@@ -52,7 +52,6 @@ class TuneColorDialog : public QDialog
    CS_SLOT_1(Private, void updateImage(int hue, int sat, int val))
    CS_SLOT_2(updateImage)
 
- private:
    QImage *m_image;
    QLabel *m_imageLab;
    int m_hue;
@@ -63,6 +62,7 @@ class TuneColorDialog : public QDialog
 class ColorPicker : public QWidget
 {
    CS_OBJECT(ColorPicker)
+
  public:
    enum Mode { Hue, Saturation, Gamma };
    ColorPicker(Mode m);
@@ -148,6 +148,7 @@ class Step1 : public QWidget
 class Step2 : public QWidget
 {
    CS_OBJECT(Step2)
+
  public:
    Step2(Wizard *parent, const QHash<QString, Input *> &modelData);
    void init();
@@ -198,7 +199,6 @@ class Step3 : public QWidget
    CS_SLOT_1(Private, void tuneColorDialog())
    CS_SLOT_2(tuneColorDialog)
 
- private:
    QGroupBox *m_texOptions;
    QButtonGroup *m_texOptionsGroup;
    QGroupBox *m_htmlOptions;
@@ -240,7 +240,7 @@ class Step4 : public QWidget
    CS_SLOT_1(Private, void setCallerGraphEnabled(int state))
    CS_SLOT_2(setCallerGraphEnabled)
 
- private:
+
    QGroupBox *m_diagramMode;
    QButtonGroup *m_diagramModeGroup;
    QGroupBox *m_dotGroup;

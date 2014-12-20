@@ -58,16 +58,25 @@ CS_Doxywizard_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
 
 CS_Doxywizard_SOURCES = \
+   src_gen/configdoc.cpp  \
+   src_gen/config_doxyw.cpp \
+\
    src/doxywizard.cpp \
    src/expert.cpp \
-   src/main.cpp \
-   src/wizard.cpp \
    src/inputbool.cpp \
    src/inputstring.cpp  \
    src/inputint.cpp  \
    src/inputstrlist.cpp  \
-   src_gen/configdoc.cpp  \
-   src_gen/config_doxyw.cpp
+   src/json.cpp \
+   src/main.cpp \
+   src/mainwindow.cpp \
+   src/support.cpp \
+   src/wizard.cpp   \
+   src/util.cpp
+
+
+FORMS = \
+   forms/mainwindow.ui
 
 
 RESOURCES = cs_doxywizard.qrc

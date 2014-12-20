@@ -42,7 +42,7 @@ class Expert : public QSplitter, public DocIntf
  public:
    Expert();
    ~Expert();
-   void loadSettings(QSettings *);
+
    void saveSettings(QSettings *);
    void loadConfig(const QString &fileName);
    bool writeConfig(QTextStream &t, bool brief);

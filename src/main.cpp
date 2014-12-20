@@ -19,7 +19,7 @@
 #include <QMessageBox>
 #include <QString>
 
-#include "doxywizard.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -46,11 +46,18 @@ int main(int argc, char *argv[])
 
    MainWindow main;
 
-   if (flagList.contains("--config", Qt::CaseInsensitive)) {
+   int index = flagList.indexOf("--config", Qt::CaseInsensitive);
+
+   if (index > 0 && index + 1 < flagList.size()) {
       // name of config file as an argument
-//    main.loadConfigFromFile(QString::fromLocal8Bit(argv[1]));
+      main.loadDoxCfg(flagList[index+1]);
    }
 
    main.show();
    return app.exec();
 }
+
+
+
+
+

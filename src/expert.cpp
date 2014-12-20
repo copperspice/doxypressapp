@@ -591,20 +591,6 @@ void Expert::activateTopic(QTreeWidgetItem *item, QTreeWidgetItem *)
    }
 }
 
-void Expert::loadSettings(QSettings *s)
-{
-   QHashIterator<QString, Input *> i(m_options);
-   while (i.hasNext()) {
-      i.next();
-      QVariant var = s->value(SA("config/") + i.key());
-      if (i.value()) {
-         //printf("Loading key %s: type=%d value='%s'\n",qPrintable(i.key()),var.type(),qPrintable(var.toString()));
-         i.value()->value() = var;
-         i.value()->update();
-      }
-   }
-}
-
 void Expert::saveSettings(QSettings *s)
 {
    QHashIterator<QString, Input *> i(m_options);

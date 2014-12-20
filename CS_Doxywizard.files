@@ -1,4 +1,5 @@
 cs_doxywizard.qrc
+
 src/config.h
 src/configdoc.h
 src/docintf.h
@@ -20,3 +21,11 @@ src/inputstrlist.h
 src/wizard.cpp
 src/wizard.h
 src/main.cpp
+src/util.cpp
+src/util.h
+src/json.cpp
+src/support.cpp
+src/mainwindow.h
+src/mainwindow.cpp
+
+forms/mainwindow.ui
