@@ -1,10 +1,11 @@
 cs_doxywizard.qrc
 
 src/config.h
-src/configdoc.h
-src/docintf.h
+src/config_doxyw.cpp
+src/configdoc.cpp
+src/dialog_selectcfg.cpp
+src/dialog_selectcfg.h
 src/doxywizard.cpp
-src/doxywizard.h
 src/dox_build_info.h
 src/expert.cpp
 src/expert.h
@@ -18,14 +19,16 @@ src/inputstring.cpp
 src/inputstring.h
 src/inputstrlist.cpp
 src/inputstrlist.h
+src/json.cpp
 src/wizard.cpp
 src/wizard.h
 src/main.cpp
 src/util.cpp
 src/util.h
-src/json.cpp
 src/support.cpp
 src/mainwindow.h
 src/mainwindow.cpp
+src/settings.h
 
 forms/mainwindow.ui
+forms/dialog_selectcfg.ui

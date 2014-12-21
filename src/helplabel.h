@@ -13,12 +13,13 @@ class HelpLabel : public QLabel
  public:
    HelpLabel(const QString &text) : QLabel(text) {
       setContextMenuPolicy(Qt::CustomContextMenu);
-      connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
-              this, SLOT(showMenu(const QPoint &)));
+
+      connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(showMenu(const QPoint &)));
    }
 
    CS_SIGNAL_1(Public, void enter())
    CS_SIGNAL_2(enter)
+
    CS_SIGNAL_1(Public, void reset())
    CS_SIGNAL_2(reset)
 

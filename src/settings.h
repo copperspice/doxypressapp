@@ -6,7 +6,6 @@
 
 #define IS_SUPPORTED(x) \
   ((USE_SQLITE3  && strcmp("USE_SQLITE3",(x))==0)  || \
-   (USE_LIBCLANG && strcmp("USE_LIBCLANG",(x))==0) || \
-  0)
+   (USE_LIBCLANG && strcmp("USE_LIBCLANG",(x))==0) || 0)
 
 #endif

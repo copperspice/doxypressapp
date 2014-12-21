@@ -58,9 +58,9 @@ CS_Doxywizard_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
 
 CS_Doxywizard_SOURCES = \
-   src_gen/configdoc.cpp  \
-   src_gen/config_doxyw.cpp \
-\
+   src/configdoc.cpp  \
+   src/config_doxyw.cpp \
+   src/dialog_selectcfg.cpp \
    src/doxywizard.cpp \
    src/expert.cpp \
    src/inputbool.cpp \
@@ -76,6 +76,7 @@ CS_Doxywizard_SOURCES = \
 
 
 FORMS = \
+   forms/dialog_selectcfg.ui \
    forms/mainwindow.ui
 
 

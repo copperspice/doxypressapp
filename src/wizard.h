@@ -225,18 +225,25 @@ class Step4 : public QWidget
  private :
    CS_SLOT_1(Private, void diagramModeChanged(int un_named_arg1))
    CS_SLOT_2(diagramModeChanged)
+
    CS_SLOT_1(Private, void setClassGraphEnabled(int state))
    CS_SLOT_2(setClassGraphEnabled)
+
    CS_SLOT_1(Private, void setCollaborationGraphEnabled(int state))
    CS_SLOT_2(setCollaborationGraphEnabled)
+
    CS_SLOT_1(Private, void setGraphicalHierarchyEnabled(int state))
    CS_SLOT_2(setGraphicalHierarchyEnabled)
+
    CS_SLOT_1(Private, void setIncludeGraphEnabled(int state))
    CS_SLOT_2(setIncludeGraphEnabled)
+
    CS_SLOT_1(Private, void setIncludedByGraphEnabled(int state))
    CS_SLOT_2(setIncludedByGraphEnabled)
+
    CS_SLOT_1(Private, void setCallGraphEnabled(int state))
    CS_SLOT_2(setCallGraphEnabled)
+
    CS_SLOT_1(Private, void setCallerGraphEnabled(int state))
    CS_SLOT_2(setCallerGraphEnabled)
 
@@ -255,39 +262,5 @@ class Step4 : public QWidget
    const QHash<QString, Input *> &m_modelData;
 };
 
-class Wizard : public QSplitter
-{
-   CS_OBJECT(Wizard)
- public:
-   Wizard(const QHash<QString, Input *> &modelData, QWidget *parent = 0);
-   ~Wizard();
-
- public :
-   CS_SLOT_1(Public, void refresh())
-   CS_SLOT_2(refresh)
-
- private :
-   CS_SLOT_1(Private, void activateTopic(QTreeWidgetItem *item, QTreeWidgetItem *un_named_arg2))
-   CS_SLOT_2(activateTopic)
-   CS_SLOT_1(Private, void nextTopic())
-   CS_SLOT_2(nextTopic)
-   CS_SLOT_1(Private, void prevTopic())
-   CS_SLOT_2(prevTopic)
-
- public:
-   CS_SIGNAL_1(Public, void done())
-   CS_SIGNAL_2(done)
-
- private:
-   const QHash<QString, Input *> &m_modelData;
-   QTreeWidget    *m_treeWidget;
-   QStackedWidget *m_topicStack;
-   Step1          *m_step1;
-   Step2          *m_step2;
-   Step3          *m_step3;
-   Step4          *m_step4;
-   QPushButton    *m_next;
-   QPushButton    *m_prev;
-};
 
 #endif

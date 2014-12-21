@@ -15,6 +15,7 @@
  *
 *************************************************************************/
 
+#include "dialog_selectcfg.h"
 #include "mainwindow.h"
 
 #include <QByteArray>
@@ -88,17 +89,7 @@ bool MainWindow::json_Read(Config trail)
       QSize size = QSize(width, height);
       resize(size);
 
-      // BROOM
-//    m_struct.autoLoad       = object.value("autoLoad").toBool();
-
       m_struct.pathPrior      = object.value("pathPrior").toString();
-
-      // screen fonts
-      m_struct.fontNormal     = json_SetFont(object.value("font-normal").toString());
-
-      // colors
-      m_struct.colorText      = json_SetColor(object.value("color-text").toString());
-
 
       // recent files
       list = object.value("recent-files").toArray();
@@ -152,14 +143,9 @@ bool MainWindow::json_Write(Option route, Config trail)
       QJsonDocument doc  = QJsonDocument::fromJson(data);
       QJsonObject object = doc.object();
 
-      switch (route)  {        
+      switch (route)  {
 
-         case AUTOLOAD:
-//BROOM     object.insert("autoLoad", m_struct.autoLoad);
-            break;
-
-         case CLOSE:
-            object.insert("color-text",  json_GetRGB(m_struct.colorText) );
+         case CLOSE:            
             object.insert("pos-x",       pos().x()  );
             object.insert("pos-y",       pos().y()  );
             object.insert("size-width",  size().width()  );
@@ -173,19 +159,7 @@ bool MainWindow::json_Write(Option route, Config trail)
 
             break;
 
-         case COLORS:
-            object.insert("color-text",     json_GetRGB(m_struct.colorText) );            
-            break;           
-
-         case FONT:           
-            {
-               QString temp = m_struct.fontNormal.toString();
-               object.insert("font-normal", temp);
-
-               break;
-            }
-
-         case PATH_PRIOR:
+          case PATH_PRIOR:
             object.insert("pathPrior", m_struct.pathPrior);
             break;
 
@@ -226,25 +200,13 @@ void MainWindow::json_getFileName()
    }
 #endif         
 
-   QString selectedFilter;
+   QString selectedFilter;       
    QFileDialog::Options options;
 
-   QMessageBox quest;
-   quest.setWindowTitle(tr("CS Doxygen"));
-   quest.setText(tr("CS Doxygen configuration file is missing.\n\n"
-                    "Selet an option to (a) create the configuration file in the system default location, "
-                    "(b) pick a folder location, or (c) select an existing CS Doxygen Configuration file.\n"));
+   Dialog_SelectCfg *dw = new Dialog_SelectCfg(this);
+   int result = dw->exec();
 
-   QPushButton *createDefault  = quest.addButton("Default Location",     QMessageBox::AcceptRole );
-   QPushButton *createNew      = quest.addButton("Pick Folder Location", QMessageBox::AcceptRole );
-   QPushButton *selectExist    = quest.addButton("Select Existing File", QMessageBox::AcceptRole );
-
-   quest.setStandardButtons(QMessageBox::Cancel);
-   quest.setDefaultButton(QMessageBox::Cancel);
-
-   quest.exec();
-
-   if (quest.clickedButton() == createDefault) {
+   if (result == Dialog_SelectCfg::Result::SysDefault) {
       m_jsonFname = m_appPath + "/config.json";
 
 #ifdef Q_OS_WIN
@@ -252,7 +214,7 @@ void MainWindow::json_getFileName()
       m_jsonFname  = path + "/config.json";
 #endif
 
-   } else if (quest.clickedButton() == createNew) {
+   } else if (result == Dialog_SelectCfg::Result::Pick)  {
       QString fname = m_appPath + "/config.json";
 
       // force windows 7 and 8 to honor initial path
@@ -261,7 +223,7 @@ void MainWindow::json_getFileName()
       m_jsonFname = QFileDialog::getSaveFileName(this, tr("Create new Configuration File"),
             fname, tr("Json Files (*.json)"), &selectedFilter, options);                  
 
-   } else if (quest.clickedButton() == selectExist) {
+   } else if (result == Dialog_SelectCfg::Result::Existing) {
 
       m_jsonFname = QFileDialog::getOpenFileName(this, tr("Select Existing CS Doxygen Configuration File"),
             "", tr("Json Files (*.json)"), &selectedFilter, options);
@@ -326,8 +288,6 @@ bool MainWindow::json_CreateNew()
    object.insert("size-width",  800);
    object.insert("size-height", 600);
 
-   object.insert("autoLoad",    true);
-
    value = QJsonValue(m_appPath);
    object.insert("pathPrior", value);
 
@@ -351,19 +311,8 @@ bool MainWindow::json_CreateNew()
 #endif
 
    if (! isAutoDetect) {
-
    }
- 
-   //
-   value = QJsonValue(QString("Courier,12,-1,5,50,0,0,0,0,0"));
-   object.insert("font-normal", value);
-
-   value = QJsonValue(QString("0,0,0"));         // black
-   object.insert("color-text", value);
-
-   value = QJsonValue(QString("255,255,255"));   // white
-   object.insert("color-back", value);
-
+    
    
    list.append(0);
    list.append(true);
@@ -396,51 +345,8 @@ QString MainWindow::get_xxFile(QString title, QString fname, QString filter)
    return file;
 }
 
-QFont MainWindow::json_SetFont(QString value)
-{
-   QFont temp;
-   temp.fromString(value);
-
-   return temp;
-}
-
-QColor MainWindow::json_SetColor(QString values)
-{
-   QStringList list = values.split(",");
-
-   int red   = 255;
-   int green = 255;
-   int blue  = 255;
-
-   if (list.count() > 2 ) {
-      red   = list[0].toInt();
-      green = list[1].toInt();
-      blue  = list[2].toInt();
-   }
-
-   QColor color(red,green,blue);
-
-   return color;
-}
-
-QString MainWindow::json_GetRGB(QColor color)
-{
-   int red   = color.red();
-   int green = color.green();
-   int blue  = color.blue();
-
-   QStringList list;
-   list.append(QString::number(red));
-   list.append(QString::number(green));
-   list.append(QString::number(blue));
-
-   QString values = list.join(",");
-
-   return values;
-}
-
 // **
-void MainWindow::move_ConfigFile()
+void MainWindow::move_WizardCfg()
 {
    QSettings settings("CS Doxygen", "Settings");
    m_jsonFname = settings.value("configName").toString();
@@ -551,7 +457,7 @@ void MainWindow::move_ConfigFile()
    }
 }
 
-void MainWindow::save_ConfigFile()
+void MainWindow::save_WizardCfg()
 {
    json_Write(CLOSE);
 
@@ -576,49 +482,4 @@ void MainWindow::save_ConfigFile()
       QFile::remove(tempName);
    }
 }
-
-
-
-
-/* BROOM
-
-   QVariant state        = m_settings.value(QString::fromAscii("main/state"),    QVariant::Invalid);
-   QVariant wizState     = m_settings.value(QString::fromAscii("wizard/state"),  QVariant::Invalid);
-   QVariant loadSettings = m_settings.value(QString::fromAscii("wizard/loadsettings"),  QVariant::Invalid);
-
-   if (state     != QVariant::Invalid) {
-      restoreState   (state.toByteArray());
-   }
-
-   if (wizState  != QVariant::Invalid) {
-      m_wizard->restoreState(wizState.toByteArray());
-   }
-
-   if (loadSettings != QVariant::Invalid && loadSettings.toBool()) {
-
-
-      QHashIterator<QString, Input *> i(m_options);
-
-      while (i.hasNext()) {
-         i.next();
-
-         QVariant var = m_settings->value(SA("config/") + i.key());
-
-         if (i.value()) {
-            //printf("Loading key %s: type=%d value='%s'\n",qPrintable(i.key()),var.type(),qPrintable(var.toString()));
-            i.value()->value() = var;
-            i.value()->update();
-         }
-      }
-
-   }
-
-   for (int i = 0; i < RECENT_FILES_MAX; i++) {
-      QString entry = m_settings.value(QString().sprintf("recent/config%d", i)).toString();
-      if (!entry.isEmpty() && QFileInfo(entry).exists()) {
-         addRecentFile(entry);
-      }
-   }
-*/
-
 

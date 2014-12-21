@@ -14,7 +14,6 @@
 
 #include "inputstrlist.h"
 #include "helplabel.h"
-#include "doxywizard.h"
 #include "config.h"
 
 #include <QtGui>

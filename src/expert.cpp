@@ -23,7 +23,6 @@
 #include "inputstrlist.h"
 #include "config.h"
 #include "dox_build_info.h"
-#include "configdoc.h"
 #include "settings.h"
 
 #define SA(x) QString::fromAscii(x)
@@ -81,22 +80,6 @@ Expert::Expert()
    m_splitter->addWidget(m_treeWidget);
    m_splitter->addWidget(m_helper);
 
-   QWidget *rightSide = new QWidget;
-   QGridLayout *grid = new QGridLayout(rightSide);
-   m_prev = new QPushButton(tr("Previous"));
-   m_prev->setEnabled(false);
-   m_next = new QPushButton(tr("Next"));
-   grid->addWidget(m_topicStack, 0, 0, 1, 2);
-   grid->addWidget(m_prev, 1, 0, Qt::AlignLeft);
-   grid->addWidget(m_next, 1, 1, Qt::AlignRight);
-   grid->setColumnStretch(0, 1);
-   grid->setRowStretch(0, 1);
-
-   addWidget(m_splitter);
-   addWidget(rightSide);
-   connect(m_next, SIGNAL(clicked()), SLOT(nextTopic()));
-
-   connect(m_prev, SIGNAL(clicked()), SLOT(prevTopic()));
 
    addConfigDocs(this);
 }
@@ -412,11 +395,16 @@ QWidget *Expert::createTopicWidget(QDomElement &elem)
    QGridLayout *layout = new QGridLayout(topic);
    QDomElement child   = elem.firstChildElement();
    int row = 0;
+
    while (!child.isNull()) {
+
       QString setting = child.attribute(SA("setting"));
+
       if (setting.isEmpty() || IS_SUPPORTED(setting.toAscii())) {
+
          QString type = child.attribute(SA("type"));
          QString docs = getDocsForNode(child);
+
          if (type == SA("bool")) {
             InputBool *boolOption =
                new InputBool(
@@ -581,33 +569,6 @@ QWidget *Expert::createTopicWidget(QDomElement &elem)
    return area;
 }
 
-void Expert::activateTopic(QTreeWidgetItem *item, QTreeWidgetItem *)
-{
-   if (item) {
-      QWidget *w = m_topics[item->text(0)];
-      m_topicStack->setCurrentWidget(w);
-      m_prev->setEnabled(m_topicStack->currentIndex() != 0);
-      m_next->setEnabled(true);
-   }
-}
-
-void Expert::saveSettings(QSettings *s)
-{
-   QHashIterator<QString, Input *> i(m_options);
-   while (i.hasNext()) {
-      i.next();
-      //printf("Saving key %s: type=%d value='%s'\n",qPrintable(i.key()),i.value()->value().type(),qPrintable(i.value()->value().toString()));
-      if (i.value()) {
-         s->setValue(SA("config/") + i.key(), i.value()->value());
-      }
-   }
-}
-
-void Expert::loadConfig(const QString &fileName)
-{
-   //printf("Expert::loadConfig(%s)\n",qPrintable(fileName));
-   parseConfig(fileName, m_options);
-}
 
 void Expert::saveTopic(QTextStream &t, QDomElement &elem, QTextCodec *codec,
                        bool brief)
@@ -694,26 +655,6 @@ void Expert::showHelp(Input *option)
       );
       m_inShowHelp = FALSE;
    }
-}
-
-void Expert::nextTopic()
-{
-   if (m_topicStack->currentIndex() + 1 == m_topicStack->count()) { // last topic
-      done();
-   } else {
-      m_topicStack->setCurrentIndex(m_topicStack->currentIndex() + 1);
-      m_next->setEnabled(m_topicStack->count() != m_topicStack->currentIndex() + 1);
-      m_prev->setEnabled(m_topicStack->currentIndex() != 0);
-      m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(m_topicStack->currentIndex()));
-   }
-}
-
-void Expert::prevTopic()
-{
-   m_topicStack->setCurrentIndex(m_topicStack->currentIndex() - 1);
-   m_next->setEnabled(m_topicStack->count() != m_topicStack->currentIndex() + 1);
-   m_prev->setEnabled(m_topicStack->currentIndex() != 0);
-   m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(m_topicStack->currentIndex()));
 }
 
 void Expert::resetToDefaults()

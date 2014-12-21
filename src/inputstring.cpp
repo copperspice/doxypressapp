@@ -15,10 +15,9 @@
  *
 *************************************************************************/
 
-#include "inputstring.h"
-#include "helplabel.h"
-#include "doxywizard.h"
 #include "config.h"
+#include "helplabel.h"
+#include "inputstring.h"
 
 #include <QtGui>
 
@@ -31,10 +30,8 @@ class NoWheelComboBox : public QComboBox
 };
 
 
-InputString::InputString( QGridLayout *layout, int &row,
-                          const QString &id, const QString &s,
-                          StringMode m, const QString &docs,
-                          const QString &absPath )
+InputString::InputString( QGridLayout *layout, int &row, const QString &id, const QString &s,
+                          StringMode m, const QString &docs, const QString &absPath )
    : m_default(s), m_sm(m), m_index(0), m_docs(docs), m_id(id),
      m_absPath(absPath == QString::fromAscii("1"))
 {
@@ -47,6 +44,7 @@ InputString::InputString( QGridLayout *layout, int &row,
       m_br = 0;
       m_im = 0;
       row++;
+
    } else {
       layout->addWidget( m_lab, row, 0 );
       m_le = new QLineEdit;

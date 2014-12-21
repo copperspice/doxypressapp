@@ -1,9 +1,25 @@
-#include "wizard.h"
+/*************************************************************************
+ *
+ * Copyright (C) 1997-2014 by Dimitri van Heesch.
+ * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * All rights reserved.
+ *
+ * Permission to use, copy, modify, and distribute this software and its
+ * documentation under the terms of the GNU General Public License version 2
+ * is hereby granted. No representations are made about the suitability of
+ * this software for any purpose. It is provided "as is" without express or
+ * implied warranty. See the GNU General Public License for more details.
+ *
+ * Documents produced by Doxygen are derivative works derived from the
+ * input used in their production; they are not affected by this license.
+ *
+*************************************************************************/
+
 #include "input.h"
-#include "doxywizard.h"
+#include "mainwindow.h"
+#include "wizard.h"
 
 #include <math.h>
-#include <QtGui>
 
 // options configurable via the wizard
 #define STR_PROJECT_NAME          QString::fromAscii("PROJECT_NAME")
@@ -16,7 +32,6 @@
 #define STR_OPTIMIZE_OUTPUT_FOR_C QString::fromAscii("OPTIMIZE_OUTPUT_FOR_C")
 #define STR_OPTIMIZE_OUTPUT_JAVA  QString::fromAscii("OPTIMIZE_OUTPUT_JAVA")
 #define STR_OPTIMIZE_FOR_FORTRAN  QString::fromAscii("OPTIMIZE_FOR_FORTRAN")
-#define STR_OPTIMIZE_OUTPUT_VHDL  QString::fromAscii("OPTIMIZE_OUTPUT_VHDL")
 #define STR_CPP_CLI_SUPPORT       QString::fromAscii("CPP_CLI_SUPPORT")
 #define STR_HIDE_SCOPE_NAMES      QString::fromAscii("HIDE_SCOPE_NAMES")
 #define STR_EXTRACT_ALL           QString::fromAscii("EXTRACT_ALL")
@@ -63,13 +78,10 @@ static bool g_optimizeMapping[6][6] = {
 static QString g_optimizeOptionNames[6] = {
    STR_OPTIMIZE_OUTPUT_FOR_C,
    STR_OPTIMIZE_OUTPUT_JAVA,
-   STR_OPTIMIZE_FOR_FORTRAN,
-   STR_OPTIMIZE_OUTPUT_VHDL,
+   STR_OPTIMIZE_FOR_FORTRAN,  
    STR_CPP_CLI_SUPPORT,
    STR_HIDE_SCOPE_NAMES
 };
-
-//==========================================================================
 
 static bool stringVariantToBool(const QVariant &v)
 {
@@ -125,7 +137,6 @@ static void updateIntOption(
    }
 }
 
-
 static void updateStringOption(
    const QHash<QString, Input *> &model, const QString &name, const QString &s)
 {
@@ -136,6 +147,21 @@ static void updateStringOption(
       option->update();
    }
 }
+
+/*
+
+void MainWindow::refresh()
+{
+   // BROOM - called after window drawn
+
+   m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(0));
+   m_step1->init();
+   m_step2->init();
+   m_step3->init();
+   m_step4->init();
+}
+
+*/
 
 //==========================================================================
 
@@ -185,8 +211,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    layout->addLayout(buttonsLayout, 5, 0, 1, 4);
 }
 
-void hsl2rgb(double h, double s, double l,
-             double *pRed, double *pGreen, double *pBlue)
+void hsl2rgb(double h, double s, double l, double *pRed, double *pGreen, double *pBlue)
 {
    double v;
    double r, g, b;
@@ -246,8 +271,6 @@ void hsl2rgb(double h, double s, double l,
    *pGreen = g;
    *pBlue  = b;
 }
-
-
 
 void TuneColorDialog::updateImage(int hue, int sat, int gam)
 {
@@ -341,7 +364,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
 
 void ColorPicker::mouseMoveEvent(QMouseEvent *m)
 {
-   if      (m_mode == Hue) {
+   if (m_mode == Hue) {
       setHue(y2hue(m->y()));
    } else if (m_mode == Saturation) {
       setSat(y2sat(m->y()));
@@ -446,6 +469,8 @@ int ColorPicker::gam2y(int g)
 }
 
 //==========================================================================
+//==========================================================================
+
 
 Step1::Step1(Wizard *wizard, const QHash<QString, Input *> &modelData) : m_wizard(wizard), m_modelData(modelData)
 {
@@ -552,18 +577,15 @@ Step1::Step1(Wizard *wizard, const QHash<QString, Input *> &modelData) : m_wizar
    layout->addStretch(1);
    setLayout(layout);
 
-   connect(projIconSel, SIGNAL(clicked()),
-           this, SLOT(selectProjectIcon()));
-   connect(m_srcSelectDir, SIGNAL(clicked()),
-           this, SLOT(selectSourceDir()));
-   connect(m_dstSelectDir, SIGNAL(clicked()),
-           this, SLOT(selectDestinationDir()));
-   connect(m_projName, SIGNAL(textChanged(const QString &)), SLOT(setProjectName(const QString &)));
-   connect(m_projBrief, SIGNAL(textChanged(const QString &)), SLOT(setProjectBrief(const QString &)));
-   connect(m_projNumber, SIGNAL(textChanged(const QString &)), SLOT(setProjectNumber(const QString &)));
-   connect(m_sourceDir, SIGNAL(textChanged(const QString &)), SLOT(setSourceDir(const QString &)));
-   connect(m_recursive, SIGNAL(stateChanged(int)), SLOT(setRecursiveScan(int)));
-   connect(m_destDir, SIGNAL(textChanged(const QString &)), SLOT(setDestinationDir(const QString &)));
+   connect(projIconSel,    SIGNAL(clicked()), this, SLOT(selectProjectIcon()));
+   connect(m_srcSelectDir, SIGNAL(clicked()), this, SLOT(selectSourceDir()));
+   connect(m_dstSelectDir, SIGNAL(clicked()), this, SLOT(selectDestinationDir()));
+   connect(m_projName,     SIGNAL(textChanged(const QString &)), SLOT(setProjectName(const QString &)));
+   connect(m_projBrief,    SIGNAL(textChanged(const QString &)), SLOT(setProjectBrief(const QString &)));
+   connect(m_projNumber,   SIGNAL(textChanged(const QString &)), SLOT(setProjectNumber(const QString &)));
+   connect(m_sourceDir,    SIGNAL(textChanged(const QString &)), SLOT(setSourceDir(const QString &)));
+   connect(m_recursive,    SIGNAL(stateChanged(int)), SLOT(setRecursiveScan(int)));
+   connect(m_destDir,      SIGNAL(textChanged(const QString &)), SLOT(setDestinationDir(const QString &)));
 }
 
 void Step1::selectProjectIcon()
@@ -705,8 +727,6 @@ void Step1::init()
 }
 
 
-//==========================================================================
-
 Step2::Step2(Wizard *wizard, const QHash<QString, Input *> &modelData)
    : m_wizard(wizard), m_modelData(modelData)
 {
@@ -845,14 +865,11 @@ void Step2::init()
    } else if (getBoolOption(m_modelData, STR_OPTIMIZE_OUTPUT_FOR_C)) {
       x = 3;
    } else if (getBoolOption(m_modelData, STR_OPTIMIZE_FOR_FORTRAN)) {
-      x = 4;
-   } else if (getBoolOption(m_modelData, STR_OPTIMIZE_OUTPUT_VHDL)) {
-      x = 5;
+      x = 4;   
    }
+
    m_optimizeLangGroup->button(x)->setChecked(true);
 }
-
-//==========================================================================
 
 Step3::Step3(Wizard *wizard, const QHash<QString, Input *> &modelData)
    : m_wizard(wizard), m_modelData(modelData)
@@ -1042,12 +1059,12 @@ void Step3::init()
 Step4::Step4(Wizard *wizard, const QHash<QString, Input *> &modelData)
    : m_wizard(wizard), m_modelData(modelData)
 {
-   m_diagramModeGroup = new QButtonGroup(this);
-   QGridLayout *gbox = new QGridLayout( this );
-   gbox->addWidget(new QLabel(tr("Diagrams to generate")), 0, 0);
-
    QRadioButton *rb = new QRadioButton(tr("No diagrams"));
    m_diagramModeGroup->addButton(rb, 0);
+
+   QGridLayout *gbox = new QGridLayout();
+
+
    gbox->addWidget(rb, 1, 0);
    // CLASS_DIAGRAMS = NO, HAVE_DOT = NO
    rb->setChecked(true);
@@ -1059,6 +1076,8 @@ Step4::Step4(Wizard *wizard, const QHash<QString, Input *> &modelData)
    m_diagramModeGroup->addButton(rb, 2);
    gbox->addWidget(rb, 3, 0);
    // CLASS_DIAGRAMS = NO, HAVE_DOT = YES
+
+
 
    m_dotGroup = new QGroupBox(tr("Dot graphs to generate"));
    QVBoxLayout *vbox = new QVBoxLayout;
@@ -1179,107 +1198,3 @@ void Step4::init()
    m_dotCaller->setChecked(getBoolOption(m_modelData, STR_CALLER_GRAPH));
 }
 
-//==========================================================================
-
-Wizard::Wizard(const QHash<QString, Input *> &modelData, QWidget *parent) :
-   QSplitter(parent), m_modelData(modelData)
-{
-   m_treeWidget = new QTreeWidget;
-   m_treeWidget->setColumnCount(1);
-   m_treeWidget->setHeaderLabels(QStringList() << QString::fromAscii("Topics"));
-   QList<QTreeWidgetItem *> items;
-   items.append(new QTreeWidgetItem((QTreeWidget *)0, QStringList(tr("Project"))));
-   items.append(new QTreeWidgetItem((QTreeWidget *)0, QStringList(tr("Mode"))));
-   items.append(new QTreeWidgetItem((QTreeWidget *)0, QStringList(tr("Output"))));
-   items.append(new QTreeWidgetItem((QTreeWidget *)0, QStringList(tr("Diagrams"))));
-   m_treeWidget->insertTopLevelItems(0, items);
-
-   m_topicStack = new QStackedWidget;
-   m_step1 = new Step1(this, modelData);
-   m_step2 = new Step2(this, modelData);
-   m_step3 = new Step3(this, modelData);
-   m_step4 = new Step4(this, modelData);
-   m_topicStack->addWidget(m_step1);
-   m_topicStack->addWidget(m_step2);
-   m_topicStack->addWidget(m_step3);
-   m_topicStack->addWidget(m_step4);
-
-   QWidget *rightSide = new QWidget;
-   QGridLayout *grid = new QGridLayout(rightSide);
-   m_prev = new QPushButton(tr("Previous"));
-   m_prev->setEnabled(false);
-   m_next = new QPushButton(tr("Next"));
-   grid->addWidget(m_topicStack, 0, 0, 1, 2);
-   grid->addWidget(m_prev, 1, 0, Qt::AlignLeft);
-   grid->addWidget(m_next, 1, 1, Qt::AlignRight);
-   grid->setColumnStretch(0, 1);
-   grid->setRowStretch(0, 1);
-   addWidget(m_treeWidget);
-   addWidget(rightSide);
-
-   connect(m_treeWidget,
-           SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-           SLOT(activateTopic(QTreeWidgetItem *, QTreeWidgetItem *)));
-   connect(m_next, SIGNAL(clicked()), SLOT(nextTopic()));
-   connect(m_prev, SIGNAL(clicked()), SLOT(prevTopic()));
-
-   refresh();
-}
-
-Wizard::~Wizard()
-{
-}
-
-void Wizard::activateTopic(QTreeWidgetItem *item, QTreeWidgetItem *)
-{
-   if (item) {
-
-      QString label = item->text(0);
-      if (label == tr("Project")) {
-         m_topicStack->setCurrentWidget(m_step1);
-         m_prev->setEnabled(false);
-         m_next->setEnabled(true);
-      } else if (label == tr("Mode")) {
-         m_topicStack->setCurrentWidget(m_step2);
-         m_prev->setEnabled(true);
-         m_next->setEnabled(true);
-      } else if (label == tr("Output")) {
-         m_topicStack->setCurrentWidget(m_step3);
-         m_prev->setEnabled(true);
-         m_next->setEnabled(true);
-      } else if (label == tr("Diagrams")) {
-         m_topicStack->setCurrentWidget(m_step4);
-         m_prev->setEnabled(true);
-         m_next->setEnabled(true);
-      }
-   }
-}
-
-void Wizard::nextTopic()
-{
-   if (m_topicStack->currentIndex() + 1 == m_topicStack->count()) { // last topic
-      done();
-   } else {
-      m_topicStack->setCurrentIndex(m_topicStack->currentIndex() + 1);
-      m_next->setEnabled(m_topicStack->count() != m_topicStack->currentIndex() + 1);
-      m_prev->setEnabled(m_topicStack->currentIndex() != 0);
-      m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(m_topicStack->currentIndex()));
-   }
-}
-
-void Wizard::prevTopic()
-{
-   m_topicStack->setCurrentIndex(m_topicStack->currentIndex() - 1);
-   m_next->setEnabled(m_topicStack->count() != m_topicStack->currentIndex() + 1);
-   m_prev->setEnabled(m_topicStack->currentIndex() != 0);
-   m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(m_topicStack->currentIndex()));
-}
-
-void Wizard::refresh()
-{
-   m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(0));
-   m_step1->init();
-   m_step2->init();
-   m_step3->init();
-   m_step4->init();
-}

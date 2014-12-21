@@ -24,8 +24,6 @@
 #include <QHash>
 #include <QSplitter>
 
-#include "docintf.h"
-
 class QTreeWidget;
 class QTreeWidgetItem;
 class QStackedWidget;
@@ -33,7 +31,16 @@ class QSettings;
 class QTextBrowser;
 class QTextCodec;
 class QPushButton;
+
 class Input;
+
+class DocIntf
+{
+ public:
+   virtual ~DocIntf() {}
+   virtual void setHeader(const char *header) = 0;
+   virtual void add(const char *name, const char *docs) = 0;
+};
 
 class Expert : public QSplitter, public DocIntf
 {
@@ -44,7 +51,7 @@ class Expert : public QSplitter, public DocIntf
    ~Expert();
 
    void saveSettings(QSettings *);
-   void loadConfig(const QString &fileName);
+
    bool writeConfig(QTextStream &t, bool brief);
    QByteArray saveInnerState () const;
    bool restoreInnerState ( const QByteArray &state );
@@ -60,29 +67,24 @@ class Expert : public QSplitter, public DocIntf
    void setHeader(const char *name);
    void add(const char *name, const char *doc);
 
- public :
-   CS_SLOT_1(Public, void activateTopic(QTreeWidgetItem *un_named_arg1, QTreeWidgetItem *un_named_arg2))
-   CS_SLOT_2(activateTopic)
+
    CS_SLOT_1(Public, QWidget *createTopicWidget(QDomElement &elem))
    CS_SLOT_2(createTopicWidget)
+
    CS_SLOT_1(Public, void refresh())
    CS_SLOT_2(refresh)
+
+   CS_SIGNAL_1(Public, void changed())
+   CS_SIGNAL_2(changed)
+
+   CS_SIGNAL_1(Public, void done())
+   CS_SIGNAL_2(done)
 
  private :
    CS_SLOT_1(Private, void showHelp(Input *un_named_arg1))
    CS_SLOT_2(showHelp)
-   CS_SLOT_1(Private, void nextTopic())
-   CS_SLOT_2(nextTopic)
-   CS_SLOT_1(Private, void prevTopic())
-   CS_SLOT_2(prevTopic)
 
- public:
-   CS_SIGNAL_1(Public, void changed())
-   CS_SIGNAL_2(changed)
-   CS_SIGNAL_1(Public, void done())
-   CS_SIGNAL_2(done)
 
- private:
    void createTopics(const QDomElement &);
    void saveTopic(QTextStream &t, QDomElement &elem, QTextCodec *codec, bool brief);
 
@@ -99,5 +101,8 @@ class Expert : public QSplitter, public DocIntf
    bool                     m_inShowHelp;
    QString                  m_header;
 };
+
+void addConfigDocs(DocIntf *doc);
+
 
 #endif

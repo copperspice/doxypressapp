@@ -44,20 +44,37 @@ int main(int argc, char *argv[])
       exit(0);
    }
 
-   MainWindow main;
+   try {
+      MainWindow main;
 
-   int index = flagList.indexOf("--config", Qt::CaseInsensitive);
+      int index = flagList.indexOf("--config", Qt::CaseInsensitive);
 
-   if (index > 0 && index + 1 < flagList.size()) {
-      // name of config file as an argument
-      main.loadDoxCfg(flagList[index+1]);
+      if (index > 0 && index + 1 < flagList.size()) {
+         // name of config file as an argument
+         main.openDoxy_Internal(flagList[index+1]);
+      }
+
+      main.show();
+      return app.exec();
+
+   } catch (std::exception &e) {
+
+      const char *what = e.what();
+
+      if (strcmp(what, "abort_no_message") == 0)  {
+         // do nothing
+
+      } else {
+         QString errMsg = "Exception: " + QString(what);
+
+         QMessageBox msgB;
+         msgB.setWindowTitle("CS Doxygen / Issue");
+         msgB.setIcon(QMessageBox::NoIcon);
+         msgB.setMinimumWidth(100);
+
+         msgB.setText(errMsg);
+         msgB.exec();
+      }
    }
-
-   main.show();
-   return app.exec();
 }
-
-
-
-
 

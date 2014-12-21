@@ -21,31 +21,53 @@
 #include <windows.h>
 #endif
 
-void MainWindow::openConfig()
+void MainWindow::importDoxy()
+{
+   QMessageBox quest;
+   quest.setWindowTitle(tr("CS Doxygen Import"));
+   quest.setText( tr("Convert Doxygen configuration file to CS Doxygen format"));
+   quest.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+   quest.setDefaultButton(QMessageBox::No);
+
+   int retval = quest.exec();
+
+   if (retval == QMessageBox::Yes) {
+      // BROOM - add code
+      csMsg("user wants to do the convert");
+
+   }
+}
+
+void MainWindow::newDoxy()
+{
+   csMsg("Create New Doxy file");
+}
+
+void MainWindow::openDoxy()
 {
    if (querySave()) {
-      m_ConfigFile = QFileDialog::getOpenFileName(this, tr("Open Configuration File"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen CFG File"), m_struct.pathPrior);
 
-      if (! m_ConfigFile.isEmpty()) {
-         loadDoxCfg(m_ConfigFile);
+      if (! fname.isEmpty()) {
+         openDoxy_Internal(fname);
       }
    }
 }
 
-void MainWindow::loadDoxCfg(const QString fname)
+void MainWindow::openDoxy_Internal(const QString fname)
 {
    m_ConfigFile = fname;
 
-   // open the specified configuration file
-   //BROOM  m_expert->loadConfig(absFileName);
-   m_wizard->refresh();
+//   BROOM
+//   m_expert->parseConfig(fileName, m_options);
+//   m_wizard->refresh();
 
    updateLaunchButtonState();
 
    setDoxygenTitle(false);
 }
 
-void MainWindow::saveDoxCfg()
+void MainWindow::saveDox_Internal()
 {
    if (m_ConfigFile.isEmpty()) {
       return;
@@ -53,19 +75,24 @@ void MainWindow::saveDoxCfg()
 
    QFile f(m_ConfigFile);
 
-   if (! f.open(QIODevice::WriteOnly)) { QMessageBox::warning(this, tr("Error saving"),
-                           tr("Can not save the file ") + m_ConfigFile + f.error());
+   if (! f.open(QIODevice::WriteOnly)) {
+      QMessageBox::warning(this, tr("Error Saving: ") + m_ConfigFile, tr("Unable to save file: ") + f.error());
       return;
    }
 
    QTextStream t(&f);
-   m_expert->writeConfig(t, false);
+   m_expert->writeConfig(t, false);   
 
-   updateConfigFileName(m_ConfigFile);
+   json_Write(PATH_PRIOR);
+
+//   if (! m_struct.XXX.contains(m_ConfigFile)) {
+//      addRecentFile(m_ConfigFile);
+//   }
+
    setDoxygenTitle(false);
 }
 
-bool MainWindow::saveDoxCfgAs()
+bool MainWindow::saveDoxyAs()
 {    
    m_ConfigFile = QFileDialog::getSaveFileName(this, QString(), m_struct.pathPrior);
 
@@ -73,146 +100,69 @@ bool MainWindow::saveDoxCfgAs()
       return false;
 
    } else {
-      saveDoxCfg();
+      saveDox_Internal();
    }
 
    return true;
 }
 
-void MainWindow::saveDoxFile()
+void MainWindow::saveDoxy()
 {
    if (m_ConfigFile.isEmpty()) {
-      saveDoxCfgAs();
+      saveDoxyAs();
 
    } else {
-      saveDoxCfg();
+      saveDox_Internal();
    }
 }
 
-void MainWindow::updateConfigFileName(const QString &fileName)
-{
-   if (m_ConfigFile != fileName) {
-
-      m_ConfigFile       = fileName;
-      m_struct.pathPrior = QFileInfo(m_ConfigFile).path();
-
-      json_Write(PATH_PRIOR);
-      addRecentFile(m_ConfigFile);
-
-      setDoxygenTitle(m_modified);
-   }
-}
+//void MainWindow::configChanged()
+//{
+//   setDoxygenTitle(true);
+//}
 
 
-// ** Defaults
-void MainWindow::clearRecent()
-{
-   if (QMessageBox::question(this, tr("Clear the list of recent files?"),
-                             tr("Do you want to clear the list of recently "
-                                "loaded configuration files?"),
-                             QMessageBox::Yes |
-                             QMessageBox::Cancel) == QMessageBox::Yes) {
-      m_recentMenu->clear();
-      m_recentFiles.clear();
+/*
 
-      for (int i = 0; i < RECENT_FILES_MAX; i++) {
-         m_settings.setValue(QString().sprintf("recent/config%d", i++), QString::fromAscii(""));      
-      }
-
-      m_settings.sync();
-   }
-
-}
-
+// ** Settings Options
 void MainWindow::makeDefaults()
 {
    if (QMessageBox::question(this, tr("Use current setting at startup?"),
                              tr("Do you want to save the current settings "
                                 "and use them next time Doxywizard starts?"),
-                             QMessageBox::Save |
-                             QMessageBox::Cancel) == QMessageBox::Save) {
-      //printf("MainWindow:makeDefaults()\n");
+                             QMessageBox::Save | QMessageBox::Cancel) == QMessageBox::Save) {
+
       m_expert->saveSettings(&m_settings);
       m_settings.setValue(QString::fromAscii("wizard/loadsettings"), true);
+
       m_settings.sync();
    }
 }
-
 
 void MainWindow::resetToDefaults()
 {
    if (QMessageBox::question(this, tr("Reset settings to their default values?"),
                              tr("Do you want to revert all settings back "
                                 "to their original values?"),
-                             QMessageBox::Reset |
-                             QMessageBox::Cancel) == QMessageBox::Reset) {
-      //printf("MainWindow:resetToDefaults()\n");
+                             QMessageBox::Reset | QMessageBox::Cancel) == QMessageBox::Reset) {
+
       m_expert->resetToDefaults();
       m_settings.setValue(QString::fromAscii("wizard/loadsettings"), false);
       m_settings.sync();
+
       m_wizard->refresh();
    }
 }
+
+*/
 
 void MainWindow::saveSettings()
 {
   json_Write(CLOSE);
 }
 
-// **  Tabs
-void MainWindow::addRecentFile(const QString &fileName)
-{
-   int i = m_recentFiles.indexOf(fileName);
-   if (i != -1) {
-      m_recentFiles.removeAt(i);
-   }
 
-   // not found
-   if (m_recentFiles.count() < RECENT_FILES_MAX) {
-      // append
-      m_recentFiles.prepend(fileName);
-
-   } else {
-      // add + drop last item
-      m_recentFiles.removeLast();
-      m_recentFiles.prepend(fileName);
-   }
-
-   m_recentMenu->clear();
-   i = 0;
-   foreach( QString str, m_recentFiles ) {
-      m_recentMenu->addAction(str);
-      m_settings.setValue(QString().sprintf("recent/config%d", i++), str);
-   }
-
-   for (; i < RECENT_FILES_MAX; i++) {
-      m_settings.setValue(QString().sprintf("recent/config%d", i++), QString::fromAscii(""));
-   }
-}
-
-void MainWindow::selectTab(int id)
-{
-   if (id == 0) {
-      m_wizard->refresh();
-   } else if (id == 1) {
-      m_expert->refresh();
-   }
-}
-
-void MainWindow::selectRunTab()
-{
-   m_tabs->setCurrentIndex(2);
-}
-
-
-// ** Recent Files
-void MainWindow::openRecent(QAction *action)
-{
-   if (querySave()) {
-// BROOM      loadDoxCfg(action->text());
-   }
-}
-
+// ** Run Options
 void MainWindow::runDoxygen()
 {
    if (!m_running) {
@@ -261,23 +211,24 @@ void MainWindow::runDoxygen()
          m_outputLog->append(QString::fromAscii("*** Failed to run doxygen\n"));
          return;
       }
+
       QTextStream t(m_runProcess);
       m_expert->writeConfig(t, false);
       m_runProcess->closeWriteChannel();
 
       if (m_runProcess->state() == QProcess::NotRunning) {
-         m_outputLog->append(QString::fromAscii("*** Failed to run doxygen\n"));
+         m_outputLog->append(QString::fromAscii("*** Failed to run CS Doxygen\n"));
       } else {
          m_saveLog->setEnabled(false);
          m_running = true;
-         m_run->setText(tr("Stop doxygen"));
+         m_run->setText(tr("Stop CS Doxygen"));
          m_runStatus->setText(tr("Status: running"));
          m_timer->start(1000);
       }
 
    } else {
       m_running = false;
-      m_run->setText(tr("Run doxygen"));
+      m_run->setText(tr("Run CS Doxygen"));
       m_runStatus->setText(tr("Status: not running"));
       m_runProcess->kill();
       m_timer->stop();      
@@ -286,10 +237,11 @@ void MainWindow::runDoxygen()
 
 void MainWindow::readStdout()
 {
-   if (m_running) {
+   if (m_running) {      
       QByteArray data = m_runProcess->readAllStandardOutput();
       QString text = QString::fromUtf8(data);
-      if (!text.isEmpty()) {
+
+      if (! text.isEmpty()) {
          m_outputLog->append(text.trimmed());
       }
    }
@@ -298,14 +250,14 @@ void MainWindow::readStdout()
 void MainWindow::runComplete()
 {
    if (m_running) {
-      m_outputLog->append(tr("*** CS Doxygen has finished\n"));
+      m_outputLog->append(tr("*** CS Doxygen has completed\n"));
    } else {
-      m_outputLog->append(tr("*** Cancelled by user\n"));
+      m_outputLog->append(tr("*** CS Doxygen was cancelled\n"));
    }
 
    m_outputLog->ensureCursorVisible();
-   m_run->setText(tr("Run doxygen"));
-   m_runStatus->setText(tr("Status: not running"));
+   m_run->setText(tr("Run CS Doxygen"));
+   m_runStatus->setText(tr("Status: CS Doxygen is not running"));
    m_running = false;
 
    updateLaunchButtonState();
@@ -325,13 +277,14 @@ void MainWindow::showHtmlOutput()
 
    // TODO: the following does not seem to work with IE
 
-#ifdef WIN32
-   //QString indexUrl(QString::fromAscii("file:///"));
+#ifdef WIN32   
    ShellExecute(NULL, L"open", (LPCWSTR)fi.absoluteFilePath().utf16(), NULL, NULL, SW_SHOWNORMAL);
+
 #else
    QString indexUrl(QString::fromAscii("file://"));
    indexUrl += fi.absoluteFilePath();
    QDesktopServices::openUrl(QUrl(indexUrl));
+
 #endif
 
 }
@@ -339,9 +292,9 @@ void MainWindow::showHtmlOutput()
 void MainWindow::saveLog()
 {
    QString fn = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->destDir->text() + QString::fromAscii("/doxygen_log.txt"));
+                                             m_ui->destDir->text() + QString::fromAscii("/doxy_log.txt"));
 
-   if (!fn.isEmpty()) {
+   if (! fn.isEmpty()) {
       QFile f(fn);
 
       if (f.open(QIODevice::WriteOnly)) {
@@ -350,8 +303,8 @@ void MainWindow::saveLog()
          statusBar()->showMessage(tr("Output log saved"), messageTimeout);
 
       } else {
-         QMessageBox::warning(0, tr("Warning"),
-                              tr("Cannot open file ") + fn + tr(" for writing. Nothing saved!"), tr("ok"));
+         QMessageBox::warning(this, tr("Error Saving: ") + fn, tr("Unable to save file: ") + f.error());
+
       }
    }
 }
@@ -360,6 +313,7 @@ void MainWindow::showSettings()
 {
    QString text;
    QTextStream t(&text);
+
    m_expert->writeConfig(t, true);
    m_outputLog->clear();
    m_outputLog->append(text);
@@ -367,8 +321,4 @@ void MainWindow::showSettings()
    m_saveLog->setEnabled(true);
 }
 
-void MainWindow::configChanged()
-{
-   setDoxygenTitle(true);
-}
 

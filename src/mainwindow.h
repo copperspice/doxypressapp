@@ -79,37 +79,41 @@ class MainWindow : public QMainWindow
 
       struct Settings m_struct;
 
-      void loadDoxCfg(const QString fname);
-
       QString pathName(QString fileName) const;
 
+      void openDoxy_Internal(const QString fname);
       void saveSettings();
       struct Settings get_StructData();
       void setDoxygenTitle(bool isModified);
 
+      CS_SLOT_1(Public, void newDoxy())
+      CS_SLOT_2(newDoxy)
+
+      CS_SLOT_1(Public, void openDoxy())
+      CS_SLOT_2(openDoxy)
+
+      CS_SLOT_1(Public, void saveDoxy())
+      CS_SLOT_2(saveDoxy)
+
+      CS_SLOT_1(Public, bool saveDoxyAs())
+      CS_SLOT_2(saveDoxyAs)
+
+      //
+      CS_SLOT_1(Public, void importDoxy())
+      CS_SLOT_2(importDoxy)
+
+      CS_SLOT_1(Public, void move_WizardCfg())
+      CS_SLOT_2(move_WizardCfg)
+
+      CS_SLOT_1(Public, void save_WizardCfg())
+      CS_SLOT_2(save_WizardCfg)
+
+      //
       CS_SLOT_1(Public, void manual())
       CS_SLOT_2(manual)
 
       CS_SLOT_1(Public, void about())
       CS_SLOT_2(about)
-
-      CS_SLOT_1(Public, void openConfig())
-      CS_SLOT_2(openConfig)
-
-      CS_SLOT_1(Public, void saveDoxFile())
-      CS_SLOT_2(saveDoxFile)
-
-      CS_SLOT_1(Public, bool saveDoxCfgAs())
-      CS_SLOT_2(saveDoxCfgAs)
-
-      CS_SLOT_1(Public, void makeDefaults())
-      CS_SLOT_2(makeDefaults)
-
-      CS_SLOT_1(Public, void resetToDefaults())
-      CS_SLOT_2(resetToDefaults)
-
-      CS_SLOT_1(Public, void selectTab(int un_named_arg1))
-      CS_SLOT_2(selectTab)     
 
    protected:
       void closeEvent(QCloseEvent *event);
@@ -120,19 +124,15 @@ class MainWindow : public QMainWindow
       QStringList m_openedFiles;
 
       enum Config { CFG_STARTUP, CFG_DEFAULT };
-      enum Option { ABOUTURL, AUTOLOAD, CLOSE, COLORS, FONT, PATH_PRIOR, RECENTFILE };
+      enum Option { ABOUTURL, CLOSE, PATH_PRIOR, RECENTFILE };
 
       void createShortCuts();
       void createConnections();
 
-      //
-      void addRecentFile(const QString &fileName);
-
       bool querySave();
-      void saveDoxCfg();
+      void saveDox_Internal();
 
       void updateLaunchButtonState();
-      void updateConfigFileName(const QString &fileName);
 
       // json
       bool json_Read(Config trail = CFG_DEFAULT);
@@ -140,15 +140,10 @@ class MainWindow : public QMainWindow
       void json_getFileName();
       bool json_CreateNew();
       bool json_SaveFile(QByteArray route);
-      QByteArray json_ReadFile();
 
+      QByteArray json_ReadFile();
       void save_ConfigFile();
       QString get_xxFile(QString title, QString fname, QString filter);
-
-      QFont json_SetFont(QString value);
-      QColor json_SetColor(QString values);
-      QString json_GetRGB(QColor color);
-
 
       QPushButton *m_run;
       QPushButton *m_saveLog;
@@ -156,10 +151,8 @@ class MainWindow : public QMainWindow
       QPushButton *m_launchPdf;
       QTextEdit *m_outputLog;
       QLabel *m_runStatus;
-
       Expert *m_expert;
       Wizard *m_wizard;
-
       QSettings m_settings;
       QMenu *m_recentMenu;
       QStringList m_recentFiles;
@@ -170,9 +163,17 @@ class MainWindow : public QMainWindow
       bool m_running;
       bool m_modified;
 
-      CS_SLOT_1(Private, void openRecent(QAction *action))
-      CS_SLOT_2(openRecent)
+      //
+      CS_SLOT_1(Private, void setupPage(QTreeWidgetItem *, QTreeWidgetItem *))
+      CS_SLOT_2(setupPage)
 
+      CS_SLOT_1(Private, void buildPage(QTreeWidgetItem *, QTreeWidgetItem *))
+      CS_SLOT_2(buildPage)
+
+      CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
+      CS_SLOT_2(outputPage)
+
+      //
       CS_SLOT_1(Private, void runDoxygen())
       CS_SLOT_2(runDoxygen)
 
@@ -189,20 +190,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_2(saveLog)
 
       CS_SLOT_1(Private, void showSettings())
-      CS_SLOT_2(showSettings)
-
-      CS_SLOT_1(Private, void configChanged())
-      CS_SLOT_2(configChanged)
-
-      CS_SLOT_1(Private, void clearRecent())
-      CS_SLOT_2(clearRecent)
-
-      CS_SLOT_1(Private, void selectRunTab())
-      CS_SLOT_2(selectRunTab)
-
-      CS_SLOT_1(Private, void move_ConfigFile())
-      CS_SLOT_2(move_ConfigFile)
-
+      CS_SLOT_2(showSettings)     
 };
 
 #endif
