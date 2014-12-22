@@ -20,10 +20,6 @@
 #include "mainwindow.h"
 #include "wizard.h"
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 #include <QKeySequence>
 
 MainWindow::MainWindow()
@@ -31,8 +27,65 @@ MainWindow::MainWindow()
 {
    m_ui->setupUi(this);   
 
-   m_ui->wizardSplitter->setStretchFactor(0, 1);
-   m_ui->wizardSplitter->setStretchFactor(1, 4);
+   m_ui->wizard_Splitter->setStretchFactor(0, 1);
+   m_ui->wizard_Splitter->setStretchFactor(1, 3);
+
+   m_ui->build_Splitter->setStretchFactor(0, 1);
+   m_ui->build_Splitter->setStretchFactor(1, 1);
+
+   m_ui->build_leftSplitter->setStretchFactor(0, 5);
+   m_ui->build_leftSplitter->setStretchFactor(1, 4);
+
+   m_ui->output_Splitter->setStretchFactor(0, 1);
+   m_ui->output_Splitter->setStretchFactor(1, 1);
+
+   m_ui->output_leftSplitter->setStretchFactor(0, 5);
+   m_ui->output_leftSplitter->setStretchFactor(1, 4);
+
+   //
+   for (int k = 0; k < m_ui->build_TreeWidget->topLevelItemCount(); ++k) {
+
+      QTreeWidgetItem *item = m_ui->build_TreeWidget->topLevelItem(k);
+
+      if (item->text(0) == "General") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->build_TreeWidget->expandItem(item);
+
+      } else if (item->text(0) == "Build") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->build_TreeWidget->expandItem(item);
+
+      } if (item->text(0) == "Input") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->build_TreeWidget->expandItem(item);
+
+      } if (item->text(0) == "Dot") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->build_TreeWidget->expandItem(item);
+      }
+   }
+
+
+   for (int k = 0; k < m_ui->output_TreeWidget->topLevelItemCount(); ++k) {
+
+      QTreeWidgetItem *item = m_ui->output_TreeWidget->topLevelItem(k);
+
+      if (item->text(0) == "HTML") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->output_TreeWidget->expandItem(item);
+
+      } else if (item->text(0) == "LaTeX") {
+         item->setFlags(Qt::ItemIsEnabled);
+
+         m_ui->output_TreeWidget->expandItem(item);
+
+      }
+   }
 
    m_ConfigFile = "";
    setDoxygenTitle(false);
@@ -47,13 +100,10 @@ MainWindow::MainWindow()
    }
 
    // screen setup
-// createStatusBar();
-
    createConnections();
    createShortCuts();
 
-/*  BROOM
-
+/*
    // recent files
    rf_CreateMenus();
 
@@ -61,15 +111,18 @@ MainWindow::MainWindow()
    m_ui->menuFile->setContextMenuPolicy(Qt::CustomContextMenu);
    connect(m_ui->menuFile, SIGNAL(customContextMenuRequested(const QPoint &)),   this, SLOT(showContext_Files(const QPoint &)));
 
-   updateLaunchButtonState();
    m_wizard->refresh();
-
-   statusBar()->showMessage(tr("Welcome to CS Doxygen"), messageTimeout);
-   setStatusBar(tr("Ready"), 0);
+   updateLaunchButtonState();
 */
 
+   m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Project);
+   m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
+   m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
+
+   m_ui->tabWidget->setCurrentIndex(0);
 
    setUnifiedTitleAndToolBarOnMac(true);
+   setStatusBar(tr("Ready"));
 }
 
 void MainWindow::about()
@@ -102,7 +155,7 @@ void MainWindow::createConnections()
    // file
    connect(m_ui->actionNew,        SIGNAL(triggered()), this, SLOT(newDoxy()));
    connect(m_ui->actionOpen,       SIGNAL(triggered()), this, SLOT(openDoxy()));
-//   connect(m_ui->actionReload,     SIGNAL(triggered()), this, SLOT(reloadDoxy()));
+// connect(m_ui->actionReload,     SIGNAL(triggered()), this, SLOT(reloadDoxy()));
 
    connect(m_ui->actionSave,       SIGNAL(triggered()), this, SLOT(saveDoxy()));
    connect(m_ui->actionSave_As,    SIGNAL(triggered()), this, SLOT(saveDoxyAs()));
@@ -166,7 +219,7 @@ void MainWindow::createShortCuts()
 void MainWindow::manual()
 {
    // broom - move when ready
-   QDesktopServices::openUrl(QUrl("http://www.copperspice.org/docs_api/index.html"));
+   QDesktopServices::openUrl(QUrl("http://www.copperspice.org/docs/cs_api/index.html"));
 }
 
 void MainWindow::setupPage(QTreeWidgetItem *item, QTreeWidgetItem *)
@@ -195,17 +248,32 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    if (item) {
       QString label = item->text(0);
 
-      if (label == tr("General")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General);
+      if (label == tr("General A")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
 
-      } else if (label == tr("Build")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build);
+      } else  if (label == tr("General B")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_B);
+
+      } else  if (label == tr("General C")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_C);
+
+      } else if (label == tr("Build A")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
+
+      } else if (label == tr("Build B")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_B);
 
       } else if (label == tr("Messages")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Messages);
 
-      } else if (label == tr("Input")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input);
+      } else if (label == tr("Input A")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_A);
+
+      } else if (label == tr("Input B")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_B);
+
+      } else if (label == tr("Input C")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_C);
 
       } else if (label == tr("Source Browser")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Browser);
@@ -225,8 +293,11 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("External")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_External);
 
-      } else if (label == tr("Dot")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot);
+      } else if (label == tr("Dot A")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_A);
+
+      } else if (label == tr("Dot B")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_B);
 
       }
    }
@@ -237,11 +308,17 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    if (item) {
       QString label = item->text(0);
 
-      if (label == tr("HTML")) {
-         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html);
+      if (label == tr("HTML A")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
 
-      } else if (label == tr("LaTeX")) {
-         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex);
+      } else if (label == tr("HTML B")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_B);
+
+      } else if (label == tr("LaTeX A")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex_A);
+
+      } else if (label == tr("LaTeX B")) {
+          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex_B);
 
       } else if (label == tr("RTF")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Rtf);
@@ -289,7 +366,8 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    ensure names are correct
 
    import old dox file
-   save to new json format
+
+   enhande load/save CFG to json format
 
    add RELOAD
    add NEW

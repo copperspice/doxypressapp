@@ -89,7 +89,7 @@ bool MainWindow::json_Read(Config trail)
       QSize size = QSize(width, height);
       resize(size);
 
-      m_struct.pathPrior      = object.value("pathPrior").toString();
+      m_struct.pathPrior = object.value("pathPrior").toString();
 
       // recent files
       list = object.value("recent-files").toArray();
@@ -298,8 +298,7 @@ bool MainWindow::json_CreateNew()
    isAutoDetect = true;
 
    QString resourcePath = m_appPath;
-   QString libraryPath  = QDir::homePath() + "/.config/CS_Doxygen/";
-   
+   QString libraryPath  = QDir::homePath() + "/.config/CS_Doxygen/";   
 
 #elif defined(Q_OS_MAC)
    if (m_appPath.contains(".app/Contents/MacOS")) {
@@ -481,5 +480,63 @@ void MainWindow::save_WizardCfg()
       QFile::copy(m_jsonFname, backName);
       QFile::remove(tempName);
    }
+}
+
+
+// **
+
+void MainWindow::json_OpenDoxy(QByteArray data)
+{
+   QJsonDocument doc = QJsonDocument::fromJson(data);
+
+   QJsonObject object = doc.object();
+   QJsonValue value;
+
+   m_ui->project_name->setText( object.value("project-name").toString());
+   m_ui->project_brief->setText( object.value("project-brief").toString());
+   m_ui->project_number->setText( object.value("project-number").toString());
+   m_ui->source_input->setText( object.value("source-input").toString());
+   m_ui->destDir->setText( object.value("source-output").toString());
+}
+
+
+QByteArray MainWindow::json_SaveDoxy()
+{
+   QJsonObject object;
+//   QJsonValue value;
+//   QJsonArray list;
+
+   object.insert("project-name",    m_ui->project_name->text());
+   object.insert("project-brief",   m_ui->project_brief->text());
+   object.insert("project-number",  m_ui->project_number->text());
+   object.insert("source-input",    m_ui->source_input->text());
+   object.insert("source-output",   m_ui->destDir->text());
+
+
+/*
+   object.insert("useSpaces",   true);
+
+   value = QJsonValue(QString("MM/dd/yyyy"));
+   object.insert("formatDate", value);
+
+   value = QJsonValue(m_appPath);
+   object.insert("pathPrior", value);
+
+   
+   list.append(0);
+   list.append(true);
+   list.append(0);
+
+   list.replace(0, QFont::Bold);
+   list.replace(1, false);
+   list.replace(2, QString("0,0,255"));
+   object.insert("syntax-key", list);
+*/
+
+   // save the data
+   QJsonDocument doc(object);
+   QByteArray data = doc.toJson();
+
+   return data;
 }
 

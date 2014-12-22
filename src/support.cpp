@@ -82,21 +82,13 @@ void MainWindow::setDoxygenTitle(bool isModified)
    }
 }
 
-/*
-
-void MainWindow::createStatusBar()
-{
-   m_statusLine = new QLabel("", this);
-   m_statusName = new QLabel("", this);
-
-   statusBar()->addPermanentWidget(m_statusLine, 0);
-   statusBar()->addPermanentWidget(m_statusName, 0);
+void MainWindow::setStatusBar(QString msg)
+{     
+   statusBar()->showMessage(msg, 5000);
 }
 
 void MainWindow::setStatusBar(QString msg, int timeOut)
 {
    statusBar()->showMessage(msg, timeOut);
 }
-
-*/
 

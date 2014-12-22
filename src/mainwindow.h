@@ -57,9 +57,6 @@
 
 static const int RECENT_FILES_MAX = 10;
 
-// status bar message timeout in millisec
-static const int messageTimeout = 5000;
-
 struct Settings {
    QFont   fontNormal;
    QColor  colorText;
@@ -82,6 +79,10 @@ class MainWindow : public QMainWindow
       QString pathName(QString fileName) const;
 
       void openDoxy_Internal(const QString fname);
+
+      void setStatusBar(QString msg);
+      void setStatusBar(QString msg, int timeOut);
+
       void saveSettings();
       struct Settings get_StructData();
       void setDoxygenTitle(bool isModified);
@@ -144,6 +145,9 @@ class MainWindow : public QMainWindow
       QByteArray json_ReadFile();
       void save_ConfigFile();
       QString get_xxFile(QString title, QString fname, QString filter);
+
+      void json_OpenDoxy(QByteArray data);
+      QByteArray json_SaveDoxy();
 
       QPushButton *m_run;
       QPushButton *m_saveLog;

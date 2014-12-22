@@ -17,6 +17,8 @@
 
 #include "mainwindow.h"
 
+#include <QFile>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -46,7 +48,8 @@ void MainWindow::newDoxy()
 void MainWindow::openDoxy()
 {
    if (querySave()) {
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen CFG File"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen CFG File"),
+                                                   m_struct.pathPrior, tr("Json Files (*.json)"));
 
       if (! fname.isEmpty()) {
          openDoxy_Internal(fname);
@@ -58,9 +61,28 @@ void MainWindow::openDoxy_Internal(const QString fname)
 {
    m_ConfigFile = fname;
 
-//   BROOM
+   QFile file(m_ConfigFile);
+
+   if (! file.open(QIODevice::ReadOnly)) {
+      QMessageBox::warning(this, tr("Error Opening: ") + m_ConfigFile, tr("Unable to open: ") + file.error());
+      return;
+   }
+
+   QByteArray data;
+
+   data = file.readAll();
+   file.close();
+
+   json_OpenDoxy(data);
+
 //   m_expert->parseConfig(fileName, m_options);
 //   m_wizard->refresh();
+
+   json_Write(PATH_PRIOR);
+
+//   if (! m_struct.XXX.contains(m_ConfigFile)) {
+//      addRecentFile(m_ConfigFile);
+//   }
 
    updateLaunchButtonState();
 
@@ -69,38 +91,38 @@ void MainWindow::openDoxy_Internal(const QString fname)
 
 void MainWindow::saveDox_Internal()
 {
-   if (m_ConfigFile.isEmpty()) {
+   QByteArray data = json_SaveDoxy();
+
+   QFile file(m_ConfigFile);
+
+   if (! file.open(QIODevice::WriteOnly)) {
+      QMessageBox::warning(this, tr("Error Saving: ") + m_ConfigFile, tr("Unable to save: ") + file.error());
       return;
    }
 
-   QFile f(m_ConfigFile);
-
-   if (! f.open(QIODevice::WriteOnly)) {
-      QMessageBox::warning(this, tr("Error Saving: ") + m_ConfigFile, tr("Unable to save file: ") + f.error());
-      return;
-   }
-
-   QTextStream t(&f);
-   m_expert->writeConfig(t, false);   
-
-   json_Write(PATH_PRIOR);
-
-//   if (! m_struct.XXX.contains(m_ConfigFile)) {
-//      addRecentFile(m_ConfigFile);
-//   }
+   file.write(data);
+   file.close();
 
    setDoxygenTitle(false);
 }
 
 bool MainWindow::saveDoxyAs()
 {    
-   m_ConfigFile = QFileDialog::getSaveFileName(this, QString(), m_struct.pathPrior);
+   m_ConfigFile = QFileDialog::getSaveFileName(this, QString(),
+                                               m_struct.pathPrior, tr("Json Files (*.json)"));
 
    if (m_ConfigFile.isEmpty()) {     
       return false;
 
    } else {
       saveDox_Internal();
+
+      json_Write(PATH_PRIOR);
+
+ //   if (! m_struct.XXX.contains(m_ConfigFile)) {
+ //      addRecentFile(m_ConfigFile);
+ //   }
+
    }
 
    return true;
@@ -217,19 +239,25 @@ void MainWindow::runDoxygen()
       m_runProcess->closeWriteChannel();
 
       if (m_runProcess->state() == QProcess::NotRunning) {
-         m_outputLog->append(QString::fromAscii("*** Failed to run CS Doxygen\n"));
+         m_outputLog->append("*** Failed to run CS Doxygen\n");
+
       } else {
          m_saveLog->setEnabled(false);
+
          m_running = true;
-         m_run->setText(tr("Stop CS Doxygen"));
-         m_runStatus->setText(tr("Status: running"));
+
+         m_ui->run_PB->setText(tr("Stop CS Doxygen"));
+         m_ui->runStatus->setText(tr("CS Doxygen: Running"));
+
          m_timer->start(1000);
       }
 
    } else {
-      m_running = false;
-      m_run->setText(tr("Run CS Doxygen"));
-      m_runStatus->setText(tr("Status: not running"));
+      m_running = false;      
+
+      m_ui->run_PB->setText(tr("Run CS Doxygen"));
+      m_ui->runStatus->setText(tr("CS Doxygen is Idle"));
+
       m_runProcess->kill();
       m_timer->stop();      
    }
@@ -256,8 +284,10 @@ void MainWindow::runComplete()
    }
 
    m_outputLog->ensureCursorVisible();
+
    m_run->setText(tr("Run CS Doxygen"));
    m_runStatus->setText(tr("Status: CS Doxygen is not running"));
+
    m_running = false;
 
    updateLaunchButtonState();
@@ -266,8 +296,9 @@ void MainWindow::runComplete()
 }
 
 void MainWindow::updateLaunchButtonState()
-{
-   m_launchHtml->setEnabled(m_expert->htmlOutputPresent(m_ui->destDir->text()));
+{        
+   //bool ok = m_expert->htmlOutputPresent(m_ui->destDir->text());
+   //m_ui->display_PB->setEnabled(ok);
 }
 
 void MainWindow::showHtmlOutput()
@@ -300,7 +331,8 @@ void MainWindow::saveLog()
       if (f.open(QIODevice::WriteOnly)) {
          QTextStream t(&f);
          t << m_outputLog->toPlainText();
-         statusBar()->showMessage(tr("Output log saved"), messageTimeout);
+
+         statusBar()->showMessage(tr("Output log saved"));
 
       } else {
          QMessageBox::warning(this, tr("Error Saving: ") + fn, tr("Unable to save file: ") + f.error());
