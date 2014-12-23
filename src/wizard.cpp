@@ -148,20 +148,79 @@ static void updateStringOption(
    }
 }
 
-/*
+//==========================================================================
 
-void MainWindow::refresh()
+void MainWindow::icon_PB(const QString route)
 {
-   // BROOM - called after window drawn
+   QString iconName;
 
-   m_treeWidget->setCurrentItem(m_treeWidget->invisibleRootItem()->child(0));
-   m_step1->init();
-   m_step2->init();
-   m_step3->init();
-   m_step4->init();
+   if (route == "load") {
+      iconName = m_project_iconFN;
+
+   } else {
+      QString path = pathName(m_ConfigFile);
+      iconName = QFileDialog::getOpenFileName(this, tr("Select Project Icon"), path);
+   }
+
+   if (iconName.isEmpty()) {
+      m_ui->project_icon->setText(tr("No Logo was selected"));
+
+   } else {
+      QFile fout(iconName);
+
+      if (! fout.exists()) {
+         m_ui->project_icon->setText(tr("Unable to find file: ") + iconName);
+
+      } else {
+         QPixmap pm(iconName);
+
+         if (! pm.isNull()) {
+            m_ui->project_icon->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
+
+         } else {
+            m_ui->project_icon->setText(tr("No preview is available for: ") + iconName);
+         }
+      }
+
+      m_project_iconFN = iconName;
+   }
+
 }
 
-*/
+void MainWindow::input_PB()
+{
+   QString path    = pathName(m_ConfigFile);
+   QString dirName = QFileDialog::getExistingDirectory(this, tr("Select source directory"), path);
+   QDir dir(path);
+
+   if (! m_ConfigFile.isEmpty() && dir.exists()) {
+      dirName = dir.relativeFilePath(dirName);
+   }
+
+   if (dirName.isEmpty()) {
+      dirName = QString::fromAscii(".");
+   }
+
+   m_ui->source_input->setText(dirName);
+}
+
+void MainWindow::output_PB()
+{
+   QString path    = pathName(m_ConfigFile);
+   QString dirName = QFileDialog::getExistingDirectory(this, tr("Select destination directory"), path);
+   QDir dir(path);
+
+   if (! m_ConfigFile.isEmpty() && dir.exists()) {
+      dirName = dir.relativeFilePath(dirName);
+   }
+
+   if (dirName.isEmpty()) {
+      dirName = QString::fromAscii(".");
+   }
+
+   m_ui->source_output->setText(dirName);
+}
+
 
 //==========================================================================
 
@@ -347,6 +406,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
       }
       m_pix = new QPixmap(QPixmap::fromImage(img));
    }
+
    QPainter p(this);
    p.drawPixmap(1, coff, *m_pix);
    const QPalette &g = palette();
@@ -354,9 +414,11 @@ void ColorPicker::paintEvent(QPaintEvent *)
    p.setPen(g.foreground().color());
    p.setBrush(g.foreground());
    QPolygon a;
+
    int y = m_mode == Hue ?        hue2y(m_hue) :
            m_mode == Saturation ? sat2y(m_sat) :
            gam2y(m_gam);
+
    a.setPoints(3, w, y, w + 5, y + 5, w + 5, y - 5);
    p.eraseRect(w, 0, 5, height());
    p.drawPolygon(a);
@@ -469,262 +531,39 @@ int ColorPicker::gam2y(int g)
 }
 
 //==========================================================================
-//==========================================================================
 
 
-Step1::Step1(Wizard *wizard, const QHash<QString, Input *> &modelData) : m_wizard(wizard), m_modelData(modelData)
-{
-   QVBoxLayout *layout = new QVBoxLayout(this);
-   layout->setMargin(4);
-   layout->setSpacing(8);
-   QLabel *l = new QLabel(this);
-   l->setText(tr("Provide some information "
-                 "about the project you are documenting"));
-   layout->addWidget(l);
-   QWidget *w      = new QWidget( this );
-   QGridLayout *grid = new QGridLayout(w);
-   grid->setSpacing(10);
-
-   // project name
-   QLabel *projName = new QLabel(this);
-   projName->setText(tr("Project name:"));
-   projName->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-   // project brief
-   QLabel *projBrief = new QLabel(this);
-   projBrief->setText(tr("Project synopsis:"));
-   projBrief->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-   // project version
-   QLabel *projVersion = new QLabel(this);
-   projVersion->setText(tr("Project version or id:"));
-   projVersion->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-   // project icon
-   QLabel *projLogo = new QLabel(this);
-   projLogo->setMinimumSize(1, 55);
-   projLogo->setText(tr("Project logo:"));
-   projLogo->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-   grid->addWidget(projName, 0, 0);
-   grid->addWidget(projBrief, 1, 0);
-   grid->addWidget(projVersion, 2, 0);
-   grid->addWidget(projLogo, 3, 0);
-
-   m_projName   = new QLineEdit;
-   m_projBrief  = new QLineEdit;
-   m_projNumber = new QLineEdit;
-   QPushButton *projIconSel = new QPushButton(this);
-   projIconSel->setText(tr("Select..."));
-   m_projIconLab = new QLabel;
-
-   grid->addWidget(m_projName, 0, 1, 1, 2);
-   grid->addWidget(m_projBrief, 1, 1, 1, 2);
-   grid->addWidget(m_projNumber, 2, 1, 1, 2);
-   grid->addWidget(projIconSel, 3, 1);
-   grid->addWidget(m_projIconLab, 3, 2);
-
-   grid->setColumnStretch(2, 1);
-
-   w->setLayout(grid);
-
-   layout->addWidget(w);
-
-   //---------------------------------------------------
-   QFrame *f = new QFrame( this );
-   f->setFrameStyle( QFrame::HLine | QFrame::Sunken );
-   layout->addWidget(f);
-
-   l = new QLabel(this);
-   l->setText(tr("Specify the directory to scan for source code"));
-   layout->addWidget(l);
-   QWidget *row = new QWidget;
-   QHBoxLayout *rowLayout = new QHBoxLayout(row);
-   rowLayout->setSpacing(10);
-   l = new QLabel(this);
-   l->setText(tr("Source code directory:"));
-   rowLayout->addWidget(l);
-   m_sourceDir = new QLineEdit;
-   m_srcSelectDir = new QPushButton(this);
-   m_srcSelectDir->setText(tr("Select..."));
-   rowLayout->addWidget(m_sourceDir);
-   rowLayout->addWidget(m_srcSelectDir);
-   layout->addWidget(row);
-
-   m_recursive = new QCheckBox(this);
-   m_recursive->setText(tr("Scan recursively"));
-   m_recursive->setChecked(TRUE);
-   layout->addWidget(m_recursive);
-
-   //---------------------------------------------------
-   f = new QFrame( this );
-   f->setFrameStyle( QFrame::HLine | QFrame::Sunken );
-   layout->addWidget(f);
-
-   l = new QLabel(this);
-   l->setText(tr("Specify the directory where doxygen should "
-                 "put the generated documentation"));
-   layout->addWidget(l);
-   row = new QWidget;
-   rowLayout = new QHBoxLayout(row);
-   rowLayout->setSpacing(10);
-   l = new QLabel(this);
-   l->setText(tr("Destination directory:"));
-   rowLayout->addWidget(l);
-   m_destDir = new QLineEdit;
-   m_dstSelectDir = new QPushButton(this);
-   m_dstSelectDir->setText(tr("Select..."));
-   rowLayout->addWidget(m_destDir);
-   rowLayout->addWidget(m_dstSelectDir);
-   layout->addWidget(row);
-   layout->addStretch(1);
-   setLayout(layout);
-
-   connect(projIconSel,    SIGNAL(clicked()), this, SLOT(selectProjectIcon()));
-   connect(m_srcSelectDir, SIGNAL(clicked()), this, SLOT(selectSourceDir()));
-   connect(m_dstSelectDir, SIGNAL(clicked()), this, SLOT(selectDestinationDir()));
+/*
    connect(m_projName,     SIGNAL(textChanged(const QString &)), SLOT(setProjectName(const QString &)));
    connect(m_projBrief,    SIGNAL(textChanged(const QString &)), SLOT(setProjectBrief(const QString &)));
    connect(m_projNumber,   SIGNAL(textChanged(const QString &)), SLOT(setProjectNumber(const QString &)));
    connect(m_sourceDir,    SIGNAL(textChanged(const QString &)), SLOT(setSourceDir(const QString &)));
-   connect(m_recursive,    SIGNAL(stateChanged(int)), SLOT(setRecursiveScan(int)));
+   connect(m_recursive,    SIGNAL(stateChanged(int)),            SLOT(setRecursiveScan(int)));
    connect(m_destDir,      SIGNAL(textChanged(const QString &)), SLOT(setDestinationDir(const QString &)));
-}
 
-void Step1::selectProjectIcon()
-{
 
-/* BROOM
+   connect(m_diagramModeGroup, SIGNAL(buttonClicked(int)),
+           this, SLOT(diagramModeChanged(int)));
+   connect(m_dotClass, SIGNAL(stateChanged(int)),
+           this, SLOT(setClassGraphEnabled(int)));
+   connect(m_dotCollaboration, SIGNAL(stateChanged(int)),
+           this, SLOT(setCollaborationGraphEnabled(int)));
+   connect(m_dotInheritance, SIGNAL(stateChanged(int)),
+           this, SLOT(setGraphicalHierarchyEnabled(int)));
+   connect(m_dotInclude, SIGNAL(stateChanged(int)),
+           this, SLOT(setIncludeGraphEnabled(int)));
+   connect(m_dotIncludedBy, SIGNAL(stateChanged(int)),
+           this, SLOT(setIncludedByGraphEnabled(int)));
+   connect(m_dotCall, SIGNAL(stateChanged(int)),
+           this, SLOT(setCallGraphEnabled(int)));
+   connect(m_dotCaller, SIGNAL(stateChanged(int)),
+           this, SLOT(setCallerGraphEnabled(int)));
 
-   QString path = QFileInfo(MainWindow::instance().configFileName()).path();
-   QString iconName = QFileDialog::getOpenFileName(this,
-                      tr("Select project icon/image"), path);
-   if (iconName.isEmpty()) {
-      m_projIconLab->setText(tr("No Project logo selected."));
-   } else {
-      QFile Fout(iconName);
-      if (!Fout.exists()) {
-         m_projIconLab->setText(tr("Sorry, cannot find file(") + iconName + QString::fromAscii(");"));
-      } else {
-         QPixmap pm(iconName);
-         if (!pm.isNull()) {
-            m_projIconLab->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
-         } else {
-            m_projIconLab->setText(tr("Sorry, no preview available (") + iconName + QString::fromAscii(");"));
-         }
-      }
-   }
-   updateStringOption(m_modelData, STR_PROJECT_LOGO, iconName);
 
-*/
-}
-
-void Step1::selectSourceDir()
-{
-/* BROOM
-   QString path = QFileInfo(MainWindow::instance().configFileName()).path();
-   QString dirName = QFileDialog::getExistingDirectory(this,
-                     tr("Select source directory"), path);
-   QDir dir(path);
-   if (!MainWindow::instance().configFileName().isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
-   m_sourceDir->setText(dirName);
 
 */
 
-}
 
-void Step1::selectDestinationDir()
-{
-
-/* BROOM
-   QString path = QFileInfo(MainWindow::instance().configFileName()).path();
-   QString dirName = QFileDialog::getExistingDirectory(this,
-                     tr("Select destination directory"), path);
-   QDir dir(path);
-   if (!MainWindow::instance().configFileName().isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
-   m_destDir->setText(dirName);
-
-*/
-}
-
-void Step1::setProjectName(const QString &name)
-{
-   updateStringOption(m_modelData, STR_PROJECT_NAME, name);
-}
-
-void Step1::setProjectBrief(const QString &desc)
-{
-   updateStringOption(m_modelData, STR_PROJECT_BRIEF, desc);
-}
-
-void Step1::setProjectNumber(const QString &num)
-{
-   updateStringOption(m_modelData, STR_PROJECT_NUMBER, num);
-}
-
-void Step1::setSourceDir(const QString &dir)
-{
-   Input *option = m_modelData[STR_INPUT];
-   if (option->value().toStringList().count() > 0) {
-      QStringList sl = option->value().toStringList();
-      if (sl[0] != dir) {
-         sl[0] = dir;
-         option->value() = sl;
-         option->update();
-      }
-   } else {
-      option->value() = QStringList() << dir;
-      option->update();
-   }
-}
-
-void Step1::setDestinationDir(const QString &dir)
-{
-   updateStringOption(m_modelData, STR_OUTPUT_DIRECTORY, dir);
-}
-
-void Step1::setRecursiveScan(int s)
-{
-   updateBoolOption(m_modelData, STR_RECURSIVE, s == Qt::Checked);
-}
-
-void Step1::init()
-{
-   Input *option;
-   m_projName->setText(getStringOption(m_modelData, STR_PROJECT_NAME));
-   m_projBrief->setText(getStringOption(m_modelData, STR_PROJECT_BRIEF));
-   m_projNumber->setText(getStringOption(m_modelData, STR_PROJECT_NUMBER));
-   QString iconName = getStringOption(m_modelData, STR_PROJECT_LOGO);
-   if (!iconName.isEmpty()) {
-      QFile Fout(iconName);
-      if (!Fout.exists()) {
-         m_projIconLab->setText(tr("Sorry, cannot find file(") + iconName + QString::fromAscii(");"));
-      } else {
-         QPixmap pm(iconName);
-         if (!pm.isNull()) {
-            m_projIconLab->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
-         } else {
-            m_projIconLab->setText(tr("Sorry, no preview available (") + iconName + QString::fromAscii(");"));
-         }
-      }
-   } else {
-      m_projIconLab->setText(tr("No Project logo selected."));
-   }
-   option = m_modelData[STR_INPUT];
-   if (option->value().toStringList().count() > 0) {
-      m_sourceDir->setText(option->value().toStringList().first());
-   }
-   m_recursive->setChecked(
-      getBoolOption(m_modelData, STR_RECURSIVE) ? Qt::Checked : Qt::Unchecked);
-   m_destDir->setText(getStringOption(m_modelData, STR_OUTPUT_DIRECTORY));
-}
 
 
 Step2::Step2(Wizard *wizard, const QHash<QString, Input *> &modelData)
@@ -1111,33 +950,20 @@ Step4::Step4(Wizard *wizard, const QHash<QString, Input *> &modelData)
    m_dotInclude->setChecked(true);
    m_dotCollaboration->setChecked(true);
    gbox->setRowStretch(5, 1);
-
-   connect(m_diagramModeGroup, SIGNAL(buttonClicked(int)),
-           this, SLOT(diagramModeChanged(int)));
-   connect(m_dotClass, SIGNAL(stateChanged(int)),
-           this, SLOT(setClassGraphEnabled(int)));
-   connect(m_dotCollaboration, SIGNAL(stateChanged(int)),
-           this, SLOT(setCollaborationGraphEnabled(int)));
-   connect(m_dotInheritance, SIGNAL(stateChanged(int)),
-           this, SLOT(setGraphicalHierarchyEnabled(int)));
-   connect(m_dotInclude, SIGNAL(stateChanged(int)),
-           this, SLOT(setIncludeGraphEnabled(int)));
-   connect(m_dotIncludedBy, SIGNAL(stateChanged(int)),
-           this, SLOT(setIncludedByGraphEnabled(int)));
-   connect(m_dotCall, SIGNAL(stateChanged(int)),
-           this, SLOT(setCallGraphEnabled(int)));
-   connect(m_dotCaller, SIGNAL(stateChanged(int)),
-           this, SLOT(setCallerGraphEnabled(int)));
 }
 
+
+/*
 void Step4::diagramModeChanged(int id)
 {
    if (id == 0) { // no diagrams
       updateBoolOption(m_modelData, STR_HAVE_DOT, false);
       updateBoolOption(m_modelData, STR_CLASS_DIAGRAMS, false);
+
    } else if (id == 1) { // builtin diagrams
       updateBoolOption(m_modelData, STR_HAVE_DOT, false);
       updateBoolOption(m_modelData, STR_CLASS_DIAGRAMS, true);
+
    } else if (id == 2) { // dot diagrams
       updateBoolOption(m_modelData, STR_HAVE_DOT, true);
       updateBoolOption(m_modelData, STR_CLASS_DIAGRAMS, false);
@@ -1145,56 +971,5 @@ void Step4::diagramModeChanged(int id)
    m_dotGroup->setEnabled(id == 2);
 }
 
-void Step4::setClassGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_CLASS_GRAPH, state == Qt::Checked);
-}
-
-void Step4::setCollaborationGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_COLLABORATION_GRAPH, state == Qt::Checked);
-}
-
-void Step4::setGraphicalHierarchyEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_GRAPHICAL_HIERARCHY, state == Qt::Checked);
-}
-
-void Step4::setIncludeGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_INCLUDE_GRAPH, state == Qt::Checked);
-}
-
-void Step4::setIncludedByGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_INCLUDED_BY_GRAPH, state == Qt::Checked);
-}
-
-void Step4::setCallGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_CALL_GRAPH, state == Qt::Checked);
-}
-
-void Step4::setCallerGraphEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_CALLER_GRAPH, state == Qt::Checked);
-}
-
-void Step4::init()
-{
-   if (getBoolOption(m_modelData, STR_HAVE_DOT)) {
-      m_diagramModeGroup->button(2)->setChecked(true); // Dot
-   } else if (getBoolOption(m_modelData, STR_CLASS_DIAGRAMS)) {
-      m_diagramModeGroup->button(1)->setChecked(true); // Builtin diagrams
-   } else {
-      m_diagramModeGroup->button(0)->setChecked(true); // no diagrams
-   }
-   m_dotClass->setChecked(getBoolOption(m_modelData, STR_CLASS_GRAPH));
-   m_dotCollaboration->setChecked(getBoolOption(m_modelData, STR_COLLABORATION_GRAPH));
-   m_dotInheritance->setChecked(getBoolOption(m_modelData, STR_GRAPHICAL_HIERARCHY));
-   m_dotInclude->setChecked(getBoolOption(m_modelData, STR_INCLUDE_GRAPH));
-   m_dotIncludedBy->setChecked(getBoolOption(m_modelData, STR_INCLUDED_BY_GRAPH));
-   m_dotCall->setChecked(getBoolOption(m_modelData, STR_CALL_GRAPH));
-   m_dotCaller->setChecked(getBoolOption(m_modelData, STR_CALLER_GRAPH));
-}
+*/
 

@@ -30,10 +30,8 @@
 #include <QColor>
 #include <QDesktopServices>
 #include <QDir>
+#include <QFile>
 #include <QFont>
-#include <QFileDialog>
-#include <QGridLayout>
-#include <QHBoxLayout>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QLabel>
@@ -43,7 +41,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QProcess>
-#include <QPushButton>
+// #include <QPushButton>
 #include <QSettings>
 #include <QStatusBar>
 #include <QString>
@@ -51,7 +49,6 @@
 #include <QTimer>
 #include <QTextEdit>
 #include <QTextStream>
-#include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -74,6 +71,8 @@ class MainWindow : public QMainWindow
       QString m_jsonFname;
       QString m_ConfigFile;
 
+      QString m_project_iconFN;
+
       struct Settings m_struct;
 
       QString pathName(QString fileName) const;
@@ -87,35 +86,6 @@ class MainWindow : public QMainWindow
       struct Settings get_StructData();
       void setDoxygenTitle(bool isModified);
 
-      CS_SLOT_1(Public, void newDoxy())
-      CS_SLOT_2(newDoxy)
-
-      CS_SLOT_1(Public, void openDoxy())
-      CS_SLOT_2(openDoxy)
-
-      CS_SLOT_1(Public, void saveDoxy())
-      CS_SLOT_2(saveDoxy)
-
-      CS_SLOT_1(Public, bool saveDoxyAs())
-      CS_SLOT_2(saveDoxyAs)
-
-      //
-      CS_SLOT_1(Public, void importDoxy())
-      CS_SLOT_2(importDoxy)
-
-      CS_SLOT_1(Public, void move_WizardCfg())
-      CS_SLOT_2(move_WizardCfg)
-
-      CS_SLOT_1(Public, void save_WizardCfg())
-      CS_SLOT_2(save_WizardCfg)
-
-      //
-      CS_SLOT_1(Public, void manual())
-      CS_SLOT_2(manual)
-
-      CS_SLOT_1(Public, void about())
-      CS_SLOT_2(about)
-
    protected:
       void closeEvent(QCloseEvent *event);
 
@@ -127,8 +97,21 @@ class MainWindow : public QMainWindow
       enum Config { CFG_STARTUP, CFG_DEFAULT };
       enum Option { ABOUTURL, CLOSE, PATH_PRIOR, RECENTFILE };
 
+      void clearAllFields();
+      void convertDoxy(QByteArray data);
+
+      bool convert_Bool(QByteArray data, QString key);
+      int convert_Int(QByteArray data, QString key);
+      QString convert_Str(QByteArray data, QString key);
+
       void createShortCuts();
       void createConnections();
+
+      QString getFile_CS(QString title, QString fname, QString filter);
+
+      bool htmlOutputPresent(const QString &workingDir) const;
+
+      void initTabs();
 
       bool querySave();
       void saveDox_Internal();
@@ -144,7 +127,6 @@ class MainWindow : public QMainWindow
 
       QByteArray json_ReadFile();
       void save_ConfigFile();
-      QString get_xxFile(QString title, QString fname, QString filter);
 
       void json_OpenDoxy(QByteArray data);
       QByteArray json_SaveDoxy();
@@ -155,17 +137,45 @@ class MainWindow : public QMainWindow
       QPushButton *m_launchPdf;
       QTextEdit *m_outputLog;
       QLabel *m_runStatus;
+
       Expert *m_expert;
       Wizard *m_wizard;
+
       QSettings m_settings;
+
       QMenu *m_recentMenu;
       QStringList m_recentFiles;
+
       QProcess *m_runProcess;
       QTimer *m_timer;
-      QTabWidget *m_tabs;
 
       bool m_running;
       bool m_modified;
+
+      CS_SLOT_1(Private, void newDoxy())
+      CS_SLOT_2(newDoxy)
+
+      CS_SLOT_1(Private, void openDoxy())
+      CS_SLOT_2(openDoxy)
+
+      CS_SLOT_1(Private, void reloadDoxy())
+      CS_SLOT_2(reloadDoxy)
+
+      CS_SLOT_1(Private, void saveDoxy())
+      CS_SLOT_2(saveDoxy)
+
+      CS_SLOT_1(Private, bool saveDoxyAs())
+      CS_SLOT_2(saveDoxyAs)
+
+      //
+      CS_SLOT_1(Private, void importDoxy())
+      CS_SLOT_2(importDoxy)
+
+      CS_SLOT_1(Private, void move_WizardCfg())
+      CS_SLOT_2(move_WizardCfg)
+
+      CS_SLOT_1(Private, void save_WizardCfg())
+      CS_SLOT_2(save_WizardCfg)
 
       //
       CS_SLOT_1(Private, void setupPage(QTreeWidgetItem *, QTreeWidgetItem *))
@@ -177,7 +187,29 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(outputPage)
 
-      //
+      CS_SLOT_1(Private, void manual())
+      CS_SLOT_2(manual)
+
+      CS_SLOT_1(Private, void about())
+      CS_SLOT_2(about)
+
+      // tab 1
+      CS_SLOT_1(Private, void icon_PB(const QString route))
+      CS_SLOT_2(icon_PB)
+
+      CS_SLOT_1(Private, void input_PB())
+      CS_SLOT_2(input_PB)
+
+      CS_SLOT_1(Private, void output_PB())
+      CS_SLOT_2(output_PB)
+
+      // tab 2
+
+
+      // tab 3
+
+
+      // tab 4
       CS_SLOT_1(Private, void runDoxygen())
       CS_SLOT_2(runDoxygen)
 

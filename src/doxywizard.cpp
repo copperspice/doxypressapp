@@ -23,6 +23,208 @@
 #include <windows.h>
 #endif
 
+void MainWindow::clearAllFields()
+{
+   // BROOM - add more
+
+   m_ui->project_name->setText("");
+   m_ui->project_brief->setText("");
+   m_ui->project_number->setText("");
+
+   m_project_iconFN = "";
+
+   m_ui->source_input->setText("");
+   m_ui->source_output->setText("");
+
+   m_ui->source_recursive_CB->setChecked(false);
+
+   m_ui->genHtml_CB->setChecked(false);
+   m_ui->genLatex_CB->setChecked(false);
+   m_ui->genRtf_CB->setChecked(false);
+   m_ui->genMan_CB->setChecked(false);
+   m_ui->genXml_CB->setChecked(false);
+   m_ui->genDocbook_CB->setChecked(false);
+
+}
+
+void MainWindow::convertDoxy(QByteArray data)
+{
+   QString tempStr;
+   bool tempBool;
+   int tempInt;
+
+   int posBeg;
+   int posEnd;
+
+   posBeg = data.indexOf("PROJECT_NAME");
+   if (posBeg > 0) {
+      posEnd = data.indexOf("\n", posBeg);
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1);
+
+      tempStr.replace("\"","");
+      tempStr = tempStr.trimmed();
+
+      m_ui->project_name->setText(tempStr);
+   }
+
+   posBeg = data.indexOf("PROJECT_BRIEF");
+   if (posBeg > 0) {
+      posEnd = data.indexOf("\n", posBeg);      
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1);
+
+      tempStr.replace("\"","");
+      tempStr = tempStr.trimmed();
+
+      m_ui->project_brief->setText(tempStr);
+   }
+
+   tempStr = convert_Str(data,"PROJECT_NUMBER");
+   m_ui->project_number->setText(tempStr);
+
+   m_project_iconFN = convert_Str(data,"PROJECT_LOGO");
+
+   tempStr = convert_Str(data,"INPUT");
+   m_ui->source_input->setText(tempStr);
+
+   tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
+   m_ui->source_output->setText(tempStr);
+
+   tempBool = convert_Bool(data,"RECURSIVE");
+   m_ui->source_recursive_CB->setChecked(tempBool);
+
+
+
+/*
+   m_ui->genHtml_CB->setChecked(false);
+   m_ui->genLatex_CB->setChecked(false);
+   m_ui->genRtf_CB->setChecked(false);
+   m_ui->genMan_CB->setChecked(false);
+   m_ui->genXml_CB->setChecked(false);
+   m_ui->genDocbook_CB->setChecked(false);
+
+
+
+DOXYFILE_ENCODING
+OUTPUT_DIRECTORY
+CREATE_SUBDIRS
+ALLOW_UNICODE_NAMES
+OUTPUT_LANGUAGE
+BRIEF_MEMBER_DESC
+REPEAT_BRIEF
+ABBREVIATE_BRIEF
+ALWAYS_DETAILED_SEC
+INLINE_INHERITED_MEMB
+FULL_PATH_NAMES
+STRIP_FROM_PATH
+STRIP_FROM_INC_PATH
+SHORT_NAMES
+JAVADOC_AUTOBRIEF
+QT_AUTOBRIEF
+MULTILINE_CPP_IS_BRIEF
+INHERIT_DOCS
+SEPARATE_MEMBER_PAGES
+TAB_SIZE
+ALIASES
+TCL_SUBST
+OPTIMIZE_OUTPUT_FOR_C
+OPTIMIZE_OUTPUT_JAVA
+OPTIMIZE_FOR_FORTRAN
+OPTIMIZE_OUTPUT_VHDL
+EXTENSION_MAPPING
+MARKDOWN_SUPPORT
+AUTOLINK_SUPPORT
+BUILTIN_STL_SUPPORT
+CPP_CLI_SUPPORT
+SIP_SUPPORT
+IDL_PROPERTY_SUPPORT
+DISTRIBUTE_GROUP_DOC
+SUBGROUPING
+INLINE_GROUPED_CLASSES
+INLINE_SIMPLE_STRUCTS
+TYPEDEF_HIDES_STRUCT
+LOOKUP_CACHE_SIZE
+EXTRACT_ALL
+EXTRACT_PRIVATE
+EXTRACT_PACKAGE
+EXTRACT_STATIC
+EXTRACT_LOCAL_CLASSES
+EXTRACT_LOCAL_METHODS
+EXTRACT_ANON_NSPACES
+HIDE_UNDOC_MEMBERS
+HIDE_UNDOC_CLASSES
+HIDE_FRIEND_COMPOUNDS
+HIDE_IN_BODY_DOCS
+INTERNAL_DOCS
+
+
+
+
+*/
+
+}
+
+bool MainWindow::convert_Bool(QByteArray data, QString key)
+{
+   bool retval = false;
+   QString tempStr;
+
+   int posBeg = data.indexOf(key);
+
+   if (posBeg > 0) {
+      int posEnd = data.indexOf("\n", posBeg);
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1).trimmed();
+
+      if (tempStr == "YES") {
+         retval = true;
+      }
+   }
+
+   return retval;
+}
+
+int MainWindow::convert_Int(QByteArray data, QString key)
+{
+   int retval;
+   QString temp;
+
+   int posBeg = data.indexOf(key);
+
+   if (posBeg > 0) {
+      int posEnd = data.indexOf("\n", posBeg);
+      temp = data.mid(posBeg, posEnd - posBeg);
+
+      retval = temp.toInt();
+   }
+
+   return retval;
+}
+
+QString MainWindow::convert_Str(QByteArray data, QString key)
+{
+   QString tempStr;
+
+   int posBeg = data.indexOf(key);
+
+   if (posBeg > 0) {
+      int posEnd = data.indexOf("\n", posBeg);
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1).trimmed();
+   }
+
+   return tempStr;
+}
+
 void MainWindow::importDoxy()
 {
    QMessageBox quest;
@@ -34,22 +236,104 @@ void MainWindow::importDoxy()
    int retval = quest.exec();
 
    if (retval == QMessageBox::Yes) {
-      // BROOM - add code
-      csMsg("user wants to do the convert");
 
+      while (true) {
+
+         QString fname = QFileDialog::getOpenFileName(this, tr("Open (old) Doxygen Config File"), m_struct.pathPrior);
+
+         if (fname.isEmpty()) {
+            csError(tr("File Open"), tr("No file name was provided"));
+            break;
+         }
+
+         QFile file(fname);
+         if (! file.open(QIODevice::ReadOnly)) {
+            csError(tr("Error Opening: ") + fname, tr("Unable to open: ") + file.error());
+            break;
+         }
+
+         QByteArray data;
+
+         data = file.readAll();
+         file.close();
+
+         // strip comments
+         int posBeg;
+         int posEnd;
+
+         while (true) {
+            posBeg = data.indexOf("#");
+
+            if (posBeg == -1) {
+               break;
+            }
+
+            posEnd = data.indexOf("\n",posBeg);
+            data.remove(posBeg, posEnd-posBeg);
+         }
+
+/*
+         // *** get the file - internal usage
+         QString path = "z:\\doxygen_wizard\\deploy";
+
+         QFile fileX(path + "/dox_fields.txt");
+
+         if (! fileX.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, tr("Error Saving: ") + m_ConfigFile, tr("Unable to save: ") + file.error());
+            break;
+         }
+
+         fileX.write(data);
+         fileX.close();
+
+         csMsg("File Saved : " + path + "/dox_fields.txt");
+         break;
+*/
+
+         // verify a few fields
+         if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
+            csError(tr("CS Doxygen Import"), tr("The configuration file is missing project information, import canceled"));
+            break;
+         }
+
+         // get new file config name
+         fname = QFileDialog::getSaveFileName(this, tr("Select name for CS Doxygen Config"), m_struct.pathPrior);
+
+         if (fname.isEmpty()) {
+            // are you sure? might want to loop around
+            csError(tr("CS Doxygen Import"), tr("No configuraton file name, import canceled"));
+            break;
+
+         } else {
+            m_ConfigFile = fname;
+
+            clearAllFields();
+            convertDoxy(data);
+
+            saveDox_Internal();
+
+            json_Write(PATH_PRIOR);
+//          if (! m_struct.XXX.contains(m_ConfigFile)) {
+//            addRecentFile(m_ConfigFile);
+//          }
+
+         }
+
+         // all done, everything is fine
+         break;
+      }
    }
 }
 
 void MainWindow::newDoxy()
 {
-   csMsg("Create New Doxy file");
+   csMsg("Create New Doxy file - pending");
 }
 
 void MainWindow::openDoxy()
 {
    if (querySave()) {
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen CFG File"),
-                                                   m_struct.pathPrior, tr("Json Files (*.json)"));
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen Config"), m_struct.pathPrior);
 
       if (! fname.isEmpty()) {
          openDoxy_Internal(fname);
@@ -73,20 +357,26 @@ void MainWindow::openDoxy_Internal(const QString fname)
    data = file.readAll();
    file.close();
 
-   json_OpenDoxy(data);
-
-//   m_expert->parseConfig(fileName, m_options);
-//   m_wizard->refresh();
-
    json_Write(PATH_PRIOR);
-
 //   if (! m_struct.XXX.contains(m_ConfigFile)) {
 //      addRecentFile(m_ConfigFile);
 //   }
 
+   json_OpenDoxy(data);
+
+   initTabs();
    updateLaunchButtonState();
 
    setDoxygenTitle(false);
+}
+
+void MainWindow::reloadDoxy()
+{
+   clearAllFields();
+
+   if (! m_ConfigFile.isEmpty()) {
+      openDoxy_Internal(m_ConfigFile);
+   }
 }
 
 void MainWindow::saveDox_Internal()
@@ -108,8 +398,7 @@ void MainWindow::saveDox_Internal()
 
 bool MainWindow::saveDoxyAs()
 {    
-   m_ConfigFile = QFileDialog::getSaveFileName(this, QString(),
-                                               m_struct.pathPrior, tr("Json Files (*.json)"));
+   m_ConfigFile = QFileDialog::getSaveFileName(this, tr("Select name for CS Doxygen Config"), m_struct.pathPrior);
 
    if (m_ConfigFile.isEmpty()) {     
       return false;
@@ -118,7 +407,6 @@ bool MainWindow::saveDoxyAs()
       saveDox_Internal();
 
       json_Write(PATH_PRIOR);
-
  //   if (! m_struct.XXX.contains(m_ConfigFile)) {
  //      addRecentFile(m_ConfigFile);
  //   }
@@ -138,49 +426,43 @@ void MainWindow::saveDoxy()
    }
 }
 
-//void MainWindow::configChanged()
-//{
-//   setDoxygenTitle(true);
-//}
-
-
-/*
-
-// ** Settings Options
-void MainWindow::makeDefaults()
-{
-   if (QMessageBox::question(this, tr("Use current setting at startup?"),
-                             tr("Do you want to save the current settings "
-                                "and use them next time Doxywizard starts?"),
-                             QMessageBox::Save | QMessageBox::Cancel) == QMessageBox::Save) {
-
-      m_expert->saveSettings(&m_settings);
-      m_settings.setValue(QString::fromAscii("wizard/loadsettings"), true);
-
-      m_settings.sync();
-   }
-}
-
-void MainWindow::resetToDefaults()
-{
-   if (QMessageBox::question(this, tr("Reset settings to their default values?"),
-                             tr("Do you want to revert all settings back "
-                                "to their original values?"),
-                             QMessageBox::Reset | QMessageBox::Cancel) == QMessageBox::Reset) {
-
-      m_expert->resetToDefaults();
-      m_settings.setValue(QString::fromAscii("wizard/loadsettings"), false);
-      m_settings.sync();
-
-      m_wizard->refresh();
-   }
-}
-
-*/
-
 void MainWindow::saveSettings()
 {
   json_Write(CLOSE);
+}
+
+// setup
+
+void MainWindow::initTabs()
+{
+   icon_PB("load");
+
+
+
+
+/*
+   if (getBoolOption(m_modelData, STR_HAVE_DOT)) {
+      // Dot
+      m_diagramModeGroup->button(2)->setChecked(true);
+
+   } else if (getBoolOption(m_modelData, STR_CLASS_DIAGRAMS)) {
+      // Builtin diagrams
+      m_diagramModeGroup->button(1)->setChecked(true);
+
+   } else {
+      // no diagrams
+      m_diagramModeGroup->button(0)->setChecked(true);
+   }
+
+   m_dotClass->setChecked(getBoolOption(m_modelData, STR_CLASS_GRAPH));
+   m_dotCollaboration->setChecked(getBoolOption(m_modelData, STR_COLLABORATION_GRAPH));
+   m_dotInheritance->setChecked(getBoolOption(m_modelData, STR_GRAPHICAL_HIERARCHY));
+   m_dotInclude->setChecked(getBoolOption(m_modelData, STR_INCLUDE_GRAPH));
+   m_dotIncludedBy->setChecked(getBoolOption(m_modelData, STR_INCLUDED_BY_GRAPH));
+   m_dotCall->setChecked(getBoolOption(m_modelData, STR_CALL_GRAPH));
+   m_dotCaller->setChecked(getBoolOption(m_modelData, STR_CALLER_GRAPH));
+
+*/
 }
 
 
@@ -208,7 +490,7 @@ void MainWindow::runDoxygen()
       qDebug() << tr("Getting doxygen from: ") << doxygenPath;
 #endif
 
-      QString destDir = m_ui->destDir->text();
+      QString destDir = m_ui->source_output->text();
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
@@ -295,15 +577,37 @@ void MainWindow::runComplete()
    m_saveLog->setEnabled(true);
 }
 
+
 void MainWindow::updateLaunchButtonState()
 {        
-   //bool ok = m_expert->htmlOutputPresent(m_ui->destDir->text());
-   //m_ui->display_PB->setEnabled(ok);
+   bool ok = false;           //  BROOM m_expert->htmlOutputPresent(m_ui->output->text());
+   m_ui->display_PB->setEnabled(ok);
+}
+
+bool MainWindow::htmlOutputPresent(const QString &workingDir) const
+{      
+   bool retval = false;
+
+/*
+   bool generateHtml = getBoolOption(m_options, QString::fromAscii("GENERATE_HTML"));
+
+   if (! generateHtml || workingDir.isEmpty()) {
+      return retval;
+   }
+
+   QString indexFile = getHtmlOutputIndex(workingDir);
+   QFileInfo fi(indexFile);
+
+   retval = (fi.exists() && fi.isFile());
+
+*/
+
+   return retval;
 }
 
 void MainWindow::showHtmlOutput()
 {
-   QString indexFile = m_expert->getHtmlOutputIndex(m_ui->destDir->text());
+   QString indexFile = m_expert->getHtmlOutputIndex(m_ui->source_output->text());
    QFileInfo fi(indexFile);
 
    // TODO: the following does not seem to work with IE
@@ -323,7 +627,7 @@ void MainWindow::showHtmlOutput()
 void MainWindow::saveLog()
 {
    QString fn = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->destDir->text() + QString::fromAscii("/doxy_log.txt"));
+                                             m_ui->source_output->text() + QString::fromAscii("/doxy_log.txt"));
 
    if (! fn.isEmpty()) {
       QFile f(fn);

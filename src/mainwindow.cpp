@@ -31,13 +31,13 @@ MainWindow::MainWindow()
    m_ui->wizard_Splitter->setStretchFactor(1, 3);
 
    m_ui->build_Splitter->setStretchFactor(0, 1);
-   m_ui->build_Splitter->setStretchFactor(1, 1);
+   m_ui->build_Splitter->setStretchFactor(1, 3);
 
-   m_ui->build_leftSplitter->setStretchFactor(0, 5);
-   m_ui->build_leftSplitter->setStretchFactor(1, 4);
+   m_ui->build_leftSplitter->setStretchFactor(0, 3);
+   m_ui->build_leftSplitter->setStretchFactor(1, 2);
 
    m_ui->output_Splitter->setStretchFactor(0, 1);
-   m_ui->output_Splitter->setStretchFactor(1, 1);
+   m_ui->output_Splitter->setStretchFactor(1, 3);
 
    m_ui->output_leftSplitter->setStretchFactor(0, 5);
    m_ui->output_leftSplitter->setStretchFactor(1, 4);
@@ -78,12 +78,6 @@ MainWindow::MainWindow()
          item->setFlags(Qt::ItemIsEnabled);
 
          m_ui->output_TreeWidget->expandItem(item);
-
-      } else if (item->text(0) == "LaTeX") {
-         item->setFlags(Qt::ItemIsEnabled);
-
-         m_ui->output_TreeWidget->expandItem(item);
-
       }
    }
 
@@ -155,7 +149,7 @@ void MainWindow::createConnections()
    // file
    connect(m_ui->actionNew,        SIGNAL(triggered()), this, SLOT(newDoxy()));
    connect(m_ui->actionOpen,       SIGNAL(triggered()), this, SLOT(openDoxy()));
-// connect(m_ui->actionReload,     SIGNAL(triggered()), this, SLOT(reloadDoxy()));
+   connect(m_ui->actionReload,     SIGNAL(triggered()), this, SLOT(reloadDoxy()));
 
    connect(m_ui->actionSave,       SIGNAL(triggered()), this, SLOT(saveDoxy()));
    connect(m_ui->actionSave_As,    SIGNAL(triggered()), this, SLOT(saveDoxyAs()));
@@ -180,6 +174,21 @@ void MainWindow::createConnections()
 
    connect(m_ui->output_TreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
                                     SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+
+
+   // tab 1
+   connect(m_ui->icon_PB,   &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
+   // connect(m_ui->input_PB,  SIGNAL(clicked()), this, SLOT(input_PB()));
+   connect(m_ui->output_PB, SIGNAL(clicked()), this, SLOT(output_PB()));
+
+   // tab 2
+
+
+   // tab 3
+
+
+   // tab 4
+
 
 }
 
@@ -314,11 +323,11 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("HTML B")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_B);
 
-      } else if (label == tr("LaTeX A")) {
-         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex_A);
+      } else if (label == tr("HTML C")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_C);
 
-      } else if (label == tr("LaTeX B")) {
-          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex_B);
+      } else if (label == tr("LaTeX")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex);
 
       } else if (label == tr("RTF")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Rtf);

@@ -657,18 +657,6 @@ void Expert::showHelp(Input *option)
    }
 }
 
-void Expert::resetToDefaults()
-{
-   //printf("Expert::makeDefaults()\n");
-   QHashIterator<QString, Input *> i(m_options);
-   while (i.hasNext()) {
-      i.next();
-      if (i.value()) {
-         i.value()->reset();
-      }
-   }
-}
-
 static bool stringVariantToBool(const QVariant &v)
 {
    QString s = v.toString().toLower();
@@ -689,18 +677,6 @@ static QString getStringOption(
    Input *option = model[name];
    Q_ASSERT(option != 0);
    return option->value().toString();
-}
-
-
-bool Expert::htmlOutputPresent(const QString &workingDir) const
-{
-   bool generateHtml = getBoolOption(m_options, QString::fromAscii("GENERATE_HTML"));
-   if (!generateHtml || workingDir.isEmpty()) {
-      return false;
-   }
-   QString indexFile = getHtmlOutputIndex(workingDir);
-   QFileInfo fi(indexFile);
-   return fi.exists() && fi.isFile();
 }
 
 QString Expert::getHtmlOutputIndex(const QString &workingDir) const

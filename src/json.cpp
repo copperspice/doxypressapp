@@ -27,7 +27,6 @@
 #include <QJsonDocument>
 #include <QKeySequence>
 #include <QPoint>
-#include <QPushButton>
 #include <QSettings>
 #include <QStandardPaths>
 
@@ -187,14 +186,14 @@ void MainWindow::json_getFileName()
 #if defined(Q_OS_UNIX) && ! defined(Q_OS_MAC)
 
    QString homePath = QDir::homePath();
-   m_jsonFname = homePath + "/.config/CS_Doxygen/config.json";
+   m_jsonFname = homePath + "/.config/CS_Doxygen/wizard.json";
    
    return;
 
 #elif defined(Q_OS_MAC)
    if (m_appPath.contains(".app/Contents/MacOS")) {
       QString homePath = QDir::homePath();      
-      m_jsonFname = homePath + "/Library/CS_Doxygen/config.json";
+      m_jsonFname = homePath + "/Library/CS_Doxygen/wizard.json";
      
       return;
    }
@@ -207,15 +206,15 @@ void MainWindow::json_getFileName()
    int result = dw->exec();
 
    if (result == Dialog_SelectCfg::Result::SysDefault) {
-      m_jsonFname = m_appPath + "/config.json";
+      m_jsonFname = m_appPath + "/wizard.json";
 
 #ifdef Q_OS_WIN
       QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-      m_jsonFname  = path + "/config.json";
+      m_jsonFname  = path + "/wizard.json";
 #endif
 
    } else if (result == Dialog_SelectCfg::Result::Pick)  {
-      QString fname = m_appPath + "/config.json";
+      QString fname = m_appPath + "/wizard.json";
 
       // force windows 7 and 8 to honor initial path
       options = QFileDialog::ForceInitialDir_Win7;
@@ -326,24 +325,6 @@ bool MainWindow::json_CreateNew()
    return ok;
 }
 
-
-// **
-QString MainWindow::get_xxFile(QString title, QString fname, QString filter)
-{
-   QString selectedFilter;
-   QFileDialog::Options options;
-
-   // force windows 7 and 8 to honor initial path
-   options = QFileDialog::ForceInitialDir_Win7;
-
-   fname = m_appPath + "/" + fname;
-
-   QString file = QFileDialog::getOpenFileName(this, "Select " + title,
-         fname, filter, &selectedFilter, options);
-
-   return file;
-}
-
 // **
 void MainWindow::move_WizardCfg()
 {
@@ -355,7 +336,6 @@ void MainWindow::move_WizardCfg()
 // BROOM   int result = dw->exec();
 
    int result = 0;
-
 
    switch (result) {
       case QDialog::Rejected:
@@ -371,7 +351,7 @@ void MainWindow::move_WizardCfg()
             options = QFileDialog::ForceInitialDir_Win7;
 
             QString newName = QFileDialog::getSaveFileName(this, tr("Create New Configuration File"),
-                  m_appPath + "/config.json", tr("Json Files (*.json)"), &selectedFilter, options);
+                  m_appPath + "/wizard.json", tr("Json Files (*.json)"), &selectedFilter, options);
 
             if (newName.isEmpty()) {
                // do nothing
@@ -490,32 +470,52 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    QJsonDocument doc = QJsonDocument::fromJson(data);
 
    QJsonObject object = doc.object();
-   QJsonValue value;
+// QJsonValue value;
 
    m_ui->project_name->setText( object.value("project-name").toString());
    m_ui->project_brief->setText( object.value("project-brief").toString());
    m_ui->project_number->setText( object.value("project-number").toString());
-   m_ui->source_input->setText( object.value("source-input").toString());
-   m_ui->destDir->setText( object.value("source-output").toString());
-}
 
+   m_project_iconFN = object.value("project-icon").toString();
+
+   m_ui->source_input->setText( object.value("source-input").toString());
+   m_ui->source_output->setText( object.value("source-output").toString());
+
+   m_ui->source_recursive_CB->setChecked( object.value("source-recursive").toBool());
+
+   m_ui->genHtml_CB->setChecked( object.value("generate-html").toBool());
+   m_ui->genLatex_CB->setChecked( object.value("generate-latex").toBool());
+   m_ui->genRtf_CB->setChecked( object.value("generate-rtf").toBool());
+   m_ui->genMan_CB->setChecked( object.value("generate-man").toBool());
+   m_ui->genXml_CB->setChecked( object.value("generate-xml").toBool());
+   m_ui->genDocbook_CB->setChecked( object.value("generate-docbook").toBool());
+
+
+}
 
 QByteArray MainWindow::json_SaveDoxy()
 {
    QJsonObject object;
-//   QJsonValue value;
-//   QJsonArray list;
+// QJsonValue value;
+// QJsonArray list;
 
-   object.insert("project-name",    m_ui->project_name->text());
-   object.insert("project-brief",   m_ui->project_brief->text());
-   object.insert("project-number",  m_ui->project_number->text());
-   object.insert("source-input",    m_ui->source_input->text());
-   object.insert("source-output",   m_ui->destDir->text());
+   object.insert("project-name",       m_ui->project_name->text());
+   object.insert("project-brief",      m_ui->project_brief->text());
+   object.insert("project-number",     m_ui->project_number->text());
+   object.insert("project-icon",       m_project_iconFN);
+   object.insert("source-input",       m_ui->source_input->text());
+   object.insert("source-output",      m_ui->source_output->text());
+   object.insert("source-recursive",   m_ui->source_recursive_CB->isChecked());
+
+   object.insert("generate-html",      m_ui->genHtml_CB->isChecked());
+   object.insert("generate-latex",     m_ui->genLatex_CB->isChecked());
+   object.insert("generate-rtf",       m_ui->genRtf_CB->isChecked());
+   object.insert("generate-man",       m_ui->genMan_CB->isChecked());
+   object.insert("generate-xml",       m_ui->genXml_CB->isChecked());
+   object.insert("generate-docbook",   m_ui->genDocbook_CB->isChecked());
 
 
 /*
-   object.insert("useSpaces",   true);
-
    value = QJsonValue(QString("MM/dd/yyyy"));
    object.insert("formatDate", value);
 

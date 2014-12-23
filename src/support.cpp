@@ -17,6 +17,8 @@
 
 #include "mainwindow.h"
 
+#include <QFileInfo>
+
 void MainWindow::closeEvent(QCloseEvent *event)
 { 
    bool exit = querySave();
@@ -28,6 +30,27 @@ void MainWindow::closeEvent(QCloseEvent *event)
    } else {
       event->ignore();
    }
+}
+
+//void MainWindow::configChanged()
+//{
+//   setDoxygenTitle(true);
+//}
+
+QString MainWindow::getFile_CS(QString title, QString fname, QString filter)
+{
+   QString selectedFilter;
+   QFileDialog::Options options;
+
+   // force windows 7 and 8 to honor initial path
+   options = QFileDialog::ForceInitialDir_Win7;
+
+   fname = m_appPath + "/" + fname;
+
+   QString file = QFileDialog::getOpenFileName(this, "Select " + title,
+         fname, filter, &selectedFilter, options);
+
+   return file;
 }
 
 QString MainWindow::pathName(QString fileName) const

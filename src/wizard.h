@@ -111,26 +111,6 @@ class Step1 : public QWidget
    Step1(Wizard *parent, const QHash<QString, Input *> &modelData);
    void init();
 
- private :
-   CS_SLOT_1(Private, void selectSourceDir())
-   CS_SLOT_2(selectSourceDir)
-   CS_SLOT_1(Private, void selectDestinationDir())
-   CS_SLOT_2(selectDestinationDir)
-   CS_SLOT_1(Private, void selectProjectIcon())
-   CS_SLOT_2(selectProjectIcon)
-   CS_SLOT_1(Private, void setProjectName(const QString &name))
-   CS_SLOT_2(setProjectName)
-   CS_SLOT_1(Private, void setProjectBrief(const QString &desc))
-   CS_SLOT_2(setProjectBrief)
-   CS_SLOT_1(Private, void setProjectNumber(const QString &num))
-   CS_SLOT_2(setProjectNumber)
-   CS_SLOT_1(Private, void setSourceDir(const QString &dir))
-   CS_SLOT_2(setSourceDir)
-   CS_SLOT_1(Private, void setDestinationDir(const QString &dir))
-   CS_SLOT_2(setDestinationDir)
-   CS_SLOT_1(Private, void setRecursiveScan(int un_named_arg1))
-   CS_SLOT_2(setRecursiveScan)
-
  private:
    QLineEdit *m_projName;
    QLineEdit *m_projBrief;
@@ -223,6 +203,8 @@ class Step4 : public QWidget
    void init();
 
  private :
+
+/*
    CS_SLOT_1(Private, void diagramModeChanged(int un_named_arg1))
    CS_SLOT_2(diagramModeChanged)
 
@@ -246,7 +228,7 @@ class Step4 : public QWidget
 
    CS_SLOT_1(Private, void setCallerGraphEnabled(int state))
    CS_SLOT_2(setCallerGraphEnabled)
-
+*/
 
    QGroupBox *m_diagramMode;
    QButtonGroup *m_diagramModeGroup;

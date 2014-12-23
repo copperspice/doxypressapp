@@ -55,12 +55,14 @@ class Expert : public QSplitter, public DocIntf
    bool writeConfig(QTextStream &t, bool brief);
    QByteArray saveInnerState () const;
    bool restoreInnerState ( const QByteArray &state );
+
    const QHash<QString, Input *> &modelData() const {
       return m_options;
    }
-   void resetToDefaults();
-   bool htmlOutputPresent(const QString &workingDir) const;
+
    bool pdfOutputPresent(const QString &workingDir) const;
+
+
    QString getHtmlOutputIndex(const QString &workingDir) const;
 
    // DocIntf methods
