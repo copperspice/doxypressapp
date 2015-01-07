@@ -162,26 +162,26 @@ void MainWindow::createConnections()
    connect(m_ui->actionSave_WizardCfg,  &QAction::triggered, this, [this](bool){ save_WizardCfg(); } );
 
    // help
-   connect(m_ui->actionDoxyHelp,   SIGNAL(triggered()), this, SLOT(manual()));
-   connect(m_ui->actionAbout,      SIGNAL(triggered()), this, SLOT(about()));
+   connect(m_ui->actionDoxyHelp,    SIGNAL(triggered()), this, SLOT(manual()));
+   connect(m_ui->actionAbout,       SIGNAL(triggered()), this, SLOT(about()));
 
    // connections for tabs
-   connect(m_ui->setup_TreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                   SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+   connect(m_ui->setup_TreeWidget,  SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+                                    SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
-   connect(m_ui->build_TreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                   SLOT(buildPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+   connect(m_ui->build_TreeWidget,  SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+                                    SLOT(buildPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
    connect(m_ui->output_TreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
                                     SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
-
    // tab 1
-   connect(m_ui->icon_PB,   &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
-   // connect(m_ui->input_PB,  SIGNAL(clicked()), this, SLOT(input_PB()));
-   connect(m_ui->output_PB, SIGNAL(clicked()), this, SLOT(output_PB()));
+   connect(m_ui->icon_PB,           &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
+   connect(m_ui->output_PB,         SIGNAL(clicked()),     this, SLOT(output_PB()));
+   connect(m_ui->htmlColors_PB,     SIGNAL(clicked()),     this, SLOT(tuneColorDialog_PB()));
 
    // tab 2
+   connect(m_ui->source_input_PB,   SIGNAL(clicked()), this, SLOT(source_input_PB()));
 
 
    // tab 3
@@ -238,9 +238,6 @@ void MainWindow::setupPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 
       if (label == tr("Project")) {
          m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Project);
-
-      } else if (label == tr("Mode")) {
-         m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Mode);
 
       } else if (label == tr("Output")) {
          m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Output);
@@ -372,16 +369,16 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    test move cfg file
 
    add all widgets
-   ensure names are correct
+   ensure field names are correct
 
    import old dox file
 
    enhande load/save CFG to json format
 
-   add RELOAD
-   add NEW
+   add RELOAD   
    put in correct url for mannual() when ready
 
+   need to update m_modifed when doxy file changes
 */
 
 

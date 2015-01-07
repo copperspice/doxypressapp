@@ -41,7 +41,6 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QProcess>
-// #include <QPushButton>
 #include <QSettings>
 #include <QStatusBar>
 #include <QString>
@@ -49,7 +48,6 @@
 #include <QTimer>
 #include <QTextEdit>
 #include <QTextStream>
-#include <QVBoxLayout>
 #include <QWidget>
 
 static const int RECENT_FILES_MAX = 10;
@@ -197,11 +195,14 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void icon_PB(const QString route))
       CS_SLOT_2(icon_PB)
 
-      CS_SLOT_1(Private, void input_PB())
-      CS_SLOT_2(input_PB)
+      CS_SLOT_1(Private, void source_input_PB())
+      CS_SLOT_2(source_input_PB)
 
       CS_SLOT_1(Private, void output_PB())
       CS_SLOT_2(output_PB)
+
+      CS_SLOT_1(Private, void tuneColorDialog_PB())
+      CS_SLOT_2(tuneColorDialog_PB)
 
       // tab 2
 

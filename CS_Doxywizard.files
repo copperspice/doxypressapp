@@ -1,5 +1,9 @@
 cs_doxywizard.qrc
 
+forms/dialog_selectcfg.ui
+forms/dialog_lookup.ui
+forms/mainwindow.ui
+
 src/config.h
 src/config_doxyw.cpp
 src/configdoc.cpp
@@ -20,6 +24,7 @@ src/inputstring.h
 src/inputstrlist.cpp
 src/inputstrlist.h
 src/json.cpp
+src/lookup.cpp
 src/wizard.cpp
 src/wizard.h
 src/main.cpp
@@ -29,6 +34,6 @@ src/support.cpp
 src/mainwindow.h
 src/mainwindow.cpp
 src/settings.h
-
-forms/mainwindow.ui
-forms/dialog_selectcfg.ui
+src/import.cpp
+src/dialog_lookup.h
+src/dialog_lookup.cpp

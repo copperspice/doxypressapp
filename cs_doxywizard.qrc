@@ -1,11 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/tunecolor.png</file>
-        <file>resources/add.png</file>
-        <file>resources/del.png</file>
         <file>resources/doxywizard.ico</file>
-        <file>resources/file.png</file>
-        <file>resources/folder.png</file>
-        <file>resources/refresh.png</file>
+        <file>resources/minus.png</file>
+        <file>resources/plus.png</file>
+        <file>resources/up-16.png</file>
+        <file>resources/down-16.png</file>
     </qresource>
 </RCC>

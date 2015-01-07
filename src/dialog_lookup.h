@@ -15,40 +15,38 @@
  *
 *************************************************************************/
 
-#include <dialog_selectcfg.h>
+#ifndef DIALOG_LOOKUP_H
+#define DIALOG_LOOKUP_H
 
-Dialog_SelectCfg::Dialog_SelectCfg(MainWindow *parent)
-   : QDialog(parent), m_ui(new Ui::Dialog_SelectCfg)
+#include <QDialog>
+
+#include "mainwindow.h"
+#include "ui_dialog_lookup.h"
+
+class Dialog_LookUp : public QDialog
 {
-   m_ui->setupUi(this);
+   CS_OBJECT(Dialog_LookUp)
 
-   connect(m_ui->sysDefault_PB, SIGNAL(clicked()),this,  SLOT(sysDefault()));
-   connect(m_ui->pick_PB, SIGNAL(clicked()),this,        SLOT(pick()));
-   connect(m_ui->existing_PB, SIGNAL(clicked()),this,    SLOT(existing()));
-   connect(m_ui->cancel_PB, SIGNAL(clicked()),this,      SLOT(cancel()));
-}
+   public:
+      explicit Dialog_LookUp(MainWindow *parent, QStringList data);
+      ~Dialog_LookUp();
 
-Dialog_SelectCfg::~Dialog_SelectCfg()
-{
-   delete m_ui;
-}
+      QStringList getData();
 
-void Dialog_SelectCfg::sysDefault()
-{
-   this->done(Result::SysDefault);
-}
+   private:
+      Ui::Dialog_LookUp *m_ui;
 
-void Dialog_SelectCfg::pick()
-{
-   this->done(Result::Pick);
-}
+      QStandardItemModel *m_model;
+      QStringList m_data;
 
-void Dialog_SelectCfg::existing()
-{
-   this->done(Result::Existing);
-}
+      CS_SLOT_1(Private, void add())
+      CS_SLOT_2(add)
 
-void Dialog_SelectCfg::cancel()
-{
-   this->done(Result::Cancel);
-}
+      CS_SLOT_1(Private, void save())
+      CS_SLOT_2(save)
+
+      CS_SLOT_1(Private, void cancel())
+      CS_SLOT_2(cancel)
+};
+
+#endif

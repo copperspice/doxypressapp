@@ -16,10 +16,38 @@
 *************************************************************************/
 
 #include "input.h"
-#include "mainwindow.h"
 #include "wizard.h"
+#include "mainwindow.h"
 
 #include <math.h>
+
+void MainWindow::tuneColorDialog_PB()
+{
+   csMsg("display the tune color Dialog");
+
+   //  TuneColorDialog tuneColor(0, 150, 200, this);
+
+
+/*  BROOM
+
+   int hue = getIntOption(m_modelData, STR_HTML_COLORSTYLE_HUE);
+   int sat = getIntOption(m_modelData, STR_HTML_COLORSTYLE_SAT);
+   int gam = getIntOption(m_modelData, STR_HTML_COLORSTYLE_GAMMA);
+
+   TuneColorDialog tuneColor(hue, sat, gam, this);
+
+   if (tuneColor.exec() == QDialog::Accepted) {
+      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_HUE, tuneColor.getHue());
+      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_SAT, tuneColor.getSaturation());
+      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_GAMMA, tuneColor.getGamma());
+   }
+
+*/
+
+
+}
+
+
 
 // options configurable via the wizard
 #define STR_PROJECT_NAME          QString::fromAscii("PROJECT_NAME")
@@ -150,80 +178,6 @@ static void updateStringOption(
 
 //==========================================================================
 
-void MainWindow::icon_PB(const QString route)
-{
-   QString iconName;
-
-   if (route == "load") {
-      iconName = m_project_iconFN;
-
-   } else {
-      QString path = pathName(m_ConfigFile);
-      iconName = QFileDialog::getOpenFileName(this, tr("Select Project Icon"), path);
-   }
-
-   if (iconName.isEmpty()) {
-      m_ui->project_icon->setText(tr("No Logo was selected"));
-
-   } else {
-      QFile fout(iconName);
-
-      if (! fout.exists()) {
-         m_ui->project_icon->setText(tr("Unable to find file: ") + iconName);
-
-      } else {
-         QPixmap pm(iconName);
-
-         if (! pm.isNull()) {
-            m_ui->project_icon->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
-
-         } else {
-            m_ui->project_icon->setText(tr("No preview is available for: ") + iconName);
-         }
-      }
-
-      m_project_iconFN = iconName;
-   }
-
-}
-
-void MainWindow::input_PB()
-{
-   QString path    = pathName(m_ConfigFile);
-   QString dirName = QFileDialog::getExistingDirectory(this, tr("Select source directory"), path);
-   QDir dir(path);
-
-   if (! m_ConfigFile.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
-
-   m_ui->source_input->setText(dirName);
-}
-
-void MainWindow::output_PB()
-{
-   QString path    = pathName(m_ConfigFile);
-   QString dirName = QFileDialog::getExistingDirectory(this, tr("Select destination directory"), path);
-   QDir dir(path);
-
-   if (! m_ConfigFile.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
-
-   m_ui->source_output->setText(dirName);
-}
-
-
-//==========================================================================
-
 TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) : QDialog(parent)
 {
    setWindowTitle(tr("Tune the color of the HTML output"));
@@ -262,7 +216,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    connect(gamPicker, SIGNAL(newHsv(int, int, int)), huePicker, SLOT(setCol(int, int, int)));
    connect(huePicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
    connect(satPicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
-   connect(gamPicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
+   connect(gamPicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));  
 
    buttonsLayout->addStretch();
    buttonsLayout->addWidget(okButton);
@@ -385,11 +339,15 @@ void ColorPicker::paintEvent(QPaintEvent *)
    int w = width() - 5;
 
    QRect r(0, foff, w, height() - 2 * foff);
+
    int wi = r.width() - 2;
    int hi = r.height() - 2;
+
    if (!m_pix || m_pix->height() != hi || m_pix->width() != wi) {
       delete m_pix;
+
       QImage img(wi, hi, QImage::Format_RGB32);
+
       int y;
       uint *pixel = (uint *) img.scanLine(0);
       for (y = 0; y < hi; y++) {
@@ -437,7 +395,7 @@ void ColorPicker::mouseMoveEvent(QMouseEvent *m)
 
 void ColorPicker::mousePressEvent(QMouseEvent *m)
 {
-   if      (m_mode == Hue) {
+   if (m_mode == Hue) {
       setHue(y2hue(m->y()));
    } else if (m_mode == Saturation) {
       setSat(y2sat(m->y()));
@@ -713,102 +671,65 @@ void Step2::init()
 Step3::Step3(Wizard *wizard, const QHash<QString, Input *> &modelData)
    : m_wizard(wizard), m_modelData(modelData)
 {
-   QVBoxLayout *vbox = 0;
-   QRadioButton *r   = 0;
-
-   QGridLayout *gbox = new QGridLayout( this );
-   gbox->addWidget(new QLabel(tr("Select the output format(s) to generate")), 0, 0);
-   {
       m_htmlOptions = new QGroupBox(tr("HTML"));
       m_htmlOptions->setCheckable(true);
+
       // GENERATE_HTML
       m_htmlOptionsGroup = new QButtonGroup(m_htmlOptions);
+
       QRadioButton *r = new QRadioButton(tr("plain HTML"));
-      r->setChecked(true);
+      r->setChecked(true);     
       m_htmlOptionsGroup->addButton(r, 0);
-      vbox = new QVBoxLayout;
-      vbox->addWidget(r);
+
       r = new QRadioButton(tr("with navigation panel"));
       m_htmlOptionsGroup->addButton(r, 1);
-      // GENERATE_TREEVIEW
-      vbox->addWidget(r);
+
       r = new QRadioButton(tr("prepare for compressed HTML (.chm)"));
       m_htmlOptionsGroup->addButton(r, 2);
-      // GENERATE_HTMLHELP
-      vbox->addWidget(r);
-      m_searchEnabled = new QCheckBox(tr("With search function"));
-      vbox->addWidget(m_searchEnabled);
-      // SEARCH_ENGINE
-      QHBoxLayout *hbox = new QHBoxLayout;
-      m_tuneColor = new QPushButton(tr("Change color..."));
-      hbox->addWidget(m_tuneColor);
-      hbox->addStretch(1);
-      vbox->addLayout(hbox);
-      m_htmlOptions->setLayout(vbox);
-      m_htmlOptions->setChecked(true);
-   }
-   gbox->addWidget(m_htmlOptions, 1, 0);
+
+
+      // searchEnabled_CB;
+      // tuneColor_PB;
 
    {
-      m_texOptions = new QGroupBox(tr("LaTeX"));
-      m_texOptions->setCheckable(true);
       // GENERATE_LATEX
       m_texOptionsGroup = new QButtonGroup(m_texOptions);
-      vbox = new QVBoxLayout;
+
+
       r = new QRadioButton(tr("as intermediate format for hyperlinked PDF"));
       m_texOptionsGroup->addButton(r, 0);
+
       // PDF_HYPERLINKS = YES
-      r->setChecked(true);
-      vbox->addWidget(r);
+      r->setChecked(true);     
       r = new QRadioButton(tr("as intermediate format for PDF"));
-      m_texOptionsGroup->addButton(r, 1);
-      // PDF_HYPERLINKS = NO, USE_PDFLATEX = YES
-      vbox->addWidget(r);
+      m_texOptionsGroup->addButton(r, 1);      
+
+      // PDF_HYPERLINKS = NO, USE_PDFLATEX = YES      
       r = new QRadioButton(tr("as intermediate format for PostScript"));
       m_texOptionsGroup->addButton(r, 2);
+
+
       // USE_PDFLATEX = NO
-      vbox->addWidget(r);
-      vbox->addStretch(1);
-      m_texOptions->setLayout(vbox);
-      m_texOptions->setChecked(true);
+
+ //     m_texOptions->setLayout(vbox);
+ //     m_texOptions->setChecked(true);
    }
-   gbox->addWidget(m_texOptions, 2, 0);
 
-   m_manEnabled = new QCheckBox(tr("Man pages"));
-   // GENERATE_MAN
+   m_manEnabled = new QCheckBox(tr("Man pages"));   
    m_rtfEnabled = new QCheckBox(tr("Rich Text Format (RTF)"));
-   // GENERATE_RTF
    m_xmlEnabled = new QCheckBox(tr("XML"));
-   // GENERATE_XML
-   gbox->addWidget(m_manEnabled, 3, 0);
-   gbox->addWidget(m_rtfEnabled, 4, 0);
-   gbox->addWidget(m_xmlEnabled, 5, 0);
 
-   gbox->setRowStretch(6, 1);
+
+   //gbox->setRowStretch(6, 1);
    connect(m_htmlOptions, SIGNAL(toggled(bool)), SLOT(setHtmlEnabled(bool)));
    connect(m_texOptions, SIGNAL(toggled(bool)), SLOT(setLatexEnabled(bool)));
    connect(m_manEnabled, SIGNAL(stateChanged(int)), SLOT(setManEnabled(int)));
    connect(m_rtfEnabled, SIGNAL(stateChanged(int)), SLOT(setRtfEnabled(int)));
    connect(m_xmlEnabled, SIGNAL(stateChanged(int)), SLOT(setXmlEnabled(int)));
    connect(m_searchEnabled, SIGNAL(stateChanged(int)), SLOT(setSearchEnabled(int)));
-   connect(m_htmlOptionsGroup, SIGNAL(buttonClicked(int)),
-           SLOT(setHtmlOptions(int)));
-   connect(m_texOptionsGroup, SIGNAL(buttonClicked(int)),
-           SLOT(setLatexOptions(int)));
-   connect(m_tuneColor, SIGNAL(clicked()), SLOT(tuneColorDialog()));
-}
+   connect(m_htmlOptionsGroup, SIGNAL(buttonClicked(int)), SLOT(setHtmlOptions(int)));
+   connect(m_texOptionsGroup, SIGNAL(buttonClicked(int)), SLOT(setLatexOptions(int)));
 
-void Step3::tuneColorDialog()
-{
-   int hue = getIntOption(m_modelData, STR_HTML_COLORSTYLE_HUE);
-   int sat = getIntOption(m_modelData, STR_HTML_COLORSTYLE_SAT);
-   int gam = getIntOption(m_modelData, STR_HTML_COLORSTYLE_GAMMA);
-   TuneColorDialog tuneColor(hue, sat, gam, this);
-   if (tuneColor.exec() == QDialog::Accepted) {
-      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_HUE, tuneColor.getHue());
-      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_SAT, tuneColor.getSaturation());
-      updateIntOption(m_modelData, STR_HTML_COLORSTYLE_GAMMA, tuneColor.getGamma());
-   }
 }
 
 void Step3::setHtmlEnabled(bool b)

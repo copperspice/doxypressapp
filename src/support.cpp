@@ -21,9 +21,7 @@
 
 void MainWindow::closeEvent(QCloseEvent *event)
 { 
-   bool exit = querySave();
-
-   if (exit) {
+   if (querySave()) {
       saveSettings();
       event->accept();
 

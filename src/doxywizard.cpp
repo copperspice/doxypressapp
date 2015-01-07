@@ -25,204 +25,66 @@
 
 void MainWindow::clearAllFields()
 {
-   // BROOM - add more
-
+   // tab 1
    m_ui->project_name->setText("");
    m_ui->project_brief->setText("");
    m_ui->project_number->setText("");
 
-   m_project_iconFN = "";
-
-   m_ui->source_input->setText("");
+   m_project_iconFN = "";  
    m_ui->source_output->setText("");
 
+   m_ui->genHtml_CB->setChecked(false);
+   m_ui->genLatex_CB->setChecked(false);
+   m_ui->genRtf_CB->setChecked(false);
+   m_ui->genMan_CB->setChecked(false);
+   m_ui->genXml_CB->setChecked(false);
+   m_ui->genDocbook_CB->setChecked(false);
+
+   m_ui->html_RB1->setChecked(true);
+   m_ui->html_RB2->setChecked(false);
+   m_ui->html_RB3->setChecked(false);
+   m_ui->searchEnabled_CB->setChecked(false);
+
+   m_ui->latex_RB1->setChecked(true);
+   m_ui->latex_RB2->setChecked(false);
+   m_ui->latex_RB3->setChecked(false);
+
+   m_ui->diagram_RB1->setChecked(true);
+   m_ui->diagram_RB2->setChecked(false);
+   m_ui->diagram_RB3->setChecked(false);
+
+   m_ui->dotClass_CB->setChecked(false);
+   m_ui->dotCollaboration_CB->setChecked(false);
+   m_ui->dotOverall_CB->setChecked(false);
+   m_ui->dotInclude_CB->setChecked(false);
+   m_ui->dotIncludedBy_CB->setChecked(false);
+   m_ui->dotCalls_CB->setChecked(false);
+   m_ui->dotGraphs_CB->setChecked(false);
+
+   // tab 2
+   m_ui->project_encoding->setText("");
    m_ui->source_recursive_CB->setChecked(false);
+   m_ui->source_input->setPlainText("");
 
-   m_ui->genHtml_CB->setChecked(false);
-   m_ui->genLatex_CB->setChecked(false);
-   m_ui->genRtf_CB->setChecked(false);
-   m_ui->genMan_CB->setChecked(false);
-   m_ui->genXml_CB->setChecked(false);
-   m_ui->genDocbook_CB->setChecked(false);
+   m_ui->strip_from_path->setText("");
+   m_ui->file_version_filter->setText("");
+   m_ui->layout_file->setText("");
+   m_ui->warn_logfile->setText("");
+   m_ui->warn_forrmat->setText("");
+   m_ui->input_encoding->setText("");
+   m_ui->mdfile_mainpage->setText("");
+   m_ui->perlmod_prefix->setText("");
+   m_ui->generate_tagfile->setText("");
+   m_ui->perl_path->setText("");
 
-}
+   m_ui->exclude_symlinks_CB->setChecked(false);
+   m_ui->source_recursive_CB->setChecked(false);
+   //m_ui->exclude_patterns_CB->setChecked(false);
 
-void MainWindow::convertDoxy(QByteArray data)
-{
-   QString tempStr;
-   bool tempBool;
-   int tempInt;
+   // tab 3
 
-   int posBeg;
-   int posEnd;
+   // tab 4
 
-   posBeg = data.indexOf("PROJECT_NAME");
-   if (posBeg > 0) {
-      posEnd = data.indexOf("\n", posBeg);
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1);
-
-      tempStr.replace("\"","");
-      tempStr = tempStr.trimmed();
-
-      m_ui->project_name->setText(tempStr);
-   }
-
-   posBeg = data.indexOf("PROJECT_BRIEF");
-   if (posBeg > 0) {
-      posEnd = data.indexOf("\n", posBeg);      
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1);
-
-      tempStr.replace("\"","");
-      tempStr = tempStr.trimmed();
-
-      m_ui->project_brief->setText(tempStr);
-   }
-
-   tempStr = convert_Str(data,"PROJECT_NUMBER");
-   m_ui->project_number->setText(tempStr);
-
-   m_project_iconFN = convert_Str(data,"PROJECT_LOGO");
-
-   tempStr = convert_Str(data,"INPUT");
-   m_ui->source_input->setText(tempStr);
-
-   tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
-   m_ui->source_output->setText(tempStr);
-
-   tempBool = convert_Bool(data,"RECURSIVE");
-   m_ui->source_recursive_CB->setChecked(tempBool);
-
-
-
-/*
-   m_ui->genHtml_CB->setChecked(false);
-   m_ui->genLatex_CB->setChecked(false);
-   m_ui->genRtf_CB->setChecked(false);
-   m_ui->genMan_CB->setChecked(false);
-   m_ui->genXml_CB->setChecked(false);
-   m_ui->genDocbook_CB->setChecked(false);
-
-
-
-DOXYFILE_ENCODING
-OUTPUT_DIRECTORY
-CREATE_SUBDIRS
-ALLOW_UNICODE_NAMES
-OUTPUT_LANGUAGE
-BRIEF_MEMBER_DESC
-REPEAT_BRIEF
-ABBREVIATE_BRIEF
-ALWAYS_DETAILED_SEC
-INLINE_INHERITED_MEMB
-FULL_PATH_NAMES
-STRIP_FROM_PATH
-STRIP_FROM_INC_PATH
-SHORT_NAMES
-JAVADOC_AUTOBRIEF
-QT_AUTOBRIEF
-MULTILINE_CPP_IS_BRIEF
-INHERIT_DOCS
-SEPARATE_MEMBER_PAGES
-TAB_SIZE
-ALIASES
-TCL_SUBST
-OPTIMIZE_OUTPUT_FOR_C
-OPTIMIZE_OUTPUT_JAVA
-OPTIMIZE_FOR_FORTRAN
-OPTIMIZE_OUTPUT_VHDL
-EXTENSION_MAPPING
-MARKDOWN_SUPPORT
-AUTOLINK_SUPPORT
-BUILTIN_STL_SUPPORT
-CPP_CLI_SUPPORT
-SIP_SUPPORT
-IDL_PROPERTY_SUPPORT
-DISTRIBUTE_GROUP_DOC
-SUBGROUPING
-INLINE_GROUPED_CLASSES
-INLINE_SIMPLE_STRUCTS
-TYPEDEF_HIDES_STRUCT
-LOOKUP_CACHE_SIZE
-EXTRACT_ALL
-EXTRACT_PRIVATE
-EXTRACT_PACKAGE
-EXTRACT_STATIC
-EXTRACT_LOCAL_CLASSES
-EXTRACT_LOCAL_METHODS
-EXTRACT_ANON_NSPACES
-HIDE_UNDOC_MEMBERS
-HIDE_UNDOC_CLASSES
-HIDE_FRIEND_COMPOUNDS
-HIDE_IN_BODY_DOCS
-INTERNAL_DOCS
-
-
-
-
-*/
-
-}
-
-bool MainWindow::convert_Bool(QByteArray data, QString key)
-{
-   bool retval = false;
-   QString tempStr;
-
-   int posBeg = data.indexOf(key);
-
-   if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1).trimmed();
-
-      if (tempStr == "YES") {
-         retval = true;
-      }
-   }
-
-   return retval;
-}
-
-int MainWindow::convert_Int(QByteArray data, QString key)
-{
-   int retval;
-   QString temp;
-
-   int posBeg = data.indexOf(key);
-
-   if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
-      temp = data.mid(posBeg, posEnd - posBeg);
-
-      retval = temp.toInt();
-   }
-
-   return retval;
-}
-
-QString MainWindow::convert_Str(QByteArray data, QString key)
-{
-   QString tempStr;
-
-   int posBeg = data.indexOf(key);
-
-   if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1).trimmed();
-   }
-
-   return tempStr;
 }
 
 void MainWindow::importDoxy()
@@ -326,8 +188,10 @@ void MainWindow::importDoxy()
 }
 
 void MainWindow::newDoxy()
-{
-   csMsg("Create New Doxy file - pending");
+{    
+   if (querySave()) {
+      clearAllFields();
+   }
 }
 
 void MainWindow::openDoxy()
@@ -431,8 +295,8 @@ void MainWindow::saveSettings()
   json_Write(CLOSE);
 }
 
-// setup
 
+// **
 void MainWindow::initTabs()
 {
    icon_PB("load");
@@ -463,6 +327,12 @@ void MainWindow::initTabs()
    m_dotCaller->setChecked(getBoolOption(m_modelData, STR_CALLER_GRAPH));
 
 */
+}
+
+void MainWindow::updateLaunchButtonState()
+{
+   bool ok = false;           //  BROOM m_expert->htmlOutputPresent(m_ui->output->text());
+   m_ui->display_PB->setEnabled(ok);
 }
 
 
@@ -577,13 +447,6 @@ void MainWindow::runComplete()
    m_saveLog->setEnabled(true);
 }
 
-
-void MainWindow::updateLaunchButtonState()
-{        
-   bool ok = false;           //  BROOM m_expert->htmlOutputPresent(m_ui->output->text());
-   m_ui->display_PB->setEnabled(ok);
-}
-
 bool MainWindow::htmlOutputPresent(const QString &workingDir) const
 {      
    bool retval = false;
@@ -656,5 +519,3 @@ void MainWindow::showSettings()
    m_outputLog->ensureCursorVisible();
    m_saveLog->setEnabled(true);
 }
-
-

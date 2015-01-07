@@ -15,23 +15,29 @@
 #ifndef WIZARD_H
 #define WIZARD_H
 
-#include <QSplitter>
-#include <QHash>
+#include <QButtonGroup>
+#include <QCheckBox>
 #include <QDialog>
+#include <QFrame>
+#include <QGroupBox>
+#include <QHash>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSplitter>
+#include <QVBoxLayout>
+#include <QWidget>
 
 class Input;
+class Wizard;
+
 class QTreeWidget;
 class QTreeWidgetItem;
 class QStackedWidget;
-class QCheckBox;
-class QLineEdit;
-class QPushButton;
-class QRadioButton;
-class QGroupBox;
-class QButtonGroup;
-class Wizard;
 class QImage;
-class QLabel;
 
 enum OptLang     { Lang_Cpp, Lang_C, Lang_Java, Lang_CS };
 enum HtmlStyle   { HS_Plain, HS_TreeView, HS_CHM };
@@ -173,11 +179,9 @@ class Step3 : public QWidget
    CS_SLOT_1(Private, void setSearchEnabled(int un_named_arg1))
    CS_SLOT_2(setSearchEnabled)
    CS_SLOT_1(Private, void setHtmlOptions(int un_named_arg1))
-   CS_SLOT_2(setHtmlOptions)
+   CS_SLOT_2(setHtmlOptions)   
    CS_SLOT_1(Private, void setLatexOptions(int un_named_arg1))
    CS_SLOT_2(setLatexOptions)
-   CS_SLOT_1(Private, void tuneColorDialog())
-   CS_SLOT_2(tuneColorDialog)
 
    QGroupBox *m_texOptions;
    QButtonGroup *m_texOptionsGroup;

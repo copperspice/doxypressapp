@@ -464,24 +464,25 @@ void MainWindow::save_WizardCfg()
 
 
 // **
-
 void MainWindow::json_OpenDoxy(QByteArray data)
 {
    QJsonDocument doc = QJsonDocument::fromJson(data);
 
-   QJsonObject object = doc.object();
+   QJsonObject object = doc.object();   
+   QJsonArray list;
 // QJsonValue value;
 
+   QString temp;
+   QStringList dataList;
+   int cnt;
+
+   // tab 1
    m_ui->project_name->setText( object.value("project-name").toString());
    m_ui->project_brief->setText( object.value("project-brief").toString());
    m_ui->project_number->setText( object.value("project-number").toString());
 
    m_project_iconFN = object.value("project-icon").toString();
-
-   m_ui->source_input->setText( object.value("source-input").toString());
    m_ui->source_output->setText( object.value("source-output").toString());
-
-   m_ui->source_recursive_CB->setChecked( object.value("source-recursive").toBool());
 
    m_ui->genHtml_CB->setChecked( object.value("generate-html").toBool());
    m_ui->genLatex_CB->setChecked( object.value("generate-latex").toBool());
@@ -490,22 +491,58 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->genXml_CB->setChecked( object.value("generate-xml").toBool());
    m_ui->genDocbook_CB->setChecked( object.value("generate-docbook").toBool());
 
+   m_ui->html_RB1->setChecked( object.value("html-rb1").toBool());
+   m_ui->html_RB2->setChecked( object.value("html-rb2").toBool());
+   m_ui->html_RB3->setChecked( object.value("html-rb3").toBool());
+   m_ui->searchEnabled_CB->setChecked( object.value("search-enabled").toBool());
+
+   m_ui->latex_RB1->setChecked( object.value("latex-rb1").toBool());
+   m_ui->latex_RB2->setChecked( object.value("latex-rb2").toBool());
+   m_ui->latex_RB3->setChecked( object.value("latex-rb3").toBool());
+
+   m_ui->diagram_RB1->setChecked( object.value("diagram-rb1").toBool());
+   m_ui->diagram_RB2->setChecked( object.value("diagram-rb2").toBool());
+   m_ui->diagram_RB3->setChecked( object.value("diagram-rb3").toBool());
+
+   m_ui->dotClass_CB->setChecked( object.value("dot-class").toBool());
+   m_ui->dotCollaboration_CB->setChecked( object.value("dot-collaboration").toBool());
+   m_ui->dotOverall_CB->setChecked( object.value("dot-overall").toBool());
+   m_ui->dotInclude_CB->setChecked( object.value("dot-include").toBool());
+   m_ui->dotIncludedBy_CB->setChecked( object.value("dot-included-by").toBool());
+   m_ui->dotCalls_CB->setChecked( object.value("dot-calls").toBool());
+   m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());
+
+   // tab 2
+   m_ui->source_recursive_CB->setChecked( object.value("source-recursive").toBool());
+
+   //
+   list = object.value("source-input").toArray();
+   cnt  = list.count();
+
+   for (int k = 0; k < cnt; k++)  {
+      dataList.append(list.at(k).toString());
+   }
+
+   temp = dataList.join(", ");
+   m_ui->source_input->setPlainText(temp);
+
+
+   // tab 3 
 
 }
 
 QByteArray MainWindow::json_SaveDoxy()
 {
    QJsonObject object;
+   QJsonArray list;
 // QJsonValue value;
-// QJsonArray list;
 
    object.insert("project-name",       m_ui->project_name->text());
    object.insert("project-brief",      m_ui->project_brief->text());
    object.insert("project-number",     m_ui->project_number->text());
-   object.insert("project-icon",       m_project_iconFN);
-   object.insert("source-input",       m_ui->source_input->text());
+
+   object.insert("project-icon",       m_project_iconFN);  
    object.insert("source-output",      m_ui->source_output->text());
-   object.insert("source-recursive",   m_ui->source_recursive_CB->isChecked());
 
    object.insert("generate-html",      m_ui->genHtml_CB->isChecked());
    object.insert("generate-latex",     m_ui->genLatex_CB->isChecked());
@@ -514,23 +551,54 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("generate-xml",       m_ui->genXml_CB->isChecked());
    object.insert("generate-docbook",   m_ui->genDocbook_CB->isChecked());
 
+   object.insert("html-rb1",           m_ui->html_RB1->isChecked());
+   object.insert("html-rb2",           m_ui->html_RB2->isChecked());
+   object.insert("html-rb3",           m_ui->html_RB3->isChecked());
+
+/*
+
+   m_ui->searchEnabled_CB->setChecked( object.value("search-enabled").toBool());
+
+   m_ui->latex_RB1->setChecked( object.value("latex-rb1").toBool());
+   m_ui->latex_RB2->setChecked( object.value("latex-rb2").toBool());
+   m_ui->latex_RB3->setChecked( object.value("latex-rb3").toBool());
+
+   m_ui->diagram_RB1->setChecked( object.value("diagram-rb1").toBool());
+   m_ui->diagram_RB2->setChecked( object.value("diagram-rb2").toBool());
+   m_ui->diagram_RB3->setChecked( object.value("diagram-rb3").toBool());
+
+   m_ui->dotClass_CB->setChecked( object.value("dot-class").toBool());
+   m_ui->dotCollaboration_CB->setChecked( object.value("dot-collaboration").toBool());
+   m_ui->dotOverall_CB->setChecked( object.value("dot-overall").toBool());
+   m_ui->dotInclude_CB->setChecked( object.value("dot-include").toBool());
+   m_ui->dotIncludedBy_CB->setChecked( object.value("dot-included-by").toBool());
+   m_ui->dotCalls_CB->setChecked( object.value("dot-calls").toBool());
+   m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());;
+
+
+
+*/
+
+
+   // tab 2
+   object.insert("source-recursive",   m_ui->source_recursive_CB->isChecked());
+
+   list = QJsonArray();
+   QStringList temp = m_ui->source_input->toPlainText().split(", ");
+
+   for (auto s : temp) {
+      list.append(s);
+   }
+
+   object.insert("source-input",  list);
+
 
 /*
    value = QJsonValue(QString("MM/dd/yyyy"));
    object.insert("formatDate", value);
 
    value = QJsonValue(m_appPath);
-   object.insert("pathPrior", value);
-
-   
-   list.append(0);
-   list.append(true);
-   list.append(0);
-
-   list.replace(0, QFont::Bold);
-   list.replace(1, false);
-   list.replace(2, QString("0,0,255"));
-   object.insert("syntax-key", list);
+   object.insert("pathPrior", value);  
 */
 
    // save the data
