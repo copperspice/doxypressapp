@@ -97,6 +97,8 @@ MainWindow::MainWindow()
    createConnections();
    createShortCuts();
 
+   setupLimits();
+
 /*
    // recent files
    rf_CreateMenus();
@@ -181,7 +183,11 @@ void MainWindow::createConnections()
    connect(m_ui->htmlColors_PB,     SIGNAL(clicked()),     this, SLOT(tuneColorDialog_PB()));
 
    // tab 2
-   connect(m_ui->source_input_PB,   SIGNAL(clicked()), this, SLOT(source_input_PB()));
+   connect(m_ui->input_source_PB,     SIGNAL(clicked()),   this, SLOT(input_source_PB()));
+   connect(m_ui->file_patterns_PB,    SIGNAL(clicked()),   this, SLOT(file_patterns_PB()));
+   connect(m_ui->exclude_files_PB,    SIGNAL(clicked()),   this, SLOT(exclude_files_PB()));
+   connect(m_ui->exclude_patterns_PB, SIGNAL(clicked()),   this, SLOT(exclude_patterns_PB()));
+   connect(m_ui->exclude_symbols_PB,  SIGNAL(clicked()),   this, SLOT(exclude_symbols_PB()));
 
 
    // tab 3
@@ -260,9 +266,6 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else  if (label == tr("General B")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_B);
 
-      } else  if (label == tr("General C")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_C);
-
       } else if (label == tr("Build A")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
 
@@ -277,9 +280,6 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 
       } else if (label == tr("Input B")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_B);
-
-      } else if (label == tr("Input C")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_C);
 
       } else if (label == tr("Source Browser")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Browser);

@@ -58,6 +58,14 @@ struct Settings {
    QString pathPrior;
 };
 
+struct LookUpInfo {
+   QString title;
+   QString topMsg;
+   QStringList dataList;
+   bool isFolderPB;
+   bool isFilePB;
+};
+
 class MainWindow : public QMainWindow
 {
    CS_OBJECT(MainWindow)
@@ -104,6 +112,7 @@ class MainWindow : public QMainWindow
 
       void createShortCuts();
       void createConnections();
+      void setupLimits();
 
       QString getFile_CS(QString title, QString fname, QString filter);
 
@@ -195,9 +204,6 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void icon_PB(const QString route))
       CS_SLOT_2(icon_PB)
 
-      CS_SLOT_1(Private, void source_input_PB())
-      CS_SLOT_2(source_input_PB)
-
       CS_SLOT_1(Private, void output_PB())
       CS_SLOT_2(output_PB)
 
@@ -205,7 +211,20 @@ class MainWindow : public QMainWindow
       CS_SLOT_2(tuneColorDialog_PB)
 
       // tab 2
+      CS_SLOT_1(Private, void input_source_PB())
+      CS_SLOT_2(input_source_PB)
 
+      CS_SLOT_1(Private, void file_patterns_PB())
+      CS_SLOT_2(file_patterns_PB)
+
+      CS_SLOT_1(Private, void exclude_files_PB())
+      CS_SLOT_2(exclude_files_PB)
+
+      CS_SLOT_1(Private, void exclude_patterns_PB())
+      CS_SLOT_2(exclude_patterns_PB)
+
+      CS_SLOT_1(Private, void exclude_symbols_PB())
+      CS_SLOT_2(exclude_symbols_PB)
 
       // tab 3
 

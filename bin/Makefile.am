@@ -70,6 +70,7 @@ CS_Doxywizard_SOURCES = \
    src/inputint.cpp  \
    src/inputstrlist.cpp  \
    src/json.cpp \
+   src/limits.cpp \
    src/lookup.cpp \
    src/main.cpp \
    src/mainwindow.cpp \

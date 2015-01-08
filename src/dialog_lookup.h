@@ -28,19 +28,27 @@ class Dialog_LookUp : public QDialog
    CS_OBJECT(Dialog_LookUp)
 
    public:
-      explicit Dialog_LookUp(MainWindow *parent, QStringList data);
+      explicit Dialog_LookUp(MainWindow *parent, struct LookUpInfo data);
       ~Dialog_LookUp();
 
       QStringList getData();
 
    private:
       Ui::Dialog_LookUp *m_ui;
-
       QStandardItemModel *m_model;
-      QStringList m_data;
+      struct LookUpInfo m_data;
 
-      CS_SLOT_1(Private, void add())
-      CS_SLOT_2(add)
+      CS_SLOT_1(Private, void moveItemUp())
+      CS_SLOT_2(moveItemUp)
+
+      CS_SLOT_1(Private, void moveItemDown())
+      CS_SLOT_2(moveItemDown)
+
+      CS_SLOT_1(Private, void addItem())
+      CS_SLOT_2(addItem)
+
+      CS_SLOT_1(Private, void deleteItem())
+      CS_SLOT_2(deleteItem)
 
       CS_SLOT_1(Private, void save())
       CS_SLOT_2(save)

@@ -17,14 +17,14 @@
 
 #include <dialog_lookup.h>
 
-Dialog_LookUp::Dialog_LookUp(MainWindow *parent, QStringList data)
+Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    :  QDialog(parent), m_ui(new Ui::Dialog_LookUp)
 {
    m_ui->setupUi(this);
    m_data = data;
 
-// setWindowTitle("Select Entries");
-// m_ui->topMsg->setText("something");
+   setWindowTitle(m_data.title);
+   m_ui->topMsg->setText(m_data.topMsg);
 
    m_model = new QStandardItemModel();
 
@@ -35,31 +35,183 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, QStringList data)
    temp->setHidden(true);
    temp->setStretchLastSection(true);
 
-   // existing data
-   for (int row = 0; row < 4; ++row) {
-      QStandardItem *item = new QStandardItem( QString("information in row %0").arg(row) );
+   // existing data   
+   for (auto s : m_data.dataList) {
+      QStandardItem *item = new QStandardItem(s);
       m_model->appendRow(item);
    }
 
-// connect(m_ui->delete_PB,       SIGNAL( clicked()),this,SLOT(deleteItem()));
-// connect(m_ui->up_PB,           SIGNAL( clicked()),this,SLOT(moveItemUp()));
-// connect(m_ui->down_PB,         SIGNAL( clicked()),this,SLOT(moveItemDown()));
+   connect(m_ui->up_PB,           SIGNAL( clicked()),this,SLOT(moveItemUp()));
+   connect(m_ui->down_PB,         SIGNAL( clicked()),this,SLOT(moveItemDown()));
 
-   connect(m_ui->add_PB,          SIGNAL( clicked()),this,SLOT(add()));
+   connect(m_ui->add_PB,          SIGNAL( clicked()),this,SLOT(addItem()));
+   connect(m_ui->delete_PB,       SIGNAL( clicked()),this,SLOT(deleteItem()));
    connect(m_ui->save_PB,         SIGNAL( clicked()),this,SLOT(save()));
    connect(m_ui->cancel_PB,       SIGNAL( clicked()),this,SLOT(cancel()));
-
-};
+}
 
 Dialog_LookUp::~Dialog_LookUp()
 {
    delete m_ui;
 }
 
-void Dialog_LookUp::add()
+void Dialog_LookUp::addItem()
 {  
    QStandardItem *item = new QStandardItem("");
    m_model->appendRow(item);
+}
+
+void Dialog_LookUp::deleteItem()
+{
+   QModelIndex index = m_ui->tableView->currentIndex();
+   if (! index.isValid() ) {
+      return;
+   }
+
+   int row = index.row();
+
+   // change the row id to zero before the delete
+   QModelIndex indexDel = m_model->index(row, 0);
+   m_model->setData(indexDel, QVariant(0) );
+
+   // hide current row from the view
+   m_ui->tableView->setRowHidden(row, true);
+
+   m_model->removeRow(row);    
+
+   //
+   int maxRow = m_model->rowCount();
+   ++row;
+
+   if (row < maxRow )  {    
+      // move to next row
+      index = m_model->index(row, 0);
+
+   } else   {
+      // move to row 0      
+      index = m_model->index(0, 0);
+   }
+
+   m_ui->tableView->setCurrentIndex(index);
+}
+
+void Dialog_LookUp::moveItemUp()
+{
+   QModelIndex index = m_ui->tableView->currentIndex();
+   if (! index.isValid() )
+      return;
+
+   // current row user wants to move up
+   int rowUp = index.row();
+
+   if (rowUp == 0) {
+      // Current row can not be moved up
+      return;
+   }
+
+   // calculate the prior visibale row
+   int rowAbove = rowUp - 1;
+
+   while (true) {
+
+      if (m_ui->tableView->isRowHidden(rowAbove)) {
+
+         if (rowAbove == 0) {
+            // Top row can not be moved up -- nothing visable above current row
+            return;
+         }
+
+         // decrement and try again
+         rowAbove--;
+
+      } else {
+         // have a good value
+         break;
+      }
+   }
+
+   // swap the data for column 0
+   setUpdatesEnabled(false);
+
+   {
+      // get data for rowUp
+      QModelIndex indexUp = m_model->index(rowUp, 0);
+      QVariant dataUp = m_model->data(indexUp, Qt::DisplayRole);
+
+      // get data for rowAbove
+      QModelIndex indexAbove = m_model->index(rowAbove, 0);
+      QVariant dataAbove = m_model->data(indexAbove,Qt::DisplayRole);
+
+      // save
+      m_model->setData(indexAbove, QVariant(dataAbove), Qt::EditRole );
+      m_model->setData(indexUp, QVariant(dataUp), Qt::EditRole );
+
+      // stay on the row that was moved up
+      m_ui->tableView->setCurrentIndex(indexAbove);
+   }
+
+   setUpdatesEnabled(true);
+}
+
+void Dialog_LookUp::moveItemDown()
+{
+   QModelIndex index = m_ui->tableView->currentIndex();
+   if (! index.isValid() ) {
+      return;
+   }
+
+   // current row user wants to move down
+   int rowDown = index.row();
+
+   int lastRow = m_model->rowCount() - 1;
+
+   if (rowDown == lastRow) {
+      // Current row can not be moved down
+      return;
+   }
+
+   // calculate the next visibale row
+   int rowBelow = rowDown + 1;
+
+   while (true) {
+
+      if (m_ui->tableView->isRowHidden(rowBelow)) {
+
+         if (rowDown == lastRow) {
+            // Bottom row can not be moved down -- nothing visable below current row
+            return;
+         }
+
+         // decrement and try again
+         rowBelow++;
+
+      } else {
+         // have a good value
+         break;
+      }
+   }
+
+   // swap the data for column 0
+   setUpdatesEnabled(false);
+
+   {
+      // 2 get data for rowDown
+      QModelIndex indexDown = m_model->index(rowDown, 0);
+      QVariant dataDown = m_model->data(indexDown, Qt::DisplayRole);
+
+      // get data for rowBelow
+      QModelIndex indexBelow = m_model->index(rowBelow, 0);
+      QVariant dataBelow = m_model->data(indexBelow,Qt::DisplayRole);
+
+      // save
+      m_model->setData(indexBelow, QVariant(dataDown), Qt::EditRole );
+      m_model->setData(indexDown, QVariant(dataBelow), Qt::EditRole );
+
+      // stay on the row that was moved up
+      m_ui->tableView->setCurrentIndex(indexBelow);
+   }
+
+   setUpdatesEnabled(true);
 }
 
 void Dialog_LookUp::save()

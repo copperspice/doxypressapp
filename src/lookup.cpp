@@ -53,7 +53,6 @@ void MainWindow::icon_PB(const QString route)
 
       m_project_iconFN = iconName;
    }
-
 }
 
 void MainWindow::output_PB()
@@ -74,31 +73,127 @@ void MainWindow::output_PB()
 }
 
 // tab 2
-void MainWindow::source_input_PB()
-{
-   QStringList dataList;
+void MainWindow::input_source_PB()
+{   
+   struct LookUpInfo data;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, dataList);
+   data.title      = "Input Source";
+   data.topMsg     = "Specify the input souce files";
+
+   QString temp    = m_ui->input_source->toPlainText();
+   data.dataList   = temp.split(", ");
+
+   data.isFilePB   = true;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
 
-      dataList = dw->getData();
+      QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->source_input->setPlainText(temp);
+      m_ui->input_source->setPlainText(temp);
+   }
+}
 
-/*
-      if (! m_ConfigFile.isEmpty() && dir.exists()) {
-         dirName = dir.relativeFilePath(dirName);
-      }
+void MainWindow::file_patterns_PB()
+{
+   struct LookUpInfo data;
 
-      if (dirName.isEmpty()) {
-         dirName = QString::fromAscii(".");
-      }
+   data.title      = "file_patterns";
+   data.topMsg     = "Specify the file_patterns";
 
-      m_ui->source_input->setText(dirName);
-*/
+   QString temp    = m_ui->file_patterns->toPlainText();
+   data.dataList   = temp.split(", ");
 
+   data.isFilePB   = true;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->file_patterns->setPlainText(temp);
+   }
+}
+
+void MainWindow::exclude_files_PB()
+{
+   struct LookUpInfo data;
+
+   data.title      = "exclude_files";
+   data.topMsg     = "Specify the exclude_files";
+
+   QString temp    = m_ui->exclude_files->toPlainText();
+   data.dataList   = temp.split(", ");
+
+   data.isFilePB   = true;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->exclude_files->setPlainText(temp);
+   }
+}
+
+void MainWindow::exclude_patterns_PB()
+{
+   struct LookUpInfo data;
+
+   data.title      = "exclude_patterns";
+   data.topMsg     = "Specify the exclude_patterns";
+
+   QString temp    = m_ui->exclude_patterns->toPlainText();
+   data.dataList   = temp.split(", ");
+
+   data.isFilePB   = true;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->exclude_patterns->setPlainText(temp);
+   }
+}
+
+void MainWindow::exclude_symbols_PB()
+{
+   struct LookUpInfo data;
+
+   data.title      = "exclude_symbols";
+   data.topMsg     = "Specify the exclude_symbols";
+
+   QString temp    = m_ui->exclude_symbols->toPlainText();
+   data.dataList   = temp.split(", ");
+
+   data.isFilePB   = true;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->exclude_symbols->setPlainText(temp);
    }
 }

@@ -63,10 +63,8 @@ void MainWindow::clearAllFields()
 
    // tab 2
    m_ui->project_encoding->setText("");
-   m_ui->source_recursive_CB->setChecked(false);
-   m_ui->source_input->setPlainText("");
-
-   m_ui->strip_from_path->setText("");
+   m_ui->source_recursive_CB->setChecked(false);   
+   m_ui->show_used_files_CB->setChecked(false);
    m_ui->file_version_filter->setText("");
    m_ui->layout_file->setText("");
    m_ui->warn_logfile->setText("");
@@ -78,12 +76,14 @@ void MainWindow::clearAllFields()
    m_ui->perl_path->setText("");
 
    m_ui->exclude_symlinks_CB->setChecked(false);
-   m_ui->source_recursive_CB->setChecked(false);
-   //m_ui->exclude_patterns_CB->setChecked(false);
 
-   // tab 3
+   m_ui->input_source->setPlainText("");
+   m_ui->file_patterns->setPlainText("");
+   m_ui->exclude_files->setPlainText("");
+   m_ui->exclude_patterns->setPlainText("");
+   m_ui->exclude_symbols->setPlainText("");
 
-   // tab 4
+   // tab 3  
 
 }
 

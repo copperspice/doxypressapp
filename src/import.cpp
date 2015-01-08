@@ -89,7 +89,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->genDocbook_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data,"INPUT");
-   m_ui->source_input->setPlainText(tempStr);
+   m_ui->input_source->setPlainText(tempStr);
 
    tempBool = convert_Bool(data,"RECURSIVE");
    m_ui->source_recursive_CB->setChecked(tempBool);

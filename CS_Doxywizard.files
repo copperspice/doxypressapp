@@ -37,3 +37,4 @@ src/settings.h
 src/import.cpp
 src/dialog_lookup.h
 src/dialog_lookup.cpp
+src/limits.cpp

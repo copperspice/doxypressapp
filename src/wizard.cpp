@@ -524,109 +524,11 @@ int ColorPicker::gam2y(int g)
 
 
 
-Step2::Step2(Wizard *wizard, const QHash<QString, Input *> &modelData)
-   : m_wizard(wizard), m_modelData(modelData)
-{
-   QRadioButton *r;
-   QVBoxLayout *layout = new QVBoxLayout(this);
-
-   //---------------------------------------------------
-   m_extractModeGroup = new QButtonGroup(this);
-   m_extractMode = new QGroupBox(this);
-   m_extractMode->setTitle(tr("Select the desired extraction mode:"));
-   QGridLayout *gbox = new QGridLayout( m_extractMode );
-   r = new QRadioButton(tr("Documented entities only"));
-   r->setChecked(true);
-   m_extractModeGroup->addButton(r, 0);
-   gbox->addWidget(r, 1, 0);
-   // 1 -> EXTRACT_ALL = NO
-   r = new QRadioButton(tr("All Entities"));
-   m_extractModeGroup->addButton(r, 1);
-   gbox->addWidget(r, 2, 0);
-   // 2 -> EXTRACT_ALL = YES
-   m_crossRef = new QCheckBox(m_extractMode);
-   m_crossRef->setText(tr("Include cross-referenced source code in the output"));
-   // m_crossRef -> SOURCE_BROWSER = YES/NO
-   gbox->addWidget(m_crossRef, 3, 0);
-   layout->addWidget(m_extractMode);
-
-   //---------------------------------------------------
-   QFrame *f = new QFrame( this );
-   f->setFrameStyle( QFrame::HLine | QFrame::Sunken );
-   layout->addWidget(f);
-
-   m_optimizeLangGroup = new QButtonGroup(this);
-   m_optimizeLang = new QGroupBox(this);
-   m_optimizeLang->setTitle(tr("Select programming language to optimize the results for"));
-   gbox = new QGridLayout( m_optimizeLang );
-
-   r = new QRadioButton(m_optimizeLang);
-   r->setText(tr("Optimize for C++ output"));
-   r->setChecked(true);
-   m_optimizeLangGroup->addButton(r, 0);
-   // 0 -> OPTIMIZE_OUTPUT_FOR_C = NO
-   //      OPTIMIZE_OUTPUT_JAVA  = NO
-   //      OPTIMIZE_FOR_FORTRAN  = NO
-   //      OPTIMIZE_OUTPUT_VHDL  = NO
-   //      CPP_CLI_SUPPORT       = NO
-   //      HIDE_SCOPE_NAMES      = NO
-   gbox->addWidget(r, 0, 0);
-   r = new QRadioButton(tr("Optimize for C++/CLI output"));
-   gbox->addWidget(r, 1, 0);
-   m_optimizeLangGroup->addButton(r, 1);
-   // 1 -> OPTIMIZE_OUTPUT_FOR_C = NO
-   //      OPTIMIZE_OUTPUT_JAVA  = NO
-   //      OPTIMIZE_FOR_FORTRAN  = NO
-   //      OPTIMIZE_OUTPUT_VHDL  = NO
-   //      CPP_CLI_SUPPORT       = YES
-   //      HIDE_SCOPE_NAMES      = NO
-   r = new QRadioButton(tr("Optimize for Java or C# output"));
-   m_optimizeLangGroup->addButton(r, 2);
-   // 2 -> OPTIMIZE_OUTPUT_FOR_C = NO
-   //      OPTIMIZE_OUTPUT_JAVA  = YES
-   //      OPTIMIZE_FOR_FORTRAN  = NO
-   //      OPTIMIZE_OUTPUT_VHDL  = NO
-   //      CPP_CLI_SUPPORT       = NO
-   //      HIDE_SCOPE_NAMES      = NO
-   gbox->addWidget(r, 2, 0);
-   r = new QRadioButton(tr("Optimize for C or PHP output"));
-   m_optimizeLangGroup->addButton(r, 3);
-   // 3 -> OPTIMIZE_OUTPUT_FOR_C = YES
-   //      OPTIMIZE_OUTPUT_JAVA  = NO
-   //      OPTIMIZE_FOR_FORTRAN  = NO
-   //      OPTIMIZE_OUTPUT_VHDL  = NO
-   //      CPP_CLI_SUPPORT       = NO
-   //      HIDE_SCOPE_NAMES      = YES
-   gbox->addWidget(r, 3, 0);
-   r = new QRadioButton(tr("Optimize for Fortran output"));
-   m_optimizeLangGroup->addButton(r, 4);
-   // 4 -> OPTIMIZE_OUTPUT_FOR_C = NO
-   //      OPTIMIZE_OUTPUT_JAVA  = NO
-   //      OPTIMIZE_FOR_FORTRAN  = YES
-   //      OPTIMIZE_OUTPUT_VHDL  = NO
-   //      CPP_CLI_SUPPORT       = NO
-   //      HIDE_SCOPE_NAMES      = NO
-   gbox->addWidget(r, 4, 0);
-   r = new QRadioButton(tr("Optimize for VHDL output"));
-   m_optimizeLangGroup->addButton(r, 5);
-   // 5 -> OPTIMIZE_OUTPUT_FOR_C = NO
-   //      OPTIMIZE_OUTPUT_JAVA  = NO
-   //      OPTIMIZE_FOR_FORTRAN  = NO
-   //      OPTIMIZE_OUTPUT_VHDL  = YES
-   //      CPP_CLI_SUPPORT       = NO
-   //      HIDE_SCOPE_NAMES      = NO
-   gbox->addWidget(r, 5, 0);
-
-   layout->addWidget(m_optimizeLang);
-   layout->addStretch(1);
-
-   connect(m_crossRef, SIGNAL(stateChanged(int)),
-           SLOT(changeCrossRefState(int)));
-   connect(m_optimizeLangGroup, SIGNAL(buttonClicked(int)),
-           SLOT(optimizeFor(int)));
-   connect(m_extractModeGroup, SIGNAL(buttonClicked(int)),
-           SLOT(extractMode(int)));
-}
+/*
+   connect(m_crossRef, SIGNAL(stateChanged(int)), SLOT(changeCrossRefState(int)));
+   connect(m_optimizeLangGroup, SIGNAL(buttonClicked(int)), SLOT(optimizeFor(int)));
+   connect(m_extractModeGroup, SIGNAL(buttonClicked(int)), SLOT(extractMode(int)));
+*/
 
 
 void Step2::optimizeFor(int choice)
@@ -688,38 +590,6 @@ Step3::Step3(Wizard *wizard, const QHash<QString, Input *> &modelData)
       m_htmlOptionsGroup->addButton(r, 2);
 
 
-      // searchEnabled_CB;
-      // tuneColor_PB;
-
-   {
-      // GENERATE_LATEX
-      m_texOptionsGroup = new QButtonGroup(m_texOptions);
-
-
-      r = new QRadioButton(tr("as intermediate format for hyperlinked PDF"));
-      m_texOptionsGroup->addButton(r, 0);
-
-      // PDF_HYPERLINKS = YES
-      r->setChecked(true);     
-      r = new QRadioButton(tr("as intermediate format for PDF"));
-      m_texOptionsGroup->addButton(r, 1);      
-
-      // PDF_HYPERLINKS = NO, USE_PDFLATEX = YES      
-      r = new QRadioButton(tr("as intermediate format for PostScript"));
-      m_texOptionsGroup->addButton(r, 2);
-
-
-      // USE_PDFLATEX = NO
-
- //     m_texOptions->setLayout(vbox);
- //     m_texOptions->setChecked(true);
-   }
-
-   m_manEnabled = new QCheckBox(tr("Man pages"));   
-   m_rtfEnabled = new QCheckBox(tr("Rich Text Format (RTF)"));
-   m_xmlEnabled = new QCheckBox(tr("XML"));
-
-
    //gbox->setRowStretch(6, 1);
    connect(m_htmlOptions, SIGNAL(toggled(bool)), SLOT(setHtmlEnabled(bool)));
    connect(m_texOptions, SIGNAL(toggled(bool)), SLOT(setLatexEnabled(bool)));
@@ -732,36 +602,7 @@ Step3::Step3(Wizard *wizard, const QHash<QString, Input *> &modelData)
 
 }
 
-void Step3::setHtmlEnabled(bool b)
-{
-   updateBoolOption(m_modelData, STR_GENERATE_HTML, b);
-}
-
-void Step3::setLatexEnabled(bool b)
-{
-   updateBoolOption(m_modelData, STR_GENERATE_LATEX, b);
-}
-
-void Step3::setManEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_GENERATE_MAN, state == Qt::Checked);
-}
-
-void Step3::setRtfEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_GENERATE_RTF, state == Qt::Checked);
-}
-
-void Step3::setXmlEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_GENERATE_XML, state == Qt::Checked);
-}
-
-void Step3::setSearchEnabled(int state)
-{
-   updateBoolOption(m_modelData, STR_SEARCHENGINE, state == Qt::Checked);
-}
-
+/*
 void Step3::setHtmlOptions(int id)
 {
    if (id == 0) { // plain HTML
@@ -789,6 +630,8 @@ void Step3::setLatexOptions(int id)
       updateBoolOption(m_modelData, STR_PDF_HYPERLINKS, false);
    }
 }
+
+*/
 
 void Step3::init()
 {

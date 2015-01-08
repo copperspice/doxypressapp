@@ -166,6 +166,8 @@ class Step3 : public QWidget
    void init();
 
  private :
+
+/*
    CS_SLOT_1(Private, void setHtmlEnabled(bool un_named_arg1))
    CS_SLOT_2(setHtmlEnabled)
    CS_SLOT_1(Private, void setLatexEnabled(bool un_named_arg1))
@@ -182,6 +184,8 @@ class Step3 : public QWidget
    CS_SLOT_2(setHtmlOptions)   
    CS_SLOT_1(Private, void setLatexOptions(int un_named_arg1))
    CS_SLOT_2(setLatexOptions)
+
+*/
 
    QGroupBox *m_texOptions;
    QButtonGroup *m_texOptionsGroup;

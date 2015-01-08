@@ -513,7 +513,27 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());
 
    // tab 2
+   m_ui->project_encoding->setText( object.value("project-encoding").toString());
    m_ui->source_recursive_CB->setChecked( object.value("source-recursive").toBool());
+   m_ui->show_used_files_CB->setChecked( object.value("show-used-files").toBool());;
+   m_ui->file_version_filter->setText( object.value("file-version-filter").toString());
+   m_ui->layout_file->setText( object.value("layout-file").toString());
+   m_ui->warn_logfile->setText( object.value("warn-logfile").toString());
+   m_ui->warn_forrmat->setText( object.value("warn-forrmat").toString());
+   m_ui->input_encoding->setText( object.value("input-encoding").toString());
+   m_ui->mdfile_mainpage->setText( object.value("mdfile-mainpage").toString());
+   m_ui->perlmod_prefix->setText( object.value("perlmod-prefix").toString());
+   m_ui->generate_tagfile->setText( object.value("generate-tagfile").toString());
+   m_ui->perl_path->setText( object.value("perl-path").toString());
+
+   m_ui->exclude_symlinks_CB->setChecked( object.value("exclude-symlinks").toBool());
+
+/*
+   m_ui->file_patterns->setPlainText("");
+   m_ui->exclude_files->setPlainText("");
+   m_ui->exclude_patterns->setPlainText("");
+   m_ui->exclude_symbols->setPlainText("");
+*/
 
    //
    list = object.value("source-input").toArray();
@@ -524,7 +544,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    }
 
    temp = dataList.join(", ");
-   m_ui->source_input->setPlainText(temp);
+   m_ui->input_source->setPlainText(temp);
 
 
    // tab 3 
@@ -574,9 +594,6 @@ QByteArray MainWindow::json_SaveDoxy()
    m_ui->dotIncludedBy_CB->setChecked( object.value("dot-included-by").toBool());
    m_ui->dotCalls_CB->setChecked( object.value("dot-calls").toBool());
    m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());;
-
-
-
 */
 
 
@@ -584,7 +601,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("source-recursive",   m_ui->source_recursive_CB->isChecked());
 
    list = QJsonArray();
-   QStringList temp = m_ui->source_input->toPlainText().split(", ");
+   QStringList temp = m_ui->input_source->toPlainText().split(", ");
 
    for (auto s : temp) {
       list.append(s);
