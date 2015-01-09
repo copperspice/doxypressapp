@@ -16,9 +16,7 @@
 *************************************************************************/
 
 #include "dox_build_info.h"
-#include "expert.h"
 #include "mainwindow.h"
-#include "wizard.h"
 
 #include <QKeySequence>
 
@@ -85,7 +83,7 @@ MainWindow::MainWindow()
    setDoxygenTitle(false);
 
    setIconSize(QSize(32,32));
-   setWindowIcon(QIcon("://resources/doxygen.ico"));
+   setWindowIcon(QIcon(":/resources/cs_doxygen.png"));
 
    if (! json_Read(CFG_STARTUP) ) {
       // do not start program
@@ -97,7 +95,10 @@ MainWindow::MainWindow()
    createConnections();
    createShortCuts();
 
+   // next 3, watch order
+   createMap();
    setupLimits();
+   clearAllFields();
 
 /*
    // recent files
@@ -134,10 +135,10 @@ void MainWindow::about()
    //
    QMessageBox msgB;
    msgB.setIcon(QMessageBox::NoIcon);
-   msgB.setWindowIcon(QIcon("://resources/diamond.png"));
+   msgB.setWindowIcon(QIcon(":/resources/cs_doxygen.png"));
 
    msgB.setWindowTitle(tr("About CS Doxygen"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 1.15.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 2.01.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -167,6 +168,10 @@ void MainWindow::createConnections()
    connect(m_ui->actionDoxyHelp,    SIGNAL(triggered()), this, SLOT(manual()));
    connect(m_ui->actionAbout,       SIGNAL(triggered()), this, SLOT(about()));
 
+   //
+   connect(qApp,  SIGNAL(focusChanged(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
+
+
    // connections for tabs
    connect(m_ui->setup_TreeWidget,  SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
                                     SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
@@ -178,9 +183,9 @@ void MainWindow::createConnections()
                                     SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
    // tab 1
-   connect(m_ui->icon_PB,           &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
-   connect(m_ui->output_PB,         SIGNAL(clicked()),     this, SLOT(output_PB()));
-   connect(m_ui->htmlColors_PB,     SIGNAL(clicked()),     this, SLOT(tuneColorDialog_PB()));
+   connect(m_ui->icon_PB,             &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
+   connect(m_ui->output_dir_PB,       SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
+   connect(m_ui->html_colors_PB,      SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
 
    // tab 2
    connect(m_ui->input_source_PB,     SIGNAL(clicked()),   this, SLOT(input_source_PB()));

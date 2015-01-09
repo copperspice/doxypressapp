@@ -20,11 +20,10 @@
 Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    :  QDialog(parent), m_ui(new Ui::Dialog_LookUp)
 {
-   m_ui->setupUi(this);
    m_data = data;
 
+   m_ui->setupUi(this);
    setWindowTitle(m_data.title);
-   m_ui->topMsg->setText(m_data.topMsg);
 
    m_model = new QStandardItemModel();
 

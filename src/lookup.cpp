@@ -15,8 +15,11 @@
  *
 *************************************************************************/
 
+#include "colors.h"
 #include "dialog_lookup.h"
 #include "mainwindow.h"
+
+#include <QRegExp>
 
 // tab 1
 void MainWindow::icon_PB(const QString route)
@@ -55,7 +58,7 @@ void MainWindow::icon_PB(const QString route)
    }
 }
 
-void MainWindow::output_PB()
+void MainWindow::output_dir_PB()
 {
    QString path    = pathName(m_ConfigFile);
    QString dirName = QFileDialog::getExistingDirectory(this, tr("Select destination directory"), path);
@@ -69,20 +72,34 @@ void MainWindow::output_PB()
       dirName = QString::fromAscii(".");
    }
 
-   m_ui->source_output->setText(dirName);
+   m_ui->output_dir->setText(dirName);
+}
+
+void MainWindow::tune_colors_PB()
+{
+   int hue   = m_ui->html_colorstyle_hue->value();
+   int sat   = m_ui->html_colorstyle_sat->value();
+   int gamma = m_ui->html_colorstyle_gamma->value();
+
+   TuneColorDialog tuneColor(hue, sat, gamma, this);
+
+   if (tuneColor.exec() == QDialog::Accepted) {
+      m_ui->html_colorstyle_hue->setValue( tuneColor.getHue());
+      m_ui->html_colorstyle_sat->setValue( tuneColor.getSaturation());
+      m_ui->html_colorstyle_gamma->setValue(tuneColor.getGamma());
+   }
 }
 
 // tab 2
 void MainWindow::input_source_PB()
-{   
+{
+   QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
+   QString temp = m_ui->input_source->toPlainText();
+
    data.title      = "Input Source";
-   data.topMsg     = "Specify the input souce files";
-
-   QString temp    = m_ui->input_source->toPlainText();
-   data.dataList   = temp.split(", ");
-
+   data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
 
@@ -90,7 +107,6 @@ void MainWindow::input_source_PB()
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
-
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
@@ -100,14 +116,13 @@ void MainWindow::input_source_PB()
 
 void MainWindow::file_patterns_PB()
 {
+   QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   data.title      = "file_patterns";
-   data.topMsg     = "Specify the file_patterns";
+   QString temp = m_ui->file_patterns->toPlainText();
 
-   QString temp    = m_ui->file_patterns->toPlainText();
-   data.dataList   = temp.split(", ");
-
+   data.title      = "File Patterns";
+   data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
 
@@ -125,14 +140,13 @@ void MainWindow::file_patterns_PB()
 
 void MainWindow::exclude_files_PB()
 {
+   QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   data.title      = "exclude_files";
-   data.topMsg     = "Specify the exclude_files";
-
    QString temp    = m_ui->exclude_files->toPlainText();
-   data.dataList   = temp.split(", ");
 
+   data.title      = "Exclude Files";
+   data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
 
@@ -140,7 +154,6 @@ void MainWindow::exclude_files_PB()
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
-
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
@@ -149,15 +162,14 @@ void MainWindow::exclude_files_PB()
 }
 
 void MainWindow::exclude_patterns_PB()
-{
+{   
+   QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   data.title      = "exclude_patterns";
-   data.topMsg     = "Specify the exclude_patterns";
-
    QString temp    = m_ui->exclude_patterns->toPlainText();
-   data.dataList   = temp.split(", ");
 
+   data.title      = "Exclude Patterns";
+   data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
 
@@ -165,7 +177,6 @@ void MainWindow::exclude_patterns_PB()
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
-
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
@@ -175,14 +186,13 @@ void MainWindow::exclude_patterns_PB()
 
 void MainWindow::exclude_symbols_PB()
 {
+   QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   data.title      = "exclude_symbols";
-   data.topMsg     = "Specify the exclude_symbols";
-
    QString temp    = m_ui->exclude_symbols->toPlainText();
-   data.dataList   = temp.split(", ");
 
+   data.title      = "Exclude Symbols";
+   data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
 
@@ -190,7 +200,6 @@ void MainWindow::exclude_symbols_PB()
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
-
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");

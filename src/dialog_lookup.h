@@ -19,6 +19,7 @@
 #define DIALOG_LOOKUP_H
 
 #include <QDialog>
+#include <QStandardItemModel>
 
 #include "mainwindow.h"
 #include "ui_dialog_lookup.h"

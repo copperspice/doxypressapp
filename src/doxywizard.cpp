@@ -17,75 +17,9 @@
 
 #include "mainwindow.h"
 
-#include <QFile>
-
 #ifdef WIN32
 #include <windows.h>
 #endif
-
-void MainWindow::clearAllFields()
-{
-   // tab 1
-   m_ui->project_name->setText("");
-   m_ui->project_brief->setText("");
-   m_ui->project_number->setText("");
-
-   m_project_iconFN = "";  
-   m_ui->source_output->setText("");
-
-   m_ui->genHtml_CB->setChecked(false);
-   m_ui->genLatex_CB->setChecked(false);
-   m_ui->genRtf_CB->setChecked(false);
-   m_ui->genMan_CB->setChecked(false);
-   m_ui->genXml_CB->setChecked(false);
-   m_ui->genDocbook_CB->setChecked(false);
-
-   m_ui->html_RB1->setChecked(true);
-   m_ui->html_RB2->setChecked(false);
-   m_ui->html_RB3->setChecked(false);
-   m_ui->searchEnabled_CB->setChecked(false);
-
-   m_ui->latex_RB1->setChecked(true);
-   m_ui->latex_RB2->setChecked(false);
-   m_ui->latex_RB3->setChecked(false);
-
-   m_ui->diagram_RB1->setChecked(true);
-   m_ui->diagram_RB2->setChecked(false);
-   m_ui->diagram_RB3->setChecked(false);
-
-   m_ui->dotClass_CB->setChecked(false);
-   m_ui->dotCollaboration_CB->setChecked(false);
-   m_ui->dotOverall_CB->setChecked(false);
-   m_ui->dotInclude_CB->setChecked(false);
-   m_ui->dotIncludedBy_CB->setChecked(false);
-   m_ui->dotCalls_CB->setChecked(false);
-   m_ui->dotGraphs_CB->setChecked(false);
-
-   // tab 2
-   m_ui->project_encoding->setText("");
-   m_ui->source_recursive_CB->setChecked(false);   
-   m_ui->show_used_files_CB->setChecked(false);
-   m_ui->file_version_filter->setText("");
-   m_ui->layout_file->setText("");
-   m_ui->warn_logfile->setText("");
-   m_ui->warn_forrmat->setText("");
-   m_ui->input_encoding->setText("");
-   m_ui->mdfile_mainpage->setText("");
-   m_ui->perlmod_prefix->setText("");
-   m_ui->generate_tagfile->setText("");
-   m_ui->perl_path->setText("");
-
-   m_ui->exclude_symlinks_CB->setChecked(false);
-
-   m_ui->input_source->setPlainText("");
-   m_ui->file_patterns->setPlainText("");
-   m_ui->exclude_files->setPlainText("");
-   m_ui->exclude_patterns->setPlainText("");
-   m_ui->exclude_symbols->setPlainText("");
-
-   // tab 3  
-
-}
 
 void MainWindow::importDoxy()
 {
@@ -339,7 +273,7 @@ void MainWindow::updateLaunchButtonState()
 // ** Run Options
 void MainWindow::runDoxygen()
 {
-   if (!m_running) {
+   if (! m_running) {
       QString doxygenPath;
 
 #if defined(Q_OS_MACX)
@@ -360,7 +294,7 @@ void MainWindow::runDoxygen()
       qDebug() << tr("Getting doxygen from: ") << doxygenPath;
 #endif
 
-      QString destDir = m_ui->source_output->text();
+      QString destDir = m_ui->output_dir->text();
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
@@ -385,6 +319,11 @@ void MainWindow::runDoxygen()
          m_outputLog->append(QString::fromAscii("*** Failed to run doxygen\n"));
          return;
       }
+
+   }
+
+
+/*    brooom - add this back in
 
       QTextStream t(m_runProcess);
       m_expert->writeConfig(t, false);
@@ -413,9 +352,13 @@ void MainWindow::runDoxygen()
       m_runProcess->kill();
       m_timer->stop();      
    }
+
+*/
+
 }
 
-void MainWindow::readStdout()
+
+void MainWindow::readStdout()      
 {
    if (m_running) {      
       QByteArray data = m_runProcess->readAllStandardOutput();
@@ -470,6 +413,10 @@ bool MainWindow::htmlOutputPresent(const QString &workingDir) const
 
 void MainWindow::showHtmlOutput()
 {
+
+/*   BROOM - put back in
+
+
    QString indexFile = m_expert->getHtmlOutputIndex(m_ui->source_output->text());
    QFileInfo fi(indexFile);
 
@@ -485,12 +432,14 @@ void MainWindow::showHtmlOutput()
 
 #endif
 
+*/
+
 }
 
 void MainWindow::saveLog()
 {
    QString fn = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->source_output->text() + QString::fromAscii("/doxy_log.txt"));
+                                             m_ui->output_dir->text() + QString::fromAscii("/doxy_log.txt"));
 
    if (! fn.isEmpty()) {
       QFile f(fn);
@@ -510,6 +459,9 @@ void MainWindow::saveLog()
 
 void MainWindow::showSettings()
 {
+
+/*   BROOM - put back in
+ *
    QString text;
    QTextStream t(&text);
 
@@ -518,4 +470,13 @@ void MainWindow::showSettings()
    m_outputLog->append(text);
    m_outputLog->ensureCursorVisible();
    m_saveLog->setEnabled(true);
+
+*/
+
 }
+
+
+
+
+
+

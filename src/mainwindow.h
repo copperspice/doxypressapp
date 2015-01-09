@@ -18,10 +18,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "expert.h"
 #include "ui_mainwindow.h"
 #include "util.h"
-#include "wizard.h"
 
 #include <QAction>
 #include <QApplication>
@@ -31,6 +29,7 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
 #include <QFont>
 #include <QJsonObject>
 #include <QJsonValue>
@@ -59,8 +58,7 @@ struct Settings {
 };
 
 struct LookUpInfo {
-   QString title;
-   QString topMsg;
+   QString title;   
    QStringList dataList;
    bool isFolderPB;
    bool isFilePB;
@@ -125,6 +123,10 @@ class MainWindow : public QMainWindow
 
       void updateLaunchButtonState();
 
+      void setHelpColor(int option, QWidget *label);
+      void setHelpText(QWidget *name);
+      void createMap();
+
       // json
       bool json_Read(Config trail = CFG_DEFAULT);
       bool json_Write(Option route, Config trail = CFG_DEFAULT);
@@ -144,9 +146,6 @@ class MainWindow : public QMainWindow
       QPushButton *m_launchPdf;
       QTextEdit *m_outputLog;
       QLabel *m_runStatus;
-
-      Expert *m_expert;
-      Wizard *m_wizard;
 
       QSettings m_settings;
 
@@ -184,6 +183,10 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void save_WizardCfg())
       CS_SLOT_2(save_WizardCfg)
 
+      // app level
+      CS_SLOT_1(Private, void focusChanged(QWidget *, QWidget *))
+      CS_SLOT_2(focusChanged)
+
       //
       CS_SLOT_1(Private, void setupPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(setupPage)
@@ -204,11 +207,11 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void icon_PB(const QString route))
       CS_SLOT_2(icon_PB)
 
-      CS_SLOT_1(Private, void output_PB())
-      CS_SLOT_2(output_PB)
+      CS_SLOT_1(Private, void output_dir_PB())
+      CS_SLOT_2(output_dir_PB)
 
-      CS_SLOT_1(Private, void tuneColorDialog_PB())
-      CS_SLOT_2(tuneColorDialog_PB)
+      CS_SLOT_1(Private, void tune_colors_PB())
+      CS_SLOT_2(tune_colors_PB)
 
       // tab 2
       CS_SLOT_1(Private, void input_source_PB())

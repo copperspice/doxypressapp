@@ -280,7 +280,6 @@ bool MainWindow::json_CreateNew()
 {
    QJsonObject object;
    QJsonValue value;
-   QJsonArray list;
 
    object.insert("pos-x",       400);
    object.insert("pos-y",       200);
@@ -310,12 +309,7 @@ bool MainWindow::json_CreateNew()
 
    if (! isAutoDetect) {
    }
-    
-   
-   list.append(0);
-   list.append(true);
-   list.append(0);
-  
+     
    // save the data
    QJsonDocument doc(object);
    QByteArray data = doc.toJson();
@@ -469,8 +463,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    QJsonDocument doc = QJsonDocument::fromJson(data);
 
    QJsonObject object = doc.object();   
-   QJsonArray list;
-// QJsonValue value;
+   QJsonArray list;   
 
    QString temp;
    QStringList dataList;
@@ -482,20 +475,32 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->project_number->setText( object.value("project-number").toString());
 
    m_project_iconFN = object.value("project-icon").toString();
-   m_ui->source_output->setText( object.value("source-output").toString());
+   m_ui->output_dir->setText( object.value("output-dir").toString());
 
-   m_ui->genHtml_CB->setChecked( object.value("generate-html").toBool());
-   m_ui->genLatex_CB->setChecked( object.value("generate-latex").toBool());
-   m_ui->genRtf_CB->setChecked( object.value("generate-rtf").toBool());
-   m_ui->genMan_CB->setChecked( object.value("generate-man").toBool());
-   m_ui->genXml_CB->setChecked( object.value("generate-xml").toBool());
-   m_ui->genDocbook_CB->setChecked( object.value("generate-docbook").toBool());
+   m_ui->gen_html_CB1->setChecked( object.value("generate-html").toBool());
+   m_ui->gen_latex_CB1->setChecked( object.value("generate-latex").toBool());
+   m_ui->gen_rtf_CB1->setChecked( object.value("generate-rtf").toBool());
+   m_ui->gen_man_CB1->setChecked( object.value("generate-man").toBool());
+   m_ui->gen_xml_CB1->setChecked( object.value("generate-xml").toBool());
+   m_ui->gen_docbook_CB1->setChecked( object.value("generate-docbook").toBool());
 
-   m_ui->html_RB1->setChecked( object.value("html-rb1").toBool());
-   m_ui->html_RB2->setChecked( object.value("html-rb2").toBool());
-   m_ui->html_RB3->setChecked( object.value("html-rb3").toBool());
+   m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
+   m_ui->gen_latex_CB2->setChecked(m_ui->gen_latex_CB1->isChecked());
+   m_ui->gen_rtf_CB2->setChecked(m_ui->gen_rtf_CB1->isChecked());
+   m_ui->gen_man_CB2->setChecked(m_ui->gen_man_CB1->isChecked());
+   m_ui->gen_xml_CB2->setChecked(m_ui->gen_xml_CB1->isChecked());
+   m_ui->gen_docbook_CB2->setChecked(m_ui->gen_docbook_CB1->isChecked());
+
+//   m_ui->html_RB->setChecked( object.value("html-rb1").toBool());
+//   m_ui->html_RB->setChecked( object.value("html-rb2").toBool());
+//   m_ui->html_RB->setChecked( object.value("html-rb3").toBool());
+
    m_ui->searchEnabled_CB->setChecked( object.value("search-enabled").toBool());
+   m_ui->html_colorstyle_hue->setValue( object.value("html-colorstyle-hue").toInt());
+   m_ui->html_colorstyle_sat->setValue( object.value("html-colorstyle-sat").toInt());
+   m_ui->html_colorstyle_gamma->setValue( object.value("html-colorstyle-gamma").toInt());
 
+/*
    m_ui->latex_RB1->setChecked( object.value("latex-rb1").toBool());
    m_ui->latex_RB2->setChecked( object.value("latex-rb2").toBool());
    m_ui->latex_RB3->setChecked( object.value("latex-rb3").toBool());
@@ -503,14 +508,15 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->diagram_RB1->setChecked( object.value("diagram-rb1").toBool());
    m_ui->diagram_RB2->setChecked( object.value("diagram-rb2").toBool());
    m_ui->diagram_RB3->setChecked( object.value("diagram-rb3").toBool());
+*/
 
-   m_ui->dotClass_CB->setChecked( object.value("dot-class").toBool());
-   m_ui->dotCollaboration_CB->setChecked( object.value("dot-collaboration").toBool());
-   m_ui->dotOverall_CB->setChecked( object.value("dot-overall").toBool());
-   m_ui->dotInclude_CB->setChecked( object.value("dot-include").toBool());
-   m_ui->dotIncludedBy_CB->setChecked( object.value("dot-included-by").toBool());
-   m_ui->dotCalls_CB->setChecked( object.value("dot-calls").toBool());
-   m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());
+   m_ui->dot_class_CB->setChecked( object.value("dot-class").toBool());
+   m_ui->dot_collaboration_CB->setChecked( object.value("dot-collaboration").toBool());
+   m_ui->dot_overall_CB->setChecked( object.value("dot-overall").toBool());
+   m_ui->dot_include_CB->setChecked( object.value("dot-include").toBool());
+   m_ui->dot_included_by_CB->setChecked( object.value("dot-included-by").toBool());
+   m_ui->dot_call_CB->setChecked( object.value("dot-call").toBool());
+   m_ui->dot_called_by_CB->setChecked( object.value("dot-called-by").toBool());
 
    // tab 2
    m_ui->project_encoding->setText( object.value("project-encoding").toString());
@@ -562,22 +568,26 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("project-number",     m_ui->project_number->text());
 
    object.insert("project-icon",       m_project_iconFN);  
-   object.insert("source-output",      m_ui->source_output->text());
+   object.insert("output-dir",         m_ui->output_dir->text());
 
-   object.insert("generate-html",      m_ui->genHtml_CB->isChecked());
-   object.insert("generate-latex",     m_ui->genLatex_CB->isChecked());
-   object.insert("generate-rtf",       m_ui->genRtf_CB->isChecked());
-   object.insert("generate-man",       m_ui->genMan_CB->isChecked());
-   object.insert("generate-xml",       m_ui->genXml_CB->isChecked());
-   object.insert("generate-docbook",   m_ui->genDocbook_CB->isChecked());
+   object.insert("generate-html",      m_ui->gen_html_CB1->isChecked());
+   object.insert("generate-latex",     m_ui->gen_latex_CB1->isChecked());
+   object.insert("generate-rtf",       m_ui->gen_rtf_CB1->isChecked());
+   object.insert("generate-man",       m_ui->gen_man_CB1->isChecked());
+   object.insert("generate-xml",       m_ui->gen_xml_CB1->isChecked());
+   object.insert("generate-docbook",   m_ui->gen_docbook_CB1->isChecked());
+
+   object.insert("search-enabled",        m_ui->searchEnabled_CB->isChecked());
+   object.insert("html-colorstyle-hue",   m_ui->html_colorstyle_hue->value());
+   object.insert("html-colorstyle-sat",   m_ui->html_colorstyle_sat->value());
+   object.insert("html-colorstyle-gamma", m_ui->html_colorstyle_gamma->value());
+
+/*
+
 
    object.insert("html-rb1",           m_ui->html_RB1->isChecked());
    object.insert("html-rb2",           m_ui->html_RB2->isChecked());
    object.insert("html-rb3",           m_ui->html_RB3->isChecked());
-
-/*
-
-   m_ui->searchEnabled_CB->setChecked( object.value("search-enabled").toBool());
 
    m_ui->latex_RB1->setChecked( object.value("latex-rb1").toBool());
    m_ui->latex_RB2->setChecked( object.value("latex-rb2").toBool());
@@ -587,13 +597,14 @@ QByteArray MainWindow::json_SaveDoxy()
    m_ui->diagram_RB2->setChecked( object.value("diagram-rb2").toBool());
    m_ui->diagram_RB3->setChecked( object.value("diagram-rb3").toBool());
 
-   m_ui->dotClass_CB->setChecked( object.value("dot-class").toBool());
-   m_ui->dotCollaboration_CB->setChecked( object.value("dot-collaboration").toBool());
-   m_ui->dotOverall_CB->setChecked( object.value("dot-overall").toBool());
-   m_ui->dotInclude_CB->setChecked( object.value("dot-include").toBool());
-   m_ui->dotIncludedBy_CB->setChecked( object.value("dot-included-by").toBool());
-   m_ui->dotCalls_CB->setChecked( object.value("dot-calls").toBool());
-   m_ui->dotGraphs_CB->setChecked( object.value("dot-graphs").toBool());;
+   m_ui->dot_class_CB->setChecked( object.value("dot-class").toBool());
+   m_ui->dot_collaboration_CB->setChecked( object.value("dot-collaboration").toBool());
+   m_ui->dot_overall_CB->setChecked( object.value("dot-overall").toBool());
+   m_ui->dot_include_CB->setChecked( object.value("dot-include").toBool());
+   m_ui->dot_included_by_CB->setChecked( object.value("dot-included-by").toBool());
+   m_ui->dot_call_CB->setChecked( object.value("dot-call").toBool());
+   m_ui->dot_called_by_CB->setChecked( object.value("dot-called-by").toBool());
+
 */
 
 

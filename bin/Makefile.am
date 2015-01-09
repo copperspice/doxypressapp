@@ -58,25 +58,18 @@ CS_Doxywizard_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
 
 CS_Doxywizard_SOURCES = \
-   src/configdoc.cpp  \
-   src/config_doxyw.cpp \
+   src/colors.cpp  \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
    src/doxywizard.cpp \
-   src/expert.cpp \
    src/import.cpp \
-   src/inputbool.cpp \
-   src/inputstring.cpp  \
-   src/inputint.cpp  \
-   src/inputstrlist.cpp  \
    src/json.cpp \
-   src/limits.cpp \
    src/lookup.cpp \
    src/main.cpp \
    src/mainwindow.cpp \
    src/support.cpp \
-   src/wizard.cpp   \
-   src/util.cpp
+   src/util.cpp  \
+   src/validate.cpp
 
 
 FORMS = \

@@ -63,7 +63,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_project_iconFN = convert_Str(data,"PROJECT_LOGO");
 
    tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
-   m_ui->source_output->setText(tempStr);
+   m_ui->output_dir->setText(tempStr);
 
 
 
@@ -71,22 +71,22 @@ void MainWindow::convertDoxy(QByteArray data)
 
 
    tempBool = convert_Bool(data,"GENERATE_HTML");
-   m_ui->genHtml_CB->setChecked(tempBool);
+   m_ui->gen_html_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_LAXTEX");
-   m_ui->genLatex_CB->setChecked(tempBool);
+   m_ui->gen_latex_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_RTF");
-   m_ui->genRtf_CB->setChecked(tempBool);
+   m_ui->gen_rtf_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_MAN");
-   m_ui->genMan_CB->setChecked(tempBool);
+   m_ui->gen_man_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_XML");
-   m_ui->genXml_CB->setChecked(tempBool);
+   m_ui->gen_xml_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_DOCSET");
-   m_ui->genDocbook_CB->setChecked(tempBool);
+   m_ui->gen_docbook_CB1->setChecked(tempBool);
 
    tempStr = convert_Str(data,"INPUT");
    m_ui->input_source->setPlainText(tempStr);
