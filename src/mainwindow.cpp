@@ -25,17 +25,19 @@ MainWindow::MainWindow()
 {
    m_ui->setupUi(this);   
 
-   m_ui->wizard_Splitter->setStretchFactor(0, 1);
-   m_ui->wizard_Splitter->setStretchFactor(1, 3);
+   QList<int> temp;
+   temp.append(250);
+   temp.append(500);
 
-   m_ui->build_Splitter->setStretchFactor(0, 1);
-   m_ui->build_Splitter->setStretchFactor(1, 3);
+   m_ui->setup_Splitter->setSizes(temp);
+   m_ui->build_Splitter->setSizes(temp);
+   m_ui->output_Splitter->setSizes(temp);
+
+   m_ui->setup_leftSplitter->setStretchFactor(0, 3);
+   m_ui->setup_leftSplitter->setStretchFactor(1, 2);
 
    m_ui->build_leftSplitter->setStretchFactor(0, 3);
    m_ui->build_leftSplitter->setStretchFactor(1, 2);
-
-   m_ui->output_Splitter->setStretchFactor(0, 1);
-   m_ui->output_Splitter->setStretchFactor(1, 3);
 
    m_ui->output_leftSplitter->setStretchFactor(0, 5);
    m_ui->output_leftSplitter->setStretchFactor(1, 4);
@@ -93,12 +95,10 @@ MainWindow::MainWindow()
 
    // screen setup
    createConnections();
-   createShortCuts();
+   createShortCuts();  
 
-   // next 3, watch order
+   // set up help & validation
    createMap();
-   setupLimits();
-   clearAllFields();
 
 /*
    // recent files
@@ -170,6 +170,10 @@ void MainWindow::createConnections()
 
    //
    connect(qApp,  SIGNAL(focusChanged(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
+
+
+   //connect(qApp,  SIGNAL( ??(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
+
 
 
    // connections for tabs
@@ -347,6 +351,11 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    }
 }
 
+QSize MainWindow::sizeHint() const
+{
+   return QSize(1000, 600);
+}
+
 
 
 /*
@@ -376,7 +385,7 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    add all widgets
    ensure field names are correct
 
-   import old dox file
+   import old doxy file
 
    enhande load/save CFG to json format
 

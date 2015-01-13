@@ -90,6 +90,8 @@ class MainWindow : public QMainWindow
       struct Settings get_StructData();
       void setDoxygenTitle(bool isModified);
 
+       QSize sizeHint() const;
+
    protected:
       void closeEvent(QCloseEvent *event);
 

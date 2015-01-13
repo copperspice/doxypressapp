@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1112</width>
-    <height>768</height>
+    <width>1003</width>
+    <height>771</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,43 +29,65 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
         <string>Setup</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QSplitter" name="wizard_Splitter">
+       <layout class="QGridLayout" name="gridLayout_22">
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QSplitter" name="setup_Splitter">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <widget class="QTreeWidget" name="setup_TreeWidget">
-           <column>
-            <property name="text">
-             <string notr="true">Topics</string>
+          <widget class="QSplitter" name="setup_leftSplitter">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QTreeWidget" name="setup_TreeWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-           </column>
-           <item>
-            <property name="text">
-             <string>Project</string>
+            <column>
+             <property name="text">
+              <string notr="true">Topics</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Project</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Output</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diagrams</string>
+             </property>
+            </item>
+           </widget>
+           <widget class="QTextEdit" name="help_t1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Output</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Diagrams</string>
-            </property>
-           </item>
+           </widget>
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,1,0">
@@ -576,6 +598,9 @@
                <property name="checkable">
                 <bool>true</bool>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
                <layout class="QVBoxLayout" name="verticalLayout_4">
                 <item>
                  <widget class="QRadioButton" name="html_plain_RB">
@@ -661,6 +686,9 @@
                 <string>LaTeX</string>
                </property>
                <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
                 <bool>true</bool>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -765,12 +793,6 @@
            </widget>
            <widget class="QWidget" name="page_Diagrams">
             <layout class="QGridLayout" name="gridLayout">
-             <property name="leftMargin">
-              <number>14</number>
-             </property>
-             <property name="topMargin">
-              <number>14</number>
-             </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_t1_e">
                <property name="palette">
@@ -815,21 +837,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="diagram_none_RB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>No diagrams</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_diagram</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="2" column="0">
               <widget class="QRadioButton" name="diagram_built_in_RB">
                <property name="font">
@@ -860,7 +867,20 @@
                </attribute>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="5" column="0">
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="4" column="0" colspan="2">
               <widget class="QGroupBox" name="groupBox_3">
                <property name="palette">
                 <palette>
@@ -993,18 +1013,20 @@
                </layout>
               </widget>
              </item>
-             <item row="5" column="0">
-              <spacer name="verticalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item row="1" column="0" colspan="2">
+              <widget class="QRadioButton" name="diagram_none_RB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
+               <property name="text">
+                <string>No diagrams</string>
                </property>
-              </spacer>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroup_diagram</string>
+               </attribute>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1129,11 +1151,11 @@
              </item>
             </item>
            </widget>
-           <widget class="QTextEdit" name="help_text"/>
+           <widget class="QTextEdit" name="help_t2"/>
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>3</number>
+            <number>14</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -2266,6 +2288,9 @@
                <property name="text">
                 <string>Sort brief documentation:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_81</cstring>
+               </property>
               </widget>
              </item>
              <item row="27" column="0">
@@ -2277,6 +2302,9 @@
                </property>
                <property name="text">
                 <string>Generate deprecated list:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_90</cstring>
                </property>
               </widget>
              </item>
@@ -2297,6 +2325,9 @@
                <property name="text">
                 <string>Show grouped member includes:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_77</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
@@ -2315,6 +2346,9 @@
                </property>
                <property name="text">
                 <string>Generate ToDo list:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_85</cstring>
                </property>
               </widget>
              </item>
@@ -2335,6 +2369,9 @@
                <property name="text">
                 <string>Case sensitive names:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_75</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="0">
@@ -2346,6 +2383,9 @@
                </property>
                <property name="text">
                 <string>Hide inbody documentation:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_72</cstring>
                </property>
               </widget>
              </item>
@@ -2387,6 +2427,9 @@
                <property name="text">
                 <string>Extract local methods</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_47</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="0">
@@ -2399,6 +2442,9 @@
                <property name="text">
                 <string>Internal documentation:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_52</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="0">
@@ -2410,6 +2456,9 @@
                </property>
                <property name="text">
                 <string>Extract static:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_45</cstring>
                </property>
               </widget>
              </item>
@@ -2430,6 +2479,9 @@
                <property name="text">
                 <string>Sort by scope name:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_86</cstring>
+               </property>
               </widget>
              </item>
              <item row="20" column="0">
@@ -2441,6 +2493,9 @@
                </property>
                <property name="text">
                 <string>Sort members ctors first:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_83</cstring>
                </property>
               </widget>
              </item>
@@ -2461,6 +2516,9 @@
                <property name="text">
                 <string>Hide friend compounds:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_51</cstring>
+               </property>
               </widget>
              </item>
              <item row="8" column="0">
@@ -2472,6 +2530,9 @@
                </property>
                <property name="text">
                 <string>Hide undocumented classes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_50</cstring>
                </property>
               </widget>
              </item>
@@ -2499,6 +2560,9 @@
                <property name="text">
                 <string>Show include files:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_78</cstring>
+               </property>
               </widget>
              </item>
              <item row="21" column="0">
@@ -2510,6 +2574,9 @@
                </property>
                <property name="text">
                 <string>Sort group names:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_84</cstring>
                </property>
               </widget>
              </item>
@@ -2544,6 +2611,9 @@
                <property name="text">
                 <string>Extract package:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_44</cstring>
+               </property>
               </widget>
              </item>
              <item row="17" column="0">
@@ -2556,6 +2626,9 @@
                <property name="text">
                 <string>Inline information:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_80</cstring>
+               </property>
               </widget>
              </item>
              <item row="26" column="0">
@@ -2567,6 +2640,9 @@
                </property>
                <property name="text">
                 <string>Gnerate Bug list:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_88</cstring>
                </property>
               </widget>
              </item>
@@ -2594,6 +2670,9 @@
                <property name="text">
                 <string>Generate Test list:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_87</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="0">
@@ -2606,6 +2685,9 @@
                <property name="text">
                 <string>Hide scope names:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_76</cstring>
+               </property>
               </widget>
              </item>
              <item row="18" column="0">
@@ -2617,6 +2699,9 @@
                </property>
                <property name="text">
                 <string>Sort member documetaion:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_82</cstring>
                </property>
               </widget>
              </item>
@@ -2636,6 +2721,9 @@
                </property>
                <property name="text">
                 <string>Extract local classes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_46</cstring>
                </property>
               </widget>
              </item>
@@ -2663,6 +2751,9 @@
                <property name="text">
                 <string>Extract all:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_2</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -2688,6 +2779,9 @@
                </property>
                <property name="text">
                 <string>Hide undocumented members:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_48</cstring>
                </property>
               </widget>
              </item>
@@ -2715,6 +2809,9 @@
                <property name="text">
                 <string>Extract private:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_43</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="1">
@@ -2734,6 +2831,9 @@
                <property name="text">
                 <string>Force locale includes:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_79</cstring>
+               </property>
               </widget>
              </item>
              <item row="20" column="1">
@@ -2752,6 +2852,9 @@
                </property>
                <property name="text">
                 <string>Extract annonymous namespaces:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_49</cstring>
                </property>
               </widget>
              </item>
@@ -2777,6 +2880,9 @@
                </property>
                <property name="text">
                 <string>Strict Protype Matching:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox</cstring>
                </property>
               </widget>
              </item>
@@ -2807,6 +2913,9 @@
                <property name="text">
                 <string>Show files:</string>
                </property>
+               <property name="buddy">
+                <cstring>show_files_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="7" column="0">
@@ -2819,6 +2928,9 @@
                <property name="text">
                 <string>Layout file:</string>
                </property>
+               <property name="buddy">
+                <cstring>layout_file</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="0">
@@ -2830,6 +2942,9 @@
                </property>
                <property name="text">
                 <string>Show used files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_used_files_CB</cstring>
                </property>
               </widget>
              </item>
@@ -2846,6 +2961,9 @@
                <property name="text">
                 <string>Cite Bib files:</string>
                </property>
+               <property name="buddy">
+                <cstring>cite_bib_files</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="0">
@@ -2857,6 +2975,9 @@
                </property>
                <property name="text">
                 <string>Enabled sections:</string>
+               </property>
+               <property name="buddy">
+                <cstring>enabled_sections</cstring>
                </property>
               </widget>
              </item>
@@ -2870,6 +2991,9 @@
                <property name="text">
                 <string>Show namespaces:</string>
                </property>
+               <property name="buddy">
+                <cstring>show_namespaces_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="0">
@@ -2881,6 +3005,9 @@
                </property>
                <property name="text">
                 <string>File version filter:</string>
+               </property>
+               <property name="buddy">
+                <cstring>file_version_filter</cstring>
                </property>
               </widget>
              </item>
@@ -2914,6 +3041,9 @@
                </property>
                <property name="text">
                 <string>Max initializer lines:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinBox</cstring>
                </property>
               </widget>
              </item>
@@ -3084,6 +3214,9 @@
                <property name="text">
                 <string>Quiet :</string>
                </property>
+               <property name="buddy">
+                <cstring>quiet_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -3102,6 +3235,9 @@
                </property>
                <property name="text">
                 <string>Warnings:</string>
+               </property>
+               <property name="buddy">
+                <cstring>warnings_CB</cstring>
                </property>
               </widget>
              </item>
@@ -3122,6 +3258,9 @@
                <property name="text">
                 <string>Warn about undocumented members:</string>
                </property>
+               <property name="buddy">
+                <cstring>warn_undoc_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="1">
@@ -3140,6 +3279,9 @@
                </property>
                <property name="text">
                 <string>Warn about syntax errors:</string>
+               </property>
+               <property name="buddy">
+                <cstring>warn_syntax_CB</cstring>
                </property>
               </widget>
              </item>
@@ -3160,6 +3302,9 @@
                <property name="text">
                 <string>Warn about undoumented parameters:</string>
                </property>
+               <property name="buddy">
+                <cstring>warn_undoc_parm_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
@@ -3179,6 +3324,9 @@
                <property name="text">
                 <string>Format for warning messages:</string>
                </property>
+               <property name="buddy">
+                <cstring>warn_forrmat</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="0">
@@ -3190,6 +3338,9 @@
                </property>
                <property name="text">
                 <string>Log file name for warnings:</string>
+               </property>
+               <property name="buddy">
+                <cstring>warn_logfile</cstring>
                </property>
               </widget>
              </item>
@@ -3271,6 +3422,9 @@
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                </property>
+               <property name="buddy">
+                <cstring>input_source</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1" rowspan="2" colspan="2">
@@ -3299,6 +3453,9 @@
                <property name="text">
                 <string>Input file encoding:</string>
                </property>
+               <property name="buddy">
+                <cstring>input_encoding</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="0">
@@ -3313,6 +3470,9 @@
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>file_patterns</cstring>
                </property>
               </widget>
              </item>
@@ -3342,6 +3502,9 @@
                <property name="text">
                 <string>Scan recursively:</string>
                </property>
+               <property name="buddy">
+                <cstring>source_recursive_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="5" column="1">
@@ -3363,6 +3526,9 @@
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_files</cstring>
                </property>
               </widget>
              </item>
@@ -3392,6 +3558,9 @@
                <property name="text">
                 <string>Exclude symlinks:</string>
                </property>
+               <property name="buddy">
+                <cstring>exclude_symlinks_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="8" column="1">
@@ -3413,6 +3582,9 @@
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_patterns</cstring>
                </property>
               </widget>
              </item>
@@ -3444,6 +3616,9 @@
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_symbols</cstring>
                </property>
               </widget>
              </item>
@@ -3628,6 +3803,9 @@
                <property name="text">
                 <string>Example source directories:</string>
                </property>
+               <property name="buddy">
+                <cstring>example_souce</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="0">
@@ -3640,6 +3818,9 @@
                <property name="text">
                 <string>Example patterns:</string>
                </property>
+               <property name="buddy">
+                <cstring>example_patterns</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="0">
@@ -3651,6 +3832,9 @@
                </property>
                <property name="text">
                 <string>Scan examples recursivly:</string>
+               </property>
+               <property name="buddy">
+                <cstring>example_recursive_CB</cstring>
                </property>
               </widget>
              </item>
@@ -3671,6 +3855,9 @@
                <property name="text">
                 <string>Image path:</string>
                </property>
+               <property name="buddy">
+                <cstring>image_path</cstring>
+               </property>
               </widget>
              </item>
              <item row="7" column="0">
@@ -3682,6 +3869,9 @@
                </property>
                <property name="text">
                 <string>Input filter:</string>
+               </property>
+               <property name="buddy">
+                <cstring>input_filter</cstring>
                </property>
               </widget>
              </item>
@@ -3695,6 +3885,9 @@
                <property name="text">
                 <string>Filter patterns:</string>
                </property>
+               <property name="buddy">
+                <cstring>filter_patterns</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="0">
@@ -3706,6 +3899,9 @@
                </property>
                <property name="text">
                 <string>Filter source files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_401</cstring>
                </property>
               </widget>
              </item>
@@ -3726,6 +3922,9 @@
                <property name="text">
                 <string>Filter source patterns:</string>
                </property>
+               <property name="buddy">
+                <cstring>filter_source_patterns</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="0">
@@ -3737,6 +3936,9 @@
                </property>
                <property name="text">
                 <string>Use MD File as main page:</string>
+               </property>
+               <property name="buddy">
+                <cstring>mdfile_mainpage</cstring>
                </property>
               </widget>
              </item>
@@ -3991,6 +4193,9 @@
                <property name="text">
                 <string>Source browser:</string>
                </property>
+               <property name="buddy">
+                <cstring>source_browser_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -4009,6 +4214,9 @@
                </property>
                <property name="text">
                 <string>Inline sources:</string>
+               </property>
+               <property name="buddy">
+                <cstring>inline_sources_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4029,6 +4237,9 @@
                <property name="text">
                 <string>Strip code comments:</string>
                </property>
+               <property name="buddy">
+                <cstring>strip_code_comments_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="1">
@@ -4047,6 +4258,9 @@
                </property>
                <property name="text">
                 <string>Referenced by relation:</string>
+               </property>
+               <property name="buddy">
+                <cstring>ref_by_relation_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4067,6 +4281,9 @@
                <property name="text">
                 <string>References relation:</string>
                </property>
+               <property name="buddy">
+                <cstring>ref_relation_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
@@ -4085,6 +4302,9 @@
                </property>
                <property name="text">
                 <string>References link source:</string>
+               </property>
+               <property name="buddy">
+                <cstring>ref_link_source_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4105,6 +4325,9 @@
                <property name="text">
                 <string>Source tooltips:</string>
                </property>
+               <property name="buddy">
+                <cstring>source_tooltips_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="1">
@@ -4123,6 +4346,9 @@
                </property>
                <property name="text">
                 <string>Use htags:</string>
+               </property>
+               <property name="buddy">
+                <cstring>use_htags_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4143,6 +4369,9 @@
                <property name="text">
                 <string>Verbatim headers:</string>
                </property>
+               <property name="buddy">
+                <cstring>verbatim_headers_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="8" column="1">
@@ -4162,6 +4391,9 @@
                <property name="text">
                 <string>Clang assisted parsing:</string>
                </property>
+               <property name="buddy">
+                <cstring>clang_parsing_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="1">
@@ -4180,6 +4412,9 @@
                </property>
                <property name="text">
                 <string>Clang options:</string>
+               </property>
+               <property name="buddy">
+                <cstring>clang_options</cstring>
                </property>
               </widget>
              </item>
@@ -4256,6 +4491,9 @@
                <property name="text">
                 <string>Ignore prefix:</string>
                </property>
+               <property name="buddy">
+                <cstring>ignore_prefix</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="3">
@@ -4308,6 +4546,9 @@
                <property name="text">
                 <string>Columns in index:</string>
                </property>
+               <property name="buddy">
+                <cstring>cols_in_index_CM</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -4326,6 +4567,9 @@
                </property>
                <property name="text">
                 <string>Alphabetical index:</string>
+               </property>
+               <property name="buddy">
+                <cstring>alpha_index_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4364,6 +4608,9 @@
                </property>
                <property name="text">
                 <string>Generate autogen definitions file:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_autogen_def_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4407,6 +4654,9 @@
                <property name="text">
                 <string>Generate Perl module:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_perl_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="0" colspan="2">
@@ -4418,6 +4668,9 @@
                </property>
                <property name="text">
                 <string>Perl module LaTeX:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perl_latex_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4438,6 +4691,9 @@
                <property name="text">
                 <string>Perl module human readable:</string>
                </property>
+               <property name="buddy">
+                <cstring>perl_pretty_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="2">
@@ -4456,6 +4712,9 @@
                </property>
                <property name="text">
                 <string>Perl module MakeVar prefix:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perlmod_prefix</cstring>
                </property>
               </widget>
              </item>
@@ -4508,6 +4767,9 @@
                <property name="text">
                 <string>Enable preprocessing:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_608</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="2">
@@ -4526,6 +4788,9 @@
                </property>
                <property name="text">
                 <string>Macro expansion:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_609</cstring>
                </property>
               </widget>
              </item>
@@ -4546,6 +4811,9 @@
                <property name="text">
                 <string>Expand only predefined macros:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_607</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="2">
@@ -4564,6 +4832,9 @@
                </property>
                <property name="text">
                 <string>Search includes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_610</cstring>
                </property>
               </widget>
              </item>
@@ -4584,6 +4855,9 @@
                <property name="text">
                 <string>Include path:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_111</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="0">
@@ -4595,6 +4869,9 @@
                </property>
                <property name="text">
                 <string>Include file patterns:</string>
+               </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_112</cstring>
                </property>
               </widget>
              </item>
@@ -4608,6 +4885,9 @@
                <property name="text">
                 <string>Predefined macros:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_113</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="0">
@@ -4620,6 +4900,9 @@
                <property name="text">
                 <string>Expand as defined:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_114</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="0">
@@ -4631,6 +4914,9 @@
                </property>
                <property name="text">
                 <string>Skip function macros:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_611</cstring>
                </property>
               </widget>
              </item>
@@ -4834,6 +5120,9 @@
                <property name="text">
                 <string>Tagfiles:</string>
                </property>
+               <property name="buddy">
+                <cstring>tag_files</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="0">
@@ -4845,6 +5134,9 @@
                </property>
                <property name="text">
                 <string>Generate Tagfile:</string>
+               </property>
+               <property name="buddy">
+                <cstring>generate_tagfile</cstring>
                </property>
               </widget>
              </item>
@@ -4891,6 +5183,9 @@
                <property name="text">
                 <string>All Externals:</string>
                </property>
+               <property name="buddy">
+                <cstring>all_externals_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="1">
@@ -4909,6 +5204,9 @@
                </property>
                <property name="text">
                 <string>External Groups:</string>
+               </property>
+               <property name="buddy">
+                <cstring>external_groups_CB</cstring>
                </property>
               </widget>
              </item>
@@ -4929,6 +5227,9 @@
                <property name="text">
                 <string>External Pages:</string>
                </property>
+               <property name="buddy">
+                <cstring>external_pages_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="5" column="1">
@@ -4947,6 +5248,9 @@
                </property>
                <property name="text">
                 <string>Perl Path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perl_path</cstring>
                </property>
               </widget>
              </item>
@@ -5056,6 +5360,9 @@
                <property name="text">
                 <string>Directory graph:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_587</cstring>
+               </property>
               </widget>
              </item>
              <item row="19" column="0">
@@ -5067,6 +5374,9 @@
                </property>
                <property name="text">
                 <string>Call graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_588</cstring>
                </property>
               </widget>
              </item>
@@ -5114,6 +5424,9 @@
                <property name="text">
                 <string>Have Dot:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_577</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
@@ -5136,6 +5449,9 @@
                <property name="text">
                 <string>Dot number of threads</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_2</cstring>
+               </property>
               </widget>
              </item>
              <item row="15" column="0">
@@ -5147,6 +5463,9 @@
                </property>
                <property name="text">
                 <string>Template relations:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_585</cstring>
                </property>
               </widget>
              </item>
@@ -5160,6 +5479,9 @@
                <property name="text">
                 <string>Dot font name:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_30</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="0">
@@ -5171,6 +5493,9 @@
                </property>
                <property name="text">
                 <string>Collaboration graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_581</cstring>
                </property>
               </widget>
              </item>
@@ -5191,6 +5516,9 @@
                <property name="text">
                 <string>Dia Path:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_119</cstring>
+               </property>
               </widget>
              </item>
              <item row="25" column="1">
@@ -5209,6 +5537,9 @@
                </property>
                <property name="text">
                 <string>Dot Image Format:</string>
+               </property>
+               <property name="buddy">
+                <cstring>comboBox_14</cstring>
                </property>
               </widget>
              </item>
@@ -5229,6 +5560,9 @@
                <property name="text">
                 <string>Class Diagrams:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_565</cstring>
+               </property>
               </widget>
              </item>
              <item row="25" column="0">
@@ -5241,6 +5575,9 @@
                <property name="text">
                 <string>Interactive SVG:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_589</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -5252,6 +5589,9 @@
                </property>
                <property name="text">
                 <string>Mscgen Path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_118</cstring>
                </property>
               </widget>
              </item>
@@ -5272,6 +5612,9 @@
                <property name="text">
                 <string>Dot font size:</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_3</cstring>
+               </property>
               </widget>
              </item>
              <item row="17" column="1" colspan="6">
@@ -5290,6 +5633,9 @@
                </property>
                <property name="text">
                 <string>Included by graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_584</cstring>
                </property>
               </widget>
              </item>
@@ -5327,6 +5673,9 @@
                <property name="text">
                 <string>Group graphs:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_579</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -5346,6 +5695,9 @@
                <property name="text">
                 <string>Hide Undocumented Relations:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_578</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="0">
@@ -5357,6 +5709,9 @@
                </property>
                <property name="text">
                 <string>Uml lock:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_582</cstring>
                </property>
               </widget>
              </item>
@@ -5383,6 +5738,9 @@
                </property>
                <property name="text">
                 <string>Class graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_580</cstring>
                </property>
               </widget>
              </item>
@@ -5420,6 +5778,9 @@
                <property name="text">
                 <string>UML limit number of fields:</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_4</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="1">
@@ -5446,6 +5807,9 @@
                <property name="text">
                 <string>Include graph:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_583</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="0">
@@ -5457,6 +5821,9 @@
                </property>
                <property name="text">
                 <string>Dot font path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_120</cstring>
                </property>
               </widget>
              </item>
@@ -5521,6 +5888,9 @@
                <property name="text">
                 <string>Graphical Hierarchy</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_586</cstring>
+               </property>
               </widget>
              </item>
              <item row="20" column="0">
@@ -5532,6 +5902,9 @@
                </property>
                <property name="text">
                 <string>Caller graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_3</cstring>
                </property>
               </widget>
              </item>
@@ -5605,6 +5978,9 @@
                <property name="text">
                 <string>Dot Path:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_121</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="0">
@@ -5616,6 +5992,9 @@
                </property>
                <property name="text">
                 <string>Generate legend:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_689</cstring>
                </property>
               </widget>
              </item>
@@ -5701,6 +6080,9 @@
                <property name="text">
                 <string>Dot file directories:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_127</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="1">
@@ -5715,6 +6097,9 @@
                </property>
                <property name="text">
                 <string>Plantuml Jar Path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_180</cstring>
                </property>
               </widget>
              </item>
@@ -5758,6 +6143,9 @@
                <property name="text">
                 <string>Dot max graph depth:</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_15</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="0">
@@ -5769,6 +6157,9 @@
                </property>
                <property name="text">
                 <string>Dot multi targets:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_688</cstring>
                </property>
               </widget>
              </item>
@@ -5782,6 +6173,9 @@
                <property name="text">
                 <string>MscFile directories:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_128</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="0">
@@ -5794,6 +6188,9 @@
                <property name="text">
                 <string>Dot Transparent:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_690</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="0">
@@ -5805,6 +6202,9 @@
                </property>
                <property name="text">
                 <string>Diafile directories:</string>
+               </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_129</cstring>
                </property>
               </widget>
              </item>
@@ -5834,6 +6234,9 @@
                <property name="text">
                 <string>Dot Cleanup:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_687</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="0">
@@ -5845,6 +6248,9 @@
                </property>
                <property name="text">
                 <string>Dot graph max nodes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinBox_14</cstring>
                </property>
               </widget>
              </item>
@@ -6026,7 +6432,7 @@
              </property>
             </item>
            </widget>
-           <widget class="QTextEdit" name="outputHelp_TextEdit"/>
+           <widget class="QTextEdit" name="help_t3"/>
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
@@ -6049,6 +6455,9 @@
                </property>
                <property name="text">
                 <string>Generate HTML:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_html_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -6086,6 +6495,9 @@
                <property name="text">
                 <string>HTML Header file:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_39</cstring>
+               </property>
               </widget>
              </item>
              <item row="16" column="0">
@@ -6097,6 +6509,9 @@
                </property>
                <property name="text">
                 <string>HTML dynamic sections:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_623</cstring>
                </property>
               </widget>
              </item>
@@ -6113,6 +6528,9 @@
                <property name="text">
                 <string>HTML file extension:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_35</cstring>
+               </property>
               </widget>
              </item>
              <item row="17" column="0">
@@ -6124,6 +6542,9 @@
                </property>
                <property name="text">
                 <string>HTML Index Num of Entries:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinBox_6</cstring>
                </property>
               </widget>
              </item>
@@ -6137,6 +6558,9 @@
                <property name="text">
                 <string>HTML Stylesheet file:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_52</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="0">
@@ -6149,6 +6573,9 @@
                <property name="text">
                 <string>HTML Extra files:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_51</cstring>
+               </property>
               </widget>
              </item>
              <item row="15" column="0">
@@ -6160,6 +6587,9 @@
                </property>
                <property name="text">
                 <string>HTML Timestamp:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_622</cstring>
                </property>
               </widget>
              </item>
@@ -6181,6 +6611,9 @@
                </property>
                <property name="text">
                 <string>HTML Extra Stylesheets:</string>
+               </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_50</cstring>
                </property>
               </widget>
              </item>
@@ -6204,6 +6637,9 @@
                <property name="text">
                 <string>HTML Color Gamma:</string>
                </property>
+               <property name="buddy">
+                <cstring>html_colorstyle_gamma</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="1">
@@ -6219,6 +6655,9 @@
                <property name="text">
                 <string>HTML Footer file:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_40</cstring>
+               </property>
               </widget>
              </item>
              <item row="17" column="1">
@@ -6233,6 +6672,9 @@
                </property>
                <property name="text">
                 <string>HTML Color Hue:</string>
+               </property>
+               <property name="buddy">
+                <cstring>html_colorstyle_hue</cstring>
                </property>
               </widget>
              </item>
@@ -6260,6 +6702,9 @@
                <property name="text">
                 <string>HTML output directory:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_32</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="0">
@@ -6271,6 +6716,9 @@
                </property>
                <property name="text">
                 <string>HTML Color Sat:</string>
+               </property>
+               <property name="buddy">
+                <cstring>html_colorstyle_sat</cstring>
                </property>
               </widget>
              </item>
@@ -6498,6 +6946,9 @@
                <property name="text">
                 <string>QHP Namespace:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_63</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -6509,6 +6960,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_56</cstring>
                </property>
               </widget>
              </item>
@@ -6547,6 +7001,9 @@
                <property name="text">
                 <string>Generate Treeview:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_633</cstring>
+               </property>
               </widget>
              </item>
              <item row="9" column="1" colspan="2">
@@ -6567,6 +7024,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_58</cstring>
                </property>
               </widget>
              </item>
@@ -6614,6 +7074,9 @@
                <property name="text">
                 <string>CHM File:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_55</cstring>
+               </property>
               </widget>
              </item>
              <item row="5" column="0">
@@ -6626,6 +7089,9 @@
                <property name="text">
                 <string>Generate HTML Help</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_624</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="0">
@@ -6637,6 +7103,9 @@
                </property>
                <property name="text">
                 <string>Generate HTML Help</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_626</cstring>
                </property>
               </widget>
              </item>
@@ -6675,6 +7144,9 @@
                <property name="text">
                 <string>QCH FIle:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_62</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="1" colspan="2">
@@ -6712,6 +7184,9 @@
                <property name="text">
                 <string>CHM Index Encoding:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_61</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="0">
@@ -6723,6 +7198,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_59</cstring>
                </property>
               </widget>
              </item>
@@ -6736,6 +7214,9 @@
                <property name="text">
                 <string>Generate Docset:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_docset_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="0">
@@ -6747,6 +7228,9 @@
                </property>
                <property name="text">
                 <string>Generate QHP:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_628</cstring>
                </property>
               </widget>
              </item>
@@ -6815,6 +7299,9 @@
                <property name="text">
                 <string>QHP Custom Filter Attributes:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_66</cstring>
+               </property>
               </widget>
              </item>
              <item row="17" column="1" colspan="2">
@@ -6836,6 +7323,9 @@
                <property name="text">
                 <string>QHP Section Filter Attributes:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_67</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="0">
@@ -6847,6 +7337,9 @@
                </property>
                <property name="text">
                 <string>Generate HTML Help</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_627</cstring>
                </property>
               </widget>
              </item>
@@ -6884,6 +7377,9 @@
                <property name="text">
                 <string>HHC Location</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_60</cstring>
+               </property>
               </widget>
              </item>
              <item row="8" column="1" colspan="2">
@@ -6903,6 +7399,9 @@
                <property name="text">
                 <string>XX</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_57</cstring>
+               </property>
               </widget>
              </item>
              <item row="21" column="0">
@@ -6915,6 +7414,9 @@
                <property name="text">
                 <string>QHG Location:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_71</cstring>
+               </property>
               </widget>
              </item>
              <item row="8" column="0">
@@ -6926,6 +7428,9 @@
                </property>
                <property name="text">
                 <string>Generate CHI</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_625</cstring>
                </property>
               </widget>
              </item>
@@ -6955,6 +7460,9 @@
                <property name="text">
                 <string>Generate Eclipse Help</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_629</cstring>
+               </property>
               </widget>
              </item>
              <item row="18" column="1" rowspan="2" colspan="2">
@@ -6983,6 +7491,9 @@
                <property name="text">
                 <string>Disable Index:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_632</cstring>
+               </property>
               </widget>
              </item>
              <item row="15" column="0">
@@ -6994,6 +7505,9 @@
                </property>
                <property name="text">
                 <string>QHP Virtual Folder:</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_64</cstring>
                </property>
               </widget>
              </item>
@@ -7025,6 +7539,9 @@
                <property name="text">
                 <string>QHP Custom Filter Name:</string>
                </property>
+               <property name="buddy">
+                <cstring>destDir_65</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="1" colspan="2">
@@ -7043,6 +7560,9 @@
                </property>
                <property name="text">
                 <string>Eclipse Doc Id:</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_68</cstring>
                </property>
               </widget>
              </item>
@@ -7079,6 +7599,9 @@
                <property name="text">
                 <string>Formula FontSize</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_9</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="1">
@@ -7098,6 +7621,9 @@
                <property name="text">
                 <string>Enum Values per Line:</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_8</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="0">
@@ -7109,6 +7635,9 @@
                </property>
                <property name="text">
                 <string>Disable Index:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_634</cstring>
                </property>
               </widget>
              </item>
@@ -7129,6 +7658,9 @@
                <property name="text">
                 <string>MathJax Format:</string>
                </property>
+               <property name="buddy">
+                <cstring>comboBox_6</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="0">
@@ -7140,6 +7672,9 @@
                </property>
                <property name="text">
                 <string>Use MathJax:</string>
+               </property>
+               <property name="buddy">
+                <cstring>checkBox_637</cstring>
                </property>
               </widget>
              </item>
@@ -7156,6 +7691,9 @@
                <property name="text">
                 <string>Extra Search Mappings:</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_32</cstring>
+               </property>
               </widget>
              </item>
              <item row="10" column="0">
@@ -7167,6 +7705,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_70</cstring>
                </property>
               </widget>
              </item>
@@ -7190,6 +7731,9 @@
                <property name="text">
                 <string>Enum Values per Line:</string>
                </property>
+               <property name="buddy">
+                <cstring>spinBox_7</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="1">
@@ -7205,6 +7749,9 @@
                <property name="text">
                 <string>Use MathJax:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_635</cstring>
+               </property>
               </widget>
              </item>
              <item row="14" column="0">
@@ -7216,6 +7763,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_76</cstring>
                </property>
               </widget>
              </item>
@@ -7229,6 +7779,9 @@
                <property name="text">
                 <string>Formula Transparent</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_630</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="0">
@@ -7241,6 +7794,9 @@
                <property name="text">
                 <string>Use MathJax:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_636</cstring>
+               </property>
               </widget>
              </item>
              <item row="16" column="0">
@@ -7252,6 +7808,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_77</cstring>
                </property>
               </widget>
              </item>
@@ -7272,6 +7831,9 @@
                <property name="text">
                 <string>MathJax Extensions</string>
                </property>
+               <property name="buddy">
+                <cstring>plainTextEdit_30</cstring>
+               </property>
               </widget>
              </item>
              <item row="13" column="1">
@@ -7291,6 +7853,9 @@
                <property name="text">
                 <string>Use MathJax:</string>
                </property>
+               <property name="buddy">
+                <cstring>checkBox_631</cstring>
+               </property>
               </widget>
              </item>
              <item row="12" column="1">
@@ -7309,6 +7874,9 @@
                </property>
                <property name="text">
                 <string>XX</string>
+               </property>
+               <property name="buddy">
+                <cstring>destDir_69</cstring>
                </property>
               </widget>
              </item>
@@ -7477,6 +8045,9 @@
                </property>
                <property name="text">
                 <string>TextLabel</string>
+               </property>
+               <property name="buddy">
+                <cstring>lineEdit</cstring>
                </property>
               </widget>
              </item>
@@ -7694,7 +8265,7 @@
                 <string>Extra Packages:</string>
                </property>
                <property name="buddy">
-                <cstring>pushButton_32</cstring>
+                <cstring>plainTextEdit_33</cstring>
                </property>
               </widget>
              </item>
@@ -7808,7 +8379,7 @@
                 <string>LaTeX Extra Files:</string>
                </property>
                <property name="buddy">
-                <cstring>pushButton_33</cstring>
+                <cstring>plainTextEdit_34</cstring>
                </property>
               </widget>
              </item>
@@ -8099,6 +8670,9 @@
                <property name="text">
                 <string>Generate RTF:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_rtf_CB2</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -8117,6 +8691,9 @@
                </property>
                <property name="text">
                 <string>RTF output directory:</string>
+               </property>
+               <property name="buddy">
+                <cstring>rtf_output</cstring>
                </property>
               </widget>
              </item>
@@ -8177,6 +8754,9 @@
                <property name="text">
                 <string>RTF Stylesheet File:</string>
                </property>
+               <property name="buddy">
+                <cstring>rtf_stylesheet</cstring>
+               </property>
               </widget>
              </item>
              <item row="6" column="1">
@@ -8221,6 +8801,9 @@
                </property>
                <property name="text">
                 <string>RTF Extensions File:</string>
+               </property>
+               <property name="buddy">
+                <cstring>rtf_extension</cstring>
                </property>
               </widget>
              </item>
@@ -8267,6 +8850,9 @@
                <property name="text">
                 <string>RTF Hyperlinks:</string>
                </property>
+               <property name="buddy">
+                <cstring>rtf_hyperlinks_CB</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="0">
@@ -8278,6 +8864,9 @@
                </property>
                <property name="text">
                 <string>Compact RTF:</string>
+               </property>
+               <property name="buddy">
+                <cstring>compact_rtf_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8314,6 +8903,9 @@
                <property name="text">
                 <string>Generate Man Pages:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_man_CB2</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -8332,6 +8924,9 @@
                </property>
                <property name="text">
                 <string>Man Page ouput directory:</string>
+               </property>
+               <property name="buddy">
+                <cstring>man_output</cstring>
                </property>
               </widget>
              </item>
@@ -8378,6 +8973,9 @@
                <property name="text">
                 <string>Man Page Extension:</string>
                </property>
+               <property name="buddy">
+                <cstring>man_extension</cstring>
+               </property>
               </widget>
              </item>
              <item row="3" column="0">
@@ -8390,6 +8988,9 @@
                <property name="text">
                 <string>Man Page Subdirectory:</string>
                </property>
+               <property name="buddy">
+                <cstring>man_subdir</cstring>
+               </property>
               </widget>
              </item>
              <item row="4" column="0">
@@ -8401,6 +9002,9 @@
                </property>
                <property name="text">
                 <string>Man Page Links:</string>
+               </property>
+               <property name="buddy">
+                <cstring>man_links_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8462,6 +9066,9 @@
                <property name="text">
                 <string>Generate XML:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_xml_CB2</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -8480,6 +9087,9 @@
                </property>
                <property name="text">
                 <string>XML ouput directory:</string>
+               </property>
+               <property name="buddy">
+                <cstring>xml_output</cstring>
                </property>
               </widget>
              </item>
@@ -8526,6 +9136,9 @@
                <property name="text">
                 <string>XML Progarm Listing:</string>
                </property>
+               <property name="buddy">
+                <cstring>xml_program_llisting</cstring>
+               </property>
               </widget>
              </item>
              <item row="2" column="1">
@@ -8568,6 +9181,9 @@
                <property name="text">
                 <string>Generate DocBook:</string>
                </property>
+               <property name="buddy">
+                <cstring>gen_docbook_CB2</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1" colspan="2">
@@ -8586,6 +9202,9 @@
                </property>
                <property name="text">
                 <string>DocBook ouput directory:</string>
+               </property>
+               <property name="buddy">
+                <cstring>docbook_output</cstring>
                </property>
               </widget>
              </item>
@@ -8631,6 +9250,9 @@
                </property>
                <property name="text">
                 <string>DocBook Progarm Listing:</string>
+               </property>
+               <property name="buddy">
+                <cstring>docbook_program_listing_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8765,7 +9387,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
+            <width>10</width>
             <height>10</height>
            </size>
           </property>
@@ -8781,7 +9403,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -8815,7 +9437,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>10</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -8849,7 +9471,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>10</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -8883,7 +9505,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>10</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -8914,7 +9536,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -8931,7 +9553,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
+            <width>10</width>
             <height>5</height>
            </size>
           </property>
@@ -8948,7 +9570,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1112</width>
+     <width>1003</width>
      <height>28</height>
     </rect>
    </property>
@@ -9181,17 +9803,12 @@
   <tabstop>checkBox_88</tabstop>
   <tabstop>checkBox_90</tabstop>
   <tabstop>enabled_sections</tabstop>
-  <tabstop>enabled_sections_PB</tabstop>
-  <tabstop>max_init_lines</tabstop>
   <tabstop>show_used_files_CB</tabstop>
   <tabstop>show_files_CB</tabstop>
   <tabstop>show_namespaces_CB</tabstop>
   <tabstop>file_version_filter</tabstop>
-  <tabstop>file_version_filter_PB</tabstop>
   <tabstop>layout_file</tabstop>
-  <tabstop>layout_file_PB</tabstop>
   <tabstop>cite_bib_files</tabstop>
-  <tabstop>cite_bib_files_PB</tabstop>
   <tabstop>quiet_CB</tabstop>
   <tabstop>warnings_CB</tabstop>
   <tabstop>warn_undoc_CB</tabstop>
@@ -9429,10 +10046,10 @@
   <tabstop>docbook_program_listing_CB</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>outputLog</tabstop>
-  <tabstop>outputHelp_TextEdit</tabstop>
+  <tabstop>help_t3</tabstop>
   <tabstop>show_config_PB</tabstop>
   <tabstop>save_log_PB</tabstop>
-  <tabstop>help_text</tabstop>
+  <tabstop>help_t2</tabstop>
   <tabstop>display_PB</tabstop>
  </tabstops>
  <resources/>
