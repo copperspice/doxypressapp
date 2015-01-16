@@ -181,7 +181,6 @@ void MainWindow::focusChanged(QWidget *old_Widget, QWidget *new_Widget)
    // entering - adjust help message for new_Widget
    setHelpText(new_Widget);
 
-
    // leaving - adjust color on old_Widget
    QString defValue = getDefault(old_Widget);
 
@@ -205,7 +204,7 @@ void MainWindow::focusChanged(QWidget *old_Widget, QWidget *new_Widget)
 
    // QGroupBox - do nothing
 
-   //QCombo  - not sure
+   // QCombo  - not sure
 
    QLineEdit *temp_LE = dynamic_cast<QLineEdit *>(old_Widget);
 
@@ -248,15 +247,18 @@ void MainWindow::focusChanged(QWidget *old_Widget, QWidget *new_Widget)
    if (temp_SB) {
       QLabel *label = getLabel(temp_SB);
 
-      if (label) {
+      if (label) {         
+/*       QString defValue_SB = getDefault(old_Widget);
 
-         if (temp_SB->value == defValue) {
+         if (temp_SB->value == defValue_SB) {
             setHelpColor(DEFAULT, label);
 
          } else {
             setHelpColor(MODIFIED, label);
 
          }
+*/
+
       }
    }
 }

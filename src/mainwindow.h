@@ -141,6 +141,7 @@ class MainWindow : public QMainWindow
 
       void json_OpenDoxy(QByteArray data);
       QByteArray json_SaveDoxy();
+      QString getDataList(QJsonObject &object, QString field);
 
       QPushButton *m_run;
       QPushButton *m_saveLog;
