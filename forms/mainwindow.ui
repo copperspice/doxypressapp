@@ -1155,7 +1155,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>6</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -3804,7 +3804,7 @@
                 <string>Example source directories:</string>
                </property>
                <property name="buddy">
-                <cstring>example_souce</cstring>
+                <cstring>example_source</cstring>
                </property>
               </widget>
              </item>
@@ -3901,12 +3901,12 @@
                 <string>Filter source files:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_401</cstring>
+                <cstring>filter_source_files_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="10" column="1">
-              <widget class="QCheckBox" name="checkBox_401">
+              <widget class="QCheckBox" name="filter_source_files_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4110,7 +4110,7 @@
               </widget>
              </item>
              <item row="0" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="example_souce">
+              <widget class="QPlainTextEdit" name="example_source">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -4474,13 +4474,76 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Index">
-            <layout class="QGridLayout" name="gridLayout_16" columnstretch="0,0,1,0">
+            <layout class="QGridLayout" name="gridLayout_16" columnstretch="0,0,1,0,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_47">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Columns in index:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_704">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Alphabetical index:</string>
+               </property>
+               <property name="buddy">
+                <cstring>alpha_index_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" rowspan="2" colspan="3">
+              <widget class="QPlainTextEdit" name="ignore_prefix">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <spacer name="verticalSpacer_37">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="alpha_index_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_388">
                <property name="font">
@@ -4496,7 +4559,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="3">
+             <item row="4" column="4">
               <widget class="QPushButton" name="ignore_prefix_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4521,73 +4584,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QComboBox" name="cols_in_index_CM"/>
-             </item>
-             <item row="6" column="0">
-              <spacer name="verticalSpacer_37">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_47">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Columns in index:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cols_in_index_CM</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="alpha_index_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_704">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Alphabetical index:</string>
-               </property>
-               <property name="buddy">
-                <cstring>alpha_index_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="ignore_prefix">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
+              <widget class="QSpinBox" name="cols_in_index_SB"/>
              </item>
             </layout>
            </widget>
@@ -4768,12 +4765,12 @@
                 <string>Enable preprocessing:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_608</cstring>
+                <cstring>enable_preprocessing_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QCheckBox" name="checkBox_608">
+              <widget class="QCheckBox" name="enable_preprocessing_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4790,12 +4787,12 @@
                 <string>Macro expansion:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_609</cstring>
+                <cstring>macro_expansion_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="1" column="2">
-              <widget class="QCheckBox" name="checkBox_609">
+              <widget class="QCheckBox" name="macro_expansion_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4812,12 +4809,12 @@
                 <string>Expand only predefined macros:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_607</cstring>
+                <cstring>expand_only_redefined_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QCheckBox" name="checkBox_607">
+              <widget class="QCheckBox" name="expand_only_redefined_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4834,12 +4831,12 @@
                 <string>Search includes:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_610</cstring>
+                <cstring>search_includes_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="3" column="2">
-              <widget class="QCheckBox" name="checkBox_610">
+              <widget class="QCheckBox" name="search_includes_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4856,7 +4853,7 @@
                 <string>Include path:</string>
                </property>
                <property name="buddy">
-                <cstring>plainTextEdit_111</cstring>
+                <cstring>include_path</cstring>
                </property>
               </widget>
              </item>
@@ -4871,7 +4868,7 @@
                 <string>Include file patterns:</string>
                </property>
                <property name="buddy">
-                <cstring>plainTextEdit_112</cstring>
+                <cstring>include_file_patterns</cstring>
                </property>
               </widget>
              </item>
@@ -4886,7 +4883,7 @@
                 <string>Predefined macros:</string>
                </property>
                <property name="buddy">
-                <cstring>plainTextEdit_113</cstring>
+                <cstring>predefined_macros</cstring>
                </property>
               </widget>
              </item>
@@ -4901,7 +4898,7 @@
                 <string>Expand as defined:</string>
                </property>
                <property name="buddy">
-                <cstring>plainTextEdit_114</cstring>
+                <cstring>expand_as_defined</cstring>
                </property>
               </widget>
              </item>
@@ -4916,12 +4913,12 @@
                 <string>Skip function macros:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_611</cstring>
+                <cstring>skip_function_macros_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="12" column="2">
-              <widget class="QCheckBox" name="checkBox_611">
+              <widget class="QCheckBox" name="skip_function_macros_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4941,7 +4938,7 @@
               </spacer>
              </item>
              <item row="4" column="3">
-              <widget class="QPushButton" name="source_input_PB_17">
+              <widget class="QPushButton" name="include_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -4965,7 +4962,7 @@
               </widget>
              </item>
              <item row="6" column="3">
-              <widget class="QPushButton" name="source_input_PB_18">
+              <widget class="QPushButton" name="include_file_patterns_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -4989,7 +4986,7 @@
               </widget>
              </item>
              <item row="8" column="3">
-              <widget class="QPushButton" name="source_input_PB_19">
+              <widget class="QPushButton" name="predefined_macros_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5013,7 +5010,7 @@
               </widget>
              </item>
              <item row="10" column="3">
-              <widget class="QPushButton" name="source_input_PB_20">
+              <widget class="QPushButton" name="expand_as_defined_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5037,7 +5034,7 @@
               </widget>
              </item>
              <item row="4" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="plainTextEdit_111">
+              <widget class="QPlainTextEdit" name="include_path">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5053,7 +5050,7 @@
               </widget>
              </item>
              <item row="6" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="plainTextEdit_112">
+              <widget class="QPlainTextEdit" name="include_file_patterns">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5069,7 +5066,7 @@
               </widget>
              </item>
              <item row="8" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="plainTextEdit_113">
+              <widget class="QPlainTextEdit" name="predefined_macros">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5085,7 +5082,7 @@
               </widget>
              </item>
              <item row="10" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="plainTextEdit_114">
+              <widget class="QPlainTextEdit" name="expand_as_defined">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5361,7 +5358,7 @@
                 <string>Directory graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_587</cstring>
+                <cstring>directory_graph_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5376,7 +5373,7 @@
                 <string>Call graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_588</cstring>
+                <cstring>call_graph_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5394,21 +5391,21 @@
               </spacer>
              </item>
              <item row="19" column="1">
-              <widget class="QCheckBox" name="checkBox_588">
+              <widget class="QCheckBox" name="call_graph_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="22" column="1">
-              <widget class="QCheckBox" name="checkBox_586">
+              <widget class="QCheckBox" name="graphical_hierarchy_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBox_578">
+              <widget class="QCheckBox" name="hide_undocumented_relations_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5425,19 +5422,19 @@
                 <string>Have Dot:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_577</cstring>
+                <cstring>have_dot_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QCheckBox" name="checkBox_577">
+              <widget class="QCheckBox" name="have_dot_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="24" column="1">
-              <widget class="QComboBox" name="comboBox_14"/>
+              <widget class="QComboBox" name="dot_image_format_CM"/>
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_682">
@@ -5450,7 +5447,7 @@
                 <string>Dot number of threads</string>
                </property>
                <property name="buddy">
-                <cstring>spinBox_2</cstring>
+                <cstring>dot_num_threads_SP</cstring>
                </property>
               </widget>
              </item>
@@ -5465,7 +5462,7 @@
                 <string>Template relations:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_585</cstring>
+                <cstring>template_relations_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5480,7 +5477,7 @@
                 <string>Dot font name:</string>
                </property>
                <property name="buddy">
-                <cstring>destDir_30</cstring>
+                <cstring>dot_font_name</cstring>
                </property>
               </widget>
              </item>
@@ -5495,12 +5492,12 @@
                 <string>Collaboration graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_581</cstring>
+                <cstring>collaboration_graph_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="10" column="1">
-              <widget class="QCheckBox" name="checkBox_580">
+              <widget class="QCheckBox" name="class_graph_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5517,12 +5514,12 @@
                 <string>Dia Path:</string>
                </property>
                <property name="buddy">
-                <cstring>destDir_119</cstring>
+                <cstring>dia_path</cstring>
                </property>
               </widget>
              </item>
              <item row="25" column="1">
-              <widget class="QCheckBox" name="checkBox_589">
+              <widget class="QCheckBox" name="interactive_svg_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5539,12 +5536,12 @@
                 <string>Dot Image Format:</string>
                </property>
                <property name="buddy">
-                <cstring>comboBox_14</cstring>
+                <cstring>dot_image_format_CM</cstring>
                </property>
               </widget>
              </item>
              <item row="13" column="1">
-              <widget class="QCheckBox" name="checkBox_582">
+              <widget class="QCheckBox" name="uml_look_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5561,7 +5558,7 @@
                 <string>Class Diagrams:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_565</cstring>
+                <cstring>class_diagrams</cstring>
                </property>
               </widget>
              </item>
@@ -5576,7 +5573,7 @@
                 <string>Interactive SVG:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_589</cstring>
+                <cstring>interactive_svg_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5591,12 +5588,12 @@
                 <string>Mscgen Path:</string>
                </property>
                <property name="buddy">
-                <cstring>destDir_118</cstring>
+                <cstring>mscgen_path</cstring>
                </property>
               </widget>
              </item>
              <item row="23" column="1">
-              <widget class="QCheckBox" name="checkBox_587">
+              <widget class="QCheckBox" name="directory_graph_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5613,12 +5610,12 @@
                 <string>Dot font size:</string>
                </property>
                <property name="buddy">
-                <cstring>spinBox_3</cstring>
+                <cstring>dot_font_size_SB</cstring>
                </property>
               </widget>
              </item>
              <item row="17" column="1" colspan="6">
-              <widget class="QCheckBox" name="checkBox_584">
+              <widget class="QCheckBox" name="included_by_graph_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5635,12 +5632,12 @@
                 <string>Included by graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_584</cstring>
+                <cstring>included_by_graph_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="1" column="6">
-              <widget class="QPushButton" name="pushButton_35">
+              <widget class="QPushButton" name="mscgen_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5674,12 +5671,12 @@
                 <string>Group graphs:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_579</cstring>
+                <cstring>group_graphs_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBox_565">
+              <widget class="QCheckBox" name="class_diagrams">
                <property name="text">
                 <string/>
                </property>
@@ -5696,7 +5693,7 @@
                 <string>Hide Undocumented Relations:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_578</cstring>
+                <cstring>hide_undocumented_relations_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5711,19 +5708,19 @@
                 <string>Uml lock:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_582</cstring>
+                <cstring>uml_look_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="11" column="1">
-              <widget class="QCheckBox" name="checkBox_581">
+              <widget class="QCheckBox" name="collaboration_graph_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="15" column="1" colspan="6">
-              <widget class="QCheckBox" name="checkBox_585">
+              <widget class="QCheckBox" name="template_relations_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5740,12 +5737,12 @@
                 <string>Class graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_580</cstring>
+                <cstring>class_graph_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="6">
-              <widget class="QPushButton" name="pushButton_36">
+              <widget class="QPushButton" name="dia_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5779,19 +5776,19 @@
                 <string>UML limit number of fields:</string>
                </property>
                <property name="buddy">
-                <cstring>spinBox_4</cstring>
+                <cstring>uml_limit_num_fileds_SB</cstring>
                </property>
               </widget>
              </item>
              <item row="12" column="1">
-              <widget class="QCheckBox" name="checkBox_579">
+              <widget class="QCheckBox" name="group_graphs_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="16" column="1">
-              <widget class="QCheckBox" name="checkBox_583">
+              <widget class="QCheckBox" name="include_graph_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5808,7 +5805,7 @@
                 <string>Include graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_583</cstring>
+                <cstring>include_graph_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5823,12 +5820,12 @@
                 <string>Dot font path:</string>
                </property>
                <property name="buddy">
-                <cstring>destDir_120</cstring>
+                <cstring>dot_font_path</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="1" colspan="5">
-              <widget class="QLineEdit" name="destDir_119">
+              <widget class="QLineEdit" name="dia_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5837,7 +5834,7 @@
               </widget>
              </item>
              <item row="1" column="1" colspan="5">
-              <widget class="QLineEdit" name="destDir_118">
+              <widget class="QLineEdit" name="mscgen_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5846,7 +5843,7 @@
               </widget>
              </item>
              <item row="9" column="1" colspan="5">
-              <widget class="QLineEdit" name="destDir_120">
+              <widget class="QLineEdit" name="dot_font_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5855,7 +5852,7 @@
               </widget>
              </item>
              <item row="9" column="6">
-              <widget class="QPushButton" name="pushButton_37">
+              <widget class="QPushButton" name="dot_font_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5889,7 +5886,7 @@
                 <string>Graphical Hierarchy</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_586</cstring>
+                <cstring>graphical_hierarchy_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5904,19 +5901,19 @@
                 <string>Caller graph:</string>
                </property>
                <property name="buddy">
-                <cstring>checkBox_3</cstring>
+                <cstring>ccaller_graph_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="20" column="1">
-              <widget class="QCheckBox" name="checkBox_3">
+              <widget class="QCheckBox" name="ccaller_graph_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="6" column="1" colspan="5">
-              <widget class="QLineEdit" name="destDir_30">
+              <widget class="QLineEdit" name="dot_font_name">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5925,7 +5922,7 @@
               </widget>
              </item>
              <item row="6" column="6">
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="dot_font_name_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -5943,13 +5940,13 @@
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QSpinBox" name="spinBox_2"/>
+              <widget class="QSpinBox" name="dot_num_threads_SP"/>
              </item>
              <item row="8" column="1">
-              <widget class="QSpinBox" name="spinBox_3"/>
+              <widget class="QSpinBox" name="dot_font_size_SB"/>
              </item>
              <item row="14" column="1">
-              <widget class="QSpinBox" name="spinBox_4"/>
+              <widget class="QSpinBox" name="uml_limit_num_fileds_SB"/>
              </item>
             </layout>
            </widget>
@@ -6436,7 +6433,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>7</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -9775,13 +9772,45 @@
   <tabstop>typedef_hids_struct_CB</tabstop>
   <tabstop>lookup_cache_size</tabstop>
   <tabstop>extract_all</tabstop>
+  <tabstop>extract_private</tabstop>
+  <tabstop>extract_package</tabstop>
+  <tabstop>extract_static</tabstop>
+  <tabstop>extract_local_classes</tabstop>
+  <tabstop>extract_local_methods</tabstop>
+  <tabstop>extract_anon_namespaces</tabstop>
+  <tabstop>hide_undoc_members</tabstop>
+  <tabstop>hide_undoc_classes</tabstop>
+  <tabstop>hide_friend_compounds</tabstop>
+  <tabstop>hide_in_body_docs</tabstop>
+  <tabstop>hide_scope_names</tabstop>
+  <tabstop>internal_docs</tabstop>
+  <tabstop>case_sense_names</tabstop>
+  <tabstop>show_include_files</tabstop>
+  <tabstop>show_grouped_members_incl</tabstop>
+  <tabstop>force_local_includes</tabstop>
+  <tabstop>inline_info</tabstop>
+  <tabstop>sort_member_docs</tabstop>
+  <tabstop>sort_brief_docs</tabstop>
+  <tabstop>sort_members_ctors_first</tabstop>
+  <tabstop>sort_group_names</tabstop>
+  <tabstop>sort_by_scope_name</tabstop>
+  <tabstop>strict_proto_matching</tabstop>
+  <tabstop>gen_todo_list</tabstop>
+  <tabstop>gen_test_list</tabstop>
+  <tabstop>gen_bug_list</tabstop>
+  <tabstop>gen_deprecatcated_list</tabstop>
   <tabstop>enabled_sections</tabstop>
+  <tabstop>source_input_PB_13</tabstop>
+  <tabstop>spinBox</tabstop>
   <tabstop>show_used_files_CB</tabstop>
   <tabstop>show_files_CB</tabstop>
   <tabstop>show_namespaces_CB</tabstop>
   <tabstop>file_version_filter</tabstop>
+  <tabstop>pushButton_3</tabstop>
   <tabstop>layout_file</tabstop>
+  <tabstop>pushButton_4</tabstop>
   <tabstop>cite_bib_files</tabstop>
+  <tabstop>source_input_PB_14</tabstop>
   <tabstop>quiet_CB</tabstop>
   <tabstop>warnings_CB</tabstop>
   <tabstop>warn_undoc_CB</tabstop>
@@ -9803,7 +9832,7 @@
   <tabstop>exclude_patterns_PB</tabstop>
   <tabstop>exclude_symbols</tabstop>
   <tabstop>exclude_symbols_PB</tabstop>
-  <tabstop>example_souce</tabstop>
+  <tabstop>example_source</tabstop>
   <tabstop>example_souce_PB</tabstop>
   <tabstop>example_patterns</tabstop>
   <tabstop>example_patterns_PB</tabstop>
@@ -9813,7 +9842,7 @@
   <tabstop>input_filter</tabstop>
   <tabstop>filter_patterns</tabstop>
   <tabstop>filter_patterns_PB</tabstop>
-  <tabstop>checkBox_401</tabstop>
+  <tabstop>filter_source_files_CB</tabstop>
   <tabstop>filter_source_patterns</tabstop>
   <tabstop>filter_source_patterns_PB</tabstop>
   <tabstop>mdfile_mainpage</tabstop>
@@ -9830,7 +9859,7 @@
   <tabstop>clang_options</tabstop>
   <tabstop>clang_options_PB</tabstop>
   <tabstop>alpha_index_CB</tabstop>
-  <tabstop>cols_in_index_CM</tabstop>
+  <tabstop>cols_in_index_SB</tabstop>
   <tabstop>ignore_prefix</tabstop>
   <tabstop>ignore_prefix_PB</tabstop>
   <tabstop>gen_autogen_def_CB</tabstop>
@@ -9838,19 +9867,19 @@
   <tabstop>perl_latex_CB</tabstop>
   <tabstop>perl_pretty_CB</tabstop>
   <tabstop>perlmod_prefix</tabstop>
-  <tabstop>checkBox_608</tabstop>
-  <tabstop>checkBox_609</tabstop>
-  <tabstop>checkBox_607</tabstop>
-  <tabstop>checkBox_610</tabstop>
-  <tabstop>plainTextEdit_111</tabstop>
-  <tabstop>source_input_PB_17</tabstop>
-  <tabstop>plainTextEdit_112</tabstop>
-  <tabstop>source_input_PB_18</tabstop>
-  <tabstop>plainTextEdit_113</tabstop>
-  <tabstop>source_input_PB_19</tabstop>
-  <tabstop>plainTextEdit_114</tabstop>
-  <tabstop>source_input_PB_20</tabstop>
-  <tabstop>checkBox_611</tabstop>
+  <tabstop>enable_preprocessing_CB</tabstop>
+  <tabstop>macro_expansion_CB</tabstop>
+  <tabstop>expand_only_redefined_CB</tabstop>
+  <tabstop>search_includes_CB</tabstop>
+  <tabstop>include_path</tabstop>
+  <tabstop>include_path_PB</tabstop>
+  <tabstop>include_file_patterns</tabstop>
+  <tabstop>include_file_patterns_PB</tabstop>
+  <tabstop>predefined_macros</tabstop>
+  <tabstop>predefined_macros_PB</tabstop>
+  <tabstop>expand_as_defined</tabstop>
+  <tabstop>expand_as_defined_PB</tabstop>
+  <tabstop>skip_function_macros_CB</tabstop>
   <tabstop>tag_files</tabstop>
   <tabstop>tag_files_PB</tabstop>
   <tabstop>generate_tagfile</tabstop>
@@ -9860,33 +9889,33 @@
   <tabstop>external_pages_CB</tabstop>
   <tabstop>perl_path</tabstop>
   <tabstop>perl_path_PB</tabstop>
-  <tabstop>checkBox_565</tabstop>
-  <tabstop>destDir_118</tabstop>
-  <tabstop>pushButton_35</tabstop>
-  <tabstop>destDir_119</tabstop>
-  <tabstop>pushButton_36</tabstop>
-  <tabstop>checkBox_578</tabstop>
-  <tabstop>checkBox_577</tabstop>
-  <tabstop>spinBox_2</tabstop>
-  <tabstop>destDir_30</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>spinBox_3</tabstop>
-  <tabstop>destDir_120</tabstop>
-  <tabstop>pushButton_37</tabstop>
-  <tabstop>checkBox_580</tabstop>
-  <tabstop>checkBox_581</tabstop>
-  <tabstop>checkBox_579</tabstop>
-  <tabstop>checkBox_582</tabstop>
-  <tabstop>spinBox_4</tabstop>
-  <tabstop>checkBox_585</tabstop>
-  <tabstop>checkBox_583</tabstop>
-  <tabstop>checkBox_584</tabstop>
-  <tabstop>checkBox_588</tabstop>
-  <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_586</tabstop>
-  <tabstop>checkBox_587</tabstop>
-  <tabstop>comboBox_14</tabstop>
-  <tabstop>checkBox_589</tabstop>
+  <tabstop>class_diagrams</tabstop>
+  <tabstop>mscgen_path</tabstop>
+  <tabstop>mscgen_path_PB</tabstop>
+  <tabstop>dia_path</tabstop>
+  <tabstop>dia_path_PB</tabstop>
+  <tabstop>hide_undocumented_relations_CB</tabstop>
+  <tabstop>have_dot_CB</tabstop>
+  <tabstop>dot_num_threads_SP</tabstop>
+  <tabstop>dot_font_name</tabstop>
+  <tabstop>dot_font_name_PB</tabstop>
+  <tabstop>dot_font_size_SB</tabstop>
+  <tabstop>dot_font_path</tabstop>
+  <tabstop>dot_font_path_PB</tabstop>
+  <tabstop>class_graph_CB</tabstop>
+  <tabstop>collaboration_graph_CB</tabstop>
+  <tabstop>group_graphs_CB</tabstop>
+  <tabstop>uml_look_CB</tabstop>
+  <tabstop>uml_limit_num_fileds_SB</tabstop>
+  <tabstop>template_relations_CB</tabstop>
+  <tabstop>include_graph_CB</tabstop>
+  <tabstop>included_by_graph_CB</tabstop>
+  <tabstop>call_graph_CB</tabstop>
+  <tabstop>ccaller_graph_CB</tabstop>
+  <tabstop>graphical_hierarchy_CB</tabstop>
+  <tabstop>directory_graph_CB</tabstop>
+  <tabstop>dot_image_format_CM</tabstop>
+  <tabstop>interactive_svg_CB</tabstop>
   <tabstop>destDir_121</tabstop>
   <tabstop>pushButton_41</tabstop>
   <tabstop>plainTextEdit_127</tabstop>
@@ -9903,7 +9932,6 @@
   <tabstop>checkBox_688</tabstop>
   <tabstop>checkBox_689</tabstop>
   <tabstop>checkBox_687</tabstop>
-  <tabstop>output_TreeWidget</tabstop>
   <tabstop>gen_html_CB2</tabstop>
   <tabstop>destDir_32</tabstop>
   <tabstop>pushButton_14</tabstop>
@@ -9924,37 +9952,6 @@
   <tabstop>checkBox_622</tabstop>
   <tabstop>checkBox_623</tabstop>
   <tabstop>spinBox_6</tabstop>
-  <tabstop>gen_docset_CB</tabstop>
-  <tabstop>destDir_56</tabstop>
-  <tabstop>destDir_57</tabstop>
-  <tabstop>destDir_58</tabstop>
-  <tabstop>destDir_59</tabstop>
-  <tabstop>checkBox_624</tabstop>
-  <tabstop>destDir_55</tabstop>
-  <tabstop>pushButton_23</tabstop>
-  <tabstop>destDir_60</tabstop>
-  <tabstop>pushButton_24</tabstop>
-  <tabstop>checkBox_625</tabstop>
-  <tabstop>destDir_61</tabstop>
-  <tabstop>checkBox_626</tabstop>
-  <tabstop>checkBox_627</tabstop>
-  <tabstop>checkBox_628</tabstop>
-  <tabstop>destDir_62</tabstop>
-  <tabstop>pushButton_25</tabstop>
-  <tabstop>destDir_63</tabstop>
-  <tabstop>destDir_64</tabstop>
-  <tabstop>destDir_65</tabstop>
-  <tabstop>destDir_66</tabstop>
-  <tabstop>destDir_67</tabstop>
-  <tabstop>destDir_71</tabstop>
-  <tabstop>checkBox_629</tabstop>
-  <tabstop>destDir_68</tabstop>
-  <tabstop>checkBox_632</tabstop>
-  <tabstop>checkBox_633</tabstop>
-  <tabstop>spinBox_7</tabstop>
-  <tabstop>spinBox_8</tabstop>
-  <tabstop>checkBox_634</tabstop>
-  <tabstop>spinBox_9</tabstop>
   <tabstop>checkBox_630</tabstop>
   <tabstop>checkBox_631</tabstop>
   <tabstop>comboBox_6</tabstop>
@@ -10024,6 +10021,39 @@
   <tabstop>save_log_PB</tabstop>
   <tabstop>help_t2</tabstop>
   <tabstop>display_PB</tabstop>
+  <tabstop>help_t1</tabstop>
+  <tabstop>checkBox_629</tabstop>
+  <tabstop>destDir_65</tabstop>
+  <tabstop>output_TreeWidget</tabstop>
+  <tabstop>destDir_55</tabstop>
+  <tabstop>destDir_62</tabstop>
+  <tabstop>destDir_63</tabstop>
+  <tabstop>checkBox_625</tabstop>
+  <tabstop>destDir_64</tabstop>
+  <tabstop>pushButton_24</tabstop>
+  <tabstop>checkBox_633</tabstop>
+  <tabstop>checkBox_632</tabstop>
+  <tabstop>destDir_68</tabstop>
+  <tabstop>spinBox_7</tabstop>
+  <tabstop>spinBox_8</tabstop>
+  <tabstop>checkBox_634</tabstop>
+  <tabstop>destDir_61</tabstop>
+  <tabstop>checkBox_627</tabstop>
+  <tabstop>checkBox_624</tabstop>
+  <tabstop>destDir_59</tabstop>
+  <tabstop>destDir_58</tabstop>
+  <tabstop>destDir_56</tabstop>
+  <tabstop>gen_docset_CB</tabstop>
+  <tabstop>spinBox_9</tabstop>
+  <tabstop>destDir_66</tabstop>
+  <tabstop>destDir_71</tabstop>
+  <tabstop>destDir_67</tabstop>
+  <tabstop>destDir_60</tabstop>
+  <tabstop>checkBox_628</tabstop>
+  <tabstop>pushButton_25</tabstop>
+  <tabstop>pushButton_23</tabstop>
+  <tabstop>checkBox_626</tabstop>
+  <tabstop>destDir_57</tabstop>
  </tabstops>
  <resources/>
  <connections/>

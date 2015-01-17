@@ -463,8 +463,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    QJsonDocument doc  = QJsonDocument::fromJson(data);
    QJsonObject object = doc.object();   
 
-   QString temp;
-
    // tab 1
    m_ui->project_name->setText( object.value("project-name").toString());
    m_ui->project_brief->setText( object.value("project-brief").toString());
@@ -512,70 +510,157 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->dot_called_by_CB->setChecked( object.value("dot-called-by").toBool());
 
 
+   //  ***
    // tab 2 - project
-   m_ui->project_encoding->setText( object.value("project-encoding").toString());
-   m_ui->create_subdirs_CB->setChecked( object.value("create-subdirs").toBool());
+   m_ui->project_encoding->setText(          object.value("project-encoding").toString());
+   m_ui->create_subdirs_CB->setChecked(      object.value("create-subdirs").toBool());
    m_ui->allow_unicode_names_CB->setChecked( object.value("allow-unicode-names").toBool());
+
 
 
    // tab 2 - build
 
 
+// done already
    m_ui->show_used_files_CB->setChecked( object.value("show-used-files").toBool());;
-   m_ui->layout_file->setText( object.value("layout-file").toString());
+   m_ui->layout_file->setText(           object.value("layout-file").toString());
+   m_ui->file_version_filter->setText(   object.value("file-version-filter").toString());
 
-   m_ui->file_version_filter->setText( object.value("file-version-filter").toString());
+
 
 
    // tab 2 - messages
-
-
-
-   m_ui->warn_forrmat->setText( object.value("warn-forrmat").toString());
-   m_ui->warn_logfile->setText( object.value("warn-logfile").toString());
+   m_ui->quiet_CB->setChecked(           object.value("quiet").toBool());
+   m_ui->warnings_CB->setChecked(        object.value("warnings").toBool());
+   m_ui->warn_undoc_CB->setChecked(      object.value("warn-undoc").toBool());
+   m_ui->warn_undoc_parm_CB->setChecked( object.value("warn-undoc-parm").toBool());
+   m_ui->warn_forrmat->setText(          object.value("warn-forrmat").toString());
+   m_ui->warn_logfile->setText(          object.value("warn-logfile").toString());
 
    // tab 2 -input
-   m_ui->input_source->setPlainText(getDataList(object, "source-input"));
-   m_ui->input_encoding->setText( object.value("input-encoding").toString());
-   m_ui->file_patterns->setPlainText(getDataList(object, "file-patterns"));
-   m_ui->source_recursive_CB->setChecked( object.value("source-recursive").toBool());
-   m_ui->exclude_files->setPlainText(getDataList(object, "exclude-files"));
+   m_ui->input_source->setPlainText(getDataList(  object, "input-source"));
+   m_ui->input_encoding->setText(                 object.value("input-encoding").toString());
+   m_ui->file_patterns->setPlainText(getDataList( object, "file-patterns"));
+   m_ui->source_recursive_CB->setChecked(         object.value("source-recursive").toBool());
 
+   m_ui->exclude_files->setPlainText(getDataList( object, "exclude-files"));
+   m_ui->exclude_symlinks_CB->setChecked(         object.value("exclude-symlinks").toBool());
+   m_ui->exclude_patterns->setPlainText(          getDataList(object, "exclude-patterns"));
+   m_ui->exclude_symbols->setPlainText(           getDataList(object, "exclude-symbols"));
 
-//  m_ui->exclude_patterns->setPlainText("");
-//  m_ui->exclude_symbols->setPlainText("");
-    m_ui->exclude_symlinks_CB->setChecked( object.value("exclude-symlinks").toBool());
+   m_ui->example_source->setPlainText(            getDataList(object, "example-source"));
+   m_ui->example_patterns->setPlainText(          getDataList(object, "example-pattens"));
+   m_ui->example_recursive_CB->setChecked(        object.value("example-recursive").toBool());
 
-    m_ui->mdfile_mainpage->setText( object.value("mdfile-mainpage").toString());
+   m_ui->image_path->setPlainText(                getDataList(object, "image-path"));
+   m_ui->input_filter->setText(                   object.value("input-filter").toString());
+   m_ui->filter_patterns->setPlainText(           getDataList(object, "filter-patterns"));
+   m_ui->filter_source_files_CB->setChecked(      object.value("filter-source-files").toBool());
+   m_ui->filter_source_patterns->setPlainText(    getDataList(object, "filter-source-patterns"));
 
-
+   m_ui->mdfile_mainpage->setText(                object.value("mdfile-mainpage").toString());
 
    // tab 2 -browser
-
+   m_ui->source_browser_CB->setChecked(      object.value("source-browser").toBool());
+   m_ui->inline_sources_CB->setChecked(      object.value("inline-sources").toBool());
+   m_ui->strip_code_comments_CB->setChecked( object.value("strip-code-comments").toBool());
+   m_ui->ref_by_relation_CB->setChecked(     object.value("ref-by-relation").toBool());
+   m_ui->ref_relation_CB->setChecked(        object.value("ref-relation").toBool());
+   m_ui->ref_link_source_CB->setChecked(     object.value("ref-link-source").toBool());
+   m_ui->source_tooltips_CB->setChecked(     object.value("source-tooltips").toBool());
+   m_ui->use_htags_CB->setChecked(           object.value("use-htags").toBool());
+   m_ui->verbatim_headers_CB->setChecked(    object.value("verbatim-headers").toBool());
+   m_ui->clang_parsing_CB->setChecked(       object.value("clang-parsing").toBool());
+   m_ui->clang_options->setPlainText(        getDataList(object, "clang-options"));
 
    // tab 2 -index
+   m_ui->alpha_index_CB->setChecked(     object.value("alpha-index").toBool());
+   m_ui->cols_in_index_SB->setValue(     object.value("cols-in-index").toInt());
+   m_ui->ignore_prefix->setPlainText(    getDataList(object, "ignore-prefix"));
 
    // tab 2 - autogen
+   m_ui->gen_autogen_def_CB->setChecked( object.value("gen-autogen-def").toBool());
 
-   // tab 2 - perlmod
-
-   m_ui->perlmod_prefix->setText( object.value("perlmod-prefix").toString());
-
+   // tab 2 - perlmod         
+   m_ui->gen_perl_CB->setChecked(    object.value("gen-perl").toBool());
+   m_ui->perl_latex_CB->setChecked(  object.value("perl-latex").toBool());
+   m_ui->perl_pretty_CB->setChecked( object.value("perl-pretty").toBool());
+   m_ui->perlmod_prefix->setText(    object.value("perlmod-prefix").toString());
 
    // tab 2 - preprocess
+   m_ui->enable_preprocessing_CB->setChecked(  object.value("enable-preprocessing").toBool());
+   m_ui->macro_expansion_CB->setChecked(       object.value("macro-expansion").toBool());
+   m_ui->expand_only_redefined_CB->setChecked( object.value("expand-only-redefined").toBool());
+   m_ui->search_includes_CB->setChecked(       object.value("search-includes").toBool());
 
+   m_ui->include_path->setPlainText(           getDataList(object,"include-path"));
+   m_ui->include_file_patterns->setPlainText(  getDataList(object,"include-file-patterns"));
+   m_ui->predefined_macros->setPlainText(      getDataList(object,"predefined-macros"));
+   m_ui->expand_as_defined->setPlainText(      getDataList(object,"expand-as-definedx"));
+
+   m_ui->skip_function_macros_CB->setChecked(  object.value("skip-function-macros").toBool());
 
    // tab 2 - external
-
-
-   m_ui->generate_tagfile->setText( object.value("generate-tagfile").toString());
-   m_ui->perl_path->setText( object.value("perl-path").toString());
-
+   m_ui->tag_files->setPlainText(         getDataList(object,"tag-files"));
+   m_ui->generate_tagfile->setText(       object.value("generate-tagfile").toString());
+   m_ui->all_externals_CB->setChecked(    object.value("all-externals").toBool());
+   m_ui->external_groups_CB->setChecked(  object.value("external-groups").toBool());
+   m_ui->external_pages_CB->setChecked(   object.value("external-pages").toBool());
+   m_ui->perl_path->setText(              object.value("perl-path").toString());
 
    // tab 2 - dot
 
 
 
+
+// START HERE
+
+/*
+   <tabstop>class_diagrams</tabstop>
+   <tabstop>mscgen_path</tabstop>
+   <tabstop>dia_path</tabstop>
+   <tabstop>hide_undocumented_relations_CB</tabstop>
+   <tabstop>have_dot_CB</tabstop>
+   <tabstop>dot_num_threads_SP</tabstop>
+   <tabstop>dot_font_name</tabstop>
+   <tabstop>dot_font_size_SB</tabstop>
+   <tabstop>dot_font_path</tabstop>
+   <tabstop>class_graph_CB</tabstop>
+   <tabstop>collaboration_graph_CB</tabstop>
+   <tabstop>group_graphs_CB</tabstop>
+   <tabstop>uml_look_CB</tabstop>
+   <tabstop>uml_limit_num_fileds_SB</tabstop>
+   <tabstop>template_relations_CB</tabstop>
+   <tabstop>include_graph_CB</tabstop>
+   <tabstop>included_by_graph_CB</tabstop>
+   <tabstop>call_graph_CB</tabstop>
+   <tabstop>ccaller_graph_CB</tabstop>
+   <tabstop>graphical_hierarchy_CB</tabstop>
+   <tabstop>directory_graph_CB</tabstop>
+   <tabstop>dot_image_format_CM</tabstop>
+   <tabstop>interactive_svg_CB</tabstop>
+
+   <tabstop>destDir_121</tabstop>
+   <tabstop>plainTextEdit_127</tabstop>
+   <tabstop>plainTextEdit_128</tabstop>
+   <tabstop>plainTextEdit_129</tabstop>
+   <tabstop>destDir_180</tabstop>
+   <tabstop>spinBox_14</tabstop>
+   <tabstop>spinBox_15</tabstop>
+   <tabstop>checkBox_690</tabstop>
+   <tabstop>checkBox_688</tabstop>
+   <tabstop>checkBox_689</tabstop>
+   <tabstop>checkBox_687</tabstop>
+
+*/
+
+
+
+
+
+
+
+   //  ***
    // tab 3 - html
    m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
 
@@ -604,7 +689,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 QByteArray MainWindow::json_SaveDoxy()
 {
    QJsonObject object;
-   QJsonArray list;
 
    object.insert("project-name",          m_ui->project_name->text());
    object.insert("project-brief",         m_ui->project_brief->text());
@@ -652,17 +736,129 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("dot-call",              m_ui->dot_call_CB->isChecked());
    object.insert("dot-called-by",         m_ui->dot_called_by_CB->isChecked());
 
-   // tab 2
-   object.insert("source-recursive",   m_ui->source_recursive_CB->isChecked());
 
-   list = QJsonArray();
-   QStringList temp = m_ui->input_source->toPlainText().split(", ");
+   //  ***
+   // tab 2 - project
 
-   for (auto s : temp) {
-      list.append(s);
-   }
 
-   object.insert("source-input",  list);
+
+   // tab 2 - build
+
+
+
+
+   // tab 2 - messages
+   object.insert("quiet",                  m_ui->quiet_CB->isChecked());
+   object.insert("warnings",               m_ui->warnings_CB->isChecked());
+   object.insert("warn-undoc",             m_ui->warn_undoc_CB->isChecked());
+   object.insert("warn-undoc-parm",        m_ui->warn_undoc_parm_CB->isChecked());
+   object.insert("warn-forrmat",           m_ui->warn_forrmat->text());
+   object.insert("warn-logfile",           m_ui->warn_logfile->text());
+
+   // tab 2 - input
+
+   object.insert("input-source",           putDataList(m_ui->input_source->toPlainText()));
+   object.insert("input-encoding",         m_ui->input_encoding->text());
+   object.insert("file-patterns",          putDataList(m_ui->file_patterns->toPlainText()));
+   object.insert("source-recursive",       m_ui->source_recursive_CB->isChecked());
+
+   object.insert("exclude-files",          putDataList(m_ui->exclude_files->toPlainText()));
+
+/*
+   m_ui->exclude_symlinks_CB->setChecked(         object.value("exclude-symlinks").toBool());
+   m_ui->exclude_patterns->setPlainText(          getDataList(object, "exclude-patterns"));
+   m_ui->exclude_symbols->setPlainText(           getDataList(object, "exclude-symbols"));
+
+   m_ui->example_source->setPlainText(            getDataList(object, "example-source"));
+   m_ui->example_patterns->setPlainText(          getDataList(object, "example-pattens"));
+   m_ui->example_recursive_CB->setChecked(        object.value("example-recursive").toBool());
+
+   m_ui->image_path->setPlainText(                getDataList(object, "image-path"));
+   m_ui->input_filter->setText(                   object.value("input-filter").toString());
+   m_ui->filter_patterns->setPlainText(           getDataList(object, "filter-patterns"));
+   m_ui->filter_source_files_CB->setChecked(      object.value("filter-source-files").toBool());
+   m_ui->filter_source_patterns->setPlainText(    getDataList(object, "filter-source-patterns"));
+
+   m_ui->mdfile_mainpage->setText(                object.value("mdfile-mainpage").toString());
+
+*/
+
+   // tab 2 -browser
+
+/*
+   m_ui->source_browse_CB->setChecked(       object.value("source-browse").toBool());
+   m_ui->inline_sources_CB->setChecked(      object.value("inline-sources").toBool());
+   m_ui->strip_code_comments_CB->setChecked( object.value("strip-code-comments").toBool());
+   m_ui->ref_by_relation_CB->setChecked(     object.value("ref-by-relation").toBool());
+   m_ui->ref_relation_CB->setChecked(        object.value("ref-relation").toBool());
+   m_ui->ref_link_source_CB->setChecked(     object.value("ref-link-source").toBool());
+   m_ui->source_tooltips_CB->setChecked(     object.value("source-tooltips").toBool());
+   m_ui->use_htags_CB->setChecked(           object.value("use-htags").toBool());
+   m_ui->verbatim_headers_CB->setChecked(    object.value("verbatim-headers").toBool());
+   m_ui->clang_parsing_CB->setChecked(       object.value("clang-parsing").toBool());
+   m_ui->clang_options->setPlainText(        getDataList(object, "clang-options"));
+
+*/
+
+
+   // tab 2 -index
+   object.insert("alpha-index",           m_ui->alpha_index_CB->isChecked());
+   object.insert("cols-in-index",         m_ui->cols_in_index_SB->value());
+   object.insert("ignore-prefix",         putDataList(m_ui->ignore_prefix->toPlainText()));
+
+   // tab 2 - autogen
+   object.insert("gen-autogen-def",       m_ui->gen_autogen_def_CB->isChecked());
+
+   // tab 2 - perlmod
+   object.insert("gen-perl",              m_ui->gen_perl_CB->isChecked());
+   object.insert("perl-latex",            m_ui->perl_latex_CB->isChecked());
+   object.insert("perl-pretty",           m_ui->perl_pretty_CB->isChecked());
+   object.insert("perlmod-prefix",        m_ui->perlmod_prefix->text());
+
+   // tab 2 - preprocess
+   object.insert("enable-preprocessing",  m_ui->enable_preprocessing_CB->isChecked());
+   object.insert("macro-expansion",       m_ui->macro_expansion_CB->isChecked());
+   object.insert("expand-only-redefined", m_ui->expand_only_redefined_CB->isChecked());
+   object.insert("search-includes",       m_ui->search_includes_CB->isChecked());
+
+   object.insert("include-path",          putDataList(m_ui->include_path->toPlainText()));
+   object.insert("include-file-patterns", putDataList(m_ui->include_file_patterns->toPlainText()));
+   object.insert("predefined-macros",     putDataList(m_ui->predefined_macros->toPlainText()));
+   object.insert("expand-as-definedx",    putDataList(m_ui->expand_as_defined->toPlainText()));
+
+   object.insert("skip-function-macros",  m_ui->skip_function_macros_CB->isChecked());
+
+   // tab 2 - external
+   object.insert("tag-files",             putDataList(m_ui->tag_files->toPlainText()));
+   object.insert("generate-tagfile",      m_ui->generate_tagfile->text());
+   object.insert("all-externals",         m_ui->all_externals_CB->isChecked());
+   object.insert("external-groups",       m_ui->external_groups_CB->isChecked());
+   object.insert("external-pages",        m_ui->external_pages_CB->isChecked());
+   object.insert("perl-path",             m_ui->perl_path->text());
+
+
+   // tab 2 - dot
+
+
+
+
+   //  ***
+   // tab 3 - html
+
+
+   // tab 3 - latex
+
+
+   // tab 3 - rtf
+
+
+   // tab 3 - man
+
+
+   // tab 3 - xml
+
+
+   // tab 3 - docbook
 
 
 
@@ -674,12 +870,12 @@ QByteArray MainWindow::json_SaveDoxy()
    return data;
 }
 
-QString MainWindow::getDataList(QJsonObject &object, QString field)
+QString MainWindow::getDataList(QJsonObject &object, QString fieldData)
 {
    QString retval;
    QStringList dataList;
 
-   QJsonArray list = object.value(field).toArray();
+   QJsonArray list = object.value(fieldData).toArray();
    int cnt = list.count();
 
    for (int k = 0; k < cnt; k++)  {
@@ -691,22 +887,35 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
    return retval;
 }
 
+QJsonArray MainWindow::putDataList(QString fieldData)
+{
+   QJsonArray list = QJsonArray();
+
+   QStringList temp = fieldData.split(", ");
+
+   for (auto s : temp) {
+      list.append(s);
+   }
+
+   return list;
+}
+
+
+
 
 
 /*
 
+  // tab 2 - project
   <tabstop>output_langugae_CM</tabstop>
   <tabstop>brief_member_desc_CB</tabstop>
   <tabstop>repeat_brief_CB</tabstop>
   <tabstop>abbreviate_brief</tabstop>
-  <tabstop>abbreviate_brief_PB</tabstop>
   <tabstop>always_detailed_sec_CB</tabstop>
   <tabstop>inline_inherited_member_CB</tabstop>
   <tabstop>full_path_names_CB</tabstop>
   <tabstop>strip_from_path</tabstop>
-  <tabstop>strip_from_path_PB</tabstop>
   <tabstop>strip_from_inc_path</tabstop>
-  <tabstop>strip_from_inc_path_PB</tabstop>
   <tabstop>short_names_CB</tabstop>
   <tabstop>javadoc_auto_brief_CB</tabstop>
   <tabstop>qt_auto_brief_CB</tabstop>
@@ -715,11 +924,8 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   <tabstop>separate_member_pages_CB</tabstop>
   <tabstop>tab_size</tabstop>
   <tabstop>aliases</tabstop>
-  <tabstop>aliases_PB</tabstop>
   <tabstop>tcl_subst</tabstop>
-  <tabstop>tcl_subst_PB</tabstop>
   <tabstop>extension_mapping</tabstop>
-  <tabstop>extension_mapping_PB</tabstop>
   <tabstop>markdown_CB</tabstop>
   <tabstop>auto_link_CB</tabstop>
   <tabstop>built_in_stl_support_CB</tabstop>
@@ -736,7 +942,7 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   // build
   <tabstop>extract_all</tabstop>
   <tabstop>extract_private</tabstop>
-  <tabstop>extract__package</tabstop>
+  <tabstop>extract_package</tabstop>
   <tabstop>extract_static</tabstop>
   <tabstop>extract_local_classes</tabstop>
   <tabstop>extract_local_methods</tabstop>
@@ -745,24 +951,26 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   <tabstop>hide_undoc_classes</tabstop>
   <tabstop>hide_friend_compounds</tabstop>
   <tabstop>hide_in_body_docs</tabstop>
+  <tabstop>hide_scope_names</tabstop>
   <tabstop>internal_docs</tabstop>
   <tabstop>case_sense_names</tabstop>
-  <tabstop>checkBox_76</tabstop>
-  <tabstop>checkBox_78</tabstop>
-  <tabstop>checkBox_77</tabstop>
-  <tabstop>checkBox_79</tabstop>
-  <tabstop>checkBox_80</tabstop>
-  <tabstop>checkBox_82</tabstop>
-  <tabstop>checkBox_81</tabstop>
-  <tabstop>checkBox_83</tabstop>
-  <tabstop>checkBox_84</tabstop>
-  <tabstop>checkBox_86</tabstop>
-  <tabstop>checkBox</tabstop>
-  <tabstop>checkBox_85</tabstop>
-  <tabstop>checkBox_87</tabstop>
-  <tabstop>checkBox_88</tabstop>
-  <tabstop>checkBox_90</tabstop>
+  <tabstop>show_include_files</tabstop>
+  <tabstop>show_grouped_members_incl</tabstop>
+  <tabstop>force_local_includes</tabstop>
+  <tabstop>inline_info</tabstop>
+  <tabstop>sort_member_docs</tabstop>
+  <tabstop>sort_brief_docs</tabstop>
+  <tabstop>sort_members_ctors_first</tabstop>
+  <tabstop>sort_group_names</tabstop>
+  <tabstop>sort_by_scope_name</tabstop>
+  <tabstop>strict_proto_matching</tabstop>
+  <tabstop>gen_todo_list</tabstop>
+  <tabstop>gen_test_list</tabstop>
+  <tabstop>gen_bug_list</tabstop>
+  <tabstop>gen_deprecatcated_list</tabstop>
+
   <tabstop>enabled_sections</tabstop>
+  <tabstop>spinBox</tabstop>
   <tabstop>show_used_files_CB</tabstop>
   <tabstop>show_files_CB</tabstop>
   <tabstop>show_namespaces_CB</tabstop>
@@ -770,150 +978,19 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   <tabstop>layout_file</tabstop>
   <tabstop>cite_bib_files</tabstop>
 
-  // messages
-  <tabstop>quiet_CB</tabstop>
-  <tabstop>warnings_CB</tabstop>
-  <tabstop>warn_undoc_CB</tabstop>
-  <tabstop>warn_syntax_CB</tabstop>
-  <tabstop>warn_undoc_parm_CB</tabstop>
-  <tabstop>warn_forrmat</tabstop>
-  <tabstop>warn_logfile</tabstop>
-  <tabstop>warn_logfile_PB</tabstop>
 
-  // input
-  <tabstop>exclude_patterns</tabstop>
-  <tabstop>exclude_patterns_PB</tabstop>
-  <tabstop>exclude_symbols</tabstop>
-  <tabstop>example_souce</tabstop>
-  <tabstop>example_souce_PB</tabstop>
-  <tabstop>example_patterns</tabstop>
 
-  <tabstop>example_recursive_CB</tabstop>
-  <tabstop>image_path</tabstop>
-  <tabstop>input_filter</tabstop>
-  <tabstop>filter_patterns</tabstop>
-  <tabstop>filter_patterns_PB</tabstop>
-  <tabstop>checkBox_401</tabstop>
-  <tabstop>filter_source_patterns</tabstop>
-  <tabstop>filter_source_patterns_PB</tabstop>
-  <tabstop>mdfile_mainpage</tabstop>
-
-  // browser
-  <tabstop>source_browser_CB</tabstop>
-  <tabstop>inline_sources_CB</tabstop>
-  <tabstop>strip_code_comments_CB</tabstop>
-  <tabstop>ref_by_relation_CB</tabstop>
-  <tabstop>ref_relation_CB</tabstop>
-  <tabstop>ref_link_source_CB</tabstop>
-  <tabstop>source_tooltips_CB</tabstop>
-  <tabstop>use_htags_CB</tabstop>
-  <tabstop>verbatim_headers_CB</tabstop>
-  <tabstop>clang_parsing_CB</tabstop>
-  <tabstop>clang_options</tabstop>
-  <tabstop>clang_options_PB</tabstop>
-
-  // index
-  <tabstop>alpha_index_CB</tabstop>
-  <tabstop>cols_in_index_CM</tabstop>
-  <tabstop>ignore_prefix</tabstop>
-  <tabstop>ignore_prefix_PB</tabstop>
-
-  // autogen
-  <tabstop>gen_autogen_def_CB</tabstop>
-
-  // perlmod
-  <tabstop>gen_perl_CB</tabstop>
-  <tabstop>perl_latex_CB</tabstop>
-  <tabstop>perl_pretty_CB</tabstop>
-  <tabstop>perlmod_prefix</tabstop>
-
-  // preprocessor
-  <tabstop>checkBox_608</tabstop>
-  <tabstop>checkBox_609</tabstop>
-  <tabstop>checkBox_607</tabstop>
-  <tabstop>checkBox_610</tabstop>
-  <tabstop>plainTextEdit_111</tabstop>
-  <tabstop>source_input_PB_17</tabstop>
-  <tabstop>plainTextEdit_112</tabstop>
-  <tabstop>source_input_PB_18</tabstop>
-  <tabstop>plainTextEdit_113</tabstop>
-  <tabstop>source_input_PB_19</tabstop>
-  <tabstop>plainTextEdit_114</tabstop>
-  <tabstop>source_input_PB_20</tabstop>
-  <tabstop>checkBox_611</tabstop>
-
-  // external
-  <tabstop>tag_files</tabstop>
-  <tabstop>tag_files_PB</tabstop>
-  <tabstop>generate_tagfile</tabstop>
-  <tabstop>all_externals_CB</tabstop>
-  <tabstop>external_groups_CB</tabstop>
-  <tabstop>external_pages_CB</tabstop>
-  <tabstop>perl_path</tabstop>
-  <tabstop>perl_path_PB</tabstop>
-
-  // dot
-  <tabstop>checkBox_565</tabstop>
-  <tabstop>destDir_118</tabstop>
-  <tabstop>pushButton_35</tabstop>
-  <tabstop>destDir_119</tabstop>
-  <tabstop>pushButton_36</tabstop>
-  <tabstop>checkBox_578</tabstop>
-  <tabstop>checkBox_577</tabstop>
-  <tabstop>spinBox_2</tabstop>
-  <tabstop>destDir_30</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>spinBox_3</tabstop>
-  <tabstop>destDir_120</tabstop>
-  <tabstop>pushButton_37</tabstop>
-  <tabstop>checkBox_580</tabstop>
-  <tabstop>checkBox_581</tabstop>
-  <tabstop>checkBox_579</tabstop>
-  <tabstop>checkBox_582</tabstop>
-  <tabstop>spinBox_4</tabstop>
-  <tabstop>checkBox_585</tabstop>
-  <tabstop>checkBox_583</tabstop>
-  <tabstop>checkBox_584</tabstop>
-  <tabstop>checkBox_588</tabstop>
-  <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_586</tabstop>
-  <tabstop>checkBox_587</tabstop>
-  <tabstop>comboBox_14</tabstop>
-  <tabstop>checkBox_589</tabstop>
-  <tabstop>destDir_121</tabstop>
-  <tabstop>pushButton_41</tabstop>
-  <tabstop>plainTextEdit_127</tabstop>
-  <tabstop>pushButton_51</tabstop>
-  <tabstop>plainTextEdit_128</tabstop>
-  <tabstop>pushButton_50</tabstop>
-  <tabstop>plainTextEdit_129</tabstop>
-  <tabstop>pushButton_49</tabstop>
-  <tabstop>destDir_180</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>spinBox_14</tabstop>
-  <tabstop>spinBox_15</tabstop>
-  <tabstop>checkBox_690</tabstop>
-  <tabstop>checkBox_688</tabstop>
-  <tabstop>checkBox_689</tabstop>
-  <tabstop>checkBox_687</tabstop>
-  <tabstop>output_TreeWidget</tabstop>
-
+  // ** TAB 3
 
   // tab 3 - html
   <tabstop>gen_html_CB2</tabstop>
-  <tabstop>destDir_32</tabstop>
-  <tabstop>pushButton_14</tabstop>
+  <tabstop>destDir_32</tabstop>  
   <tabstop>destDir_35</tabstop>
   <tabstop>destDir_39</tabstop>
-  <tabstop>pushButton_15</tabstop>
   <tabstop>destDir_40</tabstop>
-  <tabstop>pushButton_16</tabstop>
   <tabstop>destDir_52</tabstop>
-  <tabstop>pushButton_21</tabstop>
   <tabstop>plainTextEdit_50</tabstop>
-  <tabstop>pushButton_34</tabstop>
   <tabstop>plainTextEdit_51</tabstop>
-  <tabstop>pushButton_42</tabstop>
   <tabstop>html_colorstyle_hue</tabstop>
   <tabstop>html_colorstyle_sat</tabstop>
   <tabstop>html_colorstyle_gamma</tabstop>
@@ -927,16 +1004,13 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   <tabstop>destDir_59</tabstop>
   <tabstop>checkBox_624</tabstop>
   <tabstop>destDir_55</tabstop>
-  <tabstop>pushButton_23</tabstop>
   <tabstop>destDir_60</tabstop>
-  <tabstop>pushButton_24</tabstop>
   <tabstop>checkBox_625</tabstop>
   <tabstop>destDir_61</tabstop>
   <tabstop>checkBox_626</tabstop>
   <tabstop>checkBox_627</tabstop>
   <tabstop>checkBox_628</tabstop>
-  <tabstop>destDir_62</tabstop>
-  <tabstop>pushButton_25</tabstop>
+  <tabstop>destDir_62</tabstop> 
   <tabstop>destDir_63</tabstop>
   <tabstop>destDir_64</tabstop>
   <tabstop>destDir_65</tabstop>
@@ -956,34 +1030,25 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
   <tabstop>comboBox_6</tabstop>
   <tabstop>destDir_69</tabstop>
   <tabstop>plainTextEdit_30</tabstop>
-  <tabstop>pushButton_43</tabstop>
-  <tabstop>destDir_70</tabstop>
+   <tabstop>destDir_70</tabstop>
   <tabstop>checkBox_635</tabstop>
   <tabstop>checkBox_636</tabstop>
   <tabstop>checkBox_637</tabstop>
   <tabstop>destDir_76</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>destDir_77</tabstop>
-  <tabstop>pushButton_44</tabstop>
   <tabstop>plainTextEdit_32</tabstop>
-  <tabstop>pushButton_26</tabstop>
 
   // latex
   <tabstop>gen_latex_CB2</tabstop>
   <tabstop>destDir_33</tabstop>
-  <tabstop>pushButton_29</tabstop>
   <tabstop>destDir_78</tabstop>
-  <tabstop>pushButton_27</tabstop>
   <tabstop>destDir_79</tabstop>
-  <tabstop>pushButton_28</tabstop>
   <tabstop>checkBox_638</tabstop>
   <tabstop>comboBox_2</tabstop>
   <tabstop>plainTextEdit_33</tabstop>
-  <tabstop>pushButton_32</tabstop>
   <tabstop>destDir_80</tabstop>
-  <tabstop>pushButton_30</tabstop>
   <tabstop>destDir_81</tabstop>
-  <tabstop>pushButton_31</tabstop>
   <tabstop>plainTextEdit_34</tabstop>
   <tabstop>pushButton_33</tabstop>
   <tabstop>checkBox_639</tabstop>
@@ -995,19 +1060,15 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
 
   // rtf
   <tabstop>gen_rtf_CB2</tabstop>
-  <tabstop>rtf_output</tabstop>
-  <tabstop>rtf_output_PB</tabstop>
+  <tabstop>rtf_output</tabstop> 
   <tabstop>compact_rtf_CB</tabstop>
   <tabstop>rtf_hyperlinks_CB</tabstop>
   <tabstop>rtf_stylesheet</tabstop>
-  <tabstop>rtf_stylesheet_PB</tabstop>
   <tabstop>rtf_extension</tabstop>
-  <tabstop>rtf_extension_PB</tabstop>
 
   // man
   <tabstop>gen_man_CB2</tabstop>
-  <tabstop>man_output</tabstop>
-  <tabstop>man_output_PB</tabstop>
+  <tabstop>man_output</tabstop> 
   <tabstop>man_extension</tabstop>
   <tabstop>man_subdir</tabstop>
   <tabstop>man_links_CB</tabstop>
@@ -1015,13 +1076,11 @@ QString MainWindow::getDataList(QJsonObject &object, QString field)
 
   // xml
   <tabstop>xml_output</tabstop>
-  <tabstop>xml_output_PB</tabstop>
   <tabstop>xml_program_llisting</tabstop>
 
   // docbook
   <tabstop>gen_docbook_CB2</tabstop>
-  <tabstop>docbook_output</tabstop>
-  <tabstop>docbook_output_PB</tabstop>
+  <tabstop>docbook_output</tabstop> 
   <tabstop>docbook_program_listing_CB
 
 */
