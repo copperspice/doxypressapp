@@ -463,6 +463,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    QJsonDocument doc  = QJsonDocument::fromJson(data);
    QJsonObject object = doc.object();   
 
+   int index;
+
    // tab 1
    m_ui->project_name->setText( object.value("project-name").toString());
    m_ui->project_brief->setText( object.value("project-brief").toString());
@@ -512,80 +514,126 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    //  ***
    // tab 2 - project
-   m_ui->project_encoding->setText(          object.value("project-encoding").toString());
-   m_ui->create_subdirs_CB->setChecked(      object.value("create-subdirs").toBool());
-   m_ui->allow_unicode_names_CB->setChecked( object.value("allow-unicode-names").toBool());
+   m_ui->project_encoding->setText(                object.value("project-encoding").toString());
+   m_ui->create_subdirs_CB->setChecked(            object.value("create-subdirs").toBool());
+   m_ui->allow_unicode_names_CB->setChecked(       object.value("allow-unicode-names").toBool());
 
+   index = m_ui->output_langugae_CM->findText(object.value("output-langugae").toString());
+   m_ui->output_langugae_CM->setCurrentIndex(index);
+
+   m_ui->brief_member_desc_CB->setChecked(         object.value("brief-member-desc").toBool());
+   m_ui->repeat_brief_CB->setChecked(              object.value("repeat-brief").toBool());
+   m_ui->abbreviate_brief->setPlainText(           getDataList(object, "abbreviate-brief"));
+   m_ui->always_detailed_sec_CB->setChecked(       object.value("always-detailed_sec").toBool());
+   m_ui->inline_inherited_member_CB->setChecked(   object.value("inline-inherited_member").toBool());
+   m_ui->full_path_names_CB->setChecked(           object.value("full-path_names").toBool());
+   m_ui->strip_from_path->setPlainText(            getDataList(object, "strip-from-path"));
+   m_ui->strip_from_inc_path->setPlainText(        getDataList(object, "strip-from-inc-path"));
+
+   m_ui->short_names_CB->setChecked(               object.value("short_names").toBool());
+   m_ui->javadoc_auto_brief_CB->setChecked(        object.value("javadoc_auto_brief").toBool());
+   m_ui->qt_auto_brief_CB->setChecked(             object.value("qt-auto-brief").toBool());
+   m_ui->multiline_cpp_brief_CB->setChecked(       object.value("multiline-cpp-brief").toBool());
+   m_ui->inherit_docs_CB->setChecked(              object.value("inherit-docs").toBool());
+   m_ui->separate_member_pages_CB->setChecked(     object.value("separate-member-pages").toBool());
+
+   m_ui->tab_size_SB->setValue(                    object.value("tab-size").toInt());
+   m_ui->aliases->setPlainText(                    getDataList(object, "aliases"));
+   m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl_subst"));
+   m_ui->extension_mapping->setPlainText(          getDataList(object, "extension_mapping"));
+
+   m_ui->markdown_CB->setChecked(                  object.value("markdown").toBool());
+   m_ui->auto_link_CB->setChecked(                 object.value("auto_link").toBool());
+   m_ui->built_in_stl_support_CB->setChecked(      object.value("built_in_stl_support").toBool());
+   m_ui->cpp_cli_support_CB->setChecked(           object.value("cpp-cli_support").toBool());
+   m_ui->sip_support_CB->setChecked(               object.value("sip-support").toBool());
+   m_ui->idl_support_CB->setChecked(               object.value("idl-support").toBool());
+   m_ui->dist_group_doc_CB->setChecked(            object.value("dist-group-doc").toBool());
+   m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
+   m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
+   m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
+   m_ui->typedef_hids_struct_CB->setChecked(       object.value("typedef-hids-struct").toBool());
+   m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
+
+
+
+   /*
+      m_ui->X_CB->setChecked(   object.value("").toBool());
+      m_ui->X->setText(         object.value("").toString());
+      m_ui->X_SB->setValue(     object.value("").toInt());
+      m_ui->X->setPlainText(    getDataList(object, ""));
+   */
 
 
    // tab 2 - build
 
 
+
 // done already
-   m_ui->show_used_files_CB->setChecked( object.value("show-used-files").toBool());;
-   m_ui->layout_file->setText(           object.value("layout-file").toString());
-   m_ui->file_version_filter->setText(   object.value("file-version-filter").toString());
+   m_ui->show_used_files_CB->setChecked(       object.value("show-used-files").toBool());;
+   m_ui->layout_file->setText(                 object.value("layout-file").toString());
+   m_ui->file_version_filter->setText(         object.value("file-version-filter").toString());
 
 
 
 
    // tab 2 - messages
-   m_ui->quiet_CB->setChecked(           object.value("quiet").toBool());
-   m_ui->warnings_CB->setChecked(        object.value("warnings").toBool());
-   m_ui->warn_undoc_CB->setChecked(      object.value("warn-undoc").toBool());
-   m_ui->warn_undoc_parm_CB->setChecked( object.value("warn-undoc-parm").toBool());
-   m_ui->warn_forrmat->setText(          object.value("warn-forrmat").toString());
-   m_ui->warn_logfile->setText(          object.value("warn-logfile").toString());
+   m_ui->quiet_CB->setChecked(                 object.value("quiet").toBool());
+   m_ui->warnings_CB->setChecked(              object.value("warnings").toBool());
+   m_ui->warn_undoc_CB->setChecked(            object.value("warn-undoc").toBool());
+   m_ui->warn_undoc_parm_CB->setChecked(       object.value("warn-undoc-parm").toBool());
+   m_ui->warn_forrmat->setText(                object.value("warn-forrmat").toString());
+   m_ui->warn_logfile->setText(                object.value("warn-logfile").toString());
 
    // tab 2 -input
-   m_ui->input_source->setPlainText(getDataList(  object, "input-source"));
-   m_ui->input_encoding->setText(                 object.value("input-encoding").toString());
-   m_ui->file_patterns->setPlainText(getDataList( object, "file-patterns"));
-   m_ui->source_recursive_CB->setChecked(         object.value("source-recursive").toBool());
+   m_ui->input_source->setPlainText(           getDataList(object, "input-source"));
+   m_ui->input_encoding->setText(              object.value("input-encoding").toString());
+   m_ui->file_patterns->setPlainText(          getDataList(object, "file-patterns"));
+   m_ui->source_recursive_CB->setChecked(      object.value("source-recursive").toBool());
 
-   m_ui->exclude_files->setPlainText(getDataList( object, "exclude-files"));
-   m_ui->exclude_symlinks_CB->setChecked(         object.value("exclude-symlinks").toBool());
-   m_ui->exclude_patterns->setPlainText(          getDataList(object, "exclude-patterns"));
-   m_ui->exclude_symbols->setPlainText(           getDataList(object, "exclude-symbols"));
+   m_ui->exclude_files->setPlainText(          getDataList(object, "exclude-files"));
+   m_ui->exclude_symlinks_CB->setChecked(      object.value("exclude-symlinks").toBool());
+   m_ui->exclude_patterns->setPlainText(       getDataList(object, "exclude-patterns"));
+   m_ui->exclude_symbols->setPlainText(        getDataList(object, "exclude-symbols"));
 
-   m_ui->example_source->setPlainText(            getDataList(object, "example-source"));
-   m_ui->example_patterns->setPlainText(          getDataList(object, "example-pattens"));
-   m_ui->example_recursive_CB->setChecked(        object.value("example-recursive").toBool());
+   m_ui->example_source->setPlainText(         getDataList(object, "example-source"));
+   m_ui->example_patterns->setPlainText(       getDataList(object, "example-pattens"));
+   m_ui->example_recursive_CB->setChecked(     object.value("example-recursive").toBool());
 
-   m_ui->image_path->setPlainText(                getDataList(object, "image-path"));
-   m_ui->input_filter->setText(                   object.value("input-filter").toString());
-   m_ui->filter_patterns->setPlainText(           getDataList(object, "filter-patterns"));
-   m_ui->filter_source_files_CB->setChecked(      object.value("filter-source-files").toBool());
-   m_ui->filter_source_patterns->setPlainText(    getDataList(object, "filter-source-patterns"));
+   m_ui->image_path->setPlainText(             getDataList(object, "image-path"));
+   m_ui->input_filter->setText(                object.value("input-filter").toString());
+   m_ui->filter_patterns->setPlainText(        getDataList(object, "filter-patterns"));
+   m_ui->filter_source_files_CB->setChecked(   object.value("filter-source-files").toBool());
+   m_ui->filter_source_patterns->setPlainText( getDataList(object, "filter-source-patterns"));
 
-   m_ui->mdfile_mainpage->setText(                object.value("mdfile-mainpage").toString());
+   m_ui->mdfile_mainpage->setText(             object.value("mdfile-mainpage").toString());
 
    // tab 2 -browser
-   m_ui->source_browser_CB->setChecked(      object.value("source-browser").toBool());
-   m_ui->inline_sources_CB->setChecked(      object.value("inline-sources").toBool());
-   m_ui->strip_code_comments_CB->setChecked( object.value("strip-code-comments").toBool());
-   m_ui->ref_by_relation_CB->setChecked(     object.value("ref-by-relation").toBool());
-   m_ui->ref_relation_CB->setChecked(        object.value("ref-relation").toBool());
-   m_ui->ref_link_source_CB->setChecked(     object.value("ref-link-source").toBool());
-   m_ui->source_tooltips_CB->setChecked(     object.value("source-tooltips").toBool());
-   m_ui->use_htags_CB->setChecked(           object.value("use-htags").toBool());
-   m_ui->verbatim_headers_CB->setChecked(    object.value("verbatim-headers").toBool());
-   m_ui->clang_parsing_CB->setChecked(       object.value("clang-parsing").toBool());
-   m_ui->clang_options->setPlainText(        getDataList(object, "clang-options"));
+   m_ui->source_browser_CB->setChecked(        object.value("source-browser").toBool());
+   m_ui->inline_sources_CB->setChecked(        object.value("inline-sources").toBool());
+   m_ui->strip_code_comments_CB->setChecked(   object.value("strip-code-comments").toBool());
+   m_ui->ref_by_relation_CB->setChecked(       object.value("ref-by-relation").toBool());
+   m_ui->ref_relation_CB->setChecked(          object.value("ref-relation").toBool());
+   m_ui->ref_link_source_CB->setChecked(       object.value("ref-link-source").toBool());
+   m_ui->source_tooltips_CB->setChecked(       object.value("source-tooltips").toBool());
+   m_ui->use_htags_CB->setChecked(             object.value("use-htags").toBool());
+   m_ui->verbatim_headers_CB->setChecked(      object.value("verbatim-headers").toBool());
+   m_ui->clang_parsing_CB->setChecked(         object.value("clang-parsing").toBool());
+   m_ui->clang_options->setPlainText(          getDataList(object, "clang-options"));
 
    // tab 2 -index
-   m_ui->alpha_index_CB->setChecked(     object.value("alpha-index").toBool());
-   m_ui->cols_in_index_SB->setValue(     object.value("cols-in-index").toInt());
-   m_ui->ignore_prefix->setPlainText(    getDataList(object, "ignore-prefix"));
+   m_ui->alpha_index_CB->setChecked(           object.value("alpha-index").toBool());
+   m_ui->cols_in_index_SB->setValue(           object.value("cols-in-index").toInt());
+   m_ui->ignore_prefix->setPlainText(          getDataList(object, "ignore-prefix"));
 
    // tab 2 - autogen
-   m_ui->gen_autogen_def_CB->setChecked( object.value("gen-autogen-def").toBool());
+   m_ui->gen_autogen_def_CB->setChecked(       object.value("gen-autogen-def").toBool());
 
    // tab 2 - perlmod         
-   m_ui->gen_perl_CB->setChecked(    object.value("gen-perl").toBool());
-   m_ui->perl_latex_CB->setChecked(  object.value("perl-latex").toBool());
-   m_ui->perl_pretty_CB->setChecked( object.value("perl-pretty").toBool());
-   m_ui->perlmod_prefix->setText(    object.value("perlmod-prefix").toString());
+   m_ui->gen_perl_CB->setChecked(              object.value("gen-perl").toBool());
+   m_ui->perl_latex_CB->setChecked(            object.value("perl-latex").toBool());
+   m_ui->perl_pretty_CB->setChecked(           object.value("perl-pretty").toBool());
+   m_ui->perlmod_prefix->setText(              object.value("perlmod-prefix").toString());
 
    // tab 2 - preprocess
    m_ui->enable_preprocessing_CB->setChecked(  object.value("enable-preprocessing").toBool());
@@ -597,99 +645,136 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->include_file_patterns->setPlainText(  getDataList(object,"include-file-patterns"));
    m_ui->predefined_macros->setPlainText(      getDataList(object,"predefined-macros"));
    m_ui->expand_as_defined->setPlainText(      getDataList(object,"expand-as-definedx"));
-
    m_ui->skip_function_macros_CB->setChecked(  object.value("skip-function-macros").toBool());
 
    // tab 2 - external
-   m_ui->tag_files->setPlainText(         getDataList(object,"tag-files"));
-   m_ui->generate_tagfile->setText(       object.value("generate-tagfile").toString());
-   m_ui->all_externals_CB->setChecked(    object.value("all-externals").toBool());
-   m_ui->external_groups_CB->setChecked(  object.value("external-groups").toBool());
-   m_ui->external_pages_CB->setChecked(   object.value("external-pages").toBool());
-   m_ui->perl_path->setText(              object.value("perl-path").toString());
+   m_ui->tag_files->setPlainText(              getDataList(object,"tag-files"));
+   m_ui->generate_tagfile->setText(            object.value("generate-tagfile").toString());
+   m_ui->all_externals_CB->setChecked(         object.value("all-externals").toBool());
+   m_ui->external_groups_CB->setChecked(       object.value("external-groups").toBool());
+   m_ui->external_pages_CB->setChecked(        object.value("external-pages").toBool());
+   m_ui->perl_path->setText(                   object.value("perl-path").toString());
 
    // tab 2 - dot
+   m_ui->class_diagrams_CB->setChecked(              object.value("class-diagrams").toBool());
+   m_ui->mscgen_path->setText(                       object.value("mscgen-path").toString());
+   m_ui->dia_path->setText(                          object.value("dia-path").toString());
+   m_ui->hide_undocumented_relations_CB->setChecked( object.value("hide-undocumented-relations").toBool());
+   m_ui->have_dot_CB->setChecked(                    object.value("have-dot").toBool());
+   m_ui->dot_num_threads_SB->setValue(               object.value("dot-num-threads").toInt());
+   m_ui->dot_font_name->setText(                     object.value("dot-font-name").toString());
+   m_ui->dot_font_size_SB->setValue(                 object.value("dot-font-size").toInt());
+   m_ui->dot_font_path->setText(                     object.value("dot_font_path").toString());
+   m_ui->class_graph_CB->setChecked(                 object.value("class_graph").toBool());
+   m_ui->collaboration_graph_CB->setChecked(         object.value("collaboration_graph").toBool());
+   m_ui->group_graphs_CB->setChecked(                object.value("group_graphs").toBool());
+   m_ui->uml_look_CB->setChecked(                    object.value("uml-look").toBool());
+   m_ui->uml_limit_num_fields_SB->setValue(          object.value("uml-limit-num-fields").toInt());
+   m_ui->template_relations_CB->setChecked(          object.value("template_relations").toBool());
+   m_ui->include_graph_CB->setChecked(               object.value("include-graph").toBool());
+   m_ui->included_by_graph_CB->setChecked(           object.value("included-by-graph").toBool());
+   m_ui->call_graph_CB->setChecked(                  object.value("call-graph").toBool());
+   m_ui->caller_graph_CB->setChecked(                object.value("caller-graph").toBool());
+   m_ui->graphical_hierarchy_CB->setChecked(         object.value("graphical-hierarchy").toBool());
+   m_ui->directory_graph_CB->setChecked(             object.value("directory-graph").toBool());
+
+   index = m_ui->dot_image_format_CM->findText(  object.value("dot-image-format").toString());
+   m_ui->dot_image_format_CM->setCurrentIndex(index);
+
+   m_ui->interactive_svg_CB->setChecked(       object.value("interactive_svg").toBool());
+
+   m_ui->dot_path->setText(                    object.value("dot-path").toString());
+   m_ui->dot_file_dirs->setPlainText(          getDataList(object, "dot-file_dirs"));
+   m_ui->msc_file_dirs->setPlainText(          getDataList(object, "msc-file_dirs"));
+   m_ui->dia_file_dirs->setPlainText(          getDataList(object, "dia-file_dirs"));
+   m_ui->platuml_jar_path->setText(            object.value("platuml-jar-path").toString());
+
+   m_ui->dot_graph_max_nodes_SB->setValue(     object.value("dot_graph_max_nodes").toInt());
+   m_ui->dot_graph_max_depth_SB->setValue(     object.value("dot_graph_max_depth").toInt());
+   m_ui->dot_transparent_CB->setChecked(       object.value("dot_transparent").toBool());
+   m_ui->dot_multple_targets_CB->setChecked(   object.value("dot_multple_targets").toBool());
+   m_ui->gen_legend_CB->setChecked(            object.value("gen_legend").toBool());
+   m_ui->dot_cleanup_CB->setChecked(           object.value("dot_cleanup").toBool());
 
 
-
-
-// START HERE
 
 /*
-   <tabstop>class_diagrams</tabstop>
-   <tabstop>mscgen_path</tabstop>
-   <tabstop>dia_path</tabstop>
-   <tabstop>hide_undocumented_relations_CB</tabstop>
-   <tabstop>have_dot_CB</tabstop>
-   <tabstop>dot_num_threads_SP</tabstop>
-   <tabstop>dot_font_name</tabstop>
-   <tabstop>dot_font_size_SB</tabstop>
-   <tabstop>dot_font_path</tabstop>
-   <tabstop>class_graph_CB</tabstop>
-   <tabstop>collaboration_graph_CB</tabstop>
-   <tabstop>group_graphs_CB</tabstop>
-   <tabstop>uml_look_CB</tabstop>
-   <tabstop>uml_limit_num_fileds_SB</tabstop>
-   <tabstop>template_relations_CB</tabstop>
-   <tabstop>include_graph_CB</tabstop>
-   <tabstop>included_by_graph_CB</tabstop>
-   <tabstop>call_graph_CB</tabstop>
-   <tabstop>ccaller_graph_CB</tabstop>
-   <tabstop>graphical_hierarchy_CB</tabstop>
-   <tabstop>directory_graph_CB</tabstop>
-   <tabstop>dot_image_format_CM</tabstop>
-   <tabstop>interactive_svg_CB</tabstop>
 
-   <tabstop>destDir_121</tabstop>
-   <tabstop>plainTextEdit_127</tabstop>
-   <tabstop>plainTextEdit_128</tabstop>
-   <tabstop>plainTextEdit_129</tabstop>
-   <tabstop>destDir_180</tabstop>
-   <tabstop>spinBox_14</tabstop>
-   <tabstop>spinBox_15</tabstop>
-   <tabstop>checkBox_690</tabstop>
-   <tabstop>checkBox_688</tabstop>
-   <tabstop>checkBox_689</tabstop>
-   <tabstop>checkBox_687</tabstop>
+   m_ui->X_CB->setChecked(   object.value("").toBool());
+   m_ui->X->setText(         object.value("").toString());
+   m_ui->X_SB->setValue(     object.value("").toInt());
+   m_ui->X->setPlainText(    getDataList(object, ""));
 
 */
 
 
 
-
-
-
-
    //  ***
    // tab 3 - html
-   m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
+
 
 
    // tab 3 - latex
-   m_ui->gen_latex_CB2->setChecked(m_ui->gen_latex_CB1->isChecked());
+
+
+/*
+
+ <tabstop>latex_output</tabstop>
+  <tabstop>latex_output_PB</tabstop>
+  <tabstop>latex_cmd_name</tabstop>
+  <tabstop>latex_cmd_name_PB</tabstop>
+  <tabstop>make_index_cmd_name</tabstop>
+  <tabstop>make_index_cmd_name_PB</tabstop>
+  <tabstop>compact_latex_CB</tabstop>
+  <tabstop>paper_type_CM</tabstop>
+  <tabstop>latex_extra_packages</tabstop>
+  <tabstop>latex_extra_packages_PB</tabstop>
+  <tabstop>latex_header</tabstop>
+  <tabstop>latex_header_PB</tabstop>
+  <tabstop>latex_footer</tabstop>
+  <tabstop>latex_footer_PB</tabstop>
+  <tabstop>latex_extra_files</tabstop>
+  <tabstop>latex_extra_files_PB</tabstop>
+  <tabstop>pdf_hyperlinks_CB</tabstop>
+  <tabstop>use_pdf_latex_CB</tabstop>
+  <tabstop>laxtex_batch_mode_CB</tabstop>
+  <tabstop>laxtex_hide_indices_CB</tabstop>
+  <tabstop>laxtex_source_code_CB</tabstop>
+  <tabstop>laxtex_bib_style</tabstop>
+
+*/
 
 
    // tab 3 - rtf
-   m_ui->gen_rtf_CB2->setChecked(m_ui->gen_rtf_CB1->isChecked());
-
+   m_ui->rtf_output->setText(                      object.value("rtf_output").toString());
+   m_ui->rtf_compact_CB->setChecked(               object.value("rtf_compact").toBool());
+   m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf_hyperlinks").toBool());
+   m_ui->rtf_stylesheet->setText(                  object.value("rtf_stylesheet").toString());
+   m_ui->rtf_extension->setText(                   object.value("rtf_extension").toString());
 
    // tab 3 - man
-   m_ui->gen_man_CB2->setChecked(m_ui->gen_man_CB1->isChecked());
-
+   m_ui->man_output->setText(                      object.value("man-output").toString());
+   m_ui->man_extension->setText(                   object.value("man-extension").toString());
+   m_ui->man_subdir->setText(                      object.value("man-subdir").toString());
+   m_ui->man_links_CB->setChecked(                 object.value("man-links").toBool());
 
    // tab 3 - xml
-   m_ui->gen_xml_CB2->setChecked(m_ui->gen_xml_CB1->isChecked());
+   m_ui->xml_output->setText(                      object.value("xml-output").toString());
+   m_ui->xml_program_listing_CB->setChecked(       object.value("xml-program-listing").toBool());
 
+   // tab 3 - docbook     
+   m_ui->docbook_output->setText(                  object.value("docbook-output").toString());
+   m_ui->docbook_program_listing_CB->setChecked(   object.value("docbook-program-listing").toBool());
 
-   // tab 3 - docbook
-   m_ui->gen_docbook_CB2->setChecked(m_ui->gen_docbook_CB1->isChecked());
-
+   // set duplicate values
+   setDuplicates();
 }
 
 QByteArray MainWindow::json_SaveDoxy()
 {
    QJsonObject object;
 
+   // tab 1
    object.insert("project-name",          m_ui->project_name->text());
    object.insert("project-brief",         m_ui->project_brief->text());
    object.insert("project-number",        m_ui->project_number->text());
@@ -727,7 +812,6 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("diagram-built-in",      m_ui->diagram_built_in_RB->isChecked());
    object.insert("diagram-dot",           m_ui->diagram_dot_RB->isChecked());
 
-
    object.insert("dot-class",             m_ui->dot_class_CB->isChecked());
    object.insert("dot-collaboratio",      m_ui->dot_collaboration_CB->isChecked());
    object.insert("dot-overall",           m_ui->dot_overall_CB->isChecked());
@@ -739,8 +823,49 @@ QByteArray MainWindow::json_SaveDoxy()
 
    //  ***
    // tab 2 - project
+/*
+   m_ui->project_encoding->setText(                object.value("project-encoding").toString());
+   m_ui->create_subdirs_CB->setChecked(            object.value("create-subdirs").toBool());
+   m_ui->allow_unicode_names_CB->setChecked(       object.value("allow-unicode-names").toBool());
 
+   index = m_ui->output_langugae_CM->findText(object.value("output-langugae").toString());
+   m_ui->output_langugae_CM->setCurrentIndex(index);
 
+   m_ui->brief_member_desc_CB->setChecked(         object.value("brief-member-desc").toBool());
+   m_ui->repeat_brief_CB->setChecked(              object.value("repeat-brief").toBool());
+   m_ui->abbreviate_brief->setPlainText(           getDataList(object, "abbreviate-brief"));
+   m_ui->always_detailed_sec_CB->setChecked(       object.value("always-detailed_sec").toBool());
+   m_ui->inline_inherited_member_CB->setChecked(   object.value("inline-inherited_member").toBool());
+   m_ui->full_path_names_CB->setChecked(           object.value("full-path_names").toBool());
+   m_ui->strip_from_path->setPlainText(            getDataList(object, "strip-from-path"));
+   m_ui->strip_from_inc_path->setPlainText(        getDataList(object, "strip-from-inc-path"));
+
+   m_ui->short_names_CB->setChecked(               object.value("short_names").toBool());
+   m_ui->javadoc_auto_brief_CB->setChecked(        object.value("javadoc_auto_brief").toBool());
+   m_ui->qt_auto_brief_CB->setChecked(             object.value("qt-auto-brief").toBool());
+   m_ui->multiline_cpp_brief_CB->setChecked(       object.value("multiline-cpp-brief").toBool());
+   m_ui->inherit_docs_CB->setChecked(              object.value("inherit-docs").toBool());
+   m_ui->separate_member_pages_CB->setChecked(     object.value("separate-member-pages").toBool());
+
+   m_ui->tab_size_SB->setValue(                    object.value("tab-size").toInt());
+   m_ui->aliases->setPlainText(                    getDataList(object, "aliases"));
+   m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl_subst"));
+   m_ui->extension_mapping->setPlainText(          getDataList(object, "extension_mapping"));
+
+   m_ui->markdown_CB->setChecked(                  object.value("markdown").toBool());
+   m_ui->auto_link_CB->setChecked(                 object.value("auto_link").toBool());
+   m_ui->built_in_stl_support_CB->setChecked(      object.value("built_in_stl_support").toBool());
+   m_ui->cpp_cli_support_CB->setChecked(           object.value("cpp-cli_support").toBool());
+   m_ui->sip_support_CB->setChecked(               object.value("sip-support").toBool());
+   m_ui->idl_support_CB->setChecked(               object.value("idl-support").toBool());
+   m_ui->dist_group_doc_CB->setChecked(            object.value("dist-group-doc").toBool());
+   m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
+   m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
+   m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
+   m_ui->typedef_hids_struct_CB->setChecked(       object.value("typedef-hids-struct").toBool());
+   m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
+
+*/
 
    // tab 2 - build
 
@@ -748,24 +873,21 @@ QByteArray MainWindow::json_SaveDoxy()
 
 
    // tab 2 - messages
-   object.insert("quiet",                  m_ui->quiet_CB->isChecked());
-   object.insert("warnings",               m_ui->warnings_CB->isChecked());
-   object.insert("warn-undoc",             m_ui->warn_undoc_CB->isChecked());
-   object.insert("warn-undoc-parm",        m_ui->warn_undoc_parm_CB->isChecked());
-   object.insert("warn-forrmat",           m_ui->warn_forrmat->text());
-   object.insert("warn-logfile",           m_ui->warn_logfile->text());
+   object.insert("quiet",                      m_ui->quiet_CB->isChecked());
+   object.insert("warnings",                   m_ui->warnings_CB->isChecked());
+   object.insert("warn-undoc",                 m_ui->warn_undoc_CB->isChecked());
+   object.insert("warn-undoc-parm",            m_ui->warn_undoc_parm_CB->isChecked());
+   object.insert("warn-forrmat",               m_ui->warn_forrmat->text());
+   object.insert("warn-logfile",               m_ui->warn_logfile->text());
 
    // tab 2 - input
+   object.insert("input-source",               putDataList(m_ui->input_source->toPlainText()));
+   object.insert("input-encoding",             m_ui->input_encoding->text());
+   object.insert("file-patterns",              putDataList(m_ui->file_patterns->toPlainText()));
+   object.insert("source-recursive",           m_ui->source_recursive_CB->isChecked());
 
-   object.insert("input-source",           putDataList(m_ui->input_source->toPlainText()));
-   object.insert("input-encoding",         m_ui->input_encoding->text());
-   object.insert("file-patterns",          putDataList(m_ui->file_patterns->toPlainText()));
-   object.insert("source-recursive",       m_ui->source_recursive_CB->isChecked());
-
-   object.insert("exclude-files",          putDataList(m_ui->exclude_files->toPlainText()));
-
-/*
-   m_ui->exclude_symlinks_CB->setChecked(         object.value("exclude-symlinks").toBool());
+   object.insert("exclude-files",              putDataList(m_ui->exclude_files->toPlainText()));
+/* m_ui->exclude_symlinks_CB->setChecked(         object.value("exclude-symlinks").toBool());
    m_ui->exclude_patterns->setPlainText(          getDataList(object, "exclude-patterns"));
    m_ui->exclude_symbols->setPlainText(           getDataList(object, "exclude-symbols"));
 
@@ -838,9 +960,47 @@ QByteArray MainWindow::json_SaveDoxy()
 
 
    // tab 2 - dot
+/*
+   m_ui->class_diagrams_CB->setChecked(              object.value("class-diagrams").toBool());
+   m_ui->mscgen_path->setText(                       object.value("mscgen-path").toString());
+   m_ui->dia_path->setText(                          object.value("dia-path").toString());
+   m_ui->hide_undocumented_relations_CB->setChecked( object.value("hide-undocumented-relations").toBool());
+   m_ui->have_dot_CB->setChecked(                    object.value("have-dot").toBool());
+   m_ui->dot_num_threads_SB->setValue(               object.value("dot-num-threads").toInt());
+   m_ui->dot_font_name->setText(                     object.value("dot-font-name").toString());
+   m_ui->dot_font_size_SB->setValue(                 object.value("dot-font-size").toInt());
+   m_ui->dot_font_path->setText(                     object.value("dot_font_path").toString());
+   m_ui->class_graph_CB->setChecked(                 object.value("class_graph").toBool());
+   m_ui->collaboration_graph_CB->setChecked(         object.value("collaboration_graph").toBool());
+   m_ui->group_graphs_CB->setChecked(                object.value("group_graphs").toBool());
+   m_ui->uml_look_CB->setChecked(                    object.value("uml-look").toBool());
+   m_ui->uml_limit_num_fields_SB->setValue(          object.value("uml-limit-num-fields").toInt());
+   m_ui->template_relations_CB->setChecked(          object.value("template_relations").toBool());
+   m_ui->include_graph_CB->setChecked(               object.value("include-graph").toBool());
+   m_ui->included_by_graph_CB->setChecked(           object.value("included-by-graph").toBool());
+   m_ui->call_graph_CB->setChecked(                  object.value("call-graph").toBool());
+   m_ui->caller_graph_CB->setChecked(                object.value("caller-graph").toBool());
+   m_ui->graphical_hierarchy_CB->setChecked(         object.value("graphical-hierarchy").toBool());
+   m_ui->directory_graph_CB->setChecked(             object.value("directory-graph").toBool());
 
+   int index = m_ui->dot_image_format_CM->findText(  object.value("dot-image-format").toString());
+   m_ui->dot_image_format_CM->setCurrentIndex(index);
 
+   m_ui->interactive_svg_CB->setChecked(       object.value("interactive_svg").toBool());
 
+   m_ui->dot_path->setText(                    object.value("dot-path").toString());
+   m_ui->dot_file_dirs->setPlainText(          getDataList(object, "dot-file_dirs"));
+   m_ui->msc_file_dirs->setPlainText(          getDataList(object, "msc-file_dirs"));
+   m_ui->dia_file_dirs->setPlainText(          getDataList(object, "dia-file_dirs"));
+   m_ui->platuml_jar_path->setText(            object.value("platuml-jar-path").toString());
+
+   m_ui->dot_graph_max_nodes_SB->setValue(     object.value("dot_graph_max_nodes").toInt());
+   m_ui->dot_graph_max_depth_SB->setValue(     object.value("dot_graph_max_depth").toInt());
+   m_ui->dot_transparent_CB->setChecked(       object.value("dot_transparent").toBool());
+   m_ui->dot_multple_targets_CB->setChecked(   object.value("dot_multple_targets").toBool());
+   m_ui->gen_legend_CB->setChecked(            object.value("gen_legend").toBool());
+   m_ui->dot_cleanup_CB->setChecked(           object.value("dot_cleanup").toBool());
+*/
 
    //  ***
    // tab 3 - html
@@ -850,18 +1010,27 @@ QByteArray MainWindow::json_SaveDoxy()
 
 
    // tab 3 - rtf
-
+/* m_ui->rtf_output->setText(                      object.value("rtf_output").toString());
+   m_ui->rtf_compact_CB->setChecked(               object.value("rtf_compact").toBool());
+   m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf_hyperlinks").toBool());
+   m_ui->rtf_stylesheet->setText(                  object.value("rtf_stylesheet").toString());
+   m_ui->rtf_extension->setText(                   object.value("rtf_extension").toString());
+*/
 
    // tab 3 - man
-
+/* m_ui->man_output->setText(                      object.value("man-output").toString());
+   m_ui->man_extension->setText(                   object.value("man-extension").toString());
+   m_ui->man_subdir->setText(                      object.value("man-subdir").toString());
+   m_ui->man_links_CB->setChecked(                 object.value("man-links").toBool());
+*/
 
    // tab 3 - xml
-
+//   m_ui->xml_output->setText(                      object.value("xml-output").toString());
+//   m_ui->xml_program_listing_CB->setChecked(       object.value("xml-program-listing").toBool());
 
    // tab 3 - docbook
-
-
-
+//   m_ui->docbook_output->setText(                  object.value("docbook-output").toString());
+//   m_ui->docbook_program_listing_CB->setChecked(   object.value("docbook-program-listing").toBool());
 
    // save the data
    QJsonDocument doc(object);
@@ -900,44 +1069,7 @@ QJsonArray MainWindow::putDataList(QString fieldData)
    return list;
 }
 
-
-
-
-
 /*
-
-  // tab 2 - project
-  <tabstop>output_langugae_CM</tabstop>
-  <tabstop>brief_member_desc_CB</tabstop>
-  <tabstop>repeat_brief_CB</tabstop>
-  <tabstop>abbreviate_brief</tabstop>
-  <tabstop>always_detailed_sec_CB</tabstop>
-  <tabstop>inline_inherited_member_CB</tabstop>
-  <tabstop>full_path_names_CB</tabstop>
-  <tabstop>strip_from_path</tabstop>
-  <tabstop>strip_from_inc_path</tabstop>
-  <tabstop>short_names_CB</tabstop>
-  <tabstop>javadoc_auto_brief_CB</tabstop>
-  <tabstop>qt_auto_brief_CB</tabstop>
-  <tabstop>multiline_cpp_brief_CB</tabstop>
-  <tabstop>inherit_docs_CB</tabstop>
-  <tabstop>separate_member_pages_CB</tabstop>
-  <tabstop>tab_size</tabstop>
-  <tabstop>aliases</tabstop>
-  <tabstop>tcl_subst</tabstop>
-  <tabstop>extension_mapping</tabstop>
-  <tabstop>markdown_CB</tabstop>
-  <tabstop>auto_link_CB</tabstop>
-  <tabstop>built_in_stl_support_CB</tabstop>
-  <tabstop>cpp_cli_support_CB</tabstop>
-  <tabstop>sip_support_CB</tabstop>
-  <tabstop>idl_support_CB</tabstop>
-  <tabstop>dist_group_doc_CB</tabstop>
-  <tabstop>allow_sub_grouping_CB</tabstop>
-  <tabstop>inline_grouped_classes_CB</tabstop>
-  <tabstop>inline_simple_struct_CB</tabstop>
-  <tabstop>typedef_hids_struct_CB</tabstop>
-  <tabstop>lookup_cache_size</tabstop>
 
   // build
   <tabstop>extract_all</tabstop>
@@ -977,10 +1109,6 @@ QJsonArray MainWindow::putDataList(QString fieldData)
   <tabstop>file_version_filter</tabstop>
   <tabstop>layout_file</tabstop>
   <tabstop>cite_bib_files</tabstop>
-
-
-
-  // ** TAB 3
 
   // tab 3 - html
   <tabstop>gen_html_CB2</tabstop>
@@ -1030,7 +1158,7 @@ QJsonArray MainWindow::putDataList(QString fieldData)
   <tabstop>comboBox_6</tabstop>
   <tabstop>destDir_69</tabstop>
   <tabstop>plainTextEdit_30</tabstop>
-   <tabstop>destDir_70</tabstop>
+  <tabstop>destDir_70</tabstop>
   <tabstop>checkBox_635</tabstop>
   <tabstop>checkBox_636</tabstop>
   <tabstop>checkBox_637</tabstop>
@@ -1038,49 +1166,5 @@ QJsonArray MainWindow::putDataList(QString fieldData)
   <tabstop>lineEdit</tabstop>
   <tabstop>destDir_77</tabstop>
   <tabstop>plainTextEdit_32</tabstop>
-
-  // latex
-  <tabstop>gen_latex_CB2</tabstop>
-  <tabstop>destDir_33</tabstop>
-  <tabstop>destDir_78</tabstop>
-  <tabstop>destDir_79</tabstop>
-  <tabstop>checkBox_638</tabstop>
-  <tabstop>comboBox_2</tabstop>
-  <tabstop>plainTextEdit_33</tabstop>
-  <tabstop>destDir_80</tabstop>
-  <tabstop>destDir_81</tabstop>
-  <tabstop>plainTextEdit_34</tabstop>
-  <tabstop>pushButton_33</tabstop>
-  <tabstop>checkBox_639</tabstop>
-  <tabstop>checkBox_640</tabstop>
-  <tabstop>checkBox_641</tabstop>
-  <tabstop>checkBox_642</tabstop>
-  <tabstop>checkBox_643</tabstop>
-  <tabstop>destDir_83</tabstop>
-
-  // rtf
-  <tabstop>gen_rtf_CB2</tabstop>
-  <tabstop>rtf_output</tabstop> 
-  <tabstop>compact_rtf_CB</tabstop>
-  <tabstop>rtf_hyperlinks_CB</tabstop>
-  <tabstop>rtf_stylesheet</tabstop>
-  <tabstop>rtf_extension</tabstop>
-
-  // man
-  <tabstop>gen_man_CB2</tabstop>
-  <tabstop>man_output</tabstop> 
-  <tabstop>man_extension</tabstop>
-  <tabstop>man_subdir</tabstop>
-  <tabstop>man_links_CB</tabstop>
-  <tabstop>gen_xml_CB2</tabstop>
-
-  // xml
-  <tabstop>xml_output</tabstop>
-  <tabstop>xml_program_llisting</tabstop>
-
-  // docbook
-  <tabstop>gen_docbook_CB2</tabstop>
-  <tabstop>docbook_output</tabstop> 
-  <tabstop>docbook_program_listing_CB
 
 */

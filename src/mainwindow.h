@@ -112,6 +112,7 @@ class MainWindow : public QMainWindow
 
       void createShortCuts();
       void createConnections();
+      void setDuplicates();
       void setupLimits();
 
       QString getFile_CS(QString title, QString fname, QString filter);

@@ -132,11 +132,23 @@ void MainWindow::clearAllFields()
    int index = m_ui->output_langugae_CM->findText("English");
    m_ui->output_langugae_CM->setCurrentIndex(index);
 
-   m_ui->tab_size->setValue(4);
+   m_ui->tab_size_SB->setValue(4);
 
    m_ui->html_colorstyle_hue->setValue(220);
    m_ui->html_colorstyle_sat->setValue(100);
    m_ui->html_colorstyle_gamma->setValue(80);
+
+   setDuplicates();
+}
+
+void MainWindow::setDuplicates()
+{
+   m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
+   m_ui->gen_latex_CB2->setChecked(m_ui->gen_latex_CB1->isChecked());
+   m_ui->gen_rtf_CB2->setChecked(m_ui->gen_rtf_CB1->isChecked());
+   m_ui->gen_man_CB2->setChecked(m_ui->gen_man_CB1->isChecked());
+   m_ui->gen_xml_CB2->setChecked(m_ui->gen_xml_CB1->isChecked());
+   m_ui->gen_docbook_CB2->setChecked(m_ui->gen_docbook_CB1->isChecked());
 }
 
 void MainWindow::setupLimits()
@@ -152,8 +164,8 @@ void MainWindow::setupLimits()
    QStringList lang = temp.split(", ");
    m_ui->output_langugae_CM->addItems(lang);
 
-   m_ui->tab_size->setMinimum(1);
-   m_ui->tab_size->setMaximum(16);
+   m_ui->tab_size_SB->setMinimum(1);
+   m_ui->tab_size_SB->setMaximum(16);
 
    // m_ui->look_up_cache->setMinimum(0);
    // m_ui->look_up_cache->setMaximum(9);
