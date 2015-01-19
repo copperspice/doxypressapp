@@ -555,27 +555,47 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->typedef_hids_struct_CB->setChecked(       object.value("typedef-hids-struct").toBool());
    m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
 
-
-
-   /*
-      m_ui->X_CB->setChecked(   object.value("").toBool());
-      m_ui->X->setText(         object.value("").toString());
-      m_ui->X_SB->setValue(     object.value("").toInt());
-      m_ui->X->setPlainText(    getDataList(object, ""));
-   */
-
-
    // tab 2 - build
+   m_ui->extract_all_CB->setChecked(               object.value("extract-all").toBool());
+   m_ui->extract_private_CB->setChecked(           object.value("extract-private").toBool());
+   m_ui->extract_package_CB->setChecked(           object.value("extract-package").toBool());
+   m_ui->extract_static_CB->setChecked(            object.value("extract-static").toBool());
+   m_ui->extract_local_classes_CB->setChecked(     object.value("extract-local-classes").toBool());
+   m_ui->extract_local_methods_CB->setChecked(     object.value("extract-local-methods").toBool());
+   m_ui->extract_anon_namespaces_CB->setChecked(   object.value("extract-anon-namespaces").toBool());
+   m_ui->hide_undoc_members_CB->setChecked(        object.value("hide-undoc-members").toBool());
+   m_ui->hide_undoc_classes_CB->setChecked(        object.value("hide-undoc-classes").toBool());
+   m_ui->hide_friend_compounds_CB->setChecked(     object.value("hide-friend-compounds").toBool());
+   m_ui->hide_in_body_docs_CB->setChecked(         object.value("hide-in_body-docs").toBool());
+   m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());
 
+   m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
+   m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
+   m_ui->show_include_files_CB->setChecked(        object.value("show-include-files").toBool());
+   m_ui->show_grouped_members_incl_CB->setChecked( object.value("show-grouped-members_incl").toBool());
+   m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
+   m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
 
+   m_ui->sort_member_docs_CB->setChecked(          object.value("sort-member-docs").toBool());
+   m_ui->sort_brief_docs_CB->setChecked(           object.value("sort-brief-docs").toBool());
+   m_ui->sort_members_ctors_first_CB->setChecked(  object.value("sort-members-ctors-first").toBool());
+   m_ui->sort_group_names_CB->setChecked(          object.value("sort-group-names").toBool());
+   m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by_scope-name").toBool());
 
-// done already
-   m_ui->show_used_files_CB->setChecked(       object.value("show-used-files").toBool());;
-   m_ui->layout_file->setText(                 object.value("layout-file").toString());
-   m_ui->file_version_filter->setText(         object.value("file-version-filter").toString());
+   m_ui->strict_proto_matching_CB->setChecked(    object.value("strict_proto_matching").toBool());
+   m_ui->gen_todo_list_CB->setChecked(            object.value("gen-todo-list").toBool());
+   m_ui->gen_test_list_CB->setChecked(            object.value("gen-test-list").toBool());
+   m_ui->gen_bug_list_CB->setChecked(             object.value("gen-bug-list").toBool());
+   m_ui->gen_deprecatcated_list_CB->setChecked(   object.value("gen-deprecatcated-list").toBool());
 
-
-
+   m_ui->enabled_sections->setPlainText(          getDataList(object, "enabled-sections"));
+   m_ui->max_init_lines_SB->setValue(             object.value("max-init-lines").toInt());
+   m_ui->show_used_files_CB->setChecked(          object.value("show-used-files").toBool());
+   m_ui->show_files_CB->setChecked(               object.value("show-files").toBool());
+   m_ui->show_namespaces_CB->setChecked(          object.value("show-namespaces").toBool());
+   m_ui->file_version_filter->setText(            object.value("file-version-filter").toString());
+   m_ui->layout_file->setText(                    object.value("layout-file").toString());
+   m_ui->cite_bib_files->setPlainText(            getDataList(object, "cite-bib-files"));
 
    // tab 2 - messages
    m_ui->quiet_CB->setChecked(                 object.value("quiet").toBool());
@@ -678,7 +698,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->graphical_hierarchy_CB->setChecked(         object.value("graphical-hierarchy").toBool());
    m_ui->directory_graph_CB->setChecked(             object.value("directory-graph").toBool());
 
-   index = m_ui->dot_image_format_CM->findText(  object.value("dot-image-format").toString());
+   index = m_ui->dot_image_format_CM->findText(      object.value("dot-image-format").toString());
    m_ui->dot_image_format_CM->setCurrentIndex(index);
 
    m_ui->interactive_svg_CB->setChecked(       object.value("interactive_svg").toBool());
@@ -713,26 +733,98 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    // tab 3 - html
 
 
+/*
+   <tabstop>gen_html_CB2</tabstop>
+   <tabstop>gen_html_CB2</tabstop>
+   <tabstop>html_ouput</tabstop>
+
+   <tabstop>htnl_file_extension</tabstop>
+   <tabstop>html_header</tabstop>
+
+   <tabstop>html_footer</tabstop>
+
+   <tabstop>html_stylesheet</tabstop>
+
+   <tabstop>html_extra_stylesheet</tabstop>
+
+   <tabstop>html_extra_file</tabstop>
+
+   <tabstop>html_colorstyle_hue</tabstop>
+   <tabstop>html_colorstyle_sat</tabstop>
+   <tabstop>html_colorstyle_gamma</tabstop>
+   <tabstop>html_timestamp_CB</tabstop>
+   <tabstop>htl_synamic_sections_CB</tabstop>
+   <tabstop>html_index_num_entries_SB</tabstop>
+   <tabstop>gen_docset_CB</tabstop>
+   <tabstop>docset_feedname</tabstop>
+   <tabstop>docset_bundle_id</tabstop>
+   <tabstop>docset_publisher_id</tabstop>
+   <tabstop>docset_publisher_name</tabstop>
+   <tabstop>gen_html_help</tabstop>
+   <tabstop>chm_file</tabstop>
+
+   <tabstop>hhc_location</tabstop>
+
+   <tabstop>gen_chi_CB</tabstop>
+   <tabstop>chm_index_encoding</tabstop>
+   <tabstop>binary_toc_CB</tabstop>
+   <tabstop>toc_expanded_CB</tabstop>
+   <tabstop>gen_qhp_CB</tabstop>
+   <tabstop>qch_file</tabstop>
+
+   <tabstop>qhp_namespace</tabstop>
+   <tabstop>qhp_virtual_folder</tabstop>
+   <tabstop>qhp_cust_fiilter_name</tabstop>
+   <tabstop>qhp_cust_filter_attrib</tabstop>
+   <tabstop>qhp_section_filter_name</tabstop>
+   <tabstop>qhg_location</tabstop>
+
+   <tabstop>gen_eclipse_help_CB</tabstop>
+   <tabstop>eclipse_doc_id</tabstop>
+   <tabstop>disable_index_CB</tabstop>
+   <tabstop>gen_treeview_CB</tabstop>
+   <tabstop>enum_values_per_line_SB</tabstop>
+   <tabstop>treeview_width_SB</tabstop>
+   <tabstop>external_links_in_window_CB</tabstop>
+   <tabstop>formula_fontsize_SB</tabstop>
+   <tabstop>formula_transparent_CB</tabstop>
+   <tabstop>use_mathjax_CB</tabstop>
+   <tabstop>mathjax_format_CM</tabstop>
+   <tabstop>mathjax_repath</tabstop>
+   <tabstop>mathjax_extensions</tabstop>
+
+   <tabstop>mathjax_codefile</tabstop>
+   <tabstop>search_engine_CB</tabstop>
+   <tabstop>server_based_search_CB</tabstop>
+   <tabstop>external_search_CB</tabstop>
+   <tabstop>search_engine_url</tabstop>
+   <tabstop>search_data_file</tabstop>
+
+   <tabstop>external_search_id</tabstop>
+   <tabstop>extra_search_mappings</tabstop>
+*/
+
+
 
    // tab 3 - latex
 
 
 /*
 
- <tabstop>latex_output</tabstop>
-  <tabstop>latex_output_PB</tabstop>
+  <tabstop>latex_output</tabstop>
+
   <tabstop>latex_cmd_name</tabstop>
-  <tabstop>latex_cmd_name_PB</tabstop>
+
   <tabstop>make_index_cmd_name</tabstop>
-  <tabstop>make_index_cmd_name_PB</tabstop>
+
   <tabstop>compact_latex_CB</tabstop>
   <tabstop>paper_type_CM</tabstop>
   <tabstop>latex_extra_packages</tabstop>
-  <tabstop>latex_extra_packages_PB</tabstop>
+
   <tabstop>latex_header</tabstop>
-  <tabstop>latex_header_PB</tabstop>
+
   <tabstop>latex_footer</tabstop>
-  <tabstop>latex_footer_PB</tabstop>
+
   <tabstop>latex_extra_files</tabstop>
   <tabstop>latex_extra_files_PB</tabstop>
   <tabstop>pdf_hyperlinks_CB</tabstop>
@@ -864,13 +956,51 @@ QByteArray MainWindow::json_SaveDoxy()
    m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
    m_ui->typedef_hids_struct_CB->setChecked(       object.value("typedef-hids-struct").toBool());
    m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
-
 */
 
    // tab 2 - build
+/*
+   m_ui->extract_all_CB->setChecked(               object.value("extract-all").toBool());
+   m_ui->extract_private_CB->setChecked(           object.value("extract-private").toBool());
+   m_ui->extract_package_CB->setChecked(           object.value("extract-package").toBool());
+   m_ui->extract_static_CB->setChecked(            object.value("extract-static").toBool());
+   m_ui->extract_local_classe_CB->setChecked(      object.value("extract-local-classe").toBool());
+   m_ui->extract_local_methods_CB->setChecked(     object.value("extract-local-methods").toBool());
+   m_ui->extract_anon_namespaces_CB->setChecked(   object.value("extract-anon-namespaces").toBool());
+   m_ui->hide_undoc_members_CB->setChecked(        object.value("hide-undoc-members").toBool());
+   m_ui->hide_undoc_classes_CB->setChecked(        object.value("hide-undoc-classes").toBool());
+   m_ui->hide_friend_compounds_CB->setChecked(     object.value("hide-friend-compounds").toBool());
+   m_ui->hide_in_body_docs_CB->setChecked(         object.value("hide-in_body-docs").toBool());
+   m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());
 
+   m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
+   m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
+   m_ui->show_include_files_CB->setChecked(        object.value("show-include-files").toBool());
+   m_ui->show_grouped_members_incl_CB->setChecked( object.value("show-grouped-members_incl").toBool());
+   m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
+   m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
 
+   m_ui->sort_member_docs_CB->setChecked(          object.value("sort-member-docs").toBool());
+   m_ui->sort_brief_docs_CB->setChecked(           object.value("sort-brief-docs").toBool());
+   m_ui->sort_members_ctors_first_CB->setChecked(  object.value("sort-members-ctors-first").toBool());
+   m_ui->sort_group_names_CB->setChecked(          object.value("sort-group-names").toBool());
+   m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by_scope-name").toBool());
 
+   m_ui->strict_proto_matching_CB->setChecked(    object.value("strict_proto_matching").toBool());
+   m_ui->gen_todo_list_CB->setChecked(            object.value("gen-todo-list").toBool());
+   m_ui->gen_test_list_CB->setChecked(            object.value("gen-test-list").toBool());
+   m_ui->gen_bug_list_CB->setChecked(             object.value("gen-bug-list").toBool());
+   m_ui->gen_deprecatcated_list_CB->setChecked(   object.value("gen-deprecatcated-list").toBool());
+
+   m_ui->enabled_sections->setPlainText(          getDataList(object, "enabled-sections"));
+   m_ui->max_init_lines_SB->setValue(             object.value("max-init-lines").toInt());
+   m_ui->show_used_files_CB->setChecked(          object.value("show-used-files").toBool());
+   m_ui->show_files_CB->setChecked(               object.value("show-files").toBool());
+   m_ui->show_namespaces_CB->setChecked(          object.value("show-namespaces").toBool());
+   m_ui->file_version_filter->setText(            object.value("file-version-filter").toString());
+   m_ui->layout_file->setText(                    object.value("layout-file").toString());
+   m_ui->cite_bib_files->setPlainText(            getDataList(object, "cite-bib-files"));
+*/
 
    // tab 2 - messages
    object.insert("quiet",                      m_ui->quiet_CB->isChecked());
@@ -896,28 +1026,28 @@ QByteArray MainWindow::json_SaveDoxy()
    m_ui->example_recursive_CB->setChecked(        object.value("example-recursive").toBool());
 
    m_ui->image_path->setPlainText(                getDataList(object, "image-path"));
-   m_ui->input_filter->setText(                   object.value("input-filter").toString());
+   m_ui->input_filter->text());                  object.value("input-filter").toString());
    m_ui->filter_patterns->setPlainText(           getDataList(object, "filter-patterns"));
    m_ui->filter_source_files_CB->setChecked(      object.value("filter-source-files").toBool());
    m_ui->filter_source_patterns->setPlainText(    getDataList(object, "filter-source-patterns"));
 
-   m_ui->mdfile_mainpage->setText(                object.value("mdfile-mainpage").toString());
+   m_ui->mdfile_mainpage->text());               object.value("mdfile-mainpage").toString());
 
 */
 
    // tab 2 -browser
 
 /*
-   m_ui->source_browse_CB->setChecked(       object.value("source-browse").toBool());
-   m_ui->inline_sources_CB->setChecked(      object.value("inline-sources").toBool());
-   m_ui->strip_code_comments_CB->setChecked( object.value("strip-code-comments").toBool());
-   m_ui->ref_by_relation_CB->setChecked(     object.value("ref-by-relation").toBool());
-   m_ui->ref_relation_CB->setChecked(        object.value("ref-relation").toBool());
-   m_ui->ref_link_source_CB->setChecked(     object.value("ref-link-source").toBool());
-   m_ui->source_tooltips_CB->setChecked(     object.value("source-tooltips").toBool());
-   m_ui->use_htags_CB->setChecked(           object.value("use-htags").toBool());
-   m_ui->verbatim_headers_CB->setChecked(    object.value("verbatim-headers").toBool());
-   m_ui->clang_parsing_CB->setChecked(       object.value("clang-parsing").toBool());
+   m_ui->source_browse_CB->isChecked());       object.value("source-browse").toBool());
+   m_ui->inline_sources_CB->isChecked());       object.value("inline-sources").toBool());
+   m_ui->strip_code_comments_CB->isChecked());  object.value("strip-code-comments").toBool());
+   m_ui->ref_by_relation_CB->isChecked());      object.value("ref-by-relation").toBool());
+   m_ui->ref_relation_CB->isChecked());        object.value("ref-relation").toBool());
+   m_ui->ref_link_source_CB->isChecked());     object.value("ref-link-source").toBool());
+   m_ui->source_tooltips_CB->isChecked());      object.value("source-tooltips").toBool());
+   m_ui->use_htags_CB->isChecked());            object.value("use-htags").toBool());
+   m_ui->verbatim_headers_CB->isChecked());     object.value("verbatim-headers").toBool());
+   m_ui->clang_parsing_CB->isChecked());       object.value("clang-parsing").toBool());
    m_ui->clang_options->setPlainText(        getDataList(object, "clang-options"));
 
 */
@@ -961,76 +1091,76 @@ QByteArray MainWindow::json_SaveDoxy()
 
    // tab 2 - dot
 /*
-   m_ui->class_diagrams_CB->setChecked(              object.value("class-diagrams").toBool());
-   m_ui->mscgen_path->setText(                       object.value("mscgen-path").toString());
-   m_ui->dia_path->setText(                          object.value("dia-path").toString());
+   m_ui->class_diagrams_CB->isChecked());             object.value("class-diagrams").toBool());
+   m_ui->mscgen_path->text());                      object.value("mscgen-path").toString());
+   m_ui->dia_path->text());                          object.value("dia-path").toString());
    m_ui->hide_undocumented_relations_CB->setChecked( object.value("hide-undocumented-relations").toBool());
-   m_ui->have_dot_CB->setChecked(                    object.value("have-dot").toBool());
+   m_ui->have_dot_CB->isChecked());                    object.value("have-dot").toBool());
    m_ui->dot_num_threads_SB->setValue(               object.value("dot-num-threads").toInt());
-   m_ui->dot_font_name->setText(                     object.value("dot-font-name").toString());
+   m_ui->dot_font_name->text());                     object.value("dot-font-name").toString());
    m_ui->dot_font_size_SB->setValue(                 object.value("dot-font-size").toInt());
-   m_ui->dot_font_path->setText(                     object.value("dot_font_path").toString());
-   m_ui->class_graph_CB->setChecked(                 object.value("class_graph").toBool());
-   m_ui->collaboration_graph_CB->setChecked(         object.value("collaboration_graph").toBool());
-   m_ui->group_graphs_CB->setChecked(                object.value("group_graphs").toBool());
-   m_ui->uml_look_CB->setChecked(                    object.value("uml-look").toBool());
+   m_ui->dot_font_path->text());                    object.value("dot_font_path").toString());
+   m_ui->class_graph_CB->isChecked());               object.value("class_graph").toBool());
+   m_ui->collaboration_graph_CB->isChecked());         object.value("collaboration_graph").toBool());
+   m_ui->group_graphs_CB->isChecked());                object.value("group_graphs").toBool());
+   m_ui->uml_look_CB->isChecked());                    object.value("uml-look").toBool());
    m_ui->uml_limit_num_fields_SB->setValue(          object.value("uml-limit-num-fields").toInt());
-   m_ui->template_relations_CB->setChecked(          object.value("template_relations").toBool());
-   m_ui->include_graph_CB->setChecked(               object.value("include-graph").toBool());
-   m_ui->included_by_graph_CB->setChecked(           object.value("included-by-graph").toBool());
-   m_ui->call_graph_CB->setChecked(                  object.value("call-graph").toBool());
-   m_ui->caller_graph_CB->setChecked(                object.value("caller-graph").toBool());
-   m_ui->graphical_hierarchy_CB->setChecked(         object.value("graphical-hierarchy").toBool());
-   m_ui->directory_graph_CB->setChecked(             object.value("directory-graph").toBool());
-
-   int index = m_ui->dot_image_format_CM->findText(  object.value("dot-image-format").toString());
-   m_ui->dot_image_format_CM->setCurrentIndex(index);
-
-   m_ui->interactive_svg_CB->setChecked(       object.value("interactive_svg").toBool());
-
-   m_ui->dot_path->setText(                    object.value("dot-path").toString());
-   m_ui->dot_file_dirs->setPlainText(          getDataList(object, "dot-file_dirs"));
-   m_ui->msc_file_dirs->setPlainText(          getDataList(object, "msc-file_dirs"));
-   m_ui->dia_file_dirs->setPlainText(          getDataList(object, "dia-file_dirs"));
-   m_ui->platuml_jar_path->setText(            object.value("platuml-jar-path").toString());
-
-   m_ui->dot_graph_max_nodes_SB->setValue(     object.value("dot_graph_max_nodes").toInt());
-   m_ui->dot_graph_max_depth_SB->setValue(     object.value("dot_graph_max_depth").toInt());
-   m_ui->dot_transparent_CB->setChecked(       object.value("dot_transparent").toBool());
-   m_ui->dot_multple_targets_CB->setChecked(   object.value("dot_multple_targets").toBool());
-   m_ui->gen_legend_CB->setChecked(            object.value("gen_legend").toBool());
-   m_ui->dot_cleanup_CB->setChecked(           object.value("dot_cleanup").toBool());
+   m_ui->template_relations_CB->isChecked());          object.value("template_relations").toBool());
+   m_ui->include_graph_CB->isChecked());               object.value("include-graph").toBool());
+   m_ui->included_by_graph_CB->isChecked());           object.value("included-by-graph").toBool());
+   m_ui->call_graph_CB->isChecked());                  object.value("call-graph").toBool());
+   m_ui->caller_graph_CB->isChecked());               object.value("caller-graph").toBool());
+   m_ui->graphical_hierarchy_CB->isChecked());         object.value("graphical-hierarchy").toBool());
+   m_ui->directory_graph_CB->isChecked());             object.value("directory-graph").toBool());
 */
+
+
+//   int index = m_ui->dot_image_format_CM->findText(  object.value("dot-image-format").toString());
+//   m_ui->dot_image_format_CM->setCurrentIndex(index);
+
+   object.insert("interactive-svg",            m_ui->interactive_svg_CB->isChecked());
+   object.insert("dot-path",                   m_ui->dot_path->text());
+   object.insert("dot-file-dirs",              putDataList(m_ui->dot_file_dirs->toPlainText()));
+   object.insert("msc-file-dirs",              putDataList(m_ui->msc_file_dirs->toPlainText()));
+   object.insert("dia-file-dirs",              putDataList(m_ui->dia_file_dirs->toPlainText()));
+   object.insert("platuml-jar-path",           m_ui->platuml_jar_path->text());
+
+   object.insert("dot-graph-max-nodes",        m_ui->dot_graph_max_nodes_SB->value());
+   object.insert("dot-graph-max-depth",        m_ui->dot_graph_max_depth_SB->value());
+   object.insert("dot-transparent",            m_ui->dot_transparent_CB->isChecked());
+   object.insert("dot-multple-targets",        m_ui->dot_multple_targets_CB->isChecked());
+   object.insert("gen-legend",                 m_ui->gen_legend_CB->isChecked());
+   object.insert("dot-cleanup",                m_ui->dot_cleanup_CB->isChecked());
 
    //  ***
    // tab 3 - html
 
 
+
    // tab 3 - latex
 
 
+
    // tab 3 - rtf
-/* m_ui->rtf_output->setText(                      object.value("rtf_output").toString());
-   m_ui->rtf_compact_CB->setChecked(               object.value("rtf_compact").toBool());
-   m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf_hyperlinks").toBool());
-   m_ui->rtf_stylesheet->setText(                  object.value("rtf_stylesheet").toString());
-   m_ui->rtf_extension->setText(                   object.value("rtf_extension").toString());
-*/
+   object.insert("rtf-output",                 m_ui->rtf_output->text());
+   object.insert("rtf-compact",                m_ui->rtf_compact_CB->isChecked());
+   object.insert("rtf-hyperlinks",             m_ui->rtf_hyperlinks_CB->isChecked());
+   object.insert("rtf-stylesheet",             m_ui->rtf_stylesheet->text());
+   object.insert("rtf-extension",              m_ui->rtf_extension->text());
 
    // tab 3 - man
-/* m_ui->man_output->setText(                      object.value("man-output").toString());
-   m_ui->man_extension->setText(                   object.value("man-extension").toString());
-   m_ui->man_subdir->setText(                      object.value("man-subdir").toString());
-   m_ui->man_links_CB->setChecked(                 object.value("man-links").toBool());
-*/
+   object.insert("man-output",                 m_ui->man_output->text());
+   object.insert("man-extension",              m_ui->man_extension->text());
+   object.insert("man-subdir",                 m_ui->man_subdir->text());
+   object.insert("man-links",                  m_ui->man_links_CB->isChecked());
 
    // tab 3 - xml
-//   m_ui->xml_output->setText(                      object.value("xml-output").toString());
-//   m_ui->xml_program_listing_CB->setChecked(       object.value("xml-program-listing").toBool());
+   object.insert("xml-output",                 m_ui->xml_output->text());
+   object.insert("xml-program-listing",        m_ui->xml_program_listing_CB->isChecked());
 
    // tab 3 - docbook
-//   m_ui->docbook_output->setText(                  object.value("docbook-output").toString());
-//   m_ui->docbook_program_listing_CB->setChecked(   object.value("docbook-program-listing").toBool());
+   object.insert("docbook-output",             m_ui->docbook_output->text());
+   object.insert("docbook-program-listing",    m_ui->docbook_program_listing_CB->isChecked());
 
    // save the data
    QJsonDocument doc(object);
@@ -1069,102 +1199,3 @@ QJsonArray MainWindow::putDataList(QString fieldData)
    return list;
 }
 
-/*
-
-  // build
-  <tabstop>extract_all</tabstop>
-  <tabstop>extract_private</tabstop>
-  <tabstop>extract_package</tabstop>
-  <tabstop>extract_static</tabstop>
-  <tabstop>extract_local_classes</tabstop>
-  <tabstop>extract_local_methods</tabstop>
-  <tabstop>extract_anon_namespaces</tabstop>
-  <tabstop>hide_undoc_members</tabstop>
-  <tabstop>hide_undoc_classes</tabstop>
-  <tabstop>hide_friend_compounds</tabstop>
-  <tabstop>hide_in_body_docs</tabstop>
-  <tabstop>hide_scope_names</tabstop>
-  <tabstop>internal_docs</tabstop>
-  <tabstop>case_sense_names</tabstop>
-  <tabstop>show_include_files</tabstop>
-  <tabstop>show_grouped_members_incl</tabstop>
-  <tabstop>force_local_includes</tabstop>
-  <tabstop>inline_info</tabstop>
-  <tabstop>sort_member_docs</tabstop>
-  <tabstop>sort_brief_docs</tabstop>
-  <tabstop>sort_members_ctors_first</tabstop>
-  <tabstop>sort_group_names</tabstop>
-  <tabstop>sort_by_scope_name</tabstop>
-  <tabstop>strict_proto_matching</tabstop>
-  <tabstop>gen_todo_list</tabstop>
-  <tabstop>gen_test_list</tabstop>
-  <tabstop>gen_bug_list</tabstop>
-  <tabstop>gen_deprecatcated_list</tabstop>
-
-  <tabstop>enabled_sections</tabstop>
-  <tabstop>spinBox</tabstop>
-  <tabstop>show_used_files_CB</tabstop>
-  <tabstop>show_files_CB</tabstop>
-  <tabstop>show_namespaces_CB</tabstop>
-  <tabstop>file_version_filter</tabstop>
-  <tabstop>layout_file</tabstop>
-  <tabstop>cite_bib_files</tabstop>
-
-  // tab 3 - html
-  <tabstop>gen_html_CB2</tabstop>
-  <tabstop>destDir_32</tabstop>  
-  <tabstop>destDir_35</tabstop>
-  <tabstop>destDir_39</tabstop>
-  <tabstop>destDir_40</tabstop>
-  <tabstop>destDir_52</tabstop>
-  <tabstop>plainTextEdit_50</tabstop>
-  <tabstop>plainTextEdit_51</tabstop>
-  <tabstop>html_colorstyle_hue</tabstop>
-  <tabstop>html_colorstyle_sat</tabstop>
-  <tabstop>html_colorstyle_gamma</tabstop>
-  <tabstop>checkBox_622</tabstop>
-  <tabstop>checkBox_623</tabstop>
-  <tabstop>spinBox_6</tabstop>
-  <tabstop>gen_docset_CB</tabstop>
-  <tabstop>destDir_56</tabstop>
-  <tabstop>destDir_57</tabstop>
-  <tabstop>destDir_58</tabstop>
-  <tabstop>destDir_59</tabstop>
-  <tabstop>checkBox_624</tabstop>
-  <tabstop>destDir_55</tabstop>
-  <tabstop>destDir_60</tabstop>
-  <tabstop>checkBox_625</tabstop>
-  <tabstop>destDir_61</tabstop>
-  <tabstop>checkBox_626</tabstop>
-  <tabstop>checkBox_627</tabstop>
-  <tabstop>checkBox_628</tabstop>
-  <tabstop>destDir_62</tabstop> 
-  <tabstop>destDir_63</tabstop>
-  <tabstop>destDir_64</tabstop>
-  <tabstop>destDir_65</tabstop>
-  <tabstop>destDir_66</tabstop>
-  <tabstop>destDir_67</tabstop>
-  <tabstop>destDir_71</tabstop>
-  <tabstop>checkBox_629</tabstop>
-  <tabstop>destDir_68</tabstop>
-  <tabstop>checkBox_632</tabstop>
-  <tabstop>checkBox_633</tabstop>
-  <tabstop>spinBox_7</tabstop>
-  <tabstop>spinBox_8</tabstop>
-  <tabstop>checkBox_634</tabstop>
-  <tabstop>spinBox_9</tabstop>
-  <tabstop>checkBox_630</tabstop>
-  <tabstop>checkBox_631</tabstop>
-  <tabstop>comboBox_6</tabstop>
-  <tabstop>destDir_69</tabstop>
-  <tabstop>plainTextEdit_30</tabstop>
-  <tabstop>destDir_70</tabstop>
-  <tabstop>checkBox_635</tabstop>
-  <tabstop>checkBox_636</tabstop>
-  <tabstop>checkBox_637</tabstop>
-  <tabstop>destDir_76</tabstop>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>destDir_77</tabstop>
-  <tabstop>plainTextEdit_32</tabstop>
-
-*/
