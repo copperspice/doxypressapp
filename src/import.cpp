@@ -20,45 +20,19 @@
 void MainWindow::convertDoxy(QByteArray data)
 {
    QString tempStr;
+   QString tempText;
    bool tempBool;
    int tempInt;
 
-   int posBeg;
-   int posEnd;
+   // tab 1
+   tempText = convert_PlainText(data,"PROJECT_NUMBER");
+   m_ui->project_number->setText(tempText);
 
-   tempStr = convert_Str(data,"PROJECT_ENCODING");
-   m_ui->project_encoding->setText(tempStr);
-
-   posBeg = data.indexOf("PROJECT_NAME");
-   if (posBeg > 0) {
-      posEnd = data.indexOf("\n", posBeg);
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1);
-
-      tempStr.replace("\"","");
-      tempStr = tempStr.trimmed();
-
-      m_ui->project_name->setText(tempStr);
-   }
+   tempText = convert_PlainText(data,"PROJECT_BRIEF");
+   m_ui->project_brief->setText(tempText);
 
    tempStr = convert_Str(data,"PROJECT_NUMBER");
    m_ui->project_number->setText(tempStr);
-
-   posBeg = data.indexOf("PROJECT_BRIEF");
-   if (posBeg > 0) {
-      posEnd = data.indexOf("\n", posBeg);
-      QString x = data.mid(posBeg, posEnd - posBeg);
-
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1);
-
-      tempStr.replace("\"","");
-      tempStr = tempStr.trimmed();
-
-      m_ui->project_brief->setText(tempStr);
-   }
 
    m_project_iconFN = convert_Str(data,"PROJECT_LOGO");
 
@@ -66,17 +40,62 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->output_dir->setText(tempStr);
 
 
+/*
+   tempBool = convert_Bool(data,"optimize-cplus");
+   m_ui->optimize_cplus_CB->setChecked(tempBool);
 
-   // missing lines - start here
+   tempBool = convert_Bool(data,"optimize-cli");
+   m_ui->optimize_cli_CB->setChecked(tempBool);
+*/
 
 
+   tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_JAVA");
+   m_ui->optimize_java_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_FOR_C");
+   m_ui->optimize_c_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"OPTIMIZE_FOR_FORTRAN");
+   m_ui->optimize_fortran_CB->setChecked(tempBool);
+
+   //
    tempBool = convert_Bool(data,"GENERATE_HTML");
    m_ui->gen_html_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_LAXTEX");
+
+/*
+   tempBool = convert_Bool(data,"html-plain");
+   m_ui->html_plain_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"html-nav");
+   m_ui->html_nav_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"html-chm");
+   m_ui->html_chm_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"search-enabled");
+   m_ui->searchEnabled_CB->setChecked(tempBool);
+*/
+
+
+   //
+   tempBool = convert_Bool(data,"GENERATE_LATEX");
    m_ui->gen_latex_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_RTF");
+
+/*
+   tempBool = convert_Bool(data,"latex-hyper-pdf");
+   m_ui->latex_hyper_pdf_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"latex-pdf");
+   m_ui->latex_pdf_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"latex-ps");
+   m_ui->latex_ps_RB->setChecked(tempBool);
+*/
+
+   //
+   tempBool = convert_Bool(data,"GENERATE_RTF");;
    m_ui->gen_rtf_CB1->setChecked(tempBool);
 
    tempBool = convert_Bool(data,"GENERATE_MAN");
@@ -84,6 +103,202 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data,"GENERATE_XML");
    m_ui->gen_xml_CB1->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"GENERATE_DOCBOOK");
+   m_ui->gen_docbook_CB1->setChecked(tempBool);
+
+
+
+// match the following wizard fields with expert->dot, use "2"
+
+   tempBool = convert_Bool(data,"diagram-none");
+   m_ui->diagram_none_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"diagram-built-in");
+   m_ui->diagram_built_in_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"diagram-dot");
+   m_ui->diagram_dot_RB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"CLASS_DIAGRAMS");
+   m_ui->dot_class_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");
+   m_ui->dot_collaboration_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"dot-overall");
+   m_ui->dot_overall_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"INCLUDE_GRAPH");
+   m_ui->dot_include_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");
+   m_ui->dot_included_by_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"CALL_GRAPH");
+   m_ui->dot_call_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"CALLER_GRAPH");
+   m_ui->dot_called_by_CB->setChecked(tempBool);
+
+
+   //  ***
+   // tab 2 - project
+   tempStr = convert_Str(data,"PROJECT_ENCODING");
+   m_ui->project_encoding->setText(tempStr);
+
+
+// --> missing lines
+
+
+   // tab 2 - build
+
+
+// --> missing lines
+
+
+   // tab 2 - messages
+   tempBool = convert_Bool(data, "QUIET");
+   m_ui->quiet_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARNINGS");
+   m_ui->warnings_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_IF_UNDOCUMENTED");
+   m_ui->warn_undoc_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_IF_DOC_ERROR");
+   m_ui->warn_doc_error_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_NO_PARAMDOC");
+   m_ui->warn_undoc_parm_CB->setChecked(tempBool);
+
+   tempStr = convert_Str(data,"WARN_FORMAT");
+   m_ui->warn_forrmat->setText(tempStr);
+
+   tempStr = convert_Str(data,"WARN_LOGFILE");
+   m_ui->warn_logfile->setText(tempStr);
+
+   // tab 2 -input
+
+// --> missing lines
+
+   // tab 2 -browser
+
+// --> missing lines
+
+
+   /*
+      tempBool = convert_Bool(data, "");
+      tempBool);
+
+      tempInt = convert_Int(data, "");
+      tempInt);
+
+      tempStr = convert_Str(data, "");
+      tempStr);
+
+      tempText = convert_PlainText(data,"");
+      tempText);
+   */
+
+
+   // tab 2 -index
+   tempBool = convert_Bool(data, "ALPHABETICAL_INDEX");
+   m_ui->alpha_index_CB->setChecked(tempBool);
+
+   tempInt = convert_Int(data, "COLS_IN_ALPHA_INDEX");
+   m_ui->cols_in_index_SB->setValue(tempInt);
+
+   tempText = convert_PlainText(data,"IGNORE_PREFIX");
+   m_ui->ignore_prefix->setPlainText(tempText);
+
+   // tab 2 - autogen
+   tempBool = convert_Bool(data, "GENERATE_AUTOGEN_DEF");
+   m_ui->gen_autogen_def_CB->setChecked(tempBool);
+
+   // tab 2 - perlmod
+   tempBool = convert_Bool(data, "GENERATE_PERLMOD");
+   m_ui->gen_perl_CB->setChecked(tempBool);;
+
+   tempBool = convert_Bool(data, "PERLMOD_LATEX");
+   m_ui->perl_latex_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "PERLMOD_PRETTY");
+   m_ui->perl_pretty_CB->setChecked(tempBool);
+
+   tempStr = convert_Str(data, "PERLMOD_MAKEVAR_PREFIX");
+   m_ui->perlmod_prefix->setText(tempStr);
+
+   // tab 2 - preprocess
+   tempBool = convert_Bool(data, "ENABLE_PREPROCESSING");
+   m_ui->enable_preprocessing_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "MACRO_EXPANSION");
+   m_ui->macro_expansion_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "EXPAND_ONLY_PREDEF");
+   m_ui->expand_only_predefined_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "SEARCH_INCLUDES");
+   m_ui->search_includes_CB->setChecked(tempBool);
+
+   tempText = convert_PlainText(data,"INCLUDE_PATH");
+   m_ui->include_path->setPlainText(tempText);
+
+   tempText = convert_PlainText(data,"INCLUDE_FILE_PATTERNS");
+   m_ui->include_file_patterns->setPlainText(tempText);
+
+   tempText = convert_PlainText(data,"PREDEFINED");
+   m_ui->predefined_macros->setPlainText(tempText);
+
+   tempText = convert_PlainText(data,"EXPAND_AS_DEFINED");
+   m_ui->expand_as_defined->setPlainText(tempText);
+
+   tempBool = convert_Bool(data, "SKIP_FUNCTION_MACROS");
+   m_ui->skip_function_macros_CB->setChecked(tempBool);
+
+   // tab 2 - external
+
+// --> missing lines
+
+
+   // tab 2 - dot
+
+// --> missing lines
+
+
+   //  ***
+   // tab 3 - html
+
+// --> missing lines
+
+
+   // tab 3 - latex
+
+// --> missing lines
+
+
+   // tab 3 - rtf
+// --> missing lines
+
+
+
+   // tab 3 - man
+
+// --> missing lines
+
+
+   // tab 3 - xml
+
+// --> missing lines
+
+
+   // tab 3 - docbook
+// --> missing lines
+
+
+
 
    tempBool = convert_Bool(data,"GENERATE_DOCSET");
    m_ui->gen_docbook_CB1->setChecked(tempBool);
@@ -93,16 +308,12 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data,"RECURSIVE");
    m_ui->source_recursive_CB->setChecked(tempBool);
-
+}
 
 
 /*
 
-// string, list, bool, int
-// enum  will change to a string
-
-
-// missing lines - start here
+// enum  changes to a string
 
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
@@ -119,15 +330,11 @@ SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
 QT_AUTOBRIEF           = NO
 MULTILINE_CPP_IS_BRIEF = NO
-INHERIT_DOCS           = YES
+INHERIT_DOCS           = YESEeeee
 SEPARATE_MEMBER_PAGES  = NO
 TAB_SIZE               = 4
 ALIASES                = 
 TCL_SUBST              = 
-OPTIMIZE_OUTPUT_FOR_C  = NO
-OPTIMIZE_OUTPUT_JAVA   = NO
-OPTIMIZE_FOR_FORTRAN   = NO
-OPTIMIZE_OUTPUT_VHDL   = NO
 EXTENSION_MAPPING      = 
 MARKDOWN_SUPPORT       = YES
 AUTOLINK_SUPPORT       = YES
@@ -177,17 +384,10 @@ SHOW_NAMESPACES        = YES
 FILE_VERSION_FILTER    = 
 LAYOUT_FILE            = 
 CITE_BIB_FILES         = 
-QUIET                  = NO
-WARNINGS               = YES
-WARN_IF_UNDOCUMENTED   = YES
-WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO
-WARN_FORMAT            = "$file:$line: $text"
-WARN_LOGFILE           = 
-   INPUT                  = Input
+INPUT                  = Input
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c 
-   RECURSIVE              = NO
+RECURSIVE              = NO
 EXCLUDE                = 
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = 
@@ -211,11 +411,8 @@ SOURCE_TOOLTIPS        = YES
 USE_HTAGS              = NO
 VERBATIM_HEADERS       = YES
 CLANG_ASSISTED_PARSING = NO
-CLANG_OPTIONS          = 
-ALPHABETICAL_INDEX     = YES
-COLS_IN_ALPHA_INDEX    = 5
-IGNORE_PREFIX          = 
-   GENERATE_HTML          = NO
+CLANG_OPTIONS          =
+
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
 HTML_HEADER            = 
@@ -229,7 +426,7 @@ HTML_COLORSTYLE_GAMMA  = 80
 HTML_TIMESTAMP         = YES
 HTML_DYNAMIC_SECTIONS  = NO
 HTML_INDEX_NUM_ENTRIES = 100
-   GENERATE_DOCSET        = NO
+GENERATE_DOCSET        = NO
 DOCSET_FEEDNAME        = "Doxygen generated docs"
 DOCSET_BUNDLE_ID       = org.doxygen.Project
 DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
@@ -270,7 +467,6 @@ SEARCHENGINE_URL       =
 SEARCHDATA_FILE        = searchdata.xml
 EXTERNAL_SEARCH_ID     = 
 EXTRA_SEARCH_MAPPINGS  = 
-   GENERATE_LATEX         = YES
 LATEX_OUTPUT           = latex
 LATEX_CMD_NAME         = latex
 MAKEINDEX_CMD_NAME     = makeindex
@@ -285,45 +481,30 @@ USE_PDFLATEX           = YES
 LATEX_BATCHMODE        = NO
 LATEX_HIDE_INDICES     = NO
 LATEX_SOURCE_CODE      = NO
-LATEX_BIB_STYLE        = plain
-   GENERATE_RTF           = NO
+LATEX_BIB_STYLE        = plain   
 RTF_OUTPUT             = rtf
 COMPACT_RTF            = NO
+
 RTF_HYPERLINKS         = NO
 RTF_STYLESHEET_FILE    = 
-RTF_EXTENSIONS_FILE    = 
-   GENERATE_MAN           = NO
+RTF_EXTENSIONS_FILE    =    
+
 MAN_OUTPUT             = man
 MAN_EXTENSION          = .3
 MAN_SUBDIR             = 
 MAN_LINKS              = NO
-   GENERATE_XML           = NO
 XML_OUTPUT             = xml
 XML_PROGRAMLISTING     = YES
-GENERATE_DOCBOOK       = NO
 DOCBOOK_OUTPUT         = docbook
 DOCBOOK_PROGRAMLISTING = NO
-GENERATE_AUTOGEN_DEF   = NO
-GENERATE_PERLMOD       = NO
-PERLMOD_LATEX          = NO
-PERLMOD_PRETTY         = YES
-PERLMOD_MAKEVAR_PREFIX = 
-ENABLE_PREPROCESSING   = YES
-MACRO_EXPANSION        = NO
-EXPAND_ONLY_PREDEF     = NO
-SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = 
-INCLUDE_FILE_PATTERNS  = 
-PREDEFINED             = 
-EXPAND_AS_DEFINED      = 
-SKIP_FUNCTION_MACROS   = YES
+
 TAGFILES               = 
 GENERATE_TAGFILE       = 
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 EXTERNAL_PAGES         = YES
 PERL_PATH              = /usr/bin/perl
-CLASS_DIAGRAMS         = YES
+
 MSCGEN_PATH            = 
 DIA_PATH               = 
 HIDE_UNDOC_RELATIONS   = YES
@@ -333,15 +514,12 @@ DOT_FONTNAME           = Helvetica
 DOT_FONTSIZE           = 10
 DOT_FONTPATH           = 
 CLASS_GRAPH            = YES
-COLLABORATION_GRAPH    = YES
+
 GROUP_GRAPHS           = YES
 UML_LOOK               = NO
 UML_LIMIT_NUM_FIELDS   = 10
 TEMPLATE_RELATIONS     = NO
-INCLUDE_GRAPH          = YES
-INCLUDED_BY_GRAPH      = YES
-CALL_GRAPH             = NO
-CALLER_GRAPH           = NO
+
 GRAPHICAL_HIERARCHY    = YES
 DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
@@ -360,8 +538,6 @@ DOT_CLEANUP            = YES
 
 */
 
-
-}
 
 bool MainWindow::convert_Bool(QByteArray data, QString key)
 {
@@ -414,6 +590,26 @@ QString MainWindow::convert_Str(QByteArray data, QString key)
 
       posBeg  = x.indexOf("=");
       tempStr = x.mid(posBeg + 1).trimmed();
+   }
+
+   return tempStr;
+}
+
+QString MainWindow::convert_PlainText(QByteArray data, QString key)
+{
+   QString tempStr;
+
+   int posBeg = data.indexOf(key);
+
+   if (posBeg > 0) {
+      int posEnd = data.indexOf("\n", posBeg);
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1);
+
+      tempStr.replace("\"","");
+      tempStr = tempStr.trimmed();
    }
 
    return tempStr;

@@ -109,6 +109,7 @@ class MainWindow : public QMainWindow
       bool convert_Bool(QByteArray data, QString key);
       int convert_Int(QByteArray data, QString key);
       QString convert_Str(QByteArray data, QString key);
+      QString convert_PlainText(QByteArray data, QString key);
 
       void createShortCuts();
       void createConnections();

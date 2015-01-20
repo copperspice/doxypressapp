@@ -87,7 +87,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,1,0">
@@ -1155,7 +1155,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>11</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -3256,7 +3256,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Warn about undocumented members:</string>
+                <string>Warn about undocumented Members:</string>
                </property>
                <property name="buddy">
                 <cstring>warn_undoc_CB</cstring>
@@ -3278,15 +3278,15 @@
                 </font>
                </property>
                <property name="text">
-                <string>Warn about syntax errors:</string>
+                <string>Warn about documentation Errors:</string>
                </property>
                <property name="buddy">
-                <cstring>warn_syntax_CB</cstring>
+                <cstring>warn_doc_error_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QCheckBox" name="warn_syntax_CB">
+              <widget class="QCheckBox" name="warn_doc_error_CB">
                <property name="text">
                 <string/>
                </property>
@@ -3300,7 +3300,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Warn about undoumented parameters:</string>
+                <string>Warn about undoumented Parameters:</string>
                </property>
                <property name="buddy">
                 <cstring>warn_undoc_parm_CB</cstring>
@@ -4827,12 +4827,12 @@
                 <string>Expand only predefined macros:</string>
                </property>
                <property name="buddy">
-                <cstring>expand_only_redefined_CB</cstring>
+                <cstring>expand_only_predefined_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QCheckBox" name="expand_only_redefined_CB">
+              <widget class="QCheckBox" name="expand_only_predefined_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5423,7 +5423,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QCheckBox" name="hide_undocumented_relations_CB">
+              <widget class="QCheckBox" name="hide_undoc_relations_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5711,7 +5711,7 @@
                 <string>Hide Undocumented Relations:</string>
                </property>
                <property name="buddy">
-                <cstring>hide_undocumented_relations_CB</cstring>
+                <cstring>hide_undoc_relations_CB</cstring>
                </property>
               </widget>
              </item>
@@ -6451,7 +6451,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6526,7 +6526,7 @@
                 <string>HTML dynamic sections:</string>
                </property>
                <property name="buddy">
-                <cstring>htl_synamic_sections_CB</cstring>
+                <cstring>html_synamic_sections_CB</cstring>
                </property>
               </widget>
              </item>
@@ -6544,7 +6544,7 @@
                 <string>HTML file extension:</string>
                </property>
                <property name="buddy">
-                <cstring>htnl_file_extension</cstring>
+                <cstring>html_file_extension</cstring>
                </property>
               </widget>
              </item>
@@ -6694,7 +6694,7 @@
               </widget>
              </item>
              <item row="16" column="1">
-              <widget class="QCheckBox" name="htl_synamic_sections_CB">
+              <widget class="QCheckBox" name="html_synamic_sections_CB">
                <property name="text">
                 <string/>
                </property>
@@ -6828,7 +6828,7 @@
               </widget>
              </item>
              <item row="2" column="1" colspan="2">
-              <widget class="QLineEdit" name="htnl_file_extension">
+              <widget class="QLineEdit" name="html_file_extension">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -7076,7 +7076,7 @@
               </widget>
              </item>
              <item row="5" column="1" colspan="2">
-              <widget class="QCheckBox" name="gen_html_help">
+              <widget class="QCheckBox" name="gen_html_help_CB">
                <property name="text">
                 <string/>
                </property>
@@ -7108,7 +7108,7 @@
                 <string>Generate HTML Help</string>
                </property>
                <property name="buddy">
-                <cstring>gen_html_help</cstring>
+                <cstring>gen_html_help_CB</cstring>
                </property>
               </widget>
              </item>
@@ -9842,7 +9842,7 @@
   <tabstop>quiet_CB</tabstop>
   <tabstop>warnings_CB</tabstop>
   <tabstop>warn_undoc_CB</tabstop>
-  <tabstop>warn_syntax_CB</tabstop>
+  <tabstop>warn_doc_error_CB</tabstop>
   <tabstop>warn_undoc_parm_CB</tabstop>
   <tabstop>warn_forrmat</tabstop>
   <tabstop>warn_logfile</tabstop>
@@ -9898,7 +9898,7 @@
   <tabstop>perlmod_prefix</tabstop>
   <tabstop>enable_preprocessing_CB</tabstop>
   <tabstop>macro_expansion_CB</tabstop>
-  <tabstop>expand_only_redefined_CB</tabstop>
+  <tabstop>expand_only_predefined_CB</tabstop>
   <tabstop>search_includes_CB</tabstop>
   <tabstop>include_path</tabstop>
   <tabstop>include_path_PB</tabstop>
@@ -9923,7 +9923,7 @@
   <tabstop>mscgen_path_PB</tabstop>
   <tabstop>dia_path</tabstop>
   <tabstop>dia_path_PB</tabstop>
-  <tabstop>hide_undocumented_relations_CB</tabstop>
+  <tabstop>hide_undoc_relations_CB</tabstop>
   <tabstop>have_dot_CB</tabstop>
   <tabstop>dot_num_threads_SB</tabstop>
   <tabstop>dot_font_name</tabstop>
@@ -9965,7 +9965,7 @@
   <tabstop>gen_html_CB2</tabstop>
   <tabstop>html_ouput</tabstop>
   <tabstop>html_ouput_PB</tabstop>
-  <tabstop>htnl_file_extension</tabstop>
+  <tabstop>html_file_extension</tabstop>
   <tabstop>html_header</tabstop>
   <tabstop>html_header_PB</tabstop>
   <tabstop>html_footer</tabstop>
@@ -9980,14 +9980,14 @@
   <tabstop>html_colorstyle_sat</tabstop>
   <tabstop>html_colorstyle_gamma</tabstop>
   <tabstop>html_timestamp_CB</tabstop>
-  <tabstop>htl_synamic_sections_CB</tabstop>
+  <tabstop>html_synamic_sections_CB</tabstop>
   <tabstop>html_index_num_entries_SB</tabstop>
   <tabstop>gen_docset_CB</tabstop>
   <tabstop>docset_feedname</tabstop>
   <tabstop>docset_bundle_id</tabstop>
   <tabstop>docset_publisher_id</tabstop>
   <tabstop>docset_publisher_name</tabstop>
-  <tabstop>gen_html_help</tabstop>
+  <tabstop>gen_html_help_CB</tabstop>
   <tabstop>chm_file</tabstop>
   <tabstop>chm_file_PB</tabstop>
   <tabstop>hhc_location</tabstop>

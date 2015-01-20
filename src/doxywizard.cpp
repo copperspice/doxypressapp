@@ -86,7 +86,7 @@ void MainWindow::importDoxy()
          break;
 */
 
-         // verify a few fields
+         // verify a few fields to ensure this is an old project file
          if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
             csError(tr("CS Doxygen Import"), tr("The configuration file is missing project information, import canceled"));
             break;
@@ -96,7 +96,7 @@ void MainWindow::importDoxy()
          fname = QFileDialog::getSaveFileName(this, tr("Select name for CS Doxygen Config"), m_struct.pathPrior);
 
          if (fname.isEmpty()) {
-            // are you sure? might want to loop around
+            // are you sure?  might want to loop around
             csError(tr("CS Doxygen Import"), tr("No configuraton file name, import canceled"));
             break;
 
