@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -6451,7 +6451,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6998,7 +6998,7 @@
               </widget>
              </item>
              <item row="16" column="1" colspan="2">
-              <widget class="QLineEdit" name="qhp_cust_fiilter_name">
+              <widget class="QLineEdit" name="qhp_cust_filter_name">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -7558,7 +7558,7 @@
                 <string>QHP Custom Filter Name:</string>
                </property>
                <property name="buddy">
-                <cstring>qhp_cust_fiilter_name</cstring>
+                <cstring>qhp_cust_filter_name</cstring>
                </property>
               </widget>
              </item>
@@ -10001,7 +10001,7 @@
   <tabstop>qch_file_PB</tabstop>
   <tabstop>qhp_namespace</tabstop>
   <tabstop>qhp_virtual_folder</tabstop>
-  <tabstop>qhp_cust_fiilter_name</tabstop>
+  <tabstop>qhp_cust_filter_name</tabstop>
   <tabstop>qhp_cust_filter_attrib</tabstop>
   <tabstop>qhp_section_filter_name</tabstop>
   <tabstop>qhg_location</tabstop>
