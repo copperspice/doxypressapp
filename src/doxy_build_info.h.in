@@ -15,10 +15,10 @@
  *
 *************************************************************************/
 
-#ifndef DOX_BUILD_INFO_H_IN
-#define DOX_BUILD_INFO_H_IN
+#ifndef DOXY_BUILD_INFO_H_IN
+#define DOXY_BUILD_INFO_H_IN
 
 // DoxyPressUI Version  "1.0.0"
-constexpr const char *versionString = "1.0";
+constexpr const char *versionString = "@PACKAGE_VERSION@";
 
 #endif
