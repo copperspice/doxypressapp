@@ -27,7 +27,7 @@ if OSTYPE_WIN
 endif
 
 # target app name
-bin_PROGRAMS = DoxyPressUI
+bin_PROGRAMS = DoxyPressApp
 
 # copy required CopperSpice and gcc files for deployment
 .PHONY: deploy
@@ -54,10 +54,10 @@ endif
 VPATH = ../
 
 # linking
-DoxyPressUI_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
+DoxyPressApp_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
 
-DoxyPressUI_SOURCES = \
+DoxyPressApp_SOURCES = \
    src/colors.cpp  \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
@@ -78,10 +78,10 @@ FORMS = \
    forms/mainwindow.ui
 
 
-RESOURCES = doxypressui.qrc
+RESOURCES = doxypressapp.qrc
 
 # use wilcard to obtain just the dependency list
-qrc_doxypressui.cpp: doxypressui.qrc   $(wildcard ../resources/*)
+qrc_doxypressapp.cpp: doxypressapp.qrc   $(wildcard ../resources/*)
 
 # required to compile qrc
-nodist_DoxyPressUI_SOURCES=qrc_doxypressui.cpp
+nodist_DoxyPressApp_SOURCES=qrc_doxypressapp.cpp

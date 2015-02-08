@@ -15,7 +15,7 @@
  *
 *************************************************************************/
 
-#include "dox_build_info.h"
+#include "doxy_build_info.h"
 #include "mainwindow.h"
 
 #include <QKeySequence>
@@ -82,14 +82,14 @@ MainWindow::MainWindow()
    }
 
    m_ConfigFile = "";
-   setDoxygenTitle(false);
+   setDoxyTitle(false);
 
    setIconSize(QSize(32,32));
-   setWindowIcon(QIcon(":/resources/cs_doxygen.png"));
+   setWindowIcon(QIcon(":/resources/doxypress.png"));
 
    if (! json_Read(CFG_STARTUP) ) {
       // do not start program
-      csError(tr("Configuration File Missing"), tr("Unable to locate the CS Doxygen Configuration file."));
+      csError(tr("DoxyPressApp Startup"), tr("Unable to locate the DoxyPressApp settings file"));
       throw std::runtime_error("abort_no_message");
    }
 
@@ -135,10 +135,10 @@ void MainWindow::about()
    //
    QMessageBox msgB;
    msgB.setIcon(QMessageBox::NoIcon);
-   msgB.setWindowIcon(QIcon(":/resources/cs_doxygen.png"));
+   msgB.setWindowIcon(QIcon(":/resources/doxypress.png"));
 
-   msgB.setWindowTitle(tr("About CS Doxygen"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 2.01.2015</h5></center></p>").arg(versionString));
+   msgB.setWindowTitle(tr("About DoxyPressApp"));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 3.01.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);

@@ -1,5 +1,5 @@
 # project name, version, email
-AC_INIT([DoxyPressUI], 1.0, [support@copperspice.com])
+AC_INIT([DoxyPressApp], 1.0, [support@copperspice.com])
 
 # location of temp autotools files
 # note: space can not exist between ] and  )
@@ -60,5 +60,5 @@ echo "Application configured for "$BITSIZE"-bit system"
 echo
 
 # location of .am files that will create Makefiles
-AC_CONFIG_FILES( [Makefile bin/Makefile   src/dox_build_info.h])
+AC_CONFIG_FILES( [Makefile bin/Makefile   src/doxy_build_info.h])
 AC_OUTPUT

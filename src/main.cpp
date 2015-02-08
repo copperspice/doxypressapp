@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
          QString errMsg = "Exception: " + QString(what);
 
          QMessageBox msgB;
-         msgB.setWindowTitle("CS Doxygen / Issue");
+         msgB.setWindowTitle("DoxyPressApp / Issue");
          msgB.setIcon(QMessageBox::NoIcon);
          msgB.setMinimumWidth(100);
 

@@ -38,8 +38,9 @@ bool MainWindow::json_Read(Config trail)
 
    m_appPath = QCoreApplication::applicationDirPath();
 
-   QSettings settings("CS Doxygen", "Settings");
+   QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
+
 
    if (m_jsonFname.isEmpty() || ! QFile::exists(m_jsonFname)) {
       // get a new file name or location
@@ -117,7 +118,7 @@ bool MainWindow::json_Read(Config trail)
 
 bool MainWindow::json_Write(Option route, Config trail)
 {     
-   QSettings settings("CS Doxygen", "Settings");
+   QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
 
    if (m_jsonFname.isEmpty()) {
@@ -186,18 +187,19 @@ void MainWindow::json_getFileName()
 #if defined(Q_OS_UNIX) && ! defined(Q_OS_MAC)
 
    QString homePath = QDir::homePath();
-   m_jsonFname = homePath + "/.config/CS_Doxygen/wizard.json";
+   m_jsonFname = homePath + "/.config/DoxyPressApp/DoxyPressApp.json";
    
    return;
 
 #elif defined(Q_OS_MAC)
    if (m_appPath.contains(".app/Contents/MacOS")) {
       QString homePath = QDir::homePath();      
-      m_jsonFname = homePath + "/Library/CS_Doxygen/wizard.json";
+      m_jsonFname = homePath + "/Library/DoxyPressApp/DoxyPressApp.json";
      
       return;
    }
 #endif         
+
 
    QString selectedFilter;       
    QFileDialog::Options options;
@@ -206,25 +208,25 @@ void MainWindow::json_getFileName()
    int result = dw->exec();
 
    if (result == Dialog_SelectCfg::Result::SysDefault) {
-      m_jsonFname = m_appPath + "/wizard.json";
+      m_jsonFname = m_appPath + "/DoxyPressApp.json";
 
 #ifdef Q_OS_WIN
       QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-      m_jsonFname  = path + "/wizard.json";
+      m_jsonFname  = path + "/DoxyPressApp.json";
 #endif
 
    } else if (result == Dialog_SelectCfg::Result::Pick)  {
-      QString fname = m_appPath + "/wizard.json";
+      QString fname = m_appPath + "/DoxyPressApp.json";
 
       // force windows 7 and 8 to honor initial path
       options = QFileDialog::ForceInitialDir_Win7;
 
-      m_jsonFname = QFileDialog::getSaveFileName(this, tr("Create new Configuration File"),
+      m_jsonFname = QFileDialog::getSaveFileName(this, tr("Create new DoxyPressApp Settings File"),
             fname, tr("Json Files (*.json)"), &selectedFilter, options);                  
 
    } else if (result == Dialog_SelectCfg::Result::Existing) {
 
-      m_jsonFname = QFileDialog::getOpenFileName(this, tr("Select Existing CS Doxygen Configuration File"),
+      m_jsonFname = QFileDialog::getOpenFileName(this, tr("Select Existing DoxyPressApp Settings File"),
             "", tr("Json Files (*.json)"), &selectedFilter, options);
 
    } else {
@@ -240,7 +242,7 @@ QByteArray MainWindow::json_ReadFile()
 
    QFile file(m_jsonFname);
    if (! file.open(QFile::ReadWrite | QFile::Text)) {
-      const QString msg = tr("Unable to open Configuration File: ") +  m_jsonFname + " : " + file.errorString();
+      const QString msg = tr("Unable to open Settings File: ") +  m_jsonFname + " : " + file.errorString();
       csError(tr("Read Json"), msg);
       return data;
    }
@@ -264,7 +266,7 @@ bool MainWindow::json_SaveFile(QByteArray data)
    QFile file(m_jsonFname);
 
    if (! file.open(QFile::ReadWrite | QFile::Truncate | QFile::Text)) {
-      const QString msg = tr("Unable to save Configuration File: ") +  m_jsonFname + " : " + file.errorString();
+      const QString msg = tr("Unable to save Settings File: ") +  m_jsonFname + " : " + file.errorString();
       csError(tr("Save Json"), msg);
       return false;
    }
@@ -296,14 +298,14 @@ bool MainWindow::json_CreateNew()
    isAutoDetect = true;
 
    QString resourcePath = m_appPath;
-   QString libraryPath  = QDir::homePath() + "/.config/CS_Doxygen/";   
+   QString libraryPath  = QDir::homePath() + "/.config/DoxyPressApp/";
 
 #elif defined(Q_OS_MAC)
    if (m_appPath.contains(".app/Contents/MacOS")) {
       isAutoDetect = true;
 
       QString resourcePath = this->pathName(m_appPath) + "/../Contents/Resources";
-      QString libraryPath  = QDir::homePath() + "/Library/CS_Doxygen/";
+      QString libraryPath  = QDir::homePath() + "/Library/DoxyPressApp/";
    }
 #endif
 
@@ -322,7 +324,7 @@ bool MainWindow::json_CreateNew()
 // **
 void MainWindow::move_WizardCfg()
 {
-   QSettings settings("CS Doxygen", "Settings");
+   QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
 
    //
@@ -344,7 +346,7 @@ void MainWindow::move_WizardCfg()
             // force windows 7 and 8 to honor initial path
             options = QFileDialog::ForceInitialDir_Win7;
 
-            QString newName = QFileDialog::getSaveFileName(this, tr("Create New Configuration File"),
+            QString newName = QFileDialog::getSaveFileName(this, tr("Create new DoxyPressApp Settings File"),
                   m_appPath + "/wizard.json", tr("Json Files (*.json)"), &selectedFilter, options);
 
             if (newName.isEmpty()) {
@@ -352,7 +354,7 @@ void MainWindow::move_WizardCfg()
 
             } else if (QFile::exists(newName) ) {
                // can this happen?
-               csError("CS Doxygen  Configuration", "Configuration file already exists, unable to create new file.");
+               csError("DoxyPressApp Settings", "File already exists, unable to create new file");
 
             } else {
                m_jsonFname = newName;
@@ -362,8 +364,7 @@ void MainWindow::move_WizardCfg()
                json_Read();
 
                // maybe add reset later
-               csError("CS Doxygen  Configuration", "New configuration file selected."
-                        " Restart CS Doxygen  to utilize the new configuration file settings.");
+               csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
             }
 
             break;
@@ -375,7 +376,7 @@ void MainWindow::move_WizardCfg()
             QString selectedFilter;
             QFileDialog::Options options;
 
-            QString newName = QFileDialog::getOpenFileName(this, tr("Select CS Doxygen Configuration File"),
+            QString newName = QFileDialog::getOpenFileName(this, tr("Select DoxyPressApp Settings File"),
                   "*.json", tr("Json Files (*.json)"), &selectedFilter, options);
 
             if (newName.isEmpty()) {
@@ -388,8 +389,7 @@ void MainWindow::move_WizardCfg()
                json_Read();
 
                // maybe add reset later
-               csError("CS Doxygen  Configuration", "New configuration file selected."
-                        " Restart Diamond to utilize the new configuration file settings.");
+               csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
             }
 
             break;
@@ -402,10 +402,10 @@ void MainWindow::move_WizardCfg()
          QString newName = "";
 
          if (newName.isEmpty()) {
-            csError("CS Doxygen Configuration", "No configuration file name specified, unable to rename.");
+            csError("DoxyPressApp Settings", "No settings file name specified, unable to rename");
 
          } if (QFile::exists(newName) ) {
-            csError("CS Doxygen Configuration", "New configuration file already exists, unable to rename.");
+            csError("DoxyPressApp Settings", "New settings file already exists, unable to rename");
 
          } else  {
 
@@ -421,7 +421,7 @@ void MainWindow::move_WizardCfg()
                settings.setValue("configName", m_jsonFname);
 
             } else {
-               csError("CS Doxygen Configuration", "Configuration file rename failed.");
+               csError("DoxyPressApp Settings", "File rename failed");
 
             }
          }
@@ -446,7 +446,7 @@ void MainWindow::save_WizardCfg()
 
       if (! QFile::rename(backName, tempName)) {
          isOk = false;
-         csError("Configuration File", "Unble to save backup configuration");
+         csError("DoxyPressApp Settings File", "Unable to save backup settings");
       }
    }
 
@@ -705,7 +705,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->platuml_jar_path->setText(                object.value("platuml-jar-path").toString());
 
    m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph_max-nodes").toInt());
-   m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph_max-depth").toInt());
+   m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph-max-depth").toInt());
    m_ui->dot_transparent_CB->setChecked(           object.value("dot-transparent").toBool());
    m_ui->dot_multple_targets_CB->setChecked(       object.value("dot-multple-targets").toBool());
    m_ui->gen_legend_CB->setChecked(                object.value("gen-legend").toBool());
@@ -719,7 +719,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->html_footer->setText(                     object.value("html-footer").toString());
    m_ui->html_stylesheet->setText(                 object.value("html-stylesheet").toString());
    m_ui->html_extra_stylesheet->setPlainText(      getDataList(object, "html-extra-stylesheet"));
-   m_ui->html_extra_file->setPlainText(            getDataList(object, "html-extra-file"));
+   m_ui->html_extra_files->setPlainText(           getDataList(object, "html-extra-files"));
 
    m_ui->html_colorstyle_hue->setValue(            object.value("html-colorstyle-hue").toInt());
    m_ui->html_colorstyle_sat->setValue(            object.value("html-colorstyle-sat").toInt());
@@ -1077,7 +1077,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("html-footer",              m_ui->html_footer->text());
    object.insert("html-stylesheet",          m_ui->html_stylesheet->text());
    object.insert("html-extra-stylesheet",    putDataList(m_ui->html_extra_stylesheet->toPlainText()));
-   object.insert("html-extra-files",         putDataList(m_ui->html_extra_file->toPlainText()));
+   object.insert("html-extra-files",         putDataList(m_ui->html_extra_files->toPlainText()));
 
    object.insert("html-colorstyle-hue",      m_ui->html_colorstyle_hue->value());
    object.insert("html-colorstyle-sat",      m_ui->html_colorstyle_sat->value());

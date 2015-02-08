@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>216</height>
+    <width>635</width>
+    <height>217</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -40,7 +40,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(c) Select an existing CS Doxygen Configuration file</string>
+      <string>(c) Select an existing settings file</string>
      </property>
      <property name="indent">
       <number>20</number>
@@ -55,7 +55,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(a) Create a CS Configuration file in the system default location</string>
+      <string>(a) Create settngs file in the system default location</string>
      </property>
      <property name="indent">
       <number>20</number>
@@ -119,11 +119,11 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>11</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>CS Doxygen configuration file is missing. Click to select one of the following options.</string>
+      <string>DoxygenPressApp Settings file is missing. Click to select one of the following options.</string>
      </property>
     </widget>
    </item>
@@ -261,7 +261,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(b) Pick a folder location, a new CS Doxygen Configuration file will be created</string>
+      <string>(b) Pick a folder location, a new settings file will be created</string>
      </property>
      <property name="indent">
       <number>20</number>

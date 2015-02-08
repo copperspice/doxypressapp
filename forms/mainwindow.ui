@@ -6451,7 +6451,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6589,7 +6589,7 @@
                 <string>HTML Extra files:</string>
                </property>
                <property name="buddy">
-                <cstring>html_extra_file</cstring>
+                <cstring>html_extra_files</cstring>
                </property>
               </widget>
              </item>
@@ -6926,7 +6926,7 @@
               </widget>
              </item>
              <item row="9" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="html_extra_file">
+              <widget class="QPlainTextEdit" name="html_extra_files">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -9974,7 +9974,7 @@
   <tabstop>html_stylesheet_PB</tabstop>
   <tabstop>html_extra_stylesheet</tabstop>
   <tabstop>html_extra_stylesheet_PB</tabstop>
-  <tabstop>html_extra_file</tabstop>
+  <tabstop>html_extra_files</tabstop>
   <tabstop>html_extra_file_PB</tabstop>
   <tabstop>html_colorstyle_hue</tabstop>
   <tabstop>html_colorstyle_sat</tabstop>

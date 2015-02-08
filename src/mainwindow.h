@@ -88,7 +88,7 @@ class MainWindow : public QMainWindow
 
       void saveSettings();
       struct Settings get_StructData();
-      void setDoxygenTitle(bool isModified);
+      void setDoxyTitle(bool isModified);
 
        QSize sizeHint() const;
 
@@ -123,7 +123,7 @@ class MainWindow : public QMainWindow
       void initTabs();
 
       bool querySave();
-      void saveDox_Internal();
+      void saveDoxy_Internal();
 
       void updateLaunchButtonState();
 
@@ -239,8 +239,8 @@ class MainWindow : public QMainWindow
 
 
       // tab 4
-      CS_SLOT_1(Private, void runDoxygen())
-      CS_SLOT_2(runDoxygen)
+      CS_SLOT_1(Private, void runDoxyPress())
+      CS_SLOT_2(runDoxyPress)
 
       CS_SLOT_1(Private, void readStdout())
       CS_SLOT_2(readStdout)

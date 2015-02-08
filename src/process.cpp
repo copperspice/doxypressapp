@@ -29,7 +29,7 @@ void MainWindow::runDoxyPress()
 
 #if defined(Q_OS_MACX)
       path = qApp->applicationDirPath() + QString::fromAscii("/../Resources/");
-      qDebug() << tr("DoxyPress path: ") << path;
+      qDebug() << tr("DoxyPress Path: ") << path;
 
       if ( ! QFile(path + QString::fromAscii("doxypress")).exists() ) {
 
@@ -37,12 +37,12 @@ void MainWindow::runDoxyPress()
             path = QString::fromAscii("/usr/local/bin/");
 
          } else {
-            qDebug() << tr("Unable to find DoxyPress, make sure it is in your $$PATH");
+            qDebug() << tr("Unable to find DoxyPress, make sure the program is in your $$PATH");
             path = QString::fromAscii("");
          }
       }
 
-      qDebug() << tr("Running DoxyPress from: ") << path;
+      qDebug() << tr("Running DoxyPress From: ") << path;
 #endif
 
       QString destDir = m_ui->output_dir->text();
@@ -81,15 +81,15 @@ void MainWindow::runDoxyPress()
       m_runProcess->closeWriteChannel();
 
       if (m_runProcess->state() == QProcess::NotRunning) {
-         m_outputLog->append("*** Failed to run CS Doxygen\n");
+         m_outputLog->append("*** Failed to run DoxyPress\n");
 
       } else {
          m_saveLog->setEnabled(false);
 
          m_running = true;
 
-         m_ui->run_PB->setText(tr("Stop CS Doxygen"));
-         m_ui->runStatus->setText(tr("CS Doxygen: Running"));
+         m_ui->run_PB->setText(tr("Stop DoxyPress"));
+         m_ui->runStatus->setText(tr("DoxyPress: Running"));
 
          m_timer->start(1000);
       }
@@ -189,7 +189,7 @@ void MainWindow::showHtmlOutput()
 void MainWindow::saveLog()
 {
    QString fn = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->output_dir->text() + QString::fromAscii("/doxy_log.txt"));
+                                             m_ui->output_dir->text() + QString::fromAscii("/doxpress_log.txt"));
 
    if (! fn.isEmpty()) {
       QFile f(fn);
@@ -216,17 +216,14 @@ void MainWindow::showSettings()
    QTextStream t(&text);
 
    m_expert->writeConfig(t, true);
+
    m_outputLog->clear();
    m_outputLog->append(text);
    m_outputLog->ensureCursorVisible();
+
    m_saveLog->setEnabled(true);
 
 */
 
 }
-
-
-
-
-
 

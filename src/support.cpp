@@ -32,7 +32,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 //void MainWindow::configChanged()
 //{
-//   setDoxygenTitle(true);
+//   setDoxyTitle(true);
 //}
 
 QString MainWindow::getFile_CS(QString title, QString fname, QString filter)
@@ -91,7 +91,7 @@ void MainWindow::newDoxy()
 void MainWindow::openDoxy()
 {
    if (querySave()) {
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open CS Doxygen Config"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open DoxyPress ? Config"), m_struct.pathPrior);
 
       if (! fname.isEmpty()) {
          openDoxy_Internal(fname);
@@ -125,7 +125,7 @@ void MainWindow::openDoxy_Internal(const QString fname)
    initTabs();
    updateLaunchButtonState();
 
-   setDoxygenTitle(false);
+   setDoxyTitle(false);
 }
 
 QString MainWindow::pathName(QString fileName) const
@@ -138,8 +138,8 @@ bool MainWindow::querySave()
    if (m_modified) {
 
       QMessageBox quest;
-      quest.setWindowTitle(tr("CS Doxygen"));
-      quest.setText( tr("Configuration file has been modified. Save changes?"));
+      quest.setWindowTitle(tr("DoxyPressApp"));
+      quest.setText( tr("DoxyPress file has been modified. Save changes?"));
       quest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard  | QMessageBox::Cancel );
       quest.setDefaultButton(QMessageBox::Cancel);
 
@@ -183,12 +183,12 @@ void MainWindow::saveDoxy_Internal()
    file.write(data);
    file.close();
 
-   setDoxygenTitle(false);
+   setDoxyTitle(false);
 }
 
 bool MainWindow::saveDoxyAs()
 {
-   m_ConfigFile = QFileDialog::getSaveFileName(this, tr("Select name for CS Doxygen Config"), m_struct.pathPrior);
+   m_ConfigFile = QFileDialog::getSaveFileName(this, tr("Select name for DoxyPress file"), m_struct.pathPrior);
 
    if (m_ConfigFile.isEmpty()) {
       return false;
@@ -225,18 +225,18 @@ void MainWindow::setDoxyTitle(bool isModified)
 {
    m_modified = isModified;
 
-   // displays as: CS Doxygen --  ConfigFileName[*]
+   // displays as: DoxyPressApp --  ConfigFileName[*]
    if (m_ConfigFile.isEmpty())   {
 
-      setWindowTitle(tr("CS Doxygen ") );
+      setWindowTitle(tr("DoxyPressApp ") );
 
    } else {
       QString temp = QChar(0x02014);
 
       if (m_modified) {
-         setWindowTitle(tr("CS Doxygen ") + temp + " " + m_ConfigFile + " [*]" );
+         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_ConfigFile + " [*]" );
       } else {
-         setWindowTitle(tr("CS Doxygen ") + temp + " " + m_ConfigFile );
+         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_ConfigFile );
       }
    }
 }
