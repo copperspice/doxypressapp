@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -87,223 +87,16 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page_Project">
-            <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,1,0">
+            <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_t1_1">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Project Name:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_name</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0" colspan="5">
-              <widget class="Line" name="line_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_number">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_name">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QLabel" name="project_icon">
-               <property name="text">
-                <string>No logo was selected</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="3">
-              <widget class="QLineEdit" name="output_dir">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <spacer name="verticalSpacer_18">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_t1_3">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Project Version:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_number</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_t1_4">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Project Logo:</string>
-               </property>
-               <property name="buddy">
-                <cstring>icon_PB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_brief">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QPushButton" name="icon_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="4">
-              <widget class="QPushButton" name="output_dir_PB">
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0" colspan="5">
-              <widget class="Line" name="line_7">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_t1_2">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Project Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_brief</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <spacer name="verticalSpacer_21">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
              <item row="10" column="0">
               <widget class="QLabel" name="label_t1_5">
                <property name="font">
@@ -320,18 +113,6 @@
               </widget>
              </item>
              <item row="20" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_c_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Optimize for C or PHP</string>
-               </property>
-              </widget>
-             </item>
-             <item row="21" column="0" colspan="5">
               <widget class="QRadioButton" name="optimize_fortran_CB">
                <property name="font">
                 <font>
@@ -340,99 +121,6 @@
                </property>
                <property name="text">
                 <string>Optimize for Fortran</string>
-               </property>
-              </widget>
-             </item>
-             <item row="19" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_java_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Optimize for Java or C#</string>
-               </property>
-              </widget>
-             </item>
-             <item row="18" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_cli_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Optimize for C++ / CLI</string>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_cplus_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Optimize for C++</string>
-               </property>
-              </widget>
-             </item>
-             <item row="22" column="0" colspan="5">
-              <spacer name="verticalSpacer_17">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="8" column="0" colspan="5">
-              <widget class="QLabel" name="label_t1_b">
-               <property name="palette">
-                <palette>
-                 <active>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </active>
-                 <inactive>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </inactive>
-                 <disabled>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>106</red>
-                     <green>104</green>
-                     <blue>100</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </disabled>
-                </palette>
-               </property>
-               <property name="text">
-                <string>Specify the directory for the CS Doxygen output</string>
                </property>
               </widget>
              </item>
@@ -480,6 +168,153 @@
                </property>
               </widget>
              </item>
+             <item row="10" column="1" colspan="3">
+              <widget class="QLineEdit" name="output_dir">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="3">
+              <widget class="QLineEdit" name="project_name">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_t1_1">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Name:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_name</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="3">
+              <widget class="QLineEdit" name="project_number">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_t1_4">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Logo:</string>
+               </property>
+               <property name="buddy">
+                <cstring>icon_PB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="0" colspan="5">
+              <widget class="QRadioButton" name="optimize_java_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Optimize for Java or C#</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_t1_3">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Version:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_number</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="icon_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QLabel" name="project_icon">
+               <property name="text">
+                <string>No logo was selected</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="5">
+              <widget class="Line" name="line_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="3">
+              <widget class="QLineEdit" name="project_brief">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
              <item row="16" column="0" colspan="5">
               <widget class="QLabel" name="label_t1_c">
                <property name="palette">
@@ -521,6 +356,159 @@
                </property>
                <property name="text">
                 <string>Select programming language</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <spacer name="verticalSpacer_18">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="10" column="4">
+              <widget class="QPushButton" name="output_dir_PB">
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="0" colspan="5">
+              <widget class="QRadioButton" name="optimize_cplus_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Optimize for C++</string>
+               </property>
+              </widget>
+             </item>
+             <item row="21" column="0" colspan="5">
+              <spacer name="verticalSpacer_17">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_t1_2">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Description:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_brief</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <spacer name="verticalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="15" column="0" colspan="5">
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="0" colspan="5">
+              <widget class="QRadioButton" name="optimize_c_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Optimize for C or PHP</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" colspan="5">
+              <widget class="QLabel" name="label_t1_b">
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>106</red>
+                     <green>104</green>
+                     <blue>100</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <property name="text">
+                <string>Specify the directory for the CS Doxygen output</string>
                </property>
               </widget>
              </item>
@@ -648,7 +636,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="searchEnabled_CB">
+                 <widget class="QCheckBox" name="html_search_CB">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -927,19 +915,19 @@
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
-                 <widget class="QCheckBox" name="dot_class_CB">
+                 <widget class="QCheckBox" name="dot_class_graph_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
                    </font>
                   </property>
                   <property name="text">
-                   <string>Class diagrams</string>
+                   <string>Class Graphs</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_collaboration_CB">
+                 <widget class="QCheckBox" name="dot_collaboration_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -951,7 +939,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_overall_CB">
+                 <widget class="QCheckBox" name="dot_hierarchy_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -963,31 +951,31 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_include_CB">
+                 <widget class="QCheckBox" name="dot_include_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
                    </font>
                   </property>
                   <property name="text">
-                   <string>Include dependency graphs</string>
+                   <string>Include Graphs</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_included_by_CB">
+                 <widget class="QCheckBox" name="dot_included_by_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
                    </font>
                   </property>
                   <property name="text">
-                   <string>Included by dependency graphs</string>
+                   <string>Included by Graphs</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_call_CB">
+                 <widget class="QCheckBox" name="dot_call_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -999,7 +987,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="dot_called_by_CB">
+                 <widget class="QCheckBox" name="dot_called_by_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -1021,7 +1009,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>No diagrams</string>
+                <string>No Class diagrams</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroup_diagram</string>
@@ -1155,7 +1143,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>11</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -1220,7 +1208,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QComboBox" name="output_langugae_CM"/>
+              <widget class="QComboBox" name="output_language_CM"/>
              </item>
              <item row="2" column="1">
               <widget class="QCheckBox" name="allow_unicode_names_CB">
@@ -1260,7 +1248,7 @@
                 <string>Output language:</string>
                </property>
                <property name="buddy">
-                <cstring>output_langugae_CM</cstring>
+                <cstring>output_language_CM</cstring>
                </property>
               </widget>
              </item>
@@ -2422,7 +2410,7 @@
                 <string>Generate deprecated list:</string>
                </property>
                <property name="buddy">
-                <cstring>gen_deprecatcated_list_CB</cstring>
+                <cstring>gen_deprecate_list_CB</cstring>
                </property>
               </widget>
              </item>
@@ -2779,7 +2767,7 @@
               </widget>
              </item>
              <item row="22" column="3">
-              <widget class="QCheckBox" name="gen_deprecatcated_list_CB">
+              <widget class="QCheckBox" name="gen_deprecate_list_CB">
                <property name="text">
                 <string/>
                </property>
@@ -4615,7 +4603,7 @@
               <number>14</number>
              </property>
              <item row="0" column="0">
-              <widget class="QLabel" name="generate_autogen_def_CB">
+              <widget class="QLabel" name="gen_autogen_def_CB_2">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5151,12 +5139,12 @@
                 <string>Generate Tagfile:</string>
                </property>
                <property name="buddy">
-                <cstring>generate_tagfile</cstring>
+                <cstring>gen_tagfile</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="generate_tagfile">
+              <widget class="QLineEdit" name="gen_tagfile">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -5165,7 +5153,7 @@
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QPushButton" name="generate_tagfile_PB">
+              <widget class="QPushButton" name="gen_tagfile_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -5388,10 +5376,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Call graph:</string>
+                <string>Call Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>call_graph_CB</cstring>
+                <cstring>dot_call_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5409,14 +5397,14 @@
               </spacer>
              </item>
              <item row="19" column="1">
-              <widget class="QCheckBox" name="call_graph_CB">
+              <widget class="QCheckBox" name="dot_call_CB2">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="22" column="1">
-              <widget class="QCheckBox" name="graphical_hierarchy_CB">
+              <widget class="QCheckBox" name="dot_hierarchy_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -5510,12 +5498,12 @@
                 <string>Collaboration graph:</string>
                </property>
                <property name="buddy">
-                <cstring>collaboration_graph_CB</cstring>
+                <cstring>dot_collaboration_CB2</cstring>
                </property>
               </widget>
              </item>
              <item row="10" column="1">
-              <widget class="QCheckBox" name="class_graph_CB">
+              <widget class="QCheckBox" name="dot_class_graph_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -5633,7 +5621,7 @@
               </widget>
              </item>
              <item row="17" column="1" colspan="6">
-              <widget class="QCheckBox" name="included_by_graph_CB">
+              <widget class="QCheckBox" name="dot_included_by_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -5647,10 +5635,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Included by graph:</string>
+                <string>Included by Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>included_by_graph_CB</cstring>
+                <cstring>dot_included_by_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5731,7 +5719,7 @@
               </widget>
              </item>
              <item row="11" column="1">
-              <widget class="QCheckBox" name="collaboration_graph_CB">
+              <widget class="QCheckBox" name="dot_collaboration_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -5755,7 +5743,7 @@
                 <string>Class graph:</string>
                </property>
                <property name="buddy">
-                <cstring>class_graph_CB</cstring>
+                <cstring>dot_class_graph_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5806,7 +5794,7 @@
               </widget>
              </item>
              <item row="16" column="1">
-              <widget class="QCheckBox" name="include_graph_CB">
+              <widget class="QCheckBox" name="dot_include_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -5820,10 +5808,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Include graph:</string>
+                <string>Include Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>include_graph_CB</cstring>
+                <cstring>dot_include_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5904,7 +5892,7 @@
                 <string>Graphical Hierarchy</string>
                </property>
                <property name="buddy">
-                <cstring>graphical_hierarchy_CB</cstring>
+                <cstring>dot_hierarchy_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5916,15 +5904,15 @@
                 </font>
                </property>
                <property name="text">
-                <string>Caller graph:</string>
+                <string>Called by Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>caller_graph_CB</cstring>
+                <cstring>dot_called_by_CB2</cstring>
                </property>
               </widget>
              </item>
              <item row="20" column="1">
-              <widget class="QCheckBox" name="caller_graph_CB">
+              <widget class="QCheckBox" name="dot_called_by_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -6451,7 +6439,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -8103,7 +8091,7 @@
               </widget>
              </item>
              <item row="13" column="1">
-              <widget class="QCheckBox" name="use_pdf_latex_CB">
+              <widget class="QCheckBox" name="pdf_latex_CB">
                <property name="text">
                 <string/>
                </property>
@@ -8253,7 +8241,7 @@
                 <string>Use PDF LaTeX:</string>
                </property>
                <property name="buddy">
-                <cstring>use_pdf_latex_CB</cstring>
+                <cstring>pdf_latex_CB</cstring>
                </property>
               </widget>
              </item>
@@ -9369,7 +9357,7 @@
            </palette>
           </property>
           <property name="text">
-           <string>CS Doxygen is Idle</string>
+           <string>DoxyPress is Idle</string>
           </property>
          </widget>
         </item>
@@ -9447,7 +9435,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Run CS Doxygen</string>
+             <string>Run DoxyPress</string>
             </property>
            </widget>
           </item>
@@ -9482,40 +9470,6 @@
             </property>
             <property name="text">
              <string>Display HTML</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>10</width>
-              <height>10</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="show_config_PB">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Show Configuration</string>
             </property>
            </widget>
           </item>
@@ -9676,12 +9630,12 @@
   </action>
   <action name="actionDoxyHelp">
    <property name="text">
-    <string>CS Doxygen Help</string>
+    <string>DoxyPressApp Help</string>
    </property>
   </action>
   <action name="actionImport">
    <property name="text">
-    <string>Import Doxygen File / Convert to CS Doxygen</string>
+    <string>Import Doxygen File / Convert to DoxyPress</string>
    </property>
    <property name="toolTip">
     <string>Import Doxygen File</string>
@@ -9708,7 +9662,7 @@
   </action>
   <action name="actionMove_WizardCfg">
    <property name="text">
-    <string>Move Wizard Cfg File</string>
+    <string>Move DoxyPress Settings File</string>
    </property>
    <property name="toolTip">
     <string>Move Wizard Cfg File</string>
@@ -9716,7 +9670,7 @@
   </action>
   <action name="actionSave_WizardCfg">
    <property name="text">
-    <string>Save Wizard Cfg File</string>
+    <string>Save DoxyPress Settings File</string>
    </property>
   </action>
  </widget>
@@ -9730,7 +9684,6 @@
   <tabstop>output_dir</tabstop>
   <tabstop>output_dir_PB</tabstop>
   <tabstop>optimize_cplus_CB</tabstop>
-  <tabstop>optimize_cli_CB</tabstop>
   <tabstop>optimize_java_CB</tabstop>
   <tabstop>optimize_c_CB</tabstop>
   <tabstop>optimize_fortran_CB</tabstop>
@@ -9738,7 +9691,7 @@
   <tabstop>html_plain_RB</tabstop>
   <tabstop>html_nav_RB</tabstop>
   <tabstop>html_chm_RB</tabstop>
-  <tabstop>searchEnabled_CB</tabstop>
+  <tabstop>html_search_CB</tabstop>
   <tabstop>html_colors_PB</tabstop>
   <tabstop>gen_latex_CB1</tabstop>
   <tabstop>latex_hyper_pdf_RB</tabstop>
@@ -9751,18 +9704,18 @@
   <tabstop>diagram_none_RB</tabstop>
   <tabstop>diagram_built_in_RB</tabstop>
   <tabstop>diagram_dot_RB</tabstop>
-  <tabstop>dot_class_CB</tabstop>
-  <tabstop>dot_collaboration_CB</tabstop>
-  <tabstop>dot_overall_CB</tabstop>
-  <tabstop>dot_include_CB</tabstop>
-  <tabstop>dot_included_by_CB</tabstop>
-  <tabstop>dot_call_CB</tabstop>
-  <tabstop>dot_called_by_CB</tabstop>
+  <tabstop>dot_class_graph_CB1</tabstop>
+  <tabstop>dot_collaboration_CB1</tabstop>
+  <tabstop>dot_hierarchy_CB1</tabstop>
+  <tabstop>dot_include_CB1</tabstop>
+  <tabstop>dot_included_by_CB1</tabstop>
+  <tabstop>dot_call_CB1</tabstop>
+  <tabstop>dot_called_by_CB1</tabstop>
   <tabstop>build_TreeWidget</tabstop>
   <tabstop>project_encoding</tabstop>
   <tabstop>create_subdirs_CB</tabstop>
   <tabstop>allow_unicode_names_CB</tabstop>
-  <tabstop>output_langugae_CM</tabstop>
+  <tabstop>output_language_CM</tabstop>
   <tabstop>brief_member_desc_CB</tabstop>
   <tabstop>repeat_brief_CB</tabstop>
   <tabstop>abbreviate_brief</tabstop>
@@ -9826,7 +9779,7 @@
   <tabstop>gen_todo_list_CB</tabstop>
   <tabstop>gen_test_list_CB</tabstop>
   <tabstop>gen_bug_list_CB</tabstop>
-  <tabstop>gen_deprecatcated_list_CB</tabstop>
+  <tabstop>gen_deprecate_list_CB</tabstop>
   <tabstop>enabled_sections</tabstop>
   <tabstop>source_input_PB_13</tabstop>
   <tabstop>max_init_lines_SB</tabstop>
@@ -9911,8 +9864,8 @@
   <tabstop>skip_function_macros_CB</tabstop>
   <tabstop>tag_files</tabstop>
   <tabstop>tag_files_PB</tabstop>
-  <tabstop>generate_tagfile</tabstop>
-  <tabstop>generate_tagfile_PB</tabstop>
+  <tabstop>gen_tagfile</tabstop>
+  <tabstop>gen_tagfile_PB</tabstop>
   <tabstop>all_externals_CB</tabstop>
   <tabstop>external_groups_CB</tabstop>
   <tabstop>external_pages_CB</tabstop>
@@ -9931,17 +9884,17 @@
   <tabstop>dot_font_size_SB</tabstop>
   <tabstop>dot_font_path</tabstop>
   <tabstop>dot_font_path_PB</tabstop>
-  <tabstop>class_graph_CB</tabstop>
-  <tabstop>collaboration_graph_CB</tabstop>
+  <tabstop>dot_class_graph_CB2</tabstop>
+  <tabstop>dot_collaboration_CB2</tabstop>
   <tabstop>group_graphs_CB</tabstop>
   <tabstop>uml_look_CB</tabstop>
   <tabstop>uml_limit_num_fields_SB</tabstop>
   <tabstop>template_relations_CB</tabstop>
-  <tabstop>include_graph_CB</tabstop>
-  <tabstop>included_by_graph_CB</tabstop>
-  <tabstop>call_graph_CB</tabstop>
-  <tabstop>caller_graph_CB</tabstop>
-  <tabstop>graphical_hierarchy_CB</tabstop>
+  <tabstop>dot_include_CB2</tabstop>
+  <tabstop>dot_included_by_CB2</tabstop>
+  <tabstop>dot_call_CB2</tabstop>
+  <tabstop>dot_called_by_CB2</tabstop>
+  <tabstop>dot_hierarchy_CB2</tabstop>
   <tabstop>directory_graph_CB</tabstop>
   <tabstop>dot_image_format_CM</tabstop>
   <tabstop>interactive_svg_CB</tabstop>
@@ -10048,7 +10001,7 @@
   <tabstop>latex_extra_files</tabstop>
   <tabstop>latex_extra_files_PB</tabstop>
   <tabstop>pdf_hyperlinks_CB</tabstop>
-  <tabstop>use_pdf_latex_CB</tabstop>
+  <tabstop>pdf_latex_CB</tabstop>
   <tabstop>laxtex_batch_mode_CB</tabstop>
   <tabstop>laxtex_hide_indices_CB</tabstop>
   <tabstop>laxtex_source_code_CB</tabstop>
@@ -10082,7 +10035,6 @@
   <tabstop>outputLog</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>display_PB</tabstop>
-  <tabstop>show_config_PB</tabstop>
   <tabstop>save_log_PB</tabstop>
  </tabstops>
  <resources/>

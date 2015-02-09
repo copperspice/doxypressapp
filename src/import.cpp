@@ -10,7 +10,7 @@
  * this software for any purpose. It is provided "as is" without express or
  * implied warranty. See the GNU General Public License for more details.
  *
- * Documents produced by Doxygen are derivative works derived from the
+ * Documents produced by DoxyPress are derivative works derived from the
  * input used in their production; they are not affected by this license.
  *
 *************************************************************************/
@@ -40,61 +40,41 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
    m_ui->output_dir->setText(tempStr);
 
-
-/*
-   tempBool = convert_Bool(data,"optimize-cplus");
-   m_ui->optimize_cplus_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"optimize-cli");
-   m_ui->optimize_cli_CB->setChecked(tempBool);
-*/
-
+   //
+   bool isCpp = true;
 
    tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_JAVA");
    m_ui->optimize_java_CB->setChecked(tempBool);
 
+   if (tempBool)  {
+      isCpp = false;
+   }
+
    tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_FOR_C");
    m_ui->optimize_c_CB->setChecked(tempBool);
 
+   if (tempBool)  {
+      isCpp = false;
+   }
+
    tempBool = convert_Bool(data,"OPTIMIZE_FOR_FORTRAN");
    m_ui->optimize_fortran_CB->setChecked(tempBool);
+
+   if (tempBool)  {
+      isCpp = false;
+   }
+
+   if (isCpp)  {
+      m_ui->optimize_cplus_CB->setChecked(true);
+   }
 
    //
    tempBool = convert_Bool(data,"GENERATE_HTML");
    m_ui->gen_html_CB1->setChecked(tempBool);
 
-
-/*
-   tempBool = convert_Bool(data,"html-plain");
-   m_ui->html_plain_RB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"html-nav");
-   m_ui->html_nav_RB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"html-chm");
-   m_ui->html_chm_RB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"search-enabled");
-   m_ui->searchEnabled_CB->setChecked(tempBool);
-*/
-
-   //
    tempBool = convert_Bool(data,"GENERATE_LATEX");
    m_ui->gen_latex_CB1->setChecked(tempBool);
 
-
-/*
-   tempBool = convert_Bool(data,"latex-hyper-pdf");
-   m_ui->latex_hyper_pdf_RB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"latex-pdf");
-   m_ui->latex_pdf_RB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"latex-ps");
-   m_ui->latex_ps_RB->setChecked(tempBool);
-*/
-
-   //
    tempBool = convert_Bool(data,"GENERATE_RTF");;
    m_ui->gen_rtf_CB1->setChecked(tempBool);
 
@@ -107,40 +87,27 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data,"GENERATE_DOCBOOK");
    m_ui->gen_docbook_CB1->setChecked(tempBool);
 
-/*
+   //
+   tempBool = convert_Bool(data, "CLASS_GRAPH");
+   m_ui->dot_class_graph_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"DIAGRAM-NONE");
-   m_ui->diagram_none_RB->setChecked(tempBool);
+   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");
+   m_ui->dot_collaboration_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"DIAGRAM_BUILT_IN");
-   m_ui->diagram_built_in_RB->setChecked(tempBool);
+   tempBool = convert_Bool(data, "GRAPHICAL_HIERARCHY");
+   m_ui->dot_hierarchy_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"DIAGRAM_DOT");
-   m_ui->diagram_dot_RB->setChecked(tempBool);
-*/
+   tempBool = convert_Bool(data,"INCLUDE_GRAPH");
+   m_ui->dot_include_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"CLASS_DIAGRAMS");          // ok - maybe in twice
-   m_ui->dot_class_CB->setChecked(tempBool);
+   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");
+   m_ui->dot_included_by_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");     // ok - maybe in twice
-   m_ui->dot_collaboration_CB->setChecked(tempBool);
+   tempBool = convert_Bool(data,"CALL_GRAPH");
+   m_ui->dot_call_CB1->setChecked(tempBool);
 
-/*
-   tempBool = convert_Bool(data,"DOT_OVERALL");
-   m_ui->dot_overall_CB->setChecked(tempBool);
-*/
-
-   tempBool = convert_Bool(data,"INCLUDE_GRAPH");           // ok - maybe in twice
-   m_ui->dot_include_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");       // ok - maybe in twice
-   m_ui->dot_included_by_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"CALL_GRAPH");              // ok - maybe in twice
-   m_ui->dot_call_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"CALLER_GRAPH");            // ok - maybe in twice
-   m_ui->dot_called_by_CB->setChecked(tempBool);
+   tempBool = convert_Bool(data,"CALLER_GRAPH");
+   m_ui->dot_called_by_CB1->setChecked(tempBool);
 
 
    //  ***
@@ -154,8 +121,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "ALLOW_UNICODE_NAMES");
    m_ui->allow_unicode_names_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "OUTPUT_LANGUAGE");
-   m_ui->output_langugae_CM->setCurrentIndex(tempInt);
+   tempStr = convert_Str(data, "OUTPUT_LANGUAGE");
+   tempInt = m_ui->output_language_CM->findText(tempStr);
+   m_ui->output_language_CM->setCurrentIndex(tempInt);
 
    tempBool = convert_Bool(data, "BRIEF_MEMBER_DESC");
    m_ui->brief_member_desc_CB->setChecked(tempBool);
@@ -331,7 +299,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->gen_bug_list_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GENERATE_DEPRECATEDLIST");
-   m_ui->gen_deprecatcated_list_CB->setChecked(tempBool);
+   m_ui->gen_deprecate_list_CB->setChecked(tempBool);
 
    tempText = convert_PlainText(data,"ENABLED_SECTIONS");
    m_ui->enabled_sections->setPlainText(tempText);
@@ -531,7 +499,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->tag_files->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"GENERATE_TAGFILE");
-   m_ui->generate_tagfile->setText(tempText);
+   m_ui->gen_tagfile->setText(tempText);
 
    tempBool = convert_Bool(data, "ALLEXTERNALS");
    m_ui->all_externals_CB->setChecked(tempBool);
@@ -547,11 +515,8 @@ void MainWindow::convertDoxy(QByteArray data)
 
 
    // tab 2 - dot
-
-/*
-   tempBool = convert_Bool(data, "");
-   m_ui->class_diagrams_CB->setChecked(            object.value("class-diagrams").toBool());
-*/
+   tempBool = convert_Bool(data,"CLASS_DIAGRAMS");
+   m_ui->class_diagrams_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "MSCGEN_PATH");
    m_ui->mscgen_path->setText(tempStr);
@@ -577,14 +542,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "DOT_FONTPATH ");
    m_ui->dot_font_path->setText(tempStr);
 
-   tempBool = convert_Bool(data, "CLASS_GRAPH");
-   m_ui->class_graph_CB->setChecked(tempBool);
-
-/*
-   tempBool = convert_Bool(data, "");
-   m_ui->collaboration_graph_CB->setChecked(       object.value("collaboration-graph").toBool());
-*/
-
    tempBool = convert_Bool(data, "GROUP_GRAPHS");
    m_ui->group_graphs_CB->setChecked(tempBool);
 
@@ -596,24 +553,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "TEMPLATE_RELATIONS");
    m_ui->template_relations_CB->setChecked(tempBool);
-
-/*
-   tempBool = convert_Bool(data, "");
-   m_ui->include_graph_CB->setChecked(             object.value("include-graph").toBool());
-
-   tempBool = convert_Bool(data, "");
-   m_ui->included_by_graph_CB->setChecked(         object.value("included-by-graph").toBool());
-
-   tempBool = convert_Bool(data, "");
-   m_ui->call_graph_CB->setChecked(                object.value("call-graph").toBool());
-
-   tempBool = convert_Bool(data, "");
-   m_ui->caller_graph_CB->setChecked(              object.value("caller-graph").toBool());
-*/
-
-
-   tempBool = convert_Bool(data, "GRAPHICAL_HIERARCHY");
-   m_ui->graphical_hierarchy_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "DIRECTORY_GRAPH");
    m_ui->directory_graph_CB->setChecked(tempBool);
@@ -672,7 +611,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "HTML_FOOTER");
    m_ui->html_footer->setText(tempStr);
 
-   tempStr = convert_Str(data, "HTML_STYLESHEET");
+   tempStr = convert_Str(data, "eTYLESHEET");
    m_ui->html_stylesheet->setText(tempStr);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
@@ -856,7 +795,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->pdf_hyperlinks_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "USE_PDFLATEX");
-   m_ui->use_pdf_latex_CB->setChecked(tempBool);
+   m_ui->pdf_latex_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "LATEX_BATCHMODE");
    m_ui->laxtex_batch_mode_CB->setChecked(tempBool);
@@ -916,6 +855,11 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "DOCBOOK_PROGRAMLISTING");
    m_ui->docbook_program_listing_CB->setChecked(tempBool);
+
+   // final step
+   validGet_html();
+   validGet_latex();
+   validGet_dot();
 }
 
 bool MainWindow::convert_Bool(QByteArray data, QString key)
@@ -981,6 +925,8 @@ QString MainWindow::convert_Str(QByteArray data, QString key)
 
 QString MainWindow::convert_PlainText(QByteArray data, QString key)
 {
+   // 
+
    QString tempStr;
 
    int posBeg = data.indexOf(key);

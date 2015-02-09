@@ -10,7 +10,7 @@
  * this software for any purpose. It is provided "as is" without express or
  * implied warranty. See the GNU General Public License for more details.
  *
- * Documents produced by Doxygen are derivative works derived from the
+ * Documents produced by DoxyPress are derivative works derived from the
  * input used in their production; they are not affected by this license.
  *
 *************************************************************************/
@@ -164,6 +164,21 @@ class MainWindow : public QMainWindow
       bool m_running;
       bool m_modified;
 
+      // validation
+      void validGet_html();
+      void validGet_latex();
+      void validGet_dot();
+
+      CS_SLOT_1(Private, void validSet_html(QAbstractButton *))
+      CS_SLOT_2(validSet_html)
+
+      CS_SLOT_1(Private, void validSet_latex(QAbstractButton *))
+      CS_SLOT_2(validSet_latex)
+
+      CS_SLOT_1(Private, void validSet_dot(QAbstractButton *))
+      CS_SLOT_2(validSet_dot)
+
+      //
       CS_SLOT_1(Private, void newDoxy())
       CS_SLOT_2(newDoxy)
 
@@ -254,8 +269,6 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void saveLog())
       CS_SLOT_2(saveLog)
 
-      CS_SLOT_1(Private, void showSettings())
-      CS_SLOT_2(showSettings)     
 };
 
 #endif

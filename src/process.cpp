@@ -10,7 +10,7 @@
  * this software for any purpose. It is provided "as is" without express or
  * implied warranty. See the GNU General Public License for more details.
  *
- * Documents produced by Doxygen are derivative works derived from the
+ * Documents produced by DoxyPress are derivative works derived from the
  * input used in their production; they are not affected by this license.
  *
 *************************************************************************/
@@ -49,6 +49,7 @@ void MainWindow::runDoxyPress()
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
+
       m_runProcess->setWorkingDirectory(destDir);
 
       QStringList env = QProcess::systemEnvironment();
@@ -70,7 +71,6 @@ void MainWindow::runDoxyPress()
          m_outputLog->append(QString::fromAscii("*** Failed to run DoxyPress\n"));
          return;
       }
-
    }
 
 
@@ -195,6 +195,7 @@ void MainWindow::saveLog()
       QFile f(fn);
 
       if (f.open(QIODevice::WriteOnly)) {
+
          QTextStream t(&f);
          t << m_outputLog->toPlainText();
 
@@ -206,24 +207,3 @@ void MainWindow::saveLog()
       }
    }
 }
-
-void MainWindow::showSettings()
-{
-
-/*   BROOM - put back in
- *
-   QString text;
-   QTextStream t(&text);
-
-   m_expert->writeConfig(t, true);
-
-   m_outputLog->clear();
-   m_outputLog->append(text);
-   m_outputLog->ensureCursorVisible();
-
-   m_saveLog->setEnabled(true);
-
-*/
-
-}
-

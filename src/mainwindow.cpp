@@ -10,7 +10,7 @@
  * this software for any purpose. It is provided "as is" without express or
  * implied warranty. See the GNU General Public License for more details.
  *
- * Documents produced by Doxygen are derivative works derived from the
+ * Documents produced by DoxyPress are derivative works derived from the
  * input used in their production; they are not affected by this license.
  *
 *************************************************************************/
@@ -171,9 +171,7 @@ void MainWindow::createConnections()
    //
    connect(qApp,  SIGNAL(focusChanged(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
 
-
    //connect(qApp,  SIGNAL( ??(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
-
 
 
    // connections for tabs
@@ -191,12 +189,25 @@ void MainWindow::createConnections()
    connect(m_ui->output_dir_PB,       SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
    connect(m_ui->html_colors_PB,      SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
 
-   // tab 2
+   // tab 2 - lookups
    connect(m_ui->input_source_PB,     SIGNAL(clicked()),   this, SLOT(input_source_PB()));
    connect(m_ui->file_patterns_PB,    SIGNAL(clicked()),   this, SLOT(file_patterns_PB()));
    connect(m_ui->exclude_files_PB,    SIGNAL(clicked()),   this, SLOT(exclude_files_PB()));
    connect(m_ui->exclude_patterns_PB, SIGNAL(clicked()),   this, SLOT(exclude_patterns_PB()));
    connect(m_ui->exclude_symbols_PB,  SIGNAL(clicked()),   this, SLOT(exclude_symbols_PB()));
+
+   // broom - missing a bunch of these
+
+
+   // tab 2 - valid
+   connect(m_ui->buttonGroup_html,    SIGNAL(buttonClicked(QAbstractButton *)), this,
+                                      SLOT(validSet_html(QAbstractButton *)));
+
+   connect(m_ui->buttonGroup_latex,   SIGNAL(buttonClicked(QAbstractButton *)), this,
+                                      SLOT(validSet_latex(QAbstractButton *)));
+
+   connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
+                                      SLOT(validSet_dot(QAbstractButton *)));
 
 
    // tab 3
@@ -241,9 +252,8 @@ void MainWindow::createShortCuts()
 }
 
 void MainWindow::manual()
-{
-   // broom - move when ready
-   QDesktopServices::openUrl(QUrl("http://www.copperspice.org/docs/cs_api/index.html"));
+{  
+   QDesktopServices::openUrl(QUrl("http://www.copperspice.org/documentation-doxypress.html"));
 }
 
 void MainWindow::setupPage(QTreeWidgetItem *item, QTreeWidgetItem *)
@@ -367,7 +377,7 @@ QSize MainWindow::sizeHint() const
    connect(m_runProcess,    SIGNAL(readyReadStandardOutput()), SLOT(readStdout()));
    connect(m_runProcess,    SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(runComplete()));
    connect(m_timer,         SIGNAL(timeout()), SLOT(readStdout()));
-   connect(m_run,           SIGNAL(clicked()), SLOT(runDoxygen()));
+   connect(m_run,           SIGNAL(clicked()), SLOT(runDoxyPress()));
    connect(m_launchHtml,    SIGNAL(clicked()), SLOT(showHtmlOutput()));
    connect(m_saveLog,       SIGNAL(clicked()), SLOT(saveLog()));
    connect(showSettings,    SIGNAL(clicked()), SLOT(showSettings()));
