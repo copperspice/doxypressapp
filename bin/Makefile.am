@@ -59,6 +59,8 @@ DoxyPressApp_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
 DoxyPressApp_SOURCES = \
    src/colors.cpp  \
+   src/dialog_config.cpp  \
+   src/dialog_config.h   \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
    src/process.cpp \
@@ -67,12 +69,14 @@ DoxyPressApp_SOURCES = \
    src/lookup.cpp \
    src/main.cpp \
    src/mainwindow.cpp \
+   src/recent_files.cpp \
    src/support.cpp \
    src/util.cpp  \
    src/validate.cpp
 
 
 FORMS = \
+   forms/dialog_config.ui \
    forms/dialog_lookup.ui \
    forms/dialog_selectcfg.ui \
    forms/mainwindow.ui

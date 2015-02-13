@@ -52,35 +52,6 @@ QString MainWindow::getFile_CS(QString title, QString fname, QString filter)
 }
 
 // **
-void MainWindow::initTabs()
-{
-   icon_PB("load");
-
-/*
-   if (getBoolOption(m_modelData, STR_HAVE_DOT)) {
-      // Dot
-      m_diagramModeGroup->button(2)->setChecked(true);
-
-   } else if (getBoolOption(m_modelData, STR_CLASS_DIAGRAMS)) {
-      // Builtin diagrams
-      m_diagramModeGroup->button(1)->setChecked(true);
-
-   } else {
-      // no diagrams
-      m_diagramModeGroup->button(0)->setChecked(true);
-   }
-
-   m_dotClass->setChecked(getBoolOption(m_modelData, STR_CLASS_GRAPH));
-   m_dotCollaboration->setChecked(getBoolOption(m_modelData, STR_COLLABORATION_GRAPH));
-   m_dotInheritance->setChecked(getBoolOption(m_modelData, STR_GRAPHICAL_HIERARCHY));
-   m_dotInclude->setChecked(getBoolOption(m_modelData, STR_INCLUDE_GRAPH));
-   m_dotIncludedBy->setChecked(getBoolOption(m_modelData, STR_INCLUDED_BY_GRAPH));
-   m_dotCall->setChecked(getBoolOption(m_modelData, STR_CALL_GRAPH));
-   m_dotCaller->setChecked(getBoolOption(m_modelData, STR_CALLER_GRAPH));
-
-*/
-}
-
 void MainWindow::newDoxy()
 {
    if (querySave()) {
@@ -91,7 +62,7 @@ void MainWindow::newDoxy()
 void MainWindow::openDoxy()
 {
    if (querySave()) {
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open DoxyPress ? Config"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open DoxyPress Project"), m_struct.pathPrior);
 
       if (! fname.isEmpty()) {
          openDoxy_Internal(fname);
@@ -99,15 +70,13 @@ void MainWindow::openDoxy()
    }
 }
 
-void MainWindow::openDoxy_Internal(const QString fname)
-{
-   m_ConfigFile = fname;
-
-   QFile file(m_ConfigFile);
+bool MainWindow::openDoxy_Internal(const QString fname)
+{  
+   QFile file(fname);
 
    if (! file.open(QIODevice::ReadOnly)) {
-      QMessageBox::warning(this, tr("Error Opening: ") + m_ConfigFile, tr("Unable to open: ") + file.error());
-      return;
+      QMessageBox::warning(this, tr("Error Opening: ") + fname, tr("Unable to open: ") + file.error());
+      return false;
    }
 
    QByteArray data;
@@ -115,17 +84,23 @@ void MainWindow::openDoxy_Internal(const QString fname)
    data = file.readAll();
    file.close();
 
+   //
+   m_curFile = fname;
+   m_struct.pathPrior = this->pathName(fname);
+
    json_Write(PATH_PRIOR);
-//   if (! m_struct.XXX.contains(m_ConfigFile)) {
-//      addRecentFile(m_ConfigFile);
-//   }
 
-   json_OpenDoxy(data);
+   if (! m_rf_List.contains(m_curFile)) {
+      rf_Update();
+   }
 
-   initTabs();
-   updateLaunchButtonState();
+   //
+   json_OpenDoxy(data);   
 
+   updateRunButtons();
    setDoxyTitle(false);
+
+   return true;
 }
 
 QString MainWindow::pathName(QString fileName) const
@@ -146,9 +121,7 @@ bool MainWindow::querySave()
       int retval = quest.exec();
 
       if (retval == QMessageBox::Save) {
-         // saveDoxCfgFile();
-         csMsg("Do the save now");
-
+         saveDoxy();
          return true;
 
       } else if (retval == QMessageBox::Cancel) {
@@ -164,8 +137,8 @@ void MainWindow::reloadDoxy()
 {
    clearAllFields();
 
-   if (! m_ConfigFile.isEmpty()) {
-      openDoxy_Internal(m_ConfigFile);
+   if (! m_curFile.isEmpty()) {
+      openDoxy_Internal(m_curFile);
    }
 }
 
@@ -173,10 +146,10 @@ void MainWindow::saveDoxy_Internal()
 {
    QByteArray data = json_SaveDoxy();
 
-   QFile file(m_ConfigFile);
+   QFile file(m_curFile);
 
    if (! file.open(QIODevice::WriteOnly)) {
-      QMessageBox::warning(this, tr("Error Saving: ") + m_ConfigFile, tr("Unable to save: ") + file.error());
+      QMessageBox::warning(this, tr("Error Saving: ") + m_curFile, tr("Unable to save: ") + file.error());
       return;
    }
 
@@ -188,19 +161,20 @@ void MainWindow::saveDoxy_Internal()
 
 bool MainWindow::saveDoxyAs()
 {
-   m_ConfigFile = QFileDialog::getSaveFileName(this, tr("Select name for DoxyPress file"), m_struct.pathPrior);
+   m_curFile = QFileDialog::getSaveFileName(this, tr("New DoxyPress project file"), m_struct.pathPrior,
+                                            tr("Json Files (*.json)"));
 
-   if (m_ConfigFile.isEmpty()) {
+   if (m_curFile.isEmpty()) {
       return false;
 
    } else {
       saveDoxy_Internal();
 
       json_Write(PATH_PRIOR);
- //   if (! m_struct.XXX.contains(m_ConfigFile)) {
- //      addRecentFile(m_ConfigFile);
- //   }
 
+      if (! m_rf_List.contains(m_curFile)) {
+         rf_Update();
+      }
    }
 
    return true;
@@ -208,7 +182,7 @@ bool MainWindow::saveDoxyAs()
 
 void MainWindow::saveDoxy()
 {
-   if (m_ConfigFile.isEmpty()) {
+   if (m_curFile.isEmpty()) {
       saveDoxyAs();
 
    } else {
@@ -226,7 +200,7 @@ void MainWindow::setDoxyTitle(bool isModified)
    m_modified = isModified;
 
    // displays as: DoxyPressApp --  ConfigFileName[*]
-   if (m_ConfigFile.isEmpty())   {
+   if (m_curFile.isEmpty())   {
 
       setWindowTitle(tr("DoxyPressApp ") );
 
@@ -234,9 +208,9 @@ void MainWindow::setDoxyTitle(bool isModified)
       QString temp = QChar(0x02014);
 
       if (m_modified) {
-         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_ConfigFile + " [*]" );
+         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile + " [*]" );
       } else {
-         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_ConfigFile );
+         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile );
       }
    }
 }
@@ -249,10 +223,4 @@ void MainWindow::setStatusBar(QString msg)
 void MainWindow::setStatusBar(QString msg, int timeOut)
 {
    statusBar()->showMessage(msg, timeOut);
-}
-
-void MainWindow::updateLaunchButtonState()
-{
-   bool ok = false;           //  BROOM m_expert->htmlOutputPresent(m_ui->output->text());
-   m_ui->display_PB->setEnabled(ok);
 }

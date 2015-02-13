@@ -1,10 +1,13 @@
 doxypressapp.qrc
 
+src/dialog_config.cpp
+src/dialog_config.h
 src/dialog_lookup.h
 src/dialog_lookup.cpp
 src/dialog_selectcfg.cpp
 src/dialog_selectcfg.h
 
+forms/dialog_config.ui
 forms/dialog_selectcfg.ui
 forms/dialog_lookup.ui
 forms/mainwindow.ui
@@ -24,3 +27,4 @@ src/support.cpp
 src/util.cpp
 src/util.h
 src/validate.cpp
+src/recent_files.cpp

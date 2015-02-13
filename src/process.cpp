@@ -17,6 +17,8 @@
 
 #include "mainwindow.h"
 
+#include <QFileInfo>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -25,73 +27,42 @@
 void MainWindow::runDoxyPress()
 {
    if (! m_running) {
+
+      // save the file
+      saveDoxy();
+
       QString path;
-
-#if defined(Q_OS_MACX)
-      path = qApp->applicationDirPath() + QString::fromAscii("/../Resources/");
-      qDebug() << tr("DoxyPress Path: ") << path;
-
-      if ( ! QFile(path + QString::fromAscii("doxypress")).exists() ) {
-
-         if ( QFile(QString::fromAscii("/usr/local/bin/doxypress")).exists() ) {
-            path = QString::fromAscii("/usr/local/bin/");
-
-         } else {
-            qDebug() << tr("Unable to find DoxyPress, make sure the program is in your $$PATH");
-            path = QString::fromAscii("");
-         }
-      }
-
-      qDebug() << tr("Running DoxyPress From: ") << path;
-#endif
-
-      QString destDir = m_ui->output_dir->text();
+      QString outputDir = m_ui->output_dir->text();
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
-
-      m_runProcess->setWorkingDirectory(destDir);
-
-      QStringList env = QProcess::systemEnvironment();
-
-      // set PWD environment variable
-      env.replaceInStrings(QRegExp(QString::fromAscii("^PWD=(.*)"), Qt::CaseInsensitive),
-                           QString::fromAscii("PWD=") + destDir);
-
-      m_runProcess->setEnvironment(env);
+      m_runProcess->setWorkingDirectory(outputDir);
 
       QStringList args;
-      args << QString::fromAscii("-b"); // make stdout unbuffered
-      args << QString::fromAscii("-");  // read config from stdin
+      args.append(m_curFile);
+      args.append("--b");           // make stdout unbuffered
 
-      m_outputLog->clear();
-      m_runProcess->start(path + QString::fromAscii("doxypress"), args);
+      m_ui->outputLog->clear();
+      m_runProcess->start(path + "echo", args);
 
       if (! m_runProcess->waitForStarted()) {
-         m_outputLog->append(QString::fromAscii("*** Failed to run DoxyPress\n"));
+         m_ui->outputLog->append("*** Failed to run DoxyPress\n");
          return;
-      }
-   }
+      }            
 
-
-/*    brooom - add this back in
-
-      QTextStream t(m_runProcess);
-      m_expert->writeConfig(t, false);
-      m_runProcess->closeWriteChannel();
-
+      //
       if (m_runProcess->state() == QProcess::NotRunning) {
-         m_outputLog->append("*** Failed to run DoxyPress\n");
+         m_ui->outputLog->append("*** Failed to run DoxyPress\n");
 
       } else {
-         m_saveLog->setEnabled(false);
+         m_ui->save_log_PB->setEnabled(false);
 
          m_running = true;
 
          m_ui->run_PB->setText(tr("Stop DoxyPress"));
          m_ui->runStatus->setText(tr("DoxyPress: Running"));
 
-         m_timer->start(1000);
+//B      m_timer->start(1000);
       }
 
    } else {
@@ -100,22 +71,19 @@ void MainWindow::runDoxyPress()
       m_ui->run_PB->setText(tr("Run DoxyPress"));
       m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
-      m_runProcess->kill();
-      m_timer->stop();      
+//B   m_runProcess->kill();
+//B   m_timer->stop();
    }
-
-*/
-
 }
 
 void MainWindow::readStdout()      
 {
    if (m_running) {      
       QByteArray data = m_runProcess->readAllStandardOutput();
-      QString text = QString::fromUtf8(data);
+      QString text    = QString::fromUtf8(data);
 
       if (! text.isEmpty()) {
-         m_outputLog->append(text.trimmed());
+         m_ui->outputLog->append(text.trimmed());
       }
    }
 }
@@ -123,55 +91,78 @@ void MainWindow::readStdout()
 void MainWindow::runComplete()
 {
    if (m_running) {
-      m_outputLog->append(tr("*** DoxyPress has completed\n"));
+      m_ui->outputLog->append(tr("*** DoxyPress has Completed\n"));
    } else {
-      m_outputLog->append(tr("*** DoxyPress was cancelled\n"));
+      m_ui->outputLog->append(tr("*** DoxyPress was Cancelled\n"));
    }
 
-   m_outputLog->ensureCursorVisible();
+   m_ui->outputLog->ensureCursorVisible();
 
-   m_run->setText(tr("Run DoxyPress"));
-   m_runStatus->setText(tr("Status: DoxyPress is not running"));
+   m_ui->run_PB->setText(tr("Run DoxyPress"));
+   m_ui->runStatus->setText(tr("Status: DoxyPress is not running"));
 
    m_running = false;
+   updateRunButtons();
 
-   updateLaunchButtonState();
-
-   m_saveLog->setEnabled(true);
+   m_ui->save_log_PB->setEnabled(true);
 }
 
-bool MainWindow::htmlOutputPresent(const QString &workingDir) const
-{      
-   bool retval = false;
+//  **
+QString MainWindow::getHtmlOutputIndex() const
+{
+   QString retval = this->pathName(m_curFile);
 
-/*
-   bool generateHtml = getBoolOption(m_options, QString::fromAscii("GENERATE_HTML"));
+   QString outputDir = m_ui->output_dir->text();
+   QString htmlDir   = m_ui->html_output->text();
 
-   if (! generateHtml || workingDir.isEmpty()) {
-      return retval;
+   if (QFileInfo(outputDir).isAbsolute())  {
+      // override
+      retval = outputDir;
+
+   } else if (! outputDir.isEmpty())   {
+      // append
+      retval += "/" + outputDir;
    }
 
-   QString indexFile = getHtmlOutputIndex(workingDir);
-   QFileInfo fi(indexFile);
 
-   retval = (fi.exists() && fi.isFile());
+   if (QFileInfo(htmlDir).isAbsolute())  {
+      // override
+      retval = htmlDir;
 
-*/
+   } else if (! htmlDir.isEmpty())  {
+      // append
+      retval += "/" + htmlDir;
+   }
+
+   retval += "/index.html";
 
    return retval;
 }
 
+
+bool MainWindow::htmlOutputPresent() const
+{
+   bool generateHtml = m_ui->gen_html_CB1->isChecked();
+   QString dir = m_ui->output_dir->text();
+
+   if (! generateHtml || dir.isEmpty()) {
+      return false;
+   }
+
+   QString pathHtml = getHtmlOutputIndex();
+   QFileInfo fi(pathHtml);
+
+   return (fi.exists() && fi.isFile());
+}
+
 void MainWindow::showHtmlOutput()
 {
+   QString pathHtml = getHtmlOutputIndex();
+   QFileInfo fi(pathHtml);
 
-/*   BROOM - put back in
+   // BROOM -- the following does not seem to work with IE
 
-
-   QString indexFile = m_expert->getHtmlOutputIndex(m_ui->source_output->text());
-   QFileInfo fi(indexFile);
-
-   // TODO: the following does not seem to work with IE
-
+/*
 #ifdef WIN32   
    ShellExecute(NULL, L"open", (LPCWSTR)fi.absoluteFilePath().utf16(), NULL, NULL, SW_SHOWNORMAL);
 
@@ -188,22 +179,35 @@ void MainWindow::showHtmlOutput()
 
 void MainWindow::saveLog()
 {
-   QString fn = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->output_dir->text() + QString::fromAscii("/doxpress_log.txt"));
+   QString logName = QFileDialog::getSaveFileName(this, tr("Save log file"),
+                                             m_ui->output_dir->text() + QString::fromAscii("/doxypress_log.txt"));
 
-   if (! fn.isEmpty()) {
-      QFile f(fn);
+   if (! logName.isEmpty()) {
+      QFile f(logName);
 
-      if (f.open(QIODevice::WriteOnly)) {
+      if (f.open(QIODevice::WriteOnly)) {       
 
-         QTextStream t(&f);
-         t << m_outputLog->toPlainText();
+         QString data = m_ui->outputLog->toPlainText();
+         f.write(data.toUtf8());
 
          statusBar()->showMessage(tr("Output log saved"));
 
       } else {
-         QMessageBox::warning(this, tr("Error Saving: ") + fn, tr("Unable to save file: ") + f.error());
+         QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());
 
       }
    }
 }
+
+void MainWindow::updateRunButtons()
+{
+   if (m_ui->outputLog->toPlainText().isEmpty())  {
+      m_ui->save_log_PB->setEnabled(false);
+   } else {
+      m_ui->save_log_PB->setEnabled(true);
+   }
+
+   bool isHtml = htmlOutputPresent();
+   m_ui->display_PB->setEnabled(isHtml);
+}
+

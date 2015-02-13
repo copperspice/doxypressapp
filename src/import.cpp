@@ -112,7 +112,7 @@ void MainWindow::convertDoxy(QByteArray data)
 
    //  ***
    // tab 2 - project
-   tempStr = convert_Str(data,"PROJECT_ENCODING");
+   tempStr = convert_Str(data,"DOXYFILE_ENCODING");
    m_ui->project_encoding->setText(tempStr);
 
    tempBool = convert_Bool(data, "CREATE_SUBDIRS");
@@ -167,7 +167,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "SEPARATE_MEMBER_PAGES");
    m_ui->separate_member_pages_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "TAB_SIZE");
+   tempInt = convert_Int(data, "TAB_SIZE");   
    m_ui->tab_size_SB->setValue(tempInt);
 
    tempText = convert_PlainText(data,"ALIASES");
@@ -343,7 +343,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->warn_undoc_parm_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data,"WARN_FORMAT");
-   m_ui->warn_forrmat->setText(tempStr);
+   m_ui->warn_format->setText(tempStr);
 
    tempStr = convert_Str(data,"WARN_LOGFILE");
    m_ui->warn_logfile->setText(tempStr);
@@ -353,11 +353,11 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data,"INPUT");
    m_ui->input_source->setPlainText(tempStr);
 
-   tempText = convert_Str(data,"INPUT_ENCODING");
-   m_ui->input_encoding->setText(tempText);
+   tempStr = convert_Str(data,"INPUT_ENCODING");
+   m_ui->input_encoding->setText(tempStr);
 
    tempText = convert_PlainText(data,"FILE_PATTERNS");
-   m_ui->file_patterns->setPlainText(tempStr);
+   m_ui->file_patterns->setPlainText(tempText);
 
    tempBool = convert_Bool(data,"RECURSIVE");
    m_ui->source_recursive_CB->setChecked(tempBool);
@@ -382,7 +382,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "EXAMPLE_RECURSIVE");
    m_ui->example_recursive_CB->setChecked(tempBool);
-
 
    tempText = convert_PlainText(data,"IMAGE_PATH");
    m_ui->image_path->setPlainText(tempText);
@@ -557,7 +556,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "DIRECTORY_GRAPH");
    m_ui->directory_graph_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "DOT_IMAGE_FORMAT");
+   tempStr = convert_Str(data, "DOT_IMAGE_FORMAT");
+   tempInt = m_ui->dot_image_format_CM->findText(tempStr);
    m_ui->dot_image_format_CM->setCurrentIndex(tempInt);
 
    tempBool = convert_Bool(data, "INTERACTIVE_SVG");
@@ -600,7 +600,7 @@ void MainWindow::convertDoxy(QByteArray data)
    //  ***
    // tab 3 - html
    tempStr = convert_Str(data, "HTML_OUTPUT");
-   m_ui->html_ouput->setText(tempStr);
+   m_ui->html_output->setText(tempStr);
 
    tempStr = convert_Str(data, "HTML_FILE_EXTENSION");
    m_ui->html_file_extension->setText(tempStr);
@@ -611,11 +611,11 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "HTML_FOOTER");
    m_ui->html_footer->setText(tempStr);
 
-   tempStr = convert_Str(data, "eTYLESHEET");
+   tempStr = convert_Str(data, "HTML_STYLESHEET");
    m_ui->html_stylesheet->setText(tempStr);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
-   m_ui->html_extra_stylesheet->setPlainText(tempStr);
+   m_ui->html_extra_stylesheet->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_FILES");
    m_ui->html_extra_files->setPlainText(tempText);
@@ -728,7 +728,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "USE_MATHJAX");
    m_ui->use_mathjax_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "MATHJAX_FORMAT");
+   tempStr = convert_Str(data, "MATHJAX_FORMAT");
+   tempInt = m_ui->mathjax_format_CM->findText(tempStr);
    m_ui->mathjax_format_CM->setCurrentIndex(tempInt);
 
    tempStr = convert_Str(data, "MATHJAX_RELPATH");
@@ -775,9 +776,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "COMPACT_LATEX");
    m_ui->compact_latex_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "PAPER_TYPE");
+   tempStr = convert_Str(data, "PAPER_TYPE");
+   tempInt = m_ui->paper_type_CM->findText(tempStr);
    m_ui->paper_type_CM->setCurrentIndex(tempInt);
-
 
    tempText = convert_PlainText(data,"EXTRA_PACKAGES");
    m_ui->latex_extra_packages->setPlainText(tempText);
@@ -857,6 +858,8 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->docbook_program_listing_CB->setChecked(tempBool);
 
    // final step
+   getIcon("load");
+
    validGet_html();
    validGet_latex();
    validGet_dot();
@@ -924,22 +927,85 @@ QString MainWindow::convert_Str(QByteArray data, QString key)
 }
 
 QString MainWindow::convert_PlainText(QByteArray data, QString key)
-{
-   // 
-
+{  
    QString tempStr;
 
    int posBeg = data.indexOf(key);
 
-   if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
+   if (posBeg >= 0) {
+      int posEnd    = data.indexOf("\n", posBeg);
+      int tempStart = posBeg;
+
+      while (posEnd >= 0) {
+         QString x = data.mid(tempStart, posEnd - tempStart);
+
+         if (x.contains("\\")) {
+            tempStart = posEnd + 1;
+            posEnd    = data.indexOf("\n", tempStart);
+
+         } else {
+            break;
+
+         }       
+      }
+
       QString x = data.mid(posBeg, posEnd - posBeg);
 
       posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1);
+      tempStr = x.mid(posBeg + 1).trimmed();
 
-      tempStr.replace("\"","");
-      tempStr = tempStr.trimmed();
+      // break into parts
+      QRegExp regexp("\\\\[ \\t]*[\\n\\r]+");
+      QStringList list = tempStr.split(regexp, QString::SkipEmptyParts);
+
+      // walk each item
+      int maxList = list.size();
+
+      for (int k = 0; k < maxList; ++k) {
+
+         QString tempStr = list.at(k);
+         tempStr = tempStr.trimmed();
+
+         if (tempStr.startsWith("\"") && tempStr.endsWith("\"")) {
+            int len = tempStr.length();
+            tempStr = tempStr.mid(1, len - 2);
+
+            list.replace(k, tempStr);
+
+         } else if (tempStr.contains(" ") )   {
+            // have multiple entries on one line
+            bool isFirst = true;
+
+            QStringList insertList = tempStr.split(" ", QString::SkipEmptyParts);
+            int maxInsertList = insertList.size();
+
+            for (int j = 0; j < maxInsertList; ++j) {
+               QString newStr = insertList.at(j);
+               newStr = newStr.trimmed();
+
+               if (isFirst)  {
+                  list.replace(k, newStr);
+                  isFirst = false;
+
+               } else {
+                  list.insert(k+j, newStr);
+
+                  // watch these two lines of code
+                  ++maxList;
+               }
+            }
+
+            // watch this
+            k += maxInsertList - 1;
+
+         } else {
+            list.replace(k, tempStr);
+
+         }
+      }
+
+      // turn it back into a string
+      tempStr = list.join(", ");
    }
 
    return tempStr;
@@ -1008,9 +1074,9 @@ void MainWindow::importDoxy()
 
          int retval = quest.exec();
 
-         if (retval == QMessageBox::Yes) {
-
-            m_ConfigFile = fname;
+         if (retval == QMessageBox::Yes) {            
+            m_curFile = fname;
+            m_struct.pathPrior = this->pathName(fname);
 
             clearAllFields();
             convertDoxy(data);
@@ -1018,9 +1084,10 @@ void MainWindow::importDoxy()
             saveDoxy_Internal();
 
             json_Write(PATH_PRIOR);
-//          if (! m_struct.XXX.contains(m_ConfigFile)) {
-//            addRecentFile(m_ConfigFile);
-//          }
+
+            if (! m_rf_List.contains(m_curFile)) {
+               rf_Update();
+            }
          }
 
       }

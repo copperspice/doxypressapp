@@ -128,6 +128,7 @@ void MainWindow::clearAllFields()
 
    // reset initial default values
    m_project_iconFN = "";
+   getIcon("load");
 
    m_ui->optimize_cplus_CB->setChecked(true);
    m_ui->gen_html_CB1->setChecked(true);
@@ -336,6 +337,8 @@ void MainWindow::validGet_dot()
 
 void MainWindow::setupLimits()
 {
+   QStringList data;
+
    QString temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
          "Chinese-Traditional, Croatian, Czech, Danish, Dutch, English, "
          "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
@@ -344,9 +347,30 @@ void MainWindow::setupLimits()
          "Macedonian, Norwegian, Persian (Farsi), Polish, Portuguese, Romanian, Russian, "
          "Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian, Vietnamese";
 
-   QStringList lang = temp.split(", ");
-   m_ui->output_language_CM->addItems(lang);
+   data = temp.split(", ");
+   m_ui->output_language_CM->addItems(data);
 
+   data.clear();
+   data.append("HTML-CSS");
+   data.append("NativeMML");
+   data.append("SVG");
+   m_ui->mathjax_format_CM->addItems(data);
+
+   data.clear();
+   data.append("png");
+   data.append("jpg");
+   data.append("gif");
+   data.append("svg");
+   m_ui->dot_image_format_CM->addItems(data);
+
+   data.clear();
+   data.append("a4");
+   data.append("letter");
+   data.append("legal");
+   data.append("executive");
+   m_ui->paper_type_CM->addItems(data);
+
+   //
    m_ui->tab_size_SB->setMinimum(1);
    m_ui->tab_size_SB->setMaximum(16);
 
@@ -1262,7 +1286,7 @@ static void configFullHelp()
             "messages should be written. If left blank the output is written to standard "
             "error (stderr).");
 
-   m_fullHelp.insert("INPUT",
+   m_fullHelp.insert("INPUT_SOURCE",
             "The INPUT tag is used to specify the files and/or directories that contain "
             "documented source files. You may enter file names like myfile.cpp or "
             "directories like /usr/src/myproject. Separate the files or directories with "
@@ -1292,7 +1316,7 @@ static void configFullHelp()
             "be searched for input files as well. "
             "The default value is: NO.");
 
-   m_fullHelp.insert("EXCLUDE",
+   m_fullHelp.insert("EXCLUDE_FILES",
             "The EXCLUDE tag can be used to specify files and/or directories that should be "
             "excluded from the INPUT source files. This way you can easily exclude a "
             "subdirectory from a directory tree whose root is specified with the INPUT tag. "
@@ -1324,10 +1348,9 @@ static void configFullHelp()
             "Note that the wildcards are matched against the file with absolute path, so to "
             "exclude all test directories use the pattern */test/*");
 
-   m_fullHelp.insert("EXAMPLE_PATH",
-            "The EXAMPLE_PATH tag can be used to specify one or more files or directories "
-            "that contain example code fragments that are included (see the \\include "
-            "command).");
+   m_fullHelp.insert("EXAMPLE_SOURCE",
+            "Used  to specify one or more files or directories "
+            "which contain example code fragments that are included (see the \\include command).");
 
    m_fullHelp.insert("EXAMPLE_PATTERNS",
             "If the value of the EXAMPLE_PATH tag contains directories, you can use the "
@@ -1383,7 +1406,7 @@ static void configFullHelp()
             "*.ext= (so without naming a filter). "
             "This tag requires that the tag FILTER_SOURCE_FILES is set to YES.");
 
-   m_fullHelp.insert("USE_MDFILE_AS_MAINPAGE",
+   m_fullHelp.insert("MDFILE_MAINPAGE",
             "If the USE_MDFILE_AS_MAINPAGE tag refers to the name of a markdown file that "
             "is part of the input, its contents will be placed on the main page "
             "(index.html). This can be useful if you have a project on for instance GitHub "

@@ -15,6 +15,7 @@
  *
 *************************************************************************/
 
+#include "dialog_config.h"
 #include "dialog_selectcfg.h"
 #include "mainwindow.h"
 
@@ -96,7 +97,7 @@ bool MainWindow::json_Read(Config trail)
       cnt = list.count();
 
       for (int k = 0; k < cnt; k++)  {
-//BROOM     m_rf_List.append(list.at(k).toString());
+         m_rf_List.append(list.at(k).toString());
       }
 
       // opened files
@@ -107,8 +108,7 @@ bool MainWindow::json_Read(Config trail)
          QString fname = list.at(k).toString();
 
          if (! fname.isEmpty()) {
-//BROOM     m_openedFiles.append(fname);
-//BROOM     m_openedModified.append(false);
+            m_openedFiles.append(fname);           
          }
       }
    }
@@ -159,14 +159,14 @@ bool MainWindow::json_Write(Option route, Config trail)
 
             break;
 
-          case PATH_PRIOR:
+          case PATH_PRIOR: 
             object.insert("pathPrior", m_struct.pathPrior);
             break;
 
          case RECENTFILE:
             {
-//BROOM        QJsonArray temp = QJsonArray::fromStringList(m_rf_List);
-//BROOM        object.insert("recent-files", temp);
+               QJsonArray temp = QJsonArray::fromStringList(m_rf_List);
+               object.insert("recent-files", temp);
                break;
             }
       }
@@ -328,10 +328,8 @@ void MainWindow::move_WizardCfg()
    m_jsonFname = settings.value("configName").toString();
 
    //
-// BROOM   Dialog_Config *dw = new Dialog_Config(m_jsonFname);
-// BROOM   int result = dw->exec();
-
-   int result = 0;
+   Dialog_Config *dw = new Dialog_Config(m_jsonFname);
+   int result = dw->exec();
 
    switch (result) {
       case QDialog::Rejected:
@@ -397,9 +395,7 @@ void MainWindow::move_WizardCfg()
 
       case 3:
          // rename
-// BROOM         QString newName = dw->get_newName();
-
-         QString newName = "";
+         QString newName = dw->get_newName();
 
          if (newName.isEmpty()) {
             csError("DoxyPressApp Settings", "No settings file name specified, unable to rename");
@@ -601,7 +597,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->warn_undoc_CB->setChecked(                object.value("warn-undoc").toBool());
    m_ui->warn_doc_error_CB->setChecked(            object.value("warn-doc-error").toBool());
    m_ui->warn_undoc_parm_CB->setChecked(           object.value("warn-undoc-parm").toBool());
-   m_ui->warn_forrmat->setText(                    object.value("warn-forrmat").toString());
+   m_ui->warn_format->setText(                     object.value("warn-format").toString());
    m_ui->warn_logfile->setText(                    object.value("warn-logfile").toString());
 
    // tab 2 -input
@@ -708,7 +704,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    //  ***
    // tab 3 - html
-   m_ui->html_ouput->setText(                      object.value("html-ouput").toString());
+   m_ui->html_output->setText(                     object.value("html-output").toString());
    m_ui->html_file_extension->setText(             object.value("html-file-extension").toString());
    m_ui->html_header->setText(                     object.value("html-header").toString());
    m_ui->html_footer->setText(                     object.value("html-footer").toString());
@@ -816,6 +812,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->docbook_program_listing_CB->setChecked(   object.value("docbook-program-listing").toBool());
 
    // set duplicate values
+   getIcon("load");
+
    setDuplicates();
    validGet_html();
    validGet_latex();
@@ -956,7 +954,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("warn-undoc",               m_ui->warn_undoc_CB->isChecked());
    object.insert("warn-doc-error",           m_ui->warn_doc_error_CB->isChecked());
    object.insert("warn-undoc-parm",          m_ui->warn_undoc_parm_CB->isChecked());
-   object.insert("warn-forrmat",             m_ui->warn_forrmat->text());
+   object.insert("warn-format",              m_ui->warn_format->text());
    object.insert("warn-logfile",             m_ui->warn_logfile->text());
 
    // tab 2 - input
@@ -1061,7 +1059,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    //  ***
    // tab 3 - html
-   object.insert("html-ouput",               m_ui->html_ouput->text());
+   object.insert("html-output",              m_ui->html_output->text());
    object.insert("html-file-extension",      m_ui->html_file_extension->text());
    object.insert("html-header",              m_ui->html_header->text());
    object.insert("html-footer",              m_ui->html_footer->text());

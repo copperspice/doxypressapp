@@ -81,7 +81,7 @@ MainWindow::MainWindow()
       }
    }
 
-   m_ConfigFile = "";
+   m_curFile = "";
    setDoxyTitle(false);
 
    setIconSize(QSize(32,32));
@@ -93,30 +93,31 @@ MainWindow::MainWindow()
       throw std::runtime_error("abort_no_message");
    }
 
-   // screen setup
-   createConnections();
-   createShortCuts();  
-
    // set up help & validation
    createMap();
 
-/*
    // recent files
    rf_CreateMenus();
 
    // recent files, context menu
    m_ui->menuFile->setContextMenuPolicy(Qt::CustomContextMenu);
-   connect(m_ui->menuFile, SIGNAL(customContextMenuRequested(const QPoint &)),   this, SLOT(showContext_Files(const QPoint &)));
+   connect(m_ui->menuFile, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(showContext_Files(const QPoint &)));
 
-   m_wizard->refresh();
-   updateLaunchButtonState();
-*/
+// m_timer = new QTimer;
+   m_runProcess = new QProcess;
+
+   m_running = false;
+   updateRunButtons();
 
    m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Project);
    m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
    m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
 
    m_ui->tabWidget->setCurrentIndex(0);
+
+   // screen setup
+   createConnections();
+   createShortCuts();
 
    setUnifiedTitleAndToolBarOnMac(true);
    setStatusBar(tr("Ready"));
@@ -185,7 +186,7 @@ void MainWindow::createConnections()
                                     SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
    // tab 1
-   connect(m_ui->icon_PB,             &QPushButton::clicked, this, [this](bool){ icon_PB(""); } );
+   connect(m_ui->icon_PB,             &QPushButton::clicked, this, [this](bool){ getIcon(); } );
    connect(m_ui->output_dir_PB,       SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
    connect(m_ui->html_colors_PB,      SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
 
@@ -213,8 +214,16 @@ void MainWindow::createConnections()
    // tab 3
 
 
-   // tab 4
 
+   // tab 4
+   connect(m_runProcess,      SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
+   connect(m_runProcess,      SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+
+   connect(m_ui->run_PB,      SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
+   connect(m_ui->display_PB,  SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
+   connect(m_ui->save_log_PB, SIGNAL(clicked()), this,  SLOT(saveLog()));
+
+// connect(m_timer,         SIGNAL(timeout()), this,  SLOT(readStdout()));
 
 }
 
@@ -365,44 +374,5 @@ QSize MainWindow::sizeHint() const
 {
    return QSize(1000, 600);
 }
-
-
-
-/*
-
-   m_runProcess = new QProcess;
-   m_running    = false;
-   m_timer      = new QTimer;
-
-   connect(m_runProcess,    SIGNAL(readyReadStandardOutput()), SLOT(readStdout()));
-   connect(m_runProcess,    SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(runComplete()));
-   connect(m_timer,         SIGNAL(timeout()), SLOT(readStdout()));
-   connect(m_run,           SIGNAL(clicked()), SLOT(runDoxyPress()));
-   connect(m_launchHtml,    SIGNAL(clicked()), SLOT(showHtmlOutput()));
-   connect(m_saveLog,       SIGNAL(clicked()), SLOT(saveLog()));
-   connect(showSettings,    SIGNAL(clicked()), SLOT(showSettings()));
-
-   connect(m_expert,        SIGNAL(changed()), SLOT(configChanged()));
-
-*/
-
-
-/*
-   missing icon on all windows
-   recent files
-   test move cfg file
-
-   add all widgets
-   ensure field names are correct
-
-   import old doxy file
-
-   enhande load/save CFG to json format
-
-   add RELOAD   
-   put in correct url for mannual() when ready
-
-   need to update m_modifed when doxy file changes
-*/
 
 

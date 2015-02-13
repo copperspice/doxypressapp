@@ -73,7 +73,6 @@ class MainWindow : public QMainWindow
 
       QString m_appPath;
       QString m_jsonFname;
-      QString m_ConfigFile;
 
       QString m_project_iconFN;
 
@@ -81,7 +80,7 @@ class MainWindow : public QMainWindow
 
       QString pathName(QString fileName) const;
 
-      void openDoxy_Internal(const QString fname);
+      bool openDoxy_Internal(const QString fname);
 
       void setStatusBar(QString msg);
       void setStatusBar(QString msg, int timeOut);
@@ -98,6 +97,7 @@ class MainWindow : public QMainWindow
    private :
       Ui::MainWindow *m_ui;
 
+      QString m_curFile;
       QStringList m_openedFiles;
 
       enum Config { CFG_STARTUP, CFG_DEFAULT };
@@ -118,14 +118,8 @@ class MainWindow : public QMainWindow
 
       QString getFile_CS(QString title, QString fname, QString filter);
 
-      bool htmlOutputPresent(const QString &workingDir) const;
-
-      void initTabs();
-
       bool querySave();
       void saveDoxy_Internal();
-
-      void updateLaunchButtonState();
 
       void setHelpColor(int option, QWidget *label);
       void setHelpText(QWidget *name);
@@ -146,23 +140,22 @@ class MainWindow : public QMainWindow
       QString getDataList(QJsonObject &object, QString fieldData);
       QJsonArray putDataList(QString fieldData);
 
-      QPushButton *m_run;
-      QPushButton *m_saveLog;
-      QPushButton *m_launchHtml;
-      QPushButton *m_launchPdf;
-      QTextEdit *m_outputLog;
-      QLabel *m_runStatus;
+      // recent files
+      QAction *rf_Actions[RECENT_FILES_MAX];
+      QStringList m_rf_List;
 
-      QSettings m_settings;
-
-      QMenu *m_recentMenu;
-      QStringList m_recentFiles;
+      void rf_CreateMenus();
+      void rf_Update();
+      void rf_UpdateActions();   
 
       QProcess *m_runProcess;
       QTimer *m_timer;
-
       bool m_running;
       bool m_modified;
+
+      QString getHtmlOutputIndex() const;
+      bool htmlOutputPresent() const;
+      void updateRunButtons();
 
       // validation
       void validGet_html();
@@ -194,7 +187,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, bool saveDoxyAs())
       CS_SLOT_2(saveDoxyAs)
 
-      //
+      // settings file
       CS_SLOT_1(Private, void importDoxy())
       CS_SLOT_2(importDoxy)
 
@@ -203,6 +196,22 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void save_WizardCfg())
       CS_SLOT_2(save_WizardCfg)
+
+      // recent files
+      CS_SLOT_1(Private, void showContext_Files(const QPoint &pt))
+      CS_SLOT_2(showContext_Files)
+
+      CS_SLOT_1(Private, void rf_Open())
+      CS_SLOT_2(rf_Open)
+
+      CS_SLOT_1(Private, void rf_ClearList())
+      CS_SLOT_2(rf_ClearList)
+
+      CS_SLOT_1(Private, void rf_DeleteName())
+      CS_SLOT_2(rf_DeleteName)
+
+      CS_SLOT_1(Private, void rf_RemoveFName())
+      CS_SLOT_2(rf_RemoveFName)
 
       // app level
       CS_SLOT_1(Private, void focusChanged(QWidget *, QWidget *))
@@ -225,8 +234,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_2(about)
 
       // tab 1
-      CS_SLOT_1(Private, void icon_PB(const QString route))
-      CS_SLOT_2(icon_PB)
+      CS_SLOT_1(Private, void getIcon(const QString route = ""))
+      CS_SLOT_2(getIcon)
 
       CS_SLOT_1(Private, void output_dir_PB())
       CS_SLOT_2(output_dir_PB)

@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -87,7 +87,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
@@ -1143,7 +1143,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -1230,7 +1230,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Brief member desc:</string>
+                <string>Brief Member Description:</string>
                </property>
                <property name="buddy">
                 <cstring>brief_member_desc_CB</cstring>
@@ -1260,7 +1260,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Abbreviate brief desc:</string>
+                <string>Abbreviate Brief Description:</string>
                </property>
                <property name="buddy">
                 <cstring>abbreviate_brief</cstring>
@@ -1332,7 +1332,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Repeat brief:</string>
+                <string>Repeat Brief Description:</string>
                </property>
                <property name="buddy">
                 <cstring>repeat_brief_CB</cstring>
@@ -3313,7 +3313,7 @@
                 <string>Format for warning messages:</string>
                </property>
                <property name="buddy">
-                <cstring>warn_forrmat</cstring>
+                <cstring>warn_format</cstring>
                </property>
               </widget>
              </item>
@@ -3379,7 +3379,7 @@
               </spacer>
              </item>
              <item row="5" column="1">
-              <widget class="QLineEdit" name="warn_forrmat">
+              <widget class="QLineEdit" name="warn_format">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -6439,7 +6439,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>3</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6706,7 +6706,7 @@
                 <string>HTML output directory:</string>
                </property>
                <property name="buddy">
-                <cstring>html_ouput</cstring>
+                <cstring>html_output</cstring>
                </property>
               </widget>
              </item>
@@ -6783,7 +6783,7 @@
               </widget>
              </item>
              <item row="1" column="3">
-              <widget class="QPushButton" name="html_ouput_PB">
+              <widget class="QPushButton" name="html_output_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -6807,7 +6807,7 @@
               </widget>
              </item>
              <item row="1" column="1" colspan="2">
-              <widget class="QLineEdit" name="html_ouput">
+              <widget class="QLineEdit" name="html_output">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -9378,15 +9378,12 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPlainTextEdit" name="outputLog">
+         <widget class="QTextEdit" name="outputLog">
           <property name="font">
            <font>
             <family>Courier</family>
             <pointsize>12</pointsize>
            </font>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -9797,7 +9794,7 @@
   <tabstop>warn_undoc_CB</tabstop>
   <tabstop>warn_doc_error_CB</tabstop>
   <tabstop>warn_undoc_parm_CB</tabstop>
-  <tabstop>warn_forrmat</tabstop>
+  <tabstop>warn_format</tabstop>
   <tabstop>warn_logfile</tabstop>
   <tabstop>warn_logfile_PB</tabstop>
   <tabstop>input_source</tabstop>
@@ -9916,8 +9913,8 @@
   <tabstop>dot_cleanup_CB</tabstop>
   <tabstop>output_TreeWidget</tabstop>
   <tabstop>gen_html_CB2</tabstop>
-  <tabstop>html_ouput</tabstop>
-  <tabstop>html_ouput_PB</tabstop>
+  <tabstop>html_output</tabstop>
+  <tabstop>html_output_PB</tabstop>
   <tabstop>html_file_extension</tabstop>
   <tabstop>html_header</tabstop>
   <tabstop>html_header_PB</tabstop>

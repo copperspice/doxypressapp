@@ -22,7 +22,7 @@
 #include <QRegExp>
 
 // tab 1
-void MainWindow::icon_PB(const QString route)
+void MainWindow::getIcon(const QString route)
 {
    QString iconName;
 
@@ -30,7 +30,7 @@ void MainWindow::icon_PB(const QString route)
       iconName = m_project_iconFN;
 
    } else {
-      QString path = pathName(m_ConfigFile);
+      QString path = pathName(m_curFile);
       iconName = QFileDialog::getOpenFileName(this, tr("Select Project Icon"), path);
    }
 
@@ -60,11 +60,11 @@ void MainWindow::icon_PB(const QString route)
 
 void MainWindow::output_dir_PB()
 {
-   QString path    = pathName(m_ConfigFile);
+   QString path    = pathName(m_curFile);
    QString dirName = QFileDialog::getExistingDirectory(this, tr("Select destination directory"), path);
    QDir dir(path);
 
-   if (! m_ConfigFile.isEmpty() && dir.exists()) {
+   if (! m_curFile.isEmpty() && dir.exists()) {
       dirName = dir.relativeFilePath(dirName);
    }
 
