@@ -615,7 +615,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_stylesheet->setText(tempStr);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
-   m_ui->html_extra_stylesheet->setPlainText(tempText);
+   m_ui->html_extra_stylesheets->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_FILES");
    m_ui->html_extra_files->setPlainText(tempText);

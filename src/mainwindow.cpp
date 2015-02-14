@@ -150,57 +150,39 @@ void MainWindow::about()
 
 void MainWindow::createConnections()
 {
-   // file
-   connect(m_ui->actionNew,        SIGNAL(triggered()), this, SLOT(newDoxy()));
-   connect(m_ui->actionOpen,       SIGNAL(triggered()), this, SLOT(openDoxy()));
-   connect(m_ui->actionReload,     SIGNAL(triggered()), this, SLOT(reloadDoxy()));
+   // menu options
+   connect(m_ui->actionNew,           SIGNAL(triggered()), this, SLOT(newDoxy()));
+   connect(m_ui->actionOpen,          SIGNAL(triggered()), this, SLOT(openDoxy()));
+   connect(m_ui->actionReload,        SIGNAL(triggered()), this, SLOT(reloadDoxy()));
 
-   connect(m_ui->actionSave,       SIGNAL(triggered()), this, SLOT(saveDoxy()));
-   connect(m_ui->actionSave_As,    SIGNAL(triggered()), this, SLOT(saveDoxyAs()));
+   connect(m_ui->actionSave,          SIGNAL(triggered()), this, SLOT(saveDoxy()));
+   connect(m_ui->actionSave_As,       SIGNAL(triggered()), this, SLOT(saveDoxyAs()));
+   connect(m_ui->actionExit,          SIGNAL(triggered()), this, SLOT(close()));
 
-   connect(m_ui->actionExit,       SIGNAL(triggered()), this, SLOT(close()));
+   connect(m_ui->actionImport,        &QAction::triggered, this, [this](bool){ importDoxy(); } );
+   connect(m_ui->actionMove_Settings, &QAction::triggered, this, [this](bool){ move_Settings(); } );
+   connect(m_ui->actionSave_Settings, &QAction::triggered, this, [this](bool){ save_Settings(); } );
 
-   // settings
-   connect(m_ui->actionImport,          &QAction::triggered, this, [this](bool){ importDoxy(); } );
-   connect(m_ui->actionMove_WizardCfg,  &QAction::triggered, this, [this](bool){ move_WizardCfg(); } );
-   connect(m_ui->actionSave_WizardCfg,  &QAction::triggered, this, [this](bool){ save_WizardCfg(); } );
+   connect(m_ui->actionDoxyHelp,      SIGNAL(triggered()), this, SLOT(manual()));
+   connect(m_ui->actionAbout,         SIGNAL(triggered()), this, SLOT(about()));
 
-   // help
-   connect(m_ui->actionDoxyHelp,    SIGNAL(triggered()), this, SLOT(manual()));
-   connect(m_ui->actionAbout,       SIGNAL(triggered()), this, SLOT(about()));
+   // tabs
+   connect(m_ui->setup_TreeWidget,    SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+                                      SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
-   //
+   connect(m_ui->build_TreeWidget,    SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+                                      SLOT(buildPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+
+   connect(m_ui->output_TreeWidget,   SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+                                      SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+
+   // app level
    connect(qApp,  SIGNAL(focusChanged(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
-
-   //connect(qApp,  SIGNAL( ??(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
-
-
-   // connections for tabs
-   connect(m_ui->setup_TreeWidget,  SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                    SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
-   connect(m_ui->build_TreeWidget,  SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                    SLOT(buildPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
-   connect(m_ui->output_TreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                    SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
-   // tab 1
-   connect(m_ui->icon_PB,             &QPushButton::clicked, this, [this](bool){ getIcon(); } );
-   connect(m_ui->output_dir_PB,       SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
-   connect(m_ui->html_colors_PB,      SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
-
-   // tab 2 - lookups
-   connect(m_ui->input_source_PB,     SIGNAL(clicked()),   this, SLOT(input_source_PB()));
-   connect(m_ui->file_patterns_PB,    SIGNAL(clicked()),   this, SLOT(file_patterns_PB()));
-   connect(m_ui->exclude_files_PB,    SIGNAL(clicked()),   this, SLOT(exclude_files_PB()));
-   connect(m_ui->exclude_patterns_PB, SIGNAL(clicked()),   this, SLOT(exclude_patterns_PB()));
-   connect(m_ui->exclude_symbols_PB,  SIGNAL(clicked()),   this, SLOT(exclude_symbols_PB()));
-
-   // broom - missing a bunch of these
+   //  connect(qApp,  SIGNAL( ??(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
 
 
-   // tab 2 - valid
+
+   // tab 1 - valid
    connect(m_ui->buttonGroup_html,    SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_html(QAbstractButton *)));
 
@@ -211,17 +193,119 @@ void MainWindow::createConnections()
                                       SLOT(validSet_dot(QAbstractButton *)));
 
 
-   // tab 3
+   // tab 1 - lookups
+   connect(m_ui->icon_PB,                   &QPushButton::clicked, this, [this](bool){ getIcon(); } );
+   connect(m_ui->output_dir_PB,             SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
+   connect(m_ui->html_colors_PB,            SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
 
+   // tab 2- look up (general)
+   connect(m_ui->abbreviate_brief_PB,       SIGNAL(clicked()), this, SLOT(abbreviate_brief_PB()));
+   connect(m_ui->strip_from_path_PB,        SIGNAL(clicked()), this, SLOT(strip_from_path_PB()));
+   connect(m_ui->strip_from_inc_path_PB,    SIGNAL(clicked()), this, SLOT(strip_from_inc_path_PB()));
+   connect(m_ui->aliases_PB,                SIGNAL(clicked()), this, SLOT(aliases_PB()));
+   connect(m_ui->tcl_subst_PB,              SIGNAL(clicked()), this, SLOT(tcl_subst_PB()));
+   connect(m_ui->extension_mapping_PB,      SIGNAL(clicked()), this, SLOT(extension_mapping_PB()));
 
+   // tab 2- look up (build)
+   connect(m_ui->enabled_sections_PB,       SIGNAL(clicked()), this, SLOT(enabled_sections_PB()));
+   connect(m_ui->file_version_filter_PB,    SIGNAL(clicked()), this, SLOT(file_version_filter_PB()));
+   connect(m_ui->layout_file_PB,            SIGNAL(clicked()), this, SLOT(layout_file_PB()));
+   connect(m_ui->cite_bib_files_PB,         SIGNAL(clicked()), this, SLOT(cite_bib_files_PB()));
+
+   // tab 2- look up (messages)
+   connect(m_ui->warn_logfile_PB,           SIGNAL(clicked()), this, SLOT(warn_logfile_PB()));
+
+   // tab 2- look up (input)
+   connect(m_ui->input_source_PB,           SIGNAL(clicked()),   this, SLOT(input_source_PB()));
+   connect(m_ui->file_patterns_PB,          SIGNAL(clicked()),   this, SLOT(file_patterns_PB()));
+   connect(m_ui->exclude_files_PB,          SIGNAL(clicked()),   this, SLOT(exclude_files_PB()));
+   connect(m_ui->exclude_patterns_PB,       SIGNAL(clicked()),   this, SLOT(exclude_patterns_PB()));
+   connect(m_ui->exclude_symbols_PB,        SIGNAL(clicked()),   this, SLOT(exclude_symbols_PB()));
+
+   connect(m_ui->example_source_PB,          SIGNAL(clicked()), this, SLOT(example_source_PB()));
+   connect(m_ui->example_patterns_PB,        SIGNAL(clicked()), this, SLOT(example_patterns_PB()));
+   connect(m_ui->image_path_PB,              SIGNAL(clicked()), this, SLOT(image_path_PB()));
+   connect(m_ui->input_filter_PB,            SIGNAL(clicked()), this, SLOT(input_filter_PB()));
+   connect(m_ui->filter_patterns_PB,         SIGNAL(clicked()), this, SLOT(filter_patterns_PB()));
+   connect(m_ui->filter_source_patterns_PB,  SIGNAL(clicked()), this, SLOT(filter_source_patterns_PB()));
+
+   // tab 2- look up (browser)
+   connect(m_ui->clang_options_PB,          SIGNAL(clicked()), this, SLOT(clang_options_PB()));
+
+   // tab 2- look up (index)
+   connect(m_ui->ignore_prefix_PB,          SIGNAL(clicked()), this, SLOT(ignore_prefix_PB()));
+
+   // tab 2- look up (preprocessor)
+   connect(m_ui->include_path_PB,           SIGNAL(clicked()), this, SLOT(include_path_PB()));
+   connect(m_ui->include_file_patterns_PB,  SIGNAL(clicked()), this, SLOT(include_file_patterns_PB()));
+   connect(m_ui->predefined_macros_PB,      SIGNAL(clicked()), this, SLOT(predefined_macros_PB()));
+   connect(m_ui->expand_as_defined_PB,      SIGNAL(clicked()), this, SLOT(expand_as_defined_PB()));
+
+   // tab 2- look up (external)
+   connect(m_ui->tag_files_PB,              SIGNAL(clicked()), this, SLOT(tag_files_PB()));
+   connect(m_ui->gen_tagfile_PB,            SIGNAL(clicked()), this, SLOT(gen_tagfile_PB()));
+   connect(m_ui->perl_path_PB,              SIGNAL(clicked()), this, SLOT(perl_path_PB()));
+
+   // tab 2- look up (dot)
+   connect(m_ui->mscgen_path_PB,            SIGNAL(clicked()), this, SLOT(mscgen_path_PB()));
+   connect(m_ui->dia_path_PB,               SIGNAL(clicked()), this, SLOT(dia_path_PB()));
+   connect(m_ui->dot_font_name_PB,          SIGNAL(clicked()), this, SLOT(dot_font_name_PB()));
+   connect(m_ui->dot_font_path_PB,          SIGNAL(clicked()), this, SLOT(dot_font_path_PB()));
+
+   connect(m_ui->dot_path_PB,               SIGNAL(clicked()), this, SLOT(dot_path_PB()));
+   connect(m_ui->dot_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dot_file_dirs_PB()));
+   connect(m_ui->msc_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(msc_file_dirs_PB()));
+   connect(m_ui->dia_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dia_file_dirs_PB()));
+   connect(m_ui->platuml_jar_path_PB,       SIGNAL(clicked()), this, SLOT(platuml_jar_path_PB()));
+
+   // tab 3 look up (html)
+   connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));
+   connect(m_ui->html_header_PB,            SIGNAL(clicked()), this, SLOT(html_header_PB()));
+   connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));
+   connect(m_ui->html_stylesheet_PB,        SIGNAL(clicked()), this, SLOT(html_stylesheet_PB()));
+   connect(m_ui->html_extra_stylesheets_PB, SIGNAL(clicked()), this, SLOT(html_extra_stylesheets_PB()));
+   connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
+
+   connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
+   connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
+   connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
+   connect(m_ui->qhg_location_PB,           SIGNAL(clicked()), this, SLOT(qhg_location_PB()));
+
+   connect(m_ui->mathjax_extensions_PB,     SIGNAL(clicked()), this, SLOT(mathjax_extensions_PB()));
+   connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
+   connect(m_ui->extra_search_mappings_PB,  SIGNAL(clicked()), this, SLOT(extra_search_mappings_PB()));
+
+   // tab 3 look up (latex)
+   connect(m_ui->latex_output_PB,           SIGNAL(clicked()), this, SLOT(latex_output_PB()));
+   connect(m_ui->latex_cmd_name_PB,         SIGNAL(clicked()), this, SLOT(latex_cmd_name_PB()));
+   connect(m_ui->make_index_cmd_name_PB,    SIGNAL(clicked()), this, SLOT(make_index_cmd_name_PB()));
+
+   connect(m_ui->latex_extra_packages_PB,   SIGNAL(clicked()), this, SLOT(latex_extra_packages_PB()));
+   connect(m_ui->latex_header_PB,           SIGNAL(clicked()), this, SLOT(latex_header_PB()));
+   connect(m_ui->latex_footer_PB,           SIGNAL(clicked()), this, SLOT(latex_footer_PB()));
+   connect(m_ui->latex_extra_files_PB,      SIGNAL(clicked()), this, SLOT(latex_extra_files_PB()));
+
+   // tab 3 look up (rtf)
+   connect(m_ui->rtf_output_PB,       SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
+   connect(m_ui->rtf_stylesheet_PB,   SIGNAL(clicked()),   this, SLOT(rtf_stylesheet_PB()));
+   connect(m_ui->rtf_extension_PB,    SIGNAL(clicked()),   this, SLOT(rtf_extension_PB()));
+
+   // tab 3 look up (man)
+   connect(m_ui->man_output_PB,       SIGNAL(clicked()),   this, SLOT(man_output_PB()));
+
+   // tab 3 look up (xml)
+   connect(m_ui->xml_output_PB,       SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
+
+   // tab 3 look up (docbook)
+   connect(m_ui->docbook_output_PB,   SIGNAL(clicked()),   this, SLOT(docbook_output_PB()));
 
    // tab 4
-   connect(m_runProcess,      SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
-   connect(m_runProcess,      SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+   connect(m_runProcess,              SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
+   connect(m_runProcess,              SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
 
-   connect(m_ui->run_PB,      SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
-   connect(m_ui->display_PB,  SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
-   connect(m_ui->save_log_PB, SIGNAL(clicked()), this,  SLOT(saveLog()));
+   connect(m_ui->run_PB,              SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
+   connect(m_ui->display_PB,          SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
+   connect(m_ui->save_log_PB,         SIGNAL(clicked()), this,  SLOT(saveLog()));
 
 // connect(m_timer,         SIGNAL(timeout()), this,  SLOT(readStdout()));
 

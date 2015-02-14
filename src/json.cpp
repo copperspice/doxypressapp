@@ -322,7 +322,7 @@ bool MainWindow::json_CreateNew()
 }
 
 // **
-void MainWindow::move_WizardCfg()
+void MainWindow::move_Settings()
 {
    QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
@@ -426,7 +426,7 @@ void MainWindow::move_WizardCfg()
    }
 }
 
-void MainWindow::save_WizardCfg()
+void MainWindow::save_Settings()
 {
    json_Write(CLOSE);
 
@@ -709,7 +709,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->html_header->setText(                     object.value("html-header").toString());
    m_ui->html_footer->setText(                     object.value("html-footer").toString());
    m_ui->html_stylesheet->setText(                 object.value("html-stylesheet").toString());
-   m_ui->html_extra_stylesheet->setPlainText(      getDataList(object, "html-extra-stylesheet"));
+   m_ui->html_extra_stylesheets->setPlainText(      getDataList(object, "html-extra-stylesheets"));
    m_ui->html_extra_files->setPlainText(           getDataList(object, "html-extra-files"));
 
    m_ui->html_colorstyle_hue->setValue(            object.value("html-colorstyle-hue").toInt());
@@ -1064,7 +1064,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("html-header",              m_ui->html_header->text());
    object.insert("html-footer",              m_ui->html_footer->text());
    object.insert("html-stylesheet",          m_ui->html_stylesheet->text());
-   object.insert("html-extra-stylesheet",    putDataList(m_ui->html_extra_stylesheet->toPlainText()));
+   object.insert("html-extra-stylesheets",   putDataList(m_ui->html_extra_stylesheets->toPlainText()));
    object.insert("html-extra-files",         putDataList(m_ui->html_extra_files->toPlainText()));
 
    object.insert("html-colorstyle-hue",      m_ui->html_colorstyle_hue->value());

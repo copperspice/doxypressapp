@@ -15,6 +15,7 @@
  *
 *************************************************************************/
 
+#include "dialog_xp_getdir.h"
 #include "mainwindow.h"
 
 #include <QFileInfo>
@@ -35,7 +36,46 @@ void MainWindow::closeEvent(QCloseEvent *event)
 //   setDoxyTitle(true);
 //}
 
-QString MainWindow::getFile_CS(QString title, QString fname, QString filter)
+QString MainWindow::get_DirPath(QString message, QString path)
+{
+   QFileDialog::Options options;
+   options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks;
+
+   QString retval;
+
+#ifdef Q_OS_WIN
+
+   if (QSysInfo::WindowsVersion < QSysInfo::WV_VISTA) {
+
+      Dialog_XP_GetDir *dw = new Dialog_XP_GetDir(this, message, path, options);
+      int result = dw->exec();
+
+      if (result == QDialog::Accepted) {
+         path = dw->getDirectory();
+      }
+
+   } else {
+      path = QFileDialog::getExistingDirectory(this, message, path, options);
+
+   }
+
+#else
+   // on X11 the title bar may not be displayed
+   path = QFileDialog::getExistingDirectory(this, message, path, options);
+
+#endif
+
+   if (! path.isEmpty()) {
+      // silly adjust for platform slash issue
+
+      QDir temp(path + "/");
+      retval = temp.canonicalPath() + "/";
+   }
+
+   return retval;
+}
+
+QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 {
    QString selectedFilter;
    QFileDialog::Options options;

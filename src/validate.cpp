@@ -127,6 +127,8 @@ void MainWindow::clearAllFields()
    }
 
    // reset initial default values
+   m_ui->project_name->setText("My Project");
+
    m_project_iconFN = "";
    getIcon("load");
 
@@ -138,7 +140,7 @@ void MainWindow::clearAllFields()
    m_ui->html_colorstyle_gamma->setValue(80);
 
    m_ui->diagram_built_in_RB->setChecked(true);
-   m_ui->class_diagrams_CB->setChecked(true);
+   m_ui->dot_class_graph_CB1->setChecked(true);
    m_ui->dot_collaboration_CB1->setChecked(true);
    m_ui->dot_hierarchy_CB1->setChecked(true);
    m_ui->dot_include_CB1->setChecked(true);
@@ -190,6 +192,7 @@ void MainWindow::clearAllFields()
    // tab 2 - external
 
    // tab 2 - dot
+   m_ui->class_diagrams_CB->setChecked(true);
 
    // tab 3 - all of them
 
@@ -1170,7 +1173,7 @@ static void configFullHelp()
             "list. This list is created by putting \\bug commands in the documentation. "
             "The default value is: YES.");
 
-   m_fullHelp.insert("GENE_DEPRECATE_LIST",
+   m_fullHelp.insert("GEN_DEPRECATE_LIST",
             "The GENERATE_DEPRECATEDLIST tag can be used to enable (YES) or disable (NO) "
             "the deprecated list. This list is created by putting \\deprecated commands in "
             "the documentation. "
@@ -1521,7 +1524,7 @@ static void configFullHelp()
             "while generating the index headers. "
             "This tag requires that the tag ALPHABETICAL_INDEX is set to YES.");
 
-   m_fullHelp.insert("GENERATE_HTML",
+   m_fullHelp.insert("GEN_HTML",
             "If the GENERATE_HTML tag is set to YES, DoxyPress will generate HTML output "
             "The default value is: YES.");
 
@@ -1530,52 +1533,44 @@ static void configFullHelp()
             "relative path is entered the value of OUTPUT_DIRECTORY will be put in front of "
             "it. "
             "The default directory is: html. "
-            "This tag requires that the tag GENERATE_HTML is set to YES.");
+            "This tag requires the tag GENERATE_HTML is set to YES.");
 
    m_fullHelp.insert("HTML_FILE_EXTENSION",
             "The HTML_FILE_EXTENSION tag can be used to specify the file extension for each "
             "generated HTML page (for example: .htm, .php, .asp). "
             "The default value is: .html. "
-            "This tag requires that the tag GENERATE_HTML is set to YES.");
+            "This tag requires the tag GENERATE_HTML is set to YES.");
 
    m_fullHelp.insert("HTML_HEADER",
-            "The HTML_HEADER tag can be used to specify a user-defined HTML header file for "
-            "each generated HTML page. If the tag is left blank DoxyPress will generate a "
-            "standard header. "
-            " "
-            "To get valid HTML the header file that includes any scripts and style sheets "
-            "that DoxyPress needs, which is dependent on the configuration options used (e.g. "
-            "the setting GENERATE_TREEVIEW). It is highly recommended to start with a "
-            "default header using "
-            "DoxyPress -w html new_header.html new_footer.html new_stylesheet.css "
-            "YourConfigFile "
-            "and then modify the file new_header.html. See also section \"DoxyPress usage\" "
-            "for information on how to generate the default header that DoxyPress normally "
-            "uses. "
-            "Note: The header is subject to change so you typically have to regenerate the "
-            "default header when upgrading to a newer version of DoxyPress. For a description "
-            "of the possible markers and block names see the documentation. "
-            "This tag requires that the tag GENERATE_HTML is set to YES.");
+            "Used to specify a user-defined HTML header file for each generated HTML page. "
+            "If the tag is left blank DoxyPress will generate a standard header."
+            "\n"
+            "For valid HTML the header file, which includes any scripts and style sheets, "
+            "is dependent on the configuration options used (for example, GENERATE_TREEVIEW). "
+            "Start with a default header and modify the file as required. "
+            "Run \'DoxyPress --help\' for the syntax to generate a default header "
+            "\n"
+            "This tag requires the tag GENERATE_HTML is set to YES.");
 
    m_fullHelp.insert("HTML_FOOTER",
             "The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each "
             "generated HTML page. If the tag is left blank DoxyPress will generate a standard "
             "footer. See HTML_HEADER for more information on how to generate a default "
-            "footer and what special commands can be used inside the footer. See also "
-            "section \"DoxyPress usage\" for information on how to generate the default footer "
-            "that DoxyPress normally uses. "
-            "This tag requires that the tag GENERATE_HTML is set to YES.");
+            "footer and what special commands can be used inside the footer. "
+            "Run \'DoxyPress --help\' for the syntax to generate a default footer "
+            "\n"
+            "This tag requires the tag GENERATE_HTML is set to YES.");
 
    m_fullHelp.insert("HTML_STYLESHEET",
-            "The HTML_STYLESHEET tag can be used to specify a user-defined cascading style "
-            "sheet that is used by each HTML page. It can be used to fine-tune the look of "
-            "the HTML output. If left blank DoxyPress will generate a default style sheet. "
-            "See also section \"DoxyPress usage\" for information on how to generate the style "
-            "sheet that DoxyPress normally uses. "
-            "Note: It is recommended to use HTML_EXTRA_STYLESHEET instead of this tag, as "
-            "it is more robust and this tag (HTML_STYLESHEET) will in the future become "
-            "obsolete. "
-            "This tag requires that the tag GENERATE_HTML is set to YES.");
+            "The HTML_STYLESHEET tag can be used to specify a user-defined CSS file "
+            "If left blank DoxyPress will generate a default style sheet. "
+            "Run \'DoxyPress --help\' for the syntax to generate a default css page "
+            "\n"
+            "Note: It is recommended to use HTML_EXTRA_STYLESHEET insteadas "
+            "it is more robust and this tag is being deprecated. "
+            "This tag requires the tag GENERATE_HTML is set to YES.");
+
+// ?
 
    m_fullHelp.insert("HTML_EXTRA_STYLESHEET",
             "The HTML_EXTRA_STYLESHEET tag can be used to specify additional user-defined "
@@ -1780,14 +1775,14 @@ static void configFullHelp()
             "filters). "
             "This tag requires that the tag GENERATE_QHP is set to YES.");
 
-   m_fullHelp.insert("QHP_CUST_FILTER_ATTRS",
+   m_fullHelp.insert("QHP_CUST_FILTER_ATTRIB",
             "The QHP_CUST_FILTER_ATTRS tag specifies the list of the attributes of the "
             "custom filter to add. For more information please see Qt Help Project / Custom "
             "Filters (see: http://qt-project.org/doc/qt-4.8/qthelpproject.html#custom- "
             "filters). "
             "This tag requires that the tag GENERATE_QHP is set to YES.");
 
-   m_fullHelp.insert("QHP_SECT_FILTER_ATTRS",
+   m_fullHelp.insert("QHP_SECTTION_FILTER_ATTRIB",
             "The QHP_SECT_FILTER_ATTRS tag specifies the list of the attributes this "
             "project's filter section matches. Qt Help Project / Filter Attributes (see: "
             "http://qt-project.org/doc/qt-4.8/qthelpproject.html#filter-attributes). "
@@ -1799,7 +1794,7 @@ static void configFullHelp()
             "generated .qhp file. "
             "This tag requires that the tag GENERATE_QHP is set to YES.");
 
-   m_fullHelp.insert("GENERATE_ECLIPSEHELP",
+   m_fullHelp.insert("GEN_ECLIPSEHELP",
             "If the GENERATE_ECLIPSEHELP tag is set to YES, additional index files will be "
             "generated, together with the HTML files, they form an Eclipse help plugin. To "
             "install this plugin and make it available under the help contents menu in "
@@ -2058,17 +2053,16 @@ static void configFullHelp()
    m_fullHelp.insert("LATEX_HEADER",
             "The LATEX_HEADER tag can be used to specify a personal LaTeX header for the "
             "generated LaTeX document. The header should contain everything until the first "
-            "chapter. If it is left blank DoxyPress will generate a standard header. See "
-            "section \"DoxyPress usage\" for information on how to let DoxyPress write the "
-            "default header to a separate file. "
-            " "
-            "Note: Only use a user-defined header if you know what you are doing! The "
+            "chapter. If it is left blank DoxyPress will generate a standard header. "
+            "Run \'DoxyPress --help\' for the syntax to generate a default header "
+            "\n"
+            "Note: Changing this header should only be done by experinece users. The "
             "following commands have a special meaning inside the header: $title, "
             "$datetime, $date, $DoxyPressversion, $projectname, $projectnumber, "
             "$projectbrief, $projectlogo. DoxyPress will replace $title with the empty "
             "string, for the replacement values of the other commands the user is referred "
             "to HTML_HEADER. "
-            "This tag requires that the tag GENERATE_LATEX is set to YES.");
+            "This tag requires the tag GENERATE_LATEX is set to YES.");
 
    m_fullHelp.insert("LATEX_FOOTER",
             "The LATEX_FOOTER tag can be used to specify a personal LaTeX footer for the "
@@ -2665,4 +2659,4 @@ static void configFullHelp()
             "files that are used to generate the various graphs. "
             "The default value is: YES. "
             "This tag requires that the tag HAVE_DOT is set to YES.");
-   }
+}

@@ -7,7 +7,7 @@ gccpath=/c/MingW/bin
 gcclibs=libgcc_s_sjlj-1  libstdc++-6  libwinpthread-1
 
 # list of CopperSpice libraries
-cslibs=Core Gui Xml
+cslibs=Core Gui Network Xml 
 
 # location of includes
 AM_CXXFLAGS+=-I../src
@@ -56,6 +56,10 @@ VPATH = ../
 # linking
 DoxyPressApp_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
+if OSTYPE_WIN
+   # used by xp only
+   DoxyPressApp_LDFLAGS+=-lnetapi32 -lmpr
+endif
 
 DoxyPressApp_SOURCES = \
    src/colors.cpp  \
@@ -63,6 +67,7 @@ DoxyPressApp_SOURCES = \
    src/dialog_config.h   \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
+   src/dialog_xp_getdir.cpp \
    src/process.cpp \
    src/import.cpp \
    src/json.cpp \
@@ -79,7 +84,9 @@ FORMS = \
    forms/dialog_config.ui \
    forms/dialog_lookup.ui \
    forms/dialog_selectcfg.ui \
+   forms/dialog_xp_getdir.ui \
    forms/mainwindow.ui
+
 
 
 RESOURCES = doxypressapp.qrc

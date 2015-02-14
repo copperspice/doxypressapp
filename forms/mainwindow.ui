@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -87,7 +87,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
@@ -1143,7 +1143,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>4</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -3049,7 +3049,7 @@
               </spacer>
              </item>
              <item row="7" column="3">
-              <widget class="QPushButton" name="pushButton_4">
+              <widget class="QPushButton" name="layout_file_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -3067,7 +3067,7 @@
               </widget>
              </item>
              <item row="8" column="3">
-              <widget class="QPushButton" name="source_input_PB_14">
+              <widget class="QPushButton" name="cite_bib_files_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -3116,7 +3116,7 @@
               </widget>
              </item>
              <item row="0" column="3">
-              <widget class="QPushButton" name="source_input_PB_13">
+              <widget class="QPushButton" name="enabled_sections_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -3156,7 +3156,7 @@
               </widget>
              </item>
              <item row="6" column="3">
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="file_version_filter_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -4040,7 +4040,7 @@
               </widget>
              </item>
              <item row="0" column="3">
-              <widget class="QPushButton" name="example_souce_PB">
+              <widget class="QPushButton" name="example_source_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -6439,7 +6439,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6616,7 +6616,7 @@
                 <string>HTML Extra Stylesheets:</string>
                </property>
                <property name="buddy">
-                <cstring>html_extra_stylesheet</cstring>
+                <cstring>html_extra_stylesheets</cstring>
                </property>
               </widget>
              </item>
@@ -6837,7 +6837,7 @@
               </widget>
              </item>
              <item row="7" column="3">
-              <widget class="QPushButton" name="html_extra_stylesheet_PB">
+              <widget class="QPushButton" name="html_extra_stylesheets_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -6861,7 +6861,7 @@
               </widget>
              </item>
              <item row="9" column="3">
-              <widget class="QPushButton" name="html_extra_file_PB">
+              <widget class="QPushButton" name="html_extra_files_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -6898,7 +6898,7 @@
               </spacer>
              </item>
              <item row="7" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="html_extra_stylesheet">
+              <widget class="QPlainTextEdit" name="html_extra_stylesheets">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -9570,8 +9570,8 @@
     </property>
     <addaction name="actionImport"/>
     <addaction name="separator"/>
-    <addaction name="actionMove_WizardCfg"/>
-    <addaction name="actionSave_WizardCfg"/>
+    <addaction name="actionMove_Settings"/>
+    <addaction name="actionSave_Settings"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -9657,7 +9657,7 @@
     <string>Exit CS Doxygen</string>
    </property>
   </action>
-  <action name="actionMove_WizardCfg">
+  <action name="actionMove_Settings">
    <property name="text">
     <string>Move DoxyPress Settings File</string>
    </property>
@@ -9665,7 +9665,7 @@
     <string>Move Wizard Cfg File</string>
    </property>
   </action>
-  <action name="actionSave_WizardCfg">
+  <action name="actionSave_Settings">
    <property name="text">
     <string>Save DoxyPress Settings File</string>
    </property>
@@ -9778,17 +9778,17 @@
   <tabstop>gen_bug_list_CB</tabstop>
   <tabstop>gen_deprecate_list_CB</tabstop>
   <tabstop>enabled_sections</tabstop>
-  <tabstop>source_input_PB_13</tabstop>
+  <tabstop>enabled_sections_PB</tabstop>
   <tabstop>max_init_lines_SB</tabstop>
   <tabstop>show_used_files_CB</tabstop>
   <tabstop>show_files_CB</tabstop>
   <tabstop>show_namespaces_CB</tabstop>
   <tabstop>file_version_filter</tabstop>
-  <tabstop>pushButton_3</tabstop>
+  <tabstop>file_version_filter_PB</tabstop>
   <tabstop>layout_file</tabstop>
-  <tabstop>pushButton_4</tabstop>
+  <tabstop>layout_file_PB</tabstop>
   <tabstop>cite_bib_files</tabstop>
-  <tabstop>source_input_PB_14</tabstop>
+  <tabstop>cite_bib_files_PB</tabstop>
   <tabstop>quiet_CB</tabstop>
   <tabstop>warnings_CB</tabstop>
   <tabstop>warn_undoc_CB</tabstop>
@@ -9811,7 +9811,7 @@
   <tabstop>exclude_symbols</tabstop>
   <tabstop>exclude_symbols_PB</tabstop>
   <tabstop>example_source</tabstop>
-  <tabstop>example_souce_PB</tabstop>
+  <tabstop>example_source_PB</tabstop>
   <tabstop>example_patterns</tabstop>
   <tabstop>example_patterns_PB</tabstop>
   <tabstop>example_recursive_CB</tabstop>
@@ -9922,10 +9922,10 @@
   <tabstop>html_footer_PB</tabstop>
   <tabstop>html_stylesheet</tabstop>
   <tabstop>html_stylesheet_PB</tabstop>
-  <tabstop>html_extra_stylesheet</tabstop>
-  <tabstop>html_extra_stylesheet_PB</tabstop>
+  <tabstop>html_extra_stylesheets</tabstop>
+  <tabstop>html_extra_stylesheets_PB</tabstop>
   <tabstop>html_extra_files</tabstop>
-  <tabstop>html_extra_file_PB</tabstop>
+  <tabstop>html_extra_files_PB</tabstop>
   <tabstop>html_colorstyle_hue</tabstop>
   <tabstop>html_colorstyle_sat</tabstop>
   <tabstop>html_colorstyle_gamma</tabstop>
