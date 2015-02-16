@@ -116,15 +116,11 @@ class MainWindow : public QMainWindow
       void setDuplicates();
       void setupLimits();
 
-      QString get_DirPath(QString message, QString path);
+      QString get_DirPath(QString message, QString path, QString relativePath = "", bool isOutputDir = false);
       QString getSingleFile(QString title, QString fname, QString filter = "");
 
       bool querySave();
       void saveDoxy_Internal();
-
-      void setHelpColor(int option, QWidget *label);
-      void setHelpText(QWidget *name);
-      void createMap();
 
       // json
       bool json_Read(Config trail = CFG_DEFAULT);
@@ -157,6 +153,13 @@ class MainWindow : public QMainWindow
       QString getHtmlOutputIndex() const;
       bool htmlOutputPresent() const;
       void updateRunButtons();
+
+      // help and label text color
+      void setHelpText(QWidget *name);
+      void createMap();
+
+      bool eventFilter(QObject *object, QEvent *event);
+      void hoverChanged(QWidget *old_Widget, QWidget *new_Widget);
 
       // menu options
       CS_SLOT_1(Private, void newDoxy())
@@ -215,11 +218,10 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(outputPage)
 
-      // app level
-      CS_SLOT_1(Private, void focusChanged(QWidget *, QWidget *))
-      CS_SLOT_2(focusChanged)
-
       // tab 1 - valid
+      CS_SLOT_1(Private, void valid_output_dir())
+      CS_SLOT_2(valid_output_dir)
+
       void validGet_html();
       void validGet_latex();
       void validGet_dot();
@@ -370,8 +372,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void dia_file_dirs_PB())
       CS_SLOT_2(dia_file_dirs_PB)
 
-      CS_SLOT_1(Private, void platuml_jar_path_PB())
-      CS_SLOT_2(platuml_jar_path_PB)
+      CS_SLOT_1(Private, void plantuml_jar_path_PB())
+      CS_SLOT_2(plantuml_jar_path_PB)
 
       // tab 3 look up (html)
       CS_SLOT_1(Private, void html_output_PB())

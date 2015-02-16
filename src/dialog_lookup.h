@@ -45,6 +45,12 @@ class Dialog_LookUp : public QDialog
       CS_SLOT_1(Private, void moveItemDown())
       CS_SLOT_2(moveItemDown)
 
+      CS_SLOT_1(Private, void getFile())
+      CS_SLOT_2(getFile)
+
+      CS_SLOT_1(Private, void getFolder())
+      CS_SLOT_2(getFolder)
+
       CS_SLOT_1(Private, void addItem())
       CS_SLOT_2(addItem)
 

@@ -40,13 +40,24 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
       m_model->appendRow(item);
    }
 
-   connect(m_ui->up_PB,           SIGNAL( clicked()),this,SLOT(moveItemUp()));
-   connect(m_ui->down_PB,         SIGNAL( clicked()),this,SLOT(moveItemDown()));
+   if (! data.isFilePB) {
+      m_ui->files_PB->setEnabled(false);
+   }
 
-   connect(m_ui->add_PB,          SIGNAL( clicked()),this,SLOT(addItem()));
-   connect(m_ui->delete_PB,       SIGNAL( clicked()),this,SLOT(deleteItem()));
-   connect(m_ui->save_PB,         SIGNAL( clicked()),this,SLOT(save()));
-   connect(m_ui->cancel_PB,       SIGNAL( clicked()),this,SLOT(cancel()));
+   if (! data.isFolderPB) {
+      m_ui->folders_PB->setEnabled(false);
+   }
+
+   connect(m_ui->up_PB,           SIGNAL(clicked()), this, SLOT(moveItemUp()));
+   connect(m_ui->down_PB,         SIGNAL(clicked()), this, SLOT(moveItemDown()));
+
+   connect(m_ui->files_PB,        SIGNAL(clicked()), this, SLOT(getFile()));
+   connect(m_ui->folders_PB,      SIGNAL(clicked()), this, SLOT(getFolder()));
+
+   connect(m_ui->add_PB,          SIGNAL(clicked()), this, SLOT(addItem()));
+   connect(m_ui->delete_PB,       SIGNAL(clicked()), this, SLOT(deleteItem()));
+   connect(m_ui->save_PB,         SIGNAL(clicked()), this, SLOT(save()));
+   connect(m_ui->cancel_PB,       SIGNAL(clicked()), this, SLOT(cancel()));
 }
 
 Dialog_LookUp::~Dialog_LookUp()
@@ -92,6 +103,19 @@ void Dialog_LookUp::deleteItem()
    }
 
    m_ui->tableView->setCurrentIndex(index);
+}
+
+
+void Dialog_LookUp::getFile()
+{
+   csMsg("get a file name");
+
+   // file = getSingleFile(tr("Select file"), file);
+}
+
+void Dialog_LookUp::getFolder()
+{
+   csMsg("get a folder name");
 }
 
 void Dialog_LookUp::moveItemUp()

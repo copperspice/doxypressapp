@@ -210,7 +210,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->inline_simple_struct_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "TYPEDEF_HIDES_STRUCT");
-   m_ui->typedef_hids_struct_CB->setChecked(tempBool);
+   m_ui->typedef_hides_struct_CB->setChecked(tempBool);
 
    tempInt = convert_Int(data, "LOOKUP_CACHE_SIZE");
    m_ui->lookup_cache_size_SB->setValue(tempInt);
@@ -263,7 +263,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->show_include_files_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SHOW_GROUPED_MEMB_INC");
-   m_ui->show_grouped_members_incl_CB->setChecked(tempBool);
+   m_ui->show_grouped_members_inc_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "FORCE_LOCAL_INCLUDES");
    m_ui->force_local_includes_CB->setChecked(tempBool);
@@ -576,7 +576,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->dia_file_dirs->setPlainText(tempText);
 
    tempStr = convert_Str(data, "PLANTUML_JAR_PATH");
-   m_ui->platuml_jar_path->setText(tempStr);
+   m_ui->plantuml_jar_path->setText(tempStr);
 
    tempInt = convert_Int(data, "DOT_GRAPH_MAX_NODES");
    m_ui->dot_graph_max_nodes_SB->setValue(tempInt);
@@ -799,16 +799,16 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->pdf_latex_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "LATEX_BATCHMODE");
-   m_ui->laxtex_batch_mode_CB->setChecked(tempBool);
+   m_ui->latex_batch_mode_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "LATEX_HIDE_INDICES");
-   m_ui->laxtex_hide_indices_CB->setChecked(tempBool);
+   m_ui->latex_hide_indices_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "LATEX_SOURCE_CODE");
-   m_ui->laxtex_source_code_CB->setChecked(tempBool);
+   m_ui->latex_source_code_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "LATEX_BIB_STYLE");
-   m_ui->laxtex_bib_style->setText(tempStr);
+   m_ui->latex_bib_style->setText(tempStr);
 
 
    // tab 3 - rtf

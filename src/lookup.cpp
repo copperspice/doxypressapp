@@ -59,18 +59,11 @@ void MainWindow::getIcon(const QString route)
 }
 
 void MainWindow::output_dir_PB()
-{
-   QString path    = pathName(m_curFile);   
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+{   
+   QString path    = m_ui->output_dir->text();
+   QString relPath = pathName(m_curFile);
 
-   if (! m_curFile.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath, true);
 
    m_ui->output_dir->setText(dirName);
 }
@@ -711,16 +704,9 @@ void MainWindow::gen_tagfile_PB()
 void MainWindow::perl_path_PB()
 {
    QString path    = m_ui->perl_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->perl_path->setText(dirName);
 }
@@ -729,16 +715,9 @@ void MainWindow::perl_path_PB()
 void MainWindow::mscgen_path_PB()
 {
    QString path    = m_ui->mscgen_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->mscgen_path->setText(dirName);
 }
@@ -746,16 +725,9 @@ void MainWindow::mscgen_path_PB()
 void MainWindow::dia_path_PB()
 {
    QString path    = m_ui->dia_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->dia_path->setText(dirName);
 }
@@ -770,16 +742,9 @@ void MainWindow::dot_font_name_PB()
 void MainWindow::dot_font_path_PB()
 {
    QString path    = m_ui->dot_font_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->dot_font_path->setText(dirName);
 }
@@ -787,16 +752,9 @@ void MainWindow::dot_font_path_PB()
 void MainWindow::dot_path_PB()
 {
    QString path    = m_ui->dot_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->dot_path->setText(dirName);
 }
@@ -870,37 +828,23 @@ void MainWindow::dia_file_dirs_PB()
    }
 }
 
-void MainWindow::platuml_jar_path_PB()
+void MainWindow::plantuml_jar_path_PB()
 {
-   QString path    = m_ui->platuml_jar_path->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString path    = m_ui->plantuml_jar_path->text();
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
-
-   m_ui->platuml_jar_path->setText(dirName);
+   m_ui->plantuml_jar_path->setText(dirName);
 }
 
 // tab 3 look up (html)
 void MainWindow::html_output_PB()
 {
    QString path    = m_ui->html_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->html_output->setText(dirName);
 }
@@ -1057,16 +1001,9 @@ void MainWindow::extra_search_mappings_PB()
 void MainWindow::latex_output_PB()
 {
    QString path    = m_ui->latex_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->latex_output->setText(dirName);
 }
@@ -1094,8 +1031,8 @@ void MainWindow::latex_extra_packages_PB()
 
    data.title      = "Latex Extra Packages";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1149,16 +1086,9 @@ void MainWindow::latex_extra_files_PB()
 void MainWindow::rtf_output_PB()
 {
    QString path    = m_ui->rtf_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->rtf_output->setText(dirName);
 }
@@ -1181,16 +1111,9 @@ void MainWindow::rtf_extension_PB()
 void MainWindow::man_output_PB()
 {
    QString path    = m_ui->man_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->man_output->setText(dirName);
 }
@@ -1199,35 +1122,20 @@ void MainWindow::man_output_PB()
 void MainWindow::xml_output_PB()
 {
    QString path    = m_ui->xml_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->xml_output->setText(dirName);
 }
 
 // tab 3 look up (docbook)
 void MainWindow::docbook_output_PB()
-{
+{   
    QString path    = m_ui->docbook_output->text();
-   QString dirName = get_DirPath(tr("Select destination directory"), path);
-   QDir dir(path);
+   QString relPath = m_ui->output_dir->text();
 
-   if (! dirName.isEmpty() && dir.exists()) {
-      dirName = dir.relativeFilePath(dirName);
-   }
-
-   if (dirName.isEmpty()) {
-      dirName = QString::fromAscii(".");
-   }
+   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
 
    m_ui->docbook_output->setText(dirName);
 }
-

@@ -176,13 +176,10 @@ void MainWindow::createConnections()
    connect(m_ui->output_TreeWidget,   SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
                                       SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
 
-   // app level
-   connect(qApp,  SIGNAL(focusChanged(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
-   //  connect(qApp,  SIGNAL( ??(QWidget *, QWidget *)), this, SLOT(focusChanged(QWidget *, QWidget *)));
-
-
 
    // tab 1 - valid
+   connect(m_ui->output_dir,          &QLineEdit::textChanged, this, [this](){ valid_output_dir(); } );
+
    connect(m_ui->buttonGroup_html,    SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_html(QAbstractButton *)));
 
@@ -194,7 +191,7 @@ void MainWindow::createConnections()
 
 
    // tab 1 - lookups
-   connect(m_ui->icon_PB,                   &QPushButton::clicked, this, [this](bool){ getIcon(); } );
+   connect(m_ui->icon_PB,                   &QPushButton::clicked, this, [this](){ getIcon(); } );
    connect(m_ui->output_dir_PB,             SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
    connect(m_ui->html_colors_PB,            SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
 
@@ -256,7 +253,7 @@ void MainWindow::createConnections()
    connect(m_ui->dot_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dot_file_dirs_PB()));
    connect(m_ui->msc_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(msc_file_dirs_PB()));
    connect(m_ui->dia_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dia_file_dirs_PB()));
-   connect(m_ui->platuml_jar_path_PB,       SIGNAL(clicked()), this, SLOT(platuml_jar_path_PB()));
+   connect(m_ui->plantuml_jar_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_jar_path_PB()));
 
    // tab 3 look up (html)
    connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));

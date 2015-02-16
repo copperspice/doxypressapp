@@ -108,7 +108,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
       m_ui->folders_TV->hideColumn(nCount);
    }
 
-   // search for the current path
+   // search for the current path  - case sensitive issue BROOM
    m_index_R = m_model_R->index(m_path);
    m_ui->folders_TV->setCurrentIndex(m_index_R);
 

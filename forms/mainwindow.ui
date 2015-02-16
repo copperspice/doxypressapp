@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -83,6 +83,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
@@ -105,7 +108,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Destination Directory:</string>
+                <string>Output Directory:</string>
                </property>
                <property name="buddy">
                 <cstring>output_dir</cstring>
@@ -508,7 +511,7 @@
                 </palette>
                </property>
                <property name="text">
-                <string>Specify the directory for the CS Doxygen output</string>
+                <string>Specify the directory for the DoxyPress output</string>
                </property>
               </widget>
              </item>
@@ -1139,11 +1142,15 @@
              </item>
             </item>
            </widget>
-           <widget class="QTextEdit" name="help_t2"/>
+           <widget class="QTextEdit" name="help_t2">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>13</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -1805,7 +1812,7 @@
               </widget>
              </item>
              <item row="17" column="1">
-              <widget class="QCheckBox" name="typedef_hids_struct_CB">
+              <widget class="QCheckBox" name="typedef_hides_struct_CB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -2007,7 +2014,7 @@
                 <string>Typedefs hide structures:</string>
                </property>
                <property name="buddy">
-                <cstring>typedef_hids_struct_CB</cstring>
+                <cstring>typedef_hides_struct_CB</cstring>
                </property>
               </widget>
              </item>
@@ -2031,7 +2038,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Distribute group doc:</string>
+                <string>Distribute Group Doc:</string>
                </property>
                <property name="buddy">
                 <cstring>dist_group_doc_CB</cstring>
@@ -2380,7 +2387,7 @@
                 <string>Show grouped member includes:</string>
                </property>
                <property name="buddy">
-                <cstring>show_grouped_members_incl_CB</cstring>
+                <cstring>show_grouped_members_inc_CB</cstring>
                </property>
               </widget>
              </item>
@@ -2590,7 +2597,7 @@
               </widget>
              </item>
              <item row="3" column="3">
-              <widget class="QCheckBox" name="show_grouped_members_incl_CB">
+              <widget class="QCheckBox" name="show_grouped_members_inc_CB">
                <property name="text">
                 <string/>
                </property>
@@ -6102,7 +6109,7 @@
                 <string>Plantuml Jar Path:</string>
                </property>
                <property name="buddy">
-                <cstring>platuml_jar_path</cstring>
+                <cstring>plantuml_jar_path</cstring>
                </property>
               </widget>
              </item>
@@ -6121,7 +6128,7 @@
               </widget>
              </item>
              <item row="8" column="1" colspan="2">
-              <widget class="QLineEdit" name="platuml_jar_path">
+              <widget class="QLineEdit" name="plantuml_jar_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -6291,7 +6298,7 @@
               </widget>
              </item>
              <item row="8" column="3">
-              <widget class="QPushButton" name="platuml_jar_path_PB">
+              <widget class="QPushButton" name="plantuml_jar_path_PB">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -6435,7 +6442,11 @@
              </property>
             </item>
            </widget>
-           <widget class="QTextEdit" name="help_t3"/>
+           <widget class="QTextEdit" name="help_t3">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
@@ -8084,7 +8095,7 @@
               <number>14</number>
              </property>
              <item row="15" column="1">
-              <widget class="QCheckBox" name="laxtex_hide_indices_CB">
+              <widget class="QCheckBox" name="latex_hide_indices_CB">
                <property name="text">
                 <string/>
                </property>
@@ -8112,13 +8123,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="gen_latex_CB2">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
              <item row="12" column="1">
               <widget class="QCheckBox" name="pdf_hyperlinks_CB">
                <property name="text">
@@ -8127,7 +8131,7 @@
               </widget>
              </item>
              <item row="14" column="1">
-              <widget class="QCheckBox" name="laxtex_batch_mode_CB">
+              <widget class="QCheckBox" name="latex_batch_mode_CB">
                <property name="text">
                 <string/>
                </property>
@@ -8174,7 +8178,7 @@
                 <string>LaTeX Batch Mode:</string>
                </property>
                <property name="buddy">
-                <cstring>laxtex_batch_mode_CB</cstring>
+                <cstring>latex_batch_mode_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8246,7 +8250,7 @@
               </widget>
              </item>
              <item row="16" column="1">
-              <widget class="QCheckBox" name="laxtex_source_code_CB">
+              <widget class="QCheckBox" name="latex_source_code_CB">
                <property name="text">
                 <string/>
                </property>
@@ -8323,7 +8327,7 @@
                 <string>LaTeX Hide Indices:</string>
                </property>
                <property name="buddy">
-                <cstring>laxtex_hide_indices_CB</cstring>
+                <cstring>latex_hide_indices_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8338,7 +8342,7 @@
                 <string>LaTeX BIB Style:</string>
                </property>
                <property name="buddy">
-                <cstring>laxtex_bib_style</cstring>
+                <cstring>latex_bib_style</cstring>
                </property>
               </widget>
              </item>
@@ -8377,7 +8381,7 @@
                 <string>LaTeX Source Code:</string>
                </property>
                <property name="buddy">
-                <cstring>laxtex_source_code_CB</cstring>
+                <cstring>latex_source_code_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8623,7 +8627,7 @@
               </spacer>
              </item>
              <item row="17" column="1" colspan="2">
-              <widget class="QLineEdit" name="laxtex_bib_style">
+              <widget class="QLineEdit" name="latex_bib_style">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -8660,6 +8664,13 @@
                  <width>16777215</width>
                  <height>90</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" colspan="2">
+              <widget class="QCheckBox" name="gen_latex_CB2">
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
@@ -9747,7 +9758,7 @@
   <tabstop>allow_sub_grouping_CB</tabstop>
   <tabstop>inline_grouped_classes_CB</tabstop>
   <tabstop>inline_simple_struct_CB</tabstop>
-  <tabstop>typedef_hids_struct_CB</tabstop>
+  <tabstop>typedef_hides_struct_CB</tabstop>
   <tabstop>lookup_cache_size_SB</tabstop>
   <tabstop>extract_all_CB</tabstop>
   <tabstop>extract_private_CB</tabstop>
@@ -9764,7 +9775,7 @@
   <tabstop>internal_docs_CB</tabstop>
   <tabstop>case_sense_names_CB</tabstop>
   <tabstop>show_include_files_CB</tabstop>
-  <tabstop>show_grouped_members_incl_CB</tabstop>
+  <tabstop>show_grouped_members_inc_CB</tabstop>
   <tabstop>force_local_includes_CB</tabstop>
   <tabstop>inline_info_CB</tabstop>
   <tabstop>sort_member_docs_CB</tabstop>
@@ -9903,8 +9914,8 @@
   <tabstop>msc_file_dirs_PB</tabstop>
   <tabstop>dia_file_dirs</tabstop>
   <tabstop>dia_file_dirs_PB</tabstop>
-  <tabstop>platuml_jar_path</tabstop>
-  <tabstop>platuml_jar_path_PB</tabstop>
+  <tabstop>plantuml_jar_path</tabstop>
+  <tabstop>plantuml_jar_path_PB</tabstop>
   <tabstop>dot_graph_max_nodes_SB</tabstop>
   <tabstop>dot_graph_max_depth_SB</tabstop>
   <tabstop>dot_transparent_CB</tabstop>
@@ -9999,10 +10010,10 @@
   <tabstop>latex_extra_files_PB</tabstop>
   <tabstop>pdf_hyperlinks_CB</tabstop>
   <tabstop>pdf_latex_CB</tabstop>
-  <tabstop>laxtex_batch_mode_CB</tabstop>
-  <tabstop>laxtex_hide_indices_CB</tabstop>
-  <tabstop>laxtex_source_code_CB</tabstop>
-  <tabstop>laxtex_bib_style</tabstop>
+  <tabstop>latex_batch_mode_CB</tabstop>
+  <tabstop>latex_hide_indices_CB</tabstop>
+  <tabstop>latex_source_code_CB</tabstop>
+  <tabstop>latex_bib_style</tabstop>
   <tabstop>gen_rtf_CB2</tabstop>
   <tabstop>rtf_output</tabstop>
   <tabstop>rtf_output_PB</tabstop>

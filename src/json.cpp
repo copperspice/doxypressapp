@@ -546,7 +546,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
    m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
    m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
-   m_ui->typedef_hids_struct_CB->setChecked(       object.value("typedef-hids-struct").toBool());
+   m_ui->typedef_hides_struct_CB->setChecked(      object.value("typedef-hides-struct").toBool());
    m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
 
    // tab 2 - build
@@ -566,7 +566,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
    m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
    m_ui->show_include_files_CB->setChecked(        object.value("show-include-files").toBool());
-   m_ui->show_grouped_members_incl_CB->setChecked( object.value("show-grouped-members-incl").toBool());
+   m_ui->show_grouped_members_inc_CB->setChecked(  object.value("show-grouped-members-inc").toBool());
    m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
    m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
 
@@ -693,7 +693,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file_dirs"));
    m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file_dirs"));
    m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file_dirs"));
-   m_ui->platuml_jar_path->setText(                object.value("platuml-jar-path").toString());
+   m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());
 
    m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph_max-nodes").toInt());
    m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph-max-depth").toInt());
@@ -785,10 +785,10 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    m_ui->pdf_hyperlinks_CB->setChecked(            object.value("pdf-hyperlinks").toBool());
    m_ui->pdf_latex_CB->setChecked(                 object.value("pdf-latex").toBool());
-   m_ui->laxtex_batch_mode_CB->setChecked(         object.value("laxtex-batch-mode").toBool());
-   m_ui->laxtex_hide_indices_CB->setChecked(       object.value("laxtex-hide-indices").toBool());
-   m_ui->laxtex_source_code_CB->setChecked(        object.value("laxtex-source-code").toBool());
-   m_ui->laxtex_bib_style->setText(                object.value("laxtex-bib-style").toString());
+   m_ui->latex_batch_mode_CB->setChecked(         object.value("latex-batch-mode").toBool());
+   m_ui->latex_hide_indices_CB->setChecked(       object.value("latex-hide-indices").toBool());
+   m_ui->latex_source_code_CB->setChecked(        object.value("latex-source-code").toBool());
+   m_ui->latex_bib_style->setText(                object.value("latex-bib-style").toString());
 
    // tab 3 - rtf
    m_ui->rtf_output->setText(                      object.value("rtf-output").toString());
@@ -903,7 +903,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());
    object.insert("inline-grouped-classes",   m_ui->inline_grouped_classes_CB->isChecked());
    object.insert("inline-simple-struct",     m_ui->inline_simple_struct_CB->isChecked());
-   object.insert("typedef-hids-struct",      m_ui->typedef_hids_struct_CB->isChecked());
+   object.insert("typedef-hides-struct",     m_ui->typedef_hides_struct_CB->isChecked());
    object.insert("lookup-cache-size",        m_ui->lookup_cache_size_SB->value());
 
    // tab 2 - build
@@ -923,7 +923,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("internal-docs",            m_ui->internal_docs_CB->isChecked());
    object.insert("case-sense-names",         m_ui->case_sense_names_CB->isChecked());
    object.insert("show-include-files",       m_ui->show_include_files_CB->isChecked());
-   object.insert("show-grouped-members-incl",m_ui->show_grouped_members_incl_CB->isChecked());
+   object.insert("show-grouped-members-inc", m_ui->show_grouped_members_inc_CB->isChecked());
    object.insert("force-local-includes",     m_ui->force_local_includes_CB->isChecked());
    object.insert("inline-info",              m_ui->inline_info_CB->isChecked());
 
@@ -1048,7 +1048,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("dot-file-dirs",            putDataList(m_ui->dot_file_dirs->toPlainText()));
    object.insert("msc-file-dirs",            putDataList(m_ui->msc_file_dirs->toPlainText()));
    object.insert("dia-file-dirs",            putDataList(m_ui->dia_file_dirs->toPlainText()));
-   object.insert("platuml-jar-path",         m_ui->platuml_jar_path->text());
+   object.insert("plantuml-jar-path",        m_ui->plantuml_jar_path->text());
 
    object.insert("dot-graph-max-nodes",      m_ui->dot_graph_max_nodes_SB->value());
    object.insert("dot-graph-max-depth",      m_ui->dot_graph_max_depth_SB->value());
@@ -1137,10 +1137,10 @@ QByteArray MainWindow::json_SaveDoxy()
 
    object.insert("pdf-hyperlinks",           m_ui->pdf_hyperlinks_CB->isChecked());
    object.insert("pdf-latex",                m_ui->pdf_latex_CB->isChecked());
-   object.insert("laxtex-batch-mode",        m_ui->laxtex_batch_mode_CB->isChecked());
-   object.insert("laxtex-hide-indices",      m_ui->laxtex_hide_indices_CB->isChecked());
-   object.insert("laxtex-source-code",       m_ui->laxtex_source_code_CB->isChecked());
-   object.insert("laxtex-bib-style",         m_ui->laxtex_bib_style->text());
+   object.insert("latex-batch-mode",         m_ui->latex_batch_mode_CB->isChecked());
+   object.insert("latex-hide-indices",       m_ui->latex_hide_indices_CB->isChecked());
+   object.insert("latex-source-code",        m_ui->latex_source_code_CB->isChecked());
+   object.insert("latex-bib-style",          m_ui->latex_bib_style->text());
 
    // tab 3 - rtf
    object.insert("rtf-output",               m_ui->rtf_output->text());

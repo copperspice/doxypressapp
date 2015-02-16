@@ -36,12 +36,57 @@ void MainWindow::closeEvent(QCloseEvent *event)
 //   setDoxyTitle(true);
 //}
 
-QString MainWindow::get_DirPath(QString message, QString path)
-{
-   QFileDialog::Options options;
-   options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks;
 
-   QString retval;
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+   //  process events for help
+   if (event->type() == QEvent::HoverEnter) {
+      static QWidget *old_Widget = nullptr;
+
+      QWidget *new_Widget = dynamic_cast<QWidget *>(object);
+
+      if (new_Widget) {
+         hoverChanged(old_Widget, new_Widget);
+
+         // save for next time around
+         old_Widget = new_Widget;
+      }
+   }
+
+   return QObject::eventFilter(object, event);
+}
+
+QString MainWindow::get_DirPath(QString message, QString initialPath, QString relativePath, bool isOutputDir)
+{
+   QString path = initialPath;
+
+   QString outputDir  = m_ui->output_dir->text();
+   QString projectDir = pathName(m_curFile);
+
+   if (path.startsWith("$output_dir"))  {
+      path.replace("$output_dir", outputDir);
+
+   } else if (path.startsWith("$project_dir"))  {
+      path.replace("$project_dir", projectDir);
+
+   } else if (path.isEmpty()) {
+      path = relativePath;
+
+   }
+
+
+/*
+
+   // is absoulet, do nothing     BROOM
+
+   if ( relative )  {
+      path = relativePath + "/" + path;
+   }
+
+*/
+
+   QFileDialog::Options options;
+   options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks; 
 
 #ifdef Q_OS_WIN
 
@@ -52,6 +97,8 @@ QString MainWindow::get_DirPath(QString message, QString path)
 
       if (result == QDialog::Accepted) {
          path = dw->getDirectory();
+      } else {
+         path = "";
       }
 
    } else {
@@ -65,18 +112,44 @@ QString MainWindow::get_DirPath(QString message, QString path)
 
 #endif
 
-   if (! path.isEmpty()) {
-      // silly adjust for platform slash issue
-
-      QDir temp(path + "/");
-      retval = temp.canonicalPath() + "/";
+   if (path.isEmpty())  {
+      // user canceled dialog
+      return initialPath;
    }
 
-   return retval;
+   // adjust for platform slash issue
+   if (! path.isEmpty()) {      
+      QDir temp(path + "/");
+      path = temp.canonicalPath() + "/";
+   }     
+
+   if (! isOutputDir) {
+      // resolve relative path
+
+      if (path.startsWith(outputDir))  {
+         path.replace(outputDir, "$output_dir/");
+
+      } else if (path.startsWith(projectDir))  {
+         path.replace(projectDir,"$project_dir/");
+
+      }
+   }
+
+   return path;
 }
 
 QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 {
+   QString retval = fname;
+
+   QString path;
+
+   if (fname.isEmpty()) {
+      path = pathName(m_curFile);
+   } else {
+      path = fname;
+   }
+
    QString selectedFilter;
    QFileDialog::Options options;
 
@@ -85,10 +158,13 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 
    fname = m_appPath + "/" + fname;
 
-   QString file = QFileDialog::getOpenFileName(this, "Select " + title,
-         fname, filter, &selectedFilter, options);
+   QString file = QFileDialog::getOpenFileName(this, "Select " + title, path, filter, &selectedFilter, options);
 
-   return file;
+   if ( ! file.isEmpty() ) {
+      retval = file;
+   }
+
+   return retval;
 }
 
 // **
@@ -145,7 +221,13 @@ bool MainWindow::openDoxy_Internal(const QString fname)
 
 QString MainWindow::pathName(QString fileName) const
 {
-   return QFileInfo(fileName).path();
+   QString retval = "";
+
+   if (! fileName.isEmpty())  {
+      QFileInfo(fileName).absolutePath();
+   }
+
+   return retval;
 }
 
 bool MainWindow::querySave()
@@ -264,3 +346,4 @@ void MainWindow::setStatusBar(QString msg, int timeOut)
 {
    statusBar()->showMessage(msg, timeOut);
 }
+
