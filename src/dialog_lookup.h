@@ -35,6 +35,8 @@ class Dialog_LookUp : public QDialog
       QStringList getData();
 
    private:
+      MainWindow *m_owner;
+
       Ui::Dialog_LookUp *m_ui;
       QStandardItemModel *m_model;
       struct LookUpInfo m_data;

@@ -31,11 +31,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
    }
 }
 
-//void MainWindow::configChanged()
-//{
-//   setDoxyTitle(true);
-//}
-
+void MainWindow::configChanged()
+{
+   setDoxyTitle(true);
+}
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
@@ -74,16 +73,14 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, QString re
 
    }
 
-
-/*
-
-   // is absoulet, do nothing     BROOM
-
-   if ( relative )  {
+   // just text, if relative then append
+   if (QDir::isRelativePath(path) )  {
       path = relativePath + "/" + path;
-   }
 
-*/
+
+      csMsg(this, "Relatvie Test", "isRelative TRUE " +  path);
+   }  
+
 
    QFileDialog::Options options;
    options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks; 
@@ -146,8 +143,14 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 
    if (fname.isEmpty()) {
       path = pathName(m_curFile);
+
+
+      csMsg(this, "GetSingleFile()" ,"Current FileName: " + m_curFile + "\n  Path of file:" + path);
+
+
    } else {
       path = fname;
+
    }
 
    QString selectedFilter;
@@ -156,11 +159,9 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
    // force windows 7 and 8 to honor initial path
    options = QFileDialog::ForceInitialDir_Win7;
 
-   fname = m_appPath + "/" + fname;
+   QString file = QFileDialog::getOpenFileName(this, title, path, filter, &selectedFilter, options);
 
-   QString file = QFileDialog::getOpenFileName(this, "Select " + title, path, filter, &selectedFilter, options);
-
-   if ( ! file.isEmpty() ) {
+   if (! file.isEmpty()) {
       retval = file;
    }
 
@@ -224,7 +225,7 @@ QString MainWindow::pathName(QString fileName) const
    QString retval = "";
 
    if (! fileName.isEmpty())  {
-      QFileInfo(fileName).absolutePath();
+      retval = QFileInfo(fileName).absolutePath();
    }
 
    return retval;
@@ -283,7 +284,7 @@ void MainWindow::saveDoxy_Internal()
 
 bool MainWindow::saveDoxyAs()
 {
-   m_curFile = QFileDialog::getSaveFileName(this, tr("New DoxyPress project file"), m_struct.pathPrior,
+   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
                                             tr("Json Files (*.json)"));
 
    if (m_curFile.isEmpty()) {

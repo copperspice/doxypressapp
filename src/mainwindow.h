@@ -89,7 +89,10 @@ class MainWindow : public QMainWindow
       struct Settings get_StructData();
       void setDoxyTitle(bool isModified);
 
-       QSize sizeHint() const;
+      QSize sizeHint() const;
+
+      QString get_DirPath(QString message, QString path, QString relativePath = "", bool isOutputDir = false);
+      QString getSingleFile(QString title, QString fname, QString filter = "");
 
    protected:
       void closeEvent(QCloseEvent *event);
@@ -115,9 +118,6 @@ class MainWindow : public QMainWindow
       void createConnections();
       void setDuplicates();
       void setupLimits();
-
-      QString get_DirPath(QString message, QString path, QString relativePath = "", bool isOutputDir = false);
-      QString getSingleFile(QString title, QString fname, QString filter = "");
 
       bool querySave();
       void saveDoxy_Internal();
@@ -217,6 +217,10 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(outputPage)
+
+      // application
+      CS_SLOT_1(Private, void configChanged())
+      CS_SLOT_2(configChanged)
 
       // tab 1 - valid
       CS_SLOT_1(Private, void valid_output_dir())
@@ -385,9 +389,6 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void html_footer_PB())
       CS_SLOT_2(html_footer_PB)
 
-      CS_SLOT_1(Private, void html_stylesheet_PB())
-      CS_SLOT_2(html_stylesheet_PB)
-
       CS_SLOT_1(Private, void html_extra_stylesheets_PB())
       CS_SLOT_2(html_extra_stylesheets_PB)
 
@@ -403,8 +404,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void qch_file_PB())
       CS_SLOT_2(qch_file_PB)
 
-      CS_SLOT_1(Private, void qhg_location_PB())
-      CS_SLOT_2(qhg_location_PB)
+      CS_SLOT_1(Private, void qt_help_gen_path_PB())
+      CS_SLOT_2(qt_help_gen_path_PB)
 
       CS_SLOT_1(Private, void mathjax_extensions_PB())
       CS_SLOT_2(mathjax_extensions_PB)

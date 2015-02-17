@@ -19,6 +19,7 @@
 #include "mainwindow.h"
 
 #include <QKeySequence>
+#include <QPushButton>
 
 MainWindow::MainWindow()
    : m_ui(new Ui::MainWindow)
@@ -151,20 +152,20 @@ void MainWindow::about()
 void MainWindow::createConnections()
 {
    // menu options
-   connect(m_ui->actionNew,           SIGNAL(triggered()), this, SLOT(newDoxy()));
-   connect(m_ui->actionOpen,          SIGNAL(triggered()), this, SLOT(openDoxy()));
-   connect(m_ui->actionReload,        SIGNAL(triggered()), this, SLOT(reloadDoxy()));
+   connect(m_ui->actionNew,           &QAction::triggered, this, [this](){ newDoxy();    } );
+   connect(m_ui->actionOpen,          &QAction::triggered, this, [this](){ openDoxy();   } );
+   connect(m_ui->actionReload,        &QAction::triggered, this, [this](){ reloadDoxy(); } );
 
-   connect(m_ui->actionSave,          SIGNAL(triggered()), this, SLOT(saveDoxy()));
-   connect(m_ui->actionSave_As,       SIGNAL(triggered()), this, SLOT(saveDoxyAs()));
-   connect(m_ui->actionExit,          SIGNAL(triggered()), this, SLOT(close()));
+   connect(m_ui->actionSave,          &QAction::triggered, this, [this](){ saveDoxy();   } );
+   connect(m_ui->actionSave_As,       &QAction::triggered, this, [this](){ saveDoxyAs(); } );
+   connect(m_ui->actionExit,          &QAction::triggered, this, [this](){ close();      } );
 
-   connect(m_ui->actionImport,        &QAction::triggered, this, [this](bool){ importDoxy(); } );
-   connect(m_ui->actionMove_Settings, &QAction::triggered, this, [this](bool){ move_Settings(); } );
-   connect(m_ui->actionSave_Settings, &QAction::triggered, this, [this](bool){ save_Settings(); } );
+   connect(m_ui->actionImport,        &QAction::triggered, this, [this](){ importDoxy(); } );
+   connect(m_ui->actionMove_Settings, &QAction::triggered, this, [this](){ move_Settings(); } );
+   connect(m_ui->actionSave_Settings, &QAction::triggered, this, [this](){ save_Settings(); } );
 
-   connect(m_ui->actionDoxyHelp,      SIGNAL(triggered()), this, SLOT(manual()));
-   connect(m_ui->actionAbout,         SIGNAL(triggered()), this, SLOT(about()));
+   connect(m_ui->actionDoxyHelp,      &QAction::triggered, this, [this](){ manual();     } );
+   connect(m_ui->actionAbout,         &QAction::triggered, this, [this](){ about();      } );
 
    // tabs
    connect(m_ui->setup_TreeWidget,    SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
@@ -175,7 +176,6 @@ void MainWindow::createConnections()
 
    connect(m_ui->output_TreeWidget,   SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
                                       SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
 
    // tab 1 - valid
    connect(m_ui->output_dir,          &QLineEdit::textChanged, this, [this](){ valid_output_dir(); } );
@@ -188,7 +188,6 @@ void MainWindow::createConnections()
 
    connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_dot(QAbstractButton *)));
-
 
    // tab 1 - lookups
    connect(m_ui->icon_PB,                   &QPushButton::clicked, this, [this](){ getIcon(); } );
@@ -258,15 +257,14 @@ void MainWindow::createConnections()
    // tab 3 look up (html)
    connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));
    connect(m_ui->html_header_PB,            SIGNAL(clicked()), this, SLOT(html_header_PB()));
-   connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));
-   connect(m_ui->html_stylesheet_PB,        SIGNAL(clicked()), this, SLOT(html_stylesheet_PB()));
+   connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));   
    connect(m_ui->html_extra_stylesheets_PB, SIGNAL(clicked()), this, SLOT(html_extra_stylesheets_PB()));
    connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
 
    connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
    connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
    connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
-   connect(m_ui->qhg_location_PB,           SIGNAL(clicked()), this, SLOT(qhg_location_PB()));
+   connect(m_ui->qt_help_gen_path_PB,       SIGNAL(clicked()), this, SLOT(qt_help_gen_path_PB()));
 
    connect(m_ui->mathjax_extensions_PB,     SIGNAL(clicked()), this, SLOT(mathjax_extensions_PB()));
    connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
@@ -432,14 +430,26 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("HTML C")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_C);
 
+      } else if (label == tr("CHM")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Chm);
+
+      } else if (label == tr("Docset")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Docset);
+
+      } else if (label == tr("Eclipse")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Eclipse);
+
       } else if (label == tr("LaTeX")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex);
 
-      } else if (label == tr("RTF")) {
-         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Rtf);
-
       } else if (label == tr("Man")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Man);
+
+      } else if (label == tr("QtHelp")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_QtHelp);
+
+      } else if (label == tr("RTF")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Rtf);
 
       } else if (label == tr("XML")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Xml);

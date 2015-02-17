@@ -63,9 +63,9 @@ void MainWindow::output_dir_PB()
    QString path    = m_ui->output_dir->text();
    QString relPath = pathName(m_curFile);
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath, true);
+   path = get_DirPath(tr("Select destination directory"), path, relPath, true);
 
-   m_ui->output_dir->setText(dirName);
+   m_ui->output_dir->setText(path);
 }
 
 void MainWindow::tune_colors_PB()
@@ -706,9 +706,9 @@ void MainWindow::perl_path_PB()
    QString path    = m_ui->perl_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->perl_path->setText(dirName);
+   m_ui->perl_path->setText(path);
 }
 
 // tab 2- look up (dot)
@@ -717,9 +717,9 @@ void MainWindow::mscgen_path_PB()
    QString path    = m_ui->mscgen_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->mscgen_path->setText(dirName);
+   m_ui->mscgen_path->setText(path);
 }
 
 void MainWindow::dia_path_PB()
@@ -727,9 +727,9 @@ void MainWindow::dia_path_PB()
    QString path    = m_ui->dia_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->dia_path->setText(dirName);
+   m_ui->dia_path->setText(path);
 }
 
 void MainWindow::dot_font_name_PB()
@@ -744,9 +744,9 @@ void MainWindow::dot_font_path_PB()
    QString path    = m_ui->dot_font_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->dot_font_path->setText(dirName);
+   m_ui->dot_font_path->setText(path);
 }
 
 void MainWindow::dot_path_PB()
@@ -754,9 +754,9 @@ void MainWindow::dot_path_PB()
    QString path    = m_ui->dot_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->dot_path->setText(dirName);
+   m_ui->dot_path->setText(path);
 }
 
 void MainWindow::dot_file_dirs_PB()
@@ -833,9 +833,9 @@ void MainWindow::plantuml_jar_path_PB()
    QString path    = m_ui->plantuml_jar_path->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->plantuml_jar_path->setText(dirName);
+   m_ui->plantuml_jar_path->setText(path);
 }
 
 // tab 3 look up (html)
@@ -844,9 +844,9 @@ void MainWindow::html_output_PB()
    QString path    = m_ui->html_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->html_output->setText(dirName);
+   m_ui->html_output->setText(path);
 }
 
 void MainWindow::html_header_PB()
@@ -861,13 +861,6 @@ void MainWindow::html_footer_PB()
    QString file = m_ui->html_footer->text();
    file = getSingleFile(tr("Select file"), file);
    m_ui->html_footer->setText(file);
-}
-
-void MainWindow::html_stylesheet_PB()
-{
-   QString file = m_ui->html_stylesheet->text();
-   file = getSingleFile(tr("Select file"), file);
-   m_ui->html_stylesheet->setText(file);
 }
 
 void MainWindow::html_extra_stylesheets_PB()
@@ -937,11 +930,11 @@ void MainWindow::qch_file_PB()
    m_ui->qch_file->setText(file);
 }
 
-void MainWindow::qhg_location_PB()
+void MainWindow::qt_help_gen_path_PB()
 {
-   QString file = m_ui->qhg_location->text();
+   QString file = m_ui->qt_help_gen_path->text();
    file = getSingleFile(tr("Select file"), file);
-   m_ui->qhg_location->setText(file);
+   m_ui->qt_help_gen_path->setText(file);
 }
 
 void MainWindow::mathjax_extensions_PB()
@@ -1003,9 +996,9 @@ void MainWindow::latex_output_PB()
    QString path    = m_ui->latex_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->latex_output->setText(dirName);
+   m_ui->latex_output->setText(path);
 }
 
 void MainWindow::latex_cmd_name_PB()
@@ -1088,9 +1081,9 @@ void MainWindow::rtf_output_PB()
    QString path    = m_ui->rtf_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->rtf_output->setText(dirName);
+   m_ui->rtf_output->setText(path);
 }
 
 void MainWindow::rtf_stylesheet_PB()
@@ -1113,9 +1106,9 @@ void MainWindow::man_output_PB()
    QString path    = m_ui->man_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->man_output->setText(dirName);
+   m_ui->man_output->setText(path);
 }
 
 // tab 3 look up (xml)
@@ -1124,9 +1117,9 @@ void MainWindow::xml_output_PB()
    QString path    = m_ui->xml_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->xml_output->setText(dirName);
+   m_ui->xml_output->setText(path);
 }
 
 // tab 3 look up (docbook)
@@ -1135,7 +1128,7 @@ void MainWindow::docbook_output_PB()
    QString path    = m_ui->docbook_output->text();
    QString relPath = m_ui->output_dir->text();
 
-   QString dirName = get_DirPath(tr("Select destination directory"), path, relPath);
+   path = get_DirPath(tr("Select destination directory"), path, relPath);
 
-   m_ui->docbook_output->setText(dirName);
+   m_ui->docbook_output->setText(path);
 }

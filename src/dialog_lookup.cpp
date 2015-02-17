@@ -20,7 +20,8 @@
 Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    :  QDialog(parent), m_ui(new Ui::Dialog_LookUp)
 {
-   m_data = data;
+   m_data  = data;
+   m_owner = parent;
 
    m_ui->setupUi(this);
    setWindowTitle(m_data.title);
@@ -40,6 +41,10 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
       m_model->appendRow(item);
    }
 
+   // select first row
+   QModelIndex index = m_model->index(0, 0);
+   m_ui->tableView->setCurrentIndex(index);
+
    if (! data.isFilePB) {
       m_ui->files_PB->setEnabled(false);
    }
@@ -48,16 +53,16 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
       m_ui->folders_PB->setEnabled(false);
    }
 
-   connect(m_ui->up_PB,           SIGNAL(clicked()), this, SLOT(moveItemUp()));
-   connect(m_ui->down_PB,         SIGNAL(clicked()), this, SLOT(moveItemDown()));
+   connect(m_ui->up_PB,           &QPushButton::clicked, this, [this](){ moveItemUp(); } );
+   connect(m_ui->down_PB,         &QPushButton::clicked, this, [this](){ moveItemDown(); } );
 
-   connect(m_ui->files_PB,        SIGNAL(clicked()), this, SLOT(getFile()));
-   connect(m_ui->folders_PB,      SIGNAL(clicked()), this, SLOT(getFolder()));
+   connect(m_ui->files_PB,        &QPushButton::clicked, this, [this](){ getFile(); } );
+   connect(m_ui->folders_PB,      &QPushButton::clicked, this, [this](){ getFolder(); } );
 
-   connect(m_ui->add_PB,          SIGNAL(clicked()), this, SLOT(addItem()));
-   connect(m_ui->delete_PB,       SIGNAL(clicked()), this, SLOT(deleteItem()));
-   connect(m_ui->save_PB,         SIGNAL(clicked()), this, SLOT(save()));
-   connect(m_ui->cancel_PB,       SIGNAL(clicked()), this, SLOT(cancel()));
+   connect(m_ui->add_PB,          &QPushButton::clicked, this, [this](){ addItem(); } );
+   connect(m_ui->delete_PB,       &QPushButton::clicked, this, [this](){ deleteItem(); } );
+   connect(m_ui->save_PB,         &QPushButton::clicked, this, [this](){ save(); } );
+   connect(m_ui->cancel_PB,       &QPushButton::clicked, this, [this](){ cancel(); } );
 }
 
 Dialog_LookUp::~Dialog_LookUp()
@@ -69,6 +74,13 @@ void Dialog_LookUp::addItem()
 {  
    QStandardItem *item = new QStandardItem("");
    m_model->appendRow(item);
+
+   // new row
+   int row = m_model->rowCount() - 1;
+
+   // select new row
+   QModelIndex index = m_model->index(row, 0);
+   m_ui->tableView->setCurrentIndex(index);
 }
 
 void Dialog_LookUp::deleteItem()
@@ -97,25 +109,48 @@ void Dialog_LookUp::deleteItem()
       // move to next row
       index = m_model->index(row, 0);
 
-   } else   {
+   } else  {
       // move to row 0      
       index = m_model->index(0, 0);
    }
 
-   m_ui->tableView->setCurrentIndex(index);
+   m_ui->tableView->setCurrentIndex(index);   
 }
 
 
 void Dialog_LookUp::getFile()
 {
-   csMsg("get a file name");
+   QModelIndex index = m_ui->tableView->currentIndex();
+   if (! index.isValid() ) {
+      return;
+   }
 
-   // file = getSingleFile(tr("Select file"), file);
+   QString file = m_model->data(index).toString();
+   file = m_owner->getSingleFile(tr("Select file"), file);
+
+   // save new data
+   m_model->setData(index, QVariant(file));
 }
 
 void Dialog_LookUp::getFolder()
 {
-   csMsg("get a folder name");
+   QModelIndex index = m_ui->tableView->currentIndex();
+   if (! index.isValid() ) {
+      return;
+   }
+
+   QString path = m_model->data(index).toString();
+
+   QString relPath = "";
+
+   // BROOM
+   relPath = m_ui->output_dir->text();
+
+
+   path = m_owner->get_DirPath(tr("Select destination directory"), path, relPath);
+
+   // save new data
+   m_model->setData(index, QVariant(path));
 }
 
 void Dialog_LookUp::moveItemUp()

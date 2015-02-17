@@ -588,7 +588,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->dot_transparent_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "DOT_MULTI_TARGETS");
-   m_ui->dot_multple_targets_CB->setChecked(tempBool);
+   m_ui->dot_multiple_targets_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GENERATE_LEGEND");
    m_ui->gen_legend_CB->setChecked(tempBool);
@@ -611,10 +611,18 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "HTML_FOOTER");
    m_ui->html_footer->setText(tempStr);
 
+   // removed - add to tempText
    tempStr = convert_Str(data, "HTML_STYLESHEET");
-   m_ui->html_stylesheet->setText(tempStr);
-
    tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
+
+   if (! tempStr.isEmpty()) {
+
+      if (tempText.isEmpty()) {
+         tempText = tempStr;
+      } else {
+         tempText = tempStr + ", " + tempText;
+      }
+   }
    m_ui->html_extra_stylesheets->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_FILES");
@@ -633,7 +641,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_timestamp_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "HTML_DYNAMIC_SECTIONS");
-   m_ui->html_synamic_sections_CB->setChecked(tempBool);
+   m_ui->html_dynamic_sections_CB->setChecked(tempBool);
 
    tempInt = convert_Int(data, "HTML_INDEX_NUM_ENTRIES");
    m_ui->html_index_num_entries_SB->setValue(tempInt);
@@ -693,10 +701,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->qhp_cust_filter_attrib->setText(tempStr);
 
    tempStr = convert_Str(data, "QHP_SECT_FILTER_ATTRS");
-   m_ui->qhp_section_filter_name->setText(tempStr);
+   m_ui->qhp_section_filter_attrib->setText(tempStr);
 
    tempStr = convert_Str(data, "QHG_LOCATION");
-   m_ui->qhg_location->setText(tempStr);
+   m_ui->qt_help_gen_path->setText(tempStr);
 
    tempBool = convert_Bool(data, "GENERATE_ECLIPSEHELP");
    m_ui->gen_eclipse_help_CB->setChecked(tempBool);
@@ -793,10 +801,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->latex_extra_files->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "PDF_HYPERLINKS");
-   m_ui->pdf_hyperlinks_CB->setChecked(tempBool);
+   m_ui->latex_hyper_pdf_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "USE_PDFLATEX");
-   m_ui->pdf_latex_CB->setChecked(tempBool);
+   m_ui->latex_pdf_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "LATEX_BATCHMODE");
    m_ui->latex_batch_mode_CB->setChecked(tempBool);
@@ -1056,8 +1064,8 @@ void MainWindow::importDoxy()
          break;
       }
 
-      // ** get new file config name
-      fname = QFileDialog::getSaveFileName(this, tr("New DoxyPress project file name"), m_struct.pathPrior,
+      // ** get new file project file
+      fname = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
                                            tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
