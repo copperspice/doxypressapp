@@ -47,8 +47,10 @@ static QString getHelpTitle(QWidget *name);
 
 static void configFullHelp();
 static QString lookUpHelpBody(QString name);
-
 static void setLabelColor(int option, QWidget *label);
+
+static QString getFilePattens();
+static QString filePatterns = getFilePattens();
 
 void MainWindow::clearAllFields()
 {   
@@ -129,6 +131,8 @@ void MainWindow::clearAllFields()
       }
    }
 
+   int index;
+
    // reset initial default values
    m_ui->project_name->setText("My Project");
 
@@ -152,7 +156,7 @@ void MainWindow::clearAllFields()
    // tab 2 - project
    m_ui->project_encoding->setText("UTF-8");
 
-   int index = m_ui->output_language_CM->findText("English");
+   index = m_ui->output_language_CM->findText("English");
    m_ui->output_language_CM->setCurrentIndex(index);
 
    m_ui->brief_member_desc_CB->setChecked(true);
@@ -183,22 +187,108 @@ void MainWindow::clearAllFields()
    m_ui->allow_sub_grouping_CB->setChecked(true);
 
    // tab 2 - build
+   m_ui->extract_local_classes_CB->setChecked(true);
+   m_ui->show_include_files_CB->setChecked(true);
+   m_ui->inline_info_CB->setChecked(true);
+   m_ui->sort_member_docs_CB->setChecked(true);
+   m_ui->gen_todo_list_CB->setChecked(true);
+   m_ui->gen_test_list_CB->setChecked(true);
+   m_ui->gen_bug_list_CB->setChecked(true);
+   m_ui->gen_deprecate_list_CB->setChecked(true);
+
+   m_ui->max_init_lines_SB->setValue(30);
+   m_ui->show_used_files_CB->setChecked(true);
+   m_ui->show_files_CB->setChecked(true);
+   m_ui->show_namespaces_CB->setChecked(true);
 
    // tab 2 - messages
+   m_ui->warnings_CB->setChecked(true);
+   m_ui->warn_undoc_CB->setChecked(true);
+   m_ui->warn_doc_error_CB->setChecked(true);
 
-   // tab 2 -input
+   m_ui->warn_format->setText("$file:$line: $text");
+
+   // tab 2 -input   
+   m_ui->input_encoding->setText("UTF-8");
+   m_ui->file_patterns->setPlainText(filePatterns);
+
+   // tab 2 -source browser
+   m_ui->strip_code_comments_CB->setChecked(true);
+   m_ui->ref_link_source_CB ->setChecked(true);
+   m_ui->source_tooltips_CB->setChecked(true);
+   m_ui->verbatim_headers_CB->setChecked(true);
 
    // tab 2 -index
+   m_ui->alpha_index_CB->setChecked(true);
+   m_ui->cols_in_index_SB->setValue(5);
+
+   // tab 2 permod
+   m_ui->perl_pretty_CB->setChecked(true);
 
    // tab 2 - preprocess
+   m_ui->enable_preprocessing_CB->setChecked(true);
+   m_ui->search_includes_CB->setChecked(true);
+   m_ui->skip_function_macros_CB->setChecked(true);
 
    // tab 2 - external
+   m_ui->external_groups_CB->setChecked(true);
+   m_ui->external_pages_CB->setChecked(true);
+   m_ui->perl_path->setText("/usr/bin/perl");
 
    // tab 2 - dot
    m_ui->class_diagrams_CB->setChecked(true);
+   m_ui->hide_undoc_relations_CB->setChecked(true);
+   m_ui->dot_font_name->setText("Helvetica");
+   m_ui->dot_font_size_SB->setValue(10);
+   m_ui->uml_limit_num_fields_SB->setValue(10);
+   m_ui->directory_graph_CB->setChecked(true);
 
-   // tab 3 - all of them
+   index = m_ui->dot_image_format_CM->findText("png");
+   m_ui->dot_image_format_CM->setCurrentIndex(index);
 
+   m_ui->dot_graph_max_nodes_SB->setValue(50);
+   m_ui->gen_legend_CB->setChecked(true);
+   m_ui->dot_cleanup_CB->setChecked(true);
+
+   // tab 3 - html
+   m_ui->html_output->setText("html");
+   m_ui->html_file_extension->setText(".html");
+   m_ui->html_timestamp_CB->setChecked(true);
+
+   // tab 3 - chm
+
+
+   // tab 3 - docset
+
+
+   // tab 3 - eclipse
+   m_ui->eclipse_doc_id->setText("org.doxypress.Project");
+
+   // tab 3 - latex
+   m_ui->latex_output->setText("latex");
+   m_ui->latex_cmd_name->setText("latex");
+   m_ui->make_index_cmd_name->setText("makeindex");
+
+   index = m_ui->paper_type_CM->findText("a4");
+   m_ui->paper_type_CM->setCurrentIndex(index);
+
+   // tab 3 - man
+   m_ui->man_output->setText("man");
+   m_ui->man_extension->setText(".3");
+
+   // tab 3 - qthelp
+   m_ui->qhp_namespace->setText("org.doxypress.Project");
+   m_ui->qhp_virtual_folder->setText("doc");
+
+   // tab 3 - rtf
+   m_ui->rtf_output->setText("rtf");
+
+   // tab 3 - xml
+   m_ui->xml_output->setText("xml");
+   m_ui->xml_program_listing_CB->setChecked(true);
+
+   // tab 3 - docbook
+   m_ui->docbook_output->setText("docbook");
 
    // final step
    setDuplicates();  
@@ -351,9 +441,10 @@ void MainWindow::validGet_dot()
 
 void MainWindow::setupLimits()
 {
+   QString temp;
    QStringList data;
 
-   QString temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
+   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
          "Chinese-Traditional, Croatian, Czech, Danish, Dutch, English, "
          "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
          "Indonesian, Italian, Japanese, Japanese-en (Japanese with English messages), "
@@ -361,6 +452,7 @@ void MainWindow::setupLimits()
          "Macedonian, Norwegian, Persian (Farsi), Polish, Portuguese, Romanian, Russian, "
          "Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian, Vietnamese";
 
+   data.clear();
    data = temp.split(", ");
    m_ui->output_language_CM->addItems(data);
 
@@ -384,20 +476,22 @@ void MainWindow::setupLimits()
    data.append("executive");
    m_ui->paper_type_CM->addItems(data);
 
-   //
+   // tab 2 - general
    m_ui->tab_size_SB->setMinimum(1);
    m_ui->tab_size_SB->setMaximum(16);
 
-   // m_ui->look_up_cache->setMinimum(0);
-   // m_ui->look_up_cache->setMaximum(9);
+   m_ui->lookup_cache_size_SB->setMinimum(0);
+   m_ui->lookup_cache_size_SB->setMaximum(9);
 
-   // m_ui->max_init_lines->setMinimum(0);
-   // m_ui->max_init_lines->setMaximum(10000);
+  // tab 2 - build
+   m_ui->max_init_lines_SB->setMinimum(0);
+   m_ui->max_init_lines_SB->setMaximum(10000);
 
-   // file patterns
+   // tab 2 - index
+   m_ui->cols_in_index_SB->setMinimum(1);
+   m_ui->cols_in_index_SB->setMaximum(20);
 
-   // cols in alph index
-
+   // tab 3 html
    m_ui->html_colorstyle_hue->setMinimum(0);
    m_ui->html_colorstyle_hue->setMaximum(359);
 
@@ -732,6 +826,56 @@ static void setLabelColor(int option, QWidget *label)
    }
 }
 
+//**
+static QString getFilePattens()
+{
+   QStringList list;
+   list.append("*.as");
+   list.append("*.c");
+   list.append("*.cc");
+   list.append("*.cpp");
+   list.append("*.cxx");
+   list.append("*.c++");
+   list.append("*.cs");
+   list.append("*.d");
+   list.append("*.ddl");
+   list.append("*.dox");
+   list.append("*.for");
+   list.append("*.f");
+   list.append("*.f90");
+   list.append("*.h");
+   list.append("*.hh");
+   list.append("*.hxx");
+   list.append("*.hpp");
+   list.append("*.h++");
+   list.append("*.ii");
+   list.append("*.ixx");
+   list.append("*.ipp");
+   list.append("*.i++");
+   list.append("*.inc");
+   list.append("*.inl");
+   list.append("*.idl");
+   list.append("*.java");
+   list.append("*.js");
+   list.append("*.m");
+   list.append("*.md");
+   list.append("*.mm");
+   list.append("*.markdown");
+   list.append("*.odl");
+   list.append("*.php");
+   list.append("*.php4");
+   list.append("*.php5");
+   list.append("*.phtml");
+   list.append("*.py");
+   list.append("*.qsf");
+   list.append("*.tcl");
+   list.append("*.ucf");
+
+   QString retval = list.join(", ");
+
+   return retval;
+}
+
 static void configFullHelp()
 {
    m_fullHelp.clear(); 
@@ -767,6 +911,7 @@ static void configFullHelp()
       "Python sources only. DoxyPress will then generate output that is more tailored "
       "for that language. For instance, namespaces will be presented as packages, "
       "qualified scopes will look different, etc. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("OPTIMIZE_C",
@@ -774,11 +919,13 @@ static void configFullHelp()
       "only. DoxyPress will then generate output that is more tailored for C. For "
       "instance, some of the names that are used will be different. The list of all "
       "members will be omitted, etc. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("OPTIMIZE_FORTRAN",
       "Set this tag if your project consists of Fortran "
       "sources. DoxyPress will then generate output that is tailored for Fortran. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("CREATE_SUBDIRS",
@@ -786,17 +933,19 @@ static void configFullHelp()
       "under the output directory of each output format and will distribute the generated files "
       "over these directories. Enabling this option can be useful when a large number of source "
       "files is specified. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("ALLOW_UNICODE_NAMES",
       "If this tag is set DoxyPress will allow non-ASCII characters to appear "
       "in the names of generated files. If set to NO, non-ASCII characters will be "
       "escaped. For example: _xE3_x81_x84 will be used for Unicode U+3044. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("OUTPUT_LANGUAGE",
       "This tag is used to specify the language for the generated documentation. "
-       "<br><br>"
+      "<br><br>"
       "Possible values are: Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
       "Chinese-Traditional, Croatian, Czech, Danish, Dutch, English (United States), "
       "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
@@ -804,12 +953,14 @@ static void configFullHelp()
       "Korean, Korean-en (Korean with English messages), Latvian, Lithuanian, Macedonian, "
       "Norwegian, Persian (Farsi), Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, "
       "Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian and Vietnamese. "
+      "<br><br>"
       "The default value is: English.");
 
    m_fullHelp.insert("BRIEF_MEMBER_DESC",
-      "If this tag is set DoxyPress will include brief member descriptions after the "
+      "If this tag is set then DoxyPress will include brief member descriptions after the "
       "members which are listed in the file and class documentation. This is similar to Javadocs "
       "Set this tage to NO to disable. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("REPEAT_BRIEF",
@@ -818,6 +969,7 @@ static void configFullHelp()
       "<br><br>"
       "Note: If both HIDE_UNDOC_MEMBERS and BRIEF_MEMBER_DESC are set to NO, the "
       "brief descriptions will be completely suppressed. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("ABBREVIATE_BRIEF",
@@ -831,8 +983,9 @@ static void configFullHelp()
       "specifies, contains, represents, a, an and the.");
 
    m_fullHelp.insert("ALWAYS_DETAILED_SEC",
-      "If 'ALWAYS DETAILED SEC' and 'REPEAT BRIEF' tags are both set to YES then "
-      "DoxyPress will generate a detailed section even if there is only a brief description. "
+      "If this tag and 'REPEAT BRIEF' is set, then DoxyPress will generate a "
+      "detailed section even if there is only a brief description. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INLINE_INHERITED_MEMBER",
@@ -880,6 +1033,7 @@ static void configFullHelp()
    m_fullHelp.insert("QT_AUTO_BRIEF",
       "If this tag is set then DoxyPress will interpret the first line "
       "(until the first dot) of a Qt-style comment (/*!) as the brief description. "
+      "<br><br>"
       "If set to NO, an explicit @brief command is required. "
       "The default value is: NO.");
 
@@ -887,8 +1041,8 @@ static void configFullHelp()
       "If this tag is set then DoxyPress will treat a multi-line C++ special comment "
       "block (a block of //! or /// comments) as a brief description. "
       "The default is to treat a multi-line C++ special comment block as a detailed description. "
-      "<br><br>"
       "Setting this tag, means Rational Rose comments are not recognized. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INHERIT_DOCS",
@@ -933,6 +1087,7 @@ static void configFullHelp()
       "before the first occurrence of this tag. DoxyPress uses libiconv (or the iconv "
       "built into libc) for the transcoding. See http://www.gnu.org/software/libiconv "
       "for the list of possible encodings. "
+      "<br><br>"
       "The default value is: UTF-8.");
 
    m_fullHelp.insert("EXTENSION_MAPPING",
@@ -947,7 +1102,7 @@ static void configFullHelp()
       "or free formatted code, this is the default for Fortran type files). "
       "FOr example, to make DoxyPress treat .inc files as Fortran files (default is PHP), "
       "and .f files as C (default is Fortran), use: inc=Fortran f=C. "
-      "\n"
+      "<br><br>"
       "Note: For files without extensions you can use no_extension as a placeholder. "
       "For custom extensions you need to set 'FILE_PATTERNS' otherwise the files are "
       "not read by DoxyPress.");
@@ -959,6 +1114,7 @@ static void configFullHelp()
       "The output of markdown processing is further processed by DoxyPress, so you can "
       "mix DoxyPress, HTML, and XML commands with Markdown formatting. Disable only in "
       "case of backward compatibilities issues. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("AUTO_LINK",
@@ -966,6 +1122,7 @@ static void configFullHelp()
       "classes, or namespaces to their corresponding documentation. Such a link can "
       "be prevented in individual cases by putting a % sign in front of the word or "
       "globally by setting AUTOLINK_SUPPORT to NO. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("BUILT_IN_STL_SUPPORT",
@@ -975,11 +1132,13 @@ static void configFullHelp()
       "definitions whose arguments contain STL classes (e.g. func(std::string); "
       "versus func(std::string) {}). This also make the inheritance and collaboration "
       "diagrams that involve STL classes more complete and accurate. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("CPP_CLI_SUPPORT",
       "If you use Microsoft's C++/CLI language, you should set this option to YES to "
       "enable parsing support. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("SIP_SUPPORT",
@@ -996,6 +1155,7 @@ static void configFullHelp()
       "This will only work if the methods are indeed getting or setting a simple "
       "type. If this is not the case, or you want to show the methods anyway, you "
       "should set this option to NO. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("DIST_GROUP_DOC",
@@ -1010,13 +1170,16 @@ static void configFullHelp()
       "(for instance a group of public functions) to be put as a subgroup of that "
       "type (e.g. under the Public Functions section). Set it to NO to prevent "
       "subgrouping. Alternatively, this can be done per class using the "
-      "\\nosubgrouping command. The default value is: YES.");
+      "\\nosubgrouping command. "
+      "<br><br>"
+      "The default value is: YES.");
 
    m_fullHelp.insert("INLINE_GROUPED_CLASSES",
       "When the INLINE_GROUPED_CLASSES tag is set to YES, classes, structs and unions "
       "are shown inside the group in which they are included (e.g. using \\ingroup) "
       "instead of on a separate page (for HTML and Man pages) or section (for LaTeX "
       "and RTF). Note: this feature does not work in combination with SEPARATE_MEMBER_PAGES. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INLINE_SIMPLE_STRUCT",
@@ -1026,6 +1189,7 @@ static void configFullHelp()
       "namespace, or group documentation), provided this scope is documented. If set "
       "to NO, structs, classes, and unions are shown on a separate page (for HTML and "
       "Man pages) or section (for LaTeX and RTF). "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("TYPEDEF_HIDES_STRUCT",
@@ -1036,6 +1200,7 @@ static void configFullHelp()
       "namespace, or class. And the struct will be named TypeS. This can typically be "
       "useful for C code in case the coding convention dictates that all compound "
       "types are typedef'ed and only the typedef is referenced, never the tag name. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("LOOKUP_CACHE_SIZE",
@@ -1048,6 +1213,7 @@ static void configFullHelp()
       "is 0..9, the default is 0, corresponding to a cache size of 2^16=65536 "
       "symbols. At the end of a run DoxyPress will report the cache usage and suggest "
       "the optimal cache size from a speed point of view. "
+      "<br><br>"
       "Minimum value: 0, maximum value: 9, default value: 0.");
 
    m_fullHelp.insert("EXTRACT_ALL",
@@ -1057,6 +1223,7 @@ static void configFullHelp()
       "EXTRACT_PRIVATE respectively EXTRACT_STATIC tags are set to YES. "
       "Note: This will also disable the warnings about undocumented members that are "
       "normally produced when WARNINGS is set to YES. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("EXTRACT_PRIVATE",
@@ -1068,11 +1235,13 @@ static void configFullHelp()
    m_fullHelp.insert("EXTRACT_PACKAGE",
       "If the EXTRACT_PACKAGE tag is set to YES, all members with package or internal "
       "scope will be included in the documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("EXTRACT_STATIC",
       "If the EXTRACT_STATIC tag is set to YES, all static members of a file will be "
       "included in the documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("EXTRACT_LOCAL_CLASSES",
@@ -1080,12 +1249,14 @@ static void configFullHelp()
       "locally in source files will be included in the documentation. If set to NO, "
       "only classes defined in header files are included. Does not have any effect "
       "for Java sources. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("EXTRACT_LOCAL_METHODS",
       "This flag is only useful for Objective-C code. If set to YES, local methods, "
       "which are defined in the implementation section but not in the interface are "
       "included in the documentation. If set to NO, only methods in the interface are included. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("EXTRACT_ANON_NAMESPACES",
@@ -1094,6 +1265,7 @@ static void configFullHelp()
       "'anonymous_namespace{file}', where file will be replaced with the base name of "
       "the file that contains the anonymous namespace. By default anonymous namespace "
       "are hidden. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("HIDE_UNDOC_MEMBERS",
@@ -1101,6 +1273,7 @@ static void configFullHelp()
       "undocumented members inside documented classes or files. If set to NO these "
       "members will be included in the various overviews, but no documentation "
       "section is generated. This option has no effect if EXTRACT_ALL is enabled. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("HIDE_UNDOC_CLASSES",
@@ -1108,24 +1281,28 @@ static void configFullHelp()
       "undocumented classes that are normally visible in the class hierarchy. If set "
       "to NO, these classes will be included in the various overviews. This option "
       "has no effect if EXTRACT_ALL is enabled. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("HIDE_FRIEND_COMPOUNDS",
       "If the HIDE_FRIEND_COMPOUNDS tag is set to YES, DoxyPress will hide all friend "
       "(class|struct|union) declarations. If set to NO, these declarations will be "
       "included in the documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("HIDE_IN_BODY_DOCS",
       "If the HIDE_IN_BODY_DOCS tag is set to YES, DoxyPress will hide any "
       "documentation blocks found inside the body of a function. If set to NO, these "
       "blocks will be appended to the function's detailed documentation block. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INTERNAL_DOCS",
       "The INTERNAL_DOCS tag determines if documentation that is typed after a "
       "\\internal command is included. If the tag is set to NO then the documentation "
       "will be excluded. Set it to YES to include the internal documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("CASE_SENSE_NAMES",
@@ -1133,7 +1310,8 @@ static void configFullHelp()
       "names in lower-case letters. If set to YES, upper-case letters are also "
       "allowed. This is useful if you have classes or files whose names only differ "
       "in case and if your file system supports case sensitive file names. Windows "
-      "and Mac users are advised to set this option to NO. "
+      "users are advised to set this option to NO. "
+      "<br><br>"
       "The default value is: system dependent.");
 
    m_fullHelp.insert("HIDE_SCOPE_NAMES",
@@ -1145,33 +1323,39 @@ static void configFullHelp()
       "If the HIDE_COMPOUND_REFERENCE tag is set to NO (default) then DoxyPress will "
       "append additional text to a page's title, such as Class Reference. If set to "
       "YES the compound reference will be hidden. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("SHOW_INCLUDE_FILES",
       "If this tag is set then DoxyPress will put a list of "
       "the files that are included by a file in the documentation of that file. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SHOW_GROUPED_MEMBERS_INC",
       "If the SHOW_GROUPED_MEMB_INC tag is set to YES then DoxyPress will add for each "
       "grouped member an include statement to the documentation, telling the reader "
       "which file to include in order to use the member. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("FORCE_LOCAL_INCLUDES",
       "If this tag is set then DoxyPress will list include "
       "files with double quotes in the documentation rather than with sharp brackets. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INLINE_INFO",
       "If the INLINE_INFO tag is set to YES then a tag [inline] is inserted in the "
       "documentation for inline members. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SORT_MEMBER_DOCS",
       "If the SORT_MEMBER_DOCS tag is set to YES then DoxyPress will sort the "
       "(detailed) documentation of file and class members alphabetically by member "
       "name. If set to NO, the members will appear in declaration order. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SORT_BRIEF_DOCS",
@@ -1179,6 +1363,7 @@ static void configFullHelp()
       "descriptions of file, namespace and class members alphabetically by member "
       "name. If set to NO, the members will appear in declaration order. Note that "
       "this will also influence the order of the classes in the class list. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("SORT_MEMBERS_CTORS_FIRST",
@@ -1190,20 +1375,23 @@ static void configFullHelp()
       "member documentation. "
       "Note: If SORT_MEMBER_DOCS is set to NO this option is ignored for sorting "
       "detailed member documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("SORT_GROUP_NAMES",
-      "If the SORT_GROUP_NAMES tag is set to YES then DoxyPress will sort the hierarchy "
+      "If this tag is set then DoxyPress will sort the hierarchy "
       "of group names into alphabetical order. If set to NO the group names will "
       "appear in their defined order. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("SORT_BY_SCOPE_NAME",
-      "If the SORT_BY_SCOPE_NAME tag is set to YES, the class list will be sorted by "
+      "If this tag is set, the class list will be sorted by "
       "fully-qualified names, including namespaces. If set to NO, the class list will "
       "be sorted only by class name, not including the namespace part. "
       "Note: This option is not very useful if HIDE_SCOPE_NAMES is set to YES. "
       "Note: This option applies only to the class list, not to the alphabetical list. "      
+
       "The default value is: NO.");
 
    m_fullHelp.insert("STRICT_PROTO_MATCHING",
@@ -1249,27 +1437,31 @@ static void configFullHelp()
       "appearance of the value of individual variables and macros / defines can be "
       "controlled using \\showinitializer or \\hideinitializer command in the "
       "documentation regardless of this setting. "
+      "<br><br>"
       "Minimum value: 0, maximum value: 10000, default value: 30.");
 
    m_fullHelp.insert("SHOW_USED_FILES",
       "Set the SHOW_USED_FILES tag to NO to disable the list of files generated at "
       "the bottom of the documentation of classes and structs. If set to YES, the "
       "list will mention the files that were used to generate the documentation. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SHOW_FILES",
       "Set this tag to NO to disable the generation of the Files page. This "
-      "will remove the Files entry from the Quick Index and from the Folder Tree View if specified. "     
+      "will remove the Files entry from the Quick Index and from the Folder Tree View if specified. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SHOW_NAMESPACES",
       "Set the SHOW_NAMESPACES tag to NO to disable the generation of the Namespaces "
       "page. This will remove the Namespaces entry from the Quick Index and from the "
       "Folder Tree View (if specified). "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("FILE_VERSION_FILTER",
-      "The FILE_VERSION_FILTER tag can be used to specify a program or script that "
+      "This tag can be used to specify a program or script "
       "DoxyPress should invoke to get the current version for each file (typically from "
       "the version control system). DoxyPress will invoke the program by executing (via "
       "popen()) the command command input-file, where command is the value of the "
@@ -1278,15 +1470,15 @@ static void configFullHelp()
       "version. For an example see the documentation.");
 
    m_fullHelp.insert("LAYOUT_FILE",
-      "The LAYOUT_FILE tag can be used to specify a layout file which will be parsed "
+      "This tag can be used to specify a layout file which will be parsed "
       "by DoxyPress. The layout file controls the global structure of the generated "
       "output files. To create the layout file run DoxyPress with the --l option. A "
       "file name can be specified after the option, if omitted DoxyPress_Layout.xml "
       "will be the default. "
-      " "
-      "Note that if you run DoxyPress from a directory containing a file called "
-      "DoxyPressLayout.xml, DoxyPress will parse it automatically even if the LAYOUT_FILE "
-      "tag is left empty.");
+      "<br><br>"
+      "If DoxyPress is run from a directory containing a file called "
+      "DoxyPress_Layout.xml, DoxyPress will parse it automatically even if this tag "
+      "is left empty.");
 
    m_fullHelp.insert("CITE_BIB_FILES",
       "The CITE_BIB_FILES tag can be used to specify one or more bib files containing "
@@ -1301,17 +1493,20 @@ static void configFullHelp()
       "The QUIET tag can be used to turn on/off the messages that are generated to "
       "standard output by DoxyPress. If QUIET is set to YES this implies that the "
       "messages are off. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("WARNINGS",
       "This tag can be used to turn on/off the warning messages which are sent to "
       "standard error (stderr) by DoxyPress. "       
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("WARN_UNDOC",
       "If the WARN_IF_UNDOCUMENTED tag is set to YES then DoxyPress will generate "
       "warnings for undocumented members. If EXTRACT_ALL is set to YES then this flag "
       "will automatically be disabled. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("WARN_DOC_ERROR",
@@ -1319,6 +1514,7 @@ static void configFullHelp()
       "potential errors in the documentation, such as not documenting some parameters "
       "in a documented function, or documenting parameters that don't exist or using "
       "markup commands wrongly. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("WARN_UNDOC_PARM",
@@ -1326,6 +1522,7 @@ static void configFullHelp()
       "are documented, but have no documentation for their parameters or return "
       "value. If set to NO, DoxyPress will only warn about wrong or incomplete "
       "parameter documentation, but not about the absence of documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("WARN_FORMAT",
@@ -1334,7 +1531,8 @@ static void configFullHelp()
       "will be replaced by the file and line number from which the warning originated "
       "and the warning text. Optionally the format may contain $version, which will "
       "be replaced by the version of the file (if it could be obtained via FILE_VERSION_FILTER) "
-      "The default value is: $file:$line: $text.");
+      "<br><br>"
+      "The default value is: $file:$line: $text");
 
    m_fullHelp.insert("WARN_LOGFILE",
       "The WARN_LOGFILE tag can be used to specify a file to which warning and error "
@@ -1344,7 +1542,8 @@ static void configFullHelp()
    m_fullHelp.insert("INPUT_SOURCE",
       "The INPUT tag is used to specify the files and/or directories that contain "
       "documented source files. You may enter file names like myfile.cpp or "
-      "directories like /usr/src/myproject. Separate the files or directories with spaces. "      
+      "directories like /usr/src/myproject. Separate the files or directories with spaces. "
+      "<br><br>"
       "Note: If this tag is empty the current directory is searched.");
 
    m_fullHelp.insert("INPUT_ENCODING",
@@ -1354,13 +1553,10 @@ static void configFullHelp()
       "The default value is: UTF-8.");
 
    m_fullHelp.insert("FILE_PATTERNS",
-      "If the value of the INPUT tag contains directories, you can use the "
-      "FILE_PATTERNS tag to specify one or more wildcard patterns (like *.cpp and "
-      "*.h) to filter out the source-files in the directories. If left blank the "
-      "following patterns are tested:*.c, *.cc, *.cxx, *.cpp, *.c++, *.java, *.ii, "
-      "*.ixx, *.ipp, *.i++, *.inl, *.idl, *.ddl, *.odl, *.h, *.hh, *.hxx, *.hpp, "
-      "*.h++, *.cs, *.d, *.php, *.php4, *.php5, *.phtml, *.inc, *.m, *.markdown, "
-      "*.md, *.mm, *.dox, *.py, *.f90, *.f, *.for, *.tcl, *.ucf, *.qsf, *.as and *.js.");
+      "If the 'INPUT / SOURCE DIRECTORIES' tag contains directories, this tag will be used to "
+      "specify wildcard patterns to filter out the source files in the directories. "
+     "<br><br>"
+      "The defualt values are: " + filePatterns);
 
    m_fullHelp.insert("SOURCE_RECURSIVE",
       "This tag can be used to specify whether or not subdirectories should "
@@ -1376,23 +1572,21 @@ static void configFullHelp()
    m_fullHelp.insert("EXCLUDE_SYMLINKS",
       "This tag is used to select if symbolic links are excluded from the input. "
       "<br><br>"
-      "The default value is: NO.");
+      "The default value is: NO."); 
 
    m_fullHelp.insert("EXCLUDE_PATTERNS",
-      "If the value of the INPUT tag contains directories, you can use the "
-      "EXCLUDE_PATTERNS tag to specify one or more wildcard patterns to exclude "
-      "certain files from those directories. "      
+      "If the 'INPUT / SOURCE DIRECTORIES' tag contains directories, this tag will be used to "
+      "specify wildcard patterns to exclude certain files from those directories. "
       "Note: Wildcards are matched against the file with absolute path. As an example, to "
       "exclude all test directories use the pattern */test/* "); 
 
    m_fullHelp.insert("EXCLUDE_SYMBOLS",
-      "The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names "
-      "(namespaces, classes, functions, etc.) that should be excluded from the "
-      "output. The symbol name can be a fully qualified name, a word, or if the "
-      "wildcard * is used, a substring. Examples: ANamespace, AClass, "
-      "AClass::ANamespace, ANamespace::*Test "      
+      "This tag is used to specify one or more symbol names "
+      "(namespaces, classes, functions, etc.) which should be excluded from the "
+      "output. The symbol name can be a fully qualified name, a word, or the * wildcard. "
+      "Examples: ANamespace, AClass, AClass::ANamespace, ANamespace::*Test "
       "<br><br>"
-      "Note that the wildcards are matched against the file with absolute path, so to "
+      "Note: W wildcards are matched against the file with absolute path, so to "
       "exclude all test directories use the pattern */test/*");
 
    m_fullHelp.insert("EXAMPLE_SOURCE",
@@ -1400,24 +1594,25 @@ static void configFullHelp()
       "which contain example code fragments that are included (see the \\include command).");
 
    m_fullHelp.insert("EXAMPLE_PATTERNS",
-      "If the value of the EXAMPLE_PATH tag contains directories, you can use the "
-      "EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and "
-      "*.h) to filter out the source-files in the directories. If left blank all "
-      "files are included.");
+      "If the value of the 'EXAMPLE PATH' tag contains directories, then this tag can be used "
+      "to specify one or more wildcard patterns like *.cpp or *.h to filter out the "
+      "source-files in the directories. If left blank all files are included.");
+
+// BROOM should the ABOVE defualt be "*" ?
+
 
    m_fullHelp.insert("EXAMPLE_RECURSIVE",
-      "If the EXAMPLE_RECURSIVE tag is set to YES then subdirectories will be "
-      "searched for input files to be used with the \\include or \\dontinclude commands "
-      "irrespective of the value of the RECURSIVE tag. "
+      "If this tag is set then subdirectories will be searched for input files to be used "
+      "with the \\include or \\dontinclude commands irrespective of the value of the RECURSIVE tag. "
       "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("IMAGE_PATH",
-      "The IMAGE_PATH tag can be used to specify one or more files or directories "
+      "This tag can be used to specify one or more files or directories "
       "which contain images to be included in the documentation. Refer to the \\image command.");
 
    m_fullHelp.insert("INPUT_FILTER",
-      "The INPUT_FILTER tag can be used to specify a program that DoxyPress should "
+      "This tag can be used to specify a program DoxyPress should "
       "invoke to filter for each input file. DoxyPress will invoke the filter program "
       "by executing (via popen()) the command: "
       "<br><br>"
@@ -1433,8 +1628,8 @@ static void configFullHelp()
       "or removed, the anchors will not be placed correctly.");
 
    m_fullHelp.insert("FILTER_PATTERNS",
-      "The FILTER_PATTERNS tag can be used to specify filters on a per file pattern "
-      "basis. DoxyPress will compare the file name with each pattern and apply the "
+      "This tag can be used to specify filters on a per file pattern basis. "
+      "DoxyPress will compare the file name with each pattern and apply the "
       "filter if there is a match. The filters are a list of the form: pattern=filter "
       "(like *.cpp=my_cpp_filter). See INPUT_FILTER for further information on how "
       "filters are used. If the FILTER_PATTERNS tag is empty or if none of the "
@@ -1453,31 +1648,33 @@ static void configFullHelp()
       "it is also possible to disable source filtering for a specific pattern using "
       "*.ext= (so without naming a filter). "
       "<br><br>"
-      "This tag requires the tag FILTER_SOURCE_FILES is set to YES.");
+      "This tag requires the tag 'FILTER SOURCE FILES' is set to YES.");
 
    m_fullHelp.insert("MDFILE_MAINPAGE",
-      "If the USE_MDFILE_AS_MAINPAGE tag refers to the name of a markdown file that "
+      "This tag refers to the name of a markdown file that "
       "is part of the input, its contents will be placed on the main page "
-      "(index.html). This can be useful if you have a project on for instance GitHub "
+      "(index.html). This can be useful if you have a project, on for instance GitHub, "
       "and want to reuse the introduction page also for the DoxyPress output.");
 
    m_fullHelp.insert("SOURCE_BROWSER",
-      "If the SOURCE_BROWSER tag is set to YES then a list of source files will be "
-      "generated. Documented entities will be cross-referenced with these sources. "
-      "\n"
-      "Note: To get rid of all source code in the generated output, make sure that "
-      "also VERBATIM_HEADERS is set to NO. "
+      "If this tag is set then a list of source files will be "
+      "generated. Documented entities will be cross-referenced with these sources. " 
+      "Note: To remove all source code in the generated output, ensure "
+      "the 'VERBATIM HEADERS' is set to NO. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("INLINE_SOURCES",
       "Setting the INLINE_SOURCES tag to YES will include the body of functions, "
       "classes and enums directly into the documentation. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("STRIP_CODE_COMMENTS",
       "Setting the STRIP_CODE_COMMENTS tag to YES will instruct DoxyPress to hide any "
       "special comment blocks from generated source code fragments. Normal C, C++ and "
       "Fortran comments will always remain visible. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("REF_BY_RELATION",
@@ -1488,6 +1685,7 @@ static void configFullHelp()
    m_fullHelp.insert("REF_RELATION",
       "If the REFERENCES_RELATION tag is set to YES then for each documented function "
       "all documented entities called/used by that function will be listed. "
+      "<br><br>"
       "The default value is: NO.");
 
    m_fullHelp.insert("REF_LINK_SOURCE",
@@ -1495,6 +1693,7 @@ static void configFullHelp()
       "to YES then the hyperlinks from functions in REFERENCES_RELATION and "
       "REFERENCED_BY_RELATION lists will link to the source code. Otherwise they will "
       "link to the documentation. "
+      "<br><br>"
       "The default value is: YES.");
 
    m_fullHelp.insert("SOURCE_TOOLTIPS",
@@ -1503,21 +1702,22 @@ static void configFullHelp()
       "brief description and links to the definition and documentation. Since this "
       "will make the HTML file larger and loading of large files a bit slower, you "
       "can opt to disable this feature. "
+      "<br><br>"
       "The default value is: YES. "
-      "This tag requires the tag SOURCE_BROWSER is set to YES.");
+      "This tag requires the tag 'SOURCE BROWSER' is set to YES.");
 
    m_fullHelp.insert("USE_HTAGS",
       "If the USE_HTAGS tag is set to YES then the references to source code will "
       "point to the HTML generated by the htags(1) tool instead of DoxyPress built-in "
       "source browser. The htags tool is part of GNU's global source tagging system "
       "Refer to http://www.gnu.org/software/global/global.html, version 4.8.6 or higher. "
-      "\n"
+      "<br><br>"
       "Once this is installed enable SOURCE_BROWSER and USE_HTAGS. Make sure the INPUT "
       " points to the root of the source tree "
-      "\n"
+      "<br><br>"
       "DoxyPress will invoke htags which will invoke gtags. These tools must be available "
       "from the command line (i.e. in the search path). "
-      "\n"
+      "<br><br>"
       "The result: instead of the source browser generated by DoxyPress, the links to "
       "source code will point to the output of htags. "
       "The default value is: NO. "
@@ -1557,30 +1757,464 @@ static void configFullHelp()
       "The COLS_IN_ALPHA_INDEX tag can be used to specify the number of columns in "
       "which the alphabetical index list will be split. "
       "Minimum value: 1, maximum value: 20, default value: 5. "
-      "This tag requires the tag ALPHABETICAL_INDEX is set to YES.");
+      "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES.");
 
    m_fullHelp.insert("IGNORE_PREFIX",
       "In case all classes in a project start with a common prefix, all classes will "
       "be put under the same header in the alphabetical index. The IGNORE_PREFIX tag "
       "can be used to specify a prefix (or a list of prefixes) that should be ignored "
       "while generating the index headers. "
-      "This tag requires the tag ALPHABETICAL_INDEX is set to YES.");
+      "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES.");
 
    m_fullHelp.insert("GEN_HTML",
       "If the 'GENERATE HTML' tag is set to YES, DoxyPress will generate HTML output "
       "The default value is: YES.");
 
+   m_fullHelp.insert("GEN_AUTOGEN_DEF",
+      "If the GENERATE_AUTOGEN_DEF tag is set to YES, DoxyPress will generate an "
+      "AutoGen Definitions (see http://autogen.sf.net) file that captures the "
+      "structure of the code including all documentation. Note that this feature is "
+      "still experimental and incomplete at the moment. "
+      "<br><br>"
+      "The default value is: NO.");
+
+   m_fullHelp.insert("GEN_PERL",
+      "If the GENERATE_PERLMOD tag is set to YES, DoxyPress will generate a Perl module "
+      "file that captures the structure of the code including all documentation. "
+      "Note that this feature is still experimental and incomplete at the moment. "
+      "<br><br>"
+      "The default value is: NO.");
+
+   m_fullHelp.insert("PERL_LATEX",
+      "If the PERLMOD_LATEX tag is set to YES, DoxyPress will generate the necessary "
+      "Makefile rules, Perl scripts and LaTeX code to be able to generate PDF and DVI "
+      "output from the Perl module output. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
+
+   m_fullHelp.insert("PERL_PRETTY",
+      "If the PERLMOD_PRETTY tag is set to YES, the Perl module output will be nicely "
+      "formatted so it can be parsed by a human reader. This is useful if you want to "
+      "understand what is going on. On the other hand, if this tag is set to NO, the "
+      "size of the Perl module output will be much smaller and Perl will parse it "
+      "just the same. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
+
+   m_fullHelp.insert("PERLMOD_PREFIX",
+      "The names of the make variables in the generated doxyrules.make file are "
+      "prefixed with the string contained in PERLMOD_MAKEVAR_PREFIX. This is useful "
+      "so different doxyrules.make files included by the same Makefile don't "
+      "overwrite each other's variables. "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
+
+   m_fullHelp.insert("ENABLE_PREPROCESSING",
+      "If this tag is set then DoxyPress will evaluate all "
+      "C-preprocessor directives found in the sources and include files. "
+      "<br><br>"
+      "The default value is: YES.");
+
+   m_fullHelp.insert("MACRO_EXPANSION",
+      "If the MACRO_EXPANSION tag is set to YES, DoxyPress will expand all macro names "
+      "in the source code. If set to NO, only conditional compilation will be "
+      "performed. Macro expansion can be done in a controlled way by setting "
+      "EXPAND_ONLY_PREDEF to YES. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("EXPAND_ONLY_PREDEFINED",
+      "If the EXPAND_ONLY_PREDEF and MACRO_EXPANSION tags are both set to YES then "
+      "the macro expansion is limited to the macros specified with the PREDEFINED and "
+      "EXPAND_AS_DEFINED tags. "
+      "The default value is: NO. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("SEARCH_INCLUDES",
+      "If the SEARCH_INCLUDES tag is set to YES, the include files in the "
+      "INCLUDE_PATH will be searched if a #include is found. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("INCLUDE_PATH",
+      "The INCLUDE_PATH tag can be used to specify one or more directories that "
+      "contain include files that are not input files but should be processed by the "
+      "preprocessor. "
+      "<br><br>"
+      "This tag requires the tag 'SEARCH INCLUDES' is set to YES.");
+
+   m_fullHelp.insert("INCLUDE_FILE_PATTERNS",
+      "You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard "
+      "patterns (like *.h and *.hpp) to filter out the header-files in the "
+      "directories. If left blank, the patterns specified with FILE_PATTERNS will be "
+      "used. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("PREDEFINED_MACROS",
+      "The PREDEFINED tag can be used to specify one or more macro names that are "
+      "defined before the preprocessor is started (similar to the -D option of e.g. "
+      "gcc). The argument of the tag is a list of macros of the form: name or "
+      "name=definition (no spaces). If the definition and the \"=\" are omitted, \"=1\" "
+      "is assumed. To prevent a macro definition from being undefined via #undef or "
+      "recursively expanded use the := operator instead of the = operator. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("EXPAND_AS_DEFINED",
+      "If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this "
+      "tag can be used to specify a list of macro names that should be expanded. The "
+      "macro definition that is found in the sources will be used. Use the PREDEFINED "
+      "tag if you want to use a different macro definition that overrules the "
+      "definition found in the source code. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("SKIP_FUNCTION_MACROS",
+      "If the SKIP_FUNCTION_MACROS tag is set to YES then DoxyPress's preprocessor will "
+      "remove all references to function-like macros that are alone on a line, have "
+      "an all uppercase name, and do not end with a semicolon. Such function macros "
+      "are typically used for boiler-plate code, and will confuse the parser if not "
+      "removed. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
+
+   m_fullHelp.insert("TAG_FILES",
+      "The TAGFILES tag can be used to specify one or more tag files. For each tag "
+      "file the location of the external documentation should be added. The format of "
+      "a tag file without this location is as follows: "
+      "TAGFILES = file1 file2 ... "
+      "Adding location for the tag files is done as follows: "
+      "TAGFILES = file1=loc1 \"file2 = loc2\" ... "
+      "where loc1 and loc2 can be relative or absolute paths or URLs. See the "
+      "section \"Linking to external documentation\" for more information about the use "
+      "of tag files. "
+      "Note: Each tag file must have a unique name (where the name does NOT include "
+      "the path). If a tag file is not located in the directory in which DoxyPress is "
+      "run you must also specify the path to the tagfile here.");
+
+   m_fullHelp.insert("GEN_TAGFILE",
+      "When a file name is specified after GENERATE_TAGFILE, DoxyPress will create a "
+      "tag file that is based on the input files it reads. See section \"Linking to "
+      "external documentation\" for more information about the usage of tag files.");
+
+   m_fullHelp.insert("ALL_EXTERNALS",
+      "If the ALLEXTERNALS tag is set to YES, all external class will be listed in "
+      "the class index. If set to NO, only the inherited external classes will be "
+      "listed. "
+      "<br><br>"
+      "The default value is: NO.");
+
+   m_fullHelp.insert("EXTERNAL_GROUPS",
+      "If the EXTERNAL_GROUPS tag is set to YES, all external groups will be listed "
+      "in the modules index. If set to NO, only the current project's groups will be listed. "
+      "<br><br>"
+      "The default value is: YES.");
+
+   m_fullHelp.insert("EXTERNAL_PAGES",
+      "If the EXTERNAL_PAGES tag is set to YES, all external pages will be listed in "
+      "the related pages index. If set to NO, only the current project's pages will be listed. "
+      "<br><br>"
+      "The default value is: YES.");
+
+   m_fullHelp.insert("PERL_PATH",
+      "This tage should be the absolute path and name of the perl script interpreter. "
+      "<br><br>"
+      "The default file (with absolute path) is: /usr/bin/perl.");
+
+   m_fullHelp.insert("CLASS_DIAGRAMS",
+      "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "
+      "for classes with base or super classes. Setting the tag to NO turns the diagrams "
+      "off. This option also works with 'HAVE DOT' disabled. "
+      "It is recommended to install and use dot, since it yields more powerful graphs. "
+      "<br><br>"
+      "The default value is: YES.");
+
+   m_fullHelp.insert("MSCGEN_PATH",
+      "You can define message sequence charts within DoxyPress comments using the \\msc "
+      "command. DoxyPress will then run the mscgen tool to produce the chart and insert it in the "
+      "documentation. The MSCGEN_PATH tag allows you to specify the directory where "
+      "the mscgen tool resides. If left empty the tool is assumed to be found in the "
+      "default search path. Refere to: http://www.mcternan.me.uk/mscgen/");
+
+   m_fullHelp.insert("DIA_PATH",
+      "You can include diagrams made with dia in DoxyPress documentation. DoxyPress will "
+      "then run dia to produce the diagram and insert it in the documentation. The "
+      "DIA_PATH tag allows you to specify the directory where the dia binary resides. "
+      "If left empty dia is assumed to be found in the default search path.");
+
+   m_fullHelp.insert("HIDE_UNDOC_RELATIONS",
+      "If set to YES the inheritance and collaboration graphs will hide inheritance "
+      "and usage relations if the target is undocumented or is not a class. "
+      "<br><br>"
+      "The default value is: YES.");
+
+   m_fullHelp.insert("HAVE_DOT",
+      "If this tag is set then DoxyPress will assume the dot tool is available from the path. "
+      "This tool is part of Graphviz, a graph visualization toolkit from AT&T and Lucent "
+      "Bell Labs. The other options in this section have no effect if this option is set to NO "
+      "Refer to: http://www.graphviz.org/ "
+      "<br><br>"
+      "The default value is: NO.");
+
+   m_fullHelp.insert("DOT_NUM_THREADS",
+      "This tag specifies the number of dot invocations DoxyPress is allowed "
+      "to run in parallel. When set to 0 DoxyPress will base this on the number of "
+      "processors available in the system. You can set it explicitly to a value "
+      "larger than 0 to get control over the balance between CPU load and processing speed. "
+      "<br><br>"
+      "Minimum value: 0, maximum value: 32, default value: 0. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_FONT_NAME",
+      "Specifies a different font for DOT. The path can be set using the 'DOT FONT PATH' tag. "
+      "<br><br>"
+      "The default value is: Helvetica "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_FONT_SIZE",
+      "This tag can be used to set the size (in points) of the font of dot graphs. "
+      "<br><br>"
+      "Minimum value: 4, maximum value: 24, default value: 10. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_FONT_PATH",
+      "By default DOT will use the default font as specified by 'DOT FONTNAME'. "
+      "If you specify a different font, this tag is used to specify the path to the font file. "
+      "<br><br>"
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_CLASS_GRAPH",
+      "If the CLASS_GRAPH tag is set to YES then DoxyPress will generate a graph for "
+      "each documented class showing the direct and indirect inheritance relations. "
+      "Setting this tag to YES will force the CLASS_DIAGRAMS tag to NO. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_COLLABORATION",
+      "If the COLLABORATION_GRAPH tag is set to YES then DoxyPress will generate a "
+      "graph for each documented class showing the direct and indirect implementation "
+      "dependencies (inheritance, containment, and class references variables) of the "
+      "class with other documented classes. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("GROUP_GRAPHS",
+      "If the GROUP_GRAPHS tag is set to YES then DoxyPress will generate a graph for "
+      "groups, showing the direct groups dependencies. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("UML_LOOK",
+      "If this tag is set to YES DoxyPress will generate inheritance and "
+      "collaboration diagrams in a style similar to the OMG's Unified Modeling Language. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("UML_LIMIT_NUM_FIELDS",
+      "If the UML_LOOK tag is enabled, the fields and methods are shown inside the "
+      "class node. If there are many fields or methods and many nodes the graph may "
+      "become too big to be useful. The UML_LIMIT_NUM_FIELDS threshold limits the "
+      "number of items for each type to make the size more manageable. Set this to 0 "
+      "for no limit. Note that the threshold may be exceeded by 50% before the limit "
+      "is enforced. So when you set the threshold to 10, up to 15 fields may appear, "
+      "but if the number exceeds 15, the total amount of fields shown is limited to 10. "
+      "<br><br>"
+      "Minimum value: 0, maximum value: 100, default value: 10. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("TEMPLATE_RELATIONS",
+      "If the TEMPLATE_RELATIONS tag is set to YES then the inheritance and "
+      "collaboration graphs will show the relations between templates and their "
+      "instances. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_INCLUDE",
+      "If the INCLUDE_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are set to "
+      "YES then DoxyPress will generate a graph for each documented file showing the "
+      "direct and indirect include dependencies of the file with other documented "
+      "files. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_INCLUDED_BY",
+      "If the INCLUDED_BY_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are "
+      "set to YES then DoxyPress will generate a graph for each documented file showing "
+      "the direct and indirect include dependencies of the file with other documented files. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_CALL",
+      "If the CALL_GRAPH tag is set to YES then DoxyPress will generate a call "
+      "dependency graph for every global function or class method. "
+      "<br><br>"
+      "Note that enabling this option will significantly increase the time of a run. "
+      "So in most cases it will be better to enable call graphs for selected "
+      "functions only using the \\callgraph command. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_CALLED_BY",
+      "If the CALLER_GRAPH tag is set to YES then DoxyPress will generate a caller "
+      "dependency graph for every global function or class method. "
+      "<br><br>"
+      "Note that enabling this option will significantly increase the time of a run. "
+      "So in most cases it will be better to enable caller graphs for selected "
+      "functions only using the \\callergraph command. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_HIERARCHY",
+      "If this tag is set then DoxyPress will graphical hierarchy of all "
+      "classes instead of a textual one. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DIRECTORY_GRAPH",
+      "If the DIRECTORY_GRAPH tag is set to YES then DoxyPress will show the "
+      "dependencies a directory has on other directories in a graphical way. The "
+      "dependency relations are determined by the #include relations between the "
+      "files in the directories. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_IMAGE_FORMAT",
+      "The DOT_IMAGE_FORMAT tag can be used to set the image format of the images "
+      "generated by dot. "
+      "Note: If you choose svg you need to set HTML_FILE_EXTENSION to xhtml in order "
+      "to make the SVG files visible in IE 9+ (other browsers do not have this "
+      "requirement). "
+      "Possible values are: png, jpg, gif and svg. "
+      "<br><br>"
+      "The default value is: png. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("INTERACTIVE_SVG",
+      "If DOT_IMAGE_FORMAT is set to svg, then this option can be set to YES to "
+      "enable generation of interactive SVG images that allow zooming and panning. "
+      " "
+      "Note this requires a modern browser other than Internet Explorer. Tested "
+      "and working are Firefox, Chrome, Safari, and Opera. "
+      "Note: For IE 9+ you need to set HTML_FILE_EXTENSION to xhtml in order to make "
+      "the SVG files visible. Older versions of IE do not have SVG support. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_PATH",
+      "The tag can be used to specify the path where the dot tool will be  "
+      "found. If left blank it is assumed the dot tool can be found in the users path. "
+      "<br><br>"
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_FILE_DIRS",
+      "The DOTFILE_DIRS tag can be used to specify one or more directories that "
+      "contain dot files that are included in the documentation (see the \\dotfile "
+      "command). "
+      "<br><br>"
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("MSC_FILE_DIRS",
+      "The MSCFILE_DIRS tag can be used to specify one or more directories that "
+      "contain msc files that are included in the documentation (see the \\mscfile "
+      "command).");
+
+   m_fullHelp.insert("DIA_FILE_DIRS",
+      "The DIAFILE_DIRS tag can be used to specify one or more directories that "
+      "contain dia files that are included in the documentation (see the \\diafile "
+      "command).");
+
+   m_fullHelp.insert("PLANTUML_JAR_PATH",
+      "When using plantuml, this tag specifies the path where java can find the "
+      "plantuml.jar file. If left blank, it is assumed "
+      "PlantUML is not used or called during a preprocessing step. DoxyPress will "
+      "generate a warning when it encounters a \\startuml command in this case and "
+      "will not generate output for the diagram.");
+
+   m_fullHelp.insert("PLANTUML_INCLUDE_PATH",
+      "When using plantuml, the specified paths are searched for files specified by "
+      "the !include statement in a plantuml block.");
+
+   m_fullHelp.insert("DOT_GRAPH_MAX_NODES",
+      "The DOT_GRAPH_MAX_NODES tag can be used to set the maximum number of nodes "
+      "that will be shown in the graph. If the number of nodes in a graph becomes "
+      "larger than this value, DoxyPress will truncate the graph, which is visualized "
+      "by representing a node as a red box. Note that DoxyPress if the number of direct "
+      "children of the root node in a graph is already larger than "
+      "DOT_GRAPH_MAX_NODES then the graph will not be shown at all. Also note that "
+      "the size of a graph can be further restricted by MAX_DOT_GRAPH_DEPTH. "
+      "<br><br>"
+      "Minimum value: 0, maximum value: 10000, default value: 50. "
+      "This tag requires  'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
+      "This tag can be used to set the maximum depth of the graphs "
+      "generated by dot. A depth value of 3 means that only nodes reachable from the "
+      "root by following a path via at most 3 edges will be shown. Nodes that lay "
+      "further from the root node will be omitted. Note that setting this option to 1 "
+      "or 2 may greatly reduce the computation time needed for large code bases. Also "
+      "note that the size of a graph can be further restricted by "
+      "DOT_GRAPH_MAX_NODES. Using a depth of 0 means no depth restriction. "
+      "Minimum value: 0, maximum value: 1000, default value: 0. "
+      "<br><br>"
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_TRANSPARENT",
+      "Set this tag to YES to generate images with a transparent background. This tag is "
+      "disabled by default since dot on Windows does not support this feature. "
+      "Warning: Depending on your platform, enabling this option may lead to "
+      "badly anti-aliased labels on the edges of a graph (i.e. they become hard to read). "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_MULTIPLE_TARGETS",
+      "Set this tag to YES to allow dot to generate multiple output "
+      "files in one run (i.e. multiple -o and -T options on the command line). Setting this tag to YEST "
+      "makes dot run faster, however only newer versions of dot (>1.8.10) support this feature. "
+      "<br><br>"
+      "The default value is: NO. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("GEN_LEGEND",
+      "If this tag is set to YES DoxyPress will generate a legend page "
+      "explaining the meaning of the various boxes and arrows in the dot generated graphs. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
+   m_fullHelp.insert("DOT_CLEANUP",
+      "If this tag is set to YES DoxyPress will remove the intermediate dot "
+      "files which are used to generate the various graphs. "
+      "<br><br>"
+      "The default value is: YES. "
+      "This tag requires the tag 'HAVE DOT' is set to YES.");
+
    m_fullHelp.insert("HTML_OUTPUT",
       "The HTML_OUTPUT tag is used to specify where the HTML docs will be put. If a "
       "relative path is entered the value of OUTPUT_DIRECTORY will be put in front of "
       "it. "
-      "The default directory is: html. "
+      "The default directory is: html "
       "This tag requires the tag 'GENERATE HTML' is set to YES.");
 
    m_fullHelp.insert("HTML_FILE_EXTENSION",
       "The HTML_FILE_EXTENSION tag can be used to specify the file extension for each "
       "generated HTML page (for example: .htm, .php, .asp). "
-      "The default value is: .html. "
+      "The default value is: .html "
       "This tag requires the tag 'GENERATE HTML' is set to YES.");
 
    m_fullHelp.insert("HTML_HEADER",
@@ -1649,6 +2283,9 @@ static void configFullHelp()
       "The default value is: NO. "
       "This tag requires the tag 'GENERATE HTML' is set to YES.");
 
+
+// BROOM - start here TAB 3
+
    m_fullHelp.insert("HTML_INDEX_NUM_ENTRIES",
       "With HTML_INDEX_NUM_ENTRIES one can control the preferred number of entries "
       "shown in the various tree structured indices initially; the user can expand "
@@ -1685,14 +2322,14 @@ static void configFullHelp()
       "This tag specifies a string that should uniquely identify the documentation "
       "set bundle. This should be a reverse domain-name style string, e.g. "
       "com.mycompany.MyDocSet. DoxyPress will append .docset to the name. "
-      "The default value is: org.DoxyPress.Project. "
+      "The default value is: org.doxypress.Project "
       "This tag requires the tag GENERATE_DOCSET is set to YES.");
 
    m_fullHelp.insert("DOCSET_PUBLISHER_ID",
       "The DOCSET_PUBLISHER_ID tag specifies a string that should uniquely identify "
       "the documentation publisher. This should be a reverse domain-name style "
       "string, e.g. com.mycompany.MyDocSet.documentation. "
-      "The default value is: org.DoxyPress.Publisher. "
+      "The default value is: org.doxypress.Publisher "
       "This tag requires the tag GENERATE_DOCSET is set to YES.");
       
    m_fullHelp.insert("DOCSET_PUBLISHER_NAME",
@@ -1769,7 +2406,7 @@ static void configFullHelp()
    m_fullHelp.insert("QHP_NAMESPACE",
       "This tag specifies the namespace to use when generating Qt Help output. "
       "<br><br>"
-      "The default value is: org.DoxyPress.Project. "
+      "The default value is: org.doxypress.Project "
       "This tag requires the tag 'GENERATE Qt HELP' is set to YES.");
 
    m_fullHelp.insert("QHP_VIRTUAL_FOLDER",
@@ -1816,7 +2453,7 @@ static void configFullHelp()
       "the directory name containing the HTML and XML files should also have this "
       "name. Each documentation set should have its own identifier. "
       "<br><br>"
-      "The default value is: org.DoxyPress.Project. "
+      "The default value is: org.doxypress.Project "
       "This tag requires the tag 'GENERATE ECLIPSEHELP' is set to YES.");
 
    m_fullHelp.insert("DISABLE_INDEX",
@@ -2258,438 +2895,4 @@ static void configFullHelp()
       "<br><br>"
       "The default value is: NO. "
       "This tag requires the tag 'GENERATE DOCBOOK' is set to YES.");
-
-   m_fullHelp.insert("GEN_AUTOGEN_DEF",
-      "If the GENERATE_AUTOGEN_DEF tag is set to YES, DoxyPress will generate an "
-      "AutoGen Definitions (see http://autogen.sf.net) file that captures the "
-      "structure of the code including all documentation. Note that this feature is "
-      "still experimental and incomplete at the moment. "
-      "<br><br>"
-      "The default value is: NO.");
-
-   m_fullHelp.insert("GEN_PERL",
-      "If the GENERATE_PERLMOD tag is set to YES, DoxyPress will generate a Perl module "
-      "file that captures the structure of the code including all documentation. "      
-      "Note that this feature is still experimental and incomplete at the moment. "
-      "<br><br>"
-      "The default value is: NO.");
-
-   m_fullHelp.insert("PERL_LATEX",
-      "If the PERLMOD_LATEX tag is set to YES, DoxyPress will generate the necessary "
-      "Makefile rules, Perl scripts and LaTeX code to be able to generate PDF and DVI "
-      "output from the Perl module output. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
-
-   m_fullHelp.insert("PERL_PRETTY",
-      "If the PERLMOD_PRETTY tag is set to YES, the Perl module output will be nicely "
-      "formatted so it can be parsed by a human reader. This is useful if you want to "
-      "understand what is going on. On the other hand, if this tag is set to NO, the "
-      "size of the Perl module output will be much smaller and Perl will parse it "
-      "just the same. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
-
-   m_fullHelp.insert("PERLMOD_PREFIX",
-      "The names of the make variables in the generated doxyrules.make file are "
-      "prefixed with the string contained in PERLMOD_MAKEVAR_PREFIX. This is useful "
-      "so different doxyrules.make files included by the same Makefile don't "
-      "overwrite each other's variables. "
-      "<br><br>"
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES.");
-
-   m_fullHelp.insert("ENABLE_PREPROCESSING",
-      "If this tag is set then DoxyPress will evaluate all "
-      "C-preprocessor directives found in the sources and include files. "
-      "<br><br>"
-      "The default value is: YES.");
-
-   m_fullHelp.insert("MACRO_EXPANSION",
-      "If the MACRO_EXPANSION tag is set to YES, DoxyPress will expand all macro names "
-      "in the source code. If set to NO, only conditional compilation will be "
-      "performed. Macro expansion can be done in a controlled way by setting "
-      "EXPAND_ONLY_PREDEF to YES. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("EXPAND_ONLY_PREDEFINED",
-      "If the EXPAND_ONLY_PREDEF and MACRO_EXPANSION tags are both set to YES then "
-      "the macro expansion is limited to the macros specified with the PREDEFINED and "
-      "EXPAND_AS_DEFINED tags. "
-      "The default value is: NO. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("SEARCH_INCLUDES",
-      "If the SEARCH_INCLUDES tag is set to YES, the include files in the "
-      "INCLUDE_PATH will be searched if a #include is found. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("INCLUDE_PATH",
-      "The INCLUDE_PATH tag can be used to specify one or more directories that "
-      "contain include files that are not input files but should be processed by the "
-      "preprocessor. "
-      "<br><br>"
-      "This tag requires the tag 'SEARCH INCLUDES' is set to YES.");
-
-   m_fullHelp.insert("INCLUDE_FILE_PATTERNS",
-      "You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard "
-      "patterns (like *.h and *.hpp) to filter out the header-files in the "
-      "directories. If left blank, the patterns specified with FILE_PATTERNS will be "
-      "used. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("PREDEFINED_MACROS",
-      "The PREDEFINED tag can be used to specify one or more macro names that are "
-      "defined before the preprocessor is started (similar to the -D option of e.g. "
-      "gcc). The argument of the tag is a list of macros of the form: name or "
-      "name=definition (no spaces). If the definition and the \"=\" are omitted, \"=1\" "
-      "is assumed. To prevent a macro definition from being undefined via #undef or "
-      "recursively expanded use the := operator instead of the = operator. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("EXPAND_AS_DEFINED",
-      "If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this "
-      "tag can be used to specify a list of macro names that should be expanded. The "
-      "macro definition that is found in the sources will be used. Use the PREDEFINED "
-      "tag if you want to use a different macro definition that overrules the "
-      "definition found in the source code. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("SKIP_FUNCTION_MACROS",
-      "If the SKIP_FUNCTION_MACROS tag is set to YES then DoxyPress's preprocessor will "
-      "remove all references to function-like macros that are alone on a line, have "
-      "an all uppercase name, and do not end with a semicolon. Such function macros "
-      "are typically used for boiler-plate code, and will confuse the parser if not "
-      "removed. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES.");
-
-   m_fullHelp.insert("TAG_FILES",
-      "The TAGFILES tag can be used to specify one or more tag files. For each tag "
-      "file the location of the external documentation should be added. The format of "
-      "a tag file without this location is as follows: "
-      "TAGFILES = file1 file2 ... "
-      "Adding location for the tag files is done as follows: "
-      "TAGFILES = file1=loc1 \"file2 = loc2\" ... "
-      "where loc1 and loc2 can be relative or absolute paths or URLs. See the "
-      "section \"Linking to external documentation\" for more information about the use "
-      "of tag files. "
-      "Note: Each tag file must have a unique name (where the name does NOT include "
-      "the path). If a tag file is not located in the directory in which DoxyPress is "
-      "run you must also specify the path to the tagfile here.");
-
-   m_fullHelp.insert("GEN_TAGFILE",
-      "When a file name is specified after GENERATE_TAGFILE, DoxyPress will create a "
-      "tag file that is based on the input files it reads. See section \"Linking to "
-      "external documentation\" for more information about the usage of tag files.");
-
-   m_fullHelp.insert("ALL_EXTERNALS",
-      "If the ALLEXTERNALS tag is set to YES, all external class will be listed in "
-      "the class index. If set to NO, only the inherited external classes will be "
-      "listed. "
-      "<br><br>"
-      "The default value is: NO.");
-
-   m_fullHelp.insert("EXTERNAL_GROUPS",
-      "If the EXTERNAL_GROUPS tag is set to YES, all external groups will be listed "
-      "in the modules index. If set to NO, only the current project's groups will be listed. "
-      "<br><br>"
-      "The default value is: YES.");
-
-   m_fullHelp.insert("EXTERNAL_PAGES",
-      "If the EXTERNAL_PAGES tag is set to YES, all external pages will be listed in "
-      "the related pages index. If set to NO, only the current project's pages will be listed. "
-      "<br><br>"
-      "The default value is: YES.");
-
-   m_fullHelp.insert("PERL_PATH",
-      "This tage should be the absolute path and name of the perl script interpreter. "
-      "<br><br>"
-      "The default file (with absolute path) is: /usr/bin/perl.");
-
-   m_fullHelp.insert("CLASS_DIAGRAMS",
-      "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "
-      "for classes with base or super classes. Setting the tag to NO turns the diagrams "
-      "off. This option also works with 'HAVE DOT' disabled. "
-      "It is recommended to install and use dot, since it yields more powerful graphs. "
-      "<br><br>"
-      "The default value is: YES.");
-
-   m_fullHelp.insert("MSCGEN_PATH",
-      "You can define message sequence charts within DoxyPress comments using the \\msc "
-      "command. DoxyPress will then run the mscgen tool to produce the chart and insert it in the "
-      "documentation. The MSCGEN_PATH tag allows you to specify the directory where "
-      "the mscgen tool resides. If left empty the tool is assumed to be found in the "
-      "default search path. Refere to: http://www.mcternan.me.uk/mscgen/");
-
-   m_fullHelp.insert("DIA_PATH",
-      "You can include diagrams made with dia in DoxyPress documentation. DoxyPress will "
-      "then run dia to produce the diagram and insert it in the documentation. The "
-      "DIA_PATH tag allows you to specify the directory where the dia binary resides. "
-      "If left empty dia is assumed to be found in the default search path.");
-
-   m_fullHelp.insert("HIDE_UNDOC_RELATIONS",
-      "If set to YES the inheritance and collaboration graphs will hide inheritance "
-      "and usage relations if the target is undocumented or is not a class. "
-      "<br><br>"
-      "The default value is: YES.");
-
-   m_fullHelp.insert("HAVE_DOT",
-      "If this tag is set then DoxyPress will assume the dot tool is available from the path. "
-      "This tool is part of Graphviz, a graph visualization toolkit from AT&T and Lucent "
-      "Bell Labs. The other options in this section have no effect if this option is set to NO "
-      "Refer to: http://www.graphviz.org/ "
-      "<br><br>"
-      "The default value is: NO.");
-
-   m_fullHelp.insert("DOT_NUM_THREADS",
-      "This tag specifies the number of dot invocations DoxyPress is allowed "
-      "to run in parallel. When set to 0 DoxyPress will base this on the number of "
-      "processors available in the system. You can set it explicitly to a value "
-      "larger than 0 to get control over the balance between CPU load and processing speed. "
-      "<br><br>"
-      "Minimum value: 0, maximum value: 32, default value: 0. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_FONT_NAME",
-      "Specifies a different font for DOT. The path can be set using the 'DOT FONT PATH' tag. "
-      "<br><br>"
-      "The default value is: Helvetica. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_FONT_SIZE",
-      "This tag can be used to set the size (in points) of the font of dot graphs. "
-      "<br><br>"
-      "Minimum value: 4, maximum value: 24, default value: 10. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_FONT_PATH",
-      "By default DOT will use the default font as specified by 'DOT FONTNAME'. "
-      "If you specify a different font, this tag is used to specify the path to the font file. "
-      "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_CLASS_GRAPH",
-      "If the CLASS_GRAPH tag is set to YES then DoxyPress will generate a graph for "
-      "each documented class showing the direct and indirect inheritance relations. "
-      "Setting this tag to YES will force the CLASS_DIAGRAMS tag to NO. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_COLLABORATION",
-      "If the COLLABORATION_GRAPH tag is set to YES then DoxyPress will generate a "
-      "graph for each documented class showing the direct and indirect implementation "
-      "dependencies (inheritance, containment, and class references variables) of the "
-      "class with other documented classes. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("GROUP_GRAPHS",
-      "If the GROUP_GRAPHS tag is set to YES then DoxyPress will generate a graph for "
-      "groups, showing the direct groups dependencies. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("UML_LOOK",
-      "If this tag is set to YES DoxyPress will generate inheritance and "
-      "collaboration diagrams in a style similar to the OMG's Unified Modeling Language. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("UML_LIMIT_NUM_FIELDS",
-      "If the UML_LOOK tag is enabled, the fields and methods are shown inside the "
-      "class node. If there are many fields or methods and many nodes the graph may "
-      "become too big to be useful. The UML_LIMIT_NUM_FIELDS threshold limits the "
-      "number of items for each type to make the size more manageable. Set this to 0 "
-      "for no limit. Note that the threshold may be exceeded by 50% before the limit "
-      "is enforced. So when you set the threshold to 10, up to 15 fields may appear, "
-      "but if the number exceeds 15, the total amount of fields shown is limited to 10. "
-      "<br><br>"
-      "Minimum value: 0, maximum value: 100, default value: 10. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("TEMPLATE_RELATIONS",
-      "If the TEMPLATE_RELATIONS tag is set to YES then the inheritance and "
-      "collaboration graphs will show the relations between templates and their "
-      "instances. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_INCLUDE",
-      "If the INCLUDE_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are set to "
-      "YES then DoxyPress will generate a graph for each documented file showing the "
-      "direct and indirect include dependencies of the file with other documented "
-      "files. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_INCLUDED_BY",
-      "If the INCLUDED_BY_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are "
-      "set to YES then DoxyPress will generate a graph for each documented file showing "
-      "the direct and indirect include dependencies of the file with other documented files. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_CALL",
-      "If the CALL_GRAPH tag is set to YES then DoxyPress will generate a call "
-      "dependency graph for every global function or class method. "
-      "<br><br>"
-      "Note that enabling this option will significantly increase the time of a run. "
-      "So in most cases it will be better to enable call graphs for selected "
-      "functions only using the \\callgraph command. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_CALLED_BY",
-      "If the CALLER_GRAPH tag is set to YES then DoxyPress will generate a caller "
-      "dependency graph for every global function or class method. "
-      "<br><br>"
-      "Note that enabling this option will significantly increase the time of a run. "
-      "So in most cases it will be better to enable caller graphs for selected "
-      "functions only using the \\callergraph command. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_HIERARCHY",
-      "If this tag is set then DoxyPress will graphical hierarchy of all "
-      "classes instead of a textual one. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DIRECTORY_GRAPH",
-      "If the DIRECTORY_GRAPH tag is set to YES then DoxyPress will show the "
-      "dependencies a directory has on other directories in a graphical way. The "
-      "dependency relations are determined by the #include relations between the "
-      "files in the directories. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_IMAGE_FORMAT",
-      "The DOT_IMAGE_FORMAT tag can be used to set the image format of the images "
-      "generated by dot. "
-      "Note: If you choose svg you need to set HTML_FILE_EXTENSION to xhtml in order "
-      "to make the SVG files visible in IE 9+ (other browsers do not have this "
-      "requirement). "
-      "Possible values are: png, jpg, gif and svg. "
-      "<br><br>"
-      "The default value is: png. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("INTERACTIVE_SVG",
-      "If DOT_IMAGE_FORMAT is set to svg, then this option can be set to YES to "
-      "enable generation of interactive SVG images that allow zooming and panning. "
-      " "
-      "Note this requires a modern browser other than Internet Explorer. Tested "
-      "and working are Firefox, Chrome, Safari, and Opera. "
-      "Note: For IE 9+ you need to set HTML_FILE_EXTENSION to xhtml in order to make "
-      "the SVG files visible. Older versions of IE do not have SVG support. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_PATH",
-      "The tag can be used to specify the path where the dot tool will be  "
-      "found. If left blank it is assumed the dot tool can be found in the users path. "
-      "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_FILE_DIRS",
-      "The DOTFILE_DIRS tag can be used to specify one or more directories that "
-      "contain dot files that are included in the documentation (see the \\dotfile "
-      "command). "
-      "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("MSC_FILE_DIRS",
-      "The MSCFILE_DIRS tag can be used to specify one or more directories that "
-      "contain msc files that are included in the documentation (see the \\mscfile "
-      "command).");
-
-   m_fullHelp.insert("DIA_FILE_DIRS",
-      "The DIAFILE_DIRS tag can be used to specify one or more directories that "
-      "contain dia files that are included in the documentation (see the \\diafile "
-      "command).");
-
-   m_fullHelp.insert("PLANTUML_JAR_PATH",
-      "When using plantuml, this tag specifies the path where java can find the "
-      "plantuml.jar file. If left blank, it is assumed "
-      "PlantUML is not used or called during a preprocessing step. DoxyPress will "
-      "generate a warning when it encounters a \\startuml command in this case and "
-      "will not generate output for the diagram.");
-
-   m_fullHelp.insert("PLANTUML_INCLUDE_PATH",
-      "When using plantuml, the specified paths are searched for files specified by "
-      "the !include statement in a plantuml block.");
-
-   m_fullHelp.insert("DOT_GRAPH_MAX_NODES",
-      "The DOT_GRAPH_MAX_NODES tag can be used to set the maximum number of nodes "
-      "that will be shown in the graph. If the number of nodes in a graph becomes "
-      "larger than this value, DoxyPress will truncate the graph, which is visualized "
-      "by representing a node as a red box. Note that DoxyPress if the number of direct "
-      "children of the root node in a graph is already larger than "
-      "DOT_GRAPH_MAX_NODES then the graph will not be shown at all. Also note that "
-      "the size of a graph can be further restricted by MAX_DOT_GRAPH_DEPTH. "
-      "<br><br>"
-      "Minimum value: 0, maximum value: 10000, default value: 50. "
-      "This tag requires  'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
-      "This tag can be used to set the maximum depth of the graphs "
-      "generated by dot. A depth value of 3 means that only nodes reachable from the "
-      "root by following a path via at most 3 edges will be shown. Nodes that lay "
-      "further from the root node will be omitted. Note that setting this option to 1 "
-      "or 2 may greatly reduce the computation time needed for large code bases. Also "
-      "note that the size of a graph can be further restricted by "
-      "DOT_GRAPH_MAX_NODES. Using a depth of 0 means no depth restriction. "
-      "Minimum value: 0, maximum value: 1000, default value: 0. "
-      "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_TRANSPARENT",
-      "Set this tag to YES to generate images with a transparent background. This tag is "
-      "disabled by default since dot on Windows does not support this feature. "      
-      "Warning: Depending on your platform, enabling this option may lead to "
-      "badly anti-aliased labels on the edges of a graph (i.e. they become hard to read). "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-      
-   m_fullHelp.insert("DOT_MULTIPLE_TARGETS",
-      "Set this tag to YES to allow dot to generate multiple output "
-      "files in one run (i.e. multiple -o and -T options on the command line). Setting this tag to YEST "
-      "makes dot run faster, however only newer versions of dot (>1.8.10) support this feature. "
-      "<br><br>"
-      "The default value is: NO. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("GEN_LEGEND",
-      "If this tag is set to YES DoxyPress will generate a legend page "
-      "explaining the meaning of the various boxes and arrows in the dot generated graphs. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
-
-   m_fullHelp.insert("DOT_CLEANUP",
-      "If this tag is set to YES DoxyPress will remove the intermediate dot "
-      "files which are used to generate the various graphs. "
-      "<br><br>"
-      "The default value is: YES. "
-      "This tag requires the tag 'HAVE DOT' is set to YES.");
 }

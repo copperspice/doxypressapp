@@ -144,7 +144,7 @@ void Dialog_LookUp::getFolder()
    QString relPath = "";
 
    // BROOM
-   relPath = m_ui->output_dir->text();
+   relPath = "Z:/DoxyPressApp/appTest";
 
 
    path = m_owner->get_DirPath(tr("Select destination directory"), path, relPath);

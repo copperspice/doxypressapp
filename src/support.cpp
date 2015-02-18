@@ -76,11 +76,7 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, QString re
    // just text, if relative then append
    if (QDir::isRelativePath(path) )  {
       path = relativePath + "/" + path;
-
-
-      csMsg(this, "Relatvie Test", "isRelative TRUE " +  path);
    }  
-
 
    QFileDialog::Options options;
    options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks; 
