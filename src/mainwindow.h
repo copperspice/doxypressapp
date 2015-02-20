@@ -60,8 +60,22 @@ struct Settings {
 struct LookUpInfo {
    QString title;   
    QStringList dataList;
+   QString path;
+   QString relPath;
    bool isFolderPB;
    bool isFilePB;
+};
+
+struct HelpData {
+   QLabel *label;
+   QString defValue;
+   QString title;
+   QString body;
+};
+
+enum Validate{
+   MODIFIED,
+   DEFAULT
 };
 
 class MainWindow : public QMainWindow
@@ -97,7 +111,7 @@ class MainWindow : public QMainWindow
    protected:
       void closeEvent(QCloseEvent *event);
 
-   private :
+   private:
       Ui::MainWindow *m_ui;
 
       QString m_curFile;
@@ -155,7 +169,17 @@ class MainWindow : public QMainWindow
       void updateRunButtons();
 
       // help and label text color
+      static QMap<QWidget *, HelpData> m_bigMap;
+      static const QString m_filePatterns;
+
+      QString getDefault(QWidget *name);
+
+      QLabel *getLabel(QWidget *name);
+      void setLabelColor(int option, QWidget *label);
+
       void setHelpText(QWidget *name);
+      QString getHelpBody(QWidget *name);
+      QString getHelpTitle(QWidget *name);
       void createMap();
 
       bool eventFilter(QObject *object, QEvent *event);
@@ -226,9 +250,10 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void valid_output_dir())
       CS_SLOT_2(valid_output_dir)
 
+      void finalLoad();
       void validGet_html();
       void validGet_latex();
-      void validGet_dot();
+      void validGet_dot();          
 
       CS_SLOT_1(Private, void validSet_html(QAbstractButton *))
       CS_SLOT_2(validSet_html)
@@ -239,6 +264,57 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void validSet_dot(QAbstractButton *))
       CS_SLOT_2(validSet_dot)
 
+      CS_SLOT_1(Private, void valid_gen_html_1(bool checked))
+      CS_SLOT_2(valid_gen_html_1)
+
+      CS_SLOT_1(Private, void valid_gen_docbook_1(bool checked))
+      CS_SLOT_2(valid_gen_docbook_1)
+
+      CS_SLOT_1(Private, void valid_gen_latex_1(bool checked))
+      CS_SLOT_2(valid_gen_latex_1)
+
+      CS_SLOT_1(Private, void valid_gen_man_1(bool checked))
+      CS_SLOT_2(valid_gen_man_1)
+
+      CS_SLOT_1(Private, void valid_gen_rtf_1(bool checked))
+      CS_SLOT_2(valid_gen_rtf_1)
+
+      CS_SLOT_1(Private, void valid_gen_xml_1(bool checked))
+      CS_SLOT_2(valid_gen_xml_1)
+
+      // tab 3 valids
+      CS_SLOT_1(Private, void valid_gen_html())
+      CS_SLOT_2(valid_gen_html)
+
+      CS_SLOT_1(Private, void valid_gen_chm())
+      CS_SLOT_2(valid_gen_chm)
+
+      CS_SLOT_1(Private, void valid_gen_docbook())
+      CS_SLOT_2(valid_gen_docbook)
+
+      CS_SLOT_1(Private, void valid_gen_docset())
+      CS_SLOT_2(valid_gen_docset)
+
+      CS_SLOT_1(Private, void valid_gen_eclipse())
+      CS_SLOT_2(valid_gen_eclipse)
+
+      CS_SLOT_1(Private, void valid_gen_latex())
+      CS_SLOT_2(valid_gen_latex)
+
+      CS_SLOT_1(Private, void valid_gen_man())
+      CS_SLOT_2(valid_gen_man)
+
+      CS_SLOT_1(Private, void valid_gen_qthelp())
+      CS_SLOT_2(valid_gen_qthelp)
+
+      CS_SLOT_1(Private, void valid_gen_rtf())
+      CS_SLOT_2(valid_gen_rtf)
+
+      CS_SLOT_1(Private, void valid_gen_xml())
+      CS_SLOT_2(valid_gen_xml)
+
+      CS_SLOT_1(Private, void valid_search_engine())
+      CS_SLOT_2(valid_search_engine)
 
       // tab 1 - look up
       CS_SLOT_1(Private, void getIcon(const QString route = ""))
@@ -413,8 +489,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void search_data_file_PB())
       CS_SLOT_2(search_data_file_PB)
 
-      CS_SLOT_1(Private, void extra_search_mappings_PB())
-      CS_SLOT_2(extra_search_mappings_PB)
+      CS_SLOT_1(Private, void search_mappings_PB())
+      CS_SLOT_2(search_mappings_PB)
 
       // tab 3 look up (latex)
       CS_SLOT_1(Private, void latex_output_PB())

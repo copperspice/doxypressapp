@@ -7,7 +7,7 @@ gccpath=/c/MingW/bin
 gcclibs=libgcc_s_sjlj-1  libstdc++-6  libwinpthread-1
 
 # list of CopperSpice libraries
-cslibs=Core Gui Network Xml 
+cslibs=Core Gui Network Xml
 
 # location of includes
 AM_CXXFLAGS+=-I../src
@@ -44,7 +44,7 @@ deploy : all
 
 	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deploydir)
 
-#	rsync -W -a --modify-window=2  $(top_srcdir)/resources/diamond.ico $(deploydir)
+ 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)
 
 	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)/%.dll,$(gcclibs))  $(deploydir)
 	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%1-0.dll,$(cslibs))  $(deploydir)
@@ -68,16 +68,17 @@ DoxyPressApp_SOURCES = \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
    src/dialog_xp_getdir.cpp \
-   src/process.cpp \
+   src/gui_help.cpp \
+   src/gui_lookup.cpp \
+   src/gui_valid.cpp  \
    src/import.cpp \
    src/json.cpp \
-   src/lookup.cpp \
    src/main.cpp \
    src/mainwindow.cpp \
+   src/process.cpp \
    src/recent_files.cpp \
    src/support.cpp \
-   src/util.cpp  \
-   src/validate.cpp
+   src/util.cpp
 
 
 FORMS = \
@@ -86,7 +87,6 @@ FORMS = \
    forms/dialog_selectcfg.ui \
    forms/dialog_xp_getdir.ui \
    forms/mainwindow.ui
-
 
 
 RESOURCES = doxypressapp.qrc

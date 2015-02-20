@@ -932,9 +932,9 @@ void MainWindow::qch_file_PB()
 
 void MainWindow::qt_help_gen_path_PB()
 {
-   QString file = m_ui->qt_help_gen_path->text();
+   QString file = m_ui->qthelp_gen_path->text();
    file = getSingleFile(tr("Select file"), file);
-   m_ui->qt_help_gen_path->setText(file);
+   m_ui->qthelp_gen_path->setText(file);
 }
 
 void MainWindow::mathjax_extensions_PB()
@@ -967,12 +967,12 @@ void MainWindow::search_data_file_PB()
    m_ui->search_data_file->setText(file);
 }
 
-void MainWindow::extra_search_mappings_PB()
+void MainWindow::search_mappings_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->extra_search_mappings->toPlainText();
+   QString temp = m_ui->search_mappings->toPlainText();
 
    data.title      = "Extra Search Mappings";
    data.dataList   = temp.split(regExp);
@@ -986,7 +986,7 @@ void MainWindow::extra_search_mappings_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->extra_search_mappings->setPlainText(temp);
+      m_ui->search_mappings->setPlainText(temp);
    }
 }
 

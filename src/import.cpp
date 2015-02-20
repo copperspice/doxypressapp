@@ -662,7 +662,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->docset_publisher_name->setText(tempStr);
 
    tempBool = convert_Bool(data, "GENERATE_HTMLHELP");
-   m_ui->gen_html_help_CB->setChecked(tempBool);
+   m_ui->gen_chm_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "CHM_FILE");
    m_ui->chm_file->setText(tempStr);
@@ -683,7 +683,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->toc_expanded_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GENERATE_QHP");
-   m_ui->gen_qhp_CB->setChecked(tempBool);
+   m_ui->gen_qthelp_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "QCH_FILE");
    m_ui->qch_file->setText(tempStr);
@@ -701,13 +701,13 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->qhp_cust_filter_attrib->setText(tempStr);
 
    tempStr = convert_Str(data, "QHP_SECT_FILTER_ATTRS");
-   m_ui->qhp_section_filter_attrib->setText(tempStr);
+   m_ui->qhp_sect_filter_attrib->setText(tempStr);
 
    tempStr = convert_Str(data, "QHG_LOCATION");
-   m_ui->qt_help_gen_path->setText(tempStr);
+   m_ui->qthelp_gen_path->setText(tempStr);
 
    tempBool = convert_Bool(data, "GENERATE_ECLIPSEHELP");
-   m_ui->gen_eclipse_help_CB->setChecked(tempBool);
+   m_ui->gen_eclipse_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "ECLIPSE_DOC_ID");
    m_ui->eclipse_doc_id->setText(tempStr);
@@ -741,7 +741,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->mathjax_format_CM->setCurrentIndex(tempInt);
 
    tempStr = convert_Str(data, "MATHJAX_RELPATH");
-   m_ui->mathjax_repath->setText(tempStr);
+   m_ui->mathjax_relpath->setText(tempStr);
 
    tempText = convert_PlainText(data,"MATHJAX_EXTENSIONS");
    m_ui->mathjax_extensions->setPlainText(tempText);
@@ -765,10 +765,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->search_data_file->setText(tempStr);
 
    tempStr = convert_Str(data, "EXTERNAL_SEARCH_ID");
-   m_ui->external_search_id->setText(tempStr);
+   m_ui->search_external_id->setText(tempStr);
 
    tempText = convert_PlainText(data,"EXTRA_SEARCH_MAPPING");
-   m_ui->extra_search_mappings->setPlainText(tempText);
+   m_ui->search_mappings->setPlainText(tempText);
 
 
    // tab 3 - latex
@@ -782,11 +782,11 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->make_index_cmd_name->setText(tempStr);
 
    tempBool = convert_Bool(data, "COMPACT_LATEX");
-   m_ui->compact_latex_CB->setChecked(tempBool);
+   m_ui->latex_compact_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "PAPER_TYPE");
-   tempInt = m_ui->paper_type_CM->findText(tempStr);
-   m_ui->paper_type_CM->setCurrentIndex(tempInt);
+   tempInt = m_ui->latex_paper_type_CM->findText(tempStr);
+   m_ui->latex_paper_type_CM->setCurrentIndex(tempInt);
 
    tempText = convert_PlainText(data,"EXTRA_PACKAGES");
    m_ui->latex_extra_packages->setPlainText(tempText);
@@ -866,11 +866,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->docbook_program_listing_CB->setChecked(tempBool);
 
    // final step
-   getIcon("load");
-
-   validGet_html();
-   validGet_latex();
-   validGet_dot();
+   finalLoad();
 }
 
 bool MainWindow::convert_Bool(QByteArray data, QString key)

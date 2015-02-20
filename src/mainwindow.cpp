@@ -20,6 +20,7 @@
 
 #include <QKeySequence>
 #include <QPushButton>
+#include <QTreeWidget>
 
 MainWindow::MainWindow()
    : m_ui(new Ui::MainWindow)
@@ -168,17 +169,19 @@ void MainWindow::createConnections()
    connect(m_ui->actionAbout,         &QAction::triggered, this, [this](){ about();      } );
 
    // tabs
-   connect(m_ui->setup_TreeWidget,    SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                      SLOT(setupPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
-   connect(m_ui->build_TreeWidget,    SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                      SLOT(buildPage(QTreeWidgetItem *, QTreeWidgetItem *)));
-
-   connect(m_ui->output_TreeWidget,   SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-                                      SLOT(outputPage(QTreeWidgetItem *, QTreeWidgetItem *)));
+   connect(m_ui->setup_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::setupPage);
+   connect(m_ui->build_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::buildPage);
+   connect(m_ui->output_TreeWidget,   &QTreeWidget::currentItemChanged, this, &MainWindow::outputPage);
 
    // tab 1 - valid
-   connect(m_ui->output_dir,          &QLineEdit::textChanged, this, [this](){ valid_output_dir(); } );
+   connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);   
+
+   connect(m_ui->gen_html_CB1,        &QGroupBox::toggled,   this, &MainWindow::valid_gen_html_1);
+   connect(m_ui->gen_docbook_CB1,     &QCheckBox::toggled,   this, &MainWindow::valid_gen_docbook_1);
+   connect(m_ui->gen_latex_CB1,       &QGroupBox::toggled,   this, &MainWindow::valid_gen_latex_1);
+   connect(m_ui->gen_man_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_man_1);
+   connect(m_ui->gen_rtf_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_rtf_1);
+   connect(m_ui->gen_xml_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_xml_1);
 
    connect(m_ui->buttonGroup_html,    SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_html(QAbstractButton *)));
@@ -189,41 +192,55 @@ void MainWindow::createConnections()
    connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_dot(QAbstractButton *)));
 
+   // tab 3 - valid
+   connect(m_ui->gen_html_CB2,            &QPushButton::toggled, this, &MainWindow::valid_gen_html);
+   connect(m_ui->gen_chm_CB,              &QPushButton::toggled, this, &MainWindow::valid_gen_chm);
+   connect(m_ui->gen_docbook_CB2,         &QPushButton::toggled, this, &MainWindow::valid_gen_docbook);
+   connect(m_ui->gen_docset_CB,           &QPushButton::toggled, this, &MainWindow::valid_gen_docset);
+   connect(m_ui->gen_eclipse_CB,          &QPushButton::toggled, this, &MainWindow::valid_gen_eclipse);
+   connect(m_ui->gen_latex_CB2,           &QPushButton::toggled, this, &MainWindow::valid_gen_latex);
+   connect(m_ui->gen_man_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_man);
+   connect(m_ui->gen_qthelp_CB,           &QPushButton::toggled, this, &MainWindow::valid_gen_qthelp);
+   connect(m_ui->gen_rtf_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_rtf);
+   connect(m_ui->gen_xml_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
+
+   connect(m_ui->search_engine_CB,        &QPushButton::toggled, this, &MainWindow::valid_search_engine);
+
    // tab 1 - lookups
-   connect(m_ui->icon_PB,                   &QPushButton::clicked, this, [this](){ getIcon(); } );
-   connect(m_ui->output_dir_PB,             SIGNAL(clicked()),     this, SLOT(output_dir_PB()));
-   connect(m_ui->html_colors_PB,            SIGNAL(clicked()),     this, SLOT(tune_colors_PB()));
+   connect(m_ui->icon_PB,                 &QPushButton::clicked, this, [this](){ getIcon(); } );
+   connect(m_ui->output_dir_PB,           &QPushButton::clicked, this, &MainWindow::output_dir_PB);
+   connect(m_ui->html_colors_PB,          &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
    // tab 2- look up (general)
-   connect(m_ui->abbreviate_brief_PB,       SIGNAL(clicked()), this, SLOT(abbreviate_brief_PB()));
-   connect(m_ui->strip_from_path_PB,        SIGNAL(clicked()), this, SLOT(strip_from_path_PB()));
-   connect(m_ui->strip_from_inc_path_PB,    SIGNAL(clicked()), this, SLOT(strip_from_inc_path_PB()));
-   connect(m_ui->aliases_PB,                SIGNAL(clicked()), this, SLOT(aliases_PB()));
-   connect(m_ui->tcl_subst_PB,              SIGNAL(clicked()), this, SLOT(tcl_subst_PB()));
-   connect(m_ui->extension_mapping_PB,      SIGNAL(clicked()), this, SLOT(extension_mapping_PB()));
+   connect(m_ui->abbreviate_brief_PB,     &QPushButton::clicked, this, &MainWindow::abbreviate_brief_PB);
+   connect(m_ui->strip_from_path_PB,      &QPushButton::clicked, this, &MainWindow::strip_from_path_PB);
+   connect(m_ui->strip_from_inc_path_PB,  &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
+   connect(m_ui->aliases_PB,              &QPushButton::clicked, this, &MainWindow::aliases_PB);
+   connect(m_ui->tcl_subst_PB,            &QPushButton::clicked, this, &MainWindow::tcl_subst_PB);
+   connect(m_ui->extension_mapping_PB,    &QPushButton::clicked, this, &MainWindow::extension_mapping_PB);
 
    // tab 2- look up (build)
-   connect(m_ui->enabled_sections_PB,       SIGNAL(clicked()), this, SLOT(enabled_sections_PB()));
-   connect(m_ui->file_version_filter_PB,    SIGNAL(clicked()), this, SLOT(file_version_filter_PB()));
-   connect(m_ui->layout_file_PB,            SIGNAL(clicked()), this, SLOT(layout_file_PB()));
-   connect(m_ui->cite_bib_files_PB,         SIGNAL(clicked()), this, SLOT(cite_bib_files_PB()));
+   connect(m_ui->enabled_sections_PB,     &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
+   connect(m_ui->file_version_filter_PB,  &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
+   connect(m_ui->layout_file_PB,          &QPushButton::clicked, this, &MainWindow::layout_file_PB);
+   connect(m_ui->cite_bib_files_PB,       &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
 
    // tab 2- look up (messages)
-   connect(m_ui->warn_logfile_PB,           SIGNAL(clicked()), this, SLOT(warn_logfile_PB()));
+   connect(m_ui->warn_logfile_PB,         &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
 
    // tab 2- look up (input)
-   connect(m_ui->input_source_PB,           SIGNAL(clicked()),   this, SLOT(input_source_PB()));
-   connect(m_ui->file_patterns_PB,          SIGNAL(clicked()),   this, SLOT(file_patterns_PB()));
-   connect(m_ui->exclude_files_PB,          SIGNAL(clicked()),   this, SLOT(exclude_files_PB()));
-   connect(m_ui->exclude_patterns_PB,       SIGNAL(clicked()),   this, SLOT(exclude_patterns_PB()));
-   connect(m_ui->exclude_symbols_PB,        SIGNAL(clicked()),   this, SLOT(exclude_symbols_PB()));
+   connect(m_ui->input_source_PB,         &QPushButton::clicked, this, &MainWindow::input_source_PB);
+   connect(m_ui->file_patterns_PB,        &QPushButton::clicked, this, &MainWindow::file_patterns_PB);
+   connect(m_ui->exclude_files_PB,        &QPushButton::clicked, this, &MainWindow::exclude_files_PB);
+   connect(m_ui->exclude_patterns_PB,     &QPushButton::clicked, this, &MainWindow::exclude_patterns_PB);
+   connect(m_ui->exclude_symbols_PB,      &QPushButton::clicked, this, &MainWindow::exclude_symbols_PB);
 
-   connect(m_ui->example_source_PB,          SIGNAL(clicked()), this, SLOT(example_source_PB()));
-   connect(m_ui->example_patterns_PB,        SIGNAL(clicked()), this, SLOT(example_patterns_PB()));
-   connect(m_ui->image_path_PB,              SIGNAL(clicked()), this, SLOT(image_path_PB()));
-   connect(m_ui->input_filter_PB,            SIGNAL(clicked()), this, SLOT(input_filter_PB()));
-   connect(m_ui->filter_patterns_PB,         SIGNAL(clicked()), this, SLOT(filter_patterns_PB()));
-   connect(m_ui->filter_source_patterns_PB,  SIGNAL(clicked()), this, SLOT(filter_source_patterns_PB()));
+   connect(m_ui->example_source_PB,         SIGNAL(clicked()), this, SLOT(example_source_PB()));
+   connect(m_ui->example_patterns_PB,       SIGNAL(clicked()), this, SLOT(example_patterns_PB()));
+   connect(m_ui->image_path_PB,             SIGNAL(clicked()), this, SLOT(image_path_PB()));
+   connect(m_ui->input_filter_PB,           SIGNAL(clicked()), this, SLOT(input_filter_PB()));
+   connect(m_ui->filter_patterns_PB,        SIGNAL(clicked()), this, SLOT(filter_patterns_PB()));
+   connect(m_ui->filter_source_patterns_PB, SIGNAL(clicked()), this, SLOT(filter_source_patterns_PB()));
 
    // tab 2- look up (browser)
    connect(m_ui->clang_options_PB,          SIGNAL(clicked()), this, SLOT(clang_options_PB()));
@@ -261,14 +278,16 @@ void MainWindow::createConnections()
    connect(m_ui->html_extra_stylesheets_PB, SIGNAL(clicked()), this, SLOT(html_extra_stylesheets_PB()));
    connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
 
-   connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
-   connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
-   connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
-   connect(m_ui->qt_help_gen_path_PB,       SIGNAL(clicked()), this, SLOT(qt_help_gen_path_PB()));
-
    connect(m_ui->mathjax_extensions_PB,     SIGNAL(clicked()), this, SLOT(mathjax_extensions_PB()));
    connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
-   connect(m_ui->extra_search_mappings_PB,  SIGNAL(clicked()), this, SLOT(extra_search_mappings_PB()));
+   connect(m_ui->search_mappings_PB,        SIGNAL(clicked()), this, SLOT(search_mappings_PB()));
+
+   // tab 3 look up (chm)
+   connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
+   connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
+
+   // tab 3 look up (docbook)
+   connect(m_ui->docbook_output_PB,         SIGNAL(clicked()),   this, SLOT(docbook_output_PB()));
 
    // tab 3 look up (latex)
    connect(m_ui->latex_output_PB,           SIGNAL(clicked()), this, SLOT(latex_output_PB()));
@@ -280,29 +299,30 @@ void MainWindow::createConnections()
    connect(m_ui->latex_footer_PB,           SIGNAL(clicked()), this, SLOT(latex_footer_PB()));
    connect(m_ui->latex_extra_files_PB,      SIGNAL(clicked()), this, SLOT(latex_extra_files_PB()));
 
-   // tab 3 look up (rtf)
-   connect(m_ui->rtf_output_PB,       SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
-   connect(m_ui->rtf_stylesheet_PB,   SIGNAL(clicked()),   this, SLOT(rtf_stylesheet_PB()));
-   connect(m_ui->rtf_extension_PB,    SIGNAL(clicked()),   this, SLOT(rtf_extension_PB()));
+    // tab 3 look up (man)
+   connect(m_ui->man_output_PB,             SIGNAL(clicked()),   this, SLOT(man_output_PB()));
 
-   // tab 3 look up (man)
-   connect(m_ui->man_output_PB,       SIGNAL(clicked()),   this, SLOT(man_output_PB()));
+   // tab 3 look up (qthelp)
+   connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
+   connect(m_ui->qthelp_gen_path_PB,        SIGNAL(clicked()), this, SLOT(qt_help_gen_path_PB()));
+
+   // tab 3 look up (rtf)
+   connect(m_ui->rtf_output_PB,             SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
+   connect(m_ui->rtf_stylesheet_PB,         SIGNAL(clicked()),   this, SLOT(rtf_stylesheet_PB()));
+   connect(m_ui->rtf_extension_PB,          SIGNAL(clicked()),   this, SLOT(rtf_extension_PB()));
 
    // tab 3 look up (xml)
-   connect(m_ui->xml_output_PB,       SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
-
-   // tab 3 look up (docbook)
-   connect(m_ui->docbook_output_PB,   SIGNAL(clicked()),   this, SLOT(docbook_output_PB()));
+   connect(m_ui->xml_output_PB,             SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
 
    // tab 4
-   connect(m_runProcess,              SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
-   connect(m_runProcess,              SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+   connect(m_runProcess,       SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
+   connect(m_runProcess,       SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
 
-   connect(m_ui->run_PB,              SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
-   connect(m_ui->display_PB,          SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
-   connect(m_ui->save_log_PB,         SIGNAL(clicked()), this,  SLOT(saveLog()));
+   connect(m_ui->run_PB,       SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
+   connect(m_ui->display_PB,   SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
+   connect(m_ui->save_log_PB,  SIGNAL(clicked()), this,  SLOT(saveLog()));
 
-// connect(m_timer,         SIGNAL(timeout()), this,  SLOT(readStdout()));
+// connect(m_timer, SIGNAL(timeout()), this,  SLOT(readStdout()));
 
 }
 
