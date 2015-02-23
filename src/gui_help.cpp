@@ -431,20 +431,19 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: BROOM ");
 
-
    //
    s_fullHelp.insert("CREATE_SUBDIRS",
-      "If this tag is set DoxyPress will create 4096 sub-directories (in 2 levels) "
+      "If this tag is set then DoxyPress will create 4096 sub-directories (in 2 levels) "
       "under the output directory of each output format and will distribute the generated files "
       "over these directories. Enabling this option can be useful when a large number of source "
-      "files is specified. "
+      "files are specified. "
       "<br><br>"
       "The default value is: No");
 
    s_fullHelp.insert("ALLOW_UNICODE_NAMES",
-      "If this tag is set DoxyPress will allow non-ASCII characters to appear "
+      "If this tag is set then DoxyPress will allow non-ASCII characters to appear "
       "in the names of generated files. If set to NO, non-ASCII characters will be "
-      "escaped. For example: _xE3_x81_x84 will be used for Unicode U+3044. "
+      "escaped. For example, _xE3_x81_x84 will be used for Unicode U+3044. "
       "<br><br>"
       "The default value is: No");
 
@@ -488,13 +487,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "specifies, contains, represents, a, an, the");
 
    s_fullHelp.insert("ALWAYS_DETAILED_SEC",
-      "If this tag and 'REPEAT BRIEF' is set, then DoxyPress will generate a "
+      "If this tag and 'REPEAT BRIEF' is set then DoxyPress will generate a "
       "detailed section even if there is only a brief description. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("INLINE_INHERITED_MEMBER",
-      "If this tag is set DoxyPress will show all "
+      "If this tag is set then DoxyPress will show all "
       "inherited members of a class in the documentation of that class as if those "
       "members were ordinary class members. Constructors, destructors and assignment "
       "operators of the base classes will not be shown. "
@@ -513,9 +512,6 @@ static void configFullHelp(const QString &m_filePatterns)
       "The path is only stripped if one of the specified strings matches the beginning  "
       "part of the path. The tag can be used to show relative paths in the file list. "
       "If left blank the directory from which DoxyPress is run is used as the path to strip. "
-      "<br><br>"
-      "Specify an absolute path or a relative path, which "
-      "will be relative from the directory where DoxyPress is started. "
       "<br><br>"
       "This tag requires the tag 'FULL PATH NAMES' is set to YES");
 
@@ -559,7 +555,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("SEPARATE_MEMBER_PAGES",
       "If this tag is set then DoxyPress will produce a new "
-      "page for each member. If not set, the documentation of a member will be part "
+      "page for each member. If not set the documentation of a member will be part "
       "of the file/class/namespace that contains it. "
       "<br><br>"
       "The default value is: No");
@@ -568,7 +564,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag is used to set the number of spaces in a tab. DoxyPress "
       "uses this value to replace tabs with spaces in code fragments. "
       "<br><br>"
-      "Minimum value: 1, Maximum value: 16, Default value: 4");
+      "Minimum: 1, Maximum: 16, Default: 4");
 
    s_fullHelp.insert("ALIASES",
       "This tag is used to specify a number of aliases which act as commands in "
@@ -577,15 +573,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "name=value"
       "<br><br>"
       "Adding \"sideeffect=@par Side Effects:\\n\" "
-      "defines the command \n"
-      "\\sideeffect (or @sideeffect) \n"
-      "in the documentation. This will result in a user-defined paragraph with a heading of \n"
-      "\"Side Effects:\" ");
+      "defines the command \\sideeffect (or @sideeffect) "
+      "The result is a user-defined paragraph with a heading of \"Side Effects:\" ");
 
    s_fullHelp.insert("TCL_SUBST",
       "This tag is used to specify a number of word-keyword mappings (TCL only). "
-      "A mapping has the form \"name=value\". For example adding \"class=itcl::class\" "
-      "will allow you to use the command class in the itcl::class meaning.");
+      "A mapping has the form \"name=value\". For example, adding \"class=itcl::class\" "
+      "allows you to use the command class in the itcl::class meaning.");
 
    s_fullHelp.insert("PROJECT_ENCODING",
       "This tag specifies the encoding used for all characters in the config file "
@@ -599,16 +593,16 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("EXTENSION_MAPPING",
       "DoxyPress selects the language parser depending on the extension of the files it parses. "
       "Use this tag to assign a specific parser to use for a given file extension. "
-      "The format for this tag is ext=language, where ext is a file extension, and "
-      "language is one of the parsers supported by DoxyPress. "
+      "The format for this tag is ext=language, where ext is a file extension and language"
+      "is one of the parsers supported by DoxyPress. "
       "<br><br>"
-      "The supported parsers are: C#, C, C++, D, IDL, Java, Javascript, "
-      "PHP, Objective-C, Python, Fortran, FortranFixed, FortranFree. "
+      "The supported parsers are: C#, C, C++, D, IDL, Java, Javascript, Objective-C, "
+      "PHP, Python, Fortran, FortranFixed, FortranFree. "
       "<br><br>"
-      "For example, to treat .f files as C (default is Fortran), use: f=C "
+      "As and example, to treat .f files as C (default is Fortran), use: f=C "
       "<br><br>"
       "Note: For files with no extensions use no_extension as a placeholder. "
-      "For custom extensions set 'FILE PATTERNS' otherwise the files are not read by DoxyPress.");
+      "For custom extensions set 'FILE PATTERNS', otherwise the files are not read by DoxyPress.");
 
    s_fullHelp.insert("MARKDOWN",
       "If this tag is set then DoxyPress pre-processes all comments "
@@ -663,217 +657,197 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("ALLOW_SUB_GROUPING",
       "Set this tag to allow class member groups of the same type "
-      "(for instance a group of public functions) to be put as a subgroup of that "
-      "type. Set to NO to prevent subgrouping. Alternatively, sub-grouping can be done per "
+      "(for instance a group of public functions) to be put as a subgroup of that type. "
+      "Set this tag to NO to prevent subgrouping. Alternatively, sub-grouping can be done per "
       "class using the \\nosubgrouping command. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("INLINE_GROUPED_CLASSES",
-      "When this tag is set classes, structs and unions "
-      "are shown inside the group in which they are included (e.g. using \\ingroup) "
+      "When this tag is set classes, structs and unions are shown inside the group "
+      "in which they are included (using the \\ingroup command) "
       "instead of on a separate page (for HTML and Man pages) or section (for LaTeX and RTF). "
       "<br><br>"
-      "Note: This feature does not work in combination with 'SEPARATE MEMBER PAGES'. "
+      "Note: This feature does not work in combination with 'SEPARATE MEMBER PAGES' "
       "The default value is: NO");
 
    s_fullHelp.insert("INLINE_SIMPLE_STRUCT",
-      "When this tag is set structs, classes, and unions "
-      "with only public data fields or simple typedef fields will be shown inline in "
-      "the documentation of the scope in which they are defined (i.e. file, "
-      "namespace, or group documentation), provided this scope is documented. If set "
-      "to NO then structs, classes, and unions are shown on a separate page (for HTML and "
-      "Man pages) or section (for LaTeX and RTF). "
+      "When this tag is set structs, classes, and unions with only public data fields or simple "
+      "typedef fields, will be shown inline in the documentation of the scope in which they are "
+      "defined. If this tag is set to NO then structs, classes, and unions are shown on a separate page "
+      "(for HTML and Man pages) or section (for LaTeX and RTF). "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("TYPEDEF_HIDES_STRUCT",
-      "When the tag is set a typedef of a struct, union, or "
-      "enum is documented as struct, union, or enum with the name of the typedef. "
-      "For example, Typedef struct TypeS {} TypeT, will appear in the documentation as a struct "
-      "with name TypeT. When disabled the typedef will appear as a member of a file, "
-      "namespace, or class and the struct will be named TypeS. This can be "
-      "useful for C code where the coding convention dictates all compound "
-      "types are typedef'ed and only the typedef is referenced, never the tag name. "
+      "When the tag is set a typedef of a struct, union, or enum is documented as struct, union, or "
+      "enum with the name of the typedef. For example, Typedef struct TypeS {} TypeT, will appear "
+      "as a struct with name TypeT. When disabled, the typedef will appear as a member of a file, "
+      "namespace, or class and the struct will be named TypeS. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("LOOKUP_CACHE_SIZE",
       "The size of the symbol lookup cache can be set using this tag. If the cache is too small "
-      "DoxyPress may run slower. At the end of a run DoxyPress will report the cache usage and suggest "
-      "the optimal cache size. "
+      "DoxyPress may run slower. At the end of a run DoxyPress will report the cache usage and "
+      " suggest the optimal cache size. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 9, Default value: 0");
+      "Minimum: 0, Maximum: 9, Default: 0");
 
    s_fullHelp.insert("EXTRACT_ALL",
-      "If this tag is set then DoxyPress will assume all entities in "
-      "documentation are documented, even if no documentation was available. Private "
-      "class members and static file members will be hidden unless the "
-      "EXTRACT_PRIVATE respectively EXTRACT_STATIC tags are set to YES. "
+      "If this tag is set then DoxyPress will assume all entities are documented. "
+      "Private class members and static file members will be hidden unless the "
+      "'EXTRACT PRIVATE' or the 'EXTRACT STATIC' tags are set to YES. "
       "<br><br>"
-      "Note: This will also disable the warnings about undocumented members that are "
-      "normally produced when WARNINGS is set to YES "
+      "Note: Setting this tag will also disable warnings about undocumented members. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTRACT_PRIVATE",
-      "If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will "
-      "be included in the documentation. "
+      "If this tag is set then all private members of a class will be included in the documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTRACT_PACKAGE",
-      "If the EXTRACT_PACKAGE tag is set to YES, all members with package or internal "
-      "scope will be included in the documentation. "
+      "If this tag is set then all members with package or internal scope will be included in the documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTRACT_STATIC",
-      "If the EXTRACT_STATIC tag is set to YES, all static members of a file will be "
-      "included in the documentation. "
+      "If this tag is set then all static members of a file will be included in the documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTRACT_LOCAL_CLASSES",
-      "If the EXTRACT_LOCAL_CLASSES tag is set to YES, classes (and structs) defined "
-      "locally in source files will be included in the documentation. If set to NO, "
-      "only classes defined in header files are included. Does not have any effect "
-      "for Java sources. "
+      "If this tag is set then classes (and structs) defined locally in source files will "
+      "be included in the documentation. If set to NO, only classes defined in "
+      "header files are included. Does not have any effect for Java sources. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("EXTRACT_LOCAL_METHODS",
-      "This flag is only useful for Objective-C code. If set to YES, local methods, "
-      "which are defined in the implementation section but not in the interface are "
+      "This tag is only useful for Objective-C code. If set to YES then local methods, "
+      "which are defined in the implementation section, but not in the interface, are "
       "included in the documentation. If set to NO, only methods in the interface are included. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTRACT_ANON_NAMESPACES",
-      "If this flag is set to YES, the members of anonymous namespaces will be "
-      "extracted and appear in the documentation as a namespace called "
-      "'anonymous_namespace{file}', where file will be replaced with the base name of "
-      "the file that contains the anonymous namespace. By default anonymous namespace "
-      "are hidden. "
+      "If this tag is set then the members of anonymous namespaces will be extracted and appear "
+      "as a namespace called 'anonymous_namespace{file}'. The value for 'file' will be "
+      "replaced with the base name of the file which contains the anonymous namespace. "
+      "By default anonymous namespace are hidden. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("HIDE_UNDOC_MEMBERS",
-      "If the HIDE_UNDOC_MEMBERS tag is set to YES, DoxyPress will hide all "
-      "undocumented members inside documented classes or files. If set to NO these "
-      "members will be included in the various overviews, but no documentation "
-      "section is generated. This option has no effect if EXTRACT_ALL is enabled. "
+      "If this tag is set then DoxyPress will hide all undocumented members  inside "
+      "documented classes or files. If set to NO, these members will be included in the "
+      "various overviews, but no documentation section is generated. "
+      "This tag has no effect if 'EXTRACT ALL' is set to YES. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("HIDE_UNDOC_CLASSES",
-      "If the HIDE_UNDOC_CLASSES tag is set to YES, DoxyPress will hide all "
-      "undocumented classes that are normally visible in the class hierarchy. If set "
-      "to NO, these classes will be included in the various overviews. This option "
-      "has no effect if EXTRACT_ALL is enabled. "
+      "If this tag is set then DoxyPress will hide all undocumented classes which are "
+      "normally visible in the class hierarchy. If set to NO, these clases will be "
+      "included in the various overviews. This tag has no effect if 'EXTRACT ALL' is set to YES. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("HIDE_FRIEND_COMPOUNDS",
-      "If the HIDE_FRIEND_COMPOUNDS tag is set to YES, DoxyPress will hide all friend "
-      "(class|struct|union) declarations. If set to NO, these declarations will be "
-      "included in the documentation. "
+      "If this tag is set then DoxyPress will hide all friend (class|struct|union) declarations. "
+      "If set to NO, these declarations will be included in the documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("HIDE_IN_BODY_DOCS",
-      "If the HIDE_IN_BODY_DOCS tag is set to YES, DoxyPress will hide any "
-      "documentation blocks found inside the body of a function. If set to NO, these "
-      "blocks will be appended to the function's detailed documentation block. "
+      "If this tag is set then DoxyPress will hide any documentation blocks found inside the body "
+      "of a function. If set to NO, these blocks will be appended to the function's detailed "
+      "documentation block. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("INTERNAL_DOCS",
-      "The INTERNAL_DOCS tag determines if documentation that is typed after a "
-      "\\internal command is included. If the tag is set to NO then the documentation "
-      "will be excluded. Set it to YES to include the internal documentation. "
+      "This tag determines if documentation which is typed after an \\internal command "
+      "is included. If the tag is set to NO then the documentation will be excluded. "
+      "Set to YES to include the internal documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("CASE_SENSE_NAMES",
-      "If the CASE_SENSE_NAMES tag is set to NO then DoxyPress will only generate file "
-      "names in lower-case letters. If set to YES, upper-case letters are also "
-      "allowed. This is useful if you have classes or files whose names only differ "
-      "in case and if your file system supports case sensitive file names. Windows "
-      "users are advised to set this option to NO. "
+      "If this tag is set to NO then DoxyPress will generates all file names in lower case.  "
+      "If set to YES, case is preserved "
       "<br><br>"
-      "The default value is: system dependent");
+      "The default value is: YES");
 
    s_fullHelp.insert("HIDE_SCOPE_NAMES",
-      "If this tag is not set then DoxyPress will show members with their full class"
+      "If this tag is set to NO then DoxyPress will show members with their full class "
       "and namespace scopes in the documentation. If set to YES, the scope will be hidden. "
       "The default value is: NO");
 
    s_fullHelp.insert("HIDE_COMPOUND_REFERENCE",
-      "If the HIDE_COMPOUND_REFERENCE tag is set to NO (default) then DoxyPress will "
-      "append additional text to a page's title, such as Class Reference. If set to "
-      "YES the compound reference will be hidden. "
+      "If this tag is set to NO then DoxyPress will append additional text to a page's title, "
+      "such as Class Reference. If set to YES the compound reference will be hidden. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("SHOW_INCLUDE_FILES",
-      "If this tag is set then DoxyPress will put a list of "
-      "the files that are included by a file in the documentation of that file. "
+      "If this tag is set then DoxyPress will put a list of the files which are"
+      "included by a file in the documentation of that file. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("SHOW_GROUPED_MEMBERS_INC",
-      "If the SHOW_GROUPED_MEMB_INC tag is set to YES then DoxyPress will add for each "
-      "grouped member an include statement to the documentation, telling the reader "
-      "which file to include in order to use the member. "
+      "If this tag is set then DoxyPress will add for each grouped member, an include statement "
+      "indicating which file to include in order to use the member. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("FORCE_LOCAL_INCLUDES",
-      "If this tag is set then DoxyPress will list include "
-      "files with double quotes in the documentation rather than with sharp brackets. "
+      "If this tag is set then DoxyPress will list include files with double quotes "
+      "rather than with less than / greater than symbols. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("INLINE_INFO",
-      "If the INLINE_INFO tag is set to YES then a tag [inline] is inserted in the "
-      "documentation for inline members. "
+      "If this tag is set then '[inline]' is displayed for inline members. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("SORT_MEMBER_DOCS",
-      "If the SORT_MEMBER_DOCS tag is set to YES then DoxyPress will sort the "
-      "(detailed) documentation of file and class members alphabetically by member "
-      "name. If set to NO, the members will appear in declaration order. "
+      "If this tag is set then DoxyPress will sort the (detailed) documentation of "
+      "file and class members alphabetically by member name. If set to NO, "
+      "the members will appear in declaration order. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("SORT_BRIEF_DOCS",
-      "If the SORT_BRIEF_DOCS tag is set to YES then DoxyPress will sort the brief "
-      "descriptions of file, namespace and class members alphabetically by member "
-      "name. If set to NO, the members will appear in declaration order. Note that "
-      "this will also influence the order of the classes in the class list. "
+      "If this tag is set then DoxyPress will sort the brief descriptions of file, namespace, "
+      "and class members alphabetically by member name. If set to NO, the members will appear "
+      "appear in declaration order. This will also influence the order of the classes in the class list. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("SORT_MEMBERS_CTORS_FIRST",
-      "If the SORT_MEMBERS_CTORS_1ST tag is set to YES then DoxyPress will sort the "
-      "(brief and detailed) documentation of class members so that constructors and "
-      "destructors are listed first. If set to NO the constructors will appear in the "
-      "respective orders defined by SORT_BRIEF_DOCS and SORT_MEMBER_DOCS. "
-      "Note: If SORT_BRIEF_DOCS is set to NO this option is ignored for sorting brief "
-      "member documentation. "
-      "Note: If SORT_MEMBER_DOCS is set to NO this option is ignored for sorting "
-      "detailed member documentation. "
+      "If this tag is set to then DoxyPress will sort the brief and detailed) documentation of "
+      "class members so that constructors and destructors are listed first. If set to NO, the"
+      "constructors will appear in the respective orders defined by 'SORT BRIEF DOCS' "
+      "and 'SORT MEMBER DOCS'. "
+      "<br><br>"
+      "If 'SORT BRIEF DOCS' is set to NO, this tag is ignored for sorting brief member documentation. "
+      "<br><br>"
+      "If 'SORT MEMBER DOCS' is set to NO this tag is ignored for sorting detailed member documentation. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("SORT_GROUP_NAMES",
-      "If this tag is set then DoxyPress will sort the hierarchy "
-      "of group names into alphabetical order. If set to NO the group names will "
-      "appear in their defined order. "
+      "If this tag is set then DoxyPress will sort the hierarchy of group names into alphabetical "
+      "If set to NO the group names will appear in their defined order. "
       "<br><br>"
       "The default value is: NO");
+
+// BROOM - START HERE
 
    s_fullHelp.insert("SORT_BY_SCOPE_NAME",
       "If this tag is set, the class list will be sorted by "
@@ -931,7 +905,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "controlled using \\showinitializer or \\hideinitializer command in the "
       "documentation regardless of this setting. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 10000, Default value: 30.");
+      "Minimum: 0, Maximum: 10000, Default: 30");
 
    s_fullHelp.insert("SHOW_USED_FILES",
       "Set the SHOW_USED_FILES tag to NO to disable the list of files generated at "
@@ -1086,10 +1060,9 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("EXAMPLE_PATTERNS",
       "If the value of the 'EXAMPLE PATH' tag contains directories, then this tag can be used "
       "to specify one or more wildcard patterns like *.cpp or *.h to filter out the "
-      "source-files in the directories. If left blank all files are included.");
-
-// BROOM should the ABOVE defualt be "*" ?
-
+      "source files in the example directories. "
+      "<br><br>"
+      "The default value is: *");
 
    s_fullHelp.insert("EXAMPLE_RECURSIVE",
       "If this tag is set then subdirectories will be searched for input files to be used "
@@ -1244,7 +1217,8 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("COLS_IN_INDEX",
       "The COLS_IN_ALPHA_INDEX tag can be used to specify the number of columns in "
       "which the alphabetical index list will be split. "
-      "Minimum value: 1, Maximum value: 20, Default value: 5 "
+      "<br><br>"
+      "Minimum: 1, Maximum: 20, Default: 5 "
       "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES");
 
    s_fullHelp.insert("IGNORE_PREFIX",
@@ -1252,6 +1226,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "be put under the same header in the alphabetical index. The IGNORE_PREFIX tag "
       "can be used to specify a prefix (or a list of prefixes) that should be ignored "
       "while generating the index headers. "
+      "<br><br>"
       "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES");
 
    s_fullHelp.insert("GEN_AUTOGEN_DEF",
@@ -1260,7 +1235,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "structure of the code including all documentation. Note that this feature is "
       "still experimental and incomplete at the moment. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("GEN_PERL",
       "If the GENERATE_PERLMOD tag is set to YES, DoxyPress will generate a Perl module "
@@ -1452,7 +1427,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "processors available in the system. You can set it explicitly to a value "
       "larger than 0 to get control over the balance between CPU load and processing speed. "
       "<br><br>"
-      "Minimum value: 0, maximum value: 32, default value: 0. "
+      "Minimum: 0, Maximum: 32, Default: 0 "
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_NAME",
@@ -1464,7 +1439,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("DOT_FONT_SIZE",
       "This tag can be used to set the size (in points) of the font of dot graphs. "
       "<br><br>"
-      "Minimum value: 4, maximum value: 24, default value: 10. "
+      "Minimum: 4, Maximum: 24, Default: 10 "
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_PATH",
@@ -1513,7 +1488,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "is enforced. So when you set the threshold to 10, up to 15 fields may appear, "
       "but if the number exceeds 15, the total amount of fields shown is limited to 10. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 100, Default value: 10 "
+      "Minimum: 0, Maximum: 100, Default: 10 "
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("TEMPLATE_RELATIONS",
@@ -1643,8 +1618,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "DOT_GRAPH_MAX_NODES then the graph will not be shown at all. Also note that "
       "the size of a graph can be further restricted by MAX_DOT_GRAPH_DEPTH. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 10000, Default value: 50 "
-      "This tag requires  'HAVE DOT' is set to YES");
+      "Minimum: 0, Maximum: 10000, Default: 50 "
+      "This tag requires the tag'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
       "This tag can be used to set the maximum depth of the graphs "
@@ -1655,7 +1630,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "note that the size of a graph can be further restricted by "
       "DOT_GRAPH_MAX_NODES. Using a depth of 0 means no depth restriction. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 1000, Default value: 0 "
+      "Minimum: 0, Maximum: 1000, Default: 0 "
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_TRANSPARENT",
@@ -1750,20 +1725,20 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag controls the color of the HTML output. DoxyPress will adjust the colors in "
       "the stylesheet and background images according to this color. "
       "<br><br>"
-      "Minimum value: 0, maximum value: 359, default value: 220. "
+      "Minimum: 0, Maximum: 359, Default: 220 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_COLORSTYLE_SAT",
       "This tag controls the purity (or saturation) of the colors in the HTML output. "
       "<br><br>"
-      "Minimum value: 0, maximum value: 255, default value: 100. "
+      "Minimum: 0, Maximum: 255, Default: 100 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_COLORSTYLE_GAMMA",
       "This controls the gamma correction applied to the luminance component of the colors "
       "in the HTML output. "
       "<br><br>"
-      "Minimum value: 40, Maximum value: 240, Default value: 80 "
+      "Minimum: 40, Maximum: 240, Default: 80 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_TIMESTAMP",
@@ -1787,7 +1762,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "number of entries are visible. Setting the number of entries to 1 will "
       "produce a full collapsed tree. A value of 0 will result in a fully expanded tree. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 9999, Default value: 100 "
+      "Minimum: 0, Maximum: 9999, Default: 100 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    // chm
@@ -2010,7 +1985,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "If the treeview is enabled (see GENERATE_TREEVIEW) then this tag can be used "
       "to set the initial width (in pixels) of the frame in which the tree is shown. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 1500, Default value: 250 "
+      "Minimum: 0, Maximum: 1500, Default: 250 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("ENUM_VALUES_PER_LINE",
@@ -2020,7 +1995,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "Note: A value of 0 will completely suppress the enum values from appearing "
       "in the overview section. "
       "<br><br>"
-      "Minimum value: 0, Maximum value: 20, Default value: 4 "
+      "Minimum: 0, Maximum: 20, Default: 4 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("EXTERNAL_LINKS_IN_WINDOW",
@@ -2101,7 +2076,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "the HTML documentation. When you change the font size after a successful "
       "DoxyPress run you need to manually remove any form_*.png images from the HTML "
       "output directory to force them to be regenerated. "
-      "Minimum value: 8, Maximum value: 50, Default value: 10 "
+      "<br><br>"
+      "Minimum: 8, Maximum: 50, Default: 10 "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("FORMULA_TRANSPARENT",
@@ -2109,8 +2085,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "generated for formulas are transparent PNGs. Transparent PNGs are not "
       "supported properly for IE 6.0, but are supported on all modern browsers. "
       "<br><br>"
-      "Note: When changing this option you need to delete any form_*.png files in "
-      "the HTML output directory before the changes have effect. "
+      "Note: When changing this tag delete any files names form_*.png in "
+      "the HTML output directory for this change to be effective. "
       "<br><br>"
       "The default value is: YES "
       "This tag requires the tag 'GENERATE HTML' is set to YES");

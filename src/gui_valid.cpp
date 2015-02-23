@@ -163,9 +163,11 @@ void MainWindow::clearAllFields()
 
    // tab 2 - build
    m_ui->extract_local_classes_CB->setChecked(true);
+   m_ui->case_sense_names_CB->setChecked(true);
+
    m_ui->show_include_files_CB->setChecked(true);
-   m_ui->inline_info_CB->setChecked(true);
-   m_ui->sort_member_docs_CB->setChecked(true);
+   m_ui->inline_info_CB->setChecked(true);   
+   m_ui->sort_member_docs_CB->setChecked(true);   
    m_ui->gen_todo_list_CB->setChecked(true);
    m_ui->gen_test_list_CB->setChecked(true);
    m_ui->gen_bug_list_CB->setChecked(true);
@@ -186,6 +188,7 @@ void MainWindow::clearAllFields()
    // tab 2 -input
    m_ui->input_encoding->setText("UTF-8");
    m_ui->file_patterns->setPlainText(m_filePatterns);
+   m_ui->example_patterns->setPlainText("*");
 
    // tab 2 -source browser
    m_ui->strip_code_comments_CB->setChecked(true);
