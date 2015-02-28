@@ -112,10 +112,11 @@ void MainWindow::clearAllFields()
 
    // reset initial default values
    m_ui->project_name->setText("My Project");
-   m_project_iconFN = "";
+   m_project_logoFN = "";
 
    m_ui->optimize_cplus_CB->setChecked(true);
    m_ui->gen_html_CB1->setChecked(true);
+   m_ui->html_search_CB1->setChecked(true);
 
    m_ui->html_colorstyle_hue->setValue(220);
    m_ui->html_colorstyle_sat->setValue(100);
@@ -218,6 +219,7 @@ void MainWindow::clearAllFields()
    m_ui->hide_undoc_relations_CB->setChecked(true);
    m_ui->dot_font_name->setText("Helvetica");
    m_ui->dot_font_size_SB->setValue(10);
+   m_ui->group_graphs_CB->setChecked(true);
    m_ui->uml_limit_num_fields_SB->setValue(10);
    m_ui->directory_graph_CB->setChecked(true);
 
@@ -235,8 +237,7 @@ void MainWindow::clearAllFields()
    m_ui->html_index_num_entries_SB->setValue(100);
    m_ui->treeview_width_SB ->setValue(250);
    m_ui->enum_values_per_line_SB->setValue(4);
-
-   // add the 2 search ones
+   m_ui->search_data_file->setText("searchdata.xml");
 
    m_ui->formula_fontsize_SB->setValue(10);
    m_ui->formula_transparent_CB->setChecked(true);
@@ -249,7 +250,7 @@ void MainWindow::clearAllFields()
    // tab 3 - chm
 
    // tab 3 - docset
-   m_ui->docset_feedname->setText("DoxyPress genearted docs");
+   m_ui->docset_feedname->setText("DoxyPress generated docs");
    m_ui->docset_bundle_id->setText("org.doxypress.Project");
    m_ui->docset_publisher_id->setText("org.doxypress.Publisher");
    m_ui->docset_publisher_name->setText("Publisher");
@@ -264,6 +265,10 @@ void MainWindow::clearAllFields()
 
    index = m_ui->latex_paper_type_CM->findText("a4");
    m_ui->latex_paper_type_CM->setCurrentIndex(index);
+
+   m_ui->latex_hyper_pdf_CB->setChecked(true);
+   m_ui->latex_pdf_CB->setChecked(true);
+   m_ui->latex_bib_style->setText("plain");
 
    // tab 3 - man
    m_ui->man_output->setText("man");
@@ -289,7 +294,7 @@ void MainWindow::clearAllFields()
 
 void MainWindow::finalLoad()
 {
-   getIcon("load");
+   getLogo("load");
 
    setDuplicates();
    validGet_html();
@@ -307,13 +312,16 @@ void MainWindow::finalLoad()
    valid_gen_xml();
    valid_gen_docbook();
 
-   valid_search_engine();
+   valid_html_search();
 }
 
 void MainWindow::setDuplicates()
 {
-   m_ui->html_search_CB->setChecked(m_ui->search_engine_CB->isChecked());
+   // rb (tab 1), CB (tab 3)
+   m_ui->html_chm_RB->setChecked(m_ui->gen_chm_CB->isChecked());
+   m_ui->html_search_CB1->setChecked(m_ui->html_search_CB2->isChecked());
 
+   //
    m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
    m_ui->gen_latex_CB2->setChecked(m_ui->gen_latex_CB1->isChecked());
    m_ui->gen_rtf_CB2->setChecked(m_ui->gen_rtf_CB1->isChecked());
@@ -433,6 +441,7 @@ void MainWindow::valid_output_dir()
 
 void MainWindow::valid_gen_html()
 {
+   // this line can be redundant
    m_ui->gen_html_CB1->setChecked(m_ui->gen_html_CB2->isChecked());
 
    if (m_ui->gen_html_CB2->isChecked()) {                 
@@ -462,6 +471,7 @@ void MainWindow::valid_gen_html()
 
       m_ui->formula_fontsize_SB->setEnabled(true);
       m_ui->formula_transparent_CB->setEnabled(true);
+      m_ui->ghostscript->setEnabled(true);
       m_ui->use_mathjax_CB->setEnabled(true);
       m_ui->mathjax_format_CM->setEnabled(true);
       m_ui->mathjax_relpath->setEnabled(true);
@@ -479,8 +489,8 @@ void MainWindow::valid_gen_html()
       valid_gen_eclipse();
       valid_gen_qthelp();
 
-      m_ui->search_engine_CB->setEnabled(true);
-      valid_search_engine();
+      m_ui->html_search_CB2->setEnabled(true);
+      valid_html_search();
 
    } else {
       m_ui->html_output->setEnabled(false);
@@ -509,6 +519,7 @@ void MainWindow::valid_gen_html()
 
       m_ui->formula_fontsize_SB->setEnabled(false);
       m_ui->formula_transparent_CB->setEnabled(false);
+      m_ui->ghostscript->setEnabled(false);
       m_ui->use_mathjax_CB->setEnabled(false);
       m_ui->mathjax_format_CM->setEnabled(false);
       m_ui->mathjax_relpath->setEnabled(false);
@@ -526,14 +537,17 @@ void MainWindow::valid_gen_html()
       valid_gen_eclipse();
       valid_gen_qthelp();
 
-      m_ui->search_engine_CB->setEnabled(false);
-      valid_search_engine();
+      m_ui->html_search_CB2->setEnabled(false);
+      valid_html_search();
 
    }
 }
 
 void MainWindow::valid_gen_chm()
 {
+   // this line can be redundant
+   m_ui->html_chm_RB->setChecked(m_ui->gen_chm_CB->isChecked());
+
    if (m_ui->gen_chm_CB->isChecked() && m_ui->gen_html_CB2->isChecked()) {
       m_ui->chm_file->setEnabled(true);
       m_ui->chm_file_PB->setEnabled(true);
@@ -586,6 +600,7 @@ void MainWindow::valid_gen_eclipse()
 
 void MainWindow::valid_gen_latex()
 {
+   // this line can be redundant
    m_ui->gen_latex_CB1->setChecked(m_ui->gen_latex_CB2->isChecked());
 
    if (m_ui->gen_latex_CB2->isChecked()) {
@@ -641,6 +656,7 @@ void MainWindow::valid_gen_latex()
 
 void MainWindow::valid_gen_man()
 {
+   // this line can be redundant
    m_ui->gen_man_CB1->setChecked(m_ui->gen_man_CB2->isChecked());
 
    if (m_ui->gen_man_CB2->isChecked()) {
@@ -667,8 +683,8 @@ void MainWindow::valid_gen_qthelp()
       m_ui->qhp_namespace->setEnabled(true);
       m_ui->qhp_virtual_folder->setEnabled(true);
       m_ui->qhp_cust_filter_name->setEnabled(true);
-      m_ui->qhp_cust_filter_attrib->setEnabled(true);
-      m_ui->qhp_sect_filter_attrib->setEnabled(true);
+      m_ui->qhp_cust_attrib->setEnabled(true);
+      m_ui->qhp_sect_attrib->setEnabled(true);
       m_ui->qthelp_gen_path->setEnabled(true);
       m_ui->qthelp_gen_path_PB->setEnabled(true);
 
@@ -678,8 +694,8 @@ void MainWindow::valid_gen_qthelp()
       m_ui->qhp_namespace->setEnabled(false);
       m_ui->qhp_virtual_folder->setEnabled(false);
       m_ui->qhp_cust_filter_name->setEnabled(false);
-      m_ui->qhp_cust_filter_attrib->setEnabled(false);
-      m_ui->qhp_sect_filter_attrib->setEnabled(false);
+      m_ui->qhp_cust_attrib->setEnabled(false);
+      m_ui->qhp_sect_attrib->setEnabled(false);
       m_ui->qthelp_gen_path->setEnabled(false);
       m_ui->qthelp_gen_path_PB->setEnabled(false);
    }
@@ -687,6 +703,7 @@ void MainWindow::valid_gen_qthelp()
 
 void MainWindow::valid_gen_rtf()
 {
+   // this line can be redundant
    m_ui->gen_rtf_CB1->setChecked(m_ui->gen_rtf_CB2->isChecked());
 
    if (m_ui->gen_rtf_CB2->isChecked()) {
@@ -729,6 +746,7 @@ void MainWindow::valid_gen_xml()
 
 void MainWindow::valid_gen_docbook()
 {
+   // this line can be redundant
    m_ui->gen_docbook_CB1->setChecked(m_ui->gen_docbook_CB2->isChecked());
 
    if (m_ui->gen_docbook_CB2->isChecked()) {
@@ -743,9 +761,12 @@ void MainWindow::valid_gen_docbook()
    }
 }
 
-void MainWindow::valid_search_engine()
+void MainWindow::valid_html_search()
 {
-   if (m_ui->search_engine_CB->isChecked()) {
+   // this line can be redundant
+   m_ui->html_search_CB1->setChecked(m_ui->html_search_CB2->isChecked());
+
+   if (m_ui->html_search_CB2->isChecked()) {
       m_ui->server_based_search_CB->setEnabled(true);
       m_ui->external_search_CB->setEnabled(true);
       m_ui->search_engine_url->setEnabled(true);
@@ -837,6 +858,8 @@ void MainWindow::validSet_html(QAbstractButton *button)
       m_ui->gen_chm_CB->setChecked(true);
       m_ui->gen_treeview_CB->setChecked(false);
    }
+
+   valid_gen_chm();
 }
 
 void MainWindow::validGet_html()

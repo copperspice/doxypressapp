@@ -22,39 +22,39 @@
 #include <QRegExp>
 
 // tab 1
-void MainWindow::getIcon(const QString route)
+void MainWindow::getLogo(const QString route)
 {
-   QString iconName;
+   QString logoName;
 
    if (route == "load") {
-      iconName = m_project_iconFN;
+      logoName = m_project_logoFN;
 
    } else {
       QString path = pathName(m_curFile);
-      iconName = QFileDialog::getOpenFileName(this, tr("Select Project Icon"), path);
+      logoName = QFileDialog::getOpenFileName(this, tr("Select Project Logo"), path);
    }
 
-   if (iconName.isEmpty()) {
-      m_ui->project_icon->setText(tr("No Logo was selected"));
+   if (logoName.isEmpty()) {
+      m_ui->project_logo->setText(tr("No Logo was selected"));
 
    } else {
-      QFile fout(iconName);
+      QFile fout(logoName);
 
       if (! fout.exists()) {
-         m_ui->project_icon->setText(tr("Unable to find file: ") + iconName);
+         m_ui->project_logo->setText(tr("Unable to find file: ") + logoName);
 
       } else {
-         QPixmap pm(iconName);
+         QPixmap pm(logoName);
 
          if (! pm.isNull()) {
-            m_ui->project_icon->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
+            m_ui->project_logo->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
 
          } else {
-            m_ui->project_icon->setText(tr("No preview is available for: ") + iconName);
+            m_ui->project_logo->setText(tr("No preview is available for: ") + logoName);
          }
       }
 
-      m_project_iconFN = iconName;
+      m_project_logoFN = logoName;
    }
 }
 
@@ -909,6 +909,13 @@ void MainWindow::html_extra_files_PB()
    }
 }
 
+void MainWindow::ghostscript_PB()
+{
+   QString file = m_ui->ghostscript->text();
+   file = getSingleFile(tr("Select file"), file);
+   m_ui->ghostscript->setText(file);
+}
+
 void MainWindow::chm_file_PB()
 {
    QString file = m_ui->chm_file->text();
@@ -930,7 +937,53 @@ void MainWindow::qch_file_PB()
    m_ui->qch_file->setText(file);
 }
 
-void MainWindow::qt_help_gen_path_PB()
+void MainWindow::qhp_cust_attrib_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->qhp_cust_attrib->toPlainText();
+
+   data.title      = "BROOM";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->qhp_cust_attrib->setPlainText(temp);
+   }
+}
+
+void MainWindow::qhp_sect_attrib_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->qhp_sect_attrib->toPlainText();
+
+   data.title      = "BROOM";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->qhp_sect_attrib->setPlainText(temp);
+   }
+}
+
+void MainWindow::qthelp_gen_path_PB()
 {
    QString file = m_ui->qthelp_gen_path->text();
    file = getSingleFile(tr("Select file"), file);

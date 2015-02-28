@@ -380,7 +380,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "for that language. For instance, namespaces will be presented as packages, "
       "qualified scopes will look different, etc. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("OPTIMIZE_C",
       "Set this tag if your project consists of C sources "
@@ -388,48 +388,51 @@ static void configFullHelp(const QString &m_filePatterns)
       "instance, some of the names that are used will be different. The list of all "
       "members will be omitted, etc. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("OPTIMIZE_FORTRAN",
       "Set this tag if your project consists of Fortran "
       "sources. DoxyPress will then generate output that is tailored for Fortran. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("HTML_PLAIN",
-      ""
+      "This tag is set ON if neither 'GENERATE CHM' or 'HTML NAVIGATION' are set."
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: YES");
 
    s_fullHelp.insert("HTML_NAV",
-      ""
+      "This tag is set ON if 'HTML NAVIGATION' is set."
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: NO");
 
    s_fullHelp.insert("HTML_CHM",
-      ""
+      "If this tag is set then DoxyPress generates three "
+      "additional HTML index files: index.hhp, index.hhc, and index.hhk. The "
+      "index.hhp is a project file that can be read by Microsoft's HTML Help Workshop "
+      "on Windows. "
       "<br><br>"
-      "The default value is: BROOM ");
-
-   s_fullHelp.insert("HTML_SEARCH",
-      ""
+      "The HTML Help Workshop contains a compiler which can convert HTML output "
+      "into a single compiled HTML .chm file. "
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: NO"
+      "This tag requires the tag 'GENERATE HTML' is set to YES");
 
+   //
    s_fullHelp.insert("DIAGRAM_NONE",
-      ""
+      "If this tag is set then no Diagrams will be generated. "
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: NO");
 
    s_fullHelp.insert("DIAGRAM_BUILT_IN",
-      ""
+      "If this tag is then then DoxyPress will us the built in class diagram genearator. "
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: YES");
 
    s_fullHelp.insert("DAIGRAM_DOT",
       ""
       "<br><br>"
-      "The default value is: BROOM ");
+      "The default value is: NO");
 
    //
    s_fullHelp.insert("CREATE_SUBDIRS",
@@ -438,14 +441,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "over these directories. Enabling this option can be useful when a large number of source "
       "files are specified. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("ALLOW_UNICODE_NAMES",
       "If this tag is set then DoxyPress will allow non-ASCII characters to appear "
       "in the names of generated files. If set to NO, non-ASCII characters will be "
       "escaped. For example, _xE3_x81_x84 will be used for Unicode U+3044. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("OUTPUT_LANGUAGE",
       "This tag is used to specify the language for the generated documentation. "
@@ -530,7 +533,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "(until the first dot) of a Javadoc-style comment (/**) as the brief "
       "description. If set to NO, an explicit @brief command is required. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("QT_AUTO_BRIEF",
       "If this tag is set then DoxyPress will interpret the first line "
@@ -558,7 +561,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "page for each member. If not set the documentation of a member will be part "
       "of the file/class/namespace that contains it. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("TAB_SIZE",
       "This tag is used to set the number of spaces in a tab. DoxyPress "
@@ -847,43 +850,39 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-// BROOM - START HERE
-
    s_fullHelp.insert("SORT_BY_SCOPE_NAME",
-      "If this tag is set, the class list will be sorted by "
-      "fully-qualified names, including namespaces. If set to NO, the class list will "
-      "be sorted only by class name, not including the namespace part. "
+      "If this tag is set the class list will be sorted by fully-qualified names, "
+      "including namespaces. If set to NO, the class list will be sorted only by "
+      "class name, not including the namespace part. "
+      "<br><br>"
       "Note: This option is not very useful if HIDE_SCOPE_NAMES is set to YES. "
       "Note: This option applies only to the class list, not to the alphabetical list. "
-
-      "The default value is: No");
+      "<br><br>"
+      "The default value is: NO");
 
    s_fullHelp.insert("STRICT_PROTO_MATCHING",
-      "If the STRICT_PROTO_MATCHING option is enabled and DoxyPress fails to do proper "
-      "type resolution of all parameters of a function it will reject a match between "
-      "the prototype and the implementation of a member function even if there is "
-      "only one candidate or it is obvious which candidate to choose by doing a "
-      "simple string match. By disabling STRICT_PROTO_MATCHING DoxyPress will still "
-      "accept a match between prototype and implementation in such cases. "
+      "If this tag is set then an exact match of the function signature is required to docueent "
+      "a function. An exact match means the function name and parameteres must all match. "
+      "If this tag is set to NO, DoxyPress will do an approximate match, doing the best it can. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("GEN_TODO_LIST",
-      "This tag is used to enable (YES) or disable (NO) the todo "
-      "list. This list is created by putting \\todo commands in the documentation. "
+      "This tag is used to enable (YES) or disable (NO) the todo list. "
+      "This list is created by putting \\todo commands in the documentation. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("GEN_TEST_LIST",
-      "This tag is used to enable (YES) or disable (NO) the test "
-      "list. This list is created by putting \\test commands in the documentation. "
-     "<br><br>"
+      "This tag is used to enable (YES) or disable (NO) the test list. "
+      "This list is created by putting \\test commands in the documentation. "
+      "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("GEN_BUG_LIST",
-      "This tag is used to enable (YES) or disable (NO) the bug "
-      "list. This list is created by putting \\bug commands in the documentation. "
-     "<br><br>"
+      "This tag is used to enable (YES) or disable (NO) the bug list. "
+      "This list is created by putting \\bug commands in the documentation. "
+      "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("GEN_DEPRECATE_LIST",
@@ -893,72 +892,67 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES");
 
    s_fullHelp.insert("ENABLED_SECTIONS",
-      "This tag is used to enable conditional documentation section marked "
-      "by \\if <section_label> ... \\endif and \\cond <section_label> ... \\endcond blocks.");
+      "This tag is used to enable conditional documentation by marking a section with one of the following: "
+      "<br><br>"
+      "\\if <section_label> ... \\endif "
+      "<br>"
+      "\\cond <section_label> ... \\endcond");
 
    s_fullHelp.insert("MAX_INIT_LINES",
-      "The MAX_INITIALIZER_LINES tag determines the maximum number of lines that the "
-      "initial value of a variable or macro / define can have for it to appear in the "
-      "documentation. If the initializer consists of more lines than specified here "
-      "it will be hidden. Use a value of 0 to hide initializers completely. The "
-      "appearance of the value of individual variables and macros / defines can be "
-      "controlled using \\showinitializer or \\hideinitializer command in the "
-      "documentation regardless of this setting. "
+      "This tag specifies the maximum number of lines (in your source) for the initial value of a "
+      "variable or the defintion of a macro. If the initializer consists of more lines than specified in "
+      "this tag, the entire initializer will be hidden. "
+      "This tag can be overridden on a per variable or macro basis by using the \\showinitializer or "
+      "\\hideinitializer command. "
       "<br><br>"
+      "A value of 0 will hide initializers completely. "
       "Minimum: 0, Maximum: 10000, Default: 30");
 
    s_fullHelp.insert("SHOW_USED_FILES",
-      "Set the SHOW_USED_FILES tag to NO to disable the list of files generated at "
-      "the bottom of the documentation of classes and structs. If set to YES, the "
-      "list will mention the files that were used to generate the documentation. "
+      "Setting this tag to NO disables the list of files generated at the bottom of the "
+      "documentation for classes and structs. If this tag is set to YES, the list will "
+      "contain a list of the files used to generate the documentation. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("SHOW_FILES",
-      "Set this tag to NO to disable the generation of the Files page. This "
-      "will remove the Files entry from the Quick Index and from the Folder Tree View if specified. "
+      "Set this tag to NO to disable the generation of the Files page. "
+      "This will remove the Files entry from the Quick Index and from the Folder Tree View if specified. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("SHOW_NAMESPACES",
-      "Set the SHOW_NAMESPACES tag to NO to disable the generation of the Namespaces "
-      "page. This will remove the Namespaces entry from the Quick Index and from the "
-      "Folder Tree View (if specified). "
+      "Set this tag to NO to disable the generation of the Namespaces page. "
+      "This will remove the Namespaces entry from the Quick Index and from the Folder Tree "
+      "View if specified. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("FILE_VERSION_FILTER",
-      "This tag is used to specify a program or script "
-      "DoxyPress should invoke to get the current version for each file (typically from "
-      "the version control system). DoxyPress will invoke the program by executing (via "
-      "popen()) the command command input-file, where command is the value of the "
-      "FILE_VERSION_FILTER tag, and input-file is the name of an input file provided "
-      "by DoxyPress. Whatever the program writes to standard output is used as the file "
-      "version. For an example see the documentation.");
+      "This tag is used to specify a program DoxyPress should invoke to obtain the current version "
+      "for each file. DoxyPress will invoke this program and pass a file name as the input parameter. "
+      "The value written to standard output is used as the file version.");
 
    s_fullHelp.insert("LAYOUT_FILE",
       "This tag can be used to specify a layout file which will be parsed "
-      "by DoxyPress. The layout file controls the global structure of the generated "
-      "output files. To create a new layout file run 'DoxyPress --l [layout file name]' "
+      "by DoxyPress. The layout file controls the global structure of the generated output files. "
+      "To create a new layout file run 'DoxyPress --l [layout file name]' "
       "<br><br>"
-      "Note: If DoxyPress is run from a directory containing a file called "
-      "DoxyPress_Layout.xml, DoxyPress will parse it automatically even if this tag is left empty.");
+      "Note: If run from a directory containing a file called DoxyPress_Layout.xml, "
+      "DoxyPress will parse it automatically even if this tag is left empty.");
 
    s_fullHelp.insert("CITE_BIB_FILES",
-      "The CITE_BIB_FILES tag can be used to specify one or more bib files containing "
-      "the reference definitions. This must be a list of .bib files. The .bib "
-      "extension is automatically appended if omitted. This requires the bibtex tool "
-      "to be installed. "
-      "For LaTeX the style of the bibliography can be controlled using "
-      "LATEX_BIB_STYLE. To use this feature you need bibtex and perl available in the "
+      "This tag is used to specify one or more bib files containing the reference definitions. "
+      "The .bib extension is automatically appended if omitted from the file name. "
+      "For LaTeX the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "
+      "In order to use this tool, the bibtex tool and perl must be available in the "
       "search path. Refer to the DoxyPress manual regarding \\cite.");
 
    s_fullHelp.insert("QUIET",
-      "The QUIET tag can be used to turn on/off the messages that are generated to "
-      "standard output by DoxyPress. If QUIET is set to YES this implies that the "
-      "messages are off. "
+      "This tag is used to turn on/off the messages which are generated to "
+      "standard output by DoxyPress. If this tag is set messages are off. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("WARNINGS",
       "This tag can be used to turn on/off the warning messages which are sent to "
@@ -967,52 +961,49 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES");
 
    s_fullHelp.insert("WARN_UNDOC",
-      "If the WARN_IF_UNDOCUMENTED tag is set to YES then DoxyPress will generate "
-      "warnings for undocumented members. If EXTRACT_ALL is set to YES then this flag "
-      "will automatically be disabled. "
+      "If this tag is set then DoxyPress will generate warnings for undocumented members. "
+      "If 'EXTRACT ALL' is set then this tag will automatically be disabled. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("WARN_DOC_ERROR",
-      "If the WARN_IF_DOC_ERROR tag is set to YES, DoxyPress will generate warnings for "
-      "potential errors in the documentation, such as not documenting some parameters "
-      "in a documented function, or documenting parameters that don't exist or using "
-      "markup commands wrongly. "
+      "If this tag is set then DoxyPress will generate warnings for potential errors "
+      "such as not documenting some parameters in a documented function, documenting parameters "
+      " which do not exist, or using markup commands incorectly. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("WARN_UNDOC_PARM",
-      "This WARN_NO_PARAMDOC option can be enabled to get warnings for functions that "
-      "are documented, but have no documentation for their parameters or return "
-      "value. If set to NO, DoxyPress will only warn about wrong or incomplete "
+      "This tag  is used to warnings for functions which are are documented, but have no "
+      "documentation for their parameters or return value. "
+      "If set to NO, DoxyPress will only warn about wrong or incomplete "
       "parameter documentation, but not about the absence of documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("WARN_FORMAT",
       "This tag determines the format of the warning messages DoxyPress will output. "
-      "The string should contain the $file, $line, and $text tags, which "
-      "will be replaced by the file and line number from which the warning originated "
-      "and the warning text. Optionally the format may contain $version, which will "
-      "be replaced by the version of the file (if it could be obtained via FILE_VERSION_FILTER) "
+      "The string normally contains the $file, $line, and $text tags, which "
+      "will be replaced by the file name, line number from which the warning originated, "
+      "and the warning text. The format can contain $version, which will "
+      "be replaced by the version of the file, if it can be obtained from 'FILE VERSION FILTER'. "
       "<br><br>"
       "The default value is: $file:$line: $text");
 
    s_fullHelp.insert("WARN_LOGFILE",
-      "The WARN_LOGFILE tag can be used to specify a file to which warning and error "
+      "This tag is used to specify a file which warning and error "
       "messages should be written. If left blank the output is written to standard "
       "error (stderr).");
 
    s_fullHelp.insert("INPUT_SOURCE",
-      "The INPUT tag is used to specify the files and/or directories that contain "
-      "documented source files. You may enter file names like myfile.cpp or "
-      "directories like /usr/src/myproject. Separate the files or directories with spaces. "
+      "This tag is used to specify the files and/or directories which contain "
+      "documented source files. File names like myfile.cpp or directories like /usr/src/myproject "
+      "cen be entered. Separate the files or directories with a comma.  "
       "<br><br>"
-      "Note: If this tag is empty the current directory is searched.");
+      "Note: If this tag is empty only the current directory is searched.");
 
    s_fullHelp.insert("INPUT_ENCODING",
-      "This tag is used to specify the character encoding of the source files "
-      "DoxyPress parses. "
+      "This tag is used to specify the character encoding of the source files DoxyPress will parse. "
       "<br><br>"
       "The default value is: UTF-8");
 
@@ -1026,21 +1017,23 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag can be used to specify whether or not subdirectories should "
       "be searched for input files. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXCLUDE_FILES",
       "This tag is used to specify files and/or directories which should be "
       "excluded from the INPUT source files. "
-      "Note the relative paths are relative to the directory from which DoxyPress is run.");
+      "<br><br>"
+      "Note: The relative paths are relative to the directory from which DoxyPress is run.");
 
    s_fullHelp.insert("EXCLUDE_SYMLINKS",
       "This tag is used to select if symbolic links are excluded from the input. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXCLUDE_PATTERNS",
       "If the 'INPUT / SOURCE DIRECTORIES' tag contains directories, this tag will be used to "
       "specify wildcard patterns to exclude certain files from those directories. "
+      "<br><br>"
       "Note: Wildcards are matched against the file with absolute path. As an example, to "
       "exclude all test directories use the pattern */test/* ");
 
@@ -1068,16 +1061,15 @@ static void configFullHelp(const QString &m_filePatterns)
       "If this tag is set then subdirectories will be searched for input files to be used "
       "with the \\include or \\dontinclude commands irrespective of the value of the RECURSIVE tag. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("IMAGE_PATH",
       "This tag can be used to specify one or more files or directories "
       "which contain images to be included in the documentation. Refer to the \\image command.");
 
    s_fullHelp.insert("INPUT_FILTER",
-      "This tag can be used to specify a program DoxyPress should "
-      "invoke to filter for each input file. DoxyPress will invoke the filter program "
-      "by executing (via popen()) the command: "
+      "This tag can be used to specify a program DoxyPress should invoke to filter each "
+      "input file. DoxyPress will invoke the filter program by executing the command: "
       "<br><br>"
       "<filter> <input-file> "
       "<br><br>"
@@ -1091,63 +1083,66 @@ static void configFullHelp(const QString &m_filePatterns)
       "or removed, the anchors will not be placed correctly.");
 
    s_fullHelp.insert("FILTER_PATTERNS",
-      "This tag can be used to specify filters on a per file pattern basis. "
-      "DoxyPress will compare the file name with each pattern and apply the "
-      "filter if there is a match. The filters are a list of the form: pattern=filter "
-      "(like *.cpp=my_cpp_filter). See INPUT_FILTER for further information on how "
-      "filters are used. If the FILTER_PATTERNS tag is empty or if none of the "
-      "patterns match the file name, INPUT_FILTER is applied.");
+      "This tag is used to specify different filter programs on a per source file basis. "
+      "DoxyPress will compare each source file name with the list of patterns and apply the "
+      "filter program which matches. "
+      "If this tag is empty or none of the patterns match, then the 'INPUT FILTER' "
+      "program is used. The filter programs are listed in the format: "
+      "<br><br>"
+      "pattern=filter "
+      "<br><br>"
+      "Example: *.cpp=my_cpp_filter");
 
    s_fullHelp.insert("FILTER_SOURCE_FILES",
-      "If the FILTER_SOURCE_FILES tag is set to YES, the input filter (if set using "
-      "INPUT_FILTER) will also be used to filter the input files that are used for "
-      "producing the source files to browse (i.e. when SOURCE_BROWSER is set to YES). "
+      "If this tag is set then the 'INPUT FILTER' will be used to filter the input "
+      "source files when generating source documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("FILTER_SOURCE_PATTERNS",
-      "The FILTER_SOURCE_PATTERNS tag can be used to specify source filters per file "
-      "pattern. A pattern will override the setting for FILTER_PATTERN (if any) and "
-      "it is also possible to disable source filtering for a specific pattern using "
-      "*.ext= (so without naming a filter). "
+      "This tag is used to specify different filter programs on a per source file basis. "
+      "DoxyPress will compare each source file name with the list of patterns and apply the "
+      "filter program which matches. This tag will override the setting for 'FILTER PATTERNS'"
       "<br><br>"
       "This tag requires the tag 'FILTER SOURCE FILES' is set to YES");
 
    s_fullHelp.insert("MDFILE_MAINPAGE",
-      "This tag refers to the name of a markdown file which is part of "
-      "the input. Its contents will be placed on the main page, index.html.");
+      "This tag refers to the name of a markdown file which is part of the input. "
+      "Its contents will be placed on the main index.html page.");
 
    s_fullHelp.insert("SOURCE_BROWSER",
-      "If this tag is set then a list of source files will be "
-      "generated. Documented entities will be cross-referenced with these sources. "
-      "Note: To remove all source code in the generated output, ensure "
-      "the 'VERBATIM HEADERS' is set to NO. "
+      "If this tag is set then a list of source files will be generated. "
+      "Documented entities will be cross-referenced with these sources. "
+      "To remove all source code in the generated output ensure "
+      "the 'VERBATIM HEADERS' is set to NO "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("INLINE_SOURCES",
-      "Setting the INLINE_SOURCES tag to YES will include the body of functions, "
-      "classes and enums directly into the documentation. "
+      "Setting this tag will include the body of functions, classes and enums "
+      "directly into the documentation. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("STRIP_CODE_COMMENTS",
-      "Setting the STRIP_CODE_COMMENTS tag to YES will instruct DoxyPress to hide any "
-      "special comment blocks from generated source code fragments. Normal C, C++ and "
-      "Fortran comments will always remain visible. "
+      "If this tag is set DoxyPress will hide any special comment blocks from generated "
+      "source code fragments. Normal C, C++ and Fortran comments will always remain visible. "
       "<br><br>"
       "The default value is: YES");
+
+
+// BROOM - start here
 
    s_fullHelp.insert("REF_BY_RELATION",
       "If the REFERENCED_BY_RELATION tag is set to YES then for each documented "
       "function all documented functions referencing it will be listed. "
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("REF_RELATION",
       "If the REFERENCES_RELATION tag is set to YES then for each documented function "
       "all documented entities called/used by that function will be listed. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("REF_LINK_SOURCE",
       "If the REFERENCES_LINK_SOURCE tag is set to YES and SOURCE_BROWSER tag is set "
@@ -1181,14 +1176,16 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The result is, instead of the source browser generated by DoxyPress, the links to "
       "source code will point to the output of htags. "
-      "The default value is: No "
+      "<br><br>"
+      "The default value is: NO "
       "This tag requires the tag 'SOURCE BROWSER' is set to YES");
 
    s_fullHelp.insert("VERBATIM_HEADERS",
-      "If the VERBATIM_HEADERS tag is set the YES then DoxyPress will generate a "
+      "If this tag is set then DoxyPress will generate a "
       "verbatim copy of the header file for each class for which an include is "
-      "specified. Set to NO to disable this. "
-      "See also: Section \\class. "
+      "specified. Set to NO to disable this feature. "
+      "Refer to the DoxPress manual regarding \\class. "
+      "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("CLANG_PARSING",
@@ -1199,7 +1196,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "information. "
       "Note: The availability of this option depends on whether or not DoxyPress was "
       "compiled with the --with-libclang option. "
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("CLANG_OPTIONS",
       "If clang assisted parsing is enabled you can provide the compiler with command "
@@ -1242,14 +1239,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "file that captures the structure of the code including all documentation. "
       "Note that this feature is still experimental and incomplete at the moment. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("PERL_LATEX",
       "If the PERLMOD_LATEX tag is set to YES, DoxyPress will generate the necessary "
       "Makefile rules, Perl scripts and LaTeX code to be able to generate PDF and DVI "
       "output from the Perl module output. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
 
    s_fullHelp.insert("PERL_PRETTY",
@@ -1367,7 +1364,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "the class index. If set to NO, only the inherited external classes will be "
       "listed. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("EXTERNAL_GROUPS",
       "If the EXTERNAL_GROUPS tag is set to YES, all external groups will be listed "
@@ -1419,7 +1416,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "Bell Labs. The other options in this section have no effect if this option is set to NO "
       "Refer to: http://www.graphviz.org/ "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("DOT_NUM_THREADS",
       "This tag specifies the number of dot invocations DoxyPress is allowed "
@@ -1775,7 +1772,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The HTML Help Workshop contains a compiler which can convert HTML output "
       "into a single compiled HTML .chm file. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("CHM_FILE",
@@ -1797,7 +1794,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The GENERATE_CHI flag controls if a separate .chi index file is generated "
       "(YES) or that it should be included in the master .chm file (NO). "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML'HELP is set to YES");
 
    s_fullHelp.insert("CHM_INDEX_ENCODING",
@@ -1811,13 +1808,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "(YES) or a normal table of contents (NO) in the .chm file. Furthermore it "
       "enables the Previous and Next buttons. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML'HELP is set to YES");
 
    s_fullHelp.insert("TOC_EXPANDED",
       "If this tag is set to YES, then group members will be added to  "
       "the table of contents of the HTML help documentation and to the tree view. "
-      "The default value is: NO. "
+      "The default value is: NO "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
@@ -1892,7 +1889,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "can be used as input for Qt's qhelpgenerator to generate a Qt Compressed Help "
       "(.qch) of the generated HTML documentation. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("QCH_FILE",
@@ -1917,13 +1914,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
 
-   s_fullHelp.insert("QHP_CUST_FILTER_ATTRIB",
+   s_fullHelp.insert("QHP_CUST_ATTRIB",
       "This tag specifies the list of attributes for the custom filter used by Qt Help. "
       "<br><br>"
       "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
 
-   s_fullHelp.insert("QHP_SECTION_FILTER_ATTRIB",
-      "This tag specifies the list of the attributes this project's filter section matches. "
+   s_fullHelp.insert("QHP_SECT_ATTRIB",
+      "This tag specifies the list of filter section attributes used by Qt Help "
       "<br><br>"
       "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
 
@@ -1942,7 +1939,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "within the plugins directory should be the same as the ECLIPSE_DOC_ID value. "
       "After copying Eclipse needs to be restarted before the help appears. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("ECLIPSE_DOC_ID",
@@ -2005,8 +2002,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: NO "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
-   s_fullHelp.insert("SEARCH_ENGINE",
-      "When this tag is set then DoxyPress will generate a search box for the HTML output. "
+   s_fullHelp.insert("HTML_SEARCH",
+      "When this tag is set DoxyPress will generate a search box for the HTML output. "
       "The underlying search engine uses javascript and DHTML. HTML help, "
       "Qt Help, and docsets have there own search function. "
       "If this this search engine is too slow, try using the 'SERVER BASED SEARCH'. "
@@ -2091,6 +2088,11 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES "
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
+   s_fullHelp.insert("GHOSTSCRIPT",
+      "This tag specifies the full path name for the GhostScript program. "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE HTML' is set to YES");
+
    s_fullHelp.insert("USE_MATHJAX",
       "Enable the USE_MATHJAX option to render LaTeX formulas using MathJax (see "
       "http://www.mathjax.org) which uses client side Javascript for the rendering "
@@ -2153,20 +2155,20 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_CMD_NAME",
-      "The LATEX_CMD_NAME tag can be used to specify the LaTeX command name to be "
-      "invoked. "
+      "This tag is used to specify the LaTeX command name to be invoked. "
       "<br><br>"
-      "Note: When enabling USE_PDFLATEX this option is only used for generating "
-      "bitmaps for formulas in the HTML output, but not in the Makefile that is "
+      "Note: When enabling 'LATEX PDF' this option is only used for generating "
+      "bitmaps for formulas in the HTML output, not in the Makefile which is "
       "written to the output directory. "
+      "<br><br>"
       "The default file is: latex "
-      "This tag requires the tag GENERATE_LATEX is set to YES");
+      "This tag requires the tag GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("MAKE_INDEX_CMD_NAME",
       "The MAKEINDEX_CMD_NAME tag can be used to specify the command name to generate "
       "index for LaTeX. "
       "<br><br>"
-      "The default file is: makeindex. "
+      "The default file is: makeindex "
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_COMPACT",
@@ -2174,7 +2176,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "documents. This may be useful for small projects and may help to save some "
       "trees in general. "
       "<br><br>"
-      "The default value is: NO. "
+      "The default value is: NO "
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PAPERTYPE",
@@ -2186,10 +2188,9 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
-      "The EXTRA_PACKAGES tag can be used to specify one or more LaTeX package names "
-      "that should be included in the LaTeX output. To get the times font for "
-      "instance you can specify "
-      "EXTRA_PACKAGES=times "
+      "This tag is used to specify one or more LaTeX package names which should be included in "
+      "the LaTeX output. To get the times font for instance you can specify EXTRA_PACKAGES=times "
+      "<br><br>"
       "If left blank no extra packages will be included. "
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
@@ -2329,7 +2330,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("GEN_MAN",
       "If this tag is set then DoxyPress will generate man pages for classes and files. "
       "<br><br>"
-      "The default value is: No");
+      "The default value is: NO");
 
    s_fullHelp.insert("MAN_OUTPUT",
       "This tag is used to specify the location for the man page output. If a relative "

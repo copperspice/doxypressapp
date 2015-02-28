@@ -88,7 +88,7 @@ class MainWindow : public QMainWindow
       QString m_appPath;
       QString m_jsonFname;
 
-      QString m_project_iconFN;
+      QString m_project_logoFN;
 
       struct Settings m_struct;
 
@@ -313,12 +313,12 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void valid_gen_xml())
       CS_SLOT_2(valid_gen_xml)
 
-      CS_SLOT_1(Private, void valid_search_engine())
-      CS_SLOT_2(valid_search_engine)
+      CS_SLOT_1(Private, void valid_html_search())
+      CS_SLOT_2(valid_html_search)
 
       // tab 1 - look up
-      CS_SLOT_1(Private, void getIcon(const QString route = ""))
-      CS_SLOT_2(getIcon)
+      CS_SLOT_1(Private, void getLogo(const QString route = ""))
+      CS_SLOT_2(getLogo)
 
       CS_SLOT_1(Private, void output_dir_PB())
       CS_SLOT_2(output_dir_PB)
@@ -471,6 +471,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void html_extra_files_PB())
       CS_SLOT_2(html_extra_files_PB)
 
+      CS_SLOT_1(Private, void ghostscript_PB())
+      CS_SLOT_2(ghostscript_PB)
+
       CS_SLOT_1(Private, void chm_file_PB())
       CS_SLOT_2(chm_file_PB)
 
@@ -480,8 +483,14 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void qch_file_PB())
       CS_SLOT_2(qch_file_PB)
 
-      CS_SLOT_1(Private, void qt_help_gen_path_PB())
-      CS_SLOT_2(qt_help_gen_path_PB)
+      CS_SLOT_1(Private, void qhp_cust_attrib_PB())
+      CS_SLOT_2(qhp_cust_attrib_PB)
+
+      CS_SLOT_1(Private, void qhp_sect_attrib_PB())
+      CS_SLOT_2(qhp_sect_attrib_PB)
+
+      CS_SLOT_1(Private, void qthelp_gen_path_PB())
+      CS_SLOT_2(qthelp_gen_path_PB)
 
       CS_SLOT_1(Private, void mathjax_extensions_PB())
       CS_SLOT_2(mathjax_extensions_PB)

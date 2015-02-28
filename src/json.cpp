@@ -464,9 +464,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    // tab 1
    m_ui->project_name->setText(              object.value("project-name").toString());
    m_ui->project_brief->setText(             object.value("project-brief").toString());
-   m_ui->project_number->setText(            object.value("project-number").toString());
-
-   m_project_iconFN =                        object.value("project-icon").toString();
+   m_ui->project_version->setText(           object.value("project-version").toString());
+   m_project_logoFN =                        object.value("project-logo").toString();
    m_ui->output_dir->setText(                object.value("output-dir").toString());
 
    m_ui->optimize_cplus_CB->setChecked(      object.value("optimize-cplus").toBool());  
@@ -475,12 +474,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->optimize_fortran_CB->setChecked(    object.value("optimize-fortran").toBool());
 
    m_ui->gen_html_CB1->setChecked(           object.value("generate-html").toBool());
-   m_ui->html_plain_RB->setChecked(          object.value("html-plain").toBool());
-   m_ui->html_nav_RB->setChecked(            object.value("html-nav").toBool());
-   m_ui->html_chm_RB->setChecked(            object.value("html-chm").toBool());
-
-   // retrieve value from m_ui->search_engine_CB
-   // m_ui->html_search_CB->setChecked(         object.value("html-search").toBool());
 
    m_ui->gen_latex_CB1->setChecked(          object.value("generate-latex").toBool());
    m_ui->latex_hyper_pdf_RB->setChecked(     object.value("latex-hyper-pdf").toBool());
@@ -577,10 +570,10 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by-scope-name").toBool());
 
    m_ui->strict_proto_matching_CB->setChecked(     object.value("strict-proto-matching").toBool());
-   m_ui->gen_todo_list_CB->setChecked(             object.value("gen-todo-list").toBool());
-   m_ui->gen_test_list_CB->setChecked(             object.value("gen-test-list").toBool());
-   m_ui->gen_bug_list_CB->setChecked(              object.value("gen-bug-list").toBool());
-   m_ui->gen_deprecate_list_CB->setChecked(        object.value("gen-deprecate-list").toBool());
+   m_ui->gen_todo_list_CB->setChecked(             object.value("generate-todo-list").toBool());
+   m_ui->gen_test_list_CB->setChecked(             object.value("generate-test-list").toBool());
+   m_ui->gen_bug_list_CB->setChecked(              object.value("generate-bug-list").toBool());
+   m_ui->gen_deprecate_list_CB->setChecked(        object.value("generate-deprecate-list").toBool());
 
    m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
    m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
@@ -640,10 +633,10 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->ignore_prefix->setPlainText(              getDataList(object, "ignore-prefix"));
 
    // tab 2 - autogen
-   m_ui->gen_autogen_def_CB->setChecked(           object.value("gen-autogen-def").toBool());
+   m_ui->gen_autogen_def_CB->setChecked(           object.value("generate-autogen-def").toBool());
 
    // tab 2 - perlmod         
-   m_ui->gen_perl_CB->setChecked(                  object.value("gen-perl").toBool());
+   m_ui->gen_perl_CB->setChecked(                  object.value("generate-perl").toBool());
    m_ui->perl_latex_CB->setChecked(                object.value("perl-latex").toBool());
    m_ui->perl_pretty_CB->setChecked(               object.value("perl-pretty").toBool());
    m_ui->perlmod_prefix->setText(                  object.value("perlmod-prefix").toString());
@@ -699,7 +692,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph-max-depth").toInt());
    m_ui->dot_transparent_CB->setChecked(           object.value("dot-transparent").toBool());
    m_ui->dot_multiple_targets_CB->setChecked(      object.value("dot-multiple-targets").toBool());
-   m_ui->gen_legend_CB->setChecked(                object.value("gen-legend").toBool());
+   m_ui->gen_legend_CB->setChecked(                object.value("generate-legend").toBool());
    m_ui->dot_cleanup_CB->setChecked(               object.value("dot-cleanup").toBool());
 
    //  ***
@@ -720,12 +713,12 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->html_index_num_entries_SB->setValue(      object.value("html-index-num-entries").toInt());
 
    m_ui->disable_index_CB->setChecked(             object.value("disable-index").toBool());
-   m_ui->gen_treeview_CB->setChecked(              object.value("gen-treeview").toBool());
+   m_ui->gen_treeview_CB->setChecked(              object.value("generate-treeview").toBool());
    m_ui->enum_values_per_line_SB->setValue(        object.value("enum-values-per-line").toInt());
    m_ui->treeview_width_SB->setValue(              object.value("treeview-width").toInt());
    m_ui->external_links_in_window_CB->setChecked(  object.value("external-links-in-window").toBool());
 
-   m_ui->search_engine_CB->setChecked(             object.value("search-engine").toBool());
+   m_ui->html_search_CB2->setChecked(              object.value("html-search").toBool());
    m_ui->server_based_search_CB->setChecked(       object.value("server-based-search").toBool());
    m_ui->external_search_CB->setChecked(           object.value("external-search").toBool());
    m_ui->search_engine_url->setText(               object.value("search-engine-url").toString());
@@ -735,6 +728,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    m_ui->formula_fontsize_SB->setValue(            object.value("formula-fontsize").toInt());
    m_ui->formula_transparent_CB->setChecked(       object.value("formula-transparent").toBool());
+   m_ui->ghostscript->setText(                     object.value("ghostscript").toString());
    m_ui->use_mathjax_CB->setChecked(               object.value("use_mathjax").toBool());
 
    index = m_ui->mathjax_format_CM->findText(      object.value("mathjax-format").toString());
@@ -745,23 +739,23 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->mathjax_codefile->setText(                object.value("mathjax-codefile").toString());
 
    // tab 3 - chm
-   m_ui->gen_chm_CB->setChecked(                   object.value("gen-chm").toBool());
+   m_ui->gen_chm_CB->setChecked(                   object.value("generate-chm").toBool());
    m_ui->chm_file->setText(                        object.value("chm-file").toString());
    m_ui->hhc_location->setText(                    object.value("hhc-location").toString());
-   m_ui->gen_chi_CB->setChecked(                   object.value("gen-chi").toBool());
+   m_ui->gen_chi_CB->setChecked(                   object.value("generate-chi").toBool());
    m_ui->chm_index_encoding->setText(              object.value("chm-index-encoding").toString());
    m_ui->binary_toc_CB->setChecked(                object.value("binary-toc").toBool());
    m_ui->toc_expanded_CB->setChecked(              object.value("toc-expanded").toBool());
 
    // tab 3 - docset
-   m_ui->gen_docset_CB->setChecked(                object.value("gen-docset").toBool());
+   m_ui->gen_docset_CB->setChecked(                object.value("generate-docset").toBool());
    m_ui->docset_feedname->setText(                 object.value("docset-feedname").toString());
    m_ui->docset_bundle_id->setText(                object.value("docset-bundle-id").toString());
    m_ui->docset_publisher_id->setText(             object.value("docset-publisher-id").toString());
    m_ui->docset_publisher_name->setText(           object.value("docset-publisher-name").toString());
 
    // tab 3 - eclipse
-   m_ui->gen_eclipse_CB->setChecked(               object.value("gen-eclipse").toBool());
+   m_ui->gen_eclipse_CB->setChecked(               object.value("generate-eclipse").toBool());
    m_ui->eclipse_doc_id->setText(                  object.value("eclipse-doc-id").toString());
 
    // tab 3 - latex
@@ -792,13 +786,13 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->man_links_CB->setChecked(                 object.value("man-links").toBool());
 
    // tab 3 - qt help
-   m_ui->gen_qthelp_CB->setChecked(                object.value("gen-qthelp").toBool());
+   m_ui->gen_qthelp_CB->setChecked(                object.value("generate-qthelp").toBool());
    m_ui->qch_file->setText(                        object.value("qch-file").toString());
    m_ui->qhp_namespace->setText(                   object.value("qhp-namespace").toString());
    m_ui->qhp_virtual_folder->setText(              object.value("qhp-virtual-folder").toString());
-   m_ui->qhp_cust_filter_name->setText(            object.value("qhp-cust-filter-name").toString());
-   m_ui->qhp_cust_filter_attrib->setText(          object.value("qhp-cust-filter-attrib").toString());
-   m_ui->qhp_sect_filter_attrib->setText(          object.value("qhp-sect-filter-attrib").toString());
+   m_ui->qhp_cust_filter_name->setText(            object.value("qhp-cust-filter-name").toString());   
+   m_ui->qhp_cust_attrib->setPlainText(            getDataList(object, "qhp-cust-attrib"));
+   m_ui->qhp_sect_attrib->setPlainText(            getDataList(object, "qhp-sect-attrib"));
    m_ui->qthelp_gen_path->setText(                 object.value("qthelp-gen-path").toString());
 
    // tab 3 - rtf
@@ -827,9 +821,8 @@ QByteArray MainWindow::json_SaveDoxy()
    // tab 1
    object.insert("project-name",          m_ui->project_name->text());
    object.insert("project-brief",         m_ui->project_brief->text());
-   object.insert("project-number",        m_ui->project_number->text());
-
-   object.insert("project-icon",          m_project_iconFN);
+   object.insert("project-version",       m_ui->project_version->text());
+   object.insert("project-logo",          m_project_logoFN);
    object.insert("output-dir",            m_ui->output_dir->text());
 
    object.insert("optimize-cplus",        m_ui->optimize_cplus_CB->isChecked());   
@@ -837,13 +830,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("optimize-c",            m_ui->optimize_c_CB->isChecked());
    object.insert("optimize-fortran",      m_ui->optimize_fortran_CB->isChecked());
 
-   object.insert("generate-html",         m_ui->gen_html_CB1->isChecked());
-   object.insert("html-plain",            m_ui->html_plain_RB->isChecked());
-   object.insert("html-nav",              m_ui->html_nav_RB->isChecked());
-   object.insert("html-chm",              m_ui->html_chm_RB->isChecked());
-
-   // retrieve value from m_ui->search_engine_CB
-   // object.insert("html-search",           m_ui->html_search_CB->isChecked());
+   object.insert("generate-html",         m_ui->gen_html_CB1->isChecked());   
 
    object.insert("generate-latex",        m_ui->gen_latex_CB1->isChecked());
    object.insert("latex-hyper-pdf",       m_ui->latex_hyper_pdf_RB->isChecked());
@@ -861,7 +848,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    object.insert("dot-class-graph",       m_ui->dot_class_graph_CB1->isChecked());
    object.insert("dot-collaboration",     m_ui->dot_collaboration_CB1->isChecked());
-   object.insert("dot-overall",           m_ui->dot_hierarchy_CB1->isChecked());
+   object.insert("dot-hierarchy",         m_ui->dot_hierarchy_CB1->isChecked());
    object.insert("dot-include",           m_ui->dot_include_CB1->isChecked());
    object.insert("dot-included-by",       m_ui->dot_included_by_CB1->isChecked());
    object.insert("dot-call",              m_ui->dot_call_CB1->isChecked());
@@ -1081,7 +1068,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("treeview-width",           m_ui->treeview_width_SB->value());
    object.insert("external-links-in-window", m_ui->external_links_in_window_CB->isChecked());
 
-   object.insert("search-engine",            m_ui->search_engine_CB->isChecked());
+   object.insert("html-search",              m_ui->html_search_CB2->isChecked());
    object.insert("server-based-search",      m_ui->server_based_search_CB->isChecked());
    object.insert("external-search",          m_ui->external_search_CB->isChecked());
    object.insert("search-engine-url",        m_ui->search_engine_url->text());
@@ -1091,6 +1078,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    object.insert("formula-fontsize",         m_ui->formula_fontsize_SB->value());
    object.insert("formula-transparent",      m_ui->formula_transparent_CB->isChecked());
+   object.insert("ghostscript",              m_ui->ghostscript->text());
    object.insert("use-mathjax",              m_ui->use_mathjax_CB->isChecked());
    object.insert("mathjax-format",           m_ui->mathjax_format_CM->currentText());
    object.insert("mathjax-relpath",          m_ui->mathjax_relpath->text());
@@ -1148,8 +1136,8 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("qhp-namespace",            m_ui->qhp_namespace->text());
    object.insert("qhp-virtual-folder",       m_ui->qhp_virtual_folder->text());
    object.insert("qhp-cust-filter-name",     m_ui->qhp_cust_filter_name->text());
-   object.insert("qhp-cust-filter-attrib",   m_ui->qhp_cust_filter_attrib->text());
-   object.insert("qhp-sect-filter-attrib",   m_ui->qhp_sect_filter_attrib->text());
+   object.insert("qhp-cust-attrib",          putDataList(m_ui->qhp_cust_attrib->toPlainText()));
+   object.insert("qhp-sect-attrib",          putDataList(m_ui->qhp_sect_attrib->toPlainText()));
    object.insert("qthelp-gen-path",          m_ui->qthelp_gen_path->text());
 
    // tab 3 - rtf

@@ -285,12 +285,14 @@ void Dialog_LookUp::cancel()
 QStringList Dialog_LookUp::getData()
 {
    QStringList retval;
-
    int max = m_model->rowCount();
 
    for (int row = 0; row < max; ++row) {
       QStandardItem *item = m_model->item(row,0);
-      retval.append(item->text());
+
+      if (! item->text().isEmpty()) {
+         retval.append(item->text());
+      }
    }
 
    return retval;

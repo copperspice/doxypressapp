@@ -32,10 +32,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->project_brief->setText(tempStr);
 
    tempStr = convert_Str(data,"PROJECT_NUMBER");
-   m_ui->project_number->setText(tempStr);
+   m_ui->project_version->setText(tempStr);
 
    // special case
-   m_project_iconFN = convert_Str(data, "PROJECT_LOGO");
+   m_project_logoFN = convert_Str(data, "PROJECT_LOGO");
 
    tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
    m_ui->output_dir->setText(tempStr);
@@ -698,10 +698,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->qhp_cust_filter_name->setText(tempStr);
 
    tempStr = convert_Str(data, "QHP_CUST_FILTER_ATTRS");
-   m_ui->qhp_cust_filter_attrib->setText(tempStr);
+   m_ui->qhp_cust_attrib->setPlainText(tempStr);
 
    tempStr = convert_Str(data, "QHP_SECT_FILTER_ATTRS");
-   m_ui->qhp_sect_filter_attrib->setText(tempStr);
+   m_ui->qhp_sect_attrib->setPlainText(tempStr);
 
    tempStr = convert_Str(data, "QHG_LOCATION");
    m_ui->qthelp_gen_path->setText(tempStr);
@@ -750,7 +750,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->mathjax_codefile->setText(tempStr);
 
    tempBool = convert_Bool(data, "SEARCHENGINE");
-   m_ui->search_engine_CB->setChecked(tempBool);
+   m_ui->html_search_CB2->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SERVER_BASED_SEARCH");
    m_ui->server_based_search_CB->setChecked(tempBool);

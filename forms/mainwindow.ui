@@ -90,7 +90,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
@@ -205,7 +205,7 @@
               </widget>
              </item>
              <item row="3" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_number">
+              <widget class="QLineEdit" name="project_version">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -224,7 +224,7 @@
                 <string>Project Logo:</string>
                </property>
                <property name="buddy">
-                <cstring>icon_PB</cstring>
+                <cstring>logo_PB</cstring>
                </property>
               </widget>
              </item>
@@ -251,7 +251,7 @@
                 <string>Project Version:</string>
                </property>
                <property name="buddy">
-                <cstring>project_number</cstring>
+                <cstring>project_version</cstring>
                </property>
               </widget>
              </item>
@@ -272,7 +272,7 @@
               </spacer>
              </item>
              <item row="4" column="1">
-              <widget class="QPushButton" name="icon_PB">
+              <widget class="QPushButton" name="logo_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -296,7 +296,7 @@
               </widget>
              </item>
              <item row="4" column="3">
-              <widget class="QLabel" name="project_icon">
+              <widget class="QLabel" name="project_logo">
                <property name="text">
                 <string>No logo was selected</string>
                </property>
@@ -639,7 +639,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="html_search_CB">
+                 <widget class="QCheckBox" name="html_search_CB1">
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
@@ -1150,7 +1150,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>10</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -6470,7 +6470,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -7035,12 +7035,12 @@
                 <string>Search Engine:</string>
                </property>
                <property name="buddy">
-                <cstring>search_engine_CB</cstring>
+                <cstring>html_search_CB2</cstring>
                </property>
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QCheckBox" name="search_engine_CB">
+              <widget class="QCheckBox" name="html_search_CB2">
                <property name="text">
                 <string/>
                </property>
@@ -7253,7 +7253,55 @@
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="8" column="0" colspan="4">
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_741">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>MathJax Relative Path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>mathjax_relpath</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_756">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>GhostScript FileName:</string>
+               </property>
+               <property name="buddy">
+                <cstring>ghostscript</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_129">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Formula Font Size:</string>
+               </property>
+               <property name="buddy">
+                <cstring>formula_fontsize_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="formula_fontsize_SB"/>
+             </item>
+             <item row="10" column="0" colspan="3">
               <spacer name="verticalSpacer_19">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -7266,10 +7314,65 @@
                </property>
               </spacer>
              </item>
-             <item row="3" column="1">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_740">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>MathJax Format:</string>
+               </property>
+               <property name="buddy">
+                <cstring>mathjax_format_CM</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_193">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>MathJax Extensions:</string>
+               </property>
+               <property name="buddy">
+                <cstring>mathjax_extensions</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2" rowspan="2">
+              <widget class="QPlainTextEdit" name="mathjax_extensions">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="2">
+              <widget class="QLineEdit" name="mathjax_codefile">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
               <widget class="QComboBox" name="mathjax_format_CM"/>
              </item>
-             <item row="5" column="3">
+             <item row="7" column="3">
               <widget class="QPushButton" name="mathjax_extensions_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -7293,21 +7396,6 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_742">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>MathJax Code File:</string>
-               </property>
-               <property name="buddy">
-                <cstring>mathjax_codefile</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_735">
                <property name="font">
@@ -7323,7 +7411,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1" colspan="2">
+             <item row="6" column="2">
               <widget class="QLineEdit" name="mathjax_relpath">
                <property name="font">
                 <font>
@@ -7332,94 +7420,21 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="4" column="2">
               <widget class="QCheckBox" name="use_mathjax_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="7" column="1" colspan="2">
-              <widget class="QLineEdit" name="mathjax_codefile">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_129">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Formula Font Size:</string>
-               </property>
-               <property name="buddy">
-                <cstring>formula_fontsize_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="formula_fontsize_SB"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_740">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>MathJax Format:</string>
-               </property>
-               <property name="buddy">
-                <cstring>mathjax_format_CM</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="mathjax_extensions">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_741">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>MathJax Relative Path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>mathjax_relpath</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="1" column="2">
               <widget class="QCheckBox" name="formula_transparent_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_736">
                <property name="font">
                 <font>
@@ -7434,18 +7449,51 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_193">
+             <item row="2" column="3">
+              <widget class="QPushButton" name="ghostscript_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>MathJax Extensions:</string>
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="ghostscript">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_742">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>MathJax Code File:</string>
                </property>
                <property name="buddy">
-                <cstring>mathjax_extensions</cstring>
+                <cstring>mathjax_codefile</cstring>
                </property>
               </widget>
              </item>
@@ -8761,35 +8809,13 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_QtHelp">
-            <layout class="QGridLayout" name="gridLayout_24">
+            <layout class="QGridLayout" name="gridLayout_24" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_733">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate Qt Help:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_qthelp_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="gen_qthelp_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_120">
                <property name="font">
@@ -8805,16 +8831,132 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="qch_file">
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_125">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
+               <property name="text">
+                <string>QHP (Section) Filter Attributes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>qhp_sect_attrib</cstring>
+               </property>
               </widget>
              </item>
-             <item row="1" column="2">
+             <item row="9" column="3">
+              <widget class="QPushButton" name="qthelp_gen_path_PB">
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="qhp_sect_attrib">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_121">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>QHP Namespace:</string>
+               </property>
+               <property name="buddy">
+                <cstring>qhp_namespace</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="qhp_cust_attrib">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_733">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate Qt Help:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_qthelp_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_123">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>QHP Custom Filter Name:</string>
+               </property>
+               <property name="buddy">
+                <cstring>qhp_cust_filter_name</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_124">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>QHP (Custom) Filter Attributes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>qhp_cust_attrib</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
               <widget class="QPushButton" name="qch_file_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -8838,27 +8980,18 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_121">
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_142">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>QHP Namespace:</string>
+                <string>Qt Help Generator Path:</string>
                </property>
                <property name="buddy">
-                <cstring>qhp_namespace</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="qhp_namespace">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
+                <cstring>qthelp_gen_path</cstring>
                </property>
               </widget>
              </item>
@@ -8877,116 +9010,14 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="qhp_virtual_folder">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
+             <item row="7" column="3">
+              <widget class="QPushButton" name="qhp_sect_attrib_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_123">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>QHP Custom Filter Name:</string>
-               </property>
-               <property name="buddy">
-                <cstring>qhp_cust_filter_name</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="qhp_cust_filter_name">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_124">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>QHP (Custom) Filter Attributes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>qhp_cust_filter_attrib</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="qhp_cust_filter_attrib">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_125">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>QHP (Section) Filter Attributes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>qhp_sect_filter_attrib</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="qhp_sect_filter_attrib">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_142">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Qt Help Generator Path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>qthelp_gen_path</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QLineEdit" name="qthelp_gen_path">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="2">
-              <widget class="QPushButton" name="qthelp_gen_path_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -9003,7 +9034,38 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="gen_qthelp_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="3">
+              <widget class="QPushButton" name="qhp_cust_attrib_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="2">
               <spacer name="verticalSpacer_22">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -9015,6 +9077,54 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="9" column="1" colspan="2">
+              <widget class="QLineEdit" name="qthelp_gen_path">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" colspan="2">
+              <widget class="QLineEdit" name="qhp_cust_filter_name">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="2">
+              <widget class="QLineEdit" name="qhp_virtual_folder">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QLineEdit" name="qhp_namespace">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="qch_file">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -9751,8 +9861,8 @@
   <tabstop>setup_TreeWidget</tabstop>
   <tabstop>project_name</tabstop>
   <tabstop>project_brief</tabstop>
-  <tabstop>project_number</tabstop>
-  <tabstop>icon_PB</tabstop>
+  <tabstop>project_version</tabstop>
+  <tabstop>logo_PB</tabstop>
   <tabstop>output_dir</tabstop>
   <tabstop>output_dir_PB</tabstop>
   <tabstop>optimize_cplus_CB</tabstop>
@@ -9763,7 +9873,7 @@
   <tabstop>html_plain_RB</tabstop>
   <tabstop>html_nav_RB</tabstop>
   <tabstop>html_chm_RB</tabstop>
-  <tabstop>html_search_CB</tabstop>
+  <tabstop>html_search_CB1</tabstop>
   <tabstop>html_colors_PB</tabstop>
   <tabstop>gen_latex_CB1</tabstop>
   <tabstop>latex_hyper_pdf_RB</tabstop>
@@ -10010,7 +10120,7 @@
   <tabstop>treeview_width_SB</tabstop>
   <tabstop>enum_values_per_line_SB</tabstop>
   <tabstop>external_links_in_window_CB</tabstop>
-  <tabstop>search_engine_CB</tabstop>
+  <tabstop>html_search_CB2</tabstop>
   <tabstop>server_based_search_CB</tabstop>
   <tabstop>external_search_CB</tabstop>
   <tabstop>search_engine_url</tabstop>
@@ -10018,8 +10128,11 @@
   <tabstop>search_data_file_PB</tabstop>
   <tabstop>search_external_id</tabstop>
   <tabstop>search_mappings</tabstop>
+  <tabstop>search_mappings_PB</tabstop>
   <tabstop>formula_fontsize_SB</tabstop>
   <tabstop>formula_transparent_CB</tabstop>
+  <tabstop>ghostscript</tabstop>
+  <tabstop>ghostscript_PB</tabstop>
   <tabstop>use_mathjax_CB</tabstop>
   <tabstop>mathjax_format_CM</tabstop>
   <tabstop>mathjax_relpath</tabstop>
@@ -10035,6 +10148,10 @@
   <tabstop>chm_index_encoding</tabstop>
   <tabstop>binary_toc_CB</tabstop>
   <tabstop>toc_expanded_CB</tabstop>
+  <tabstop>gen_docbook_CB2</tabstop>
+  <tabstop>docbook_output</tabstop>
+  <tabstop>docbook_output_PB</tabstop>
+  <tabstop>docbook_program_listing_CB</tabstop>
   <tabstop>gen_docset_CB</tabstop>
   <tabstop>docset_feedname</tabstop>
   <tabstop>docset_bundle_id</tabstop>
@@ -10077,8 +10194,10 @@
   <tabstop>qhp_namespace</tabstop>
   <tabstop>qhp_virtual_folder</tabstop>
   <tabstop>qhp_cust_filter_name</tabstop>
-  <tabstop>qhp_cust_filter_attrib</tabstop>
-  <tabstop>qhp_sect_filter_attrib</tabstop>
+  <tabstop>qhp_cust_attrib</tabstop>
+  <tabstop>qhp_cust_attrib_PB</tabstop>
+  <tabstop>qhp_sect_attrib</tabstop>
+  <tabstop>qhp_sect_attrib_PB</tabstop>
   <tabstop>qthelp_gen_path</tabstop>
   <tabstop>qthelp_gen_path_PB</tabstop>
   <tabstop>gen_rtf_CB2</tabstop>
@@ -10094,18 +10213,13 @@
   <tabstop>xml_output</tabstop>
   <tabstop>xml_output_PB</tabstop>
   <tabstop>xml_program_listing_CB</tabstop>
-  <tabstop>gen_docbook_CB2</tabstop>
-  <tabstop>docbook_output</tabstop>
-  <tabstop>docbook_output_PB</tabstop>
-  <tabstop>docbook_program_listing_CB</tabstop>
   <tabstop>help_t3</tabstop>
-  <tabstop>help_t1</tabstop>
   <tabstop>help_t2</tabstop>
-  <tabstop>outputLog</tabstop>
+  <tabstop>help_t1</tabstop>
   <tabstop>save_log_PB</tabstop>
+  <tabstop>outputLog</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>display_PB</tabstop>
-  <tabstop>search_mappings_PB</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -204,10 +204,10 @@ void MainWindow::createConnections()
    connect(m_ui->gen_rtf_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_rtf);
    connect(m_ui->gen_xml_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
 
-   connect(m_ui->search_engine_CB,        &QPushButton::toggled, this, &MainWindow::valid_search_engine);
+   connect(m_ui->html_search_CB2,         &QPushButton::toggled, this, &MainWindow::valid_html_search);
 
    // tab 1 - lookups
-   connect(m_ui->icon_PB,                 &QPushButton::clicked, this, [this](){ getIcon(); } );
+   connect(m_ui->logo_PB,                 &QPushButton::clicked, this, [this](){ getLogo(); } );
    connect(m_ui->output_dir_PB,           &QPushButton::clicked, this, &MainWindow::output_dir_PB);
    connect(m_ui->html_colors_PB,          &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
@@ -278,6 +278,7 @@ void MainWindow::createConnections()
    connect(m_ui->html_extra_stylesheets_PB, SIGNAL(clicked()), this, SLOT(html_extra_stylesheets_PB()));
    connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
 
+   connect(m_ui->ghostscript_PB,            SIGNAL(clicked()), this, SLOT(ghostscript_PB()));
    connect(m_ui->mathjax_extensions_PB,     SIGNAL(clicked()), this, SLOT(mathjax_extensions_PB()));
    connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
    connect(m_ui->search_mappings_PB,        SIGNAL(clicked()), this, SLOT(search_mappings_PB()));
@@ -304,7 +305,9 @@ void MainWindow::createConnections()
 
    // tab 3 look up (qthelp)
    connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
-   connect(m_ui->qthelp_gen_path_PB,        SIGNAL(clicked()), this, SLOT(qt_help_gen_path_PB()));
+   connect(m_ui->qhp_cust_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_cust_attrib_PB()));
+   connect(m_ui->qhp_sect_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_sect_attrib_PB()));
+   connect(m_ui->qthelp_gen_path_PB,        SIGNAL(clicked()), this, SLOT(qthelp_gen_path_PB()));
 
    // tab 3 look up (rtf)
    connect(m_ui->rtf_output_PB,             SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
