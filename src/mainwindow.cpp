@@ -275,7 +275,7 @@ void MainWindow::createConnections()
    connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));
    connect(m_ui->html_header_PB,            SIGNAL(clicked()), this, SLOT(html_header_PB()));
    connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));   
-   connect(m_ui->html_extra_stylesheets_PB, SIGNAL(clicked()), this, SLOT(html_extra_stylesheets_PB()));
+   connect(m_ui->html_stylesheets_PB,       SIGNAL(clicked()), this, SLOT(html_stylesheets_PB()));
    connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
 
    connect(m_ui->ghostscript_PB,            SIGNAL(clicked()), this, SLOT(ghostscript_PB()));

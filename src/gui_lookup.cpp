@@ -863,14 +863,14 @@ void MainWindow::html_footer_PB()
    m_ui->html_footer->setText(file);
 }
 
-void MainWindow::html_extra_stylesheets_PB()
+void MainWindow::html_stylesheets_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->html_extra_stylesheets->toPlainText();
+   QString temp = m_ui->html_stylesheets->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "HTML Stylesheets";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
@@ -882,7 +882,7 @@ void MainWindow::html_extra_stylesheets_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->html_extra_stylesheets->setPlainText(temp);
+      m_ui->html_stylesheets->setPlainText(temp);
    }
 }
 
@@ -893,7 +893,7 @@ void MainWindow::html_extra_files_PB()
 
    QString temp = m_ui->html_extra_files->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "HTML Extra Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;

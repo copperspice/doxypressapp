@@ -465,8 +465,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void html_footer_PB())
       CS_SLOT_2(html_footer_PB)
 
-      CS_SLOT_1(Private, void html_extra_stylesheets_PB())
-      CS_SLOT_2(html_extra_stylesheets_PB)
+      CS_SLOT_1(Private, void html_stylesheets_PB())
+      CS_SLOT_2(html_stylesheets_PB)
 
       CS_SLOT_1(Private, void html_extra_files_PB())
       CS_SLOT_2(html_extra_files_PB)

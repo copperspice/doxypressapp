@@ -356,6 +356,28 @@ void MainWindow::setupLimits()
    data = temp.split(", ");
    m_ui->output_language_CM->addItems(data);
 
+   data.clear();
+   data.append("png");
+   data.append("jpg");
+   data.append("gif");
+   data.append("svg");
+   m_ui->dot_image_format_CM->addItems(data);
+
+   data.clear();
+   data.append("HTML-CSS");
+   data.append("NativeMML");
+   data.append("SVG");
+   m_ui->mathjax_format_CM->addItems(data);
+
+   // tab 3 - latex
+   data.clear();
+   data.append("a4");
+   data.append("letter");
+   data.append("legal");
+   data.append("executive");
+   m_ui->latex_paper_type_CM->addItems(data);
+
+   // tab 2 -
    m_ui->tab_size_SB->setMinimum(1);
    m_ui->tab_size_SB->setMaximum(16);
 
@@ -379,13 +401,6 @@ void MainWindow::setupLimits()
 
    m_ui->uml_limit_num_fields_SB->setMinimum(0);
    m_ui->uml_limit_num_fields_SB->setMaximum(100);
-
-   data.clear();
-   data.append("png");
-   data.append("jpg");
-   data.append("gif");
-   data.append("svg");
-   m_ui->dot_image_format_CM->addItems(data);
 
    m_ui->dot_graph_max_nodes_SB->setMinimum(0);
    m_ui->dot_graph_max_nodes_SB->setMaximum(10000);
@@ -414,20 +429,6 @@ void MainWindow::setupLimits()
 
    m_ui->formula_fontsize_SB->setMinimum(8);
    m_ui->formula_fontsize_SB->setMaximum(50);
-
-   data.clear();
-   data.append("HTML-CSS");
-   data.append("NativeMML");
-   data.append("SVG");
-   m_ui->mathjax_format_CM->addItems(data);
-
-   // tab 3 - latex
-   data.clear();
-   data.append("a4");
-   data.append("letter");
-   data.append("legal");
-   data.append("executive");
-   m_ui->latex_paper_type_CM->addItems(data);
 }
 
 // **
@@ -452,8 +453,8 @@ void MainWindow::valid_gen_html()
       m_ui->html_header_PB->setEnabled(true);
       m_ui->html_footer->setEnabled(true);
       m_ui->html_footer_PB->setEnabled(true);
-      m_ui->html_extra_stylesheets->setEnabled(true);
-      m_ui->html_extra_stylesheets_PB->setEnabled(true);
+      m_ui->html_stylesheets->setEnabled(true);
+      m_ui->html_stylesheets_PB->setEnabled(true);
       m_ui->html_extra_files->setEnabled(true);
       m_ui->html_extra_files_PB->setEnabled(true);
       m_ui->html_colorstyle_hue->setEnabled(true);
@@ -500,8 +501,8 @@ void MainWindow::valid_gen_html()
       m_ui->html_header_PB->setEnabled(false);
       m_ui->html_footer->setEnabled(false);
       m_ui->html_footer_PB->setEnabled(false);
-      m_ui->html_extra_stylesheets->setEnabled(false);
-      m_ui->html_extra_stylesheets_PB->setEnabled(false);
+      m_ui->html_stylesheets->setEnabled(false);
+      m_ui->html_stylesheets_PB->setEnabled(false);
       m_ui->html_extra_files->setEnabled(false);
       m_ui->html_extra_files_PB->setEnabled(false);
       m_ui->html_colorstyle_hue->setEnabled(false);

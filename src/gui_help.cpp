@@ -1701,10 +1701,10 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
-   s_fullHelp.insert("HTML_EXTRA_STYLESHEETS",
-      "This tag can is used to specify additional custom css files which will be included "
-      "after the standard DoxyPress internal css file. DoxyPress will automatically copy  "
-      "these css files to the 'HTML OUTPUT DIRECTORY'. "
+   s_fullHelp.insert("HTML_STYLESHEETS",
+      "This tag is used to specify additional custom css files which will be included "
+      "after the standard 'doxy_style.css' file. DoxyPress will automatically copy  "
+      "any css files listed in this tag to the 'HTML OUTPUT DIRECTORY'. "
       "<br><br>"
       "Note: The order of the css files is important. The last stylesheet will override the "
       "settings of any previous stylesheets. "

@@ -197,10 +197,10 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "IDL_PROPERTY_SUPPORT");
    m_ui->idl_support_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data, "DISTRIBUTE_GROUP_DOC ");
+   tempBool = convert_Bool(data, "DISTRIBUTE_GROUP_DOC");
    m_ui->dist_group_doc_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data, "SUBGROUPING ");
+   tempBool = convert_Bool(data, "SUBGROUPING");
    m_ui->allow_sub_grouping_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "INLINE_GROUPED_CLASSES");
@@ -612,7 +612,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_footer->setText(tempStr);
 
    // removed - add to tempText
-   tempStr = convert_Str(data, "HTML_STYLESHEET");
+   tempStr  = convert_Str(data, "HTML_STYLESHEET");
    tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
 
    if (! tempStr.isEmpty()) {
@@ -623,7 +623,7 @@ void MainWindow::convertDoxy(QByteArray data)
          tempText = tempStr + ", " + tempText;
       }
    }
-   m_ui->html_extra_stylesheets->setPlainText(tempText);
+   m_ui->html_stylesheets->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"HTML_EXTRA_FILES");
    m_ui->html_extra_files->setPlainText(tempText);

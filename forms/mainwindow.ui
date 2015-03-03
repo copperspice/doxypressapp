@@ -6596,10 +6596,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>HTML Extra Stylesheets:</string>
+                <string>HTML Stylesheets:</string>
                </property>
                <property name="buddy">
-                <cstring>html_extra_stylesheets</cstring>
+                <cstring>html_stylesheets</cstring>
                </property>
               </widget>
              </item>
@@ -6820,7 +6820,7 @@
               </widget>
              </item>
              <item row="6" column="3">
-              <widget class="QPushButton" name="html_extra_stylesheets_PB">
+              <widget class="QPushButton" name="html_stylesheets_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -6881,7 +6881,7 @@
               </spacer>
              </item>
              <item row="6" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="html_extra_stylesheets">
+              <widget class="QPlainTextEdit" name="html_stylesheets">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -10105,8 +10105,8 @@
   <tabstop>html_header_PB</tabstop>
   <tabstop>html_footer</tabstop>
   <tabstop>html_footer_PB</tabstop>
-  <tabstop>html_extra_stylesheets</tabstop>
-  <tabstop>html_extra_stylesheets_PB</tabstop>
+  <tabstop>html_stylesheets</tabstop>
+  <tabstop>html_stylesheets_PB</tabstop>
   <tabstop>html_extra_files</tabstop>
   <tabstop>html_extra_files_PB</tabstop>
   <tabstop>html_colorstyle_hue</tabstop>

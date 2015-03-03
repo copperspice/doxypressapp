@@ -485,11 +485,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->gen_xml_CB1->setChecked(            object.value("generate-xml").toBool());
    m_ui->gen_docbook_CB1->setChecked(        object.value("generate-docbook").toBool());
 
-   //
-   m_ui->diagram_none_RB->setChecked(        object.value("diagram-none").toBool());
-   m_ui->diagram_built_in_RB->setChecked(    object.value("diagram-built-in").toBool());
-   m_ui->diagram_dot_RB->setChecked(         object.value("diagram-dot").toBool());
-
    m_ui->dot_class_graph_CB1->setChecked(    object.value("dot-class-graph").toBool());
    m_ui->dot_collaboration_CB1->setChecked(  object.value("dot-collaboration").toBool());
    m_ui->dot_hierarchy_CB1->setChecked(      object.value("dot-hierarchy").toBool());
@@ -681,14 +676,14 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    index = m_ui->dot_image_format_CM->findText(    object.value("dot-image-format").toString());
    m_ui->dot_image_format_CM->setCurrentIndex(index);
 
-   m_ui->interactive_svg_CB->setChecked(           object.value("interactive_svg").toBool());
+   m_ui->interactive_svg_CB->setChecked(           object.value("interactive-svg").toBool());
    m_ui->dot_path->setText(                        object.value("dot-path").toString());
-   m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file_dirs"));
-   m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file_dirs"));
-   m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file_dirs"));
+   m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file-dirs"));
+   m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file-dirs"));
+   m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file-dirs"));
    m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());
 
-   m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph_max-nodes").toInt());
+   m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph-max-nodes").toInt());
    m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph-max-depth").toInt());
    m_ui->dot_transparent_CB->setChecked(           object.value("dot-transparent").toBool());
    m_ui->dot_multiple_targets_CB->setChecked(      object.value("dot-multiple-targets").toBool());
@@ -701,7 +696,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->html_file_extension->setText(             object.value("html-file-extension").toString());
    m_ui->html_header->setText(                     object.value("html-header").toString());
    m_ui->html_footer->setText(                     object.value("html-footer").toString());   
-   m_ui->html_extra_stylesheets->setPlainText(     getDataList(object, "html-extra-stylesheets"));
+   m_ui->html_stylesheets->setPlainText(           getDataList(object, "html-stylesheets"));
    m_ui->html_extra_files->setPlainText(           getDataList(object, "html-extra-files"));
 
    m_ui->html_colorstyle_hue->setValue(            object.value("html-colorstyle-hue").toInt());
@@ -729,7 +724,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->formula_fontsize_SB->setValue(            object.value("formula-fontsize").toInt());
    m_ui->formula_transparent_CB->setChecked(       object.value("formula-transparent").toBool());
    m_ui->ghostscript->setText(                     object.value("ghostscript").toString());
-   m_ui->use_mathjax_CB->setChecked(               object.value("use_mathjax").toBool());
+   m_ui->use_mathjax_CB->setChecked(               object.value("use-mathjax").toBool());
 
    index = m_ui->mathjax_format_CM->findText(      object.value("mathjax-format").toString());
    m_ui->mathjax_format_CM->setCurrentIndex(index);
@@ -841,10 +836,6 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("generate-man",          m_ui->gen_man_CB1->isChecked());
    object.insert("generate-xml",          m_ui->gen_xml_CB1->isChecked());
    object.insert("generate-docbook",      m_ui->gen_docbook_CB1->isChecked());
-
-   object.insert("diagram-none",          m_ui->diagram_none_RB->isChecked());
-   object.insert("diagram-built-in",      m_ui->diagram_built_in_RB->isChecked());
-   object.insert("diagram-dot",           m_ui->diagram_dot_RB->isChecked());
 
    object.insert("dot-class-graph",       m_ui->dot_class_graph_CB1->isChecked());
    object.insert("dot-collaboration",     m_ui->dot_collaboration_CB1->isChecked());
@@ -1051,7 +1042,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("html-file-extension",      m_ui->html_file_extension->text());
    object.insert("html-header",              m_ui->html_header->text());
    object.insert("html-footer",              m_ui->html_footer->text());  
-   object.insert("html-extra-stylesheets",   putDataList(m_ui->html_extra_stylesheets->toPlainText()));
+   object.insert("html-stylesheets",         putDataList(m_ui->html_stylesheets->toPlainText()));
    object.insert("html-extra-files",         putDataList(m_ui->html_extra_files->toPlainText()));
 
    object.insert("html-colorstyle-hue",      m_ui->html_colorstyle_hue->value());
@@ -1082,7 +1073,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("use-mathjax",              m_ui->use_mathjax_CB->isChecked());
    object.insert("mathjax-format",           m_ui->mathjax_format_CM->currentText());
    object.insert("mathjax-relpath",          m_ui->mathjax_relpath->text());
-   object.insert("mathjax-extensionss",      putDataList(m_ui->mathjax_extensions->toPlainText()));
+   object.insert("mathjax-extensions",       putDataList(m_ui->mathjax_extensions->toPlainText()));
    object.insert("mathjax-codefile",         m_ui->mathjax_codefile->text());
 
    // tab 3 - chm
