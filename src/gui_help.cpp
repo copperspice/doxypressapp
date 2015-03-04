@@ -1234,39 +1234,6 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-   s_fullHelp.insert("GEN_PERL",
-      "If the GENERATE_PERLMOD tag is set to YES, DoxyPress will generate a Perl module "
-      "file that captures the structure of the code including all documentation. "
-      "Note that this feature is still experimental and incomplete at the moment. "
-      "<br><br>"
-      "The default value is: NO");
-
-   s_fullHelp.insert("PERL_LATEX",
-      "If the PERLMOD_LATEX tag is set to YES, DoxyPress will generate the necessary "
-      "Makefile rules, Perl scripts and LaTeX code to be able to generate PDF and DVI "
-      "output from the Perl module output. "
-      "<br><br>"
-      "The default value is: NO "
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
-
-   s_fullHelp.insert("PERL_PRETTY",
-      "If the PERLMOD_PRETTY tag is set to YES, the Perl module output will be nicely "
-      "formatted so it can be parsed by a human reader. This is useful if you want to "
-      "understand what is going on. On the other hand, if this tag is set to NO, the "
-      "size of the Perl module output will be much smaller and Perl will parse it "
-      "just the same. "
-      "<br><br>"
-      "The default value is: YES "
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
-
-   s_fullHelp.insert("PERLMOD_PREFIX",
-      "The names of the make variables in the generated doxyrules.make file are "
-      "prefixed with the string contained in PERLMOD_MAKEVAR_PREFIX. This is useful "
-      "so different doxyrules.make files included by the same Makefile don't "
-      "overwrite each other's variables. "
-      "<br><br>"
-      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
-
    s_fullHelp.insert("ENABLE_PREPROCESSING",
       "If this tag is set then DoxyPress will evaluate all "
       "C-preprocessor directives found in the sources and include files. "
@@ -1661,6 +1628,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES "
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
+   // tab 3
    s_fullHelp.insert("GEN_HTML",
       "If the 'GENERATE HTML' tag is set to YES, DoxyPress will generate HTML output "
       "<br><br>"
@@ -1881,6 +1849,40 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: Publisher. "
       "This tag requires the tag GENERATE_DOCSET is set to YES");
+
+   // tab 3 perl module
+   s_fullHelp.insert("GEN_PERL",
+      "If this tag is set then DoxyPress will generate a Perl module "
+      "file which captures the structure of the code including all documentation. "
+      "Note that this feature is still experimental and incomplete at the moment. "
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("PERL_LATEX",
+      "If this tag is set then DoxyPress will generate the necessary "
+      "Makefile rules, Perl scripts, and LaTeX code to be able to generate PDF and DVI "
+      "output from the Perl module output. "
+      "<br><br>"
+      "The default value is: NO "
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
+
+   s_fullHelp.insert("PERL_PRETTY",
+      "If the PERLMOD_PRETTY tag is set to YES, the Perl module output will be nicely "
+      "formatted so it can be parsed by a human reader. This is useful if you want to "
+      "understand what is going on. On the other hand, if this tag is set to NO, the "
+      "size of the Perl module output will be much smaller and Perl will parse it "
+      "just the same. "
+      "<br><br>"
+      "The default value is: YES "
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
+
+   s_fullHelp.insert("PERL_PREFIX",
+      "The names of the make variables in the generated doxyrules.make file are "
+      "prefixed with the string contained in PERLMOD_MAKEVAR_PREFIX. This is useful "
+      "so different doxyrules.make files included by the same Makefile don't "
+      "overwrite each other's variables. "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE PERLMOD' is set to YES");
 
    // Qt Help
    s_fullHelp.insert("GEN_QTHELP",

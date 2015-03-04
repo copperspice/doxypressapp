@@ -447,22 +447,11 @@ void MainWindow::convertDoxy(QByteArray data)
    tempText = convert_PlainText(data,"IGNORE_PREFIX");
    m_ui->ignore_prefix->setPlainText(tempText);
 
+
    // tab 2 - autogen
    tempBool = convert_Bool(data, "GENERATE_AUTOGEN_DEF");
    m_ui->gen_autogen_def_CB->setChecked(tempBool);
 
-   // tab 2 - perlmod
-   tempBool = convert_Bool(data, "GENERATE_PERLMOD");
-   m_ui->gen_perl_CB->setChecked(tempBool);;
-
-   tempBool = convert_Bool(data, "PERLMOD_LATEX");
-   m_ui->perl_latex_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "PERLMOD_PRETTY");
-   m_ui->perl_pretty_CB->setChecked(tempBool);
-
-   tempStr = convert_Str(data, "PERLMOD_MAKEVAR_PREFIX");
-   m_ui->perlmod_prefix->setText(tempStr);
 
    // tab 2 - preprocess
    tempBool = convert_Bool(data, "ENABLE_PREPROCESSING");
@@ -492,7 +481,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "SKIP_FUNCTION_MACROS");
    m_ui->skip_function_macros_CB->setChecked(tempBool);
 
-
    // tab 2 - external
    tempText = convert_PlainText(data,"TAGFILES");
    m_ui->tag_files->setPlainText(tempText);
@@ -511,7 +499,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempStr = convert_Str(data, "PERL_PATH");
    m_ui->perl_path->setText(tempStr);
-
 
    // tab 2 - dot
    tempBool = convert_Bool(data,"CLASS_DIAGRAMS");
@@ -850,6 +837,20 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->man_links_CB->setChecked(tempBool);
 
 
+   // tab 3 - perl module
+   tempBool = convert_Bool(data, "GENERATE_PERLMOD");
+   m_ui->gen_perl_CB->setChecked(tempBool);;
+
+   tempBool = convert_Bool(data, "PERLMOD_LATEX");
+   m_ui->perl_latex_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "PERLMOD_PRETTY");
+   m_ui->perl_pretty_CB->setChecked(tempBool);
+
+   tempStr = convert_Str(data, "PERLMOD_MAKEVAR_PREFIX");
+   m_ui->perl_prefix->setText(tempStr);
+
+
    // tab 3 - xml
    tempStr = convert_Str(data, "XML_OUTPUT");
    m_ui->xml_output->setText(tempStr);
@@ -872,16 +873,16 @@ void MainWindow::convertDoxy(QByteArray data)
 bool MainWindow::convert_Bool(QByteArray data, QString key)
 {
    bool retval = false;
-   QString tempStr;
-
-   int posBeg = data.indexOf(key);
+   int posBeg  = data.indexOf(key);
 
    if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
+      QString tempStr;
+
+      int posEnd = data.indexOf("\n", posBeg);      
       QString x = data.mid(posBeg, posEnd - posBeg);
 
-      posBeg  = x.indexOf("=");
-      tempStr = x.mid(posBeg + 1).trimmed();
+      posBeg  = x.indexOf("=");      
+      tempStr = x.mid(posBeg + 1).trimmed().toUpper();
 
       if (tempStr == "YES") {
          retval = true;
@@ -894,15 +895,18 @@ bool MainWindow::convert_Bool(QByteArray data, QString key)
 int MainWindow::convert_Int(QByteArray data, QString key)
 {
    int retval;
-   QString temp;
-
    int posBeg = data.indexOf(key);
 
-   if (posBeg > 0) {
-      int posEnd = data.indexOf("\n", posBeg);
-      temp = data.mid(posBeg, posEnd - posBeg);
+   if (posBeg != -1) {
+      QString tempStr;
 
-      retval = temp.toInt();
+      int posEnd = data.indexOf("\n", posBeg);
+      QString x = data.mid(posBeg, posEnd - posBeg);
+
+      posBeg  = x.indexOf("=");
+      tempStr = x.mid(posBeg + 1).trimmed();
+
+      retval = tempStr.toInt();
    }
 
    return retval;
@@ -911,7 +915,6 @@ int MainWindow::convert_Int(QByteArray data, QString key)
 QString MainWindow::convert_Str(QByteArray data, QString key)
 {
    QString tempStr;
-
    int posBeg = data.indexOf(key);
 
    if (posBeg > 0) {

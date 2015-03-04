@@ -105,6 +105,9 @@ MainWindow::MainWindow()
    m_ui->menuFile->setContextMenuPolicy(Qt::CustomContextMenu);
    connect(m_ui->menuFile, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(showContext_Files(const QPoint &)));
 
+   // syntax highlighting
+   m_syntaxParser = new Syntax(m_ui->runText->document());
+
 // m_timer = new QTimer;
    m_runProcess = new QProcess;
 
@@ -141,7 +144,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(":/resources/doxypress.png"));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 3.01.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 3.15.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -420,9 +423,6 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("AutoGen")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_AutoGen);
 
-      } else if (label == tr("PerlMod")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_PerlMod);
-
       } else if (label == tr("Preprocessor")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Process);
 
@@ -468,6 +468,9 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("Man")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Man);
 
+      } else if (label == tr("Perl Module")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Perl);
+
       } else if (label == tr("QtHelp")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_QtHelp);
 
@@ -487,6 +490,75 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 QSize MainWindow::sizeHint() const
 {
    return QSize(1000, 600);
+}
+
+
+
+//  move these
+
+Syntax::Syntax(QTextDocument *document)
+   : QSyntaxHighlighter(document)
+{
+}
+
+Syntax::~Syntax()
+{
+}
+
+void Syntax::processSyntax()
+{
+   //
+   QStringList keyWords;
+   keyWords.append("Processing");
+
+   //
+   QStringList errorWords;
+   errorWords.append("Error:");
+   errorWords.append("Warning:");
+
+   //
+   HighlightingRule rule;
+
+   for (auto pattern : keyWords) {
+      rule.format.setFontWeight(QFont::Bold);
+      rule.format.setFontItalic(false);
+      rule.format.setForeground(Qt::blue);
+
+      rule.pattern = QRegExp(pattern);
+      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
+
+      highlightingRules.append(rule);
+   }
+
+   for (auto pattern : errorWords) {
+      rule.format.setFontWeight(QFont::Bold);
+      rule.format.setFontItalic(false);
+      rule.format.setForeground(Qt::red);
+
+      rule.pattern = QRegExp(pattern);
+      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
+
+      highlightingRules.append(rule);
+   }
+
+
+   // redo the current document
+   rehighlight();
+}
+
+void Syntax::highlightBlock(const QString &text)
+{
+   for (auto &rule : highlightingRules) {
+      QRegExp expression(rule.pattern);
+      int index = expression.indexIn(text);
+
+      while (index >= 0) {
+         int length = expression.matchedLength();
+         setFormat(index, length, rule.format);
+         index = expression.indexIn(text, index + length);
+      }
+   }
+
 }
 
 

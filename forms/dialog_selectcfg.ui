@@ -123,7 +123,7 @@
       </font>
      </property>
      <property name="text">
-      <string>DoxygenPressApp Settings file is missing. Click to select one of the following options.</string>
+      <string>DoxyPressApp  Settings file is missing. Click to select one of the following options.</string>
      </property>
     </widget>
    </item>

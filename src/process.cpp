@@ -18,6 +18,7 @@
 #include "mainwindow.h"
 
 #include <QFileInfo>
+#include <QTextCursor>
 
 #ifdef WIN32
 #include <windows.h>
@@ -27,11 +28,37 @@
 void MainWindow::runDoxyPress()
 {
    if (! m_running) {
-
       // save the file
-      saveDoxy();
+      saveDoxy();                
 
-      QString path;
+      QString doxyPressPath;
+
+      if (! m_struct.doxyPress_Exe.isEmpty() ) {
+         // user specified
+         doxyPressPath = m_struct.doxyPress_Exe;
+
+      } else {
+         // test if DoxyPress in the same directory as the current app
+         QString dir = QCoreApplication::applicationDirPath();
+
+         QDir file(dir);
+         if (file.exists("doxypress.exe")) {
+            doxyPressPath = dir + "doxypress.exe";
+
+         } else if (file.exists("doxypress")) {
+            doxyPressPath = dir + "doxypress";
+
+         } else {
+            // search user path
+            doxyPressPath = "doxypress";
+         }
+      }
+
+      if (doxyPressPath.isEmpty()) {
+         runText_Append("*** Unable to locate DoxyPress program\n");
+         return;
+      }
+
       QString outputDir = m_ui->output_dir->text();
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
@@ -40,19 +67,19 @@ void MainWindow::runDoxyPress()
 
       QStringList args;
       args.append(m_curFile);
-      args.append("--b");           // make stdout unbuffered
+      args.append(" --b");           // make stdout unbuffered
 
-      m_ui->outputLog->clear();
-      m_runProcess->start(path + "echo", args);
+      m_ui->runText->document()->clear();
+      m_runProcess->start(doxyPressPath, args);
 
       if (! m_runProcess->waitForStarted()) {
-         m_ui->outputLog->append("*** Failed to run DoxyPress\n");
+         runText_Append( QString("*** Failed to run %1\n").arg(doxyPressPath));
          return;
       }            
 
       //
       if (m_runProcess->state() == QProcess::NotRunning) {
-         m_ui->outputLog->append("*** Failed to run DoxyPress\n");
+         runText_Append("*** Failed to run DoxyPress\n");
 
       } else {
          m_ui->save_log_PB->setEnabled(false);
@@ -79,11 +106,10 @@ void MainWindow::runDoxyPress()
 void MainWindow::readStdout()      
 {
    if (m_running) {      
-      QByteArray data = m_runProcess->readAllStandardOutput();
-      QString text    = QString::fromUtf8(data);
+      QString text = m_runProcess->readAllStandardOutput();
 
       if (! text.isEmpty()) {
-         m_ui->outputLog->append(text.trimmed());
+         runText_Append(text.trimmed());
       }
    }
 }
@@ -91,23 +117,32 @@ void MainWindow::readStdout()
 void MainWindow::runComplete()
 {
    if (m_running) {
-      m_ui->outputLog->append(tr("*** DoxyPress has Completed\n"));
+      runText_Append(tr("\n** DoxyPress has Completed\n"));
    } else {
-      m_ui->outputLog->append(tr("*** DoxyPress was Cancelled\n"));
+      runText_Append(tr("\n** DoxyPress was Cancelled\n"));
    }
 
-   m_ui->outputLog->ensureCursorVisible();
+   m_ui->runText->ensureCursorVisible();
 
    m_ui->run_PB->setText(tr("Run DoxyPress"));
    m_ui->runStatus->setText(tr("Status: DoxyPress is not running"));
 
    m_running = false;
+
    updateRunButtons();
+   m_syntaxParser->processSyntax();
 
    m_ui->save_log_PB->setEnabled(true);
 }
 
 //  **
+void MainWindow::runText_Append(const QString &text)
+{
+   QTextCursor cursor(m_ui->runText->document());
+   cursor.movePosition(QTextCursor::End);
+   cursor.insertText(text);
+}
+
 QString MainWindow::getHtmlOutputIndex() const
 {
    QString retval = this->pathName(m_curFile);
@@ -123,7 +158,6 @@ QString MainWindow::getHtmlOutputIndex() const
       // append
       retval += "/" + outputDir;
    }
-
 
    if (QFileInfo(htmlDir).isAbsolute())  {
       // override
@@ -180,14 +214,14 @@ void MainWindow::showHtmlOutput()
 void MainWindow::saveLog()
 {
    QString logName = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                                             m_ui->output_dir->text() + QString::fromAscii("/doxypress_log.txt"));
+                  m_ui->output_dir->text() + QString::fromAscii("/doxypress_log.txt"));
 
    if (! logName.isEmpty()) {
       QFile f(logName);
 
       if (f.open(QIODevice::WriteOnly)) {       
 
-         QString data = m_ui->outputLog->toPlainText();
+         QString data = m_ui->runText->toPlainText();
          f.write(data.toUtf8());
 
          statusBar()->showMessage(tr("Output log saved"));
@@ -201,7 +235,7 @@ void MainWindow::saveLog()
 
 void MainWindow::updateRunButtons()
 {
-   if (m_ui->outputLog->toPlainText().isEmpty())  {
+   if (m_ui->runText->toPlainText().isEmpty())  {
       m_ui->save_log_PB->setEnabled(false);
    } else {
       m_ui->save_log_PB->setEnabled(true);

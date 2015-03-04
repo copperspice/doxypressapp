@@ -90,6 +90,9 @@ bool MainWindow::json_Read(Config trail)
       QSize size = QSize(width, height);
       resize(size);
 
+      m_struct.doxyPress_Exe = object.value("doxyPress-location").toString();
+
+      //
       m_struct.pathPrior = object.value("pathPrior").toString();
 
       // recent files
@@ -159,7 +162,11 @@ bool MainWindow::json_Write(Option route, Config trail)
 
             break;
 
-          case PATH_PRIOR: 
+         case DOXYPRESS_EXE:
+            object.insert("doxyPress-location", m_struct.doxyPress_Exe);
+            break;
+
+         case PATH_PRIOR:
             object.insert("pathPrior", m_struct.pathPrior);
             break;
 
@@ -599,7 +606,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->exclude_patterns->setPlainText(           getDataList(object, "exclude-patterns"));
    m_ui->exclude_symbols->setPlainText(            getDataList(object, "exclude-symbols"));
    m_ui->example_source->setPlainText(             getDataList(object, "example-source"));
-   m_ui->example_patterns->setPlainText(           getDataList(object, "example-pattens"));
+   m_ui->example_patterns->setPlainText(           getDataList(object, "example-patterns"));
    m_ui->example_recursive_CB->setChecked(         object.value("example-recursive").toBool());
 
    m_ui->image_path->setPlainText(                 getDataList(object, "image-path"));
@@ -629,12 +636,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    // tab 2 - autogen
    m_ui->gen_autogen_def_CB->setChecked(           object.value("generate-autogen-def").toBool());
-
-   // tab 2 - perlmod         
-   m_ui->gen_perl_CB->setChecked(                  object.value("generate-perl").toBool());
-   m_ui->perl_latex_CB->setChecked(                object.value("perl-latex").toBool());
-   m_ui->perl_pretty_CB->setChecked(               object.value("perl-pretty").toBool());
-   m_ui->perlmod_prefix->setText(                  object.value("perlmod-prefix").toString());
 
    // tab 2 - preprocess
    m_ui->enable_preprocessing_CB->setChecked(      object.value("enable-preprocessing").toBool());
@@ -779,6 +780,12 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->man_extension->setText(                   object.value("man-extension").toString());
    m_ui->man_subdir->setText(                      object.value("man-subdir").toString());
    m_ui->man_links_CB->setChecked(                 object.value("man-links").toBool());
+
+   // tab 3 - perl modoule
+   m_ui->gen_perl_CB->setChecked(                  object.value("generate-perl").toBool());
+   m_ui->perl_latex_CB->setChecked(                object.value("perl-latex").toBool());
+   m_ui->perl_pretty_CB->setChecked(               object.value("perl-pretty").toBool());
+   m_ui->perl_prefix->setText(                     object.value("perl-prefix").toString());
 
    // tab 3 - qt help
    m_ui->gen_qthelp_CB->setChecked(                object.value("generate-qthelp").toBool());
@@ -947,7 +954,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("exclude-patterns",         putDataList(m_ui->exclude_patterns->toPlainText()));
    object.insert("exclude-symbols",          putDataList(m_ui->exclude_symbols->toPlainText()));
    object.insert("example-source",           putDataList(m_ui->example_source->toPlainText()));
-   object.insert("example-pattens",          putDataList(m_ui->example_patterns->toPlainText()));
+   object.insert("example-patterns",         putDataList(m_ui->example_patterns->toPlainText()));
    object.insert("example-recursive",        m_ui->example_recursive_CB->isChecked());
 
    object.insert("image-path",               putDataList(m_ui->image_path->toPlainText()));
@@ -977,12 +984,6 @@ QByteArray MainWindow::json_SaveDoxy()
 
    // tab 2 - autogen
    object.insert("generate-autogen-def",    m_ui->gen_autogen_def_CB->isChecked());
-
-   // tab 2 - perlmod
-   object.insert("generate-perl",            m_ui->gen_perl_CB->isChecked());
-   object.insert("perl-latex",               m_ui->perl_latex_CB->isChecked());
-   object.insert("perl-pretty",              m_ui->perl_pretty_CB->isChecked());
-   object.insert("perlmod-prefix",           m_ui->perlmod_prefix->text());
 
    // tab 2 - preprocess
    object.insert("enable-preprocessing",     m_ui->enable_preprocessing_CB->isChecked());
@@ -1120,6 +1121,12 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("man-extension",            m_ui->man_extension->text());
    object.insert("man-subdir",               m_ui->man_subdir->text());
    object.insert("man-links",                m_ui->man_links_CB->isChecked());
+
+   // tab 3 - perl module
+   object.insert("generate-perl",            m_ui->gen_perl_CB->isChecked());
+   object.insert("perl-latex",               m_ui->perl_latex_CB->isChecked());
+   object.insert("perl-pretty",              m_ui->perl_pretty_CB->isChecked());
+   object.insert("perl-prefix",              m_ui->perl_prefix->text());
 
    // tab 3 - qt help
    object.insert("generate-qthelp",          m_ui->gen_qthelp_CB->isChecked());

@@ -135,18 +135,11 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 {
    QString retval = fname;
 
-   QString path;
+   // save last path used
+   static QString path;
 
-   if (fname.isEmpty()) {
-      path = pathName(m_curFile);
-
-
-      csMsg(this, "GetSingleFile()" ,"Current FileName: " + m_curFile + "\n  Path of file:" + path);
-
-
-   } else {
+   if (! fname.isEmpty()) {
       path = fname;
-
    }
 
    QString selectedFilter;

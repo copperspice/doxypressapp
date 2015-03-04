@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -1113,11 +1113,6 @@
             </item>
             <item>
              <property name="text">
-              <string>PerlMod</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
               <string>Preprocessor</string>
              </property>
             </item>
@@ -1150,7 +1145,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>10</number>
+            <number>9</number>
            </property>
            <widget class="QWidget" name="page_General_A">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
@@ -4646,119 +4641,6 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_PerlMod">
-            <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,1">
-             <property name="leftMargin">
-              <number>14</number>
-             </property>
-             <property name="topMargin">
-              <number>14</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_706">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate Perl module:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_perl_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QLabel" name="label_707">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Perl module LaTeX:</string>
-               </property>
-               <property name="buddy">
-                <cstring>perl_latex_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="perl_latex_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" colspan="2">
-              <widget class="QLabel" name="label_708">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Perl module human readable:</string>
-               </property>
-               <property name="buddy">
-                <cstring>perl_pretty_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="perl_pretty_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_48">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Perl module MakeVar prefix:</string>
-               </property>
-               <property name="buddy">
-                <cstring>perlmod_prefix</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QLineEdit" name="perlmod_prefix">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0" colspan="3">
-              <spacer name="verticalSpacer_8">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="gen_perl_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
            <widget class="QWidget" name="page_Process">
             <layout class="QGridLayout" name="gridLayout_19">
              <property name="leftMargin">
@@ -6448,6 +6330,11 @@
             </item>
             <item>
              <property name="text">
+              <string>Perl Module</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
               <string>QtHelp</string>
              </property>
             </item>
@@ -6470,7 +6357,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>10</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -8808,6 +8695,119 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="page_Perl">
+            <layout class="QGridLayout" name="gridLayout_27">
+             <property name="leftMargin">
+              <number>14</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_757">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate Perl Module:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_perl_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="gen_perl_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_734">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Perl module LaTeX:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perl_latex_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="perl_latex_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_758">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Perl module human readable:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perl_pretty_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="perl_pretty_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_49">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Perl module MakeVar prefix:</string>
+               </property>
+               <property name="buddy">
+                <cstring>perl_prefix</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="perl_prefix">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <spacer name="verticalSpacer_48">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>13</width>
+                 <height>538</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
            <widget class="QWidget" name="page_QtHelp">
             <layout class="QGridLayout" name="gridLayout_24" columnstretch="0,0,1,0">
              <property name="leftMargin">
@@ -9563,7 +9563,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QTextEdit" name="outputLog">
+         <widget class="QPlainTextEdit" name="runText">
           <property name="font">
            <font>
             <family>Courier</family>
@@ -10027,10 +10027,6 @@
   <tabstop>ignore_prefix</tabstop>
   <tabstop>ignore_prefix_PB</tabstop>
   <tabstop>gen_autogen_def_CB</tabstop>
-  <tabstop>gen_perl_CB</tabstop>
-  <tabstop>perl_latex_CB</tabstop>
-  <tabstop>perl_pretty_CB</tabstop>
-  <tabstop>perlmod_prefix</tabstop>
   <tabstop>enable_preprocessing_CB</tabstop>
   <tabstop>macro_expansion_CB</tabstop>
   <tabstop>expand_only_predefined_CB</tabstop>
@@ -10188,6 +10184,10 @@
   <tabstop>man_extension</tabstop>
   <tabstop>man_subdir</tabstop>
   <tabstop>man_links_CB</tabstop>
+  <tabstop>gen_perl_CB</tabstop>
+  <tabstop>perl_latex_CB</tabstop>
+  <tabstop>perl_pretty_CB</tabstop>
+  <tabstop>perl_prefix</tabstop>
   <tabstop>gen_qthelp_CB</tabstop>
   <tabstop>qch_file</tabstop>
   <tabstop>qch_file_PB</tabstop>
@@ -10217,7 +10217,7 @@
   <tabstop>help_t2</tabstop>
   <tabstop>help_t1</tabstop>
   <tabstop>save_log_PB</tabstop>
-  <tabstop>outputLog</tabstop>
+  <tabstop>runText</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>display_PB</tabstop>
  </tabstops>

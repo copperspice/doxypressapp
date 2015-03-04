@@ -49,12 +49,18 @@
 #include <QTextStream>
 #include <QWidget>
 
+
+#include <QSyntaxHighlighter>
+class Syntax;
+
+
 static const int RECENT_FILES_MAX = 10;
 
 struct Settings {
    QFont   fontNormal;
    QColor  colorText;
    QString pathPrior;
+   QString doxyPress_Exe;
 };
 
 struct LookUpInfo {
@@ -114,11 +120,13 @@ class MainWindow : public QMainWindow
    private:
       Ui::MainWindow *m_ui;
 
+      Syntax *m_syntaxParser;
+
       QString m_curFile;
       QStringList m_openedFiles;
 
       enum Config { CFG_STARTUP, CFG_DEFAULT };
-      enum Option { ABOUTURL, CLOSE, PATH_PRIOR, RECENTFILE };
+      enum Option { ABOUTURL, CLOSE, DOXYPRESS_EXE, PATH_PRIOR, RECENTFILE };
 
       void clearAllFields();
       void convertDoxy(QByteArray data);
@@ -164,6 +172,7 @@ class MainWindow : public QMainWindow
       bool m_running;
       bool m_modified;
 
+      void runText_Append(const QString &text);
       QString getHtmlOutputIndex() const;
       bool htmlOutputPresent() const;
       void updateRunButtons();
@@ -561,5 +570,32 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void saveLog())
       CS_SLOT_2(saveLog)
 };
+
+
+class Syntax : public QSyntaxHighlighter
+{
+   CS_OBJECT(Syntax)
+
+   public:
+      Syntax(QTextDocument *document);
+      ~Syntax();
+
+      void processSyntax();
+
+   protected:
+      void highlightBlock(const QString &text);
+
+   private:
+      struct HighlightingRule
+      {
+         QRegExp pattern;
+         QTextCharFormat format;
+      };
+
+      QVector<HighlightingRule> highlightingRules;
+};
+
+
+
 
 #endif
