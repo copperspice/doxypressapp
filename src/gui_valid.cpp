@@ -176,8 +176,8 @@ void MainWindow::clearAllFields()
 
    m_ui->max_init_lines_SB->setValue(30);
    m_ui->show_used_files_CB->setChecked(true);
-   m_ui->show_files_CB->setChecked(true);
-   m_ui->show_namespaces_CB->setChecked(true);
+   m_ui->show_file_page_CB->setChecked(true);
+   m_ui->show_namespace_page_CB->setChecked(true);
 
    // tab 2 - messages
    m_ui->warnings_CB->setChecked(true);
@@ -357,9 +357,9 @@ void MainWindow::setupLimits()
    m_ui->output_language_CM->addItems(data);
 
    data.clear();
-   data.append("png");
    data.append("jpg");
    data.append("gif");
+   data.append("png");
    data.append("svg");
    m_ui->dot_image_format_CM->addItems(data);
 

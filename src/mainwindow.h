@@ -351,8 +351,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void tcl_subst_PB())
       CS_SLOT_2(tcl_subst_PB)
 
-      CS_SLOT_1(Private, void extension_mapping_PB())
-      CS_SLOT_2(extension_mapping_PB)
+      CS_SLOT_1(Private, void language_mapping_PB())
+      CS_SLOT_2(language_mapping_PB)
 
       // tab 2- look up (build)
       CS_SLOT_1(Private, void enabled_sections_PB())

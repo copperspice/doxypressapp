@@ -40,7 +40,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(c) Select an existing settings file</string>
+      <string>(c) Select an existing setup file</string>
      </property>
      <property name="indent">
       <number>20</number>
@@ -55,7 +55,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(a) Create settngs file in the system default location</string>
+      <string>(a) Create a setup file in the system default location</string>
      </property>
      <property name="indent">
       <number>20</number>
@@ -123,7 +123,7 @@
       </font>
      </property>
      <property name="text">
-      <string>DoxyPressApp  Settings file is missing. Click to select one of the following options.</string>
+      <string>DoxyPressApp setup file is missing. Select one of the following options:</string>
      </property>
     </widget>
    </item>
@@ -261,7 +261,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(b) Pick a folder location, a new settings file will be created</string>
+      <string>(b) Pick a folder location where a new setup file will be created</string>
      </property>
      <property name="indent">
       <number>20</number>

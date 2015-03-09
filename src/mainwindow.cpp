@@ -220,7 +220,7 @@ void MainWindow::createConnections()
    connect(m_ui->strip_from_inc_path_PB,  &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
    connect(m_ui->aliases_PB,              &QPushButton::clicked, this, &MainWindow::aliases_PB);
    connect(m_ui->tcl_subst_PB,            &QPushButton::clicked, this, &MainWindow::tcl_subst_PB);
-   connect(m_ui->extension_mapping_PB,    &QPushButton::clicked, this, &MainWindow::extension_mapping_PB);
+   connect(m_ui->language_mapping_PB,     &QPushButton::clicked, this, &MainWindow::language_mapping_PB);
 
    // tab 2- look up (build)
    connect(m_ui->enabled_sections_PB,     &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
@@ -393,35 +393,48 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    if (item) {
       QString label = item->text(0);
 
-      if (label == tr("General A")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
+      //
+      if (label == tr("General")) {
+          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
 
-      } else  if (label == tr("General B")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_B);
-
-      } else if (label == tr("Build A")) {
+      } else if (label == tr("Build")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
 
-      } else if (label == tr("Build B")) {
+      } else if (label == tr("Input")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_A);
+
+      } else if (label == tr("Dot")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_A);
+
+      }
+
+      //
+      if (label == tr("General (Part 1)")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
+
+      } else  if (label == tr("General (Part 2)")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_B);
+
+      } else if (label == tr("Build (Part 1)")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
+
+      } else if (label == tr("Build (Part 2)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_B);
 
       } else if (label == tr("Messages")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Messages);
 
-      } else if (label == tr("Input A")) {
+      } else if (label == tr("Input (Part 1)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_A);
 
-      } else if (label == tr("Input B")) {
+      } else if (label == tr("Input (Part 2)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_B);
 
-      } else if (label == tr("Source Browser")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Browser);
+      } else if (label == tr("Source Code Listing")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Source);
 
       } else if (label == tr("Index Page")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Index);
-
-      } else if (label == tr("AutoGen")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_AutoGen);
 
       } else if (label == tr("Preprocessor")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Process);
@@ -429,10 +442,10 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("External")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_External);
 
-      } else if (label == tr("Dot A")) {
+      } else if (label == tr("Dot (Part 1)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_A);
 
-      } else if (label == tr("Dot B")) {
+      } else if (label == tr("Dot (Part 2)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_B);
 
       }
@@ -444,13 +457,13 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    if (item) {
       QString label = item->text(0);
 
-      if (label == tr("HTML A")) {
+      if (label == tr("HTML") || label == tr("HTML (Part 1)")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
 
-      } else if (label == tr("HTML B")) {
+      } else if (label == tr("HTML (Part 2)")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_B);
 
-      } else if (label == tr("HTML C")) {
+      } else if (label == tr("HTML (Part 3)")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_C);
 
       } else if (label == tr("CHM")) {
@@ -540,7 +553,6 @@ void Syntax::processSyntax()
 
       highlightingRules.append(rule);
    }
-
 
    // redo the current document
    rehighlight();

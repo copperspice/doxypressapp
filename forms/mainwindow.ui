@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -90,7 +90,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
@@ -167,7 +167,7 @@
                 </palette>
                </property>
                <property name="text">
-                <string>Information about your project</string>
+                <string>Information about your Project</string>
                </property>
               </widget>
              </item>
@@ -1052,12 +1052,12 @@
              </property>
              <item>
               <property name="text">
-               <string>General A</string>
+               <string>General (Part 1)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>General B</string>
+               <string>General (Part 2)</string>
               </property>
              </item>
             </item>
@@ -1067,12 +1067,12 @@
              </property>
              <item>
               <property name="text">
-               <string>Build A</string>
+               <string>Build (Part 1)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>Build B</string>
+               <string>Build (Part 2)</string>
               </property>
              </item>
             </item>
@@ -1087,28 +1087,23 @@
              </property>
              <item>
               <property name="text">
-               <string>Input A</string>
+               <string>Input (Part 1)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>Input B</string>
+               <string>Input (Part 2)</string>
               </property>
              </item>
             </item>
             <item>
              <property name="text">
-              <string>Source Browser</string>
+              <string>Source Code Listing</string>
              </property>
             </item>
             <item>
              <property name="text">
               <string>Index Page</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>AutoGen</string>
              </property>
             </item>
             <item>
@@ -1127,12 +1122,12 @@
              </property>
              <item>
               <property name="text">
-               <string>Dot A</string>
+               <string>Dot (Part 1)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>Dot B</string>
+               <string>Dot (Part 2)</string>
               </property>
              </item>
             </item>
@@ -1145,17 +1140,41 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>9</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="page_General_A">
-            <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,1,0">
+            <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,2,0,1,1,0,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="16" column="0">
+             <item row="18" column="5">
+              <widget class="QCheckBox" name="multiline_cpp_brief_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="2">
+              <widget class="QCheckBox" name="inline_simple_struct_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="3">
               <widget class="QLabel" name="label_t2_14">
                <property name="font">
                 <font>
@@ -1163,14 +1182,44 @@
                 </font>
                </property>
                <property name="text">
-                <string>JavaDoc AutoBrief:</string>
+                <string>JavaDoc auto brief:</string>
                </property>
                <property name="buddy">
                 <cstring>javadoc_auto_brief_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="17" column="0">
+             <item row="20" column="0">
+              <widget class="QLabel" name="label_156">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Typedefs hide structures:</string>
+               </property>
+               <property name="buddy">
+                <cstring>typedef_hides_struct_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="23" column="0">
+              <widget class="QLabel" name="label_t2_18">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Separate member pages:</string>
+               </property>
+               <property name="buddy">
+                <cstring>separate_member_pages_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="20" column="3">
               <widget class="QLabel" name="label_t2_15">
                <property name="font">
                 <font>
@@ -1178,15 +1227,15 @@
                 </font>
                </property>
                <property name="text">
-                <string>Qt-Style auto brief:</string>
+                <string>Qt-Style auto Brief:</string>
                </property>
                <property name="buddy">
                 <cstring>qt_auto_brief_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="17" column="1">
-              <widget class="QCheckBox" name="qt_auto_brief_CB">
+             <item row="21" column="2">
+              <widget class="QCheckBox" name="inherit_docs_CB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1194,128 +1243,57 @@
                </property>
                <property name="text">
                 <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="repeat_brief_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QComboBox" name="output_language_CM"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="allow_unicode_names_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_t2_5">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Brief Member Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>brief_member_desc_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_t2_4">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Output language:</string>
-               </property>
-               <property name="buddy">
-                <cstring>output_language_CM</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_t2_7">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Abbreviate Brief Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>abbreviate_brief</cstring>
                </property>
               </widget>
              </item>
              <item row="19" column="0">
-              <widget class="QLabel" name="label_t2_17">
+              <widget class="QLabel" name="label_150">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Inherit docs from parent:</string>
+                <string>Inline simple structures:</string>
                </property>
                <property name="buddy">
-                <cstring>inherit_docs_CB</cstring>
+                <cstring>inline_simple_struct_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_t2_12">
+             <item row="18" column="3">
+              <widget class="QLabel" name="label_t2_16">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Strip from include path:</string>
+                <string>Multiline CPP is brief:</string>
                </property>
                <property name="buddy">
-                <cstring>strip_from_inc_path</cstring>
+                <cstring>multiline_cpp_brief_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_t2_9">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
+             <item row="12" column="2" rowspan="2" colspan="5">
+              <widget class="QPlainTextEdit" name="strip_from_inc_path">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-               <property name="text">
-                <string>Inline inherited member:</string>
-               </property>
-               <property name="buddy">
-                <cstring>inline_inherited_member_CB</cstring>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="always_detailed_sec_CB">
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="brief_member_desc_CB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1326,37 +1304,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_t2_6">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Repeat Brief Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>repeat_brief_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_t2_1">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Doxygen Encoding:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_encoding</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1">
+             <item row="2" column="2">
               <widget class="QCheckBox" name="short_names_CB">
                <property name="font">
                 <font>
@@ -1368,91 +1316,7 @@
                </property>
               </widget>
              </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_t2_13">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Short names:</string>
-               </property>
-               <property name="buddy">
-                <cstring>short_names_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="inline_inherited_member_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_t2_11">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Strip from path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>strip_from_path</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1">
-              <widget class="QCheckBox" name="full_path_names_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="create_subdirs_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="layoutDirection">
-                <enum>Qt::LeftToRight</enum>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_t2_2">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Create subdirectories:</string>
-               </property>
-               <property name="buddy">
-                <cstring>create_subdirs_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="label_t2_3">
                <property name="font">
                 <font>
@@ -1468,45 +1332,51 @@
               </widget>
              </item>
              <item row="18" column="0">
-              <widget class="QLabel" name="label_t2_16">
+              <widget class="QLabel" name="label_157">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Multiline CPP is brief:</string>
+                <string>Inine grouped classes:</string>
                </property>
                <property name="buddy">
-                <cstring>multiline_cpp_brief_CB</cstring>
+                <cstring>inline_grouped_classes_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="18" column="1">
-              <widget class="QCheckBox" name="multiline_cpp_brief_CB">
+             <item row="21" column="0">
+              <widget class="QLabel" name="label_t2_17">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string/>
+                <string>Inherit docs from parent:</string>
+               </property>
+               <property name="buddy">
+                <cstring>inherit_docs_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="16" column="1">
-              <widget class="QCheckBox" name="javadoc_auto_brief_CB">
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_t2_2">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string/>
+                <string>Create subdirectories:</string>
+               </property>
+               <property name="buddy">
+                <cstring>create_subdirs_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="20" column="1">
+             <item row="23" column="2">
               <widget class="QCheckBox" name="separate_member_pages_CB">
                <property name="font">
                 <font>
@@ -1518,23 +1388,38 @@
                </property>
               </widget>
              </item>
-             <item row="20" column="0">
-              <widget class="QLabel" name="label_t2_18">
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_t2_6">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Separate member pages:</string>
+                <string>Repeat brief description:</string>
                </property>
                <property name="buddy">
-                <cstring>separate_member_pages_CB</cstring>
+                <cstring>repeat_brief_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="brief_member_desc_CB">
+             <item row="21" column="3">
+              <widget class="QLabel" name="label_155">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Autolink support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>auto_link_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="2">
+              <widget class="QCheckBox" name="inline_grouped_classes_CB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1545,119 +1430,52 @@
                </property>
               </widget>
              </item>
-             <item row="19" column="1">
-              <widget class="QCheckBox" name="inherit_docs_CB">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_t2_5">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
+               </property>
+               <property name="text">
+                <string>Brief description:</string>
+               </property>
+               <property name="buddy">
+                <cstring>brief_member_desc_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_t2_1">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Documentation encoding:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_encoding</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="create_subdirs_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_t2_8">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Always show detailed section:</string>
-               </property>
-               <property name="buddy">
-                <cstring>always_detailed_sec_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="21" column="0" colspan="2">
-              <spacer name="verticalSpacer_11">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_t2_10">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Full path name:</string>
-               </property>
-               <property name="buddy">
-                <cstring>full_path_names_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" colspan="2">
-              <widget class="QLineEdit" name="project_encoding">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QPushButton" name="abbreviate_brief_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="3">
-              <widget class="QPushButton" name="strip_from_path_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="3">
+             <item row="12" column="7">
               <widget class="QPushButton" name="strip_from_inc_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1681,7 +1499,117 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="1" rowspan="2" colspan="2">
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_t2_7">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Abbreviate brief description:</string>
+               </property>
+               <property name="buddy">
+                <cstring>abbreviate_brief</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2" colspan="5">
+              <widget class="QLineEdit" name="project_encoding">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="24" column="2">
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="allow_unicode_names_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2" colspan="2">
+              <widget class="QComboBox" name="output_language_CM"/>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_t2_12">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Strip from include path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>strip_from_inc_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="21" column="5">
+              <widget class="QCheckBox" name="auto_link_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_t2_13">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Short file names:</string>
+               </property>
+               <property name="buddy">
+                <cstring>short_names_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0" colspan="6">
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="7" column="2" rowspan="2" colspan="5">
               <widget class="QPlainTextEdit" name="abbreviate_brief">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1697,59 +1625,8 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="strip_from_path">
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="strip_from_inc_path">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="page_General_B">
-            <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,0,1,0">
-             <property name="leftMargin">
-              <number>14</number>
-             </property>
-             <property name="topMargin">
-              <number>14</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_t2_19">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Tab size: </string>
-               </property>
-               <property name="buddy">
-                <cstring>tab_size_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="markdown_CB">
+             <item row="20" column="5">
+              <widget class="QCheckBox" name="qt_auto_brief_CB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1760,372 +1637,8 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_147">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Markdown support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>markdown_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="19" column="0">
-              <spacer name="verticalSpacer_15">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="18" column="1">
-              <widget class="QSpinBox" name="lookup_cache_size_SB"/>
-             </item>
-             <item row="18" column="0">
-              <widget class="QLabel" name="label_t2_34">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Lookup cache size:</string>
-               </property>
-               <property name="buddy">
-                <cstring>lookup_cache_size_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="1">
-              <widget class="QCheckBox" name="typedef_hides_struct_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_143">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>SIP support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>sip_support_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_145">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>CPP / CLI support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cpp_cli_support_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="built_in_stl_support_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_152">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Built in STL support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>built_in_stl_support_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="sip_support_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1">
-              <widget class="QCheckBox" name="inline_grouped_classes_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_149">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Inine grouped classes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>inline_grouped_classes_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="1">
-              <widget class="QCheckBox" name="allow_sub_grouping_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="label_153">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Allow sub grouping:</string>
-               </property>
-               <property name="buddy">
-                <cstring>allow_sub_grouping_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="dist_group_doc_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_t2_20">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Aliases:</string>
-               </property>
-               <property name="buddy">
-                <cstring>aliases</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="auto_link_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_154">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Autolink support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>auto_link_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="tab_size_SB"/>
-             </item>
-             <item row="17" column="0">
-              <widget class="QLabel" name="label_151">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Typedefs hide structures:</string>
-               </property>
-               <property name="buddy">
-                <cstring>typedef_hides_struct_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="1">
-              <widget class="QCheckBox" name="inline_simple_struct_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_144">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Distribute Group Doc:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dist_group_doc_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <widget class="QCheckBox" name="idl_support_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="0">
-              <widget class="QLabel" name="label_148">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Inline simple structures:</string>
-               </property>
-               <property name="buddy">
-                <cstring>inline_simple_struct_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="label_146">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>IDL property support:</string>
-               </property>
-               <property name="buddy">
-                <cstring>idl_support_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_t2_22">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extension mapping:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extension_mapping</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_t2_21">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>TCL Subst:</string>
-               </property>
-               <property name="buddy">
-                <cstring>tcl_subst</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="2">
-              <widget class="QCheckBox" name="cpp_cli_support_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QPushButton" name="aliases_PB">
+             <item row="7" column="7">
+              <widget class="QPushButton" name="abbreviate_brief_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2145,6 +1658,283 @@
                </property>
                <property name="text">
                 <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="2" rowspan="2" colspan="5">
+              <widget class="QPlainTextEdit" name="strip_from_path">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="20" column="2">
+              <widget class="QCheckBox" name="typedef_hides_struct_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="7">
+              <widget class="QPushButton" name="strip_from_path_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="5">
+              <widget class="QCheckBox" name="javadoc_auto_brief_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QCheckBox" name="repeat_brief_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_t2_4">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Output language:</string>
+               </property>
+               <property name="buddy">
+                <cstring>output_language_CM</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="2">
+              <widget class="QCheckBox" name="full_path_names_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_t2_10">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Full path name:</string>
+               </property>
+               <property name="buddy">
+                <cstring>full_path_names_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_t2_11">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Strip from path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>strip_from_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="0">
+              <widget class="QLabel" name="label_t2_9">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Inline inherited member:</string>
+               </property>
+               <property name="buddy">
+                <cstring>inline_inherited_member_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="2">
+              <widget class="QCheckBox" name="inline_inherited_member_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="3">
+              <widget class="QLabel" name="label_t2_8">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Always show detailed section:</string>
+               </property>
+               <property name="buddy">
+                <cstring>always_detailed_sec_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="5">
+              <widget class="QCheckBox" name="always_detailed_sec_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_General_B">
+            <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,0,1,0">
+             <property name="leftMargin">
+              <number>14</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <item row="10" column="1">
+              <widget class="QCheckBox" name="sip_support_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="tcl_subst">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_152">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Built in STL support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>built_in_stl_support_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <widget class="QSpinBox" name="lookup_cache_size_SB"/>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="built_in_stl_support_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="language_mapping">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="idl_support_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
@@ -2173,7 +1963,7 @@
               </widget>
              </item>
              <item row="5" column="3">
-              <widget class="QPushButton" name="extension_mapping_PB">
+              <widget class="QPushButton" name="language_mapping_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2196,6 +1986,48 @@
                </property>
               </widget>
              </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_143">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>SIP support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>sip_support_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="duplicate_docs_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_146">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>IDL property support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>idl_support_CB</cstring>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="1" rowspan="2" colspan="2">
               <widget class="QPlainTextEdit" name="aliases">
                <property name="sizePolicy">
@@ -2212,78 +2044,227 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="tcl_subst">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_t2_22">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
+               <property name="text">
+                <string>Language mapping:</string>
+               </property>
+               <property name="buddy">
+                <cstring>language_mapping</cstring>
                </property>
               </widget>
              </item>
-             <item row="5" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="extension_mapping">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_t2_21">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>TCL substitute:</string>
+               </property>
+               <property name="buddy">
+                <cstring>tcl_subst</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_147">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Markdown support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>markdown_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <spacer name="verticalSpacer_15">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_t2_20">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Aliases:</string>
+               </property>
+               <property name="buddy">
+                <cstring>aliases</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="label_153">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Allow sub grouping:</string>
+               </property>
+               <property name="buddy">
+                <cstring>allow_sub_grouping_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_144">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Duplicate group documentation:</string>
+               </property>
+               <property name="buddy">
+                <cstring>duplicate_docs_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="label_t2_34">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Lookup cache size:</string>
+               </property>
+               <property name="buddy">
+                <cstring>lookup_cache_size_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1" colspan="2">
+              <widget class="QCheckBox" name="cpp_cli_support_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_145">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>CPP / CLI support:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cpp_cli_support_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="tab_size_SB"/>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="markdown_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_t2_19">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Tab size: </string>
+               </property>
+               <property name="buddy">
+                <cstring>tab_size_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QPushButton" name="aliases_PB">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>90</height>
+                 <width>28</width>
+                 <height>16777215</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QCheckBox" name="allow_sub_grouping_CB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
            <widget class="QWidget" name="page_Build_A">
-            <layout class="QGridLayout" name="gridLayout_9" columnstretch="0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_9">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_6">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extract local classes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extract_local_classes_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extract private:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extract_private_CB</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_t2_35">
                <property name="font">
@@ -2299,71 +2280,6 @@
                </property>
               </widget>
              </item>
-             <item row="38" column="0" colspan="3">
-              <spacer name="verticalSpacer_13">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_16">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Show include files:</string>
-               </property>
-               <property name="buddy">
-                <cstring>show_include_files_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extract package:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extract_package_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_5">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extract static:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extract_static_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="show_include_files_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QCheckBox" name="extract_all_CB">
                <property name="text">
@@ -2371,234 +2287,7 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
-              <widget class="QLabel" name="label_17">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Show grouped member includes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>show_grouped_members_inc_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="21" column="2">
-              <widget class="QLabel" name="label_t2_100">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate Bug list:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_bug_list_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="22" column="2">
-              <widget class="QLabel" name="label_41">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate deprecated list:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_deprecate_list_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="label_10">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide undocumented classes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>hide_undoc_classes_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_9">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide undocumented members:</string>
-               </property>
-               <property name="buddy">
-                <cstring>hide_undoc_members_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="1">
-              <widget class="QCheckBox" name="hide_in_body_docs_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="extract_local_classes_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QLabel" name="label_19">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Inline information:</string>
-               </property>
-               <property name="buddy">
-                <cstring>inline_info_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="extract_private_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide friend compounds:</string>
-               </property>
-               <property name="buddy">
-                <cstring>hide_friend_compounds_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="0">
-              <widget class="QLabel" name="label_12">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide inbody documentation:</string>
-               </property>
-               <property name="buddy">
-                <cstring>hide_in_body_docs_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="hide_undoc_members_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="1">
-              <widget class="QCheckBox" name="hide_undoc_classes_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QLabel" name="label_18">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Force local Includes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>force_local_includes_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="extract_static_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1">
-              <widget class="QCheckBox" name="hide_friend_compounds_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="20" column="2">
-              <widget class="QLabel" name="label_26">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate Test list:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_test_list_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="extract_package_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3">
-              <widget class="QCheckBox" name="inline_info_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QCheckBox" name="force_local_includes_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QCheckBox" name="show_grouped_members_inc_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="2">
+             <item row="0" column="2">
               <widget class="QLabel" name="label_20">
                <property name="font">
                 <font>
@@ -2613,7 +2302,36 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="2">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="sort_member_docs_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Extract private:</string>
+               </property>
+               <property name="buddy">
+                <cstring>extract_private_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="extract_private_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
               <widget class="QLabel" name="label_21">
                <property name="font">
                 <font>
@@ -2628,7 +2346,36 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="2">
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="sort_brief_docs_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Extract package:</string>
+               </property>
+               <property name="buddy">
+                <cstring>extract_package_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="extract_package_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
               <widget class="QLabel" name="label_22">
                <property name="font">
                 <font>
@@ -2643,72 +2390,36 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="3">
-              <widget class="QCheckBox" name="sort_member_docs_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="3">
-              <widget class="QCheckBox" name="sort_brief_docs_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="3">
+             <item row="2" column="3">
               <widget class="QCheckBox" name="sort_members_ctors_first_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="extract_local_methods_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_7">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_5">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Extract local methods:</string>
+                <string>Extract static:</string>
                </property>
                <property name="buddy">
-                <cstring>extract_local_methods_CB</cstring>
+                <cstring>extract_static_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_8">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Extract annonymous namespaces:</string>
-               </property>
-               <property name="buddy">
-                <cstring>extract_anon_namespaces_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="extract_anon_namespaces_CB">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="extract_static_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="14" column="2">
+             <item row="3" column="2">
               <widget class="QLabel" name="label_23">
                <property name="font">
                 <font>
@@ -2723,7 +2434,36 @@
                </property>
               </widget>
              </item>
-             <item row="15" column="2">
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="sort_group_names_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Extract local classes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>extract_local_classes_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="extract_local_classes_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
               <widget class="QLabel" name="label_24">
                <property name="font">
                 <font>
@@ -2738,22 +2478,58 @@
                </property>
               </widget>
              </item>
-             <item row="16" column="2">
-              <widget class="QLabel" name="label_37">
+             <item row="4" column="3">
+              <widget class="QCheckBox" name="sort_by_scope_name_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_7">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Strict Protype Matching:</string>
+                <string>Extract local methods:</string>
                </property>
                <property name="buddy">
-                <cstring>strict_proto_matching_CB</cstring>
+                <cstring>extract_local_methods_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="19" column="2">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="extract_local_methods_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Extract annonymous namespaces:</string>
+               </property>
+               <property name="buddy">
+                <cstring>extract_anon_namespaces_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="extract_anon_namespaces_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
               <widget class="QLabel" name="label_25">
                <property name="font">
                 <font>
@@ -2761,114 +2537,175 @@
                 </font>
                </property>
                <property name="text">
-                <string>Generate ToDo list:</string>
+                <string>Generatet todo list:</string>
                </property>
                <property name="buddy">
                 <cstring>gen_todo_list_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="22" column="3">
-              <widget class="QCheckBox" name="gen_deprecate_list_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="21" column="3">
-              <widget class="QCheckBox" name="gen_bug_list_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="20" column="3">
-              <widget class="QCheckBox" name="gen_test_list_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="19" column="3">
+             <item row="6" column="3">
               <widget class="QCheckBox" name="gen_todo_list_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="16" column="3">
-              <widget class="QCheckBox" name="strict_proto_matching_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="3">
-              <widget class="QCheckBox" name="sort_by_scope_name_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="3">
-              <widget class="QCheckBox" name="sort_group_names_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="21" column="0">
-              <widget class="QLabel" name="label_14">
+             <item row="7" column="2">
+              <widget class="QLabel" name="label_26">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Case sensitive names:</string>
+                <string>Generate test list:</string>
                </property>
                <property name="buddy">
-                <cstring>case_sense_names_CB</cstring>
+                <cstring>gen_test_list_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="20" column="0">
-              <widget class="QLabel" name="label_13">
+             <item row="7" column="3">
+              <widget class="QCheckBox" name="gen_test_list_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_9">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Internal documentation:</string>
+                <string>Hide undocumented members:</string>
                </property>
                <property name="buddy">
-                <cstring>internal_docs_CB</cstring>
+                <cstring>hide_undoc_members_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="17" column="1">
-              <widget class="QCheckBox" name="hide_scope_names_CB">
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="hide_undoc_members_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="21" column="1">
-              <widget class="QCheckBox" name="case_sense_names_CB">
+             <item row="8" column="2">
+              <widget class="QLabel" name="label_t2_100">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate bug list:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_bug_list_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="3">
+              <widget class="QCheckBox" name="gen_bug_list_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="20" column="1">
-              <widget class="QCheckBox" name="internal_docs_CB">
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_10">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Hide undocumented classes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>hide_undoc_classes_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="hide_undoc_classes_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="17" column="0">
+             <item row="9" column="2">
+              <widget class="QLabel" name="label_41">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate deprecated list:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_deprecate_list_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="3">
+              <widget class="QCheckBox" name="gen_deprecate_list_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Hide friend compounds:</string>
+               </property>
+               <property name="buddy">
+                <cstring>hide_friend_compounds_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QCheckBox" name="hide_friend_compounds_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Hide inbody documentation:</string>
+               </property>
+               <property name="buddy">
+                <cstring>hide_in_body_docs_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="hide_in_body_docs_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
               <widget class="QLabel" name="label_15">
                <property name="font">
                 <font>
@@ -2883,6 +2720,246 @@
                </property>
               </widget>
              </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="hide_scope_names_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="22" column="2">
+              <spacer name="verticalSpacer_13">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="label_16">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Show include files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_include_files_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <widget class="QCheckBox" name="show_include_files_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <widget class="QLabel" name="label_17">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Show grouped member includes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_grouped_members_inc_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="0">
+              <widget class="QLabel" name="label_103">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Show used files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_used_files_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="0">
+              <widget class="QLabel" name="label_95">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Show file page:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_file_page_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1">
+              <widget class="QCheckBox" name="show_grouped_members_inc_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="1">
+              <widget class="QCheckBox" name="show_used_files_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="1">
+              <widget class="QCheckBox" name="show_file_page_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="1">
+              <widget class="QCheckBox" name="show_namespace_page_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="0">
+              <widget class="QLabel" name="label_62">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Show namespace page:</string>
+               </property>
+               <property name="buddy">
+                <cstring>show_namespace_page_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="2">
+              <widget class="QLabel" name="label_13">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Internal documentation:</string>
+               </property>
+               <property name="buddy">
+                <cstring>internal_docs_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="2">
+              <widget class="QLabel" name="label_14">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Case sensitive names:</string>
+               </property>
+               <property name="buddy">
+                <cstring>case_sense_names_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="2">
+              <widget class="QLabel" name="label_18">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Force local includes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>force_local_includes_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="2">
+              <widget class="QLabel" name="label_19">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Inline information:</string>
+               </property>
+               <property name="buddy">
+                <cstring>inline_info_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="2">
+              <widget class="QLabel" name="label_37">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Strict signature matching:</string>
+               </property>
+               <property name="buddy">
+                <cstring>strict_sig_matching_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="3">
+              <widget class="QCheckBox" name="internal_docs_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="3">
+              <widget class="QCheckBox" name="case_sense_names_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="3">
+              <widget class="QCheckBox" name="force_local_includes_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="3">
+              <widget class="QCheckBox" name="inline_info_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="3">
+              <widget class="QCheckBox" name="strict_sig_matching_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="page_Build_B">
@@ -2894,21 +2971,6 @@
               <number>14</number>
              </property>
              <item row="4" column="0">
-              <widget class="QLabel" name="label_94">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Show files:</string>
-               </property>
-               <property name="buddy">
-                <cstring>show_files_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
               <widget class="QLabel" name="label_191">
                <property name="font">
                 <font>
@@ -2923,25 +2985,10 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_98">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Show used files:</string>
-               </property>
-               <property name="buddy">
-                <cstring>show_used_files_CB</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
               <widget class="QSpinBox" name="max_init_lines_SB"/>
              </item>
-             <item row="8" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="label_192">
                <property name="font">
                 <font>
@@ -2971,22 +3018,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_60">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Show namespaces:</string>
-               </property>
-               <property name="buddy">
-                <cstring>show_namespaces_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="label_190">
                <property name="font">
                 <font>
@@ -2998,27 +3030,6 @@
                </property>
                <property name="buddy">
                 <cstring>file_version_filter</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="show_namespaces_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="show_used_files_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="show_files_CB">
-               <property name="text">
-                <string/>
                </property>
               </widget>
              </item>
@@ -3037,7 +3048,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="7" column="0">
               <spacer name="verticalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -3050,7 +3061,7 @@
                </property>
               </spacer>
              </item>
-             <item row="7" column="3">
+             <item row="4" column="3">
               <widget class="QPushButton" name="layout_file_PB">
                <property name="maximumSize">
                 <size>
@@ -3068,7 +3079,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="3">
+             <item row="5" column="3">
               <widget class="QPushButton" name="cite_bib_files_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -3092,7 +3103,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="1" rowspan="2" colspan="2">
+             <item row="5" column="1" rowspan="2" colspan="2">
               <widget class="QPlainTextEdit" name="cite_bib_files">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -3108,7 +3119,7 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="1" colspan="2">
+             <item row="4" column="1" colspan="2">
               <widget class="QLineEdit" name="layout_file">
                <property name="font">
                 <font>
@@ -3157,7 +3168,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="3">
+             <item row="3" column="3">
               <widget class="QPushButton" name="file_version_filter_PB">
                <property name="maximumSize">
                 <size>
@@ -3175,7 +3186,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="1" colspan="2">
+             <item row="3" column="1" colspan="2">
               <widget class="QLineEdit" name="file_version_filter">
                <property name="font">
                 <font>
@@ -3477,7 +3488,7 @@
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>90</height>
+                 <height>110</height>
                 </size>
                </property>
               </widget>
@@ -3490,7 +3501,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Scan recursively:</string>
+                <string>Scan input recursively:</string>
                </property>
                <property name="buddy">
                 <cstring>source_recursive_CB</cstring>
@@ -3925,7 +3936,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Use MD File as main page:</string>
+                <string>Use MD file as main page:</string>
                </property>
                <property name="buddy">
                 <cstring>mdfile_mainpage</cstring>
@@ -4183,7 +4194,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_Browser">
+           <widget class="QWidget" name="page_Source">
             <layout class="QGridLayout" name="gridLayout_13">
              <property name="leftMargin">
               <number>14</number>
@@ -4499,6 +4510,9 @@
                <property name="text">
                 <string>Columns in index:</string>
                </property>
+               <property name="buddy">
+                <cstring>cols_in_index_SB</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -4596,53 +4610,8 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_AutoGen">
-            <layout class="QGridLayout" name="gridLayout_36" columnstretch="0,1">
-             <property name="leftMargin">
-              <number>14</number>
-             </property>
-             <property name="topMargin">
-              <number>14</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="gen_autogen_def_CB_2">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate autogen definitions file:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_autogen_def_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="gen_autogen_def_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="2">
-              <spacer name="verticalSpacer_38">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
            <widget class="QWidget" name="page_Process">
-            <layout class="QGridLayout" name="gridLayout_19">
+            <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -4664,7 +4633,7 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
+             <item row="0" column="1">
               <widget class="QCheckBox" name="enable_preprocessing_CB">
                <property name="text">
                 <string/>
@@ -4672,50 +4641,6 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_712">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Macro expansion:</string>
-               </property>
-               <property name="buddy">
-                <cstring>macro_expansion_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="macro_expansion_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" colspan="2">
-              <widget class="QLabel" name="label_713">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Expand only predefined macros:</string>
-               </property>
-               <property name="buddy">
-                <cstring>expand_only_predefined_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="expand_only_predefined_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
               <widget class="QLabel" name="label_715">
                <property name="font">
                 <font>
@@ -4730,14 +4655,14 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
+             <item row="1" column="1">
               <widget class="QCheckBox" name="search_includes_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="label_391">
                <property name="font">
                 <font>
@@ -4752,7 +4677,23 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="2" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="include_path">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
               <widget class="QLabel" name="label_392">
                <property name="font">
                 <font>
@@ -4767,37 +4708,67 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="include_file_patterns">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_712">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Macro expansion:</string>
+               </property>
+               <property name="buddy">
+                <cstring>macro_expansion_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="macro_expansion_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_713">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Expand only predefined macros:</string>
+               </property>
+               <property name="buddy">
+                <cstring>expand_only_predefined_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="expand_only_predefined_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
              <item row="8" column="0">
-              <widget class="QLabel" name="label_393">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Predefined macros:</string>
-               </property>
-               <property name="buddy">
-                <cstring>predefined_macros</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_394">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Expand as defined:</string>
-               </property>
-               <property name="buddy">
-                <cstring>expand_as_defined</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
               <widget class="QLabel" name="label_716">
                <property name="font">
                 <font>
@@ -4812,14 +4783,76 @@
                </property>
               </widget>
              </item>
-             <item row="12" column="2">
+             <item row="8" column="1">
               <widget class="QCheckBox" name="skip_function_macros_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="13" column="1">
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_393">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Predefined macros:</string>
+               </property>
+               <property name="buddy">
+                <cstring>predefined_macros</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="predefined_macros">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_394">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Expand as defined:</string>
+               </property>
+               <property name="buddy">
+                <cstring>expand_as_defined</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="expand_as_defined">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
               <spacer name="verticalSpacer_40">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -4832,55 +4865,7 @@
                </property>
               </spacer>
              </item>
-             <item row="4" column="3">
-              <widget class="QPushButton" name="include_path_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QPushButton" name="include_file_patterns_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="3">
+             <item row="9" column="3">
               <widget class="QPushButton" name="predefined_macros_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4904,7 +4889,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="3">
+             <item row="11" column="3">
               <widget class="QPushButton" name="expand_as_defined_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4928,67 +4913,51 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="include_path">
+             <item row="4" column="3">
+              <widget class="QPushButton" name="include_file_patterns_PB">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>90</height>
+                 <width>28</width>
+                 <height>16777215</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="include_file_patterns">
+             <item row="2" column="3">
+              <widget class="QPushButton" name="include_path_PB">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>90</height>
+                 <width>28</width>
+                 <height>16777215</height>
                 </size>
                </property>
-              </widget>
-             </item>
-             <item row="8" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="predefined_macros">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="2" rowspan="2">
-              <widget class="QPlainTextEdit" name="expand_as_defined">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
+               <property name="text">
+                <string>►</string>
                </property>
               </widget>
              </item>
@@ -5025,7 +4994,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Generate Tagfile:</string>
+                <string>Generate tagfile:</string>
                </property>
                <property name="buddy">
                 <cstring>gen_tagfile</cstring>
@@ -5073,7 +5042,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>All Externals:</string>
+                <string>All externals:</string>
                </property>
                <property name="buddy">
                 <cstring>all_externals_CB</cstring>
@@ -5095,7 +5064,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>External Groups:</string>
+                <string>External groups:</string>
                </property>
                <property name="buddy">
                 <cstring>external_groups_CB</cstring>
@@ -5117,7 +5086,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>External Pages:</string>
+                <string>External pages:</string>
                </property>
                <property name="buddy">
                 <cstring>external_pages_CB</cstring>
@@ -5139,7 +5108,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Perl Path:</string>
+                <string>Perl path:</string>
                </property>
                <property name="buddy">
                 <cstring>perl_path</cstring>
@@ -6284,17 +6253,17 @@
              </property>
              <item>
               <property name="text">
-               <string>HTML A</string>
+               <string>HTML (Part 1)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>HTML B</string>
+               <string>HTML (Part 2)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>HTML C</string>
+               <string>HTML (Part 3)</string>
               </property>
              </item>
             </item>
@@ -6357,7 +6326,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>10</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0">
@@ -6420,7 +6389,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>HTML dynamic sections:</string>
+                <string>HTML Dynamic Sections:</string>
                </property>
                <property name="buddy">
                 <cstring>html_dynamic_sections_CB</cstring>
@@ -7043,7 +7012,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Extra Search Mappings:</string>
+                <string>Search Mappings:</string>
                </property>
                <property name="buddy">
                 <cstring>search_mappings</cstring>
@@ -7943,116 +7912,13 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Latex">
-            <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0,1,0">
+            <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="15" column="1">
-              <widget class="QCheckBox" name="latex_hide_indices_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="latex_pdf_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_132">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>LaTeX Header:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_header</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <widget class="QCheckBox" name="latex_hyper_pdf_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="1">
-              <widget class="QCheckBox" name="latex_batch_mode_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_131">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>MakeIndex Command Name:</string>
-               </property>
-               <property name="buddy">
-                <cstring>make_index_cmd_name</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="label_750">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>PDF Hyperlinks:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_hyper_pdf_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="label_752">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>LaTeX Batch Mode:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_batch_mode_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_748">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Compact  LaTeX:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_compact_CB</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_54">
                <property name="font">
@@ -8065,50 +7931,6 @@
                </property>
                <property name="buddy">
                 <cstring>latex_output</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="latex_compact_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_749">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Paper Type:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_paper_type_CM</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_751">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Use PDF LaTeX:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_pdf_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="1">
-              <widget class="QCheckBox" name="latex_source_code_CB">
-               <property name="text">
-                <string/>
                </property>
               </widget>
              </item>
@@ -8142,63 +7964,18 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_133">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_749">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>LaTeX Footer:</string>
+                <string>Paper Type:</string>
                </property>
                <property name="buddy">
-                <cstring>latex_footer</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_726">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate LaTeX:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_latex_CB2</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_753">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>LaTeX Hide Indices:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_hide_indices_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="0">
-              <widget class="QLabel" name="label_135">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>LaTeX BIB Style:</string>
-               </property>
-               <property name="buddy">
-                <cstring>latex_bib_style</cstring>
+                <cstring>latex_paper_type_CM</cstring>
                </property>
               </widget>
              </item>
@@ -8226,7 +8003,86 @@
                </item>
               </widget>
              </item>
-             <item row="16" column="0">
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="latex_compact_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1">
+              <widget class="QCheckBox" name="latex_batch_mode_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="0">
+              <spacer name="verticalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_748">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Compact  LaTeX:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_compact_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <widget class="QLabel" name="label_752">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>LaTeX Batch Mode:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_batch_mode_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QCheckBox" name="latex_hyper_pdf_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_133">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>LaTeX Footer:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_footer</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="0">
               <widget class="QLabel" name="label_754">
                <property name="font">
                 <font>
@@ -8238,6 +8094,58 @@
                </property>
                <property name="buddy">
                 <cstring>latex_source_code_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="label_750">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>PDF Hyperlinks:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_hyper_pdf_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_726">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate LaTeX:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_latex_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="1">
+              <widget class="QCheckBox" name="latex_hide_indices_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_132">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>LaTeX Header:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_header</cstring>
                </property>
               </widget>
              </item>
@@ -8256,69 +8164,106 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="3">
-              <widget class="QPushButton" name="make_index_cmd_name_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+             <item row="16" column="0">
+              <widget class="QLabel" name="label_753">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>►</string>
+                <string>LaTeX Hide Indices:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_hide_indices_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="3" column="1" colspan="2">
-              <widget class="QLineEdit" name="make_index_cmd_name">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
+             <item row="17" column="1">
+              <widget class="QCheckBox" name="latex_source_code_CB">
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
-              <widget class="QPushButton" name="latex_cmd_name_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+             <item row="14" column="1">
+              <widget class="QCheckBox" name="latex_pdf_CB">
+               <property name="text">
+                <string/>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+              </widget>
+             </item>
+             <item row="18" column="0">
+              <widget class="QLabel" name="label_135">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>►</string>
+                <string>LaTeX BIB Style:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_bib_style</cstring>
                </property>
               </widget>
              </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QLineEdit" name="latex_cmd_name">
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="latex_timestamp_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_131">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
+               </property>
+               <property name="text">
+                <string>MakeIndex Command Name:</string>
+               </property>
+               <property name="buddy">
+                <cstring>make_index_cmd_name</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_759">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>LaTex Timestamp:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_timestamp_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="gen_latex_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="label_751">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Use PDF LaTeX:</string>
+               </property>
+               <property name="buddy">
+                <cstring>latex_pdf_CB</cstring>
                </property>
               </widget>
              </item>
@@ -8388,8 +8333,8 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="3">
-              <widget class="QPushButton" name="latex_extra_files_PB">
+             <item row="6" column="3">
+              <widget class="QPushButton" name="latex_extra_packages_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -8412,8 +8357,32 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="3">
-              <widget class="QPushButton" name="latex_extra_packages_PB">
+             <item row="3" column="3">
+              <widget class="QPushButton" name="make_index_cmd_name_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QPushButton" name="latex_cmd_name_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -8460,37 +8429,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1" colspan="2">
-              <widget class="QLineEdit" name="latex_output">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="18" column="0" colspan="4">
-              <spacer name="verticalSpacer_14">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="17" column="1" colspan="2">
-              <widget class="QLineEdit" name="latex_bib_style">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="1" rowspan="2" colspan="2">
               <widget class="QPlainTextEdit" name="latex_extra_packages">
                <property name="sizePolicy">
@@ -8504,6 +8442,30 @@
                  <width>16777215</width>
                  <height>90</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="3">
+              <widget class="QPushButton" name="latex_extra_files_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
                </property>
               </widget>
              </item>
@@ -8523,10 +8485,39 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1" colspan="2">
-              <widget class="QCheckBox" name="gen_latex_CB2">
-               <property name="text">
-                <string/>
+             <item row="3" column="1" colspan="2">
+              <widget class="QLineEdit" name="make_index_cmd_name">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QLineEdit" name="latex_cmd_name">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="latex_output">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="1" colspan="2">
+              <widget class="QLineEdit" name="latex_bib_style">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
               </widget>
              </item>
@@ -9570,6 +9561,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -9807,7 +9801,7 @@
     <string>About</string>
    </property>
    <property name="toolTip">
-    <string>About CS Doxygen</string>
+    <string>About DoxyPressApp</string>
    </property>
   </action>
   <action name="actionDoxyHelp">
@@ -9817,7 +9811,7 @@
   </action>
   <action name="actionImport">
    <property name="text">
-    <string>Import Doxygen File / Convert to DoxyPress</string>
+    <string>Import Doxygen File / Convert to DoxyPress format</string>
    </property>
    <property name="toolTip">
     <string>Import Doxygen File</string>
@@ -9839,26 +9833,27 @@
     <string>Exit</string>
    </property>
    <property name="toolTip">
-    <string>Exit CS Doxygen</string>
+    <string>Exit DoxyPressApp</string>
    </property>
   </action>
   <action name="actionMove_Settings">
    <property name="text">
-    <string>Move DoxyPress Settings File</string>
+    <string>Move DoxyPressApp Setup File</string>
    </property>
    <property name="toolTip">
-    <string>Move Wizard Cfg File</string>
+    <string>Move DoxyPressApp Setup File</string>
    </property>
   </action>
   <action name="actionSave_Settings">
    <property name="text">
-    <string>Save DoxyPress Settings File</string>
+    <string>Save DoxyPress Setup File</string>
    </property>
   </action>
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>setup_TreeWidget</tabstop>
+  <tabstop>help_t1</tabstop>
   <tabstop>project_name</tabstop>
   <tabstop>project_brief</tabstop>
   <tabstop>project_version</tabstop>
@@ -9894,46 +9889,46 @@
   <tabstop>dot_call_CB1</tabstop>
   <tabstop>dot_called_by_CB1</tabstop>
   <tabstop>build_TreeWidget</tabstop>
+  <tabstop>help_t2</tabstop>
   <tabstop>project_encoding</tabstop>
-  <tabstop>create_subdirs_CB</tabstop>
-  <tabstop>allow_unicode_names_CB</tabstop>
   <tabstop>output_language_CM</tabstop>
+  <tabstop>short_names_CB</tabstop>
+  <tabstop>allow_unicode_names_CB</tabstop>
+  <tabstop>create_subdirs_CB</tabstop>
   <tabstop>brief_member_desc_CB</tabstop>
   <tabstop>repeat_brief_CB</tabstop>
   <tabstop>abbreviate_brief</tabstop>
   <tabstop>abbreviate_brief_PB</tabstop>
-  <tabstop>always_detailed_sec_CB</tabstop>
-  <tabstop>inline_inherited_member_CB</tabstop>
   <tabstop>full_path_names_CB</tabstop>
   <tabstop>strip_from_path</tabstop>
   <tabstop>strip_from_path_PB</tabstop>
   <tabstop>strip_from_inc_path</tabstop>
   <tabstop>strip_from_inc_path_PB</tabstop>
-  <tabstop>short_names_CB</tabstop>
-  <tabstop>javadoc_auto_brief_CB</tabstop>
-  <tabstop>qt_auto_brief_CB</tabstop>
-  <tabstop>multiline_cpp_brief_CB</tabstop>
+  <tabstop>inline_grouped_classes_CB</tabstop>
+  <tabstop>inline_simple_struct_CB</tabstop>
+  <tabstop>typedef_hides_struct_CB</tabstop>
   <tabstop>inherit_docs_CB</tabstop>
   <tabstop>separate_member_pages_CB</tabstop>
+  <tabstop>multiline_cpp_brief_CB</tabstop>
+  <tabstop>javadoc_auto_brief_CB</tabstop>
+  <tabstop>qt_auto_brief_CB</tabstop>
+  <tabstop>auto_link_CB</tabstop>
   <tabstop>tab_size_SB</tabstop>
   <tabstop>aliases</tabstop>
   <tabstop>aliases_PB</tabstop>
   <tabstop>tcl_subst</tabstop>
   <tabstop>tcl_subst_PB</tabstop>
-  <tabstop>extension_mapping</tabstop>
-  <tabstop>extension_mapping_PB</tabstop>
+  <tabstop>language_mapping</tabstop>
+  <tabstop>language_mapping_PB</tabstop>
   <tabstop>markdown_CB</tabstop>
-  <tabstop>auto_link_CB</tabstop>
   <tabstop>built_in_stl_support_CB</tabstop>
   <tabstop>cpp_cli_support_CB</tabstop>
   <tabstop>sip_support_CB</tabstop>
   <tabstop>idl_support_CB</tabstop>
-  <tabstop>dist_group_doc_CB</tabstop>
+  <tabstop>duplicate_docs_CB</tabstop>
   <tabstop>allow_sub_grouping_CB</tabstop>
-  <tabstop>inline_grouped_classes_CB</tabstop>
-  <tabstop>inline_simple_struct_CB</tabstop>
-  <tabstop>typedef_hides_struct_CB</tabstop>
   <tabstop>lookup_cache_size_SB</tabstop>
+
   <tabstop>extract_all_CB</tabstop>
   <tabstop>extract_private_CB</tabstop>
   <tabstop>extract_package_CB</tabstop>
@@ -9946,28 +9941,28 @@
   <tabstop>hide_friend_compounds_CB</tabstop>
   <tabstop>hide_in_body_docs_CB</tabstop>
   <tabstop>hide_scope_names_CB</tabstop>
-  <tabstop>internal_docs_CB</tabstop>
-  <tabstop>case_sense_names_CB</tabstop>
   <tabstop>show_include_files_CB</tabstop>
   <tabstop>show_grouped_members_inc_CB</tabstop>
-  <tabstop>force_local_includes_CB</tabstop>
-  <tabstop>inline_info_CB</tabstop>
+  <tabstop>show_used_files_CB</tabstop>
+  <tabstop>show_file_page_CB</tabstop>
+  <tabstop>show_namespace_page_CB</tabstop> 
   <tabstop>sort_member_docs_CB</tabstop>
   <tabstop>sort_brief_docs_CB</tabstop>
   <tabstop>sort_members_ctors_first_CB</tabstop>
   <tabstop>sort_group_names_CB</tabstop>
   <tabstop>sort_by_scope_name_CB</tabstop>
-  <tabstop>strict_proto_matching_CB</tabstop>
   <tabstop>gen_todo_list_CB</tabstop>
   <tabstop>gen_test_list_CB</tabstop>
   <tabstop>gen_bug_list_CB</tabstop>
   <tabstop>gen_deprecate_list_CB</tabstop>
+  <tabstop>internal_docs_CB</tabstop>
+  <tabstop>case_sense_names_CB</tabstop>
+  <tabstop>force_local_includes_CB</tabstop>
+  <tabstop>inline_info_CB</tabstop>
+  <tabstop>strict_sig_matching_CB</tabstop>
   <tabstop>enabled_sections</tabstop>
   <tabstop>enabled_sections_PB</tabstop>
   <tabstop>max_init_lines_SB</tabstop>
-  <tabstop>show_used_files_CB</tabstop>
-  <tabstop>show_files_CB</tabstop>
-  <tabstop>show_namespaces_CB</tabstop>
   <tabstop>file_version_filter</tabstop>
   <tabstop>file_version_filter_PB</tabstop>
   <tabstop>layout_file</tabstop>
@@ -10026,20 +10021,19 @@
   <tabstop>cols_in_index_SB</tabstop>
   <tabstop>ignore_prefix</tabstop>
   <tabstop>ignore_prefix_PB</tabstop>
-  <tabstop>gen_autogen_def_CB</tabstop>
   <tabstop>enable_preprocessing_CB</tabstop>
-  <tabstop>macro_expansion_CB</tabstop>
-  <tabstop>expand_only_predefined_CB</tabstop>
   <tabstop>search_includes_CB</tabstop>
   <tabstop>include_path</tabstop>
   <tabstop>include_path_PB</tabstop>
   <tabstop>include_file_patterns</tabstop>
   <tabstop>include_file_patterns_PB</tabstop>
+  <tabstop>macro_expansion_CB</tabstop>
+  <tabstop>expand_only_predefined_CB</tabstop>
+  <tabstop>skip_function_macros_CB</tabstop>
   <tabstop>predefined_macros</tabstop>
   <tabstop>predefined_macros_PB</tabstop>
   <tabstop>expand_as_defined</tabstop>
   <tabstop>expand_as_defined_PB</tabstop>
-  <tabstop>skip_function_macros_CB</tabstop>
   <tabstop>tag_files</tabstop>
   <tabstop>tag_files_PB</tabstop>
   <tabstop>gen_tagfile</tabstop>
@@ -10093,6 +10087,7 @@
   <tabstop>gen_legend_CB</tabstop>
   <tabstop>dot_cleanup_CB</tabstop>
   <tabstop>output_TreeWidget</tabstop>
+  <tabstop>help_t3</tabstop>
   <tabstop>gen_html_CB2</tabstop>
   <tabstop>html_output</tabstop>
   <tabstop>html_output_PB</tabstop>
@@ -10157,21 +10152,15 @@
   <tabstop>eclipse_doc_id</tabstop>
   <tabstop>gen_latex_CB2</tabstop>
   <tabstop>latex_output</tabstop>
-  <tabstop>latex_output_PB</tabstop>
   <tabstop>latex_cmd_name</tabstop>
-  <tabstop>latex_cmd_name_PB</tabstop>
   <tabstop>make_index_cmd_name</tabstop>
-  <tabstop>make_index_cmd_name_PB</tabstop>
   <tabstop>latex_compact_CB</tabstop>
   <tabstop>latex_paper_type_CM</tabstop>
   <tabstop>latex_extra_packages</tabstop>
-  <tabstop>latex_extra_packages_PB</tabstop>
   <tabstop>latex_header</tabstop>
-  <tabstop>latex_header_PB</tabstop>
   <tabstop>latex_footer</tabstop>
-  <tabstop>latex_footer_PB</tabstop>
   <tabstop>latex_extra_files</tabstop>
-  <tabstop>latex_extra_files_PB</tabstop>
+  <tabstop>latex_timestamp_CB</tabstop>
   <tabstop>latex_hyper_pdf_CB</tabstop>
   <tabstop>latex_pdf_CB</tabstop>
   <tabstop>latex_batch_mode_CB</tabstop>
@@ -10213,13 +10202,10 @@
   <tabstop>xml_output</tabstop>
   <tabstop>xml_output_PB</tabstop>
   <tabstop>xml_program_listing_CB</tabstop>
-  <tabstop>help_t3</tabstop>
-  <tabstop>help_t2</tabstop>
-  <tabstop>help_t1</tabstop>
-  <tabstop>save_log_PB</tabstop>
   <tabstop>runText</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>display_PB</tabstop>
+  <tabstop>save_log_PB</tabstop>
  </tabstops>
  <resources/>
  <connections/>

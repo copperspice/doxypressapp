@@ -139,7 +139,7 @@ bool MainWindow::json_Write(Option route, Config trail)
       QByteArray data = json_ReadFile();
 
       if (data.isEmpty()) {
-         csError("Save Configuration", "Configuration data is empty, aborting update...");
+         csError("Save Settings", "Configuration data is empty, aborting update...");
          return false;
       }
 
@@ -250,7 +250,7 @@ QByteArray MainWindow::json_ReadFile()
    QFile file(m_jsonFname);
    if (! file.open(QFile::ReadWrite | QFile::Text)) {
       const QString msg = tr("Unable to open Settings File: ") +  m_jsonFname + " : " + file.errorString();
-      csError(tr("Read Json"), msg);
+      csError(tr("Read Settings"), msg);
       return data;
    }
 
@@ -274,7 +274,7 @@ bool MainWindow::json_SaveFile(QByteArray data)
 
    if (! file.open(QFile::ReadWrite | QFile::Truncate | QFile::Text)) {
       const QString msg = tr("Unable to save Settings File: ") +  m_jsonFname + " : " + file.errorString();
-      csError(tr("Save Json"), msg);
+      csError(tr("Save Settings"), msg);
       return false;
    }
 
@@ -529,7 +529,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->tab_size_SB->setValue(                    object.value("tab-size").toInt());
    m_ui->aliases->setPlainText(                    getDataList(object, "aliases"));
    m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl-subst"));
-   m_ui->extension_mapping->setPlainText(          getDataList(object, "extension-mapping"));
+   m_ui->language_mapping->setPlainText(           getDataList(object, "language-mapping"));
 
    m_ui->markdown_CB->setChecked(                  object.value("markdown").toBool());
    m_ui->auto_link_CB->setChecked(                 object.value("auto-link").toBool());
@@ -537,7 +537,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->cpp_cli_support_CB->setChecked(           object.value("cpp-cli-support").toBool());
    m_ui->sip_support_CB->setChecked(               object.value("sip-support").toBool());
    m_ui->idl_support_CB->setChecked(               object.value("idl-support").toBool());
-   m_ui->dist_group_doc_CB->setChecked(            object.value("dist-group-doc").toBool());
+   m_ui->duplicate_docs_CB->setChecked(            object.value("duplicate-docs").toBool());
    m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
    m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
    m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
@@ -556,12 +556,17 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->hide_undoc_classes_CB->setChecked(        object.value("hide-undoc-classes").toBool());
    m_ui->hide_friend_compounds_CB->setChecked(     object.value("hide-friend-compounds").toBool());
    m_ui->hide_in_body_docs_CB->setChecked(         object.value("hide-in-body-docs").toBool());
-   m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());
+   m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());  
 
    m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
    m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
+
    m_ui->show_include_files_CB->setChecked(        object.value("show-include-files").toBool());
    m_ui->show_grouped_members_inc_CB->setChecked(  object.value("show-grouped-members-inc").toBool());
+   m_ui->show_used_files_CB->setChecked(           object.value("show-used-files").toBool());
+   m_ui->show_file_page_CB->setChecked(            object.value("show-file-page").toBool());
+   m_ui->show_namespace_page_CB->setChecked(       object.value("show-namespace-page").toBool());
+
    m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
    m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
 
@@ -571,7 +576,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->sort_group_names_CB->setChecked(          object.value("sort-group-names").toBool());
    m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by-scope-name").toBool());
 
-   m_ui->strict_proto_matching_CB->setChecked(     object.value("strict-proto-matching").toBool());
+   m_ui->strict_sig_matching_CB->setChecked(       object.value("strict-sig-matching").toBool());
    m_ui->gen_todo_list_CB->setChecked(             object.value("generate-todo-list").toBool());
    m_ui->gen_test_list_CB->setChecked(             object.value("generate-test-list").toBool());
    m_ui->gen_bug_list_CB->setChecked(              object.value("generate-bug-list").toBool());
@@ -579,9 +584,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
    m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
-   m_ui->show_used_files_CB->setChecked(           object.value("show-used-files").toBool());
-   m_ui->show_files_CB->setChecked(                object.value("show-files").toBool());
-   m_ui->show_namespaces_CB->setChecked(           object.value("show-namespaces").toBool());
    m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());
    m_ui->layout_file->setText(                     object.value("layout-file").toString());
    m_ui->cite_bib_files->setPlainText(             getDataList(object, "cite-bib-files"));
@@ -633,9 +635,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->alpha_index_CB->setChecked(               object.value("alpha-index").toBool());
    m_ui->cols_in_index_SB->setValue(               object.value("cols-in-index").toInt());
    m_ui->ignore_prefix->setPlainText(              getDataList(object, "ignore-prefix"));
-
-   // tab 2 - autogen
-   m_ui->gen_autogen_def_CB->setChecked(           object.value("generate-autogen-def").toBool());
 
    // tab 2 - preprocess
    m_ui->enable_preprocessing_CB->setChecked(      object.value("enable-preprocessing").toBool());
@@ -768,6 +767,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->latex_footer->setText(                    object.value("latex-footer").toString());
    m_ui->latex_extra_files->setPlainText(          getDataList(object, "latex-extra-files"));
 
+   m_ui->latex_timestamp_CB->setChecked(           object.value("latex-timestamp").toBool());
    m_ui->latex_hyper_pdf_CB->setChecked(           object.value("latex-hyper-pdf").toBool());
    m_ui->latex_pdf_CB->setChecked(                 object.value("latex-pdf").toBool());
    m_ui->latex_batch_mode_CB->setChecked(          object.value("latex-batch-mode").toBool());
@@ -877,7 +877,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("tab-size",                 m_ui->tab_size_SB->value());
    object.insert("aliases",                  putDataList(m_ui->aliases->toPlainText()));
    object.insert("tcl-subst",                putDataList(m_ui->tcl_subst->toPlainText()));
-   object.insert("extension-mapping",        putDataList(m_ui->extension_mapping->toPlainText()));
+   object.insert("language-mapping",         putDataList(m_ui->language_mapping->toPlainText()));
 
    object.insert("markdown",                 m_ui->markdown_CB->isChecked());
    object.insert("auto-link",                m_ui->auto_link_CB->isChecked());
@@ -885,7 +885,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("cpp-cli-support",          m_ui->cpp_cli_support_CB->isChecked());
    object.insert("sip-support",              m_ui->sip_support_CB->isChecked());
    object.insert("idl-support",              m_ui->idl_support_CB->isChecked());
-   object.insert("dist-group-doc",           m_ui->dist_group_doc_CB->isChecked());
+   object.insert("duplicate-docs",           m_ui->duplicate_docs_CB->isChecked());
    object.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());
    object.insert("inline-grouped-classes",   m_ui->inline_grouped_classes_CB->isChecked());
    object.insert("inline-simple-struct",     m_ui->inline_simple_struct_CB->isChecked());
@@ -908,8 +908,13 @@ QByteArray MainWindow::json_SaveDoxy()
 
    object.insert("internal-docs",            m_ui->internal_docs_CB->isChecked());
    object.insert("case-sense-names",         m_ui->case_sense_names_CB->isChecked());
+
    object.insert("show-include-files",       m_ui->show_include_files_CB->isChecked());
    object.insert("show-grouped-members-inc", m_ui->show_grouped_members_inc_CB->isChecked());
+   object.insert("show-used-files",          m_ui->show_used_files_CB->isChecked());
+   object.insert("show-file-page",           m_ui->show_file_page_CB->isChecked());
+   object.insert("show-namespace-page",      m_ui->show_namespace_page_CB->isChecked());
+
    object.insert("force-local-includes",     m_ui->force_local_includes_CB->isChecked());
    object.insert("inline-info",              m_ui->inline_info_CB->isChecked());
 
@@ -919,17 +924,14 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("sort-group-names",         m_ui->sort_group_names_CB->isChecked());
    object.insert("sort-by-scope-name",       m_ui->sort_by_scope_name_CB->isChecked());
 
-   object.insert("strict-proto-matching",    m_ui->strict_proto_matching_CB->isChecked());
+   object.insert("strict-sig-matching",      m_ui->strict_sig_matching_CB->isChecked());
    object.insert("generate-todo-list",       m_ui->gen_todo_list_CB->isChecked());
    object.insert("generate-test-list",       m_ui->gen_test_list_CB->isChecked());
    object.insert("generate-bug-list",        m_ui->gen_bug_list_CB->isChecked());
    object.insert("generate-deprecate-list",  m_ui->gen_deprecate_list_CB->isChecked());
 
    object.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));
-   object.insert("max-init-lines",           m_ui->max_init_lines_SB->value());
-   object.insert("show-used-files",          m_ui->show_used_files_CB->isChecked());
-   object.insert("show-files",               m_ui->show_files_CB->isChecked());
-   object.insert("show-namespaces",          m_ui->show_namespaces_CB->isChecked());
+   object.insert("max-init-lines",           m_ui->max_init_lines_SB->value()); 
    object.insert("file-version-filter",      m_ui->file_version_filter->text());
    object.insert("layout-file",              m_ui->layout_file->text());
    object.insert("cite-bib-files",           putDataList(m_ui->cite_bib_files->toPlainText()));
@@ -981,9 +983,6 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("alpha-index",              m_ui->alpha_index_CB->isChecked());
    object.insert("cols-in-index",            m_ui->cols_in_index_SB->value());
    object.insert("ignore-prefix",            putDataList(m_ui->ignore_prefix->toPlainText()));
-
-   // tab 2 - autogen
-   object.insert("generate-autogen-def",    m_ui->gen_autogen_def_CB->isChecked());
 
    // tab 2 - preprocess
    object.insert("enable-preprocessing",     m_ui->enable_preprocessing_CB->isChecked());
@@ -1109,6 +1108,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("latex-footer",             m_ui->latex_footer->text());
    object.insert("latex-extra-files",        putDataList(m_ui->latex_extra_files->toPlainText()));
 
+   object.insert("latex-timestamp",          m_ui->latex_timestamp_CB->isChecked());
    object.insert("latex-hyper-pdf",          m_ui->latex_hyper_pdf_CB->isChecked());
    object.insert("latex-pdf",                m_ui->latex_pdf_CB->isChecked());
    object.insert("latex-batch-mode",         m_ui->latex_batch_mode_CB->isChecked());

@@ -199,14 +199,14 @@ void MainWindow::tcl_subst_PB()
    }
 }
 
-void MainWindow::extension_mapping_PB()
+void MainWindow::language_mapping_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->extension_mapping->toPlainText();
+   QString temp = m_ui->language_mapping->toPlainText();
 
-   data.title      = "Extension Mapping";
+   data.title      = "Language Mapping";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
@@ -218,7 +218,7 @@ void MainWindow::extension_mapping_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->extension_mapping->setPlainText(temp);
+      m_ui->language_mapping->setPlainText(temp);
    }
 }
 

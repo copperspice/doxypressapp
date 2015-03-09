@@ -177,7 +177,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->tcl_subst->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"EXTENSION_MAPPING");
-   m_ui->extension_mapping->setPlainText(tempText);
+   m_ui->language_mapping->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "MARKDOWN_SUPPORT");
    m_ui->markdown_CB->setChecked(tempBool);
@@ -198,7 +198,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->idl_support_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "DISTRIBUTE_GROUP_DOC");
-   m_ui->dist_group_doc_CB->setChecked(tempBool);
+   m_ui->duplicate_docs_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SUBGROUPING");
    m_ui->allow_sub_grouping_CB->setChecked(tempBool);
@@ -287,7 +287,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->sort_by_scope_name_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "STRICT_PROTO_MATCHING");
-   m_ui->strict_proto_matching_CB->setChecked(tempBool);
+   m_ui->strict_sig_matching_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GENERATE_TODOLIST");
    m_ui->gen_todo_list_CB->setChecked(tempBool);
@@ -311,10 +311,10 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->show_used_files_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SHOW_FILES");
-   m_ui->show_files_CB->setChecked(tempBool);
+   m_ui->show_file_page_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SHOW_NAMESPACES");
-   m_ui->show_namespaces_CB->setChecked(tempBool);
+   m_ui->show_namespace_page_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "FILE_VERSION_FILTER");
    m_ui->file_version_filter->setText(tempStr);
@@ -446,11 +446,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempText = convert_PlainText(data,"IGNORE_PREFIX");
    m_ui->ignore_prefix->setPlainText(tempText);
-
-
-   // tab 2 - autogen
-   tempBool = convert_Bool(data, "GENERATE_AUTOGEN_DEF");
-   m_ui->gen_autogen_def_CB->setChecked(tempBool);
 
 
    // tab 2 - preprocess
@@ -625,7 +620,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_colorstyle_gamma->setValue(tempInt);
 
    tempBool = convert_Bool(data, "HTML_TIMESTAMP");
-   m_ui->html_timestamp_CB->setChecked(tempBool);
+   m_ui->html_timestamp_CB->setChecked(tempBool);    
 
    tempBool = convert_Bool(data, "HTML_DYNAMIC_SECTIONS");
    m_ui->html_dynamic_sections_CB->setChecked(tempBool);
@@ -786,6 +781,9 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempText = convert_PlainText(data,"LATEX_EXTRA_FILES");
    m_ui->latex_extra_files->setPlainText(tempText);
+
+   // new field
+   m_ui->latex_timestamp_CB->setChecked(m_ui->html_timestamp_CB->isChecked());
 
    tempBool = convert_Bool(data, "PDF_HYPERLINKS");
    m_ui->latex_hyper_pdf_CB->setChecked(tempBool);
