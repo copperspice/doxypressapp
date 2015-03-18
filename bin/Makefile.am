@@ -77,6 +77,7 @@ DoxyPressApp_SOURCES = \
    src/mainwindow.cpp \
    src/process.cpp \
    src/recent_files.cpp \
+   src/syntax.cpp \
    src/support.cpp \
    src/util.cpp
 

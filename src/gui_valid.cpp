@@ -94,18 +94,7 @@ void MainWindow::clearAllFields()
          temp_RB->setChecked(false);
 
          // no label coloring
-      }
-
-      QSpinBox *temp_SB = dynamic_cast<QSpinBox *>(item);
-
-      if (temp_SB) {
-         temp_SB->setValue(0);
-
-         QLabel *label = getLabel(temp_SB);
-         if (label) {
-            setLabelColor(DEFAULT, label);
-         }
-      }
+      }     
    }
 
    int index;
@@ -114,7 +103,7 @@ void MainWindow::clearAllFields()
    m_ui->project_name->setText("My Project");
    m_project_logoFN = "";
 
-   m_ui->optimize_cplus_CB->setChecked(true);
+   m_ui->optimize_cplus_RB->setChecked(true);
    m_ui->gen_html_CB1->setChecked(true);
    m_ui->html_search_CB1->setChecked(true);
 
@@ -129,9 +118,7 @@ void MainWindow::clearAllFields()
    m_ui->dot_include_CB1->setChecked(true);
    m_ui->dot_included_by_CB1->setChecked(true);
 
-   // tab 2 - project
-   m_ui->project_encoding->setText("UTF-8");
-
+   // tab 2 - project   
    index = m_ui->output_language_CM->findText("English");
    m_ui->output_language_CM->setCurrentIndex(index);
 
@@ -151,6 +138,7 @@ void MainWindow::clearAllFields()
    tempStr.append("an");
    tempStr.append("the");
 
+   // tab 2 build
    QString tempText = tempStr.join(", ");
    m_ui->abbreviate_brief->setPlainText(tempText);
 
@@ -161,6 +149,7 @@ void MainWindow::clearAllFields()
    m_ui->auto_link_CB->setChecked(true);
    m_ui->idl_support_CB->setChecked(true);
    m_ui->allow_sub_grouping_CB->setChecked(true);
+   m_ui->lookup_cache_size_SB->setValue(0);
 
    // tab 2 - build
    m_ui->extract_local_classes_CB->setChecked(true);
@@ -188,7 +177,7 @@ void MainWindow::clearAllFields()
 
    // tab 2 -input
    m_ui->input_encoding->setText("UTF-8");
-   m_ui->file_patterns->setPlainText(m_filePatterns);
+   m_ui->input_patterns->setPlainText(m_filePatterns);
    m_ui->example_patterns->setPlainText("*");
 
    // tab 2 -source browser
@@ -217,6 +206,7 @@ void MainWindow::clearAllFields()
    // tab 2 - dot
    m_ui->class_diagrams_CB->setChecked(true);
    m_ui->hide_undoc_relations_CB->setChecked(true);
+   m_ui->dot_num_threads_SB->setValue(0);
    m_ui->dot_font_name->setText("Helvetica");
    m_ui->dot_font_size_SB->setValue(10);
    m_ui->group_graphs_CB->setChecked(true);
@@ -227,6 +217,7 @@ void MainWindow::clearAllFields()
    m_ui->dot_image_format_CM->setCurrentIndex(index);
 
    m_ui->dot_graph_max_nodes_SB->setValue(50);
+   m_ui->dot_graph_max_depth_SB->setValue(0);
    m_ui->gen_legend_CB->setChecked(true);
    m_ui->dot_cleanup_CB->setChecked(true);
 
@@ -288,8 +279,177 @@ void MainWindow::clearAllFields()
    // tab 3 - docbook
    m_ui->docbook_output->setText("docbook");
 
-   // final step
+   // ** final step
    finalLoad();
+
+   // adjust defaults in m_bigMap (do this after the finalLoad)
+   adjustDefaults();
+
+   setDoxyTitle(false);
+}
+
+void MainWindow::adjustDefaults()
+{
+   // ** normal init values
+   setDefault(m_ui->project_name);
+
+// setDefault(m_ui->optimize_cplus_RB);
+   setDefault(m_ui->gen_html_CB2);
+   setDefault(m_ui->html_search_CB1);
+
+   setDefault(m_ui->html_colorstyle_hue);
+   setDefault(m_ui->html_colorstyle_sat);
+   setDefault(m_ui->html_colorstyle_gamma);
+
+   setDefault(m_ui->dot_class_graph_CB1);
+   setDefault(m_ui->dot_collaboration_CB1);
+   setDefault(m_ui->dot_hierarchy_CB1);
+   setDefault(m_ui->dot_include_CB1);
+   setDefault(m_ui->dot_included_by_CB1);
+
+   setDefault(m_ui->dot_class_graph_CB2);
+   setDefault(m_ui->dot_collaboration_CB2);
+   setDefault(m_ui->dot_hierarchy_CB2);
+   setDefault(m_ui->dot_include_CB2);
+   setDefault(m_ui->dot_included_by_CB2);
+
+   // tab 2 - general
+   setDefault(m_ui->output_language_CM);
+   setDefault(m_ui->brief_member_desc_CB);
+   setDefault(m_ui->repeat_brief_CB);
+   setDefault(m_ui->abbreviate_brief);
+   setDefault(m_ui->full_path_names_CB);
+   setDefault(m_ui->inherit_docs_CB);
+   setDefault(m_ui->tab_size_SB);
+   setDefault(m_ui->markdown_CB);
+   setDefault(m_ui->auto_link_CB);
+   setDefault(m_ui->idl_support_CB);
+   setDefault(m_ui->allow_sub_grouping_CB);
+   setDefault(m_ui->lookup_cache_size_SB);
+
+   // tab 2 - build
+   setDefault(m_ui->extract_local_classes_CB);
+   setDefault(m_ui->case_sense_names_CB);
+
+   setDefault(m_ui->show_include_files_CB);
+   setDefault(m_ui->inline_info_CB);
+   setDefault(m_ui->sort_member_docs_CB);
+   setDefault(m_ui->gen_todo_list_CB);
+   setDefault(m_ui->gen_test_list_CB);
+   setDefault(m_ui->gen_bug_list_CB);
+   setDefault(m_ui->gen_deprecate_list_CB);
+
+   setDefault(m_ui->max_init_lines_SB);
+   setDefault(m_ui->show_used_files_CB);
+   setDefault(m_ui->show_file_page_CB);
+   setDefault(m_ui->show_namespace_page_CB);
+
+   // tab 2 - messages
+   setDefault(m_ui->warnings_CB);
+   setDefault(m_ui->warn_undoc_CB);
+   setDefault(m_ui->warn_doc_error_CB);
+
+   setDefault(m_ui->warn_format);
+
+   // tab 2 -input
+   setDefault(m_ui->input_encoding);
+   setDefault(m_ui->input_patterns);
+   setDefault(m_ui->example_patterns);
+
+   // tab 2 -source browser
+   setDefault(m_ui->strip_code_comments_CB);
+   setDefault(m_ui->ref_link_source_CB);
+   setDefault(m_ui->source_tooltips_CB);
+   setDefault(m_ui->verbatim_headers_CB);
+
+   // tab 2 -index
+   setDefault(m_ui->alpha_index_CB);
+   setDefault(m_ui->cols_in_index_SB);
+
+   // tab 2 permod
+   setDefault(m_ui->perl_pretty_CB);
+
+   // tab 2 - preprocess
+   setDefault(m_ui->enable_preprocessing_CB);
+   setDefault(m_ui->search_includes_CB);
+   setDefault(m_ui->skip_function_macros_CB);
+
+   // tab 2 - external
+   setDefault(m_ui->external_groups_CB);
+   setDefault(m_ui->external_pages_CB);
+   setDefault(m_ui->perl_path);
+
+   // tab 2 - dot
+   setDefault(m_ui->class_diagrams_CB);
+   setDefault(m_ui->hide_undoc_relations_CB);
+   setDefault(m_ui->dot_num_threads_SB);
+   setDefault(m_ui->dot_font_name);
+   setDefault(m_ui->dot_font_size_SB);
+   setDefault(m_ui->group_graphs_CB);
+   setDefault(m_ui->uml_limit_num_fields_SB);
+   setDefault(m_ui->directory_graph_CB);
+
+   setDefault(m_ui->dot_image_format_CM);
+
+   setDefault(m_ui->dot_graph_max_nodes_SB);
+   setDefault(m_ui->dot_graph_max_depth_SB);
+   setDefault(m_ui->gen_legend_CB);
+   setDefault(m_ui->dot_cleanup_CB);
+
+   // tab 3 - html
+   setDefault(m_ui->html_output);
+   setDefault(m_ui->html_file_extension);
+   setDefault(m_ui->html_timestamp_CB);
+   setDefault(m_ui->html_index_num_entries_SB);
+   setDefault(m_ui->treeview_width_SB);
+   setDefault(m_ui->enum_values_per_line_SB);
+   setDefault(m_ui->search_data_file);
+
+   setDefault(m_ui->formula_fontsize_SB);
+   setDefault(m_ui->formula_transparent_CB);
+
+   setDefault(m_ui->mathjax_format_CM);
+   setDefault(m_ui->mathjax_relpath);
+
+   // tab 3 - chm
+
+   // tab 3 - docset
+   setDefault(m_ui->docset_feedname);
+   setDefault(m_ui->docset_bundle_id);
+   setDefault(m_ui->docset_publisher_id);
+   setDefault(m_ui->docset_publisher_name);
+
+   // tab 3 - eclipse
+   setDefault(m_ui->eclipse_doc_id);
+
+   // tab 3 - latex
+   setDefault(m_ui->latex_output);
+   setDefault(m_ui->latex_cmd_name);
+   setDefault(m_ui->make_index_cmd_name);
+
+   setDefault(m_ui->latex_paper_type_CM);
+
+   setDefault(m_ui->latex_hyper_pdf_CB);
+   setDefault(m_ui->latex_pdf_CB);
+   setDefault(m_ui->latex_bib_style);
+
+   // tab 3 - man
+   setDefault(m_ui->man_output);
+   setDefault(m_ui->man_extension);
+
+   // tab 3 - qthelp
+   setDefault(m_ui->qhp_namespace);
+   setDefault(m_ui->qhp_virtual_folder);
+
+   // tab 3 - rtf
+   setDefault(m_ui->rtf_output);
+
+   // tab 3 - xml
+   setDefault(m_ui->xml_output);
+   setDefault(m_ui->xml_program_listing_CB);
+
+   // tab 3 - docbook
+   setDefault(m_ui->docbook_output);
 }
 
 void MainWindow::finalLoad()
@@ -301,6 +461,14 @@ void MainWindow::finalLoad()
    validGet_latex();
    validGet_dot();
 
+   // tab 2
+   valid_full_path_names();
+   valid_filter_source_files();
+   valid_alpha_index();
+   valid_enable_preprocessing();
+   valid_have_dot();
+
+   // tab 3
    valid_gen_html();
    valid_gen_chm();
    valid_gen_docset();
@@ -428,10 +596,10 @@ void MainWindow::setupLimits()
    m_ui->enum_values_per_line_SB->setMaximum(20);
 
    m_ui->formula_fontsize_SB->setMinimum(8);
-   m_ui->formula_fontsize_SB->setMaximum(50);
+   m_ui->formula_fontsize_SB->setMaximum(50);  
 }
 
-// **
+// tab 1
 void MainWindow::valid_output_dir()
 {
    if (m_ui->output_dir->text().contains("$output_dir")) {
@@ -440,6 +608,330 @@ void MainWindow::valid_output_dir()
    }
 }
 
+void MainWindow::valid_gen_html_1(bool checked)
+{
+   m_ui->gen_html_CB1->setChecked(checked);
+   m_ui->gen_html_CB2->setChecked(checked);
+
+   valid_gen_html();
+}
+
+void MainWindow::valid_gen_latex_1(bool checked)
+{
+   m_ui->gen_latex_CB1->setChecked(checked);
+   m_ui->gen_latex_CB2->setChecked(checked);
+
+   valid_gen_latex();
+}
+
+void MainWindow::valid_gen_docbook_1(bool checked)
+{
+   m_ui->gen_docbook_CB1->setChecked(checked);
+   m_ui->gen_docbook_CB2->setChecked(checked);
+
+   valid_gen_docbook();
+}
+
+void MainWindow::valid_gen_man_1(bool checked)
+{
+   m_ui->gen_man_CB1->setChecked(checked);
+   m_ui->gen_man_CB2->setChecked(checked);
+
+   valid_gen_man();
+}
+
+void MainWindow::valid_gen_rtf_1(bool checked)
+{
+   m_ui->gen_rtf_CB1->setChecked(checked);
+   m_ui->gen_rtf_CB2->setChecked(checked);
+
+   valid_gen_rtf();
+}
+
+void MainWindow::valid_gen_xml_1(bool checked)
+{
+   m_ui->gen_xml_CB1->setChecked(checked);
+   m_ui->gen_xml_CB2->setChecked(checked);
+
+   valid_gen_xml();
+}
+
+void MainWindow::validSet_html(QAbstractButton *button)
+{
+    if (button == m_ui->html_plain_RB) {
+      // no navigation tree, compiled html help disabled
+
+      m_ui->gen_chm_CB->setChecked(false);
+      m_ui->gen_treeview_CB->setChecked(false);
+
+   } else if (button == m_ui->html_nav_RB) {
+      // navigation tree, compiled html help disabled
+
+      m_ui->gen_chm_CB->setChecked(false);
+      m_ui->gen_treeview_CB->setChecked(true);
+
+   } else if (button == m_ui->html_chm_RB ) {
+      // no navigation tree, compiled html help enabled
+
+      m_ui->gen_chm_CB->setChecked(true);
+      m_ui->gen_treeview_CB->setChecked(false);
+   }
+
+   valid_gen_chm();
+}
+
+void MainWindow::validGet_html()
+{
+   if (m_ui->gen_chm_CB->isChecked()) {
+     // compiled help
+     m_ui->html_chm_RB->setChecked(true);
+
+   } else if (m_ui->gen_treeview_CB->isChecked()) {
+     // navigation tree
+     m_ui->html_nav_RB->setChecked(true);
+
+   } else  {
+     // plain HTML
+     m_ui->html_plain_RB->setChecked(true);
+
+   }
+}
+
+void MainWindow::validSet_latex(QAbstractButton *button)
+{
+   if (button == m_ui->latex_hyper_pdf_RB) {
+      // hyperlinked PDF
+
+      m_ui->latex_pdf_CB->setChecked(true);
+      m_ui->latex_hyper_pdf_CB->setChecked(true);
+
+   } else if (button == m_ui->latex_pdf_RB) {
+      // pdf
+
+      m_ui->latex_pdf_CB->setChecked(true);
+      m_ui->latex_hyper_pdf_CB->setChecked(false);
+
+   } else if (button == m_ui->latex_ps_RB) {
+      // PostScript
+
+      m_ui->latex_pdf_CB->setChecked(false);
+      m_ui->latex_hyper_pdf_CB->setChecked(false);
+   }
+}
+
+void MainWindow::validGet_latex()
+{
+   if (m_ui->latex_pdf_CB->isChecked()) {
+     // postScript
+     m_ui->latex_ps_RB->setChecked(true);
+
+   } else if (m_ui->latex_hyper_pdf_CB->isChecked()) {
+     // pdf
+     m_ui->latex_pdf_RB->setChecked(true);
+
+   } else  {
+     // hyperlinked PDF
+     m_ui->latex_hyper_pdf_RB->setChecked(true);
+
+   }
+}
+
+void MainWindow::validSet_dot(QAbstractButton *button)
+{
+   if (button == m_ui->diagram_none_RB) {
+      // no diagrams
+      m_ui->have_dot_CB->setChecked(false);
+      m_ui->class_diagrams_CB->setChecked(false);
+
+   } else if (button == m_ui->diagram_built_in_RB) {
+      // builtin diagrams
+      m_ui->have_dot_CB->setChecked(false);
+      m_ui->class_diagrams_CB->setChecked(true);
+
+   } else if (button == m_ui->diagram_dot_RB) {
+      // dot diagrams
+      m_ui->have_dot_CB->setChecked(true);
+      m_ui->class_diagrams_CB->setChecked(false);
+
+   }
+}
+
+void MainWindow::validGet_dot()
+{
+   if (m_ui->have_dot_CB->isChecked()) {
+     // dot
+     m_ui->diagram_dot_RB->setChecked(true);
+
+   } else if (m_ui->class_diagrams_CB->isChecked()) {
+     // builtin diagrams
+      m_ui->diagram_built_in_RB->setChecked(true);
+
+   } else  {
+     // no diagrams
+     m_ui->diagram_none_RB->setChecked(true);
+
+   }
+}
+
+// tab 2
+void MainWindow::valid_full_path_names()
+{
+   if (m_ui->full_path_names_CB->isChecked()) {
+      m_ui->strip_from_path->setEnabled(true);
+      m_ui->strip_from_path_PB->setEnabled(true);
+
+   } else {
+      m_ui->strip_from_path->setEnabled(false);
+      m_ui->strip_from_path_PB->setEnabled(false);
+   }
+}
+
+void MainWindow::valid_filter_source_files()
+{
+   if (m_ui->filter_source_files_CB->isChecked()) {
+      m_ui->filter_source_patterns->setEnabled(true);
+      m_ui->filter_source_patterns_PB->setEnabled(true);
+
+   } else {
+      m_ui->filter_source_patterns->setEnabled(false);
+      m_ui->filter_source_patterns_PB->setEnabled(false);
+
+   }
+}
+
+void MainWindow::valid_alpha_index()
+{
+   if (m_ui->alpha_index_CB->isChecked()) {
+      m_ui->cols_in_index_SB->setEnabled(true);
+      m_ui->ignore_prefix->setEnabled(true);
+      m_ui->ignore_prefix_PB->setEnabled(true);
+
+   } else {
+      m_ui->cols_in_index_SB->setEnabled(false);
+      m_ui->ignore_prefix->setEnabled(false);
+      m_ui->ignore_prefix_PB->setEnabled(false);
+
+   }
+}
+
+void MainWindow::valid_enable_preprocessing()
+{
+   if (m_ui->enable_preprocessing_CB->isChecked()) {
+      m_ui->macro_expansion_CB->setEnabled(true);
+      m_ui->expand_only_predefined_CB->setEnabled(true);
+      m_ui->search_includes_CB->setEnabled(true);
+      m_ui->include_path->setEnabled(true);
+      m_ui->include_path_PB->setEnabled(true);
+      m_ui->include_file_patterns->setEnabled(true);
+      m_ui->include_file_patterns_PB->setEnabled(true);
+      m_ui->predefined_macros->setEnabled(true);
+      m_ui->predefined_macros_PB->setEnabled(true);
+      m_ui->expand_as_defined->setEnabled(true);
+      m_ui->expand_as_defined_PB->setEnabled(true);
+      m_ui->skip_function_macros_CB->setEnabled(true);
+
+   } else {
+      m_ui->macro_expansion_CB->setEnabled(false);
+      m_ui->expand_only_predefined_CB->setEnabled(false);
+      m_ui->search_includes_CB->setEnabled(false);
+      m_ui->include_path->setEnabled(false);
+      m_ui->include_path_PB->setEnabled(false);
+      m_ui->include_file_patterns->setEnabled(false);
+      m_ui->include_file_patterns_PB->setEnabled(false);
+      m_ui->predefined_macros->setEnabled(false);
+      m_ui->predefined_macros_PB->setEnabled(false);
+      m_ui->expand_as_defined->setEnabled(false);
+      m_ui->expand_as_defined_PB->setEnabled(false);
+      m_ui->skip_function_macros_CB->setEnabled(false);
+
+   }
+}
+
+void MainWindow::valid_have_dot()
+{
+   if (m_ui->have_dot_CB->isChecked()) {
+      m_ui->dot_num_threads_SB->setEnabled(true);
+      m_ui->dot_font_name->setEnabled(true);
+      m_ui->dot_font_name_PB->setEnabled(true);
+      m_ui->dot_font_size_SB->setEnabled(true);
+      m_ui->dot_font_path->setEnabled(true);
+      m_ui->dot_font_name_PB->setEnabled(true);
+
+      m_ui->dot_class_graph_CB2->setEnabled(true);
+      m_ui->dot_collaboration_CB2->setEnabled(true);
+      m_ui->group_graphs_CB->setEnabled(true);
+      m_ui->uml_look_CB ->setEnabled(true);
+      m_ui->uml_limit_num_fields_SB->setEnabled(true);
+      m_ui->template_relations_CB->setEnabled(true);
+      m_ui->dot_include_CB2->setEnabled(true);
+      m_ui->dot_included_by_CB2->setEnabled(true);
+      m_ui->dot_call_CB2->setEnabled(true);
+      m_ui->dot_called_by_CB2->setEnabled(true);
+      m_ui->dot_hierarchy_CB2->setEnabled(true);
+      m_ui->directory_graph_CB->setEnabled(true);
+      m_ui->dot_image_format_CM->setEnabled(true);
+      m_ui->interactive_svg_CB->setEnabled(true);
+
+      m_ui->dot_path->setEnabled(true);
+      m_ui->dot_path_PB->setEnabled(true);
+      m_ui->dot_file_dirs->setEnabled(true);
+      m_ui->dot_file_dirs_PB->setEnabled(true);
+      m_ui->msc_file_dirs->setEnabled(true);
+      m_ui->msc_file_dirs_PB ->setEnabled(true);
+      m_ui->dia_file_dirs->setEnabled(true);
+      m_ui->dia_file_dirs_PB->setEnabled(true);
+      m_ui->plantuml_jar_path->setEnabled(true);
+      m_ui->plantuml_jar_path_PB->setEnabled(true);
+      m_ui->dot_graph_max_nodes_SB->setEnabled(true);
+      m_ui->dot_graph_max_depth_SB->setEnabled(true);
+      m_ui->dot_transparent_CB->setEnabled(true);
+      m_ui->dot_multiple_targets_CB->setEnabled(true);
+      m_ui->gen_legend_CB->setEnabled(true);
+      m_ui->dot_cleanup_CB->setEnabled(true);
+
+   } else {
+      m_ui->dot_num_threads_SB->setEnabled(false);
+      m_ui->dot_font_name->setEnabled(false);
+      m_ui->dot_font_name_PB->setEnabled(false);
+      m_ui->dot_font_size_SB->setEnabled(false);
+      m_ui->dot_font_path->setEnabled(false);
+      m_ui->dot_font_name_PB->setEnabled(false);
+
+      m_ui->dot_class_graph_CB2->setEnabled(false);
+      m_ui->dot_collaboration_CB2->setEnabled(false);
+      m_ui->group_graphs_CB->setEnabled(false);
+      m_ui->uml_look_CB ->setEnabled(false);
+      m_ui->uml_limit_num_fields_SB->setEnabled(false);
+      m_ui->template_relations_CB->setEnabled(false);
+      m_ui->dot_include_CB2->setEnabled(false);
+      m_ui->dot_included_by_CB2->setEnabled(false);
+      m_ui->dot_call_CB2->setEnabled(false);
+      m_ui->dot_called_by_CB2->setEnabled(false);
+      m_ui->dot_hierarchy_CB2->setEnabled(false);
+      m_ui->directory_graph_CB->setEnabled(false);
+      m_ui->dot_image_format_CM->setEnabled(false);
+      m_ui->interactive_svg_CB->setEnabled(false);
+
+      m_ui->dot_path->setEnabled(false);
+      m_ui->dot_path_PB->setEnabled(false);
+      m_ui->dot_file_dirs->setEnabled(false);
+      m_ui->dot_file_dirs_PB->setEnabled(false);
+      m_ui->msc_file_dirs->setEnabled(false);
+      m_ui->msc_file_dirs_PB ->setEnabled(false);
+      m_ui->dia_file_dirs->setEnabled(false);
+      m_ui->dia_file_dirs_PB->setEnabled(false);
+      m_ui->plantuml_jar_path->setEnabled(false);
+      m_ui->plantuml_jar_path_PB->setEnabled(false);
+      m_ui->dot_graph_max_nodes_SB->setEnabled(false);
+      m_ui->dot_graph_max_depth_SB->setEnabled(false);
+      m_ui->dot_transparent_CB->setEnabled(false);
+      m_ui->dot_multiple_targets_CB->setEnabled(false);
+      m_ui->gen_legend_CB->setEnabled(false);
+      m_ui->dot_cleanup_CB->setEnabled(false);
+   }
+}
+
+// tab 3
 void MainWindow::valid_gen_html()
 {
    // this line can be redundant
@@ -569,6 +1061,23 @@ void MainWindow::valid_gen_chm()
       m_ui->binary_toc_CB->setEnabled(false);
       m_ui->toc_expanded_CB->setEnabled(false);
 
+   }
+}
+
+void MainWindow::valid_gen_docbook()
+{
+   // this line can be redundant
+   m_ui->gen_docbook_CB1->setChecked(m_ui->gen_docbook_CB2->isChecked());
+
+   if (m_ui->gen_docbook_CB2->isChecked()) {
+      m_ui->docbook_output->setEnabled(true);
+      m_ui->docbook_output_PB->setEnabled(true);
+      m_ui->docbook_program_listing_CB->setEnabled(true);
+
+   } else {
+      m_ui->docbook_output->setEnabled(false);
+      m_ui->docbook_output_PB->setEnabled(false);
+      m_ui->docbook_program_listing_CB->setEnabled(false);
    }
 }
 
@@ -745,23 +1254,6 @@ void MainWindow::valid_gen_xml()
    }
 }
 
-void MainWindow::valid_gen_docbook()
-{
-   // this line can be redundant
-   m_ui->gen_docbook_CB1->setChecked(m_ui->gen_docbook_CB2->isChecked());
-
-   if (m_ui->gen_docbook_CB2->isChecked()) {
-      m_ui->docbook_output->setEnabled(true);
-      m_ui->docbook_output_PB->setEnabled(true);
-      m_ui->docbook_program_listing_CB->setEnabled(true);
-
-   } else {
-      m_ui->docbook_output->setEnabled(false);
-      m_ui->docbook_output_PB->setEnabled(false);
-      m_ui->docbook_program_listing_CB->setEnabled(false);
-   }
-}
-
 void MainWindow::valid_html_search()
 {
    // this line can be redundant
@@ -791,171 +1283,6 @@ void MainWindow::valid_html_search()
 
 
 // **
-void MainWindow::valid_gen_html_1(bool checked)
-{
-   m_ui->gen_html_CB1->setChecked(checked);
-   m_ui->gen_html_CB2->setChecked(checked);
-
-   valid_gen_html();
-}
-
-void MainWindow::valid_gen_latex_1(bool checked)
-{
-   m_ui->gen_latex_CB1->setChecked(checked);
-   m_ui->gen_latex_CB2->setChecked(checked);
-
-   valid_gen_latex();
-}
-
-void MainWindow::valid_gen_docbook_1(bool checked)
-{
-   m_ui->gen_docbook_CB1->setChecked(checked);
-   m_ui->gen_docbook_CB2->setChecked(checked);
-
-   valid_gen_docbook();
-}
-
-void MainWindow::valid_gen_man_1(bool checked)
-{
-   m_ui->gen_man_CB1->setChecked(checked);
-   m_ui->gen_man_CB2->setChecked(checked);
-
-   valid_gen_man();
-}
-
-void MainWindow::valid_gen_rtf_1(bool checked)
-{
-   m_ui->gen_rtf_CB1->setChecked(checked);
-   m_ui->gen_rtf_CB2->setChecked(checked);
-
-   valid_gen_rtf();
-}
-
-void MainWindow::valid_gen_xml_1(bool checked)
-{
-   m_ui->gen_xml_CB1->setChecked(checked);
-   m_ui->gen_xml_CB2->setChecked(checked);
-
-   valid_gen_xml();
-}
-
-void MainWindow::validSet_html(QAbstractButton *button)
-{
-    if (button == m_ui->html_plain_RB) {
-      // plain HTML
-
-      m_ui->gen_chm_CB->setChecked(false);
-      m_ui->gen_treeview_CB->setChecked(false);
-
-   } else if (button == m_ui->html_nav_RB) {
-      // with navigation tree
-
-      m_ui->gen_chm_CB->setChecked(false);
-      m_ui->gen_treeview_CB->setChecked(true);
-
-   } else if (button == m_ui->html_chm_RB ) {
-      // with compiled help
-
-      m_ui->gen_chm_CB->setChecked(true);
-      m_ui->gen_treeview_CB->setChecked(false);
-   }
-
-   valid_gen_chm();
-}
-
-void MainWindow::validGet_html()
-{
-   if (m_ui->gen_chm_CB->isChecked()) {
-     // compiled help
-     m_ui->html_chm_RB->setChecked(true);
-
-   } else if (m_ui->gen_treeview_CB->isChecked()) {
-     // navigation tree
-     m_ui->html_nav_RB->setChecked(true);
-
-   } else  {
-     // plain HTML
-     m_ui->html_plain_RB->setChecked(true);
-
-   }
-}
-
-void MainWindow::validSet_latex(QAbstractButton *button)
-{
-   if (button == m_ui->latex_hyper_pdf_RB) {
-      // hyperlinked PDF
-
-      m_ui->latex_pdf_CB->setChecked(true);
-      m_ui->latex_hyper_pdf_CB->setChecked(true);
-
-   } else if (button == m_ui->latex_pdf_RB) {
-      // pdf
-
-      m_ui->latex_pdf_CB->setChecked(true);
-      m_ui->latex_hyper_pdf_CB->setChecked(false);
-
-   } else if (button == m_ui->latex_ps_RB) {
-      // PostScript
-
-      m_ui->latex_pdf_CB->setChecked(false);
-      m_ui->latex_hyper_pdf_CB->setChecked(false);
-   }
-}
-
-void MainWindow::validGet_latex()
-{
-   if (m_ui->latex_pdf_CB->isChecked()) {
-     // postScript
-     m_ui->latex_ps_RB->setChecked(true);
-
-   } else if (m_ui->latex_hyper_pdf_CB->isChecked()) {
-     // pdf
-     m_ui->latex_pdf_RB->setChecked(true);
-
-   } else  {
-     // hyperlinked PDF
-     m_ui->latex_hyper_pdf_RB->setChecked(true);
-
-   }
-}
-
-void MainWindow::validSet_dot(QAbstractButton *button)
-{
-   if (button == m_ui->diagram_none_RB) {
-      // no diagrams
-      m_ui->have_dot_CB->setChecked(false);
-      m_ui->class_diagrams_CB->setChecked(false);
-
-   } else if (button == m_ui->diagram_built_in_RB) {
-      // builtin diagrams
-      m_ui->have_dot_CB->setChecked(false);
-      m_ui->class_diagrams_CB->setChecked(true);
-
-   } else if (button == m_ui->diagram_dot_RB) {
-      // dot diagrams
-      m_ui->have_dot_CB->setChecked(true);
-      m_ui->class_diagrams_CB->setChecked(false);
-
-   }
-}
-
-void MainWindow::validGet_dot()
-{
-   if (m_ui->have_dot_CB->isChecked()) {
-     // dot
-     m_ui->diagram_dot_RB->setChecked(true);
-
-   } else if (m_ui->class_diagrams_CB->isChecked()) {
-     // builtin diagrams
-      m_ui->diagram_built_in_RB->setChecked(true);
-
-   } else  {
-     // no diagrams
-     m_ui->diagram_none_RB->setChecked(true);
-
-   }
-}
-
 static QString getFilePattens()
 {
    QStringList list;

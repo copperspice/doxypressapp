@@ -31,11 +31,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
    }
 }
 
-void MainWindow::configChanged()
-{
-   setDoxyTitle(true);
-}
-
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
    //  process events for help
@@ -309,20 +304,26 @@ void MainWindow::saveSettings()
 
 void MainWindow::setDoxyTitle(bool isModified)
 {
-   m_modified = isModified;
+   m_modified = isModified;   
+   setWindowModified(m_modified);
 
-   // displays as: DoxyPressApp --  ConfigFileName[*]
-   if (m_curFile.isEmpty())   {
+   // displays as: DoxyPressApp -- FileName[*]
+   QString temp = QChar(0x02014);
 
-      setWindowTitle(tr("DoxyPressApp ") );
+   if (m_curFile.isEmpty())  {
 
-   } else {
-      QString temp = QChar(0x02014);
+      if (m_modified) {
+         setWindowTitle(tr("DoxyPressApp ") + temp + " [*]" );
+      } else {
+         setWindowTitle(tr("DoxyPressApp ") );
+      }
+
+   } else {     
 
       if (m_modified) {
          setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile + " [*]" );
       } else {
-         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile );
+         setWindowTitle(tr("DoxyPressApp ") + m_curFile );
       }
    }
 }

@@ -475,10 +475,10 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_project_logoFN =                        object.value("project-logo").toString();
    m_ui->output_dir->setText(                object.value("output-dir").toString());
 
-   m_ui->optimize_cplus_CB->setChecked(      object.value("optimize-cplus").toBool());  
-   m_ui->optimize_java_CB->setChecked(       object.value("optimize-java").toBool());
-   m_ui->optimize_c_CB->setChecked(          object.value("optimize-c").toBool());
-   m_ui->optimize_fortran_CB->setChecked(    object.value("optimize-fortran").toBool());
+   m_ui->optimize_cplus_RB->setChecked(      object.value("optimize-cplus").toBool());
+   m_ui->optimize_java_RB->setChecked(       object.value("optimize-java").toBool());
+   m_ui->optimize_c_RB->setChecked(          object.value("optimize-c").toBool());
+   m_ui->optimize_fortran_RB->setChecked(    object.value("optimize-fortran").toBool());
 
    m_ui->gen_html_CB1->setChecked(           object.value("generate-html").toBool());
 
@@ -502,8 +502,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
 
    //  ***
-   // tab 2 - project
-   m_ui->project_encoding->setText(                object.value("project-encoding").toString());
+   // tab 2 - general
    m_ui->create_subdirs_CB->setChecked(            object.value("create-subdirs").toBool());
    m_ui->allow_unicode_names_CB->setChecked(       object.value("allow-unicode-names").toBool());
 
@@ -588,19 +587,10 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->layout_file->setText(                     object.value("layout-file").toString());
    m_ui->cite_bib_files->setPlainText(             getDataList(object, "cite-bib-files"));
 
-   // tab 2 - messages
-   m_ui->quiet_CB->setChecked(                     object.value("quiet").toBool());
-   m_ui->warnings_CB->setChecked(                  object.value("warnings").toBool());
-   m_ui->warn_undoc_CB->setChecked(                object.value("warn-undoc").toBool());
-   m_ui->warn_doc_error_CB->setChecked(            object.value("warn-doc-error").toBool());
-   m_ui->warn_undoc_parm_CB->setChecked(           object.value("warn-undoc-parm").toBool());
-   m_ui->warn_format->setText(                     object.value("warn-format").toString());
-   m_ui->warn_logfile->setText(                    object.value("warn-logfile").toString());
-
    // tab 2 -input
    m_ui->input_source->setPlainText(               getDataList(object, "input-source"));
    m_ui->input_encoding->setText(                  object.value("input-encoding").toString());
-   m_ui->file_patterns->setPlainText(              getDataList(object, "file-patterns"));
+   m_ui->input_patterns->setPlainText(             getDataList(object, "input-patterns"));
    m_ui->source_recursive_CB->setChecked(          object.value("source-recursive").toBool());
 
    m_ui->exclude_files->setPlainText(              getDataList(object, "exclude-files"));
@@ -612,15 +602,29 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->example_recursive_CB->setChecked(         object.value("example-recursive").toBool());
 
    m_ui->image_path->setPlainText(                 getDataList(object, "image-path"));
-   m_ui->input_filter->setText(                    object.value("input-filter").toString());
+   m_ui->filter_program->setText(                  object.value("filter-program").toString());
    m_ui->filter_patterns->setPlainText(            getDataList(object, "filter-patterns"));
    m_ui->filter_source_files_CB->setChecked(       object.value("filter-source-files").toBool());
    m_ui->filter_source_patterns->setPlainText(     getDataList(object, "filter-source-patterns"));
    m_ui->mdfile_mainpage->setText(                 object.value("mdfile-mainpage").toString());
 
-   // tab 2 -browser
-   m_ui->source_browser_CB->setChecked(            object.value("source-browser").toBool());
-   m_ui->inline_sources_CB->setChecked(            object.value("inline-sources").toBool());
+   // tab 2 -index
+   m_ui->alpha_index_CB->setChecked(               object.value("alpha-index").toBool());
+   m_ui->cols_in_index_SB->setValue(               object.value("cols-in-index").toInt());
+   m_ui->ignore_prefix->setPlainText(              getDataList(object, "ignore-prefix"));
+
+   // tab 2 - messages
+   m_ui->quiet_CB->setChecked(                     object.value("quiet").toBool());
+   m_ui->warnings_CB->setChecked(                  object.value("warnings").toBool());
+   m_ui->warn_undoc_CB->setChecked(                object.value("warn-undoc").toBool());
+   m_ui->warn_doc_error_CB->setChecked(            object.value("warn-doc-error").toBool());
+   m_ui->warn_undoc_parm_CB->setChecked(           object.value("warn-undoc-parm").toBool());
+   m_ui->warn_format->setText(                     object.value("warn-format").toString());
+   m_ui->warn_logfile->setText(                    object.value("warn-logfile").toString());
+
+   // tab 2 -source code
+   m_ui->source_code_CB->setChecked(               object.value("source-code").toBool());
+   m_ui->inline_source_CB->setChecked(             object.value("inline-source").toBool());
    m_ui->strip_code_comments_CB->setChecked(       object.value("strip-code-comments").toBool());
    m_ui->ref_by_relation_CB->setChecked(           object.value("ref-by-relation").toBool());
    m_ui->ref_relation_CB->setChecked(              object.value("ref-relation").toBool());
@@ -630,11 +634,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->verbatim_headers_CB->setChecked(          object.value("verbatim-headers").toBool());
    m_ui->clang_parsing_CB->setChecked(             object.value("clang-parsing").toBool());
    m_ui->clang_options->setPlainText(              getDataList(object, "clang-options"));
-
-   // tab 2 -index
-   m_ui->alpha_index_CB->setChecked(               object.value("alpha-index").toBool());
-   m_ui->cols_in_index_SB->setValue(               object.value("cols-in-index").toInt());
-   m_ui->ignore_prefix->setPlainText(              getDataList(object, "ignore-prefix"));
 
    // tab 2 - preprocess
    m_ui->enable_preprocessing_CB->setChecked(      object.value("enable-preprocessing").toBool());
@@ -827,10 +826,10 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("project-logo",          m_project_logoFN);
    object.insert("output-dir",            m_ui->output_dir->text());
 
-   object.insert("optimize-cplus",        m_ui->optimize_cplus_CB->isChecked());   
-   object.insert("optimize-java",         m_ui->optimize_java_CB->isChecked());
-   object.insert("optimize-c",            m_ui->optimize_c_CB->isChecked());
-   object.insert("optimize-fortran",      m_ui->optimize_fortran_CB->isChecked());
+   object.insert("optimize-cplus",        m_ui->optimize_cplus_RB->isChecked());
+   object.insert("optimize-java",         m_ui->optimize_java_RB->isChecked());
+   object.insert("optimize-c",            m_ui->optimize_c_RB->isChecked());
+   object.insert("optimize-fortran",      m_ui->optimize_fortran_RB->isChecked());
 
    object.insert("generate-html",         m_ui->gen_html_CB1->isChecked());   
 
@@ -853,8 +852,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("dot-called-by",         m_ui->dot_called_by_CB1->isChecked());
 
    //  ***
-   // tab 2 - project
-   object.insert("project-encoding",         m_ui->project_encoding->text());
+   // tab 2 - general
    object.insert("create-subdirs",           m_ui->create_subdirs_CB->isChecked());
    object.insert("allow-unicode-names",      m_ui->allow_unicode_names_CB->isChecked());
    object.insert("output-language",          m_ui->output_language_CM->currentText());
@@ -936,19 +934,10 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("layout-file",              m_ui->layout_file->text());
    object.insert("cite-bib-files",           putDataList(m_ui->cite_bib_files->toPlainText()));
 
-   // tab 2 - messages
-   object.insert("quiet",                    m_ui->quiet_CB->isChecked());
-   object.insert("warnings",                 m_ui->warnings_CB->isChecked());
-   object.insert("warn-undoc",               m_ui->warn_undoc_CB->isChecked());
-   object.insert("warn-doc-error",           m_ui->warn_doc_error_CB->isChecked());
-   object.insert("warn-undoc-parm",          m_ui->warn_undoc_parm_CB->isChecked());
-   object.insert("warn-format",              m_ui->warn_format->text());
-   object.insert("warn-logfile",             m_ui->warn_logfile->text());
-
    // tab 2 - input
    object.insert("input-source",             putDataList(m_ui->input_source->toPlainText()));
    object.insert("input-encoding",           m_ui->input_encoding->text());
-   object.insert("file-patterns",            putDataList(m_ui->file_patterns->toPlainText()));
+   object.insert("input-patterns",           putDataList(m_ui->input_patterns->toPlainText()));
    object.insert("source-recursive",         m_ui->source_recursive_CB->isChecked());
 
    object.insert("exclude-files",            putDataList(m_ui->exclude_files->toPlainText()));
@@ -960,15 +949,29 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("example-recursive",        m_ui->example_recursive_CB->isChecked());
 
    object.insert("image-path",               putDataList(m_ui->image_path->toPlainText()));
-   object.insert("input-filter",             m_ui->input_filter->text());
+   object.insert("filter-program",           m_ui->filter_program->text());
    object.insert("filter-patterns",          putDataList(m_ui->filter_patterns->toPlainText()));
    object.insert("filter-source-files",      m_ui->filter_source_files_CB->isChecked());
    object.insert("filter-source-patterns",   putDataList(m_ui->filter_source_patterns->toPlainText()));
    object.insert("mdfile-mainpage",          m_ui->mdfile_mainpage->text());
 
-   // tab 2 -browser
-   object.insert("source-browser",           m_ui->source_browser_CB->isChecked());
-   object.insert("inline-sources",           m_ui->inline_sources_CB->isChecked());
+   // tab 2 -index
+   object.insert("alpha-index",              m_ui->alpha_index_CB->isChecked());
+   object.insert("cols-in-index",            m_ui->cols_in_index_SB->value());
+   object.insert("ignore-prefix",            putDataList(m_ui->ignore_prefix->toPlainText()));
+
+   // tab 2 - messages
+   object.insert("quiet",                    m_ui->quiet_CB->isChecked());
+   object.insert("warnings",                 m_ui->warnings_CB->isChecked());
+   object.insert("warn-undoc",               m_ui->warn_undoc_CB->isChecked());
+   object.insert("warn-doc-error",           m_ui->warn_doc_error_CB->isChecked());
+   object.insert("warn-undoc-parm",          m_ui->warn_undoc_parm_CB->isChecked());
+   object.insert("warn-format",              m_ui->warn_format->text());
+   object.insert("warn-logfile",             m_ui->warn_logfile->text());
+
+   // tab 2 -source code
+   object.insert("source-code",              m_ui->source_code_CB->isChecked());
+   object.insert("inline-source",            m_ui->inline_source_CB->isChecked());
    object.insert("strip-code-comments",      m_ui->strip_code_comments_CB->isChecked());
    object.insert("ref-by-relation",          m_ui->ref_by_relation_CB->isChecked());
    object.insert("ref-relation",             m_ui->ref_relation_CB->isChecked());
@@ -978,11 +981,6 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
    object.insert("clang-parsing",            m_ui->clang_parsing_CB->isChecked());
    object.insert("clang-options",            putDataList(m_ui->clang_options->toPlainText()));
-
-   // tab 2 -index
-   object.insert("alpha-index",              m_ui->alpha_index_CB->isChecked());
-   object.insert("cols-in-index",            m_ui->cols_in_index_SB->value());
-   object.insert("ignore-prefix",            putDataList(m_ui->ignore_prefix->toPlainText()));
 
    // tab 2 - preprocess
    object.insert("enable-preprocessing",     m_ui->enable_preprocessing_CB->isChecked());

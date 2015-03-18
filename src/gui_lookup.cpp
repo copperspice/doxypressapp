@@ -315,14 +315,14 @@ void MainWindow::input_source_PB()
    }
 }
 
-void MainWindow::file_patterns_PB()
+void MainWindow::input_patterns_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->file_patterns->toPlainText();
+   QString temp = m_ui->input_patterns->toPlainText();
 
-   data.title      = "File Patterns";
+   data.title      = "Input Patterns";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
@@ -334,7 +334,7 @@ void MainWindow::file_patterns_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->file_patterns->setPlainText(temp);
+      m_ui->input_patterns->setPlainText(temp);
    }
 }
 
@@ -476,11 +476,11 @@ void MainWindow::image_path_PB()
    }
 }
 
-void MainWindow::input_filter_PB()
+void MainWindow::filter_program_PB()
 {
-   QString file = m_ui->input_filter->text();
+   QString file = m_ui->filter_program->text();
    file = getSingleFile(tr("Select file"), file);
-   m_ui->input_filter->setText(file);
+   m_ui->filter_program->setText(file);
 }
 
 void MainWindow::filter_patterns_PB()
@@ -488,7 +488,7 @@ void MainWindow::filter_patterns_PB()
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->file_patterns->toPlainText();
+   QString temp = m_ui->filter_patterns->toPlainText();
 
    data.title      = "Filter Patterns";
    data.dataList   = temp.split(regExp);
@@ -608,7 +608,7 @@ void MainWindow::include_file_patterns_PB()
 
    QString temp = m_ui->include_file_patterns->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Inlcude File Patterns";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;

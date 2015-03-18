@@ -18,6 +18,7 @@
 #include "doxy_build_info.h"
 #include "mainwindow.h"
 
+
 #include <QKeySequence>
 #include <QPushButton>
 #include <QTreeWidget>
@@ -115,7 +116,7 @@ MainWindow::MainWindow()
    updateRunButtons();
 
    m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Project);
-   m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
+   m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config);
    m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
 
    m_ui->tabWidget->setCurrentIndex(0);
@@ -176,7 +177,8 @@ void MainWindow::createConnections()
    connect(m_ui->build_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::buildPage);
    connect(m_ui->output_TreeWidget,   &QTreeWidget::currentItemChanged, this, &MainWindow::outputPage);
 
-   // tab 1 - valid
+   // ** validataion
+   // tab 1
    connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);   
 
    connect(m_ui->gen_html_CB1,        &QGroupBox::toggled,   this, &MainWindow::valid_gen_html_1);
@@ -195,74 +197,82 @@ void MainWindow::createConnections()
    connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_dot(QAbstractButton *)));
 
-   // tab 3 - valid
-   connect(m_ui->gen_html_CB2,            &QPushButton::toggled, this, &MainWindow::valid_gen_html);
-   connect(m_ui->gen_chm_CB,              &QPushButton::toggled, this, &MainWindow::valid_gen_chm);
-   connect(m_ui->gen_docbook_CB2,         &QPushButton::toggled, this, &MainWindow::valid_gen_docbook);
-   connect(m_ui->gen_docset_CB,           &QPushButton::toggled, this, &MainWindow::valid_gen_docset);
-   connect(m_ui->gen_eclipse_CB,          &QPushButton::toggled, this, &MainWindow::valid_gen_eclipse);
-   connect(m_ui->gen_latex_CB2,           &QPushButton::toggled, this, &MainWindow::valid_gen_latex);
-   connect(m_ui->gen_man_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_man);
-   connect(m_ui->gen_qthelp_CB,           &QPushButton::toggled, this, &MainWindow::valid_gen_qthelp);
-   connect(m_ui->gen_rtf_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_rtf);
-   connect(m_ui->gen_xml_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
+   // tab 2
+   connect(m_ui->full_path_names_CB,       &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
+   connect(m_ui->filter_source_files_CB ,  &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
+   connect(m_ui->alpha_index_CB ,          &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
+   connect(m_ui->enable_preprocessing_CB , &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
+   connect(m_ui->have_dot_CB ,             &QPushButton::toggled, this, &MainWindow::valid_have_dot);
 
-   connect(m_ui->html_search_CB2,         &QPushButton::toggled, this, &MainWindow::valid_html_search);
+   // tab 3
+   connect(m_ui->gen_html_CB2,             &QPushButton::toggled, this, &MainWindow::valid_gen_html);
+   connect(m_ui->gen_chm_CB,               &QPushButton::toggled, this, &MainWindow::valid_gen_chm);
+   connect(m_ui->gen_docbook_CB2,          &QPushButton::toggled, this, &MainWindow::valid_gen_docbook);
+   connect(m_ui->gen_docset_CB,            &QPushButton::toggled, this, &MainWindow::valid_gen_docset);
+   connect(m_ui->gen_eclipse_CB,           &QPushButton::toggled, this, &MainWindow::valid_gen_eclipse);
+   connect(m_ui->gen_latex_CB2,            &QPushButton::toggled, this, &MainWindow::valid_gen_latex);
+   connect(m_ui->gen_man_CB2,              &QPushButton::toggled, this, &MainWindow::valid_gen_man);
+   connect(m_ui->gen_qthelp_CB,            &QPushButton::toggled, this, &MainWindow::valid_gen_qthelp);
+   connect(m_ui->gen_rtf_CB2,              &QPushButton::toggled, this, &MainWindow::valid_gen_rtf);
+   connect(m_ui->gen_xml_CB2,              &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
 
-   // tab 1 - lookups
-   connect(m_ui->logo_PB,                 &QPushButton::clicked, this, [this](){ getLogo(); } );
-   connect(m_ui->output_dir_PB,           &QPushButton::clicked, this, &MainWindow::output_dir_PB);
-   connect(m_ui->html_colors_PB,          &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
+   connect(m_ui->html_search_CB2,          &QPushButton::toggled, this, &MainWindow::valid_html_search);
 
-   // tab 2- look up (general)
-   connect(m_ui->abbreviate_brief_PB,     &QPushButton::clicked, this, &MainWindow::abbreviate_brief_PB);
-   connect(m_ui->strip_from_path_PB,      &QPushButton::clicked, this, &MainWindow::strip_from_path_PB);
-   connect(m_ui->strip_from_inc_path_PB,  &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
-   connect(m_ui->aliases_PB,              &QPushButton::clicked, this, &MainWindow::aliases_PB);
-   connect(m_ui->tcl_subst_PB,            &QPushButton::clicked, this, &MainWindow::tcl_subst_PB);
-   connect(m_ui->language_mapping_PB,     &QPushButton::clicked, this, &MainWindow::language_mapping_PB);
+   // ** lookups
+   // tab 1
+   connect(m_ui->logo_PB,                  &QPushButton::clicked, this, [this](){ getLogo(); } );
+   connect(m_ui->output_dir_PB,            &QPushButton::clicked, this, &MainWindow::output_dir_PB);
+   connect(m_ui->html_colors_PB,           &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
-   // tab 2- look up (build)
-   connect(m_ui->enabled_sections_PB,     &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
-   connect(m_ui->file_version_filter_PB,  &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
-   connect(m_ui->layout_file_PB,          &QPushButton::clicked, this, &MainWindow::layout_file_PB);
-   connect(m_ui->cite_bib_files_PB,       &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
+   // tab 2- general
+   connect(m_ui->abbreviate_brief_PB,      &QPushButton::clicked, this, &MainWindow::abbreviate_brief_PB);
+   connect(m_ui->strip_from_path_PB,       &QPushButton::clicked, this, &MainWindow::strip_from_path_PB);
+   connect(m_ui->strip_from_inc_path_PB,   &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
+   connect(m_ui->aliases_PB,               &QPushButton::clicked, this, &MainWindow::aliases_PB);
+   connect(m_ui->tcl_subst_PB,             &QPushButton::clicked, this, &MainWindow::tcl_subst_PB);
+   connect(m_ui->language_mapping_PB,      &QPushButton::clicked, this, &MainWindow::language_mapping_PB);
 
-   // tab 2- look up (messages)
-   connect(m_ui->warn_logfile_PB,         &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
+   // tab 2- build
+   connect(m_ui->enabled_sections_PB,      &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
+   connect(m_ui->file_version_filter_PB,   &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
+   connect(m_ui->layout_file_PB,           &QPushButton::clicked, this, &MainWindow::layout_file_PB);
+   connect(m_ui->cite_bib_files_PB,        &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
 
-   // tab 2- look up (input)
-   connect(m_ui->input_source_PB,         &QPushButton::clicked, this, &MainWindow::input_source_PB);
-   connect(m_ui->file_patterns_PB,        &QPushButton::clicked, this, &MainWindow::file_patterns_PB);
-   connect(m_ui->exclude_files_PB,        &QPushButton::clicked, this, &MainWindow::exclude_files_PB);
-   connect(m_ui->exclude_patterns_PB,     &QPushButton::clicked, this, &MainWindow::exclude_patterns_PB);
-   connect(m_ui->exclude_symbols_PB,      &QPushButton::clicked, this, &MainWindow::exclude_symbols_PB);
+   // tab 2- input
+   connect(m_ui->input_source_PB,          &QPushButton::clicked, this, &MainWindow::input_source_PB);
+   connect(m_ui->input_patterns_PB,        &QPushButton::clicked, this, &MainWindow::input_patterns_PB);
+   connect(m_ui->exclude_files_PB,         &QPushButton::clicked, this, &MainWindow::exclude_files_PB);
+   connect(m_ui->exclude_patterns_PB,      &QPushButton::clicked, this, &MainWindow::exclude_patterns_PB);
+   connect(m_ui->exclude_symbols_PB,       &QPushButton::clicked, this, &MainWindow::exclude_symbols_PB);
 
    connect(m_ui->example_source_PB,         SIGNAL(clicked()), this, SLOT(example_source_PB()));
    connect(m_ui->example_patterns_PB,       SIGNAL(clicked()), this, SLOT(example_patterns_PB()));
    connect(m_ui->image_path_PB,             SIGNAL(clicked()), this, SLOT(image_path_PB()));
-   connect(m_ui->input_filter_PB,           SIGNAL(clicked()), this, SLOT(input_filter_PB()));
+   connect(m_ui->filter_program_PB,         SIGNAL(clicked()), this, SLOT(filter_program_PB()));
    connect(m_ui->filter_patterns_PB,        SIGNAL(clicked()), this, SLOT(filter_patterns_PB()));
    connect(m_ui->filter_source_patterns_PB, SIGNAL(clicked()), this, SLOT(filter_source_patterns_PB()));
 
-   // tab 2- look up (browser)
-   connect(m_ui->clang_options_PB,          SIGNAL(clicked()), this, SLOT(clang_options_PB()));
-
-   // tab 2- look up (index)
+   // tab 2- index
    connect(m_ui->ignore_prefix_PB,          SIGNAL(clicked()), this, SLOT(ignore_prefix_PB()));
 
-   // tab 2- look up (preprocessor)
+   // tab 2- messages
+   connect(m_ui->warn_logfile_PB,          &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
+
+   // tab 2- source code
+   connect(m_ui->clang_options_PB,          SIGNAL(clicked()), this, SLOT(clang_options_PB()));
+
+   // tab 2- preprocessor
    connect(m_ui->include_path_PB,           SIGNAL(clicked()), this, SLOT(include_path_PB()));
    connect(m_ui->include_file_patterns_PB,  SIGNAL(clicked()), this, SLOT(include_file_patterns_PB()));
    connect(m_ui->predefined_macros_PB,      SIGNAL(clicked()), this, SLOT(predefined_macros_PB()));
    connect(m_ui->expand_as_defined_PB,      SIGNAL(clicked()), this, SLOT(expand_as_defined_PB()));
 
-   // tab 2- look up (external)
+   // tab 2- external
    connect(m_ui->tag_files_PB,              SIGNAL(clicked()), this, SLOT(tag_files_PB()));
    connect(m_ui->gen_tagfile_PB,            SIGNAL(clicked()), this, SLOT(gen_tagfile_PB()));
    connect(m_ui->perl_path_PB,              SIGNAL(clicked()), this, SLOT(perl_path_PB()));
 
-   // tab 2- look up (dot)
+   // tab 2- dot
    connect(m_ui->mscgen_path_PB,            SIGNAL(clicked()), this, SLOT(mscgen_path_PB()));
    connect(m_ui->dia_path_PB,               SIGNAL(clicked()), this, SLOT(dia_path_PB()));
    connect(m_ui->dot_font_name_PB,          SIGNAL(clicked()), this, SLOT(dot_font_name_PB()));
@@ -274,7 +284,7 @@ void MainWindow::createConnections()
    connect(m_ui->dia_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dia_file_dirs_PB()));
    connect(m_ui->plantuml_jar_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_jar_path_PB()));
 
-   // tab 3 look up (html)
+   // tab 3 html
    connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));
    connect(m_ui->html_header_PB,            SIGNAL(clicked()), this, SLOT(html_header_PB()));
    connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));   
@@ -286,7 +296,7 @@ void MainWindow::createConnections()
    connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
    connect(m_ui->search_mappings_PB,        SIGNAL(clicked()), this, SLOT(search_mappings_PB()));
 
-   // tab 3 look up (chm)
+   // tab 3 chm
    connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
    connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
 
@@ -303,21 +313,21 @@ void MainWindow::createConnections()
    connect(m_ui->latex_footer_PB,           SIGNAL(clicked()), this, SLOT(latex_footer_PB()));
    connect(m_ui->latex_extra_files_PB,      SIGNAL(clicked()), this, SLOT(latex_extra_files_PB()));
 
-    // tab 3 look up (man)
+    // tab 3 man
    connect(m_ui->man_output_PB,             SIGNAL(clicked()),   this, SLOT(man_output_PB()));
 
-   // tab 3 look up (qthelp)
+   // tab 3 qthelp
    connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
    connect(m_ui->qhp_cust_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_cust_attrib_PB()));
    connect(m_ui->qhp_sect_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_sect_attrib_PB()));
    connect(m_ui->qthelp_gen_path_PB,        SIGNAL(clicked()), this, SLOT(qthelp_gen_path_PB()));
 
-   // tab 3 look up (rtf)
+   // tab 3 rtf
    connect(m_ui->rtf_output_PB,             SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
    connect(m_ui->rtf_stylesheet_PB,         SIGNAL(clicked()),   this, SLOT(rtf_stylesheet_PB()));
    connect(m_ui->rtf_extension_PB,          SIGNAL(clicked()),   this, SLOT(rtf_extension_PB()));
 
-   // tab 3 look up (xml)
+   // tab 3 xml
    connect(m_ui->xml_output_PB,             SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
 
    // tab 4
@@ -393,48 +403,41 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
    if (item) {
       QString label = item->text(0);
 
-      //
-      if (label == tr("General")) {
-          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
-
-      } else if (label == tr("Build")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
-
-      } else if (label == tr("Input")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_A);
-
-      } else if (label == tr("Dot")) {
+      //      
+      if (label == tr("Dot")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_A);
-
       }
 
       //
-      if (label == tr("General (Part 1)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_A);
+      if (label == tr("Project Configuration")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Project_Config);
 
-      } else  if (label == tr("General (Part 2)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_General_B);
+      } else  if (label == tr("Build Configuration")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config);
 
-      } else if (label == tr("Build (Part 1)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_A);
+      } else if (label == tr("Build Output")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
 
-      } else if (label == tr("Build (Part 2)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_B);
+      } else if (label == tr("Language")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);
 
       } else if (label == tr("Messages")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Messages);
 
-      } else if (label == tr("Input (Part 1)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_A);
+      } else if (label == tr("Input Source Files")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_Source);
 
-      } else if (label == tr("Input (Part 2)")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_B);
+      } else if (label == tr("Input Other Files")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_Other);
 
-      } else if (label == tr("Source Code Listing")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Source);
+      } else if (label == tr("Input Filters")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Input_Filters);
 
       } else if (label == tr("Index Page")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Index);
+
+      } else if (label == tr("Source Code")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Source);
 
       } else if (label == tr("Preprocessor")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Process);
@@ -478,6 +481,9 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("LaTeX")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex);
 
+      } else if (label == tr("LaTeX Bibliography")) {
+         m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Latex_Bio);
+
       } else if (label == tr("Man")) {
          m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Man);
 
@@ -504,73 +510,4 @@ QSize MainWindow::sizeHint() const
 {
    return QSize(1000, 600);
 }
-
-
-
-//  move these
-
-Syntax::Syntax(QTextDocument *document)
-   : QSyntaxHighlighter(document)
-{
-}
-
-Syntax::~Syntax()
-{
-}
-
-void Syntax::processSyntax()
-{
-   //
-   QStringList keyWords;
-   keyWords.append("Processing");
-
-   //
-   QStringList errorWords;
-   errorWords.append("Error:");
-   errorWords.append("Warning:");
-
-   //
-   HighlightingRule rule;
-
-   for (auto pattern : keyWords) {
-      rule.format.setFontWeight(QFont::Bold);
-      rule.format.setFontItalic(false);
-      rule.format.setForeground(Qt::blue);
-
-      rule.pattern = QRegExp(pattern);
-      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
-
-      highlightingRules.append(rule);
-   }
-
-   for (auto pattern : errorWords) {
-      rule.format.setFontWeight(QFont::Bold);
-      rule.format.setFontItalic(false);
-      rule.format.setForeground(Qt::red);
-
-      rule.pattern = QRegExp(pattern);
-      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
-
-      highlightingRules.append(rule);
-   }
-
-   // redo the current document
-   rehighlight();
-}
-
-void Syntax::highlightBlock(const QString &text)
-{
-   for (auto &rule : highlightingRules) {
-      QRegExp expression(rule.pattern);
-      int index = expression.indexIn(text);
-
-      while (index >= 0) {
-         int length = expression.matchedLength();
-         setFormat(index, length, rule.format);
-         index = expression.indexIn(text, index + length);
-      }
-   }
-
-}
-
 

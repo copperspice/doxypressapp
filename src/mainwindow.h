@@ -18,19 +18,23 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <syntax.h>
 #include "ui_mainwindow.h"
 #include "util.h"
 
 #include <QAction>
 #include <QApplication>
 #include <QByteArray>
+#include <QCheckBox>
 #include <QCloseEvent>
+#include <QComboBox>
 #include <QColor>
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
 #include <QFont>
+#include <QGroupBox>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QLabel>
@@ -39,8 +43,11 @@
 #include <QMenuBar>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QPlainTextEdit>
 #include <QProcess>
+#include <QRadioButton>
 #include <QSettings>
+#include <QSpinBox>
 #include <QStatusBar>
 #include <QString>
 #include <QStringList>
@@ -48,11 +55,6 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QWidget>
-
-
-#include <QSyntaxHighlighter>
-class Syntax;
-
 
 static const int RECENT_FILES_MAX = 10;
 
@@ -72,9 +74,27 @@ struct LookUpInfo {
    bool isFilePB;
 };
 
-struct HelpData {
-   QLabel *label;
+struct HelpData {     
+
+   enum DefType {
+      BOOL,
+      INT,
+      STRING
+   };
+
+   HelpData(DefType x_type, QLabel *x_label, QString x_body)
+      : type(x_type), label(x_label), body(x_body)
+   {
+      defBool = false;
+      defInt  = 0;
+   }
+
+   DefType type;
    QString defValue;
+   bool defBool;
+   int defInt;
+
+   QLabel *label;
    QString title;
    QString body;
 };
@@ -181,10 +201,19 @@ class MainWindow : public QMainWindow
       static QMap<QWidget *, HelpData> m_bigMap;
       static const QString m_filePatterns;
 
+      bool getDefault(QCheckBox *name);
       QString getDefault(QWidget *name);
+      int getDefault(QSpinBox *name);
 
       QLabel *getLabel(QWidget *name);
       void setLabelColor(int option, QWidget *label);
+
+      void setDefault(QCheckBox *name);
+      void setDefault(QComboBox *name);
+      void setDefault(QGroupBox *name);
+      void setDefault(QLineEdit *name);
+      void setDefault(QPlainTextEdit *name);
+      void setDefault(QSpinBox *name);
 
       void setHelpText(QWidget *name);
       QString getHelpBody(QWidget *name);
@@ -251,19 +280,17 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(outputPage)
 
-      // application
-      CS_SLOT_1(Private, void configChanged())
-      CS_SLOT_2(configChanged)
-
       // tab 1 - valid
       CS_SLOT_1(Private, void valid_output_dir())
       CS_SLOT_2(valid_output_dir)
 
+      void adjustDefaults();
       void finalLoad();
       void validGet_html();
       void validGet_latex();
       void validGet_dot();          
 
+      // tab 1
       CS_SLOT_1(Private, void validSet_html(QAbstractButton *))
       CS_SLOT_2(validSet_html)
 
@@ -271,8 +298,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_2(validSet_latex)
 
       CS_SLOT_1(Private, void validSet_dot(QAbstractButton *))
-      CS_SLOT_2(validSet_dot)
+      CS_SLOT_2(validSet_dot)      
 
+      // tab 1
       CS_SLOT_1(Private, void valid_gen_html_1(bool checked))
       CS_SLOT_2(valid_gen_html_1)
 
@@ -290,6 +318,22 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void valid_gen_xml_1(bool checked))
       CS_SLOT_2(valid_gen_xml_1)
+
+      // tab 2 valids
+      CS_SLOT_1(Private, void valid_full_path_names())
+      CS_SLOT_2(valid_full_path_names)
+
+      CS_SLOT_1(Private, void valid_filter_source_files())
+      CS_SLOT_2(valid_filter_source_files)
+
+      CS_SLOT_1(Private, void valid_alpha_index())
+      CS_SLOT_2(valid_alpha_index)
+
+      CS_SLOT_1(Private, void valid_enable_preprocessing())
+      CS_SLOT_2(valid_enable_preprocessing)
+
+      CS_SLOT_1(Private, void valid_have_dot())
+      CS_SLOT_2(valid_have_dot)
 
       // tab 3 valids
       CS_SLOT_1(Private, void valid_gen_html())
@@ -325,7 +369,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void valid_html_search())
       CS_SLOT_2(valid_html_search)
 
-      // tab 1 - look up
+      // ** lookup
+      // tab 1
       CS_SLOT_1(Private, void getLogo(const QString route = ""))
       CS_SLOT_2(getLogo)
 
@@ -335,7 +380,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void tune_colors_PB())
       CS_SLOT_2(tune_colors_PB)
 
-      // tab 2- look up (general)
+
+      // tab 2- general
       CS_SLOT_1(Private, void abbreviate_brief_PB())
       CS_SLOT_2(abbreviate_brief_PB)
 
@@ -354,7 +400,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void language_mapping_PB())
       CS_SLOT_2(language_mapping_PB)
 
-      // tab 2- look up (build)
+
+      // tab 2- build
       CS_SLOT_1(Private, void enabled_sections_PB())
       CS_SLOT_2(enabled_sections_PB)
 
@@ -367,16 +414,13 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void cite_bib_files_PB())
       CS_SLOT_2(cite_bib_files_PB)
 
-      // tab 2- look up (messages)
-      CS_SLOT_1(Private, void warn_logfile_PB())
-      CS_SLOT_2(warn_logfile_PB)
 
-      // tab 2- look up (input)
+      // tab 2- input
       CS_SLOT_1(Private, void input_source_PB())
       CS_SLOT_2(input_source_PB)
 
-      CS_SLOT_1(Private, void file_patterns_PB())
-      CS_SLOT_2(file_patterns_PB)
+      CS_SLOT_1(Private, void input_patterns_PB())
+      CS_SLOT_2(input_patterns_PB)
 
       CS_SLOT_1(Private, void exclude_files_PB())
       CS_SLOT_2(exclude_files_PB)
@@ -396,8 +440,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void image_path_PB())
       CS_SLOT_2(image_path_PB)
 
-      CS_SLOT_1(Private, void input_filter_PB())
-      CS_SLOT_2(input_filter_PB)
+      CS_SLOT_1(Private, void filter_program_PB())
+      CS_SLOT_2(filter_program_PB)
 
       CS_SLOT_1(Private, void filter_patterns_PB())
       CS_SLOT_2(filter_patterns_PB)
@@ -405,15 +449,23 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void filter_source_patterns_PB())
       CS_SLOT_2(filter_source_patterns_PB)
 
-      // tab 2- look up (browser)
-      CS_SLOT_1(Private, void clang_options_PB())
-      CS_SLOT_2(clang_options_PB)
 
-      // tab 2- look up (index)
+      // tab 2- index
       CS_SLOT_1(Private, void ignore_prefix_PB())
       CS_SLOT_2(ignore_prefix_PB)
 
-      // tab 2- look up (preprocess)
+
+      // tab 2- messages
+      CS_SLOT_1(Private, void warn_logfile_PB())
+      CS_SLOT_2(warn_logfile_PB)
+
+
+      // tab 2- source code
+      CS_SLOT_1(Private, void clang_options_PB())
+      CS_SLOT_2(clang_options_PB)
+
+
+      // tab 2- preprocess
       CS_SLOT_1(Private, void include_path_PB())
       CS_SLOT_2(include_path_PB)
 
@@ -426,7 +478,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void expand_as_defined_PB())
       CS_SLOT_2(expand_as_defined_PB)
 
-      // tab 2- look up (external)
+
+      // tab 2- external
       CS_SLOT_1(Private, void tag_files_PB())
       CS_SLOT_2(tag_files_PB)
 
@@ -464,7 +517,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void plantuml_jar_path_PB())
       CS_SLOT_2(plantuml_jar_path_PB)
 
-      // tab 3 look up (html)
+
+      // tab 3 html
       CS_SLOT_1(Private, void html_output_PB())
       CS_SLOT_2(html_output_PB)
 
@@ -570,32 +624,5 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void saveLog())
       CS_SLOT_2(saveLog)
 };
-
-
-class Syntax : public QSyntaxHighlighter
-{
-   CS_OBJECT(Syntax)
-
-   public:
-      Syntax(QTextDocument *document);
-      ~Syntax();
-
-      void processSyntax();
-
-   protected:
-      void highlightBlock(const QString &text);
-
-   private:
-      struct HighlightingRule
-      {
-         QRegExp pattern;
-         QTextCharFormat format;
-      };
-
-      QVector<HighlightingRule> highlightingRules;
-};
-
-
-
 
 #endif

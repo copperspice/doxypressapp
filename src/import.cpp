@@ -44,28 +44,28 @@ void MainWindow::convertDoxy(QByteArray data)
    bool isCpp = true;
 
    tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_JAVA");
-   m_ui->optimize_java_CB->setChecked(tempBool);
+   m_ui->optimize_java_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
    tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_FOR_C");
-   m_ui->optimize_c_CB->setChecked(tempBool);
+   m_ui->optimize_c_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
    tempBool = convert_Bool(data,"OPTIMIZE_FOR_FORTRAN");
-   m_ui->optimize_fortran_CB->setChecked(tempBool);
+   m_ui->optimize_fortran_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
    if (isCpp)  {
-      m_ui->optimize_cplus_CB->setChecked(true);
+      m_ui->optimize_cplus_RB->setChecked(true);
    }
 
    //
@@ -111,10 +111,7 @@ void MainWindow::convertDoxy(QByteArray data)
 
 
    //  ***
-   // tab 2 - project
-   tempStr = convert_Str(data,"DOXYFILE_ENCODING");
-   m_ui->project_encoding->setText(tempStr);
-
+   // tab 2 - general
    tempBool = convert_Bool(data, "CREATE_SUBDIRS");
    m_ui->create_subdirs_CB->setChecked(tempBool);
 
@@ -326,29 +323,6 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->cite_bib_files->setPlainText(tempText);
 
 
-   // tab 2 - messages
-   tempBool = convert_Bool(data, "QUIET");
-   m_ui->quiet_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "WARNINGS");
-   m_ui->warnings_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "WARN_IF_UNDOCUMENTED");
-   m_ui->warn_undoc_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "WARN_IF_DOC_ERROR");
-   m_ui->warn_doc_error_CB->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "WARN_NO_PARAMDOC");
-   m_ui->warn_undoc_parm_CB->setChecked(tempBool);
-
-   tempStr = convert_Str(data,"WARN_FORMAT");
-   m_ui->warn_format->setText(tempStr);
-
-   tempStr = convert_Str(data,"WARN_LOGFILE");
-   m_ui->warn_logfile->setText(tempStr);
-
-
    // tab 2 -input
    tempStr = convert_Str(data,"INPUT");
    m_ui->input_source->setPlainText(tempStr);
@@ -357,7 +331,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->input_encoding->setText(tempStr);
 
    tempText = convert_PlainText(data,"FILE_PATTERNS");
-   m_ui->file_patterns->setPlainText(tempText);
+   m_ui->input_patterns->setPlainText(tempText);
 
    tempBool = convert_Bool(data,"RECURSIVE");
    m_ui->source_recursive_CB->setChecked(tempBool);
@@ -387,7 +361,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->image_path->setPlainText(tempText);
 
    tempStr = convert_Str(data, "INPUT_FILTER");
-   m_ui->input_filter->setText(tempStr);
+   m_ui->filter_program->setText(tempStr);
 
    tempText = convert_PlainText(data,"FILTER_PATTERNS");
    m_ui->filter_patterns->setPlainText(tempText);
@@ -402,12 +376,47 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->mdfile_mainpage->setText(tempStr);
 
 
-   // tab 2 -browser
+   // tab 2 -index
+   tempBool = convert_Bool(data, "ALPHABETICAL_INDEX");
+   m_ui->alpha_index_CB->setChecked(tempBool);
+
+   tempInt = convert_Int(data, "COLS_IN_ALPHA_INDEX");
+   m_ui->cols_in_index_SB->setValue(tempInt);
+
+   tempText = convert_PlainText(data,"IGNORE_PREFIX");
+   m_ui->ignore_prefix->setPlainText(tempText);
+
+
+
+   // tab 2 - messages
+   tempBool = convert_Bool(data, "QUIET");
+   m_ui->quiet_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARNINGS");
+   m_ui->warnings_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_IF_UNDOCUMENTED");
+   m_ui->warn_undoc_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_IF_DOC_ERROR");
+   m_ui->warn_doc_error_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "WARN_NO_PARAMDOC");
+   m_ui->warn_undoc_parm_CB->setChecked(tempBool);
+
+   tempStr = convert_Str(data,"WARN_FORMAT");
+   m_ui->warn_format->setText(tempStr);
+
+   tempStr = convert_Str(data,"WARN_LOGFILE");
+   m_ui->warn_logfile->setText(tempStr);
+
+
+   // tab 2 -source code
    tempBool = convert_Bool(data, "SOURCE_BROWSER");
-   m_ui->source_browser_CB->setChecked(tempBool);
+   m_ui->source_code_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "INLINE_SOURCES");
-   m_ui->inline_sources_CB->setChecked(tempBool);
+   m_ui->inline_source_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "STRIP_CODE_COMMENTS");
    m_ui->strip_code_comments_CB->setChecked(tempBool);
@@ -435,17 +444,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempText = convert_PlainText(data,"CLANG_OPTIONS");
    m_ui->clang_options->setPlainText(tempText);
-
-
-   // tab 2 -index
-   tempBool = convert_Bool(data, "ALPHABETICAL_INDEX");
-   m_ui->alpha_index_CB->setChecked(tempBool);
-
-   tempInt = convert_Int(data, "COLS_IN_ALPHA_INDEX");
-   m_ui->cols_in_index_SB->setValue(tempInt);
-
-   tempText = convert_PlainText(data,"IGNORE_PREFIX");
-   m_ui->ignore_prefix->setPlainText(tempText);
 
 
    // tab 2 - preprocess
@@ -476,6 +474,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "SKIP_FUNCTION_MACROS");
    m_ui->skip_function_macros_CB->setChecked(tempBool);
 
+
    // tab 2 - external
    tempText = convert_PlainText(data,"TAGFILES");
    m_ui->tag_files->setPlainText(tempText);
@@ -494,6 +493,7 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempStr = convert_Str(data, "PERL_PATH");
    m_ui->perl_path->setText(tempStr);
+
 
    // tab 2 - dot
    tempBool = convert_Bool(data,"CLASS_DIAGRAMS");
