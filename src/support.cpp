@@ -221,6 +221,8 @@ bool MainWindow::querySave()
 
       QMessageBox quest;
       quest.setWindowTitle(tr("DoxyPressApp"));
+      quest.setWindowIcon(QIcon("://resources/doxypress.png"));
+
       quest.setText( tr("DoxyPress file has been modified. Save changes?"));
       quest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard  | QMessageBox::Cancel );
       quest.setDefaultButton(QMessageBox::Cancel);
@@ -308,23 +310,18 @@ void MainWindow::setDoxyTitle(bool isModified)
    setWindowModified(m_modified);
 
    // displays as: DoxyPressApp -- FileName[*]
-   QString temp = QChar(0x02014);
+   QString temp;
+
+   if (m_modified) {
+      temp = QChar(0x02014);
+   }
 
    if (m_curFile.isEmpty())  {
+      setWindowTitle(tr("DoxyPressApp ") + " [*]" );
 
-      if (m_modified) {
-         setWindowTitle(tr("DoxyPressApp ") + temp + " [*]" );
-      } else {
-         setWindowTitle(tr("DoxyPressApp ") );
-      }
+   } else {
+      setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile + " [*]" );
 
-   } else {     
-
-      if (m_modified) {
-         setWindowTitle(tr("DoxyPressApp ") + temp + " " + m_curFile + " [*]" );
-      } else {
-         setWindowTitle(tr("DoxyPressApp ") + m_curFile );
-      }
    }
 }
 

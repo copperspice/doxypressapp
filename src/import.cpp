@@ -207,7 +207,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->inline_simple_struct_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "TYPEDEF_HIDES_STRUCT");
-   m_ui->typedef_hides_struct_CB->setChecked(tempBool);
+   m_ui->use_typedef_name_CB->setChecked(tempBool);
 
    tempInt = convert_Int(data, "LOOKUP_CACHE_SIZE");
    m_ui->lookup_cache_size_SB->setValue(tempInt);
@@ -250,6 +250,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "HIDE_SCOPE_NAMES");
    m_ui->hide_scope_names_CB->setChecked(tempBool);
 
+   tempBool = convert_Bool(data, "HIDE_COMPOUND_REFERENCE");
+   m_ui->hide_compound_ref_CB->setChecked(tempBool);
+
    tempBool = convert_Bool(data, "INTERNAL_DOCS");
    m_ui->internal_docs_CB->setChecked(tempBool);
 
@@ -275,7 +278,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->sort_brief_docs_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SORT_MEMBERS_CTORS_1ST");
-   m_ui->sort_members_ctors_first_CB->setChecked(tempBool);
+   m_ui->sort_constructors_first_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SORT_GROUP_NAMES");
    m_ui->sort_group_names_CB->setChecked(tempBool);
@@ -402,7 +405,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->warn_doc_error_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "WARN_NO_PARAMDOC");
-   m_ui->warn_undoc_parm_CB->setChecked(tempBool);
+   m_ui->warn_undoc_param_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data,"WARN_FORMAT");
    m_ui->warn_format->setText(tempStr);

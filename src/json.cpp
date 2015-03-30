@@ -512,8 +512,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->brief_member_desc_CB->setChecked(         object.value("brief-member-desc").toBool());
    m_ui->repeat_brief_CB->setChecked(              object.value("repeat-brief").toBool());
    m_ui->abbreviate_brief->setPlainText(           getDataList(object, "abbreviate-brief"));
-   m_ui->always_detailed_sec_CB->setChecked(       object.value("always-detailed-sec").toBool());
-   m_ui->inline_inherited_member_CB->setChecked(   object.value("inline-inherited-member").toBool());
+   m_ui->always_detailed_sec_CB->setChecked(       object.value("always-detailed-sec").toBool()); 
    m_ui->full_path_names_CB->setChecked(           object.value("full-path-names").toBool());
    m_ui->strip_from_path->setPlainText(            getDataList(object, "strip-from-path"));
    m_ui->strip_from_inc_path->setPlainText(        getDataList(object, "strip-from-inc-path"));
@@ -538,9 +537,6 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->idl_support_CB->setChecked(               object.value("idl-support").toBool());
    m_ui->duplicate_docs_CB->setChecked(            object.value("duplicate-docs").toBool());
    m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
-   m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
-   m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
-   m_ui->typedef_hides_struct_CB->setChecked(      object.value("typedef-hides-struct").toBool());
    m_ui->lookup_cache_size_SB->setValue(           object.value("lookup-cache-size").toInt());
 
    // tab 2 - build
@@ -556,6 +552,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->hide_friend_compounds_CB->setChecked(     object.value("hide-friend-compounds").toBool());
    m_ui->hide_in_body_docs_CB->setChecked(         object.value("hide-in-body-docs").toBool());
    m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());  
+   m_ui->hide_compound_ref_CB->setChecked(         object.value("hide-compound-ref").toBool());
 
    m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
    m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
@@ -565,13 +562,17 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->show_used_files_CB->setChecked(           object.value("show-used-files").toBool());
    m_ui->show_file_page_CB->setChecked(            object.value("show-file-page").toBool());
    m_ui->show_namespace_page_CB->setChecked(       object.value("show-namespace-page").toBool());
-
    m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
+
+   m_ui->inline_inherited_member_CB->setChecked(   object.value("inline-inherited-member").toBool());
    m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
+   m_ui->inline_grouped_classes_CB->setChecked(    object.value("inline-grouped-classes").toBool());
+   m_ui->inline_simple_struct_CB->setChecked(      object.value("inline-simple-struct").toBool());
+   m_ui->use_typedef_name_CB->setChecked(          object.value("use-typedef-name").toBool());
 
    m_ui->sort_member_docs_CB->setChecked(          object.value("sort-member-docs").toBool());
    m_ui->sort_brief_docs_CB->setChecked(           object.value("sort-brief-docs").toBool());
-   m_ui->sort_members_ctors_first_CB->setChecked(  object.value("sort-members-ctors-first").toBool());
+   m_ui->sort_constructors_first_CB->setChecked(   object.value("sort-constructors-first").toBool());
    m_ui->sort_group_names_CB->setChecked(          object.value("sort-group-names").toBool());
    m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by-scope-name").toBool());
 
@@ -618,7 +619,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->warnings_CB->setChecked(                  object.value("warnings").toBool());
    m_ui->warn_undoc_CB->setChecked(                object.value("warn-undoc").toBool());
    m_ui->warn_doc_error_CB->setChecked(            object.value("warn-doc-error").toBool());
-   m_ui->warn_undoc_parm_CB->setChecked(           object.value("warn-undoc-parm").toBool());
+   m_ui->warn_undoc_param_CB->setChecked(          object.value("warn-undoc-param").toBool());
    m_ui->warn_format->setText(                     object.value("warn-format").toString());
    m_ui->warn_logfile->setText(                    object.value("warn-logfile").toString());
 
@@ -860,8 +861,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("repeat-brief",             m_ui->repeat_brief_CB->isChecked());
 
    object.insert("abbreviate-brief",         putDataList(m_ui->abbreviate_brief->toPlainText()));
-   object.insert("always-detailed-sec",      m_ui->always_detailed_sec_CB->isChecked());
-   object.insert("inline-inherited-member",  m_ui->inline_inherited_member_CB->isChecked());
+   object.insert("always-detailed-sec",      m_ui->always_detailed_sec_CB->isChecked()); 
    object.insert("full-path-names",          m_ui->full_path_names_CB->isChecked());
    object.insert("strip-from-path",          putDataList(m_ui->strip_from_path->toPlainText()));
    object.insert("strip-from-inc-path",      putDataList(m_ui->strip_from_inc_path->toPlainText()));
@@ -884,10 +884,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("sip-support",              m_ui->sip_support_CB->isChecked());
    object.insert("idl-support",              m_ui->idl_support_CB->isChecked());
    object.insert("duplicate-docs",           m_ui->duplicate_docs_CB->isChecked());
-   object.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());
-   object.insert("inline-grouped-classes",   m_ui->inline_grouped_classes_CB->isChecked());
-   object.insert("inline-simple-struct",     m_ui->inline_simple_struct_CB->isChecked());
-   object.insert("typedef-hides-struct",     m_ui->typedef_hides_struct_CB->isChecked());
+   object.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());  
    object.insert("lookup-cache-size",        m_ui->lookup_cache_size_SB->value());
 
    // tab 2 - build
@@ -903,6 +900,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("hide-friend-compounds",    m_ui->hide_friend_compounds_CB->isChecked());
    object.insert("hide-in-body-docs",        m_ui->hide_in_body_docs_CB->isChecked());
    object.insert("hide-scope-names",         m_ui->hide_scope_names_CB->isChecked());
+   object.insert("hide-compound-ref",        m_ui->hide_compound_ref_CB->isChecked());
 
    object.insert("internal-docs",            m_ui->internal_docs_CB->isChecked());
    object.insert("case-sense-names",         m_ui->case_sense_names_CB->isChecked());
@@ -912,13 +910,17 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("show-used-files",          m_ui->show_used_files_CB->isChecked());
    object.insert("show-file-page",           m_ui->show_file_page_CB->isChecked());
    object.insert("show-namespace-page",      m_ui->show_namespace_page_CB->isChecked());
-
    object.insert("force-local-includes",     m_ui->force_local_includes_CB->isChecked());
+
+   object.insert("inline-inherited-member",  m_ui->inline_inherited_member_CB->isChecked());
    object.insert("inline-info",              m_ui->inline_info_CB->isChecked());
+   object.insert("inline-grouped-classes",   m_ui->inline_grouped_classes_CB->isChecked());
+   object.insert("inline-simple-struct",     m_ui->inline_simple_struct_CB->isChecked());
+   object.insert("use-typedef-name",         m_ui->use_typedef_name_CB->isChecked());
 
    object.insert("sort-member-docs",         m_ui->sort_member_docs_CB->isChecked());
    object.insert("sort-brief-docs",          m_ui->sort_brief_docs_CB->isChecked());
-   object.insert("sort-members-ctors-first", m_ui->sort_members_ctors_first_CB->isChecked());
+   object.insert("sort-constructors-first",  m_ui->sort_constructors_first_CB->isChecked());
    object.insert("sort-group-names",         m_ui->sort_group_names_CB->isChecked());
    object.insert("sort-by-scope-name",       m_ui->sort_by_scope_name_CB->isChecked());
 
@@ -965,7 +967,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("warnings",                 m_ui->warnings_CB->isChecked());
    object.insert("warn-undoc",               m_ui->warn_undoc_CB->isChecked());
    object.insert("warn-doc-error",           m_ui->warn_doc_error_CB->isChecked());
-   object.insert("warn-undoc-parm",          m_ui->warn_undoc_parm_CB->isChecked());
+   object.insert("warn-undoc-param",         m_ui->warn_undoc_param_CB->isChecked());
    object.insert("warn-format",              m_ui->warn_format->text());
    object.insert("warn-logfile",             m_ui->warn_logfile->text());
 
