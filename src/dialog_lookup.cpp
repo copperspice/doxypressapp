@@ -63,6 +63,9 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    connect(m_ui->delete_PB,       &QPushButton::clicked, this, [this](){ deleteItem(); } );
    connect(m_ui->save_PB,         &QPushButton::clicked, this, [this](){ save(); } );
    connect(m_ui->cancel_PB,       &QPushButton::clicked, this, [this](){ cancel(); } );
+
+   // force call to sizeHint()
+   adjustSize();
 }
 
 Dialog_LookUp::~Dialog_LookUp()
@@ -75,7 +78,7 @@ void Dialog_LookUp::addItem()
    QStandardItem *item = new QStandardItem("");
    m_model->appendRow(item);
 
-   // new row
+   // add new row
    int row = m_model->rowCount() - 1;
 
    // select new row
@@ -117,7 +120,6 @@ void Dialog_LookUp::deleteItem()
    m_ui->tableView->setCurrentIndex(index);   
 }
 
-
 void Dialog_LookUp::getFile()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
@@ -139,13 +141,8 @@ void Dialog_LookUp::getFolder()
       return;
    }
 
-   QString path = m_model->data(index).toString();
-
-   QString relPath = "";
-
-   // BROOM
-   relPath = "Z:/DoxyPressApp/appTest";
-
+   QString path    = m_model->data(index).toString();
+   QString relPath = "";  // BROOM - wrong
 
    path = m_owner->get_DirPath(tr("Select destination directory"), path, relPath);
 
@@ -275,6 +272,11 @@ void Dialog_LookUp::moveItemDown()
 void Dialog_LookUp::save()
 {
    this->done(QDialog::Accepted);
+}
+
+QSize Dialog_LookUp::sizeHint() const
+{
+   return QSize(616, 600);
 }
 
 void Dialog_LookUp::cancel()

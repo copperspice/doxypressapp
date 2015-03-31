@@ -120,11 +120,11 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    connect(m_ui->ok_PB,      SIGNAL(clicked()),this, SLOT(ok()));
    connect(m_ui->cancel_PB,  SIGNAL(clicked()),this, SLOT(cancel()));
 
-   // force call to sizeHint()
-   adjustSize();
-
    // update right treeview
    connect(m_model_R, &QFileSystemModel::directoryLoaded, this, &Dialog_XP_GetDir::showMe);
+
+   // force call to sizeHint()
+   adjustSize();
 
    m_ui->drives_TV->setFocus();
 }

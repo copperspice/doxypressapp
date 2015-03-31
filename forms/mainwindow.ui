@@ -1136,7 +1136,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_29" columnstretch="0,0,1,0">
@@ -3334,33 +3334,15 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Input_Source">
-            <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0,1,0">
+            <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0,1,0,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_45">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Input source files or directories:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="buddy">
-                <cstring>input_source</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="input_source">
+             <item row="12" column="1" rowspan="2" colspan="3">
+              <widget class="QPlainTextEdit" name="exclude_symbols">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -3375,152 +3357,7 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_101">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Input file encoding:</string>
-               </property>
-               <property name="buddy">
-                <cstring>input_encoding</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_100">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Input file patterns:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="buddy">
-                <cstring>input_patterns</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="input_patterns">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>110</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_61">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Input, scan recursively:</string>
-               </property>
-               <property name="buddy">
-                <cstring>source_recursive_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="source_recursive_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_104">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Exclude files or directories:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="buddy">
-                <cstring>exclude_files</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="exclude_files">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_102">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Exclude symlinks:</string>
-               </property>
-               <property name="buddy">
-                <cstring>exclude_symlinks_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="exclude_symlinks_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_105">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Exclude file patterns:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="buddy">
-                <cstring>exclude_patterns</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1" rowspan="2" colspan="2">
+             <item row="10" column="1" rowspan="2" colspan="3">
               <widget class="QPlainTextEdit" name="exclude_patterns">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -3536,25 +3373,7 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_136">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Exclude symbols:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="buddy">
-                <cstring>exclude_symbols</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="2">
+             <item row="14" column="3">
               <spacer name="verticalSpacer">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -3567,115 +3386,7 @@
                </property>
               </spacer>
              </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QLineEdit" name="input_encoding">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QPushButton" name="input_source_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QPushButton" name="input_patterns_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QPushButton" name="exclude_files_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="3">
-              <widget class="QPushButton" name="exclude_patterns_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="3">
+             <item row="12" column="4">
               <widget class="QPushButton" name="exclude_symbols_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -3699,8 +3410,26 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="exclude_symbols">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_100">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Input file patterns:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>input_patterns</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" rowspan="2" colspan="3">
+              <widget class="QPlainTextEdit" name="input_source">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -3712,6 +3441,277 @@
                  <width>16777215</width>
                  <height>90</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="source_recursive_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_104">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Exclude files or directories:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_files</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_102">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Exclude symlinks:</string>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_symlinks_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" rowspan="2" colspan="3">
+              <widget class="QPlainTextEdit" name="exclude_files">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" rowspan="2" colspan="3">
+              <widget class="QPlainTextEdit" name="input_patterns">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>110</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_105">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Exclude file patterns:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_patterns</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_45">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Input source:&lt;br&gt;(full file name or directory)</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>input_source</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_61">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Input, scan recursively:</string>
+               </property>
+               <property name="buddy">
+                <cstring>source_recursive_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="exclude_symlinks_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="4">
+              <widget class="QPushButton" name="exclude_patterns_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="4">
+              <widget class="QPushButton" name="input_patterns_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="4">
+              <widget class="QPushButton" name="exclude_files_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QPushButton" name="input_source_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_136">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Exclude symbols:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+               <property name="buddy">
+                <cstring>exclude_symbols</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="input_encoding">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_101">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Input file encoding:</string>
+               </property>
+               <property name="buddy">
+                <cstring>input_encoding</cstring>
                </property>
               </widget>
              </item>
@@ -10018,7 +10018,6 @@
   <tabstop>warn_logfile_PB</tabstop>
   <tabstop>input_source</tabstop>
   <tabstop>input_source_PB</tabstop>
-  <tabstop>input_encoding</tabstop>
   <tabstop>input_patterns</tabstop>
   <tabstop>input_patterns_PB</tabstop>
   <tabstop>source_recursive_CB</tabstop>
@@ -10258,8 +10257,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_html"/>
-  <buttongroup name="buttonGroup_latex"/>
   <buttongroup name="buttonGroup_diagram"/>
+  <buttongroup name="buttonGroup_latex"/>
+  <buttongroup name="buttonGroup_html"/>
  </buttongroups>
 </ui>

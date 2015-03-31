@@ -111,7 +111,10 @@ void MainWindow::createMap()
 
          if (index != m_bigMap.end()) {
             index->label = ptr;
-            index->title = ptr->text().left( ptr->text().length() - 1);
+            index->title = ptr->text();
+
+            // remove the colon
+            index->title.replace(":", "");
          }
       }
    }
@@ -234,7 +237,7 @@ void MainWindow::setLabelColor(int option, QWidget *label)
 
     } else if (option == MODIFIED) {
       QPalette temp = label->palette();
-      temp.setColor(QPalette::WindowText, Qt::red);
+      temp.setColor(QPalette::WindowText, QColor(160, 0, 160) );
 
       label->setPalette(temp);
    }
@@ -415,7 +418,7 @@ QString MainWindow::getHelpBody(QWidget *name)
    }
 
    if (retval.isEmpty()) {
-      retval = "missing help, how?";
+      retval = "Missing help text";
    }
 
    return retval;
@@ -1103,7 +1106,8 @@ static void configFullHelp(const QString &m_filePatterns)
     
    // input source files
    s_fullHelp.insert("INPUT_SOURCE",
-      "This tag is used to specify the files or directories containing source files to be processed. "
+      "This tag is used to specify full file name or directories containing source files to be processed. "
+      "Wildcards are not permitted. "
       "<br><br>"
       "Note: If this tag is empty only the current directory is searched.");
 

@@ -33,6 +33,7 @@ class Dialog_LookUp : public QDialog
       ~Dialog_LookUp();
 
       QStringList getData();
+      QSize sizeHint() const;
 
    private:
       MainWindow *m_owner;
