@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
 
    if (flagList.contains("--help", Qt::CaseInsensitive)) {
       QMessageBox msgBox;
+      msgBox.setWindowIcon(QIcon("://resources/doxypress.png"));
+
       msgBox.setText(QString().sprintf("Usage: %s [config file]", argv[0]));
       msgBox.exec();
 

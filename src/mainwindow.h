@@ -621,6 +621,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void showHtmlOutput())
       CS_SLOT_2(showHtmlOutput)
 
+      CS_SLOT_1(Private, void clearOutput())
+      CS_SLOT_2(clearOutput)
+
       CS_SLOT_1(Private, void saveLog())
       CS_SLOT_2(saveLog)
 };

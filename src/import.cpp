@@ -327,7 +327,7 @@ void MainWindow::convertDoxy(QByteArray data)
 
 
    // tab 2 -input
-   tempStr = convert_Str(data,"INPUT");
+   tempStr = convert_PlainText(data,"INPUT");
    m_ui->input_source->setPlainText(tempStr);
 
    tempStr = convert_Str(data,"INPUT_ENCODING");
@@ -1065,7 +1065,7 @@ void MainWindow::importDoxy()
       }
 
       // ** get new file project file
-      fname = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
+      fname = QFileDialog::getSaveFileName(this, tr("Save DoxyPress project file"), m_struct.pathPrior,
                                            tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
@@ -1073,10 +1073,13 @@ void MainWindow::importDoxy()
          break;
 
       } else {
-
          QMessageBox quest;
-         quest.setWindowTitle(tr("DoxyPressApp Import"));
-         quest.setText( tr("Convert (old) Doxygen project file to new DoxyPress format"));
+         quest.setWindowTitle(tr("Convert Doxygen Project"));
+         quest.setWindowIcon(QIcon("://resources/doxypress.png"));
+
+         quest.setText( tr("If you have a layout or css file refer to the DoxyPress documentation for 'Convert to DoxyPress' "
+                           "for additional information. Continue?"));
+
          quest.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
          quest.setDefaultButton(QMessageBox::No);
 

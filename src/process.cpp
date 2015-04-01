@@ -192,23 +192,19 @@ bool MainWindow::htmlOutputPresent() const
 void MainWindow::showHtmlOutput()
 {
    QString pathHtml = getHtmlOutputIndex();
-   QFileInfo fi(pathHtml);
+   QFileInfo fileInfo(pathHtml);
 
-   // BROOM -- the following does not seem to work with IE
+   QString indexUrl = "file:///" + fileInfo.absoluteFilePath();
+   bool ok = QDesktopServices::openUrl(QUrl(indexUrl));
 
-/*
-#ifdef WIN32   
-   ShellExecute(NULL, L"open", (LPCWSTR)fi.absoluteFilePath().utf16(), NULL, NULL, SW_SHOWNORMAL);
+   if (! ok)  {
+      csError("Display HTML", "Unable to display generated documentation, " + indexUrl );
+   }
+}
 
-#else
-   QString indexUrl(QString::fromAscii("file://"));
-   indexUrl += fi.absoluteFilePath();
-   QDesktopServices::openUrl(QUrl(indexUrl));
-
-#endif
-
-*/
-
+void MainWindow::clearOutput()
+{
+   m_ui->runText->document()->clear();
 }
 
 void MainWindow::saveLog()
@@ -227,7 +223,7 @@ void MainWindow::saveLog()
          statusBar()->showMessage(tr("Output log saved"));
 
       } else {
-         QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());
+         QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());         
 
       }
    }

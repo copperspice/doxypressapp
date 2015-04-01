@@ -20,7 +20,7 @@
    </size>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -90,7 +90,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_1" columnstretch="0,0,0,0,0">
@@ -1136,7 +1136,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>5</number>
+            <number>13</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_29" columnstretch="0,0,1,0">
@@ -3439,7 +3439,7 @@
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>90</height>
+                 <height>110</height>
                 </size>
                </property>
               </widget>
@@ -6288,7 +6288,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>4</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_31" columnstretch="0,0,1,0">
@@ -9706,6 +9706,29 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="clear_PB">
+            <property name="text">
+             <string>Clear Screen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>10</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QPushButton" name="save_log_PB">
             <property name="minimumSize">
              <size>
@@ -9851,7 +9874,7 @@
   </action>
   <action name="actionImport">
    <property name="text">
-    <string>Import Doxygen File / Convert to DoxyPress format</string>
+    <string>Convert Doxygen project to DoxyPress format</string>
    </property>
    <property name="toolTip">
     <string>Import Doxygen File</string>
@@ -10020,6 +10043,7 @@
   <tabstop>input_source_PB</tabstop>
   <tabstop>input_patterns</tabstop>
   <tabstop>input_patterns_PB</tabstop>
+  <tabstop>input_encoding</tabstop>
   <tabstop>source_recursive_CB</tabstop>
   <tabstop>exclude_files</tabstop>
   <tabstop>exclude_files_PB</tabstop>
@@ -10179,8 +10203,47 @@
   <tabstop>toc_expanded_CB</tabstop>
   <tabstop>gen_docbook_CB2</tabstop>
   <tabstop>docbook_output</tabstop>
-  <tabstop>docbook_program_listing_CB</tabstop>
   <tabstop>docbook_output_PB</tabstop>
+  <tabstop>docbook_program_listing_CB</tabstop>
+  <tabstop>gen_docset_CB</tabstop>
+  <tabstop>docset_feedname</tabstop>
+  <tabstop>docset_bundle_id</tabstop>
+  <tabstop>docset_publisher_id</tabstop>
+  <tabstop>docset_publisher_name</tabstop>
+  <tabstop>gen_eclipse_CB</tabstop>
+  <tabstop>eclipse_doc_id</tabstop>
+  <tabstop>gen_latex_CB2</tabstop>
+  <tabstop>latex_output</tabstop>
+  <tabstop>latex_output_PB</tabstop>
+  <tabstop>latex_cmd_name</tabstop>
+  <tabstop>latex_cmd_name_PB</tabstop>
+  <tabstop>make_index_cmd_name</tabstop>
+  <tabstop>make_index_cmd_name_PB</tabstop>
+  <tabstop>latex_compact_CB</tabstop>
+  <tabstop>latex_paper_type_CM</tabstop>
+  <tabstop>latex_extra_packages</tabstop>
+  <tabstop>latex_extra_packages_PB</tabstop>
+  <tabstop>latex_header</tabstop>
+  <tabstop>latex_header_PB</tabstop>
+  <tabstop>latex_footer</tabstop>
+  <tabstop>latex_footer_PB</tabstop>
+  <tabstop>latex_extra_files</tabstop>
+  <tabstop>latex_extra_files_PB</tabstop>
+  <tabstop>latex_timestamp_CB</tabstop>
+  <tabstop>latex_hyper_pdf_CB</tabstop>
+  <tabstop>latex_pdf_CB</tabstop>
+  <tabstop>latex_batch_mode_CB</tabstop>
+  <tabstop>latex_hide_indices_CB</tabstop>
+  <tabstop>latex_source_code_CB</tabstop>
+  <tabstop>latex_bib_style</tabstop>
+  <tabstop>cite_bib_files</tabstop>
+  <tabstop>cite_bib_files_PB</tabstop>
+  <tabstop>gen_man_CB2</tabstop>
+  <tabstop>man_output</tabstop>
+  <tabstop>man_output_PB</tabstop>
+  <tabstop>man_extension</tabstop>
+  <tabstop>man_subdir</tabstop>
+  <tabstop>man_links_CB</tabstop>
   <tabstop>gen_perl_CB</tabstop>
   <tabstop>perl_latex_CB</tabstop>
   <tabstop>perl_pretty_CB</tabstop>
@@ -10213,52 +10276,14 @@
   <tabstop>runText</tabstop>
   <tabstop>run_PB</tabstop>
   <tabstop>display_PB</tabstop>
+  <tabstop>clear_PB</tabstop>
   <tabstop>save_log_PB</tabstop>
-  <tabstop>latex_batch_mode_CB</tabstop>
-  <tabstop>latex_output</tabstop>
-  <tabstop>latex_cmd_name</tabstop>
-  <tabstop>latex_pdf_CB</tabstop>
-  <tabstop>latex_hide_indices_CB</tabstop>
-  <tabstop>gen_latex_CB2</tabstop>
-  <tabstop>latex_source_code_CB</tabstop>
-  <tabstop>latex_hyper_pdf_CB</tabstop>
-  <tabstop>make_index_cmd_name</tabstop>
-  <tabstop>man_extension</tabstop>
-  <tabstop>gen_man_CB2</tabstop>
-  <tabstop>man_links_CB</tabstop>
-  <tabstop>latex_header</tabstop>
-  <tabstop>latex_paper_type_CM</tabstop>
-  <tabstop>latex_extra_files</tabstop>
-  <tabstop>man_output</tabstop>
-  <tabstop>man_output_PB</tabstop>
-  <tabstop>man_subdir</tabstop>
-  <tabstop>latex_timestamp_CB</tabstop>
-  <tabstop>latex_compact_CB</tabstop>
-  <tabstop>latex_extra_packages</tabstop>
-  <tabstop>latex_footer</tabstop>
-  <tabstop>gen_docset_CB</tabstop>
-  <tabstop>eclipse_doc_id</tabstop>
-  <tabstop>docset_bundle_id</tabstop>
-  <tabstop>docset_publisher_name</tabstop>
-  <tabstop>docset_feedname</tabstop>
-  <tabstop>docset_publisher_id</tabstop>
-  <tabstop>gen_eclipse_CB</tabstop>
-  <tabstop>latex_output_PB</tabstop>
-  <tabstop>latex_extra_packages_PB</tabstop>
-  <tabstop>latex_header_PB</tabstop>
-  <tabstop>latex_extra_files_PB</tabstop>
-  <tabstop>latex_cmd_name_PB</tabstop>
-  <tabstop>latex_footer_PB</tabstop>
-  <tabstop>make_index_cmd_name_PB</tabstop>
-  <tabstop>cite_bib_files</tabstop>
-  <tabstop>cite_bib_files_PB</tabstop>
-  <tabstop>latex_bib_style</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_diagram"/>
-  <buttongroup name="buttonGroup_latex"/>
   <buttongroup name="buttonGroup_html"/>
+  <buttongroup name="buttonGroup_latex"/>
  </buttongroups>
 </ui>
