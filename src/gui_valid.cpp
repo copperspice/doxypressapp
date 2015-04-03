@@ -101,7 +101,6 @@ void MainWindow::clearAllFields()
 
    // reset initial default values
    m_ui->project_name->setText("My Project");
-   m_project_logoFN = "";
 
    m_ui->optimize_cplus_RB->setChecked(true);
    m_ui->gen_html_CB1->setChecked(true);

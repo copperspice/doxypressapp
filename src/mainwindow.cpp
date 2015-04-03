@@ -142,7 +142,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(":/resources/doxypress.png"));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 3.15.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 4.10.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -176,7 +176,8 @@ void MainWindow::createConnections()
 
    // ** validataion
    // tab 1
-   connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);   
+   connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);
+   connect(m_ui->project_logo,        &QLineEdit::textChanged, this, [this](){ getLogo("load"); } );
 
    connect(m_ui->gen_html_CB1,        &QGroupBox::toggled,   this, &MainWindow::valid_gen_html_1);
    connect(m_ui->gen_docbook_CB1,     &QCheckBox::toggled,   this, &MainWindow::valid_gen_docbook_1);
@@ -217,7 +218,7 @@ void MainWindow::createConnections()
 
    // ** lookups
    // tab 1
-   connect(m_ui->logo_PB,                   &QPushButton::clicked, this, [this](){ getLogo(); } );
+   connect(m_ui->project_logo_PB,           &QPushButton::clicked, this, [this](){ getLogo("select"); } );
    connect(m_ui->output_dir_PB,             &QPushButton::clicked, this, &MainWindow::output_dir_PB);
    connect(m_ui->html_colors_PB,            &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
@@ -435,7 +436,7 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("External")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_External);
 
-      } else if (label == tr("Dot") && label == tr("Dot (Part 1)")) {
+      } else if (label == tr("Dot") || label == tr("Dot (Part 1)")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Dot_A);
 
       } else if (label == tr("Dot (Part 2)")) {

@@ -1,10 +1,11 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/doxypress.ico</file>
+        <file>resources/doxypress.png</file>
         <file>resources/tunecolor.png</file>
         <file>resources/minus.png</file>
         <file>resources/plus.png</file>
         <file>resources/up-16.png</file>
         <file>resources/down-16.png</file>
-        <file>resources/doxypress.png</file>
     </qresource>
 </RCC>

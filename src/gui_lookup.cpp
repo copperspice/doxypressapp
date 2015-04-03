@@ -24,37 +24,37 @@
 // tab 1
 void MainWindow::getLogo(const QString route)
 {
-   QString logoName;
+   QString logoName = m_ui->project_logo->text();
 
    if (route == "load") {
-      logoName = m_project_logoFN;
+      // do nothing
 
-   } else {
+   } else if (route == "select") {
       QString path = pathName(m_curFile);
-      logoName = QFileDialog::getOpenFileName(this, tr("Select Project Logo"), path);
+      logoName = QFileDialog::getOpenFileName(this, tr("Select Project Logo"), path, logoName);
    }
 
    if (logoName.isEmpty()) {
-      m_ui->project_logo->setText(tr("No Logo was selected"));
+      m_ui->project_logo_image->setText(tr("No Logo was selected"));
 
    } else {
       QFile fout(logoName);
 
       if (! fout.exists()) {
-         m_ui->project_logo->setText(tr("Unable to find file: ") + logoName);
+         m_ui->project_logo_image->setText(tr("Unable to find file: ") + logoName);
 
       } else {
          QPixmap pm(logoName);
 
          if (! pm.isNull()) {
-            m_ui->project_logo->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
+            m_ui->project_logo_image->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
 
          } else {
-            m_ui->project_logo->setText(tr("No preview is available for: ") + logoName);
+            m_ui->project_logo_image->setText(tr("No preview is available for: ") + logoName);
          }
       }
 
-      m_project_logoFN = logoName;
+      m_ui->project_logo->setText(logoName);
    }
 }
 

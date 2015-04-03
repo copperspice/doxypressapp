@@ -471,8 +471,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    // tab 1
    m_ui->project_name->setText(              object.value("project-name").toString());
    m_ui->project_brief->setText(             object.value("project-brief").toString());
-   m_ui->project_version->setText(           object.value("project-version").toString());
-   m_project_logoFN =                        object.value("project-logo").toString();
+   m_ui->project_version->setText(           object.value("project-version").toString());   
+   m_ui->project_logo->setText(              object.value("project-logo").toString());
    m_ui->output_dir->setText(                object.value("output-dir").toString());
 
    m_ui->optimize_cplus_RB->setChecked(      object.value("optimize-cplus").toBool());
@@ -824,7 +824,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("project-name",          m_ui->project_name->text());
    object.insert("project-brief",         m_ui->project_brief->text());
    object.insert("project-version",       m_ui->project_version->text());
-   object.insert("project-logo",          m_project_logoFN);
+   object.insert("project-logo",          m_ui->project_logo->text());
    object.insert("output-dir",            m_ui->output_dir->text());
 
    object.insert("optimize-cplus",        m_ui->optimize_cplus_RB->isChecked());

@@ -464,7 +464,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("PROJECT_VERSION",
       "This tag is used to enter a project number or revision number.");
 
-   s_fullHelp.insert("PROJECT_ICON",
+   s_fullHelp.insert("PROJECT_LOGO",
       "This tag specifies a logo or icon which is included "
       "in the documentation. The height of the logo should not exceed 55 "
       "pixels and the width should not exceed 200 pixels.");
@@ -554,10 +554,6 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-
-// BROOM (start here for proofreading)
-
-
    // project config
    s_fullHelp.insert("OUTPUT_LANGUAGE",
       "This tag is used to specify the language for the generated documentation. "
@@ -607,11 +603,12 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES");
 
   s_fullHelp.insert("ALWAYS_DETAILED_SEC",
-      "If this tag and 'REPEAT BRIEF DESCRIPTION' is set a detailed section will be "
+      "If this tag and 'REPEAT BRIEF DESCRIPTION' is set, a detailed section will be "
       "generated even if there is only a brief description. "
       "<br><br>"
       "The default value is: NO");
 
+// broom
    s_fullHelp.insert("ABBREVIATE_BRIEF",
       "This tag implements a quasi-intelligent brief description abbreviator which is "
       "used to form the text in various listings. Each string in this list, if found "
@@ -624,7 +621,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("FULL_PATH_NAMES",
       "If this tag is set DoxyPress will prepend the full path "
-      "before files names in the file list and in the header files. If not set, the "
+      "before files names in the file list and in the header files. If set to NO, the "
       "shortest path which makes the file name unique will be used. "
       "<br><br>"
       "The default value is: YES");
@@ -633,7 +630,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag is used to specify what portion of the path to remove from the source files. "
       "The path is only stripped if one of the specified strings matches the beginning  "
       "part of the path. The tag can be used to show relative paths in the file list. "
-      "If left blank the directory from which DoxyPress is run is used as the path to strip. "
+      "If left blank the directory where DoxyPress is run is used as the path to strip. "
       "<br><br>"
       "This tag requires the tag 'FULL PATH NAME' is set to YES");
 
@@ -668,10 +665,9 @@ static void configFullHelp(const QString &m_filePatterns)
 
    // build config   
    s_fullHelp.insert("INLINE_INHERITED_MEMBER",
-      "If this tag is set DoxyPress will show all "
-      "inherited members of a class in the documentation of that class as if those "
-      "members were ordinary class members. Constructors, destructors and assignment "
-      "operators of the base classes will not be shown. "
+      "If this tag is set DoxyPress will show all inherited members of a class in the "
+      "documentation of that class as if those members were ordinary class members. "
+      "Constructors, destructors and assignment operators of the base classes will not be shown. "
       "<br><br>"
       "The default value is: NO");
 
@@ -691,7 +687,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "If this tag is set DoxyPress will treat a multi-line C++ special comment "
       "block (a block of //! or /// comments) as a brief description. "
       "The default is to treat a multi-line C++ special comment block as a detailed description. "
-      "Setting this tag, means Rational Rose comments are not recognized. "
+      "Setting this tag to YES, means Rational Rose comments are not recognized. "
       "<br><br>"
       "The default value is: NO");
 
@@ -714,7 +710,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES");
 
    s_fullHelp.insert("AUTO_LINK",
-      "When this tag  is set DoxyPress tries to link words which correspond to documented "
+      "When this tag is set DoxyPress tries to link words which correspond to documented "
       "classes, or namespaces to their corresponding documentation. Such a link can "
       "be prevented in individual cases by putting a % sign in front of the word or "
       "globally by setting 'AUTOLINK SUPPORT' to NO. "
@@ -737,6 +733,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: YES");
 
+// broom
    s_fullHelp.insert("INLINE_GROUPED_CLASSES",
       "When this tag is set classes, structs, and unions are shown inside the group "
       "in which they are included (using the \\ingroup command) "
@@ -753,6 +750,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+// broom
    s_fullHelp.insert("TYPEDEF_HIDES_STRUCT",
       "When the tag is set a typedef of a struct, union, or enum is documented as struct, union, or "
       "enum with the name of the typedef. For example, Typedef struct TypeS {} TypeT, will appear "
@@ -766,7 +764,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "Private class members and static file members will be hidden unless the "
       "'EXTRACT PRIVATE' or the 'EXTRACT STATIC' tags are set to YES. "
       "<br><br>"
-      "Note: Setting this tag will also disable warnings about undocumented members. "
+      "Note: Setting this tag will disable warnings about undocumented members. "
       "<br><br>"
       "The default value is: NO");
 
@@ -795,7 +793,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("EXTRACT_LOCAL_METHODS",
       "This tag is only useful for Objective-C source code. If set then local methods, "
       "which are defined in the implementation section but not in the interface, are "
-      "included in the documentation. If not set, only methods in the interface are included. "
+      "included in the documentation. If set to NO only methods in the interface are included. "
       "<br><br>"
       "The default value is: NO");
 
@@ -822,6 +820,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+// broom
    s_fullHelp.insert("HIDE_FRIEND_COMPOUNDS",
       "If this tag is set DoxyPress will hide all friend (class|struct|union) declarations. "
       "If set to NO, these declarations will be included in the documentation. "
@@ -835,9 +834,10 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+//broom
    s_fullHelp.insert("INTERNAL_DOCS",
       "This tag determines if documentation which is typed after an \\internal command "
-      "is included. Set to YES to include the internal documentation. "
+      "is included in the documentation. Set to YES to include the internal documentation. "
       "If the tag is set to NO, the documentation will be excluded. "
       "<br><br>"
       "The default value is: NO");
@@ -872,6 +872,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+// broom
    s_fullHelp.insert("SHOW_USED_FILES",
       "Setting this tag to NO disables the list of files generated at the bottom of the "
       "documentation for classes and structs. If this tag is set to YES, the list will "
@@ -894,7 +895,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("FORCE_LOCAL_INCLUDES",
       "If this tag is set DoxyPress will list include files with double quotes "
-      "rather than with less than / greater than symbols. "
+      "rather than with less than and greater than symbols. "
       "<br><br>"
       "The default value is: NO");
 
@@ -906,6 +907,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("SORT_MEMBER_DOCS",
       "If this tag is set DoxyPress will sort the detailed documentation alphabetically. "
       "If set to NO, members will appear in the order they are defined in the source code. "
+      "To sort pages manually refer to the DoxyPress manual regarding the \\sortid command."
       "<br><br>"
       "The default value is: YES");
 
@@ -930,8 +932,8 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("SORT_GROUP_NAMES",
       "If this tag is set DoxyPress will sort the groups alphabetical, as defined by the \\defgroup command. "
-      "If set to NO, groups will appear in the order they are defined in the source code. Groups will appear in a "
-      "page called modules. "
+      "If set to NO, groups will appear in the order they are defined in the source code. Groups will appear "
+      "on a page called modules. "
       "<br><br>"
       "The default value is: NO");
 
@@ -982,6 +984,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br>"
       "\\cond <section_label> ... \\endcond");
 
+// broom
    s_fullHelp.insert("MAX_INIT_LINES",
       "This tag specifies the maximum number of lines (in your source) for the initial value of a "
       "variable or the definition of a macro. If the initializer consists of more lines than specified in "
@@ -1007,7 +1010,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "Note: If run from a directory containing a file called DoxyPress_Layout.xml, "
       "DoxyPress will parse it automatically even if this tag is left empty.");
 
-   
+
+// broom
    // language
    s_fullHelp.insert("TCL_SUBST",
       "This tag is used to specify a number of word-keyword mappings (TCL only). "
@@ -1039,6 +1043,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+// broom
    s_fullHelp.insert("SIP_SUPPORT",
       "Set this tag if your project consists of sip sources only. DoxyPress "
       "will parse them like normal C++ but will assume all classes use public instead "
@@ -1046,6 +1051,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+
+// broom
    s_fullHelp.insert("IDL_SUPPORT",
       "For Microsoft's IDL there are propget and propput attributes to indicate "
       "getter and setter methods for a property. Setting this option to YES will make "
@@ -1060,13 +1067,13 @@ static void configFullHelp(const QString &m_filePatterns)
    // messages
    s_fullHelp.insert("QUIET",
       "This tag is used to enable (YES) or disable (NO) messages which are generated to "
-      "standard output. If this tag is set, standard messages will be generated. "
+      "standard output. If this tag is set standard messages will be generated. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("WARNINGS",
       "This tag can be used to enable (YES) or disable (NO) warning messages which are sent to "
-      "standard error (stderr). If this tag is set, standard error messages will be generated. "
+      "standard error (stderr). If this tag is set standard error messages will be generated. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1106,7 +1113,7 @@ static void configFullHelp(const QString &m_filePatterns)
     
    // input source files
    s_fullHelp.insert("INPUT_SOURCE",
-      "This tag is used to specify full file name or directories containing source files to be processed. "
+      "This tag is used to specify full file names or directories containing source files to be processed. "
       "Wildcards are not permitted. "
       "<br><br>"
       "Note: If this tag is empty only the current directory is searched.");
@@ -1129,7 +1136,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("EXCLUDE_FILES",
       "This tag is used to specify files or directories which should be excluded from "
-      "the 'INPUT SOURCE FILES OR DIRECTORIES' tag. "
+      "the 'INPUT SOURCE' tag. "
       "<br><br>"
       "Note: The relative paths are relative to the directory from which DoxyPress is run.");
 
@@ -1139,7 +1146,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: NO");
 
    s_fullHelp.insert("EXCLUDE_PATTERNS",
-      "If the 'INPUT SOURCE FILES OR DIRECTORIES' tag contains directories, this tag will be used to "
+      "If the 'INPUT SOURCE' tag contains directories, this tag will be used to "
       "specify wildcard patterns to exclude certain files from those directories. "
       "<br><br>"
       "Note: Wildcards are matched using the absolute path. As an example, to "
@@ -1153,11 +1160,11 @@ static void configFullHelp(const QString &m_filePatterns)
 
    // input other
    s_fullHelp.insert("EXAMPLE_SOURCE",
-      "Used  to specify one or more files or directories which contain example code fragments. "
+      "This tag is used to specify full file names or directories which contain example code fragments. "
       "Refer to the DoxyPress manual regarding the \\include command.");
 
    s_fullHelp.insert("EXAMPLE_PATTERNS",
-      "If the value of the 'EXAMPLE FILES OR DIRECTORIES' tag contains directories, then this tag is used "
+      "If the value of the 'EXAMPLE FILES OR DIRECTORIES' tag contains directories then this tag is used "
       "to specify one or more wildcard patterns like *.cpp or *.h to filter out the "
       "source files in the example directories. "
       "<br><br>"
@@ -1234,8 +1241,9 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br>"
       "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES");
 
+// broom
    s_fullHelp.insert("IGNORE_PREFIX",
-      "This tag is used to a prefix, or a list of prefixes, which should be ignored "
+      "This tag is used to define a prefix or a list of prefixes, which should be ignored "
       "while generating the index headers. "                     
       "This is useful when several classes start with a common prefix, in which case these classes "
       "would be put under the same header in the alphabetical index. "
@@ -1277,7 +1285,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("REF_LINK_SOURCE",
       "If this tag is set and 'SOURCE CODE' is set, the hyperlinks from functions "
       "in 'REFERENCED BY RELATION' and 'REFERENCES RELATION' will link to the source code. "
-      "Otherwise they will link to the documentation. "
+      "Otherwise the link will refer to the generated documentation. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1374,13 +1382,14 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("SKIP_FUNCTION_MACROS",
       "If this tag is set DoxyPress will preprocessor and "
       "remove all references to function-like macros which are alone on a line, have "
-      "an all uppercase name, and do not end with a semicolon. Such function macros "
+      "a full uppercase name, and do not end with a semicolon. Such function macros "
       "are typically used for boiler-plate code and will confuse the parser if not removed. "
       "<br><br>"
       "The default value is: YES "
       "<br>"
       "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
    
+// broom
    s_fullHelp.insert("PREDEFINED_MACROS",
       "This tag is used to specify one or more macro names which are "
       "defined before the preprocessor is started (similar to the -D option with gcc). "
@@ -1391,7 +1400,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
 
    s_fullHelp.insert("EXPAND_AS_DEFINED",
-      "If the 'MACRO EXPANSION' and 'EXPAND ONLY PREDEFINED MACROS' tags are set to YES, then this "
+      "If the 'MACRO EXPANSION' and 'EXPAND ONLY PREDEFINED MACROS' tags are set to YES, this "
       "tag is used to specify a list of macro names which should be expanded. "
       "The macro definitions are those found in your source code. Use the 'PREDEFINED MACROS' "
       "tag to use a different macro definition which overrides the definition found in your source code. "
@@ -1449,13 +1458,13 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("CLASS_DIAGRAMS",
       "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "
       "for classes with base or super classes. Setting the tag to NO turns the diagrams off. "     
-      "It is recommended to install and use Dot, since it yields more powerful graphs. "
+      "It is recommended to install and use Dot since it yields more powerful graphs. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("MSCGEN_PATH",
       "Message sequence charts can be defined within DoxyPress comments using the \\msc command. "
-      "DoxyPress will run the mscgen tool to produce the chart and insert it in the documentation. "
+      "DoxyPress will run the mscgen program to produce the chart and insert it in the documentation. "
       "This tag is used to specify the directory where the mscgen program is located. "
       "If left empty the the default path will be searched.");
 
@@ -1506,8 +1515,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_CLASS_GRAPH",
-      "If this tag is set DoxyPress will generate a graph for "
-      "each documented class showing the direct and indirect inheritance relations. "
+      "If this tag is set DoxyPress will generate a graph for each documented class showing the "
+      "direct and indirect inheritance relations. "
       "Setting this tag to YES will force the 'CLASS DIAGRAMS' tag to NO. "
       "<br><br>"
       "The default value is: YES "
@@ -1517,7 +1526,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("DOT_COLLABORATION",
       "If this tag is set DoxyPress will generate a graph for each documented class showing the "
       "direct and indirect implementation dependencies (inheritance, containment, and class references variables) "
-      " of the class with other documented classes. "
+      "of the class with other documented classes. "
       "<br><br>"
       "The default value is: YES "
       "<br>"
@@ -1653,35 +1662,37 @@ static void configFullHelp(const QString &m_filePatterns)
       "Refer to the DoxyPress manual regarding the \\diafile command.");
 
    s_fullHelp.insert("PLANTUML_JAR_PATH",
-      "When using plantuml, this tag specifies the path where java can find the "
+      "This tag specifies the path where java can find the "
       "plantuml.jar file. If left blank, it is assumed "
       "PlantUML is not used or called during a preprocessing step. DoxyPress will "
       "generate a warning when it encounters a \\startuml command in this case and "
       "will not generate output for the diagram.");
 
    s_fullHelp.insert("PLANTUML_INCLUDE_PATH",
-      "When using plantuml, the specified paths are searched for files specified by "
+      "When using PlantUML, the specified paths are searched for files specified by "
       "the !include statement in a plantuml block.");
 
+// broom
    s_fullHelp.insert("DOT_GRAPH_MAX_NODES",
       "This tag sets the maximum number of nodes shown in the graph. "
       "If the number of nodes is larger than this value, the graph will be truncated and the node will be "
       "shown with a red box. If the number of direct children of the root node is already larger than this "
       "tag value, the graph will not be shown at all. "
-      "The size of the graph can be further restricted by 'DOT MAX GRAPH DEPTH'. "
+      "The size of the graph can be further restricted by 'DOT MAX GRAPH DEPTH'."
       "<br><br>"
       "Minimum: 0, Maximum: 10000, Default: 50 "
       "<br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
+
+// broom
    s_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
-      "This tag can be used to set the maximum depth of the graphs "
-      "generated by dot. A depth value of 3 means that only nodes reachable from the "
-      "root by following a path via at most 3 edges will be shown. Nodes that lay "
-      "further from the root node will be omitted. Note that setting this option to 1 "
-      "or 2 may greatly reduce the computation time needed for large code bases. Also "
-      "note that the size of a graph can be further restricted by "
-      "DOT_GRAPH_MAX_NODES. Using a depth of 0 means no depth restriction. "
+      "This tag is used to set the maximum depth of the graphs generated by dot. A depth value of 3 means "
+      "only nodes reachable from the root by following a path via at most 3 edges will be shown. "
+      "Nodes which lay further from the root node will be omitted. Setting this option to 1 "
+      "or 2 may greatly reduce the computation time needed for large code bases. "
+      "The size of a graph can be further restricted by 'DOT GRAPH MAX NODES'. "
+      "Using a depth of 0 means no depth restriction. "
       "<br><br>"
       "Minimum: 0, Maximum: 1000, Default: 0 "
       "<br>"
@@ -1689,7 +1700,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("DOT_TRANSPARENT",
       "Set this tag to generate images with a transparent background. "
-      "Warning: Depending on your platform, enabling this option may lead to "
+      "Depending on your platform, enabling this option may lead to "
       "unreadabel anti-aliased labels on the edges of a graph. "
       "<br><br>"
       "The default value is: NO "
@@ -1699,7 +1710,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("DOT_MULTIPLE_TARGETS",
       "Set this tag to allow dot to generate multiple output "
       "files in one run (i.e. multiple -o and -T options on the command line). Setting this tag to YES "
-      "makes dot run faster, however only newer versions of dot (>1.8.10) support this feature. "
+      "makes dot run faster. Only versions of dot greter than 1.8.10 support this feature. "
       "<br><br>"
       "The default value is: NO "
       "<br>"
@@ -1720,6 +1731,11 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: YES "
       "<br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
+
+
+
+   // BROOM (start here for proofreading)
+
 
    // html
    s_fullHelp.insert("GEN_HTML",

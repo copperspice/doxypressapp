@@ -114,12 +114,9 @@ class MainWindow : public QMainWindow
       QString m_appPath;
       QString m_jsonFname;
 
-      QString m_project_logoFN;
-
       struct Settings m_struct;
 
       QString pathName(QString fileName) const;
-
       bool openDoxy_Internal(const QString fname);
 
       void setStatusBar(QString msg);
@@ -371,7 +368,7 @@ class MainWindow : public QMainWindow
 
       // ** lookup
       // tab 1
-      CS_SLOT_1(Private, void getLogo(const QString route = ""))
+      CS_SLOT_1(Private, void getLogo(const QString route))
       CS_SLOT_2(getLogo)
 
       CS_SLOT_1(Private, void output_dir_PB())

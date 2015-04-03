@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -90,44 +90,17 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Project">
-            <layout class="QGridLayout" name="gridLayout_1" columnstretch="0,0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_t1_5">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Output Directory:</string>
-               </property>
-               <property name="buddy">
-                <cstring>output_dir</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="20" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_fortran_RB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Optimize for Fortran</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0" colspan="5">
+             <item row="0" column="0" colspan="2">
               <widget class="QLabel" name="label_t1_a">
                <property name="palette">
                 <palette>
@@ -171,24 +144,6 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="1" colspan="3">
-              <widget class="QLineEdit" name="output_dir">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_name">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_t1_1">
                <property name="font">
@@ -204,7 +159,55 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1" colspan="3">
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="project_name">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_t1_2">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Description:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_brief</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="project_brief">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_t1_3">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Project Version:</string>
+               </property>
+               <property name="buddy">
+                <cstring>project_version</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
               <widget class="QLineEdit" name="project_version">
                <property name="font">
                 <font>
@@ -224,61 +227,21 @@
                 <string>Project Logo:</string>
                </property>
                <property name="buddy">
-                <cstring>logo_PB</cstring>
+                <cstring>project_logo</cstring>
                </property>
               </widget>
              </item>
-             <item row="18" column="0" colspan="5">
-              <widget class="QRadioButton" name="optimize_java_RB">
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="project_logo">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
-               </property>
-               <property name="text">
-                <string>Optimize for Java or C#</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_t1_3">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Project Version:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_version</cstring>
                </property>
               </widget>
              </item>
              <item row="4" column="2">
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="4" column="1">
-              <widget class="QPushButton" name="logo_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
+              <widget class="QPushButton" name="project_logo_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -295,22 +258,97 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="3">
-              <widget class="QLabel" name="project_logo">
+             <item row="5" column="1">
+              <widget class="QLabel" name="project_logo_image">
                <property name="text">
                 <string>No logo was selected</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0" colspan="5">
+             <item row="6" column="1">
+              <spacer name="verticalSpacer_18">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="7" column="0" colspan="3">
               <widget class="Line" name="line_7">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
               </widget>
              </item>
-             <item row="2" column="1" colspan="3">
-              <widget class="QLineEdit" name="project_brief">
+             <item row="8" column="0" colspan="2">
+              <widget class="QLabel" name="label_t1_b">
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>106</red>
+                     <green>104</green>
+                     <blue>100</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <property name="text">
+                <string>Specify the directory for the DoxyPress output</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_t1_5">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Output Directory:</string>
+               </property>
+               <property name="buddy">
+                <cstring>output_dir</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QLineEdit" name="output_dir">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -318,7 +356,48 @@
                </property>
               </widget>
              </item>
-             <item row="16" column="0" colspan="5">
+             <item row="9" column="2">
+              <widget class="QPushButton" name="output_dir_PB">
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <spacer name="verticalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="11" column="0" colspan="3">
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0" colspan="2">
               <widget class="QLabel" name="label_t1_c">
                <property name="palette">
                 <palette>
@@ -362,41 +441,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <spacer name="verticalSpacer_18">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="10" column="4">
-              <widget class="QPushButton" name="output_dir_PB">
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="0" colspan="5">
+             <item row="13" column="0">
               <widget class="QRadioButton" name="optimize_cplus_RB">
                <property name="font">
                 <font>
@@ -408,58 +453,19 @@
                </property>
               </widget>
              </item>
-             <item row="21" column="0" colspan="5">
-              <spacer name="verticalSpacer_17">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_t1_2">
+             <item row="14" column="0" colspan="2">
+              <widget class="QRadioButton" name="optimize_java_RB">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Project Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>project_brief</cstring>
+                <string>Optimize for Java or C#</string>
                </property>
               </widget>
              </item>
-             <item row="13" column="0">
-              <spacer name="verticalSpacer_21">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="15" column="0" colspan="5">
-              <widget class="Line" name="line_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="19" column="0" colspan="5">
+             <item row="15" column="0" colspan="2">
               <widget class="QRadioButton" name="optimize_c_RB">
                <property name="font">
                 <font>
@@ -471,49 +477,30 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="0" colspan="5">
-              <widget class="QLabel" name="label_t1_b">
-               <property name="palette">
-                <palette>
-                 <active>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </active>
-                 <inactive>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </inactive>
-                 <disabled>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>106</red>
-                     <green>104</green>
-                     <blue>100</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </disabled>
-                </palette>
+             <item row="16" column="0" colspan="2">
+              <widget class="QRadioButton" name="optimize_fortran_RB">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
                <property name="text">
-                <string>Specify the directory for the DoxyPress output</string>
+                <string>Optimize for Fortran</string>
                </property>
               </widget>
+             </item>
+             <item row="17" column="0">
+              <spacer name="verticalSpacer_17">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -2708,7 +2695,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Build_Output">
-            <layout class="QGridLayout" name="gridLayout_11" columnstretch="0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_11" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -2888,7 +2875,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Language">
-            <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -3718,7 +3705,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Input_Other">
-            <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -6288,7 +6275,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>7</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_31" columnstretch="0,0,1,0">
@@ -7874,7 +7861,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Latex">
-            <layout class="QGridLayout" name="gridLayout_46" columnstretch="0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_46" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -9920,7 +9907,8 @@
   <tabstop>project_name</tabstop>
   <tabstop>project_brief</tabstop>
   <tabstop>project_version</tabstop>
-  <tabstop>logo_PB</tabstop>
+  <tabstop>project_logo</tabstop>
+  <tabstop>project_logo_PB</tabstop>
   <tabstop>output_dir</tabstop>
   <tabstop>output_dir_PB</tabstop>
   <tabstop>optimize_cplus_RB</tabstop>

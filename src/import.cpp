@@ -34,8 +34,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data,"PROJECT_NUMBER");
    m_ui->project_version->setText(tempStr);
 
-   // special case
-   m_project_logoFN = convert_Str(data, "PROJECT_LOGO");
+   tempStr= convert_Str(data, "PROJECT_LOGO");
+   m_ui->project_logo->setText(tempStr);
 
    tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
    m_ui->output_dir->setText(tempStr);

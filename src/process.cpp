@@ -65,9 +65,9 @@ void MainWindow::runDoxyPress()
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
       m_runProcess->setWorkingDirectory(outputDir);
 
-      QStringList args;
+      QStringList args;     
+      args.append("--b");           // make stdout unbuffered
       args.append(m_curFile);
-      args.append(" --b");           // make stdout unbuffered
 
       m_ui->runText->document()->clear();
       m_runProcess->start(doxyPressPath, args);
@@ -87,7 +87,7 @@ void MainWindow::runDoxyPress()
          m_running = true;
 
          m_ui->run_PB->setText(tr("Stop DoxyPress"));
-         m_ui->runStatus->setText(tr("DoxyPress: Running"));
+         m_ui->runStatus->setText(tr("DoxyPress is Running"));
 
 //B      m_timer->start(1000);
       }
@@ -117,7 +117,14 @@ void MainWindow::readStdout()
 void MainWindow::runComplete()
 {
    if (m_running) {
-      runText_Append(tr("\n** DoxyPress has Completed\n"));
+
+      if (m_runProcess->exitStatus() == QProcess::CrashExit) {
+         runText_Append(tr("\n** DoxyPress Aborted\n"));
+
+      } else {
+         runText_Append(tr("\n** DoxyPress has Completed\n"));
+      }
+
    } else {
       runText_Append(tr("\n** DoxyPress was Cancelled\n"));
    }
@@ -125,7 +132,7 @@ void MainWindow::runComplete()
    m_ui->runText->ensureCursorVisible();
 
    m_ui->run_PB->setText(tr("Run DoxyPress"));
-   m_ui->runStatus->setText(tr("Status: DoxyPress is not running"));
+   m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
    m_running = false;
 
@@ -210,7 +217,7 @@ void MainWindow::clearOutput()
 void MainWindow::saveLog()
 {
    QString logName = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                  m_ui->output_dir->text() + QString::fromAscii("/doxypress_log.txt"));
+                  m_ui->output_dir->text() + "/doxypress_log.txt");
 
    if (! logName.isEmpty()) {
       QFile f(logName);
