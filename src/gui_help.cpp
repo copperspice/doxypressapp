@@ -616,7 +616,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "and the result, after processing the whole list, is used as the annotated "
       "text. Otherwise, the brief description is used as is. "
       "<br><br>"
-      "The default value ares: The $name class, The $name widget, The $name file, is, provides, "
+      "The default value are: The $name class, The $name widget, The $name file, is, provides, "
       "specifies, contains, represents, a, an, the");
 
    s_fullHelp.insert("FULL_PATH_NAMES",
@@ -1752,7 +1752,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_FILE_EXTENSION",
-      "The HTML_FILE_EXTENSION tag can be used to specify the file extension for each "
+      "This tag is used to specify the file extension for each "
       "generated HTML page (for example: .htm, .php, .asp). "
       "<br><br>"
       "The default value is: .html "
@@ -1856,14 +1856,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("CHM_FILE",
-      "The CHM_FILE tag can be used to specify the file name of the resulting .chm "
+      "This tag is used to specify the file name of the resulting .chm "
       "file. You can add a path in front of the file if the result should not be "
       "written to the html output directory. "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("HHC_LOCATION",
-      "The HHC_LOCATION tag can be used to specify the location (absolute path "
+      "This tag is used to specify the location (absolute path "
       "including file name) of the HTML help compiler (hhc.exe). If non-empty, "
       "DoxyPress will try to run the HTML help compiler on the generated index.hhp. "
       "The file has to be specified with full path. "
@@ -1871,21 +1871,21 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("GEN_CHI",
-      "The GENERATE_CHI flag controls if a separate .chi index file is generated "
-      "(YES) or that it should be included in the master .chm file (NO). "
+      "This tag controls if a separate .chi index file is generated "
+      "(YES) or if it should be included in the master .chm file (NO). "
       "<br><br>"
       "The default value is: NO "
       "<br>"
       "This tag requires the tag 'GENERATE HTML'HELP is set to YES");
 
    s_fullHelp.insert("CHM_INDEX_ENCODING",
-      "The CHM_INDEX_ENCODING is used to encode HtmlHelp index (hhk), content (hhc) "
+      "This tag is used to encode HtmlHelp index (hhk), content (hhc) "
       "and project file content. "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("BINARY_TOC",
-      "The BINARY_TOC flag controls whether a binary table of contents is generated "
+      "This tag controls whether a binary table of contents is generated "
       "(YES) or a normal table of contents (NO) in the .chm file. Furthermore it "
       "enables the Previous and Next buttons. "
       "<br><br>"
@@ -1944,7 +1944,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: DoxyPress generated docs "
       "<br>"
-      "This tag requires the tag GENERATE_DOCSET is set to YES");
+      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_BUNDLE_ID",
       "This tag specifies a string that should uniquely identify the documentation "
@@ -1953,23 +1953,23 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br>"
-      "This tag requires the tag GENERATE_DOCSET is set to YES");
+      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_ID",
-      "The DOCSET_PUBLISHER_ID tag specifies a string that should uniquely identify "
+      "This tag is used to specify a string which should uniquely identify  "
       "the documentation publisher. This should be a reverse domain-name style "
       "string, e.g. com.mycompany.MyDocSet.documentation. "
       "<br><br>"
       "The default value is: org.doxypress.Publisher "
       "<br>"
-      "This tag requires the tag GENERATE_DOCSET is set to YES");
+      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_NAME",
-      "The DOCSET_PUBLISHER_NAME tag identifies the documentation publisher. "
+      "This tag identifies the documentation publisher. "
       "<br><br>"
       "The default value is: Publisher. "
       "<br>"
-      "This tag requires the tag GENERATE_DOCSET is set to YES");
+      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    // eclipse
    s_fullHelp.insert("GEN_ECLIPSE",
@@ -2030,7 +2030,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("EXTERNAL_LINKS_IN_WINDOW",
-      "If the EXT_LINKS_IN_WINDOW option is set to YES, DoxyPress will open links to "
+      "If this tag is set DoxyPress will open links to "
       "external symbols imported via tag files in a separate window. "
       "<br><br>"
       "The default value is: NO "
@@ -2214,7 +2214,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PAPER_TYPE",
-      "The PAPER_TYPE tag can be used to set the paper type that is used by the "
+      "This tag is uses to set the paper type used by the printer. "
       "printer. Possible values are: a4 (210 x 297 mm), letter (8.5 x 11 inches), legal ("
       "8.5 x 14 inches) and executive (7.25 x 10.5 inches). "
       "<br><br>"
@@ -2224,7 +2224,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
       "This tag is used to specify one or more LaTeX package names which should be included in "
-      "the LaTeX output. To get the times font for instance you can specify EXTRA_PACKAGES=times "
+      "the LaTeX output. To use the times font for example, specify 'times'. "
       "<br><br>"
       "If left blank no extra packages will be included. "
       "<br>"
@@ -2487,8 +2487,8 @@ static void configFullHelp(const QString &m_filePatterns)
       "file, i.e. a series of assignments. You only have to provide replacements, "
       "missing definitions are set to their default value. "
       "<br><br>"
-      "See also section \"DoxyPress usage\" for information on how to generate the "
-      "default style sheet that DoxyPress normally uses. "
+      "Refer to the DoxyPress manula regarding \"DoxyPress usage\" for information on how to generate "
+      "the default stylesheet. "
       "<br><br>"
       "This tag requires the tag 'GENERATE RTF' is set to YES");
 
