@@ -631,7 +631,7 @@ void MainWindow::predefined_macros_PB()
 
    QString temp = m_ui->predefined_macros->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Predefined Macros";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
@@ -654,7 +654,7 @@ void MainWindow::expand_as_defined_PB()
 
    QString temp = m_ui->expand_as_defined->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Expand As Defined";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
@@ -678,7 +678,7 @@ void MainWindow::tag_files_PB()
 
    QString temp = m_ui->tag_files->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Tag Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
@@ -766,7 +766,7 @@ void MainWindow::dot_file_dirs_PB()
 
    QString temp = m_ui->dot_file_dirs->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Dot File Directory";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
@@ -789,7 +789,7 @@ void MainWindow::msc_file_dirs_PB()
 
    QString temp = m_ui->msc_file_dirs->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "MSC File Directory";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
@@ -812,7 +812,7 @@ void MainWindow::dia_file_dirs_PB()
 
    QString temp = m_ui->dia_file_dirs->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Diafile Directories";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
@@ -837,6 +837,30 @@ void MainWindow::plantuml_jar_path_PB()
 
    m_ui->plantuml_jar_path->setText(path);
 }
+
+void MainWindow::plantuml_inc_path_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->plantuml_inc_path->toPlainText();
+
+   data.title      = "PlantUML Include Path";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = true;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->plantuml_inc_path->setPlainText(temp);
+   }
+}
+
 
 // tab 3 look up (html)
 void MainWindow::html_output_PB()
@@ -944,7 +968,7 @@ void MainWindow::qhp_cust_attrib_PB()
 
    QString temp = m_ui->qhp_cust_attrib->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Qt Help Custom Attribute";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
@@ -967,7 +991,7 @@ void MainWindow::qhp_sect_attrib_PB()
 
    QString temp = m_ui->qhp_sect_attrib->toPlainText();
 
-   data.title      = "BROOM";
+   data.title      = "Qt Help Section Attribute";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;

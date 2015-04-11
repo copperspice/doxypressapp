@@ -514,6 +514,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void plantuml_jar_path_PB())
       CS_SLOT_2(plantuml_jar_path_PB)
 
+      CS_SLOT_1(Private, void plantuml_inc_path_PB())
+      CS_SLOT_2(plantuml_inc_path_PB)
+
 
       // tab 3 html
       CS_SLOT_1(Private, void html_output_PB())

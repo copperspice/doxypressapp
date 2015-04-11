@@ -30,12 +30,13 @@ void Syntax::processSyntax()
 {
    //
    QStringList keyWords;
-   keyWords.append("Processing");
+   keyWords.append("\\bProcessing\\b");
 
    //
    QStringList errorWords;
    errorWords.append("Error:");
    errorWords.append("Warning:");
+   errorWords.append("\\bBroomCS\\b");
 
    //
    HighlightingRule rule;

@@ -751,7 +751,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: NO");
 
 // broom
-   s_fullHelp.insert("TYPEDEF_HIDES_STRUCT",
+   s_fullHelp.insert("USE_TYPEDEF_NAME",
       "When the tag is set a typedef of a struct, union, or enum is documented as struct, union, or "
       "enum with the name of the typedef. For example, Typedef struct TypeS {} TypeT, will appear "
       "as a struct with name TypeT. When disabled, the typedef will appear as a member of a file, "
@@ -1668,7 +1668,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "generate a warning when it encounters a \\startuml command in this case and "
       "will not generate output for the diagram.");
 
-   s_fullHelp.insert("PLANTUML_INCLUDE_PATH",
+   s_fullHelp.insert("PLANTUML_INC_PATH",
       "When using PlantUML, the specified paths are searched for files specified by "
       "the !include statement in a plantuml block.");
 
@@ -2040,26 +2040,27 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("HTML_SEARCH",
       "When this tag is set DoxyPress will generate a search box for the HTML output. "
       "The underlying search engine uses javascript and DHTML. "
-      "If this search engine is too slow try using the 'SERVER BASED SEARCH'. "
+      "If this search engine is too slow try using the 'SEARCH SERVER BASED'. "
       "<br><br>"
       "The default value is: YES "
       "<br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
-   s_fullHelp.insert("SERVER_BASED_SEARCH",
+   s_fullHelp.insert("SEARCH_SERVER_BASED",
       "When the is set the search engine will be implemented using a web server instead "
       "of a web client using Javascript. There "
       "are two flavors of web server based searching depending on the 'EXTERNAL SEARCH' "
       "setting. When disabled, DoxyPress will generate a PHP script for searching and "
       "an index file used by the script. When 'EXTERNAL SEARCH' is enabled the indexing "
-      "and searching needs to be provided by external tools. See the section "
-      "\"External Indexing and Searching\" for details. "
+      "and searching needs to be provided by external tools. "
+      "<br><br>"
+      "Refer to the DoxyPress manual regarding 'External Indexing and Searching'. "
       "<br><br>"
       "The default value is: NO "
       "<br>"
-      "This tag requires the tag 'SEARCH ENGINE' is set to YES");
+      "This tag requires the tag 'HTML SEARCH' is set to YES");
 
-   s_fullHelp.insert("EXTERNAL_SEARCH",
+   s_fullHelp.insert("SEARCH_EXTERNAL",
       "When this tag is enabled DoxyPress will not generate the PHP script for searching. "
       "The search results will be written to an XML file which must be processed by an external "
       "indexing system. DoxyPress will call the external search engine referenced in the "
@@ -2067,15 +2068,15 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO "
       "<br>"
-      "This tag requires the tag 'SEARCH ENGINE' is set to YES");
+      "This tag requires the tag 'HTML SEARCH' is set to YES");
 
-   s_fullHelp.insert("SEARCH_ENGINE_URL",
+   s_fullHelp.insert("SEARCH_EXTERNAL_URL",
       "This tag references a search engine hosted by a web server "
       "which will return the search results when 'EXTERNAL SEARCH' is enabled. "     
       "<br><br>"
       "Refer to the DoxyPress manual regarding 'External Indexing and Searching'. "
       "<br>"
-      "This tag requires the tag 'SEARCH ENGINE is set to YES");
+      "This tag requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_DATA_FILE",
       "When 'SERVER BASED SEARCH' and 'EXTERNAL SEARCH' are both enabled the unindexed "
@@ -2084,7 +2085,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default file is: searchdata.xml "
       "<br>"
-      "This tag requires the tag 'SEARCH ENGINE is set to YES");
+      "This tag requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_EXTERNAL_ID",
       "When the tags 'SERVER BASED SEARCH' and 'EXTERNAL SEARCH' are both enabled, this tag is used as "
@@ -2099,7 +2100,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag is used to map the id to a relative location where the documentation can be found. "
       "The format is: tagname1=loc1 tagname2=loc2 ... "
       "<br><br>"
-      "This tag requires the tag 'SEARCH ENGINE is set to YES");
+      "This tag requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("FORMULA_FONTSIZE",
       "Use this tag to change the font size of LaTeX formulas included as images in "

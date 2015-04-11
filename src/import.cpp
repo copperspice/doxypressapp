@@ -563,6 +563,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "PLANTUML_JAR_PATH");
    m_ui->plantuml_jar_path->setText(tempStr);
 
+   tempStr = convert_Str(data, "PLANTUML_INCLUDE_PATH");
+   m_ui->plantuml_inc_path->setPlainText(tempStr);
+
    tempInt = convert_Int(data, "DOT_GRAPH_MAX_NODES");
    m_ui->dot_graph_max_nodes_SB->setValue(tempInt);
 
@@ -738,13 +741,13 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_search_CB2->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SERVER_BASED_SEARCH");
-   m_ui->server_based_search_CB->setChecked(tempBool);
+   m_ui->search_server_based_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "EXTERNAL_SEARCH");
-   m_ui->external_search_CB->setChecked(tempBool);
+   m_ui->search_external_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "SEARCHENGINE_URL");
-   m_ui->search_engine_url->setText(tempStr);
+   m_ui->search_external_url->setText(tempStr);
 
    tempStr = convert_Str(data, "SEARCHDATA_FILE");
    m_ui->search_data_file->setText(tempStr);
@@ -1077,8 +1080,8 @@ void MainWindow::importDoxy()
          quest.setWindowTitle(tr("Convert Doxygen Project"));
          quest.setWindowIcon(QIcon("://resources/doxypress.png"));
 
-         quest.setText( tr("If you have a layout or css file refer to the DoxyPress documentation for 'Convert to DoxyPress' "
-                           "for additional information. Continue?"));
+         quest.setText( tr("If a layout or css file was specified in your project file, please refer to the DoxyPress documentation "
+                           "regarding 'Converting to DoxyPress' for additional information. Continue?"));
 
          quest.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
          quest.setDefaultButton(QMessageBox::No);

@@ -281,6 +281,7 @@ void MainWindow::createConnections()
    connect(m_ui->msc_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(msc_file_dirs_PB()));
    connect(m_ui->dia_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dia_file_dirs_PB()));
    connect(m_ui->plantuml_jar_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_jar_path_PB()));
+   connect(m_ui->plantuml_inc_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_inc_path_PB()));
 
    // tab 3 html
    connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));

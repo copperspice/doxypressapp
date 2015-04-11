@@ -681,7 +681,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file-dirs"));
    m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file-dirs"));
    m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file-dirs"));
-   m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());
+   m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());      
+   m_ui->plantuml_inc_path->setPlainText(          getDataList(object, "plantuml-inc-path"));
 
    m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph-max-nodes").toInt());
    m_ui->dot_graph_max_depth_SB->setValue(         object.value("dot-graph-max-depth").toInt());
@@ -714,9 +715,9 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->external_links_in_window_CB->setChecked(  object.value("external-links-in-window").toBool());
 
    m_ui->html_search_CB2->setChecked(              object.value("html-search").toBool());
-   m_ui->server_based_search_CB->setChecked(       object.value("server-based-search").toBool());
-   m_ui->external_search_CB->setChecked(           object.value("external-search").toBool());
-   m_ui->search_engine_url->setText(               object.value("search-engine-url").toString());
+   m_ui->search_server_based_CB->setChecked(       object.value("search-server-based").toBool());
+   m_ui->search_external_CB->setChecked(           object.value("search-external").toBool());
+   m_ui->search_external_url->setText(             object.value("search-external-url").toString());
    m_ui->search_data_file->setText(                object.value("search-data-file").toString());
    m_ui->search_external_id->setText(              object.value("search-external-id").toString());
    m_ui->search_mappings->setPlainText(            getDataList(object, "search-mappings"));
@@ -1028,6 +1029,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("msc-file-dirs",            putDataList(m_ui->msc_file_dirs->toPlainText()));
    object.insert("dia-file-dirs",            putDataList(m_ui->dia_file_dirs->toPlainText()));
    object.insert("plantuml-jar-path",        m_ui->plantuml_jar_path->text());
+   object.insert("plantuml-inc-path",        putDataList(m_ui->plantuml_inc_path->toPlainText()));
 
    object.insert("dot-graph-max-nodes",      m_ui->dot_graph_max_nodes_SB->value());
    object.insert("dot-graph-max-depth",      m_ui->dot_graph_max_depth_SB->value());
@@ -1060,9 +1062,9 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("external-links-in-window", m_ui->external_links_in_window_CB->isChecked());
 
    object.insert("html-search",              m_ui->html_search_CB2->isChecked());
-   object.insert("server-based-search",      m_ui->server_based_search_CB->isChecked());
-   object.insert("external-search",          m_ui->external_search_CB->isChecked());
-   object.insert("search-engine-url",        m_ui->search_engine_url->text());
+   object.insert("search-server-based",      m_ui->search_server_based_CB->isChecked());
+   object.insert("search-external",          m_ui->search_external_CB->isChecked());
+   object.insert("search-external-url",      m_ui->search_external_url->text());
    object.insert("search-data-file",         m_ui->search_data_file->text());
    object.insert("search-external-id",       m_ui->search_external_id->text());
    object.insert("search-mappings",          putDataList(m_ui->search_mappings->toPlainText()));

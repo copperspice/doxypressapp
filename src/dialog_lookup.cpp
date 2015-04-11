@@ -142,7 +142,7 @@ void Dialog_LookUp::getFolder()
    }
 
    QString path    = m_model->data(index).toString();
-   QString relPath = "";  // BROOM - wrong
+   QString relPath = "marker";  // BROOM - resolve
 
    path = m_owner->get_DirPath(tr("Select destination directory"), path, relPath);
 

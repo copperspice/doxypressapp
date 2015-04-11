@@ -875,12 +875,14 @@ void MainWindow::valid_have_dot()
       m_ui->dot_path_PB->setEnabled(true);
       m_ui->dot_file_dirs->setEnabled(true);
       m_ui->dot_file_dirs_PB->setEnabled(true);
+
+/*
       m_ui->msc_file_dirs->setEnabled(true);
       m_ui->msc_file_dirs_PB ->setEnabled(true);
       m_ui->dia_file_dirs->setEnabled(true);
-      m_ui->dia_file_dirs_PB->setEnabled(true);
-      m_ui->plantuml_jar_path->setEnabled(true);
-      m_ui->plantuml_jar_path_PB->setEnabled(true);
+      m_ui->dia_file_dirs_PB->setEnabled(true);     
+*/
+
       m_ui->dot_graph_max_nodes_SB->setEnabled(true);
       m_ui->dot_graph_max_depth_SB->setEnabled(true);
       m_ui->dot_transparent_CB->setEnabled(true);
@@ -915,12 +917,13 @@ void MainWindow::valid_have_dot()
       m_ui->dot_path_PB->setEnabled(false);
       m_ui->dot_file_dirs->setEnabled(false);
       m_ui->dot_file_dirs_PB->setEnabled(false);
+
+/*
       m_ui->msc_file_dirs->setEnabled(false);
       m_ui->msc_file_dirs_PB ->setEnabled(false);
       m_ui->dia_file_dirs->setEnabled(false);
       m_ui->dia_file_dirs_PB->setEnabled(false);
-      m_ui->plantuml_jar_path->setEnabled(false);
-      m_ui->plantuml_jar_path_PB->setEnabled(false);
+*/
       m_ui->dot_graph_max_nodes_SB->setEnabled(false);
       m_ui->dot_graph_max_depth_SB->setEnabled(false);
       m_ui->dot_transparent_CB->setEnabled(false);
@@ -1259,9 +1262,9 @@ void MainWindow::valid_html_search()
    m_ui->html_search_CB1->setChecked(m_ui->html_search_CB2->isChecked());
 
    if (m_ui->html_search_CB2->isChecked()) {
-      m_ui->server_based_search_CB->setEnabled(true);
-      m_ui->external_search_CB->setEnabled(true);
-      m_ui->search_engine_url->setEnabled(true);
+      m_ui->search_server_based_CB->setEnabled(true);
+      m_ui->search_external_CB->setEnabled(true);
+      m_ui->search_external_url->setEnabled(true);
       m_ui->search_data_file->setEnabled(true);
       m_ui->search_data_file_PB->setEnabled(true);
       m_ui->search_external_id->setEnabled(true);
@@ -1269,9 +1272,9 @@ void MainWindow::valid_html_search()
       m_ui->search_mappings_PB ->setEnabled(true);
 
    } else {
-      m_ui->server_based_search_CB->setEnabled(false);
-      m_ui->external_search_CB->setEnabled(false);
-      m_ui->search_engine_url->setEnabled(false);
+      m_ui->search_server_based_CB->setEnabled(false);
+      m_ui->search_external_CB->setEnabled(false);
+      m_ui->search_external_url->setEnabled(false);
       m_ui->search_data_file->setEnabled(false);
       m_ui->search_data_file_PB->setEnabled(false);
       m_ui->search_external_id->setEnabled(false);
