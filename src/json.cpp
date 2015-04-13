@@ -42,7 +42,6 @@ bool MainWindow::json_Read(Config trail)
    QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
 
-
    if (m_jsonFname.isEmpty() || ! QFile::exists(m_jsonFname)) {
       // get a new file name or location
       json_getFileName();
@@ -90,7 +89,7 @@ bool MainWindow::json_Read(Config trail)
       QSize size = QSize(width, height);
       resize(size);
 
-      m_struct.doxyPress_Exe = object.value("doxyPress-location").toString();
+      m_struct.doxyPressExe = object.value("doxyPress-location").toString();
 
       //
       m_struct.pathPrior = object.value("pathPrior").toString();
@@ -162,8 +161,9 @@ bool MainWindow::json_Write(Option route, Config trail)
 
             break;
 
-         case DOXYPRESS_EXE:
-            object.insert("doxyPress-location", m_struct.doxyPress_Exe);
+         // missing option for the user to set this by hand (BroomCS)
+         case DOXY_PRESS_EXE:
+            object.insert("doxyPress-location", m_struct.doxyPressExe);
             break;
 
          case PATH_PRIOR:
@@ -206,7 +206,6 @@ void MainWindow::json_getFileName()
       return;
    }
 #endif         
-
 
    QString selectedFilter;       
    QFileDialog::Options options;
@@ -298,27 +297,9 @@ bool MainWindow::json_CreateNew()
    value = QJsonValue(m_appPath);
    object.insert("pathPrior", value);
 
-   bool isAutoDetect = false;
+   value = QJsonValue(QString(""));
+   object.insert("doxyPress-location", value);
 
-#if defined(Q_OS_UNIX) && ! defined(Q_OS_MAC)
-
-   isAutoDetect = true;
-
-   QString resourcePath = m_appPath;
-   QString libraryPath  = QDir::homePath() + "/.config/DoxyPressApp/";
-
-#elif defined(Q_OS_MAC)
-   if (m_appPath.contains(".app/Contents/MacOS")) {
-      isAutoDetect = true;
-
-      QString resourcePath = this->pathName(m_appPath) + "/../Contents/Resources";
-      QString libraryPath  = QDir::homePath() + "/Library/DoxyPressApp/";
-   }
-#endif
-
-   if (! isAutoDetect) {
-   }
-     
    // save the data
    QJsonDocument doc(object);
    QByteArray data = doc.toJson();

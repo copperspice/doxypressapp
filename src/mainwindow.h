@@ -62,7 +62,7 @@ struct Settings {
    QFont   fontNormal;
    QColor  colorText;
    QString pathPrior;
-   QString doxyPress_Exe;
+   QString doxyPressExe;
 };
 
 struct LookUpInfo {
@@ -143,7 +143,7 @@ class MainWindow : public QMainWindow
       QStringList m_openedFiles;
 
       enum Config { CFG_STARTUP, CFG_DEFAULT };
-      enum Option { ABOUTURL, CLOSE, DOXYPRESS_EXE, PATH_PRIOR, RECENTFILE };
+      enum Option { ABOUTURL, CLOSE, DOXY_PRESS_EXE, PATH_PRIOR, RECENTFILE };
 
       void clearAllFields();
       void convertDoxy(QByteArray data);

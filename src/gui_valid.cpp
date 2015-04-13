@@ -1306,13 +1306,13 @@ static QString getFilePattens()
    list.append("*.hxx");
    list.append("*.hpp");
    list.append("*.h++");
+   list.append("*.idl");
    list.append("*.ii");
    list.append("*.ixx");
    list.append("*.ipp");
    list.append("*.i++");
    list.append("*.inc");
-   list.append("*.inl");
-   list.append("*.idl");
+   list.append("*.inl");  
    list.append("*.java");
    list.append("*.js");
    list.append("*.m");
@@ -1321,6 +1321,7 @@ static QString getFilePattens()
    list.append("*.markdown");
    list.append("*.odl");
    list.append("*.php");
+   list.append("*.php3");
    list.append("*.php4");
    list.append("*.php5");
    list.append("*.phtml");

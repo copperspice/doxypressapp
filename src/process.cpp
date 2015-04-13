@@ -28,25 +28,25 @@
 void MainWindow::runDoxyPress()
 {
    if (! m_running) {
-      // save the file
+      // save the project file
       saveDoxy();                
 
       QString doxyPressPath;
 
-      if (! m_struct.doxyPress_Exe.isEmpty() ) {
+      if (! m_struct.doxyPressExe.trimmed().isEmpty() ) {
          // user specified
-         doxyPressPath = m_struct.doxyPress_Exe;
+         doxyPressPath = m_struct.doxyPressExe;
 
       } else {
-         // test if DoxyPress in the same directory as the current app
+         // test if DoxyPress is in the same directory as the current app
          QString dir = QCoreApplication::applicationDirPath();
 
          QDir file(dir);
          if (file.exists("doxypress.exe")) {
-            doxyPressPath = dir + "doxypress.exe";
+            doxyPressPath = dir + "/doxypress.exe";
 
          } else if (file.exists("doxypress")) {
-            doxyPressPath = dir + "doxypress";
+            doxyPressPath = dir + "/doxypress";
 
          } else {
             // search user path
@@ -63,7 +63,19 @@ void MainWindow::runDoxyPress()
 
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
-      m_runProcess->setWorkingDirectory(outputDir);
+
+      QDir outf(outputDir);
+
+      if (outf.exists()) {
+         m_runProcess->setWorkingDirectory(outputDir);
+
+      } else {
+         runText_Append( QString("*** Your project 'Output Directory' tag has a value of: %1 \n"
+                                 "This directory does not exist, please correct\n").arg(outputDir));
+         return;
+
+      }
+
 
       QStringList args;     
       args.append("--b");           // make stdout unbuffered
@@ -73,13 +85,20 @@ void MainWindow::runDoxyPress()
       m_runProcess->start(doxyPressPath, args);
 
       if (! m_runProcess->waitForStarted()) {
-         runText_Append( QString("*** Failed to run %1\n").arg(doxyPressPath));
+         // show possible error messages
+         readStdout();
+
+         runText_Append( QString("*** Failed to start %1\n").arg(doxyPressPath));
+
          return;
       }            
 
       //
       if (m_runProcess->state() == QProcess::NotRunning) {
-         runText_Append("*** Failed to run DoxyPress\n");
+         // show possible error messages
+         readStdout();
+
+         runText_Append( QString("*** Failed to run %1\n").arg(doxyPressPath));
 
       } else {
          m_ui->save_log_PB->setEnabled(false);
@@ -105,13 +124,13 @@ void MainWindow::runDoxyPress()
 
 void MainWindow::readStdout()      
 {
-   if (m_running) {      
+  if (m_running) {
       QString text = m_runProcess->readAllStandardOutput();
 
       if (! text.isEmpty()) {
          runText_Append(text.trimmed());
       }
-   }
+  }
 }
 
 void MainWindow::runComplete()
