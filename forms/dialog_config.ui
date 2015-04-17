@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
-    <height>257</height>
+    <width>509</width>
+    <height>258</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -202,7 +202,7 @@
         </font>
        </property>
        <property name="text">
-        <string>New Settings File Name:</string>
+        <string>New Set Up File Name:</string>
        </property>
       </widget>
      </item>
@@ -210,7 +210,7 @@
       <widget class="QLineEdit" name="newName">
        <property name="minimumSize">
         <size>
-         <width>250</width>
+         <width>300</width>
          <height>20</height>
         </size>
        </property>
@@ -229,7 +229,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Current Settings File Name:</string>
+        <string>Current Set Up File Name:</string>
        </property>
       </widget>
      </item>
@@ -237,7 +237,7 @@
       <widget class="QLineEdit" name="currentName">
        <property name="minimumSize">
         <size>
-         <width>250</width>
+         <width>300</width>
          <height>0</height>
         </size>
        </property>
@@ -348,7 +348,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Create&lt;/span&gt; a new settings file&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select&lt;/span&gt; an existing settings file&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rename&lt;/span&gt; the current settings file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Create&lt;/span&gt; a new setup file&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select&lt;/span&gt; an existing set up file&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rename&lt;/span&gt; the current set up file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -422,7 +422,7 @@
       </font>
      </property>
      <property name="text">
-      <string>DoxyPressApp Settings File</string>
+      <string>DoxyPressApp Setup File</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

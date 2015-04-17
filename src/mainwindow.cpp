@@ -163,8 +163,9 @@ void MainWindow::createConnections()
    connect(m_ui->actionExit,          &QAction::triggered, this, [this](){ close();      } );
 
    connect(m_ui->actionImport,        &QAction::triggered, this, [this](){ importDoxy(); } );
-   connect(m_ui->actionMove_Settings, &QAction::triggered, this, [this](){ move_Settings(); } );
-   connect(m_ui->actionSave_Settings, &QAction::triggered, this, [this](){ save_Settings(); } );
+   connect(m_ui->actionEdit_Cfg,      &QAction::triggered, this, [this](){ edit_Cfg(); } );
+   connect(m_ui->actionMove_Cfg,      &QAction::triggered, this, [this](){ move_Cfg(); } );
+   connect(m_ui->actionSave_Cfg,      &QAction::triggered, this, [this](){ save_Cfg(); } );
 
    connect(m_ui->actionDoxyHelp,      &QAction::triggered, this, [this](){ manual();     } );
    connect(m_ui->actionAbout,         &QAction::triggered, this, [this](){ about();      } );

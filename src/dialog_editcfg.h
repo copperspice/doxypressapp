@@ -15,38 +15,33 @@
  *
 *************************************************************************/
 
-#ifndef DIALOG_CONFIG_H
-#define DIALOG_CONFIG_H
-
-#include "ui_dialog_config.h"
+#ifndef DIALOG_EDITCFG_H
+#define DIALOG_EDITCFG_H
 
 #include <QDialog>
-#include <QString>
 
-class Dialog_Config : public QDialog
-{     
-   CS_OBJECT(Dialog_Config)
+#include "mainwindow.h"
+#include "ui_dialog_editcfg.h"
+
+class Dialog_EditCfg : public QDialog
+{
+   CS_OBJECT(Dialog_EditCfg)
 
    public:
-      Dialog_Config(QString fileName);
-      ~Dialog_Config();
+      explicit Dialog_EditCfg(QString fileName);
+      ~Dialog_EditCfg();
 
-      QString get_newName();
+      QString get_doxyPressFn();
 
    private:
-      Ui::Dialog_Config *m_ui;
+      Ui::Dialog_EditCfg *m_ui;
 
-      CS_SLOT_1(Private, void createNew())
-      CS_SLOT_2(createNew) 
-
-      CS_SLOT_1(Private, void select())
-      CS_SLOT_2(select) 
-
-      CS_SLOT_1(Private, void rename())
-      CS_SLOT_2(rename) 
+      CS_SLOT_1(Private, void save())
+      CS_SLOT_2(save)
 
       CS_SLOT_1(Private, void cancel())
-      CS_SLOT_2(cancel) 
+      CS_SLOT_2(cancel)
+
 };
 
 #endif

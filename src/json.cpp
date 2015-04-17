@@ -16,7 +16,9 @@
 *************************************************************************/
 
 #include "dialog_config.h"
+#include "dialog_editcfg.h"
 #include "dialog_selectcfg.h"
+#include "util.h"
 #include "mainwindow.h"
 
 #include <QByteArray>
@@ -152,6 +154,8 @@ bool MainWindow::json_Write(Option route, Config trail)
             object.insert("pos-y",       pos().y()  );
             object.insert("size-width",  size().width()  );
             object.insert("size-height", size().height() );
+
+            object.insert("doxyPress-location", m_struct.doxyPressExe);
 
             {
               // opened files
@@ -310,7 +314,26 @@ bool MainWindow::json_CreateNew()
 }
 
 // **
-void MainWindow::move_Settings()
+// **
+void MainWindow::edit_Cfg()
+{
+   Dialog_EditCfg *dw = new Dialog_EditCfg(m_struct.doxyPressExe);
+   int result = dw->exec();
+
+   switch (result) {
+
+      case QDialog::Rejected:
+         break;
+
+      case QDialog::Accepted:
+         m_struct.doxyPressExe = dw->get_doxyPressFn();
+         json_Write(DOXY_PRESS_EXE);
+
+         break;
+   }
+}
+
+void MainWindow::move_Cfg()
 {
    QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
@@ -414,7 +437,7 @@ void MainWindow::move_Settings()
    }
 }
 
-void MainWindow::save_Settings()
+void MainWindow::save_Cfg()
 {
    json_Write(CLOSE);
 

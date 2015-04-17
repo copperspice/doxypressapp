@@ -15,58 +15,37 @@
  *
 *************************************************************************/
 
-#include "dialog_config.h"
-#include "util.h"
+#include <dialog_editcfg.h>
 
-Dialog_Config::Dialog_Config(QString fileName)
-   : m_ui(new Ui::Dialog_Config)
+Dialog_EditCfg::Dialog_EditCfg(QString fileName)
+   : m_ui(new Ui::Dialog_EditCfg)
 {
    m_ui->setupUi(this);
    this->setWindowIcon(QIcon("://resources/doxypress.png"));
 
-   m_ui->currentName->setText(fileName);
-   m_ui->newName->setText(fileName);
+   m_ui->doxyPress_fn->setText(fileName);
+   m_ui->doxyPress_fn->setFocus();
 
-   connect(m_ui->create_PB, SIGNAL(clicked()),this, SLOT(createNew()));
-   connect(m_ui->select_PB, SIGNAL(clicked()),this, SLOT(select()));
-   connect(m_ui->rename_PB, SIGNAL(clicked()),this, SLOT(rename()));
+   connect(m_ui->save_PB,   SIGNAL(clicked()),this, SLOT(save()));
    connect(m_ui->cancel_PB, SIGNAL(clicked()),this, SLOT(cancel()));
 }
 
-Dialog_Config::~Dialog_Config()
+Dialog_EditCfg::~Dialog_EditCfg()
 {
    delete m_ui;
 }
 
-void Dialog_Config::createNew()
+QString Dialog_EditCfg::get_doxyPressFn()
 {
-   this->done(1);
+   return m_ui->doxyPress_fn->text();
 }
 
-void Dialog_Config::select()
+void Dialog_EditCfg::cancel()
 {
-   this->done(2);
+   this->done(QDialog::Rejected);
 }
 
-void Dialog_Config::rename()
+void Dialog_EditCfg::save()
 {
-   QString name = m_ui->newName->text();
-
-   if (name.isEmpty())  {
-      csError("Rename Configuration File", "New file name can not be blank.");
-      return;
-   }
-
-   this->done(3);
+   this->done(QDialog::Accepted);
 }
-
-void Dialog_Config::cancel()
-{
-   this->done(0);
-}
-
-QString Dialog_Config::get_newName()
-{
-   return m_ui->newName->text();
-}
-

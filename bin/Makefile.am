@@ -36,6 +36,47 @@ if OSTYPE_LINUX
 endif
 
 if OSTYPE_DARWIN
+deployapp=$(deploydir)/$(bin_PROGRAMS).app/Contents
+
+deploy : all
+	mkdir -p $(deployapp)/Frameworks
+	mkdir -p $(deployapp)/MacOS
+	mkdir -p $(deployapp)/Resources
+
+	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deployapp)/MacOS
+
+	rm -f $(deployapp)/Info.plist
+	sed -e "s,@ICON@,doxypress.icns,g" \
+	    -e "s,@TYPEINFO@,????,g" \
+	    -e "s,@EXECUTABLE@,$(bin_PROGRAMS),g" \
+	    -e "s,com.yourcompany.,com.copperspice.,g" \
+	$(CS_HOME)/mac/Info.plist.app > $(deployapp)/Info.plist
+
+	rm -f $(deployapp)/PkgInfo
+	echo "APPL????" > $(deployapp)/PkgInfo
+
+	touch $(deployapp)/Resources/empty.lproj
+	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
+
+#cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
+	
+	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%1.0.dylib,$(cslibs)) $(deployapp)/Frameworks
+
+	for libname in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
+	\
+	install_name_tool -change $(CS_HOME)/lib/$$libname \
+	@executable_path/../Frameworks/$$libname  $(deployapp)/MacOS/$(bin_PROGRAMS); \
+	\
+	for templib in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
+	install_name_tool -change $(CS_HOME)/lib/$$templib \
+	@executable_path/../Frameworks/$$templib  $(deployapp)/Frameworks/$$libname \
+	; done \
+	\
+	; done
+
+   # generate dmg	
+	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname $(bin_PROGRAMS) ../$(bin_PROGRAMS).dmg
+	hdiutil internet-enable -yes ../$(bin_PROGRAMS).dmg
 endif
 
 if OSTYPE_WIN
@@ -65,6 +106,8 @@ DoxyPressApp_SOURCES = \
    src/colors.cpp  \
    src/dialog_config.cpp  \
    src/dialog_config.h   \
+   src/dialog_editcfg.cpp  \
+   src/dialog_editcfg.h   \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
    src/dialog_xp_getdir.cpp \
@@ -84,6 +127,7 @@ DoxyPressApp_SOURCES = \
 
 FORMS = \
    forms/dialog_config.ui \
+   forms/dialog_editcfg.ui \
    forms/dialog_lookup.ui \
    forms/dialog_selectcfg.ui \
    forms/dialog_xp_getdir.ui \

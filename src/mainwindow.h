@@ -239,11 +239,14 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void importDoxy())
       CS_SLOT_2(importDoxy)
 
-      CS_SLOT_1(Private, void move_Settings())
-      CS_SLOT_2(move_Settings)
+      CS_SLOT_1(Private, void edit_Cfg())
+      CS_SLOT_2(edit_Cfg)
 
-      CS_SLOT_1(Private, void save_Settings())
-      CS_SLOT_2(save_Settings)
+      CS_SLOT_1(Private, void move_Cfg())
+      CS_SLOT_2(move_Cfg)
+
+      CS_SLOT_1(Private, void save_Cfg())
+      CS_SLOT_2(save_Cfg)
 
       // recent files
       CS_SLOT_1(Private, void showContext_Files(const QPoint &pt))

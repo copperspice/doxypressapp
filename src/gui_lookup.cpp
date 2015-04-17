@@ -117,7 +117,7 @@ void MainWindow::strip_from_path_PB()
    data.title      = "Strip From Path";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = false;
+   data.isFolderPB = true;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -140,7 +140,7 @@ void MainWindow::strip_from_inc_path_PB()
    data.title      = "Strip From Include Path";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = false;
+   data.isFolderPB = true;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -183,7 +183,7 @@ void MainWindow::tcl_subst_PB()
 
    QString temp = m_ui->tcl_subst->toPlainText();
 
-   data.title      = "Tcl Substitue";
+   data.title      = "Tcl Substitute";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
@@ -269,7 +269,7 @@ void MainWindow::cite_bib_files_PB()
 
    data.title      = "Cite Bib Files";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
+   data.isFilePB   = true;
    data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
@@ -324,8 +324,8 @@ void MainWindow::input_patterns_PB()
 
    data.title      = "Input Patterns";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -348,7 +348,7 @@ void MainWindow::exclude_files_PB()
    data.title      = "Exclude Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -370,8 +370,8 @@ void MainWindow::exclude_patterns_PB()
 
    data.title      = "Exclude Patterns";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -393,8 +393,8 @@ void MainWindow::exclude_symbols_PB()
 
    data.title      = "Exclude Symbols";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -417,7 +417,7 @@ void MainWindow::example_source_PB()
    data.title      = "Example Source";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = false;
+   data.isFolderPB = true;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -463,7 +463,7 @@ void MainWindow::image_path_PB()
    data.title      = "Image Path";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = false;
+   data.isFolderPB = true;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -611,7 +611,7 @@ void MainWindow::include_file_patterns_PB()
    data.title      = "Inlcude File Patterns";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -634,7 +634,7 @@ void MainWindow::predefined_macros_PB()
    data.title      = "Predefined Macros";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -657,7 +657,7 @@ void MainWindow::expand_as_defined_PB()
    data.title      = "Expand As Defined";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -681,7 +681,7 @@ void MainWindow::tag_files_PB()
    data.title      = "Tag Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -897,7 +897,7 @@ void MainWindow::html_stylesheets_PB()
    data.title      = "HTML Stylesheets";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -920,7 +920,7 @@ void MainWindow::html_extra_files_PB()
    data.title      = "HTML Extra Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1023,8 +1023,8 @@ void MainWindow::mathjax_extensions_PB()
 
    data.title      = "Mathjax Extensions";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1053,8 +1053,8 @@ void MainWindow::search_mappings_PB()
 
    data.title      = "Extra Search Mappings";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFilePB   = false;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1139,7 +1139,7 @@ void MainWindow::latex_extra_files_PB()
    data.title      = "Latex Extra Files";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = true;
+   data.isFolderPB = false;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();

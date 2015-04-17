@@ -9854,8 +9854,9 @@
     </property>
     <addaction name="actionImport"/>
     <addaction name="separator"/>
-    <addaction name="actionMove_Settings"/>
-    <addaction name="actionSave_Settings"/>
+    <addaction name="actionEdit_Cfg"/>
+    <addaction name="actionMove_Cfg"/>
+    <addaction name="actionSave_Cfg"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -9941,17 +9942,22 @@
     <string>Exit DoxyPressApp</string>
    </property>
   </action>
-  <action name="actionMove_Settings">
+  <action name="actionMove_Cfg">
    <property name="text">
-    <string>Move DoxyPressApp Setup File</string>
+    <string>Move Setup File</string>
    </property>
    <property name="toolTip">
     <string>Move DoxyPressApp Setup File</string>
    </property>
   </action>
-  <action name="actionSave_Settings">
+  <action name="actionSave_Cfg">
    <property name="text">
-    <string>Save DoxyPress Setup File</string>
+    <string>Save Setup File</string>
+   </property>
+  </action>
+  <action name="actionEdit_Cfg">
+   <property name="text">
+    <string>Edit Setup File</string>
    </property>
   </action>
  </widget>
@@ -10327,8 +10333,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_diagram"/>
+  <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_latex"/>
  </buttongroups>
 </ui>

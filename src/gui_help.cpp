@@ -247,6 +247,10 @@ void MainWindow::hoverChanged(QWidget *old_Widget, QWidget *new_Widget)
 {
    bool isModified = false;
 
+   if (new_Widget == m_ui->runText) {
+      return;
+   }
+
    // adjust help message for new_Widget
    setHelpText(new_Widget);
 
@@ -1024,7 +1028,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The format for this tag is ext=language, where ext is a file extension and language"
       "is one of the parsers supported by DoxyPress. "
       "<br><br>"
-      "The supported parsers are: C#, C, C++, IDL, Java, Javascript, Objective-C, "
+      "The supported parsers are: C#, C, C++, IDL, Java, JavaScript, Objective-C, "
       "PHP, Python, Fortran, FortranFixed, FortranFree. "
       "<br><br>"
       "As and example, to treat .f files as C (default is Fortran), use: f=C "
@@ -1200,7 +1204,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag is used to specify filter programs based on a wildcard match. "
       "DoxyPress will compare source file names with the wildcards and apply the "
       "filter program if there is a match. "
-      "If this tag is empty or none of the wildards match, then the program specified by the 'FILTER PROGRAM NAME' "
+      "If this tag is empty or none of the wildcards match, then the program specified by the 'FILTER PROGRAM NAME' "
       "will be used. The filter programs are listed in the format: "
       "<br><br>"
       "wildcard=filter program"
@@ -1482,7 +1486,8 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("HAVE_DOT",
       "If this tag is set DoxyPress will assume the DOT program is available from the path. "
-      "This tool is part of Graphviz, a graph visualization toolkit from AT&T and Lucent Bell Labs. "     
+      "This program is part of Graphviz which is a graph visualization toolkit from AT&T "
+      "and Lucent Bell Labs.   "     
       "<br><br>"
       "The default value is: NO");
 
@@ -1701,7 +1706,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("DOT_TRANSPARENT",
       "Set this tag to generate images with a transparent background. "
       "Depending on your platform, enabling this option may lead to "
-      "unreadabel anti-aliased labels on the edges of a graph. "
+      "unreadable anti-aliased labels on the edges of a graph. "
       "<br><br>"
       "The default value is: NO "
       "<br>"
@@ -1787,7 +1792,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("HTML_EXTRA_FILES",
       "This tag is  used to specify one or more extra images or other source files which "
-      "should be copied to the base 'HTML OUTPUT DIRECTORY'. Use the $relpath^ varialbe in your "
+      "should be copied to the base 'HTML OUTPUT DIRECTORY'. Use the $relpath^ variable in your "
       "'HTML HEADER FILE' or 'HTML FOOTER FILE' files to load the extra files. "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
@@ -1876,7 +1881,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO "
       "<br>"
-      "This tag requires the tag 'GENERATE HTML'HELP is set to YES");
+      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("CHM_INDEX_ENCODING",
       "This tag is used to encode HtmlHelp index (hhk), content (hhc) "
@@ -2039,7 +2044,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("HTML_SEARCH",
       "When this tag is set DoxyPress will generate a search box for the HTML output. "
-      "The underlying search engine uses javascript and DHTML. "
+      "The underlying search engine uses JavaScript and DHTML. "
       "If this search engine is too slow try using the 'SEARCH SERVER BASED'. "
       "<br><br>"
       "The default value is: YES "
@@ -2048,7 +2053,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("SEARCH_SERVER_BASED",
       "When the is set the search engine will be implemented using a web server instead "
-      "of a web client using Javascript. There "
+      "of a web client using JavaScript. There "
       "are two flavors of web server based searching depending on the 'EXTERNAL SEARCH' "
       "setting. When disabled, DoxyPress will generate a PHP script for searching and "
       "an index file used by the script. When 'EXTERNAL SEARCH' is enabled the indexing "
@@ -2116,7 +2121,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "If this tag is set transparent PNGs will be used for formulas. Transparent PNGs may not "
       "be supported properly in older browsers. "
       "<br><br>"
-      "Note: When changing this tag delete any files names form _*.png in "
+      "Note: When changing this tag delete any files named form_*.png in "
       "the HTML output directory for this change to be effective. "
       "<br><br>"
       "The default value is: YES "
@@ -2129,14 +2134,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("USE_MATHJAX",
-      "Enable this tag to render LaTeX formulas using MathJax, which uses client side Javascript for the rendering "
+      "Enable this tag to render LaTeX formulas using MathJax, which uses client side JavaScript for the rendering "
       "instead of using pre-rendered bitmaps. Use this if you do not have LaTeX "
       "installed or if you want formulas look prettier in the HTML output. When "
       "enabled you may also need to install MathJax separately and configure the path "
       "to it using the 'MATHJAX RELATIVE PATH' option. "
       "<br><br>"
       "The default value is: NO "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("MATHJAX_FORMAT",
@@ -2145,20 +2150,19 @@ static void configFullHelp(const QString &m_filePatterns)
       "compatibility), NativeMML (i.e. MathML) and SVG. "
       "<br><br>"
       "The default value is: HTML-CSS "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_RELPATH",
-      "When MathJax is enabled you need to specify the location relative to the HTML "
-      "output directory using the MATHJAX_RELPATH option. The destination directory "
-      "should contain the MathJax.js script. For instance, if the mathjax directory "
-      "is located at the same level as the HTML output directory, then this tag should "
-      "be ../mathjax. The default value points to the MathJax Content Delivery Network so you can quickly see "
-      "the result without installing "
-      "MathJax. However, it is strongly recommended to install a local copy of MathJax. "
+      "When MathJax is enabled specify the location relative to the HTML "
+      "output directory using the 'MATHJAX RELATIVE PATH' tag. The destination directory "
+      "should contain the MathJax.js script. For example, if the mathjax directory "
+      "is located at the same level as the HTML output directory, then this tag should be ../mathjax. "
+      "The default value points to the MathJax Content Delivery Network so you can quickly see "
+      "the result without installing MathJax. "
       "<br><br>"
       "The default value is: http://cdn.mathjax.org/mathjax/latest "                     
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_EXTENSIONS",
@@ -2166,11 +2170,11 @@ static void configFullHelp(const QString &m_filePatterns)
       "during MathJax rendering. "
       "<br><br>"
       "For example: TeX/AMSmath, TeX/AMSsymbols "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_CODEFILE",
-      "This tag is used to specify a file with javascript fragments which will be used on "
+      "This tag is used to specify a file with JavaScript fragments which will be used on "
       "startup of the MathJax code. "
       "<br><br>"
       "This tag requires the tag 'USE MATHJAX' is set to YES");
@@ -2186,7 +2190,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "path is entered the value of 'OUTPUT DIRECTORY' will be prepended. "
       "<br><br>"
       "The default directory is: latex "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_CMD_NAME",
@@ -2197,21 +2201,21 @@ static void configFullHelp(const QString &m_filePatterns)
       "written to the output directory. "
       "<br><br>"
       "The default file is: latex "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("MAKE_INDEX_CMD_NAME",
       "This tag is used to specify the command name to generate index for LaTeX. "
       "<br><br>"
       "The default file is: makeindex "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_COMPACT",
       "If this tag is set DoxyPress generates more compact LaTeX documents. "
       "<br><br>"
       "The default value is: NO "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PAPER_TYPE",
@@ -2220,7 +2224,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "8.5 x 14 inches) and executive (7.25 x 10.5 inches). "
       "<br><br>"
       "The default value is: a4 "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
@@ -2235,7 +2239,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "If this tag is set the footer page will contain the date and time when the page was generated. "
       "<br><br>"
       "The default value is: NO "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_HEADER",
@@ -2255,10 +2259,10 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("LATEX_FOOTER",
       "This tag is used to specify a user-defined LaTeX footer for the generated LaTeX document."
       "If left blank DoxyPress will generate a standard footer. "
-      "<br>"
+      "<br><br>"
       "The footer should contain everything after the last chapter. "
       "To create a new footer file run 'DoxyPress --w latex-foot [footer file name]' "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_FILES",
