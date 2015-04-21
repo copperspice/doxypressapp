@@ -199,6 +199,8 @@ bool MainWindow::openDoxy_Internal(const QString fname)
    json_OpenDoxy(data);   
 
    updateRunButtons();
+   clearOutput();
+
    setDoxyTitle(false);
 
    return true;

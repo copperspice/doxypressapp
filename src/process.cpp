@@ -81,7 +81,7 @@ void MainWindow::runDoxyPress()
       args.append("--b");           // make stdout unbuffered
       args.append(m_curFile);
 
-      m_ui->runText->document()->clear();
+      clearOutput();
       m_runProcess->start(doxyPressPath, args);
 
       if (! m_runProcess->waitForStarted()) {
@@ -102,6 +102,7 @@ void MainWindow::runDoxyPress()
 
       } else {
          m_ui->save_log_PB->setEnabled(false);
+         m_ui->clear_PB->setEnabled(false);
 
          m_running = true;
 
@@ -111,13 +112,15 @@ void MainWindow::runDoxyPress()
 //B      m_timer->start(1000);
       }
 
-   } else {
-      m_running = false;      
+   } else {      
+      // doxypress is running, stop it
+      m_running = false;
+
+      m_runProcess->kill();
 
       m_ui->run_PB->setText(tr("Run DoxyPress"));
       m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
-//B   m_runProcess->kill();
 //B   m_timer->stop();
    }
 }
@@ -128,7 +131,7 @@ void MainWindow::readStdout()
       QString text = m_runProcess->readAllStandardOutput();
 
       if (! text.isEmpty()) {
-         runText_Append(text.trimmed());
+         runText_Append(text);
       }
   }
 }
@@ -159,6 +162,7 @@ void MainWindow::runComplete()
    m_syntaxParser->processSyntax();
 
    m_ui->save_log_PB->setEnabled(true);
+   m_ui->clear_PB->setEnabled(true);
 }
 
 //  **
@@ -259,8 +263,12 @@ void MainWindow::updateRunButtons()
 {
    if (m_ui->runText->toPlainText().isEmpty())  {
       m_ui->save_log_PB->setEnabled(false);
+      m_ui->clear_PB->setEnabled(false);
+
    } else {
       m_ui->save_log_PB->setEnabled(true);
+      m_ui->clear_PB->setEnabled(true);
+
    }
 
    bool isHtml = htmlOutputPresent();

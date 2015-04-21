@@ -31,6 +31,7 @@ void Syntax::processSyntax()
    //
    QStringList keyWords;
    keyWords.append("\\bProcessing\\b");
+   keyWords.append("\\bReading\\b");
 
    //
    QStringList errorWords;

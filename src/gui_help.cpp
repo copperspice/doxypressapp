@@ -715,12 +715,12 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("AUTO_LINK",
       "When this tag is set DoxyPress tries to link words which correspond to documented "
-      "classes, or namespaces to their corresponding documentation. Such a link can "
-      "be prevented in individual cases by putting a % sign in front of the word or "
+      "classes, or namespaces to their corresponding documentation. An auto link can "
+      "be prevented for individual cases by adding a % charactor in front of the word or "
       "globally by setting 'AUTOLINK SUPPORT' to NO. "
       "<br><br>"
       "The default value is: YES");
-
+   
   s_fullHelp.insert("DUPLICATE_DOCS",
       "If member grouping is used in the documentation and this tag "
       "is set, DoxyPress will reuse the documentation of the first "
