@@ -50,29 +50,65 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
    return QObject::eventFilter(object, event);
 }
 
-QString MainWindow::get_DirPath(QString message, QString initialPath, QString relativePath, bool isOutputDir)
+QString MainWindow::get_DirPath(QString message, QString initialPath, enum RelativeX relativeTo)
 {
-   QString path = initialPath;
+   QString retval = initialPath;
 
-   QString outputDir  = m_ui->output_dir->text();
-   QString projectDir = pathName(m_curFile);
+   QString outputDir;
+   QString projectDir;
 
-   if (path.startsWith("$output_dir"))  {
-      path.replace("$output_dir", outputDir);
+   if (relativeTo != ABSOLUTE_ONLY) {
+      // part 1 - find the real outputDir
 
-   } else if (path.startsWith("$project_dir"))  {
-      path.replace("$project_dir", projectDir);
+      // a
+      projectDir = pathName(m_curFile);
 
-   } else if (path.isEmpty()) {
-      path = relativePath;
+      // test if outputdir is relative
+      outputDir = m_ui->output_dir->text();
 
+      if (QDir::isAbsolutePath(outputDir)) {
+         // do nothing
+
+      } else if (outputDir.isEmpty()) {
+         // outputdir was blank
+         outputDir = projectDir;
+
+      } else {
+         // outputdir was relative
+         outputDir = projectDir + "/" + outputDir;
+
+      }
+
+      // b
+      if (relativeTo == PROJECT_DIR) {
+
+         if (QDir::isAbsolutePath(initialPath) )  {
+            // do nothing
+
+         } else if (initialPath.isEmpty())  {
+            retval = projectDir;
+
+         } else {
+            retval = projectDir + "/" + initialPath;
+
+         }
+
+      } else {
+
+         if (QDir::isAbsolutePath(initialPath) )  {
+            // do nothing
+
+         } else if (initialPath.isEmpty())  {
+            retval = outputDir;
+
+         } else {
+            retval = outputDir + "/" + initialPath;
+
+         }
+      }
    }
 
-   // just text, if relative then append
-   if (QDir::isRelativePath(path) )  {
-      path = relativePath + "/" + path;
-   }  
-
+   // part 2 - user can select a new path
    QFileDialog::Options options;
    options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks; 
 
@@ -80,50 +116,59 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, QString re
 
    if (QSysInfo::WindowsVersion < QSysInfo::WV_VISTA) {
 
-      Dialog_XP_GetDir *dw = new Dialog_XP_GetDir(this, message, path, options);
+      Dialog_XP_GetDir *dw = new Dialog_XP_GetDir(this, message, retval, options);
       int result = dw->exec();
 
       if (result == QDialog::Accepted) {
-         path = dw->getDirectory();
+         retval = dw->getDirectory();
       } else {
-         path = "";
+         retval = "";
       }
 
    } else {
-      path = QFileDialog::getExistingDirectory(this, message, path, options);
+      retval = QFileDialog::getExistingDirectory(this, message, retval, options);
 
    }
 
 #else
    // on X11 the title bar may not be displayed
-   path = QFileDialog::getExistingDirectory(this, message, path, options);
+   retval = QFileDialog::getExistingDirectory(this, message, retval, options);
 
 #endif
 
-   if (path.isEmpty())  {
+   if (retval.isEmpty())  {
       // user canceled dialog
       return initialPath;
-   }
 
-   // adjust for platform slash issue
-   if (! path.isEmpty()) {      
-      QDir temp(path + "/");
-      path = temp.canonicalPath() + "/";
-   }     
+   } else if (relativeTo != ABSOLUTE_ONLY) {
+      // turn absolute path into a relative path if possible
 
-   if (! isOutputDir) {
-      // resolve relative path
+      QDir temp(retval + "/");
+      retval = temp.canonicalPath();
 
-      if (path.startsWith(outputDir))  {
-         path.replace(outputDir, "$output_dir/");
+      if (relativeTo == PROJECT_DIR) {
+         projectDir = QDir(projectDir).canonicalPath();
 
-      } else if (path.startsWith(projectDir))  {
-         path.replace(projectDir,"$project_dir/");
+         if (retval.startsWith(projectDir)) {
+            retval = retval.mid(projectDir.length() + 1);
+         }
 
+      } else {
+         outputDir = QDir(outputDir).canonicalPath();
+
+         if (retval.startsWith(outputDir)) {
+            retval = retval.mid(outputDir.length() + 1 );
+         }
+
+      }
+
+      // show user something
+      if (retval.isEmpty()) {
+         retval = ".";
       }
    }
 
-   return path;
+   return retval;
 }
 
 QString MainWindow::getSingleFile(QString title, QString fname, QString filter)

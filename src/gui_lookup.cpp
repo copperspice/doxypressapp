@@ -60,10 +60,8 @@ void MainWindow::getLogo(const QString route)
 
 void MainWindow::output_dir_PB()
 {   
-   QString path    = m_ui->output_dir->text();
-   QString relPath = pathName(m_curFile);
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath, true);
+   QString path = m_ui->output_dir->text();
+   path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
 
    m_ui->output_dir->setText(path);
 }
@@ -95,6 +93,7 @@ void MainWindow::abbreviate_brief_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -118,6 +117,7 @@ void MainWindow::strip_from_path_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -141,6 +141,7 @@ void MainWindow::strip_from_inc_path_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -164,6 +165,7 @@ void MainWindow::aliases_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -187,6 +189,7 @@ void MainWindow::tcl_subst_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -210,6 +213,7 @@ void MainWindow::language_mapping_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -234,6 +238,7 @@ void MainWindow::enabled_sections_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -271,6 +276,7 @@ void MainWindow::cite_bib_files_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -303,6 +309,7 @@ void MainWindow::input_source_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -326,6 +333,7 @@ void MainWindow::input_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -349,6 +357,7 @@ void MainWindow::exclude_files_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -372,6 +381,7 @@ void MainWindow::exclude_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -395,6 +405,7 @@ void MainWindow::exclude_symbols_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -418,6 +429,7 @@ void MainWindow::example_source_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -441,6 +453,7 @@ void MainWindow::example_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -464,6 +477,7 @@ void MainWindow::image_path_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -494,6 +508,7 @@ void MainWindow::filter_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -517,6 +532,7 @@ void MainWindow::filter_source_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -541,6 +557,7 @@ void MainWindow::clang_options_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -565,6 +582,7 @@ void MainWindow::ignore_prefix_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -589,6 +607,7 @@ void MainWindow::include_path_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -612,6 +631,7 @@ void MainWindow::include_file_patterns_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -635,6 +655,7 @@ void MainWindow::predefined_macros_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -658,6 +679,7 @@ void MainWindow::expand_as_defined_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -682,6 +704,7 @@ void MainWindow::tag_files_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -703,10 +726,8 @@ void MainWindow::gen_tagfile_PB()
 
 void MainWindow::perl_path_PB()
 {
-   QString path    = m_ui->perl_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->perl_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
 
    m_ui->perl_path->setText(path);
 }
@@ -714,20 +735,16 @@ void MainWindow::perl_path_PB()
 // tab 2- look up (dot)
 void MainWindow::mscgen_path_PB()
 {
-   QString path    = m_ui->mscgen_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->mscgen_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
 
    m_ui->mscgen_path->setText(path);
 }
 
 void MainWindow::dia_path_PB()
 {
-   QString path    = m_ui->dia_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->dia_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
 
    m_ui->dia_path->setText(path);
 }
@@ -741,20 +758,16 @@ void MainWindow::dot_font_name_PB()
 
 void MainWindow::dot_font_path_PB()
 {
-   QString path    = m_ui->dot_font_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->dot_font_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
 
    m_ui->dot_font_path->setText(path);
 }
 
 void MainWindow::dot_path_PB()
 {
-   QString path    = m_ui->dot_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->dot_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
 
    m_ui->dot_path->setText(path);
 }
@@ -770,6 +783,7 @@ void MainWindow::dot_file_dirs_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -793,6 +807,7 @@ void MainWindow::msc_file_dirs_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -816,6 +831,7 @@ void MainWindow::dia_file_dirs_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = OUTPUT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -830,10 +846,8 @@ void MainWindow::dia_file_dirs_PB()
 
 void MainWindow::plantuml_jar_path_PB()
 {
-   QString path    = m_ui->plantuml_jar_path->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->plantuml_jar_path->text();
+   path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
 
    m_ui->plantuml_jar_path->setText(path);
 }
@@ -849,6 +863,7 @@ void MainWindow::plantuml_inc_path_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = true;
+   data.relativeTo = OUTPUT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -865,10 +880,8 @@ void MainWindow::plantuml_inc_path_PB()
 // tab 3 look up (html)
 void MainWindow::html_output_PB()
 {
-   QString path    = m_ui->html_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->html_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->html_output->setText(path);
 }
@@ -898,6 +911,7 @@ void MainWindow::html_stylesheets_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -921,6 +935,7 @@ void MainWindow::html_extra_files_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -972,6 +987,7 @@ void MainWindow::qhp_cust_attrib_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -995,6 +1011,7 @@ void MainWindow::qhp_sect_attrib_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1025,6 +1042,7 @@ void MainWindow::mathjax_extensions_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1055,6 +1073,7 @@ void MainWindow::search_mappings_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1070,10 +1089,8 @@ void MainWindow::search_mappings_PB()
 // tab 3 look up (latex)
 void MainWindow::latex_output_PB()
 {
-   QString path    = m_ui->latex_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->latex_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->latex_output->setText(path);
 }
@@ -1103,6 +1120,7 @@ void MainWindow::latex_extra_packages_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = false;
    data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1140,6 +1158,7 @@ void MainWindow::latex_extra_files_PB()
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
    data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
    int result = dw->exec();
@@ -1155,10 +1174,8 @@ void MainWindow::latex_extra_files_PB()
 // tab 3 look up (rtf)
 void MainWindow::rtf_output_PB()
 {
-   QString path    = m_ui->rtf_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->rtf_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->rtf_output->setText(path);
 }
@@ -1180,10 +1197,8 @@ void MainWindow::rtf_extension_PB()
 // tab 3 look up (man)
 void MainWindow::man_output_PB()
 {
-   QString path    = m_ui->man_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->man_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->man_output->setText(path);
 }
@@ -1191,10 +1206,8 @@ void MainWindow::man_output_PB()
 // tab 3 look up (xml)
 void MainWindow::xml_output_PB()
 {
-   QString path    = m_ui->xml_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->xml_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->xml_output->setText(path);
 }
@@ -1202,10 +1215,8 @@ void MainWindow::xml_output_PB()
 // tab 3 look up (docbook)
 void MainWindow::docbook_output_PB()
 {   
-   QString path    = m_ui->docbook_output->text();
-   QString relPath = m_ui->output_dir->text();
-
-   path = get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_ui->docbook_output->text();
+   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 
    m_ui->docbook_output->setText(path);
 }

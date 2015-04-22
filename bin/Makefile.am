@@ -45,6 +45,9 @@ deploy : all
 
 	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deployapp)/MacOS
 
+   # hard coded line to copy doxypress app into this dmg
+	cp $(top_srcdir)/../DoxyPress/deploy/doxypress.app/Contents/MacOS/doxypress  $(deployapp)/MacOS
+
 	rm -f $(deployapp)/Info.plist
 	sed -e "s,@ICON@,doxypress.icns,g" \
 	    -e "s,@TYPEINFO@,????,g" \
@@ -58,8 +61,8 @@ deploy : all
 	touch $(deployapp)/Resources/empty.lproj
 	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
 
-#cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
-	
+	cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
+
 	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%1.0.dylib,$(cslibs)) $(deployapp)/Frameworks
 
 	for libname in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \

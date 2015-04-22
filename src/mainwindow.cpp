@@ -77,7 +77,7 @@ MainWindow::MainWindow()
 
    if (! json_Read(CFG_STARTUP) ) {
       // do not start program
-      csError(tr("DoxyPressApp Startup"), tr("Unable to locate the DoxyPressApp settings file"));
+      csError(tr("DoxyPressApp Startup"), tr("Unable to locate tlp DoxyPressApp settings file"));
       throw std::runtime_error("abort_no_message");
    }
 
@@ -128,21 +128,30 @@ MainWindow::MainWindow()
 
 void MainWindow::about()
 {
-   QString textBody = "<font color='#000080'><table style=margin-right:25>"
-                      "<tr><td><nobr>Developed by Barbara Geller</nobr></td><td>barbara@copperspice.com</td></tr>"
-                      "<tr><td style=padding-right:25><nobr>Developed by Ansel Sermersheim</nobr></td><td>ansel@copperspice.com</td></tr>"
-                      "</table></font>"
-                      "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-                      "<p><small>Copyright 2014-2015 BG Consulting, All rights reserved.<br>"
-                      "This program is provided AS IS with no warranty of any kind.<br></small></p>";
+   QString icon = ":/resources/doxypress.png";
+
+   QString textBody =
+      "<font color='#000080'><table style='margin-right:25'>"
+
+      "<tr><td><img width='96' height='96'src='" + icon + "'></td>"
+      "    <td>"
+      "      <table style='margin-left:25; margin-top:15px' >"
+      "        <tr><td><nobr>Developed by Barbara Geller</nobr></td><td>barbara@copperspice.com</td></tr>"
+      "        <tr><td style=padding-right:25><nobr>Developed by Ansel Sermersheim</nobr></td><td>ansel@copperspice.com</td></tr>"
+      "       </table>"
+      "    </td>"
+      "</tr></table></font>"
+      "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
+      "<p><small>Copyright 2014-2015 BG Consulting, All rights reserved.<br>"
+      "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    //
    QMessageBox msgB;
    msgB.setIcon(QMessageBox::NoIcon);
-   msgB.setWindowIcon(QIcon(":/resources/doxypress.png"));
+   msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 4.10.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 4.22.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);

@@ -141,10 +141,8 @@ void Dialog_LookUp::getFolder()
       return;
    }
 
-   QString path    = m_model->data(index).toString();
-   QString relPath = "marker";  // BROOM - resolve
-
-   path = m_owner->get_DirPath(tr("Select destination directory"), path, relPath);
+   QString path = m_model->data(index).toString();
+   path = m_owner->get_DirPath(tr("Select destination directory"), path, m_data.relativeTo);
 
    // save new data
    m_model->setData(index, QVariant(path));
@@ -156,23 +154,22 @@ void Dialog_LookUp::moveItemUp()
    if (! index.isValid() )
       return;
 
-   // current row user wants to move up
+   // current row
    int rowUp = index.row();
 
    if (rowUp == 0) {
-      // Current row can not be moved up
+      // row is already at the top
       return;
    }
 
-   // calculate the prior visibale row
+   // calculate the prior visible row
    int rowAbove = rowUp - 1;
 
    while (true) {
-
       if (m_ui->tableView->isRowHidden(rowAbove)) {
 
          if (rowAbove == 0) {
-            // Top row can not be moved up -- nothing visable above current row
+            // row is already at the top, nothing above current row
             return;
          }
 
@@ -180,7 +177,7 @@ void Dialog_LookUp::moveItemUp()
          rowAbove--;
 
       } else {
-         // have a good value
+         // have good value
          break;
       }
    }
@@ -195,13 +192,13 @@ void Dialog_LookUp::moveItemUp()
 
       // get data for rowAbove
       QModelIndex indexAbove = m_model->index(rowAbove, 0);
-      QVariant dataAbove = m_model->data(indexAbove,Qt::DisplayRole);
+      QVariant dataAbove = m_model->data(indexAbove, Qt::DisplayRole);
 
       // save
-      m_model->setData(indexAbove, QVariant(dataAbove), Qt::EditRole );
-      m_model->setData(indexUp, QVariant(dataUp), Qt::EditRole );
+      m_model->setData(indexAbove, QVariant(dataUp), Qt::EditRole );
+      m_model->setData(indexUp,    QVariant(dataAbove), Qt::EditRole );
 
-      // stay on the row that was moved up
+      // stay on the row which was moved up
       m_ui->tableView->setCurrentIndex(indexAbove);
    }
 
@@ -215,17 +212,16 @@ void Dialog_LookUp::moveItemDown()
       return;
    }
 
-   // current row user wants to move down
+   // current row
    int rowDown = index.row();
-
    int lastRow = m_model->rowCount() - 1;
 
    if (rowDown == lastRow) {
-      // Current row can not be moved down
+      // current row is at the bottom
       return;
    }
 
-   // calculate the next visibale row
+   // calculate the next visible row
    int rowBelow = rowDown + 1;
 
    while (true) {
@@ -233,7 +229,7 @@ void Dialog_LookUp::moveItemDown()
       if (m_ui->tableView->isRowHidden(rowBelow)) {
 
          if (rowDown == lastRow) {
-            // Bottom row can not be moved down -- nothing visable below current row
+            // row can not be moved down, nothing below current row
             return;
          }
 
@@ -250,19 +246,19 @@ void Dialog_LookUp::moveItemDown()
    setUpdatesEnabled(false);
 
    {
-      // 2 get data for rowDown
+      // get data for rowDown
       QModelIndex indexDown = m_model->index(rowDown, 0);
       QVariant dataDown = m_model->data(indexDown, Qt::DisplayRole);
 
       // get data for rowBelow
       QModelIndex indexBelow = m_model->index(rowBelow, 0);
-      QVariant dataBelow = m_model->data(indexBelow,Qt::DisplayRole);
+      QVariant dataBelow = m_model->data(indexBelow, Qt::DisplayRole);
 
       // save
       m_model->setData(indexBelow, QVariant(dataDown), Qt::EditRole );
-      m_model->setData(indexDown, QVariant(dataBelow), Qt::EditRole );
+      m_model->setData(indexDown,  QVariant(dataBelow), Qt::EditRole );
 
-      // stay on the row that was moved up
+      // stay on the row which was moved up
       m_ui->tableView->setCurrentIndex(indexBelow);
    }
 

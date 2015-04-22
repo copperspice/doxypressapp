@@ -58,6 +58,17 @@
 
 static const int RECENT_FILES_MAX = 10;
 
+enum Validate {
+   MODIFIED,
+   DEFAULT
+};
+
+enum RelativeX {
+   PROJECT_DIR,
+   OUTPUT_DIR,
+   ABSOLUTE_ONLY
+};
+
 struct Settings {
    QFont   fontNormal;
    QColor  colorText;
@@ -72,6 +83,7 @@ struct LookUpInfo {
    QString relPath;
    bool isFolderPB;
    bool isFilePB;
+   enum RelativeX relativeTo;
 };
 
 struct HelpData {     
@@ -99,11 +111,6 @@ struct HelpData {
    QString body;
 };
 
-enum Validate{
-   MODIFIED,
-   DEFAULT
-};
-
 class MainWindow : public QMainWindow
 {
    CS_OBJECT(MainWindow)
@@ -128,7 +135,7 @@ class MainWindow : public QMainWindow
 
       QSize sizeHint() const;
 
-      QString get_DirPath(QString message, QString path, QString relativePath = "", bool isOutputDir = false);
+      QString get_DirPath(QString message, QString path, enum RelativeX relativeTo);
       QString getSingleFile(QString title, QString fname, QString filter = "");
 
    protected:

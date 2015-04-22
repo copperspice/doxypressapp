@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/doxypress.icns</file>
         <file>resources/doxypress.ico</file>
         <file>resources/doxypress.png</file>
         <file>resources/tunecolor.png</file>

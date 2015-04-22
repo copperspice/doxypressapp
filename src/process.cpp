@@ -29,7 +29,7 @@ void MainWindow::runDoxyPress()
 {
    if (! m_running) {
       // save the project file
-      saveDoxy();                
+      saveDoxy();
 
       QString doxyPressPath;
 
@@ -59,23 +59,11 @@ void MainWindow::runDoxyPress()
          return;
       }
 
-      QString outputDir = m_ui->output_dir->text();
-
       m_runProcess->setReadChannel(QProcess::StandardOutput);
       m_runProcess->setProcessChannelMode(QProcess::MergedChannels);
 
-      QDir outf(outputDir);
-
-      if (outf.exists()) {
-         m_runProcess->setWorkingDirectory(outputDir);
-
-      } else {
-         runText_Append( QString("*** Your project 'Output Directory' tag has a value of: %1 \n"
-                                 "This directory does not exist, please correct\n").arg(outputDir));
-         return;
-
-      }
-
+      QString projectDir = pathName(m_curFile);
+      m_runProcess->setWorkingDirectory(projectDir);
 
       QStringList args;     
       args.append("--b");           // make stdout unbuffered
