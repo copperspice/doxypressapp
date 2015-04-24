@@ -157,6 +157,30 @@ nodist_DoxyPressApp_SOURCES=qrc_doxypressapp.cpp
 
 # distribution
 distdir: $(DISTFILES)
+	cd .. ; \
+	test -d "$(distdir_custom)" || mkdir -p "$(distdir_custom)" ; \
+	mkdir -p $(distdir_custom)/bin                              ; \
+	mkdir -p $(distdir_custom)/resources                        ; \
+\
+	for f in $(DIST_SOURCES)  ; do install -D $$f $(distdir_custom)/$$f ; done   ;\
+	for f in $(HEADERS)       ; do install -D $$f $(distdir_custom)/$$f ; done   ;\
+	for f in $(FORMS)         ; do install -D $$f $(distdir_custom)/$$f ; done   ;\
+\
+	cp doxypressapp.qrc              $(distdir_custom)/                          ; \
+	cp bin/*.am                      $(distdir_custom)/bin/                      ; \
+	cp bin/Makefile.in               $(distdir_custom)/bin/                      ; \
+	cp resources/*                   $(distdir_custom)/resources/                ;
 
+	$(MAKE) $(AM_MAKEFLAGS) dist-hook
 
-
+# distdir is a temp folder
+dist-hook:
+	cd ..  ; \
+\
+	cp -r bin/$(distdir)/../*   $(distdir_custom) ; \
+	cd $(distdir_custom)/..                       ; \
+\
+	rm  -f   ../DoxyPressApp-$(VERSION).zip         ; \
+	zip -r   ../DoxyPressApp-$(VERSION).zip .       ; \
+	rm  -f   ../DoxyPressApp-$(VERSION).tar.bz2     ; \
+	tar -cjf ../DoxyPressApp-$(VERSION).tar.bz2 .
