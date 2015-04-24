@@ -1,7 +1,7 @@
 /*************************************************************************
  *
- * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software and its
@@ -612,15 +612,10 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-// broom
    s_fullHelp.insert("ABBREVIATE_BRIEF",
-      "This tag implements a quasi-intelligent brief description abbreviator which is "
-      "used to form the text in various listings. Each string in this list, if found "
-      "as the leading text of the brief description, will be stripped from the text "
-      "and the result, after processing the whole list, is used as the annotated "
-      "text. Otherwise, the brief description is used as is. "
+      "This tag is a list of phrases which are removed from the beginning of a brief description. "
       "<br><br>"
-      "The default value are: The $name class, The $name widget, The $name file, is, provides, "
+      "The default values are: The $name class, The $name widget, The $name file, is, provides, "
       "specifies, contains, represents, a, an, the");
 
    s_fullHelp.insert("FULL_PATH_NAMES",
@@ -824,10 +819,9 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-// broom
    s_fullHelp.insert("HIDE_FRIEND_COMPOUNDS",
-      "If this tag is set DoxyPress will hide all friend (class|struct|union) declarations. "
-      "If set to NO, these declarations will be included in the documentation. "
+      "If this tag is set to YES DoxyPress will hide all friend (class|struct|union) declarations. "
+      "If set to NO these declarations will be included in the documentation. "
       "<br><br>"
       "The default value is: NO");
 
@@ -838,11 +832,10 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-//broom
    s_fullHelp.insert("INTERNAL_DOCS",
       "This tag determines if documentation which is typed after an \\internal command "
-      "is included in the documentation. Set to YES to include the internal documentation. "
-      "If the tag is set to NO, the documentation will be excluded. "
+      "is included in the documentation. Set to YES to include the internal documentation, "
+      "set to NO, to exclude the documentation. "
       "<br><br>"
       "The default value is: NO");
 
@@ -1928,7 +1921,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "Note: Enabling this tag will significantly increase the size of the documentation. "
       "<br><br>"
       "The default value is: NO "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE DOCBOOK' is set to YES");
 
    // docset
@@ -1939,7 +1932,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "and running make install will install the docset. "
       "<br><br>"
       "The default value is: NO "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("DOCSET_FEEDNAME",
@@ -1948,7 +1941,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "(such as a company or product suite) can be grouped. "
       "<br><br>"
       "The default value is: DoxyPress generated docs "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_BUNDLE_ID",
@@ -1957,7 +1950,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "com.mycompany.MyDocSet. DoxyPress will append .docset to the name. "
       "<br><br>"
       "The default value is: org.doxypress.Project "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_ID",
@@ -1966,14 +1959,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "string, e.g. com.mycompany.MyDocSet.documentation. "
       "<br><br>"
       "The default value is: org.doxypress.Publisher "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_NAME",
       "This tag identifies the documentation publisher. "
       "<br><br>"
       "The default value is: Publisher. "
-      "<br>"
+      "<br><br>"
       "This tag requires the tag 'GENERATE DOCSET' is set to YES");
 
    // eclipse

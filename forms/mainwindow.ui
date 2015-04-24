@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string/>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../resources/doxypress.png</normaloff>../resources/doxypress.png</iconset>
+  </property>
   <property name="iconSize">
    <size>
     <width>32</width>

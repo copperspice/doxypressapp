@@ -1,7 +1,7 @@
 /*************************************************************************
  *
- * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software and its
@@ -29,7 +29,17 @@ void MainWindow::runDoxyPress()
 {
    if (! m_running) {
       // save the project file
-      saveDoxy();
+
+      if (! saveDoxy()) {
+         QString msg = m_curFile;
+
+         if (msg.isEmpty()) {
+            msg = "No project file was selected";
+         }
+
+         runText_Append( QString("*** Unable to save DoxyPress project: %1\n").arg(msg));
+         return;
+      }
 
       QString doxyPressPath;
 
@@ -77,7 +87,6 @@ void MainWindow::runDoxyPress()
          readStdout();
 
          runText_Append( QString("*** Failed to start %1\n").arg(doxyPressPath));
-
          return;
       }            
 

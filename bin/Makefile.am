@@ -1,5 +1,8 @@
 include copperspice.am
 
+# dist
+distdir_custom=source_dist/dist/DoxyPressApp-$(VERSION)
+
 # path to gcc (windows)
 gccpath=/c/MingW/bin
 
@@ -45,8 +48,8 @@ deploy : all
 
 	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deployapp)/MacOS
 
-   # hard coded line to copy doxypress app into this dmg
-	cp $(top_srcdir)/../DoxyPress/deploy/doxypress.app/Contents/MacOS/doxypress  $(deployapp)/MacOS
+   # copy doxypress app into this dmg
+	cp $(top_srcdir)/../DoxyPress/bin/doxypress  $(deployapp)/MacOS
 
 	rm -f $(deployapp)/Info.plist
 	sed -e "s,@ICON@,doxypress.icns,g" \
@@ -75,6 +78,13 @@ deploy : all
 	@executable_path/../Frameworks/$$templib  $(deployapp)/Frameworks/$$libname \
 	; done \
 	\
+	; done
+
+   # clean up the path for doxypress app
+	for libname in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
+	\
+	install_name_tool -change $(CS_HOME)/lib/$$libname \
+	@executable_path/../Frameworks/$$libname  $(deployapp)/MacOS/doxypress \
 	; done
 
    # generate dmg	
@@ -144,3 +154,9 @@ qrc_doxypressapp.cpp: doxypressapp.qrc   $(wildcard ../resources/*)
 
 # required to compile qrc
 nodist_DoxyPressApp_SOURCES=qrc_doxypressapp.cpp
+
+# distribution
+distdir: $(DISTFILES)
+
+
+

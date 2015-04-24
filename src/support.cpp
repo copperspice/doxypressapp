@@ -1,7 +1,7 @@
 /*************************************************************************
- *
- * Copyright (C) 1997-2014 by Dimitri van Heesch.
+ * 
  * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software and its
@@ -173,13 +173,12 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
 
 QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 {
-   QString retval = fname;
+   QString retval     = fname;
+   QString path       = pathName(fname);
+   QString projectDir = pathName(m_curFile);
 
-   // save last path used
-   static QString path;
-
-   if (! fname.isEmpty()) {
-      path = fname;
+   if (path.isEmpty()) {
+      path = projectDir;
    }
 
    QString selectedFilter;
@@ -188,10 +187,20 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
    // force windows 7 and 8 to honor initial path
    options = QFileDialog::ForceInitialDir_Win7;
 
-   QString file = QFileDialog::getOpenFileName(this, title, path, filter, &selectedFilter, options);
+   QString newFile = QFileDialog::getOpenFileName(this, title, path, filter, &selectedFilter, options);
 
-   if (! file.isEmpty()) {
-      retval = file;
+   if (! newFile.isEmpty()) {
+      retval = newFile;
+
+      // turn absolute path into a relative path if possible
+      QDir temp(retval + "/");
+      retval = temp.canonicalPath();
+
+      projectDir = QDir(projectDir).canonicalPath();
+
+      if (retval.startsWith(projectDir)) {
+         retval = retval.mid(projectDir.length() + 1);
+      }
    }
 
    return retval;
@@ -255,8 +264,12 @@ QString MainWindow::pathName(QString fileName) const
 {
    QString retval = "";
 
-   if (! fileName.isEmpty())  {
-      retval = QFileInfo(fileName).absolutePath();
+   if (! fileName.isEmpty())  {      
+      QFileInfo temp(fileName);
+
+      if (temp.isAbsolute()) {
+         retval = temp.absolutePath();
+      }
    }
 
    return retval;
@@ -264,6 +277,8 @@ QString MainWindow::pathName(QString fileName) const
 
 bool MainWindow::querySave()
 {
+   bool retval = true;
+
    if (m_modified) {
 
       QMessageBox quest;
@@ -277,16 +292,15 @@ bool MainWindow::querySave()
       int retval = quest.exec();
 
       if (retval == QMessageBox::Save) {
-         saveDoxy();
-         return true;
+         retval = saveDoxy();
 
       } else if (retval == QMessageBox::Cancel) {
-         return false;
+         retval = false;
 
       }
    }
 
-   return true;
+   return retval;
 }
 
 void MainWindow::reloadDoxy()
@@ -298,52 +312,61 @@ void MainWindow::reloadDoxy()
    }
 }
 
-void MainWindow::saveDoxy_Internal()
+bool MainWindow::saveDoxy_Internal()
 {
    QByteArray data = json_SaveDoxy();
-
    QFile file(m_curFile);
 
    if (! file.open(QIODevice::WriteOnly)) {
       QMessageBox::warning(this, tr("Error Saving: ") + m_curFile, tr("Unable to save: ") + file.error());
-      return;
+      return false;
    }
 
    file.write(data);
    file.close();
 
    setDoxyTitle(false);
-}
-
-bool MainWindow::saveDoxyAs()
-{
-   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
-                                            tr("Json Files (*.json)"));
-
-   if (m_curFile.isEmpty()) {
-      return false;
-
-   } else {
-      saveDoxy_Internal();
-
-      json_Write(PATH_PRIOR);
-
-      if (! m_rf_List.contains(m_curFile)) {
-         rf_Update();
-      }
-   }
 
    return true;
 }
 
-void MainWindow::saveDoxy()
+bool MainWindow::saveDoxyAs()
 {
+   bool retval;
+
+   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
+                                            tr("Json Files (*.json)"));
+
    if (m_curFile.isEmpty()) {
-      saveDoxyAs();
+      retval = false;
 
    } else {
-      saveDoxy_Internal();
+      retval = saveDoxy_Internal();
+
+      if (retval) {
+         json_Write(PATH_PRIOR);
+
+         if (! m_rf_List.contains(m_curFile)) {
+            rf_Update();
+         }
+      }
    }
+
+   return retval;
+}
+
+bool MainWindow::saveDoxy()
+{
+   bool retval;
+
+   if (m_curFile.isEmpty()) {
+      retval = saveDoxyAs();
+
+   } else {
+      retval = saveDoxy_Internal();
+   }
+
+   return retval;
 }
 
 void MainWindow::saveSettings()

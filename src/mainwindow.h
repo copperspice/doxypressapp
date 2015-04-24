@@ -1,7 +1,7 @@
 /*************************************************************************
  *
- * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software and its
@@ -166,7 +166,7 @@ class MainWindow : public QMainWindow
       void setupLimits();
 
       bool querySave();
-      void saveDoxy_Internal();
+      bool saveDoxy_Internal();
 
       // json
       bool json_Read(Config trail = CFG_DEFAULT);
@@ -237,7 +237,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void reloadDoxy())
       CS_SLOT_2(reloadDoxy)
 
-      CS_SLOT_1(Private, void saveDoxy())
+      CS_SLOT_1(Private, bool saveDoxy())
       CS_SLOT_2(saveDoxy)
 
       CS_SLOT_1(Private, bool saveDoxyAs())
