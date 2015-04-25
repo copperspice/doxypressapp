@@ -88,8 +88,8 @@ deploy : all
 	; done
 
    # generate dmg	
-	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname $(bin_PROGRAMS) ../$(bin_PROGRAMS).dmg
-	hdiutil internet-enable -yes ../$(bin_PROGRAMS).dmg
+	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname $(bin_PROGRAMS) ../$(bin_PROGRAMS)-$(VERSION).dmg
+	hdiutil internet-enable -yes ../$(bin_PROGRAMS)-$(VERSION).dmg
 endif
 
 if OSTYPE_WIN

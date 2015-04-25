@@ -1,6 +1,6 @@
 .dirstamp
 DoxyPressApp.creator.user.*
-do-config-doxypress
+do-config
 autom4te.cache/*
 autotools/build-aux/*
 autotools/m4/lt*.m4
@@ -24,5 +24,4 @@ error.log
 /bin/Makefile
 /bin/*.exe
 /deploy/
-/install/
-/hold/
+/source_dist/
