@@ -137,6 +137,18 @@ DoxyPressApp_SOURCES = \
    src/support.cpp \
    src/util.cpp
 
+noinst_HEADERS = \
+   src/colors.h \
+   src/dialog_config.h \
+   src/dialog_editcfg.h \
+   src/dialog_lookup.h \
+   src/dialog_selectcfg.h \
+   src/dialog_xp_getdir.h \
+   src/doxy_build_info.h \
+   src/mainwindow.h \
+   src/settings.h \
+   src/syntax.h \
+   src/util.h
 
 FORMS = \
    forms/dialog_config.ui \
