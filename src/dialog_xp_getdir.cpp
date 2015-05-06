@@ -35,6 +35,7 @@
 Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path, QFileDialog::Options options)
    : QDialog(from), m_ui(new Ui::Dialog_XP_GetDir)
 {
+   // the value for path is an absolute path
    m_path = path;
 
    m_ui->setupUi(this);
@@ -73,7 +74,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    QString data;
    QTreeWidgetItem *item;
 
-   for (auto k = driveList.begin(); k != driveList.end(); ++k) {
+   for (auto k = driveList.begin(); k != driveList.end(); ++k) {      
       data = k->path();
 
       if (data.endsWith("/")) {
@@ -87,7 +88,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
       item->setText(0, data);
       item->setText(1, other);
 
-      if (drive_L == data + "/") {
+      if (drive_L.startsWith(data, Qt::CaseInsensitive)) {
          m_ui->drives_TV->setCurrentItem(item);
       }
    } 
@@ -97,7 +98,9 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    m_model_R->setFilter(QDir::Drives | QDir::Dirs | QDir::NoDotAndDotDot);
    m_model_R->setRootPath(drive_L);
 
-   //
+   // reset in case there is a backslash issue
+   drive_L = m_model_R->rootPath();
+
    m_ui->folders_TV->setModel(m_model_R);
    m_ui->folders_TV->setHeaderHidden(true);
 
@@ -108,7 +111,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
       m_ui->folders_TV->hideColumn(nCount);
    }
 
-   // search for the current path  - case sensitive issue BROOM
+   // search for the current path
    m_index_R = m_model_R->index(m_path);
    m_ui->folders_TV->setCurrentIndex(m_index_R);
 

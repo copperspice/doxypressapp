@@ -146,7 +146,6 @@ noinst_HEADERS = \
    src/dialog_xp_getdir.h \
    src/doxy_build_info.h \
    src/mainwindow.h \
-   src/settings.h \
    src/syntax.h \
    src/util.h
 

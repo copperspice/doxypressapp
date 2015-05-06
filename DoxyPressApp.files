@@ -36,7 +36,6 @@ src/util.cpp
 src/colors.h
 src/doxy_build_info.h
 src/mainwindow.h
-src/settings.h
 src/syntax.h
 src/util.h
 
