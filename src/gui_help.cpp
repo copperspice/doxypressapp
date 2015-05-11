@@ -732,11 +732,10 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: YES");
 
-// broom
    s_fullHelp.insert("INLINE_GROUPED_CLASSES",
       "When this tag is set classes, structs, and unions are shown inside the group "
-      "in which they are included (using the \\ingroup command) "
-      "instead of on a separate page (for HTML and Man pages) or section (for LaTeX and RTF). "
+      "in which they are included. Use the \\ingroup command instead of a "
+      "separate page (for HTML and Man pages) or section (for LaTeX and RTF). "
       "<br><br>"
       "Note: This feature does not work in combination with 'SEPARATE MEMBER PAGES' "
       "The default value is: NO");
@@ -749,12 +748,11 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
-// broom
    s_fullHelp.insert("USE_TYPEDEF_NAME",
       "When the tag is set a typedef of a struct, union, or enum is documented as struct, union, or "
-      "enum with the name of the typedef. For example, Typedef struct TypeS {} TypeT, will appear "
-      "as a struct with name TypeT. When disabled, the typedef will appear as a member of a file, "
-      "namespace, or class and the struct will be named TypeS. "
+      "enum with the name of the typedef. For example, Typedef struct Type_S {} Type_T, will appear "
+      "as a struct with name Type_T. When disabled, the typedef will appear as a member of a file, "
+      "namespace, or class and the struct will be named Type_S. "
       "<br><br>"
       "The default value is: NO");
  
@@ -1315,22 +1313,16 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: YES");
 
-// BROOM
    s_fullHelp.insert("CLANG_PARSING",
-      "If this tag is set DoxyPress will use the clang parser for more accurate parsing at the "
-      "cost of reduced performance. This can be particularly helpful with template "
-      "rich C++ code for which the built-in parser lacks the necessary type information. "
-      "<br><br>"
-      "Note: This option if only available if DoxyPress was compiled with the --with-libclang option. "
-      "<br>"
+      "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
+      "Objective-C source code. Using clang is currently much slower."
+      "<br><br>"     
       "The default value is: NO");
 
-// BROOM
-   s_fullHelp.insert("CLANG_OPTIONS",
-      "If the tag 'CLANG ASSISTED PARSING' is set, this tag is used to pass command line options. "
-      "<br><br>"
-      "Note: The include paths are set by DoxyPress for files and directories "
-      "specified by the 'INPUT SOURCE FILES OR DIRECTORIES' and 'INCLUDE PATH' tags.");
+   s_fullHelp.insert("CLANG_FLAGS",
+      "This tag is used to pass flags to clang when parsing source files. "
+      "<br><br>"                 
+      "This tag requires 'CLANG PARSING' is set to YES");
 
 
    // preprocessing

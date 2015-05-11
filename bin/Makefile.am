@@ -95,7 +95,6 @@ endif
 if OSTYPE_WIN
 deploy : all
 	mkdir -p $(deploydir)
-
 	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deploydir)
 
 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)

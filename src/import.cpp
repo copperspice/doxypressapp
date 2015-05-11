@@ -446,7 +446,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->clang_parsing_CB->setChecked(tempBool);
 
    tempText = convert_PlainText(data,"CLANG_OPTIONS");
-   m_ui->clang_options->setPlainText(tempText);
+   m_ui->clang_flags->setPlainText(tempText);
 
 
    // tab 2 - preprocess

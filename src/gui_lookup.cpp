@@ -24,37 +24,46 @@
 // tab 1
 void MainWindow::getLogo(const QString route)
 {
-   QString logoName = m_ui->project_logo->text();
+   QString projectDir = pathName(m_curFile);
+   QString logoName   = m_ui->project_logo->text();
 
    if (route == "load") {
-      // do nothing
+      QString tempName = logoName;
 
-   } else if (route == "select") {
-      QString path = pathName(m_curFile);
-      logoName = QFileDialog::getOpenFileName(this, tr("Select Project Logo"), path, logoName);
+      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) )  {
+         tempName = projectDir + "/" + tempName;
+      }
+
+   } else if (route == "select") {            
+      logoName = getSingleFile(tr("Select Project Logo"), logoName);
+      m_ui->project_logo->setText(logoName);
    }
 
    if (logoName.isEmpty()) {
       m_ui->project_logo_image->setText(tr("No Logo was selected"));
 
    } else {
-      QFile fout(logoName);
+      QString tempName = logoName;
+
+      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) )  {
+         tempName = projectDir + "/" + tempName;
+      }
+
+      QFile fout(tempName);
 
       if (! fout.exists()) {
-         m_ui->project_logo_image->setText(tr("Unable to find file: ") + logoName);
+         m_ui->project_logo_image->setText(tr("Unable to find file: ") + tempName);
 
       } else {
-         QPixmap pm(logoName);
+         QPixmap pm(tempName);
 
          if (! pm.isNull()) {
             m_ui->project_logo_image->setPixmap(pm.scaledToHeight(55, Qt::SmoothTransformation));
 
          } else {
-            m_ui->project_logo_image->setText(tr("No preview is available for: ") + logoName);
+            m_ui->project_logo_image->setText(tr("No preview is available for: ") + tempName);
          }
-      }
-
-      m_ui->project_logo->setText(logoName);
+      }      
    }
 }
 
@@ -551,7 +560,7 @@ void MainWindow::clang_options_PB()
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->clang_options->toPlainText();
+   QString temp = m_ui->clang_flags->toPlainText();
 
    data.title      = "Clang Options";
    data.dataList   = temp.split(regExp);
@@ -566,7 +575,7 @@ void MainWindow::clang_options_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->clang_options->setPlainText(temp);
+      m_ui->clang_flags->setPlainText(temp);
    }
 }
 

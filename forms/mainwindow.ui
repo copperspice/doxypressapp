@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -1127,7 +1127,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>13</number>
+            <number>9</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_29" columnstretch="0,0,1,0">
@@ -4474,7 +4474,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Clang assisted parsing:</string>
+                <string>Clang parsing:</string>
                </property>
                <property name="buddy">
                 <cstring>clang_parsing_CB</cstring>
@@ -4496,10 +4496,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Clang options:</string>
+                <string>Clang flags:</string>
                </property>
                <property name="buddy">
-                <cstring>clang_options</cstring>
+                <cstring>clang_flags</cstring>
                </property>
               </widget>
              </item>
@@ -4541,7 +4541,7 @@
               </widget>
              </item>
              <item row="10" column="1" rowspan="2">
-              <widget class="QPlainTextEdit" name="clang_options">
+              <widget class="QPlainTextEdit" name="clang_flags">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -10134,7 +10134,7 @@
   <tabstop>use_htags_CB</tabstop>
   <tabstop>verbatim_headers_CB</tabstop>
   <tabstop>clang_parsing_CB</tabstop>
-  <tabstop>clang_options</tabstop>
+  <tabstop>clang_flags</tabstop>
   <tabstop>clang_options_PB</tabstop>
   <tabstop>enable_preprocessing_CB</tabstop>
   <tabstop>search_includes_CB</tabstop>

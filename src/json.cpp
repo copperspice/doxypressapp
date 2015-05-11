@@ -638,7 +638,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->use_htags_CB->setChecked(                 object.value("use-htags").toBool());
    m_ui->verbatim_headers_CB->setChecked(          object.value("verbatim-headers").toBool());
    m_ui->clang_parsing_CB->setChecked(             object.value("clang-parsing").toBool());
-   m_ui->clang_options->setPlainText(              getDataList(object, "clang-options"));
+   m_ui->clang_flags->setPlainText(                getDataList(object, "clang-flags"));
 
    // tab 2 - preprocess
    m_ui->enable_preprocessing_CB->setChecked(      object.value("enable-preprocessing").toBool());
@@ -987,7 +987,7 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("use-htags",                m_ui->use_htags_CB->isChecked());
    object.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
    object.insert("clang-parsing",            m_ui->clang_parsing_CB->isChecked());
-   object.insert("clang-options",            putDataList(m_ui->clang_options->toPlainText()));
+   object.insert("clang-flags",              putDataList(m_ui->clang_flags->toPlainText()));
 
    // tab 2 - preprocess
    object.insert("enable-preprocessing",     m_ui->enable_preprocessing_CB->isChecked());

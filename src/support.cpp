@@ -173,13 +173,14 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
 
 QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
 {
-   QString retval     = fname;
-   QString path       = pathName(fname);
-   QString projectDir = pathName(m_curFile);
+   QString retval      = fname;
+   QString projectDir  = pathName(m_curFile);
 
-   if (path.isEmpty()) {
-      path = projectDir;
+   if (! QDir::isAbsolutePath(retval) )  {
+      retval = projectDir + "/" + retval;
    }
+
+   QString initialPath = pathName(retval);
 
    QString selectedFilter;
    QFileDialog::Options options;
@@ -187,9 +188,13 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
    // force windows 7 and 8 to honor initial path
    options = QFileDialog::ForceInitialDir_Win7;
 
-   QString newFile = QFileDialog::getOpenFileName(this, title, path, filter, &selectedFilter, options);
+   QString newFile = QFileDialog::getOpenFileName(this, title, initialPath, filter, &selectedFilter, options);
 
-   if (! newFile.isEmpty()) {
+   if (newFile.isEmpty()) {
+      // fname might have been relative
+      retval = fname;
+
+    } else {
       retval = newFile;
 
       // turn absolute path into a relative path if possible
