@@ -151,7 +151,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 4.22.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 5.10.2015</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
