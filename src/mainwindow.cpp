@@ -420,7 +420,7 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("Build Output")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
 
-      } else if (label == tr("Language")) {
+      } else if (label == tr("Programming Language")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);
 
       } else if (label == tr("Messages")) {

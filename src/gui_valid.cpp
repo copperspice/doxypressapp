@@ -150,17 +150,17 @@ void MainWindow::clearAllFields()
    m_ui->allow_sub_grouping_CB->setChecked(true);
    m_ui->lookup_cache_size_SB->setValue(0);
 
-   // tab 2 - build
-   m_ui->extract_local_classes_CB->setChecked(true);
-   m_ui->case_sense_names_CB->setChecked(true);
-
-   m_ui->show_include_files_CB->setChecked(true);
-   m_ui->inline_info_CB->setChecked(true);   
-   m_ui->sort_member_docs_CB->setChecked(true);   
    m_ui->gen_todo_list_CB->setChecked(true);
    m_ui->gen_test_list_CB->setChecked(true);
    m_ui->gen_bug_list_CB->setChecked(true);
    m_ui->gen_deprecate_list_CB->setChecked(true);
+
+   m_ui->extract_local_classes_CB->setChecked(true);
+   m_ui->case_sensitive_fname_CB->setChecked(true);
+
+   m_ui->show_include_files_CB->setChecked(true);
+   m_ui->inline_info_CB->setChecked(true);   
+   m_ui->sort_member_docs_CB->setChecked(true);
 
    m_ui->max_init_lines_SB->setValue(30);
    m_ui->show_used_files_CB->setChecked(true);
@@ -327,16 +327,17 @@ void MainWindow::adjustDefaults()
    setDefault(m_ui->lookup_cache_size_SB);
 
    // tab 2 - build
-   setDefault(m_ui->extract_local_classes_CB);
-   setDefault(m_ui->case_sense_names_CB);
-
-   setDefault(m_ui->show_include_files_CB);
-   setDefault(m_ui->inline_info_CB);
-   setDefault(m_ui->sort_member_docs_CB);
    setDefault(m_ui->gen_todo_list_CB);
    setDefault(m_ui->gen_test_list_CB);
    setDefault(m_ui->gen_bug_list_CB);
    setDefault(m_ui->gen_deprecate_list_CB);
+
+   setDefault(m_ui->extract_local_classes_CB);
+   setDefault(m_ui->case_sensitive_fname_CB);
+
+   setDefault(m_ui->show_include_files_CB);
+   setDefault(m_ui->inline_info_CB);
+   setDefault(m_ui->sort_member_docs_CB);
 
    setDefault(m_ui->max_init_lines_SB);
    setDefault(m_ui->show_used_files_CB);
@@ -509,14 +510,13 @@ void MainWindow::setupLimits()
 {
    QString temp;
    QStringList data;
-
+ 
    // tab 2 - general
-   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
-         "Chinese-Traditional, Croatian, Czech, Danish, Dutch, English, "
+   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional,"
+         "Croatian, Czech, Danish, Dutch, English, "
          "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
-         "Indonesian, Italian, Japanese, Japanese-en (Japanese with English messages), "
-         "Korean, Korean-en (Korean with English messages), Latvian, Lithuanian, "
-         "Macedonian, Norwegian, Persian (Farsi), Polish, Portuguese, Romanian, Russian, "
+         "Indonesian, Italian, Japanese, Japanese-en, Korean, Korean-en, Latvian, Lithuanian, "
+         "Macedonian, Norwegian, Polish, Portuguese, Romanian, Russian, "
          "Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian, Vietnamese";
 
    data.clear();

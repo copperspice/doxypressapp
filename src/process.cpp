@@ -200,7 +200,6 @@ QString MainWindow::getHtmlOutputIndex() const
    return retval;
 }
 
-
 bool MainWindow::htmlOutputPresent() const
 {
    bool generateHtml = m_ui->gen_html_CB1->isChecked();
@@ -236,8 +235,10 @@ void MainWindow::clearOutput()
 
 void MainWindow::saveLog()
 {
-   QString logName = QFileDialog::getSaveFileName(this, tr("Save log file"),
-                  m_ui->output_dir->text() + "/doxypress_log.txt");
+   QString projectDir = pathName(m_curFile);
+
+   QString logName = QFileDialog::getSaveFileName(this, tr("Save log output"),
+                  projectDir + "/doxypress_log.txt");
 
    if (! logName.isEmpty()) {
       QFile f(logName);
@@ -247,7 +248,7 @@ void MainWindow::saveLog()
          QString data = m_ui->runText->toPlainText();
          f.write(data.toUtf8());
 
-         statusBar()->showMessage(tr("Output log saved"));
+         setStatusBar(tr("Output log saved"));
 
       } else {
          QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());         

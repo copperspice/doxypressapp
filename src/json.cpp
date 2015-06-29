@@ -558,15 +558,16 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->hide_scope_names_CB->setChecked(          object.value("hide-scope-names").toBool());  
    m_ui->hide_compound_ref_CB->setChecked(         object.value("hide-compound-ref").toBool());
 
-   m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());
-   m_ui->case_sense_names_CB->setChecked(          object.value("case-sense-names").toBool());
+   m_ui->internal_docs_CB->setChecked(             object.value("internal-docs").toBool());   
+   m_ui->case_sensitive_fname_CB->setChecked(      object.value("case-sensitive-fname").toBool());
+   m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
+   m_ui->strict_sig_matching_CB->setChecked(       object.value("strict-sig-matching").toBool());
 
    m_ui->show_include_files_CB->setChecked(        object.value("show-include-files").toBool());
    m_ui->show_grouped_members_inc_CB->setChecked(  object.value("show-grouped-members-inc").toBool());
    m_ui->show_used_files_CB->setChecked(           object.value("show-used-files").toBool());
    m_ui->show_file_page_CB->setChecked(            object.value("show-file-page").toBool());
    m_ui->show_namespace_page_CB->setChecked(       object.value("show-namespace-page").toBool());
-   m_ui->force_local_includes_CB->setChecked(      object.value("force-local-includes").toBool());
 
    m_ui->inline_inherited_member_CB->setChecked(   object.value("inline-inherited-member").toBool());
    m_ui->inline_info_CB->setChecked(               object.value("inline-info").toBool());
@@ -579,8 +580,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    m_ui->sort_constructors_first_CB->setChecked(   object.value("sort-constructors-first").toBool());
    m_ui->sort_group_names_CB->setChecked(          object.value("sort-group-names").toBool());
    m_ui->sort_by_scope_name_CB->setChecked(        object.value("sort-by-scope-name").toBool());
+   m_ui->sort_class_case_sensitive_CB->setChecked( object.value("sort-class-case-sensitive").toBool());
 
-   m_ui->strict_sig_matching_CB->setChecked(       object.value("strict-sig-matching").toBool());
    m_ui->gen_todo_list_CB->setChecked(             object.value("generate-todo-list").toBool());
    m_ui->gen_test_list_CB->setChecked(             object.value("generate-test-list").toBool());
    m_ui->gen_bug_list_CB->setChecked(              object.value("generate-bug-list").toBool());
@@ -908,14 +909,15 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("hide-compound-ref",        m_ui->hide_compound_ref_CB->isChecked());
 
    object.insert("internal-docs",            m_ui->internal_docs_CB->isChecked());
-   object.insert("case-sense-names",         m_ui->case_sense_names_CB->isChecked());
+   object.insert("case-sensitive-fname",     m_ui->case_sensitive_fname_CB->isChecked());
+   object.insert("force-local-includes",     m_ui->force_local_includes_CB->isChecked());
+   object.insert("strict-sig-matching",      m_ui->strict_sig_matching_CB->isChecked());
 
    object.insert("show-include-files",       m_ui->show_include_files_CB->isChecked());
    object.insert("show-grouped-members-inc", m_ui->show_grouped_members_inc_CB->isChecked());
    object.insert("show-used-files",          m_ui->show_used_files_CB->isChecked());
    object.insert("show-file-page",           m_ui->show_file_page_CB->isChecked());
    object.insert("show-namespace-page",      m_ui->show_namespace_page_CB->isChecked());
-   object.insert("force-local-includes",     m_ui->force_local_includes_CB->isChecked());
 
    object.insert("inline-inherited-member",  m_ui->inline_inherited_member_CB->isChecked());
    object.insert("inline-info",              m_ui->inline_info_CB->isChecked());
@@ -927,9 +929,9 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("sort-brief-docs",          m_ui->sort_brief_docs_CB->isChecked());
    object.insert("sort-constructors-first",  m_ui->sort_constructors_first_CB->isChecked());
    object.insert("sort-group-names",         m_ui->sort_group_names_CB->isChecked());
-   object.insert("sort-by-scope-name",       m_ui->sort_by_scope_name_CB->isChecked());
+   object.insert("sort-by-scope-name",       m_ui->sort_by_scope_name_CB->isChecked());   
+   object.insert("sort-class-case-sensitive",m_ui->sort_class_case_sensitive_CB->isChecked());
 
-   object.insert("strict-sig-matching",      m_ui->strict_sig_matching_CB->isChecked());
    object.insert("generate-todo-list",       m_ui->gen_todo_list_CB->isChecked());
    object.insert("generate-test-list",       m_ui->gen_test_list_CB->isChecked());
    object.insert("generate-bug-list",        m_ui->gen_bug_list_CB->isChecked());

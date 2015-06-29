@@ -404,9 +404,3 @@ void MainWindow::setStatusBar(QString msg)
 {     
    statusBar()->showMessage(msg, 5000);
 }
-
-void MainWindow::setStatusBar(QString msg, int timeOut)
-{
-   statusBar()->showMessage(msg, timeOut);
-}
-

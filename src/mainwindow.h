@@ -127,8 +127,6 @@ class MainWindow : public QMainWindow
       bool openDoxy_Internal(const QString fname);
 
       void setStatusBar(QString msg);
-      void setStatusBar(QString msg, int timeOut);
-
       void saveSettings();
       struct Settings get_StructData();
       void setDoxyTitle(bool isModified);

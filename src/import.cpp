@@ -257,7 +257,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->internal_docs_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "CASE_SENSE_NAMES");
-   m_ui->case_sense_names_CB->setChecked(tempBool);
+   m_ui->case_sensitive_fname_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "SHOW_INCLUDE_FILES");
    m_ui->show_include_files_CB->setChecked(tempBool);
