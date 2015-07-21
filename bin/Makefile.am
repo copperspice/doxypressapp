@@ -3,11 +3,11 @@ include copperspice.am
 # dist
 distdir_custom=source_dist/dist/DoxyPressApp-$(VERSION)
 
-# path to gcc (windows)
-gccpath=/c/MingW/bin
+# path to gcc retrieved from configure (windows)
+gccpath=$(dir $(shell which $(word 1,$(CC))))
 
-# list of gcc libraries (windows)
-gcclibs=libgcc_s_sjlj-1  libstdc++-6  libwinpthread-1
+# list of gcc libraries (windows)  sjlj  or seh
+gcclibs=libgcc_s_*-1  libstdc++-6  libwinpthread-1
 
 # list of CopperSpice libraries
 cslibs=Core Gui Network Xml
@@ -99,7 +99,7 @@ deploy : all
 
 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)
 
-	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)/%.dll,$(gcclibs))  $(deploydir)
+	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)%.dll,$(gcclibs))  $(deploydir)
 	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%1-0.dll,$(cslibs))  $(deploydir)
 endif
 
