@@ -36,7 +36,7 @@ void MainWindow::rf_CreateMenus()
       }
 
       rf_Actions[i] = new QAction(tName, this);
-      rf_Actions[i]->setData("recent-file");
+      rf_Actions[i]->setData(QString("recent-file"));
 
       fileMenu->insertAction(action, rf_Actions[i]);
 

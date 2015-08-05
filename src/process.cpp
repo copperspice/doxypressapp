@@ -124,13 +124,15 @@ void MainWindow::runDoxyPress()
 
 void MainWindow::readStdout()      
 {
-  if (m_running) {
-      QString text = m_runProcess->readAllStandardOutput();
+   if (m_running) {
+      QByteArray tmp = m_runProcess->readAllStandardOutput();
+
+      QString text = QString::fromLocal8Bit(tmp);
 
       if (! text.isEmpty()) {
          runText_Append(text);
       }
-  }
+   }
 }
 
 void MainWindow::runComplete()
