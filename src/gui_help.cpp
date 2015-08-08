@@ -640,12 +640,11 @@ static void configFullHelp(const QString &m_filePatterns)
    
    s_fullHelp.insert("ALIASES",
       "This tag is used to specify a number of aliases which act as commands in "
-      "the documentation. An alias has the form: "
+      "the documentation. An alias has the format: name=value"
+      "<br><br>"          
+      "\"sideeffect=@par Side Effects:\\n\" "
       "<br><br>"
-      "name=value"
-      "<br><br>"
-      "Adding \"sideeffect=@par Side Effects:\\n\" "
-      "defines the command \\sideeffect (or @sideeffect) "
+      "This example defines the command \\sideeffect (or @sideeffect). "
       "The result is a user-defined paragraph with a heading of \"Side Effects:\" ");
 
    s_fullHelp.insert("TAB_SIZE",
@@ -762,7 +761,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "Private class members and static file members will be hidden unless the "
       "'EXTRACT PRIVATE' or the 'EXTRACT STATIC' tags are set to YES. "
       "<br><br>"
-      "Note: Setting this tag will disable warnings about undocumented members. "
+      "Setting this tag will disable warnings about undocumented members. "
       "<br><br>"
       "The default value is: NO");
 
@@ -1150,9 +1149,9 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("EXCLUDE_SYMBOLS",
       "This tag is used to specify symbol names, namespaces, classes, functions, etc. "
-      "which should be excluded from the documentation. "      
+      "which should be excluded from the documentation. "
+      "<br><br>"
       "Examples: FooNamespace, BarClass, FooNamespace::BarClass, FooNamespace::*Test ");          
-
 
    // input other
    s_fullHelp.insert("EXAMPLE_SOURCE",
@@ -1189,7 +1188,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "DoxyPress will invoke the filter program and pass the input file name as the first parameter. "
       "The DoxyPress will use the output of the filter program. "
       "<br><br>"
-      "Note: The filter program must not add or remove lines and is run before the "
+      "The filter program must not add or remove lines and is run before the "
       "source code is scanned, not when the documentation output code is generated.");
 
    s_fullHelp.insert("FILTER_PATTERNS",
@@ -1269,6 +1268,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("REF_BY_RELATION",
       "If this tag is set, then for each documented "
       "function all documented functions referencing it will be listed. "
+      "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("REF_RELATION",
@@ -1601,7 +1601,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DIRECTORY_GRAPH",
-      "This tag is set the the dependencies a directory has on other directories will be shown. "
+      "This tag is set the dependencies a directory has on other directories, will be shown. "
       "The dependency relations are determined by the #include relations between the "
       "files in the directories. "
       "<br><br>"
@@ -1759,7 +1759,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "after the standard 'doxy_style.css' file. DoxyPress will automatically copy  "
       "any css files listed in this tag to the 'HTML OUTPUT DIRECTORY'. "
       "<br><br>"
-      "Note: The order of css files is important. The last stylesheet will override the "
+      "The order of css files is important. The last stylesheet will override the "
       "settings of any previous stylesheets. "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
@@ -1891,7 +1891,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE DOCBOOK' is set to YES");
 
    s_fullHelp.insert("DOCBOOK_PROGRAM_LISTING",
-      "If this tag is set then DoxyPress will include the "
+      "If this tag is set DoxyPress will include the "
       "program listings, including syntax highlighting and cross-referencing "
       "information, to the Docbook output. "
       "<br><br>"
@@ -2038,7 +2038,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "When this tag is enabled DoxyPress will not generate the PHP script for searching. "
       "The search results will be written to an XML file which must be processed by an external "
       "indexing system. DoxyPress will call the external search engine referenced in the "
-      "tag 'SEARCH ENGINE URL' "
+      "tag 'SEARCH ENGINE URL'. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
@@ -2173,7 +2173,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("MAKE_INDEX_CMD_NAME",
-      "This tag is used to specify the command name to generate index for LaTeX. "
+      "This tag is used to specify the command name to generate an index for LaTeX. "
       "<br><br>"
       "The default file is: makeindex "
       "<br><br>"
