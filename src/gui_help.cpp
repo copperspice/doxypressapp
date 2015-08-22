@@ -1174,8 +1174,9 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("IMAGE_PATH",
       "This tag can be used to specify one or more files or directories "
-      "which contain images to be included in the documentation. Refer to the DoxyPress manual "
-      "regarding the \\image command.");
+      "which contain images to be included in the documentation. "
+      "<br><br>"
+      "Refer to the DoxyPress manual regarding the \\image command.");
 
    s_fullHelp.insert("MDFILE_MAINPAGE",
       "This tag refers to the name of a markdown file which is part of the input. "
@@ -1280,7 +1281,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("REF_LINK_SOURCE",
       "If this tag is set and 'SOURCE CODE' is set, the hyperlinks from functions "
       "in 'REFERENCED BY RELATION' and 'REFERENCES RELATION' will link to the source code. "
-      "Otherwise the link will refer to the generated documentation. "
+      "Otherwise, the link will refer to the generated documentation. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1402,23 +1403,21 @@ static void configFullHelp(const QString &m_filePatterns)
       "This tag is used to specify one or more tag files. For each tag file the location ot the "
       "external documentation should be provided. The format of a tag file without this location is: "
       "<br><br>"
-      "TAGFILES = file1 file2 ... "
+      "TAGFILES = tagFile1 tagFile2 ... "
       "<br><br>"
-      "Adding a location for the tag file: "
-      "TAGFILES = file1=loc1 \"file2 = loc2\" ... "
-      "<br><br>"
-      "where loc1 and loc2 can be relative or absolute paths or URLs. "
+      "Syntax to add a url or path for the tag files. Loc1 and loc2 can be relative or absolute. "
+      "TAGFILES = tagFile1=loc1 tagFile2=loc2 ... "
+      "<br><br>"      
       "Refer to the DoxyPress documention regarding 'Linking to external documentation' "
       "<br><br>"
-      "Note: Each tag file must have a unique name (where the name does NOT include "
-      "the path). If a tag file is not located in the directory in which DoxyPress is run, "
-      "include the path with the file name.");
+      "Each tag file must have a unique name (where the name does NOT include the path). If a tag file is not "
+      "located in the directory in which DoxyPress is run, include the path with the file name.");
 
    s_fullHelp.insert("GEN_TAGFILE",
       "When a file name is specified DoxyPress will create a "
       "tag file which is based on the input files it reads. "
       "<br><br>"
-      "Refer to the DoxyPress documention regarding 'Linking to external documentation'");
+      "Refer to the DoxyPress documention regarding 'Linking to external documentation'.");
 
    s_fullHelp.insert("ALL_EXTERNALS",
       "If this tag is set all external classes will be listed in the class index. "
@@ -2225,9 +2224,8 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("LATEX_FOOTER",
       "This tag is used to specify a user-defined LaTeX footer for the generated LaTeX document."
-      "If left blank DoxyPress will generate a standard footer. "
+      "If left blank DoxyPress will generate a standard footer. The footer should contain everything after the last chapter. "
       "<br><br>"
-      "The footer should contain everything after the last chapter. "
       "To create a new footer file run 'DoxyPress --w latex-foot [footer file name]' "
       "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
@@ -2454,7 +2452,7 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("RTF_STYLESHEET",
       "Load stylesheet definitions from file. "
       "<br><br>"
-      "Refer to the DoxyPress manual regarding \"DoxyPress usage\" for information on how to generate "
+      "Refer to the DoxyPress manual regarding \"DoxyPress Usage\" for information on how to generate "
       "the default stylesheet. "
       "<br><br>"
       "This tag requires the tag 'GENERATE RTF' is set to YES");
