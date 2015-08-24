@@ -2103,7 +2103,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("USE_MATHJAX",
       "Set this tag to render LaTeX formulas using MathJax. Client side JavaScript will be used for rendering "
-      "instead of pre-rendered bitmaps. This tag should be used fi you do not have LaTeX "
+      "instead of pre-rendered bitmaps. This tag should be used if you do not have LaTeX "
       "installed or if you want formulas to look better in the HTML output. When "
       "enabled, you may also need to install MathJax and configure the path "
       "to it using the 'MATHJAX RELATIVE PATH' option. "
@@ -2248,7 +2248,7 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("LATEX_PDF",
       "If this tag is set DoxyPress will use the pdflatex program to generate the PDF file "
-      "directly from the LaTeX files. Set this optionto obtain higher quality PDF documentation. "
+      "directly from the LaTeX files. Set this option to obtain higher quality PDF documentation. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
