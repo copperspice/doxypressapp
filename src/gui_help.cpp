@@ -1011,6 +1011,14 @@ static void configFullHelp(const QString &m_filePatterns)
       "Note: If run from a directory containing a file called DoxyPress_Layout.xml, "
       "DoxyPress will parse it automatically even if this tag is left empty.");
 
+   // bb
+   s_fullHelp.insert("BB_STYLE",
+      "This tag is used to enable the special comment style of documenting source code. Commennts in source must be "
+      "below the source code. (Experimental)");
+
+   s_fullHelp.insert("BB_MAIN_PAGE",
+      "This tag is used to specify an input file name which should be used for the index page.");
+
    // language
    s_fullHelp.insert("TCL_SUBST",
       "This tag is used to specify a number of word-keyword mappings. "

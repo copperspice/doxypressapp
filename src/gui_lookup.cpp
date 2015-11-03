@@ -91,6 +91,13 @@ void MainWindow::tune_colors_PB()
 }
 
 // tab 2- look up (general)
+void MainWindow::bb_main_page_PB()
+{   
+   QString file = m_ui->bb_main_page->text();
+   file = getSingleFile(tr("Select file"), file);
+   m_ui->bb_main_page->setText(file);
+}
+
 void MainWindow::abbreviate_brief_PB()
 {
    QRegExp regExp("\\s*,\\s*");

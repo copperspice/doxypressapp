@@ -167,6 +167,10 @@ void MainWindow::clearAllFields()
    m_ui->show_file_page_CB->setChecked(true);
    m_ui->show_namespace_page_CB->setChecked(true);
 
+   // tab 2 - bb
+   m_ui->bb_style_CB->setChecked(false);
+   m_ui->bb_main_page->setText("");
+
    // tab 2 - messages
    m_ui->warnings_CB->setChecked(true);
    m_ui->warn_undoc_CB->setChecked(true);

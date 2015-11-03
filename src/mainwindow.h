@@ -387,6 +387,9 @@ class MainWindow : public QMainWindow
 
 
       // tab 2- general
+      CS_SLOT_1(Private, void bb_main_page_PB())
+      CS_SLOT_2(bb_main_page_PB)
+
       CS_SLOT_1(Private, void abbreviate_brief_PB())
       CS_SLOT_2(abbreviate_brief_PB)
 

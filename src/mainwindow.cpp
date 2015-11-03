@@ -206,6 +206,7 @@ void MainWindow::createConnections()
                                       SLOT(validSet_dot(QAbstractButton *)));
 
    // tab 2
+   // connect(m_ui->bb_style_CB,               &QPushButton::toggled, this, &MainWindow::valid_bb_style);
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
    connect(m_ui->filter_source_files_CB,    &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
    connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
@@ -233,6 +234,7 @@ void MainWindow::createConnections()
    connect(m_ui->html_colors_PB,            &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
    // tab 2- general
+   connect(m_ui->bb_main_page_PB,           &QPushButton::clicked, this, &MainWindow::bb_main_page_PB);
    connect(m_ui->abbreviate_brief_PB,       &QPushButton::clicked, this, &MainWindow::abbreviate_brief_PB);
    connect(m_ui->strip_from_path_PB,        &QPushButton::clicked, this, &MainWindow::strip_from_path_PB);
    connect(m_ui->strip_from_inc_path_PB,    &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
@@ -419,6 +421,9 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 
       } else if (label == tr("Build Output")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
+
+      } else if (label == tr("Special Styles")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_BB_Style);
 
       } else if (label == tr("Programming Language")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);

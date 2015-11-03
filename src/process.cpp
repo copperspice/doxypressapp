@@ -140,14 +140,15 @@ void MainWindow::runComplete()
    if (m_running) {
 
       if (m_runProcess->exitStatus() == QProcess::CrashExit) {
-         runText_Append(tr("\n** DoxyPress Aborted\n"));
+         runText_Append(tr("\n** DoxyPress aborted\n"));
 
       } else {
-         runText_Append(tr("\n** DoxyPress has Completed\n"));
+         runText_Append(tr("\n** DoxyPress completed\n"));
       }
 
    } else {
-      runText_Append(tr("\n** DoxyPress was Cancelled\n"));
+      runText_Append(tr("\n** DoxyPress cancelled\n"));
+
    }
 
    m_ui->runText->ensureCursorVisible();
