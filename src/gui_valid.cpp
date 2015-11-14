@@ -175,28 +175,26 @@ void MainWindow::clearAllFields()
    m_ui->warnings_CB->setChecked(true);
    m_ui->warn_undoc_CB->setChecked(true);
    m_ui->warn_doc_error_CB->setChecked(true);
-
    m_ui->warn_format->setText("$file:$line: $text");
 
-   // tab 2 -input
+    // tab 2 -input src
    m_ui->input_encoding->setText("UTF-8");
    m_ui->input_patterns->setPlainText(m_filePatterns);
+
+   // tab 2 - input other
    m_ui->example_patterns->setPlainText("*");
 
-   // tab 2 -source browser
+   // tab 2 -index page
+   m_ui->alpha_index_CB->setChecked(true);
+   m_ui->cols_in_index_SB->setValue(5);
+
+   // tab 2 -source code
    m_ui->strip_code_comments_CB->setChecked(true);
    m_ui->ref_link_source_CB ->setChecked(true);
    m_ui->source_tooltips_CB->setChecked(true);
    m_ui->verbatim_headers_CB->setChecked(true);
 
-   // tab 2 -index
-   m_ui->alpha_index_CB->setChecked(true);
-   m_ui->cols_in_index_SB->setValue(5);
-
-   // tab 2 permod
-   m_ui->perl_pretty_CB->setChecked(true);
-
-   // tab 2 - preprocess
+   // tab 2 - preprocessor
    m_ui->enable_preprocessing_CB->setChecked(true);
    m_ui->search_includes_CB->setChecked(true);
    m_ui->skip_function_macros_CB->setChecked(true);
@@ -268,7 +266,10 @@ void MainWindow::clearAllFields()
    m_ui->man_output->setText("man");
    m_ui->man_extension->setText(".3");
 
-   // tab 3 - qthelp
+   // tab 3 per module
+   m_ui->perl_pretty_CB->setChecked(true);
+
+   // tab 3 - qt help
    m_ui->qhp_namespace->setText("org.doxypress.Project");
    m_ui->qhp_virtual_folder->setText("doc");
 
@@ -468,7 +469,7 @@ void MainWindow::finalLoad()
    // tab 2
    valid_full_path_names();
    valid_filter_source_files();
-   valid_alpha_index();
+   valid_alpha_index(); 
    valid_enable_preprocessing();
    valid_have_dot();
 
@@ -820,6 +821,7 @@ void MainWindow::valid_alpha_index()
 void MainWindow::valid_enable_preprocessing()
 {
    if (m_ui->enable_preprocessing_CB->isChecked()) {
+
       m_ui->macro_expansion_CB->setEnabled(true);
       m_ui->expand_only_predefined_CB->setEnabled(true);
       m_ui->search_includes_CB->setEnabled(true);

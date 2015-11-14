@@ -91,13 +91,6 @@ void MainWindow::tune_colors_PB()
 }
 
 // tab 2- look up (general)
-void MainWindow::bb_main_page_PB()
-{   
-   QString file = m_ui->bb_main_page->text();
-   file = getSingleFile(tr("Select file"), file);
-   m_ui->bb_main_page->setText(file);
-}
-
 void MainWindow::abbreviate_brief_PB()
 {
    QRegExp regExp("\\s*,\\s*");
@@ -302,6 +295,38 @@ void MainWindow::cite_bib_files_PB()
 
       QString temp = dataList.join(", ");
       m_ui->cite_bib_files->setPlainText(temp);
+   }
+}
+
+// tab 2- bb
+void MainWindow::bb_main_page_PB()
+{
+   QString file = m_ui->bb_main_page->text();
+   file = getSingleFile(tr("Select file"), file);
+   m_ui->bb_main_page->setText(file);
+}
+
+void MainWindow::bb_skip_ns_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->bb_skip_ns->toPlainText();
+
+   data.title      = "Omit Namespaces";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->bb_skip_ns->setPlainText(temp);
    }
 }
 

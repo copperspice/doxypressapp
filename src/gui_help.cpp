@@ -834,7 +834,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: NO");
 
    s_fullHelp.insert("HIDE_SCOPE_NAMES",
-      "If this tag is set to NO, members will be shown with their full class "
+      "If this tag is set to NO then members will be shown with their full class "
       "and namespace scopes in the documentation. If set to YES, the scope will be hidden. "
       "<br><br>"
       "The default value is: NO");
@@ -845,8 +845,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: NO");
 
+   s_fullHelp.insert("HIDE_NAVTREE_MEMBERS",
+      "If this tag is set to YES, then members will not be shown in the navigation treeview. "
+      "<br><br>"
+      "The default value is: NO");
+
    s_fullHelp.insert("SHOW_INCLUDE_FILES",
-      "If this tag is set DoxyPress will put a list of the files which are"
+      "If this tag is set DoxyPress will put a list of the files which are "
       "included by a file, in the documentation of that file. "
       "<br><br>"
       "The default value is: YES");
@@ -1018,6 +1023,10 @@ static void configFullHelp(const QString &m_filePatterns)
 
    s_fullHelp.insert("BB_MAIN_PAGE",
       "This tag is used to specify an input file name which should be used for the index page.");
+    
+   s_fullHelp.insert("BB_SKIP_NS",
+      "This tag is used to specify a list of namespaces which should be treated as if they do not exist");
+
 
    // language
    s_fullHelp.insert("TCL_SUBST",

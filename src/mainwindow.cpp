@@ -205,8 +205,7 @@ void MainWindow::createConnections()
    connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
                                       SLOT(validSet_dot(QAbstractButton *)));
 
-   // tab 2
-   // connect(m_ui->bb_style_CB,               &QPushButton::toggled, this, &MainWindow::valid_bb_style);
+   // tab 2   
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
    connect(m_ui->filter_source_files_CB,    &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
    connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
@@ -234,7 +233,6 @@ void MainWindow::createConnections()
    connect(m_ui->html_colors_PB,            &QPushButton::clicked, this, &MainWindow::tune_colors_PB);
 
    // tab 2- general
-   connect(m_ui->bb_main_page_PB,           &QPushButton::clicked, this, &MainWindow::bb_main_page_PB);
    connect(m_ui->abbreviate_brief_PB,       &QPushButton::clicked, this, &MainWindow::abbreviate_brief_PB);
    connect(m_ui->strip_from_path_PB,        &QPushButton::clicked, this, &MainWindow::strip_from_path_PB);
    connect(m_ui->strip_from_inc_path_PB,    &QPushButton::clicked, this, &MainWindow::strip_from_inc_path_PB);
@@ -246,7 +244,11 @@ void MainWindow::createConnections()
    connect(m_ui->enabled_sections_PB,       &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
    connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
    connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);
-   connect(m_ui->cite_bib_files_PB,         &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
+   connect(m_ui->cite_bib_files_PB,         &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);   
+
+   // tab 2- bb
+   connect(m_ui->bb_main_page_PB,           &QPushButton::clicked, this, &MainWindow::bb_main_page_PB);
+   connect(m_ui->bb_skip_ns_PB,             &QPushButton::clicked, this, &MainWindow::bb_skip_ns_PB);
 
    // tab 2- input
    connect(m_ui->input_source_PB,           &QPushButton::clicked, this, &MainWindow::input_source_PB);

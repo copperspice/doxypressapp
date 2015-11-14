@@ -385,11 +385,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void tune_colors_PB())
       CS_SLOT_2(tune_colors_PB)
 
-
-      // tab 2- general
-      CS_SLOT_1(Private, void bb_main_page_PB())
-      CS_SLOT_2(bb_main_page_PB)
-
+      // tab 2 - general
       CS_SLOT_1(Private, void abbreviate_brief_PB())
       CS_SLOT_2(abbreviate_brief_PB)
 
@@ -408,6 +404,12 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void language_mapping_PB())
       CS_SLOT_2(language_mapping_PB)
 
+      // tab 2- bb
+      CS_SLOT_1(Private, void bb_main_page_PB())
+      CS_SLOT_2(bb_main_page_PB)
+
+      CS_SLOT_1(Private, void bb_skip_ns_PB())
+      CS_SLOT_2(bb_skip_ns_PB)
 
       // tab 2- build
       CS_SLOT_1(Private, void enabled_sections_PB())
