@@ -17,15 +17,13 @@
 
 #include "mainwindow.h"
 
-static void configFullHelp(const QString &m_filePatterns);
 static QString find_HelpBody(QString name);
-
 static QMap<QString, QString> s_fullHelp;
 
 void MainWindow::createMap()
 {
    // 1  load help data
-   configFullHelp(m_filePatterns);
+   this->configFullHelp();
 
    // 2  load bigMap
    QList<QCheckBox *> temp_CB = this->findChildren<QCheckBox *>();
@@ -453,7 +451,7 @@ static QString find_HelpBody(QString name)
    return retval;
 }
 
-static void configFullHelp(const QString &m_filePatterns)
+void MainWindow::configFullHelp()
 {
    s_fullHelp.clear();
 
@@ -1027,6 +1025,13 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("BB_SKIP_NS",
       "This tag is used to specify a list of namespaces which should be treated as if they do not exist");
 
+   s_fullHelp.insert("BB_NS_ALIAS",
+      "This tag is used to specify a list of namespaces which should be renamed in the documentation. "
+      "The format for this tag is: namespace=alias"
+      "<br><br>"
+      "As an example boost::thread=bt will replace the boost::thread everywhere it occurs in your documentation "
+      "with the value of 'bt'");
+
 
    // language
    s_fullHelp.insert("TCL_SUBST",
@@ -1039,13 +1044,13 @@ static void configFullHelp(const QString &m_filePatterns)
    s_fullHelp.insert("LANGUAGE_MAPPING",
       "DoxyPress selects the language parser depending on the extension of the files it is parsing. "
       "Use this tag to assign a specific parser to use for a given file extension. "
-      "The format for this tag is ext=language, where ext is a file extension and language"
+      "The format for this tag is ext=language, where ext is a file extension and language "
       "is one of the parsers supported by DoxyPress. "
       "<br><br>"
       "The supported parsers are: C#, C, C++, IDL, Java, JavaScript, Objective-C, "
       "PHP, Python, Fortran, FortranFixed, FortranFree. "
       "<br><br>"
-      "As and example, to treat .f files as C (default is Fortran), use: f=C "
+      "As an example, to treat .f files as C (default is Fortran), use: f=C "
       "<br><br>"
       "Note: For files with no extensions use no_extension as a placeholder. "
       "For custom extensions modify 'INPUT FILE PATTERNS', otherwise these files will not be read by DoxyPress.");
@@ -1136,13 +1141,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "The default value is: UTF-8");
 
    s_fullHelp.insert("INPUT_PATTERNS",
-      "If the 'INPUT SOURCE' tag contains directories, this tag is used to "
-      "specify wildcard patterns to filter the source files in the source directories. "
+      "If the 'INPUT SOURCE' tag contains directories then this tag is be used to "
+      "specify wildcard patterns. Files matching these patterns will be processed. "
       "<br><br>"
-      "The default values are: " + m_filePatterns);
+      "If this tag is empty the default will be: " + m_filePatterns);
 
-   s_fullHelp.insert("SOURCE_RECURSIVE",
-      "This tag can be used to specify whether or not subdirectories should be searched for input files. "
+   s_fullHelp.insert("INPUT_RECURSIVE",
+      "This tag is used to specify whether or not subdirectories should be searched for input files. "
       "<br><br>"
       "The default value is: NO");
 
@@ -1283,6 +1288,13 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "The default value is: YES");
 
+   s_fullHelp.insert("VERBATIM_HEADERS",
+      "If this tag is set DoxyPress will generate a verbatim copy of the header "
+      "file for each class for which an include is specified. Set to NO to disable this feature. "
+      "Refer to the DoxyPress manual regarding the \\class command."
+      "<br><br>"
+      "The default value is: YES");
+
    s_fullHelp.insert("REF_BY_RELATION",
       "If this tag is set, then for each documented "
       "function all documented functions referencing it will be listed. "
@@ -1324,12 +1336,25 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "This tag requires the tag 'SOURCE CODE' is set to YES");
 
-   s_fullHelp.insert("VERBATIM_HEADERS",
-      "If this tag is set DoxyPress will generate a verbatim copy of the header "
-      "file for each class for which an include is specified. Set to NO to disable this feature. "
-      "Refer to the DoxyPress manual regarding the \\class command."
+   s_fullHelp.insert("SUFFIX_SOURCE_NAVTREE",
+      "This tag is used to specify a list of file extensions which are treated as source. All entities "
+      "in source files are considered to be 'local' rather than 'global'. Local entities will only be "
+      "documented if the tag 'EXTRACT_LOCAL_CLASSES' is set. The dot should not be specified."
       "<br><br>"
-      "The default value is: YES");
+      "If this tag is empty the default will be: " + m_suffixSource );
+
+   s_fullHelp.insert("SUFFIX_HEADER_NAVTREE",
+      "This tag is used to specify a list of file extensions which will be treated as headers when building the "
+      "Files and File List in the navigation treeview. The dot should not be specified."
+      "<br><br>"
+      "If this tag is empty the default will be: " + m_suffixHeader);
+
+   s_fullHelp.insert("SUFFIX_EXCLUDE_NAVTREE",
+      "This tag is used to specify a list of file extensions which should not appear in the "
+      "Files and File List of the navigation treeview. The dot should not be specified."
+      "<br><br>"
+      "If this tag is empty the default will be: " + m_suffixExclude);
+
 
    s_fullHelp.insert("CLANG_PARSING",
       "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
@@ -1363,7 +1388,7 @@ static void configFullHelp(const QString &m_filePatterns)
       "<br><br>"
       "This tag requires the tag 'SEARCH INCLUDES' is set to YES");
 
-   s_fullHelp.insert("INCLUDE_FILE_PATTERNS",
+   s_fullHelp.insert("INCLUDE_PATTERNS",
       "This tag is used to specify wildcard patterns (like *.h) "
       "to filter out the header files in the directories. If left blank, the patterns "
       "specified with the 'INPUT FILE PATTERNS' tag will be used. "

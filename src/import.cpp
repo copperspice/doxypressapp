@@ -337,7 +337,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->input_patterns->setPlainText(tempText);
 
    tempBool = convert_Bool(data,"RECURSIVE");
-   m_ui->source_recursive_CB->setChecked(tempBool);
+   m_ui->input_recursive_CB->setChecked(tempBool);
 
    tempText = convert_PlainText(data,"EXCLUDE");
    m_ui->exclude_files->setPlainText(tempText);
@@ -466,7 +466,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->include_path->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"INCLUDE_FILE_PATTERNS");
-   m_ui->include_file_patterns->setPlainText(tempText);
+   m_ui->include_patterns->setPlainText(tempText);
 
    tempText = convert_PlainText(data,"PREDEFINED");
    m_ui->predefined_macros->setPlainText(tempText);

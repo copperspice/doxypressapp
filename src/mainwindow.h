@@ -201,7 +201,11 @@ class MainWindow : public QMainWindow
 
       // help and label text color
       static QMap<QWidget *, HelpData> m_bigMap;
+
       static const QString m_filePatterns;
+      static const QString m_suffixSource;
+      static const QString m_suffixHeader;
+      static const QString m_suffixExclude;
 
       bool getDefault(QCheckBox *name);
       QString getDefault(QWidget *name);
@@ -221,6 +225,7 @@ class MainWindow : public QMainWindow
       QString getHelpBody(QWidget *name);
       QString getHelpTitle(QWidget *name);
       void createMap();
+      void configFullHelp();
 
       bool eventFilter(QObject *object, QEvent *event);
       void hoverChanged(QWidget *old_Widget, QWidget *new_Widget);
@@ -333,6 +338,9 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void valid_alpha_index())
       CS_SLOT_2(valid_alpha_index)
+
+      CS_SLOT_1(Private, void valid_source_code())
+      CS_SLOT_2(valid_source_code)
 
       CS_SLOT_1(Private, void valid_enable_preprocessing())
       CS_SLOT_2(valid_enable_preprocessing)
@@ -471,6 +479,15 @@ class MainWindow : public QMainWindow
 
 
       // tab 2- source code
+      CS_SLOT_1(Private, void suffix_source_navtree_PB())
+      CS_SLOT_2(suffix_source_navtree_PB)
+
+      CS_SLOT_1(Private, void suffix_header_navtree_PB())
+      CS_SLOT_2(suffix_header_navtree_PB)
+
+      CS_SLOT_1(Private, void suffix_exclude_navtree_PB())
+      CS_SLOT_2(suffix_exclude_navtree_PB)
+
       CS_SLOT_1(Private, void clang_options_PB())
       CS_SLOT_2(clang_options_PB)
 

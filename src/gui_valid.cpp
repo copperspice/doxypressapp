@@ -25,7 +25,13 @@
 #include <QSpinBox>
 
 static QString getFilePattens();
-const QString MainWindow::m_filePatterns = getFilePattens();
+static QString getSuffixSource();
+static QString getSuffixHeader();
+
+const QString MainWindow::m_filePatterns  = getFilePattens();
+const QString MainWindow::m_suffixSource  = getSuffixSource();
+const QString MainWindow::m_suffixHeader  = getSuffixHeader();
+const QString MainWindow::m_suffixExclude = "doc, doc, md, markdown, txt";
 
 QMap<QWidget *, HelpData> MainWindow::m_bigMap;
 
@@ -190,9 +196,12 @@ void MainWindow::clearAllFields()
 
    // tab 2 -source code
    m_ui->strip_code_comments_CB->setChecked(true);
-   m_ui->ref_link_source_CB ->setChecked(true);
-   m_ui->source_tooltips_CB->setChecked(true);
    m_ui->verbatim_headers_CB->setChecked(true);
+   m_ui->ref_link_source_CB ->setChecked(true);
+   m_ui->source_tooltips_CB->setChecked(true);   
+   m_ui->suffix_source_navtree->setPlainText(m_suffixSource);
+   m_ui->suffix_header_navtree->setPlainText(m_suffixHeader);
+   m_ui->suffix_exclude_navtree->setPlainText(m_suffixExclude);
 
    // tab 2 - preprocessor
    m_ui->enable_preprocessing_CB->setChecked(true);
@@ -470,6 +479,7 @@ void MainWindow::finalLoad()
    valid_full_path_names();
    valid_filter_source_files();
    valid_alpha_index(); 
+   valid_source_code();
    valid_enable_preprocessing();
    valid_have_dot();
 
@@ -818,6 +828,19 @@ void MainWindow::valid_alpha_index()
    }
 }
 
+void MainWindow::valid_source_code()
+{
+   if (m_ui->source_code_CB->isChecked()) {
+      m_ui->source_tooltips_CB->setEnabled(true);
+      m_ui->use_htags_CB->setEnabled(true);
+
+   } else {
+      m_ui->source_tooltips_CB->setEnabled(false);
+      m_ui->use_htags_CB->setEnabled(false);
+
+   }
+}
+
 void MainWindow::valid_enable_preprocessing()
 {
    if (m_ui->enable_preprocessing_CB->isChecked()) {
@@ -827,8 +850,8 @@ void MainWindow::valid_enable_preprocessing()
       m_ui->search_includes_CB->setEnabled(true);
       m_ui->include_path->setEnabled(true);
       m_ui->include_path_PB->setEnabled(true);
-      m_ui->include_file_patterns->setEnabled(true);
-      m_ui->include_file_patterns_PB->setEnabled(true);
+      m_ui->include_patterns->setEnabled(true);
+      m_ui->include_patterns_PB->setEnabled(true);
       m_ui->predefined_macros->setEnabled(true);
       m_ui->predefined_macros_PB->setEnabled(true);
       m_ui->expand_as_defined->setEnabled(true);
@@ -841,8 +864,8 @@ void MainWindow::valid_enable_preprocessing()
       m_ui->search_includes_CB->setEnabled(false);
       m_ui->include_path->setEnabled(false);
       m_ui->include_path_PB->setEnabled(false);
-      m_ui->include_file_patterns->setEnabled(false);
-      m_ui->include_file_patterns_PB->setEnabled(false);
+      m_ui->include_patterns->setEnabled(false);
+      m_ui->include_patterns_PB->setEnabled(false);
       m_ui->predefined_macros->setEnabled(false);
       m_ui->predefined_macros_PB->setEnabled(false);
       m_ui->expand_as_defined->setEnabled(false);
@@ -1294,6 +1317,7 @@ void MainWindow::valid_html_search()
 static QString getFilePattens()
 {
    QStringList list;
+
    list.append("*.as");
    list.append("*.c");
    list.append("*.cc");
@@ -1336,9 +1360,43 @@ static QString getFilePattens()
    list.append("*.tcl");
    list.append("*.ucf");
 
-   QString retval = list.join(", ");
-
-   return retval;
+   return list.join(", ");
 }
 
+static QString getSuffixSource()
+{
+   QStringList list;
 
+   list.append("c");
+   list.append("cc");
+   list.append("cxx");
+   list.append("cpp");
+   list.append("c++");
+   list.append("ii");
+   list.append("ixx");
+   list.append("ipp");
+   list.append("i++");
+   list.append("inl");
+   list.append("java");
+   list.append("m");
+   list.append("mm");
+   list.append("xml");
+
+   return list.join(", ");
+}
+
+static QString getSuffixHeader()
+{
+   QStringList list;
+
+   list.append("h");
+   list.append("hh");
+   list.append("hxx");
+   list.append("hpp");
+   list.append("h++");
+   list.append("idl");
+   list.append("ddl");
+   list.append("pidl");
+
+   return list.join(", ");
+}

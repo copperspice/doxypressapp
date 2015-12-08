@@ -311,7 +311,7 @@ void MainWindow::bb_skip_ns_PB()
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->bb_skip_ns->toPlainText();
+   QString temp = m_ui->bb_ns_alias->toPlainText();
 
    data.title      = "Omit Namespaces";
    data.dataList   = temp.split(regExp);
@@ -326,7 +326,7 @@ void MainWindow::bb_skip_ns_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->bb_skip_ns->setPlainText(temp);
+      m_ui->bb_ns_alias->setPlainText(temp);
    }
 }
 
@@ -586,7 +586,79 @@ void MainWindow::filter_source_patterns_PB()
    }
 }
 
-// tab 2- look up (browser)
+// tab 2- look up (source code)
+void MainWindow::suffix_source_navtree_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->suffix_source_navtree->toPlainText();
+
+   data.title      = "Extensions Source Navtree";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->suffix_source_navtree->setPlainText(temp);
+   }
+}
+
+void MainWindow::suffix_header_navtree_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->suffix_header_navtree->toPlainText();
+
+   data.title      = "Extensions Header Navtree";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->suffix_header_navtree->setPlainText(temp);
+   }
+}
+
+void MainWindow::suffix_exclude_navtree_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->suffix_exclude_navtree->toPlainText();
+
+   data.title      = "Extensions Exclude Navtree";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->suffix_exclude_navtree->setPlainText(temp);
+   }
+}
+
 void MainWindow::clang_options_PB()
 {
    QRegExp regExp("\\s*,\\s*");
@@ -666,7 +738,7 @@ void MainWindow::include_file_patterns_PB()
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->include_file_patterns->toPlainText();
+   QString temp = m_ui->include_patterns->toPlainText();
 
    data.title      = "Inlcude File Patterns";
    data.dataList   = temp.split(regExp);
@@ -681,7 +753,7 @@ void MainWindow::include_file_patterns_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->include_file_patterns->setPlainText(temp);
+      m_ui->include_patterns->setPlainText(temp);
    }
 }
 

@@ -271,11 +271,15 @@ void MainWindow::createConnections()
    connect(m_ui->warn_logfile_PB,           &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
 
    // tab 2- source code
+   connect(m_ui->source_code_CB,            &QPushButton::toggled, this, &MainWindow::valid_source_code);
+   connect(m_ui->suffix_source_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_source_navtree_PB);
+   connect(m_ui->suffix_header_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_header_navtree_PB);
+   connect(m_ui->suffix_exclude_navtree_PB, &QPushButton::clicked, this, &MainWindow::suffix_exclude_navtree_PB);
    connect(m_ui->clang_options_PB,          &QPushButton::clicked, this, &MainWindow::clang_options_PB);
 
    // tab 2- preprocessor
    connect(m_ui->include_path_PB,           SIGNAL(clicked()), this, SLOT(include_path_PB()));
-   connect(m_ui->include_file_patterns_PB,  SIGNAL(clicked()), this, SLOT(include_file_patterns_PB()));
+   connect(m_ui->include_patterns_PB,       SIGNAL(clicked()), this, SLOT(include_file_patterns_PB()));
    connect(m_ui->predefined_macros_PB,      SIGNAL(clicked()), this, SLOT(predefined_macros_PB()));
    connect(m_ui->expand_as_defined_PB,      SIGNAL(clicked()), this, SLOT(expand_as_defined_PB()));
 

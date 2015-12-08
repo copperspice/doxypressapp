@@ -605,7 +605,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       // tab 2 -bb
       m_ui->bb_style_CB->setChecked(                  false);
       m_ui->bb_main_page->setText(                    "");
-      m_ui->bb_skip_ns->setPlainText(                 "");
+      m_ui->bb_ns_alias->setPlainText(                "");
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl-subst"));
@@ -628,7 +628,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->input_source->setPlainText(               getDataList(object, "input-source"));
       m_ui->input_patterns->setPlainText(             getDataList(object, "input-patterns"));
       m_ui->input_encoding->setText(                  object.value("input-encoding").toString());
-      m_ui->source_recursive_CB->setChecked(          object.value("source-recursive").toBool());
+      m_ui->input_recursive_CB->setChecked(           object.value("input-recursive").toBool());
 
       m_ui->exclude_files->setPlainText(              getDataList(object, "exclude-files"));
       m_ui->exclude_symlinks_CB->setChecked(          object.value("exclude-symlinks").toBool());
@@ -658,13 +658,15 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->source_code_CB->setChecked(               object.value("source-code").toBool());
       m_ui->inline_source_CB->setChecked(             object.value("inline-source").toBool());
       m_ui->strip_code_comments_CB->setChecked(       object.value("strip-code-comments").toBool());
+      m_ui->verbatim_headers_CB->setChecked(          object.value("verbatim-headers").toBool());
       m_ui->ref_by_relation_CB->setChecked(           object.value("ref-by-relation").toBool());
       m_ui->ref_relation_CB->setChecked(              object.value("ref-relation").toBool());
       m_ui->ref_link_source_CB->setChecked(           object.value("ref-link-source").toBool());
       m_ui->source_tooltips_CB->setChecked(           object.value("source-tooltips").toBool());
       m_ui->use_htags_CB->setChecked(                 object.value("use-htags").toBool());
-      m_ui->verbatim_headers_CB->setChecked(          object.value("verbatim-headers").toBool());
-
+      m_ui->suffix_source_navtree->setPlainText(      getDataList(object, "suffix-source-navtree"));
+      m_ui->suffix_header_navtree->setPlainText(      getDataList(object, "suffix-header-navtree"));
+      m_ui->suffix_exclude_navtree->setPlainText(     getDataList(object, "suffix-exclude-navtree"));
       m_ui->clang_parsing_CB->setChecked(             object.value("clang-parsing").toBool());
       m_ui->clang_flags->setPlainText(                getDataList(object, "clang-flags"));
 
@@ -673,7 +675,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->search_includes_CB->setChecked(           object.value("search-includes").toBool());
 
       m_ui->include_path->setPlainText(               getDataList(object,"include-path"));
-      m_ui->include_file_patterns->setPlainText(      getDataList(object,"include-file-patterns"));
+      m_ui->include_patterns->setPlainText(           getDataList(object,"include-patterns"));
 
       m_ui->macro_expansion_CB->setChecked(           object.value("macro-expansion").toBool());
       m_ui->expand_only_predefined_CB->setChecked(    object.value("expand-only-predefined").toBool());
@@ -998,7 +1000,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       // tab 2 - bb
       m_ui->bb_style_CB->setChecked(                  bbObj.value("bb-style").toBool());
       m_ui->bb_main_page->setText(                    bbObj.value("bb-main-page").toString());
-      m_ui->bb_skip_ns->setPlainText(                 getDataList(bbObj, "bb-skip-ns"));
+      m_ui->bb_ns_alias->setPlainText(                getDataList(bbObj, "bb-ns-alias"));
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(configObj, "tcl-subst"));
@@ -1021,7 +1023,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->input_source->setPlainText(               getDataList(inputObj, "input-source"));
       m_ui->input_patterns->setPlainText(             getDataList(inputObj, "input-patterns"));
       m_ui->input_encoding->setText(                  inputObj.value("input-encoding").toString());     
-      m_ui->source_recursive_CB->setChecked(          inputObj.value("source-recursive").toBool());
+      m_ui->input_recursive_CB->setChecked(           inputObj.value("input-recursive").toBool());
 
       m_ui->exclude_files->setPlainText(              getDataList(inputObj, "exclude-files"));
       m_ui->exclude_symlinks_CB->setChecked(          inputObj.value("exclude-symlinks").toBool());
@@ -1051,13 +1053,15 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->source_code_CB->setChecked(               sourceObj.value("source-code").toBool());
       m_ui->inline_source_CB->setChecked(             sourceObj.value("inline-source").toBool());
       m_ui->strip_code_comments_CB->setChecked(       sourceObj.value("strip-code-comments").toBool());
+      m_ui->verbatim_headers_CB->setChecked(          sourceObj.value("verbatim-headers").toBool());
       m_ui->ref_by_relation_CB->setChecked(           sourceObj.value("ref-by-relation").toBool());
       m_ui->ref_relation_CB->setChecked(              sourceObj.value("ref-relation").toBool());
       m_ui->ref_link_source_CB->setChecked(           sourceObj.value("ref-link-source").toBool());
       m_ui->source_tooltips_CB->setChecked(           sourceObj.value("source-tooltips").toBool());
       m_ui->use_htags_CB->setChecked(                 sourceObj.value("use-htags").toBool());
-      m_ui->verbatim_headers_CB->setChecked(          sourceObj.value("verbatim-headers").toBool());
-
+      m_ui->suffix_source_navtree->setPlainText(      getDataList(sourceObj, "suffix-source-navtree"));
+      m_ui->suffix_header_navtree->setPlainText(      getDataList(sourceObj, "suffix-header-navtree"));
+      m_ui->suffix_exclude_navtree->setPlainText(     getDataList(sourceObj, "suffix-exclude-navtree"));
       m_ui->clang_parsing_CB->setChecked(             sourceObj.value("clang-parsing").toBool());
       m_ui->clang_flags->setPlainText(                getDataList(sourceObj, "clang-flags"));
 
@@ -1066,7 +1070,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->search_includes_CB->setChecked(           ppObj.value("search-includes").toBool());
 
       m_ui->include_path->setPlainText(               getDataList(ppObj,"include-path"));
-      m_ui->include_file_patterns->setPlainText(      getDataList(ppObj,"include-file-patterns"));
+      m_ui->include_patterns->setPlainText(           getDataList(ppObj,"include-patterns"));
 
       m_ui->macro_expansion_CB->setChecked(           ppObj.value("macro-expansion").toBool());      
       m_ui->expand_only_predefined_CB->setChecked(    ppObj.value("expand-only-predefined").toBool());
@@ -1397,7 +1401,7 @@ QByteArray MainWindow::json_SaveDoxy()
    // tab 2 - bb
    bbObj.insert("bb-style",                     m_ui->bb_style_CB->isChecked());
    bbObj.insert("bb-main-page",                 m_ui->bb_main_page->text());
-   bbObj.insert("bb-skip-ns",                   putDataList(m_ui->bb_skip_ns->toPlainText()));
+   bbObj.insert("bb-ns-alias",                  putDataList(m_ui->bb_ns_alias->toPlainText()));
 
    // tab 2 -programming
    configObj.insert("tcl-subst",                putDataList(m_ui->tcl_subst->toPlainText()));
@@ -1420,7 +1424,7 @@ QByteArray MainWindow::json_SaveDoxy()
    inputObj.insert("input-source",              putDataList(m_ui->input_source->toPlainText()));
    inputObj.insert("input-patterns",            putDataList(m_ui->input_patterns->toPlainText()));
    inputObj.insert("input-encoding",            m_ui->input_encoding->text());  
-   inputObj.insert("source-recursive",          m_ui->source_recursive_CB->isChecked());
+   inputObj.insert("input-recursive",           m_ui->input_recursive_CB->isChecked());
 
    inputObj.insert("exclude-files",             putDataList(m_ui->exclude_files->toPlainText()));
    inputObj.insert("exclude-symlinks",          m_ui->exclude_symlinks_CB->isChecked());
@@ -1450,13 +1454,15 @@ QByteArray MainWindow::json_SaveDoxy()
    sourceObj.insert("source-code",              m_ui->source_code_CB->isChecked());
    sourceObj.insert("inline-source",            m_ui->inline_source_CB->isChecked());
    sourceObj.insert("strip-code-comments",      m_ui->strip_code_comments_CB->isChecked());
+   sourceObj.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
    sourceObj.insert("ref-by-relation",          m_ui->ref_by_relation_CB->isChecked());
    sourceObj.insert("ref-relation",             m_ui->ref_relation_CB->isChecked());
    sourceObj.insert("ref-link-source",          m_ui->ref_link_source_CB->isChecked());
    sourceObj.insert("source-tooltips",          m_ui->source_tooltips_CB->isChecked());
    sourceObj.insert("use-htags",                m_ui->use_htags_CB->isChecked());
-   sourceObj.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
-
+   sourceObj.insert("suffix-source-navtree",    putDataList(m_ui->suffix_source_navtree->toPlainText()));
+   sourceObj.insert("suffix-header-navtree",    putDataList(m_ui->suffix_header_navtree->toPlainText()));
+   sourceObj.insert("suffix-exclude-navtree",   putDataList(m_ui->suffix_exclude_navtree->toPlainText()));
    sourceObj.insert("clang-parsing",            m_ui->clang_parsing_CB->isChecked());
    sourceObj.insert("clang-flags",              putDataList(m_ui->clang_flags->toPlainText()));
 
@@ -1465,7 +1471,7 @@ QByteArray MainWindow::json_SaveDoxy()
    ppObj.insert("search-includes",              m_ui->search_includes_CB->isChecked());
 
    ppObj.insert("include-path",                 putDataList(m_ui->include_path->toPlainText()));
-   ppObj.insert("include-file-patterns",        putDataList(m_ui->include_file_patterns->toPlainText()));
+   ppObj.insert("include-patterns",             putDataList(m_ui->include_patterns->toPlainText()));
 
    ppObj.insert("macro-expansion",              m_ui->macro_expansion_CB->isChecked());
    ppObj.insert("expand-only-predefined",       m_ui->expand_only_predefined_CB->isChecked());
