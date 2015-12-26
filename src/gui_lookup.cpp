@@ -1260,12 +1260,36 @@ void MainWindow::latex_footer_PB()
    m_ui->latex_footer->setText(file);
 }
 
+void MainWindow::latex_stylesheets_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->latex_stylesheets->toPlainText();
+
+   data.title      = "Latex Stylesheets";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = true;
+   data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->latex_stylesheets->setPlainText(temp);
+   }
+}
+
 void MainWindow::latex_extra_files_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->latex_extra_files->toPlainText();
+   QString temp = m_ui->latex_stylesheets->toPlainText();
 
    data.title      = "Latex Extra Files";
    data.dataList   = temp.split(regExp);

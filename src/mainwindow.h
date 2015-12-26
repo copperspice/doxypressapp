@@ -613,6 +613,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void latex_footer_PB())
       CS_SLOT_2(latex_footer_PB)
 
+      CS_SLOT_1(Private, void latex_stylesheets_PB())
+      CS_SLOT_2(latex_stylesheets_PB)
+
       CS_SLOT_1(Private, void latex_extra_files_PB())
       CS_SLOT_2(latex_extra_files_PB)
 

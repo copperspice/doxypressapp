@@ -712,14 +712,18 @@ void MainWindow::configFullHelp()
       "globally by setting 'AUTOLINK SUPPORT' to NO. "
       "<br><br>"
       "The default value is: YES");
-   
-  s_fullHelp.insert("DUPLICATE_DOCS",
-      "If member grouping is used in the documentation and this tag "
-      "is set, DoxyPress will reuse the documentation of the first "
-      "member in the group (if any) for the other members of the group. By default "
-      "all members of a group must be documented explicitly. "
-     "<br><br>"
+
+   s_fullHelp.insert("STRICT_SIG_MATCHING",
+      "If this tag is set then an exact match of the function signature is required to document "
+      "a function. An exact match means the function name and parameters must all match. "
+      "If this tag is set to NO DoxyPress will do an approximate match. "
+      "<br><br>"
       "The default value is: NO");
+
+   // internal doc
+   // force
+   // inherit
+   // seperate mem
 
    s_fullHelp.insert("ALLOW_SUB_GROUPING",
       "Set this tag to allow class member groups of the same type. "
@@ -727,7 +731,23 @@ void MainWindow::configFullHelp()
       "Set this tag to NO to prevent subgrouping. Alternatively, sub-grouping can be done per "
       "class using the \\nosubgrouping command. "
       "<br><br>"
-      "The default value is: YES");
+      "The default value is: YES");   
+
+   s_fullHelp.insert("DUPLICATE_DOCS",
+       "If member grouping is used in the documentation and this tag "
+       "is set, DoxyPress will reuse the documentation of the first "
+       "member in the group (if any) for the other members of the group. By default "
+       "all members of a group must be documented explicitly. "
+       "<br><br>"
+       "The default value is: NO");
+
+   s_fullHelp.insert("GROUP_NESTED_COMPOUNDS",
+       "If this tag is enabled then nested classes or structures will be in the same group "
+       "the parent class or structure is located. If disabled nested classes or structures "
+       "can be added explicitly using the \\ingroup command. "
+       "<br><br>"
+       "The default value is: NO");
+
 
    s_fullHelp.insert("INLINE_GROUPED_CLASSES",
       "When this tag is set classes, structs, and unions are shown inside the group "
@@ -949,13 +969,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES");
 
-   s_fullHelp.insert("STRICT_SIG_MATCHING",
-      "If this tag is set then an exact match of the function signature is required to document "
-      "a function. An exact match means the function name and parameters must all match. "
-      "If this tag is set to NO DoxyPress will do an approximate match. "
-      "<br><br>"
-      "The default value is: NO");
-
    s_fullHelp.insert("GEN_TODO_LIST",
       "This tag is used to enable (YES) or disable (NO) the todo list. "
       "This list is created by putting \\todo commands in the documentation. "
@@ -1001,9 +1014,9 @@ void MainWindow::configFullHelp()
       "Minimum: 0, Maximum: 10000, Default: 30");
 
   s_fullHelp.insert("FILE_VERSION_FILTER",
-      "This tag is used to specify a program which should invoke to obtain the current version "
-      "for each file. DoxyPress will invoke this program and pass a file name as the input parameter. "
-      "The value written to standard output is used as the file version.");
+      "This tag is used to specify a program which DoxyPress should invoke to obtain the current version "
+      "for each file. DoxyPress will invoke this program and pass a file name as the first command line parameter. "
+      "The value written to standard output is used as the file version.");  
 
    s_fullHelp.insert("LAYOUT_FILE",
       "This tag is used to specify a layout file. The layout file controls the global structure of "
@@ -1142,9 +1155,10 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("INPUT_PATTERNS",
       "If the 'INPUT SOURCE' tag contains directories then this tag is be used to "
-      "specify wildcard patterns. Files matching these patterns will be processed. "
+      "specify wildcard patterns. Files matching these patterns will be processed by DoxyPress as source. "
+      "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag.  "
       "<br><br>"
-      "If this tag is empty the default will be: " + m_filePatterns);
+      "If this tag is empty the default will be: " + m_filePatterns);   
 
    s_fullHelp.insert("INPUT_RECURSIVE",
       "This tag is used to specify whether or not subdirectories should be searched for input files. "
@@ -1209,19 +1223,23 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("FILTER_PROGRAM",
       "This tag is used to specify a program which is called to filter each input file. "
       "DoxyPress will invoke the filter program and pass the input file name as the first parameter. "
-      "The DoxyPress will use the output of the filter program. "
+      "DoxyPress will use the output of the filter program. "
       "<br><br>"
       "The filter program must not add or remove lines and is run before the "
-      "source code is scanned, not when the documentation output code is generated.");
+      "source code is scanned, not when the documentation output code is generated. "
+      "<br><br>"
+      "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag.");
 
    s_fullHelp.insert("FILTER_PATTERNS",
       "This tag is used to specify filter programs based on a wildcard match. "
       "DoxyPress will compare source file names with the wildcards and apply the "
       "filter program if there is a match. "
-      "If this tag is empty or none of the wildcards match, then the program specified by the 'FILTER PROGRAM NAME' "
-      "will be used. The filter programs are listed in the format: "
+      "If this tag is empty or none of the wildcards match then the program specified by the 'FILTER PROGRAM NAME' "
+      "will be used. "
       "<br><br>"
-      "wildcard=filter program"
+      "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag. "
+      "<br><br>"
+      "The filter programs are listed in the format: wildcard=filter program "
       "<br><br>"
       "Example: *.cpp=my_cpp_filter");
 
@@ -1339,19 +1357,22 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("SUFFIX_SOURCE_NAVTREE",
       "This tag is used to specify a list of file extensions which are treated as source. All entities "
       "in source files are considered to be 'local' rather than 'global'. Local entities will only be "
-      "documented if the tag 'EXTRACT_LOCAL_CLASSES' is set. The dot should not be specified."
+      "documented if the tag 'EXTRACT_LOCAL_CLASSES' is set. The 'dot' for the extension should not be specified "
+      "in this tag."
       "<br><br>"
       "If this tag is empty the default will be: " + m_suffixSource );
 
    s_fullHelp.insert("SUFFIX_HEADER_NAVTREE",
       "This tag is used to specify a list of file extensions which will be treated as headers when building the "
-      "Files and File List in the navigation treeview. The dot should not be specified."
+      "Files and File List of the navigation treeview. The 'dot' for the extension should not be specified "
+      "in this tag."
       "<br><br>"
       "If this tag is empty the default will be: " + m_suffixHeader);
 
    s_fullHelp.insert("SUFFIX_EXCLUDE_NAVTREE",
       "This tag is used to specify a list of file extensions which should not appear in the "
-      "Files and File List of the navigation treeview. The dot should not be specified."
+      "Files and File List of the navigation treeview. The 'dot' for the extension should not be specified "
+      "in this tag."
       "<br><br>"
       "If this tag is empty the default will be: " + m_suffixExclude);
 
@@ -1617,6 +1638,10 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
+
+   // when ready in DoxyPress, add the following (12/2015 )
+   // If this tag is enabled use the \\hidecallgraph command to prevent a call graph from being generated.
+
    s_fullHelp.insert("DOT_CALL",
       "If this tag is set a call dependency graph for every global function or class method "
       "will be generated. "
@@ -1625,6 +1650,10 @@ void MainWindow::configFullHelp()
       "The default value is: NO "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
+
+
+   // when ready in DoxyPress, add the following (12/2015 )
+   // If this tag is enabled use the \\hidecallergraph command to prevent a call graph from being generated.
 
    s_fullHelp.insert("DOT_CALLED_BY",
       "If this tag is set a caller dependency graph will be generated for every global function or class method. "
@@ -1700,7 +1729,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("PLANTUML_INC_PATH",
       "When using PlantUML, the specified paths are searched for files specified by "
-      "the !include statement in a plantuml block.");
+      "the <code>!include</code> statement in a plantuml block.");
 
    s_fullHelp.insert("DOT_GRAPH_MAX_NODES",
       "This tag sets the maximum number of nodes shown in the graph. If the number of nodes is larger "
@@ -1806,9 +1835,10 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_EXTRA_FILES",
-      "This tag is  used to specify one or more extra images or other source files which "
+      "This tag is used to specify one or more extra images or other source files which "
       "should be copied to the base 'HTML OUTPUT DIRECTORY'. Use the $relpath^ variable in your "
-      "'HTML HEADER FILE' or 'HTML FOOTER FILE' files to load the extra files. "
+      "'HTML HEADER FILE' or 'HTML FOOTER FILE' files to load the extra files. In a stylesheet "
+      "use the file name with no prefix. "
       "<br><br>"
       "This tag requires the tag 'GENERATE HTML' is set to YES");
 
@@ -2237,28 +2267,25 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
-      "This tag is used to specify one or more LaTeX packages to include in "
-      "the LaTeX output. To use the times font for example, specify 'times'. "
+      "This tag is used to specify one or more LaTeX packages to include in the "
+      "LaTeX output. Each entry can be a package name or the literal argument "
+      "passed to the \\usepackage command. "
       "<br><br>"
-      "If left blank no extra packages will be included. "
+      "As an example, to use the times font specify either: 'times' or '{times}' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
-
-   s_fullHelp.insert("LATEX_TIMESTAMP",
-      "If this tag is set the footer page will contain the date and time when the page was generated. "
-      "<br><br>"
-      "The default value is: NO "
+      "If this tag is blank no extra packages will be included. "
       "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_HEADER",
-      "This tag is used to specify a user-defined LaTeX header file for the generated LaTeX document. "
-      "If left blank DoxyPress will generate a standard header. "
+      "This tag is used to specify a user-defined LaTeX header file for the generated LaTeX output. "
       "<br><br>"
       "The header should contain everything until the first chapter. "
-      "The following commands have a special meanings: $title, $datetime, $date, $DoxyPressversion, $projectname, "
+      "The following commands have a special meaning: $title, $datetime, $date, $DoxyPressversion, $projectname, "
       "$projectnumber, $projectbrief, $projectlogo. DoxyPress will replace $title with the empty "
       "string for the replacement values of the other commands the user is referred to 'HTML HEADER FILE'. "
+      "<br><br>"
+      "If this tag is blank DoxyPress will generate a standard header. "
       "<br><br>"
       "To create a new header file run 'DoxyPress --w latex-head [header file name]' "
       "<br><br>"
@@ -2272,10 +2299,27 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
+   s_fullHelp.insert("LATEX_STYLESHEETS",
+      "This tag is used to specify additional custom style sheets which will be included "
+      "after the standard stylesheets. DoxyPress will automatically copy  "
+      "any files listed in this tag to the 'LATEX OUTPUT DIRECTORY'. "
+      "<br><br>"
+      "The order of stylesheets is important. The last stylesheet will override the "
+      "settings of any previous stylesheets. "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+
    s_fullHelp.insert("LATEX_EXTRA_FILES",
       "This tag is used to specify one or more extra images or "
       "other source files which should be copied to the 'LATEX OUTPUT DIRECTORY' "
       "directory. The files will be copied verbatim. "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+
+   s_fullHelp.insert("LATEX_TIMESTAMP",
+      "If this tag is set the footer page will contain the date and time when the page was generated. "
+      "<br><br>"
+      "The default value is: NO "
       "<br><br>"
       "This tag requires the tag 'GENERATE LATEX' is set to YES");
 
@@ -2502,6 +2546,14 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("RTF_EXTENSION",
       "This tag is used to set optional variables used in the generation of an RTF document. "
       "A template extensions file can be generated by running: 'DoxyPress --w rtf-ext [extensions file name]' "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE RTF' is set to YES");
+
+   s_fullHelp.insert("RTF_SOURCE_CODE",
+      "If this tag is set DoxyPress will include source code with syntax highlighting in the RTF output. "
+      "Which sources are shown depend on other settings such as 'SOURCE CODE'"
+      "<br><br>"
+      "The default value is: NO "
       "<br><br>"
       "This tag requires the tag 'GENERATE RTF' is set to YES");
 

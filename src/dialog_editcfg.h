@@ -28,13 +28,17 @@ class Dialog_EditCfg : public QDialog
    CS_OBJECT(Dialog_EditCfg)
 
    public:
-      explicit Dialog_EditCfg(QString fileName);
+      explicit Dialog_EditCfg(MainWindow *parent, QString fileName);
       ~Dialog_EditCfg();
 
       QString get_doxyPressFn();
 
    private:
+      MainWindow *m_owner;
       Ui::Dialog_EditCfg *m_ui;
+
+      CS_SLOT_1(Private, void fileLookUp())
+      CS_SLOT_2(fileLookUp)
 
       CS_SLOT_1(Private, void save())
       CS_SLOT_2(save)

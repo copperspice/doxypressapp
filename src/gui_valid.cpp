@@ -31,7 +31,7 @@ static QString getSuffixHeader();
 const QString MainWindow::m_filePatterns  = getFilePattens();
 const QString MainWindow::m_suffixSource  = getSuffixSource();
 const QString MainWindow::m_suffixHeader  = getSuffixHeader();
-const QString MainWindow::m_suffixExclude = "doc, doc, md, markdown, txt";
+const QString MainWindow::m_suffixExclude = "doc, dox, md, markdown, txt";
 
 QMap<QWidget *, HelpData> MainWindow::m_bigMap;
 
@@ -1159,6 +1159,8 @@ void MainWindow::valid_gen_latex()
       m_ui->latex_header_PB->setEnabled(true);
       m_ui->latex_footer->setEnabled(true);
       m_ui->latex_footer_PB->setEnabled(true);
+      m_ui->latex_stylesheets->setEnabled(true);
+      m_ui->latex_stylesheets_PB->setEnabled(true);
       m_ui->latex_extra_files->setEnabled(true);
       m_ui->latex_extra_files_PB->setEnabled(true);
       m_ui->latex_hyper_pdf_CB->setEnabled(true);
@@ -1183,6 +1185,8 @@ void MainWindow::valid_gen_latex()
       m_ui->latex_header_PB->setEnabled(false);
       m_ui->latex_footer->setEnabled(false);
       m_ui->latex_footer_PB->setEnabled(false);
+      m_ui->latex_stylesheets->setEnabled(false);
+      m_ui->latex_stylesheets_PB->setEnabled(false);
       m_ui->latex_extra_files->setEnabled(false);
       m_ui->latex_extra_files_PB->setEnabled(false);
       m_ui->latex_hyper_pdf_CB->setEnabled(false);
@@ -1256,6 +1260,7 @@ void MainWindow::valid_gen_rtf()
       m_ui->rtf_stylesheet_PB->setEnabled(true);
       m_ui->rtf_extension->setEnabled(true);
       m_ui->rtf_extension_PB->setEnabled(true);
+      m_ui->rtf_source_code_CB->setEnabled(true);
 
    } else {
       m_ui->rtf_output->setEnabled(false);
@@ -1266,6 +1271,7 @@ void MainWindow::valid_gen_rtf()
       m_ui->rtf_stylesheet_PB->setEnabled(false);
       m_ui->rtf_extension->setEnabled(false);
       m_ui->rtf_extension_PB->setEnabled(false);
+      m_ui->rtf_source_code_CB->setEnabled(false);
    }
 }
 

@@ -17,17 +17,20 @@
 
 #include <dialog_editcfg.h>
 
-Dialog_EditCfg::Dialog_EditCfg(QString fileName)
-   : m_ui(new Ui::Dialog_EditCfg)
+Dialog_EditCfg::Dialog_EditCfg(MainWindow *parent, QString fileName)
+   : QDialog(parent), m_ui(new Ui::Dialog_EditCfg)
 {
+   m_owner = parent;
+
    m_ui->setupUi(this);
    this->setWindowIcon(QIcon("://resources/doxypress.png"));
 
-   m_ui->doxyPress_fn->setText(fileName);
-   m_ui->doxyPress_fn->setFocus();
+   m_ui->doxyPressFile->setText(fileName);
+   m_ui->doxyPressFile->setFocus();
 
-   connect(m_ui->save_PB,   SIGNAL(clicked()),this, SLOT(save()));
-   connect(m_ui->cancel_PB, SIGNAL(clicked()),this, SLOT(cancel()));
+   connect(m_ui->doxyPressFile_PB, SIGNAL(clicked()), this, SLOT(fileLookUp()));
+   connect(m_ui->save_PB,          SIGNAL(clicked()), this, SLOT(save()));
+   connect(m_ui->cancel_PB,        SIGNAL(clicked()), this, SLOT(cancel()));
 }
 
 Dialog_EditCfg::~Dialog_EditCfg()
@@ -37,7 +40,14 @@ Dialog_EditCfg::~Dialog_EditCfg()
 
 QString Dialog_EditCfg::get_doxyPressFn()
 {
-   return m_ui->doxyPress_fn->text();
+   return m_ui->doxyPressFile->text();
+}
+
+void Dialog_EditCfg::fileLookUp()
+{
+   QString file = m_ui->doxyPressFile->text();
+   file = m_owner->getSingleFile(tr("Select file"), file);
+   m_ui->doxyPressFile->setText(file);
 }
 
 void Dialog_EditCfg::cancel()

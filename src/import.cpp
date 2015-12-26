@@ -197,6 +197,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "DISTRIBUTE_GROUP_DOC");
    m_ui->duplicate_docs_CB->setChecked(tempBool);
 
+   tempBool = convert_Bool(data, "GROUP_NESTED_COMPOUNDS");
+   m_ui->group_nested_compounds_CB->setChecked(tempBool);
+
    tempBool = convert_Bool(data, "SUBGROUPING");
    m_ui->allow_sub_grouping_CB->setChecked(tempBool);
 
@@ -785,6 +788,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "LATEX_FOOTER");
    m_ui->latex_footer->setText(tempStr);
 
+   tempText = convert_PlainText(data,"LATEX_EXTRA_STYLESHEET");
+   m_ui->latex_stylesheets->setPlainText(tempText);
+
    tempText = convert_PlainText(data,"LATEX_EXTRA_FILES");
    m_ui->latex_extra_files->setPlainText(tempText);
 
@@ -825,6 +831,9 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempStr = convert_Str(data, "RTF_EXTENSIONS_FILE");
    m_ui->rtf_extension->setText(tempStr);
+
+   tempBool = convert_Bool(data, "RTF_SOURCE_CODE");
+   m_ui->rtf_source_code_CB->setChecked(tempBool);
 
 
    // tab 3 - man

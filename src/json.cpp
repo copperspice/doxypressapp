@@ -314,10 +314,9 @@ bool MainWindow::json_CreateNew()
 }
 
 // **
-// **
 void MainWindow::edit_Cfg()
 {
-   Dialog_EditCfg *dw = new Dialog_EditCfg(m_struct.doxyPressExe);
+   Dialog_EditCfg *dw = new Dialog_EditCfg(this, m_struct.doxyPressExe);
    int result = dw->exec();
 
    switch (result) {
@@ -595,6 +594,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->separate_member_pages_CB->setChecked(     object.value("separate-member-pages").toBool());
       m_ui->allow_sub_grouping_CB->setChecked(        object.value("allow-sub-grouping").toBool());
       m_ui->duplicate_docs_CB->setChecked(            object.value("duplicate-docs").toBool());
+      m_ui->group_nested_compounds_CB->setChecked(    object.value("group-nested-compounds").toBool());
 
       // tab 2 -output
       m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
@@ -802,6 +802,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->latex_extra_packages->setPlainText(       getDataList(object, "latex-extra-packages"));
       m_ui->latex_header->setText(                    object.value("latex-header").toString());
       m_ui->latex_footer->setText(                    object.value("latex-footer").toString());
+      m_ui->latex_stylesheets->setPlainText(          getDataList(object, "latex-stylesheets"));
       m_ui->latex_extra_files->setPlainText(          getDataList(object, "latex-extra-files"));
 
       m_ui->latex_timestamp_CB->setChecked(           object.value("latex-timestamp").toBool());
@@ -843,6 +844,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf-hyperlinks").toBool());
       m_ui->rtf_stylesheet->setText(                  object.value("rtf-stylesheet").toString());
       m_ui->rtf_extension->setText(                   object.value("rtf-extension").toString());
+      m_ui->rtf_source_code_CB->setChecked(           object.value("rtf-source-code").toBool());
 
       // tab 3 - xml
       m_ui->xml_output->setText(                      object.value("xml-output").toString());
@@ -990,6 +992,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->separate_member_pages_CB->setChecked(     configObj.value("separate-member-pages").toBool());
       m_ui->allow_sub_grouping_CB->setChecked(        configObj.value("allow-sub-grouping").toBool());
       m_ui->duplicate_docs_CB->setChecked(            configObj.value("duplicate-docs").toBool());
+      m_ui->group_nested_compounds_CB->setChecked(    configObj.value("group-nested-compounds").toBool());
 
       // tab 2 -output
       m_ui->enabled_sections->setPlainText(           getDataList(configObj, "enabled-sections"));
@@ -1197,6 +1200,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->latex_extra_packages->setPlainText(       getDataList(latexObj, "latex-extra-packages"));
       m_ui->latex_header->setText(                    latexObj.value("latex-header").toString());
       m_ui->latex_footer->setText(                    latexObj.value("latex-footer").toString());
+      m_ui->latex_stylesheets->setPlainText(          getDataList(latexObj, "latex-stylesheets"));
       m_ui->latex_extra_files->setPlainText(          getDataList(latexObj, "latex-extra-files"));
 
       m_ui->latex_timestamp_CB->setChecked(           latexObj.value("latex-timestamp").toBool());
@@ -1238,6 +1242,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->rtf_hyperlinks_CB->setChecked(            rtfObj.value("rtf-hyperlinks").toBool());
       m_ui->rtf_stylesheet->setText(                  rtfObj.value("rtf-stylesheet").toString());
       m_ui->rtf_extension->setText(                   rtfObj.value("rtf-extension").toString());
+      m_ui->rtf_source_code_CB->setChecked(           rtfObj.value("rtf-source-code").toBool());
 
       // tab 3 - xml
       m_ui->xml_output->setText(                      xmlObj.value("xml-output").toString());
@@ -1390,7 +1395,7 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("separate-member-pages",    m_ui->separate_member_pages_CB->isChecked());
    configObj.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());
    configObj.insert("duplicate-docs",           m_ui->duplicate_docs_CB->isChecked());
-
+   configObj.insert("group-nested-compounds",   m_ui->group_nested_compounds_CB->isChecked());
 
    // tab 2 -output
    configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));
@@ -1591,6 +1596,7 @@ QByteArray MainWindow::json_SaveDoxy()
    latexObj.insert("latex-extra-packages",    putDataList(m_ui->latex_extra_packages->toPlainText()));
    latexObj.insert("latex-header",            m_ui->latex_header->text());
    latexObj.insert("latex-footer",            m_ui->latex_footer->text());
+   latexObj.insert("latex-stylesheets",       putDataList(m_ui->latex_stylesheets->toPlainText()));
    latexObj.insert("latex-extra-files",       putDataList(m_ui->latex_extra_files->toPlainText()));
 
    latexObj.insert("latex-timestamp",         m_ui->latex_timestamp_CB->isChecked());
@@ -1632,6 +1638,7 @@ QByteArray MainWindow::json_SaveDoxy()
    rtfObj.insert("rtf-hyperlinks",            m_ui->rtf_hyperlinks_CB->isChecked());
    rtfObj.insert("rtf-stylesheet",            m_ui->rtf_stylesheet->text());
    rtfObj.insert("rtf-extension",             m_ui->rtf_extension->text());
+   rtfObj.insert("rtf-source-code",           m_ui->rtf_source_code_CB->isChecked());
 
    // tab 3 - xml
    xmlObj.insert("xml-output",                m_ui->xml_output->text());
