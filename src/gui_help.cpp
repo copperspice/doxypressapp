@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 2014-2016 Barbara Geller & Ansel Sermersheim
  * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
@@ -1639,7 +1639,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
 
-   // when ready in DoxyPress, add the following (12/2015 )
+   // when ready in DoxyPress, add the following (01/2016 )
    // If this tag is enabled use the \\hidecallgraph command to prevent a call graph from being generated.
 
    s_fullHelp.insert("DOT_CALL",
@@ -1652,7 +1652,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
 
-   // when ready in DoxyPress, add the following (12/2015 )
+   // when ready in DoxyPress, add the following (01/2016 )
    // If this tag is enabled use the \\hidecallergraph command to prevent a call graph from being generated.
 
    s_fullHelp.insert("DOT_CALLED_BY",

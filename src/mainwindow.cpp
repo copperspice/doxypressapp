@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (C) 2014-2015 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 2014-2016 Barbara Geller & Ansel Sermersheim
  * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
@@ -142,7 +142,7 @@ void MainWindow::about()
       "    </td>"
       "</tr></table></font>"
       "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-      "<p><small>Copyright 2014-2015 BG Consulting, All rights reserved.<br>"
+      "<p><small>Copyright 2014-2016 BG Consulting, All rights reserved.<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    //
@@ -151,7 +151,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 12.09.2015</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 01.01.2016</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
