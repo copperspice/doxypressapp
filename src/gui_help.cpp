@@ -510,9 +510,8 @@ void MainWindow::configFullHelp()
       "The default value is: NO");
 
    s_fullHelp.insert("HTML_CHM_RB",
-      "Set this option to enable the 'GENERATE HTML HELP' tag. "
-      "If this option is set three additional files will be generated: index.hhp, "
-      "index.hhc, and index.hhk. The index.hhp is used by "
+      "Set this option to enable the 'GENERATE HTML HELP' tag. If this option is set three "
+      "additional files will be generated: index.hhp, index.hhc, and index.hhk. The index.hhp is used by "
       "Microsoft's HTML Help Workshop to convert HTML output into a single compiled HTML .chm file. "
       "<br><br>"
       "The default value is: NO"
@@ -529,7 +528,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("LATEX_PDF_RB",
       "If this tag is set DoxyPress will use the pdflatex program to generate the PDF. "
-      "Set this option to YES, to get a higher quality PDF documentation. "
+      "Set this option to YES, to obtain higher quality PDF documentation. "
       "<br><br>"
       "The default value is: YES"
       "<br><br>"
@@ -570,24 +569,40 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: English");
 
-   s_fullHelp.insert("SHORT_NAMES",
-      "If this tag is set shorter file names will be generated which may be less readable. "
+   s_fullHelp.insert("ALIASES",
+      "This tag is used to specify a number of aliases which act as commands in "
+      "the documentation. An alias has the format: name=value"
+      "<br><br>"          
+      "\"sideeffect=@par Side Effects:\\n\" "
       "<br><br>"
-      "The default value is: NO");
-   
-   s_fullHelp.insert("ALLOW_UNICODE_NAMES",
-      "If this tag is set DoxyPress will allow non-ASCII characters to appear "
-      "in the names of generated files. If set to NO, non-ASCII characters will be "
-      "escaped. For example: _xE3_x81_x84 will be used for Unicode U+3044. "
-      "<br><br>"
-      "The default value is: NO");
+      "This example defines the command \\sideeffect (or @sideeffect). "
+      "The result is a user-defined paragraph with a heading of \"Side Effects:\" ");
 
-   s_fullHelp.insert("CREATE_SUBDIRS",
-      "If this tag is set, 4096 sub-directories (in 2 levels) will be created "
-      "under the output directory for each output format type. "
-      "The output files will be distributed in these directories. "
+  s_fullHelp.insert("ABBREVIATE_BRIEF",
+      "This tag is a list of phrases which are removed from the beginning of a brief description. "
       "<br><br>"
-      "The default value is: NO");
+      "The default values are: The $name class, The $name widget, The $name file, is, provides, "
+      "specifies, contains, represents, a, an, the");
+
+   s_fullHelp.insert("STRIP_FROM_PATH",
+      "This tag is used to specify what portion of the path to remove from the source files. "
+      "The path is only stripped if one of the specified strings matches the beginning  "
+      "part of the path. This tag can be used to show relative paths in the file list. "
+      "If left blank the directory where DoxyPress is run is used as the path to strip. "
+      "<br><br>"
+      "This tag requires the tag 'FULL PATH NAME' is set to YES");
+
+   s_fullHelp.insert("STRIP_FROM_INC_PATH",
+      "This tag is used to specify what portion of the path to remove for include files. "
+      "The include file shown in the documentation will indicate which header file to include, "
+      "in order to use a particular class. If this tag is left blank the full path will be removed. ");
+
+   s_fullHelp.insert("FULL_PATH_NAMES",
+      "If this tag is set DoxyPress will prepend the full path "
+      "before file names in the file list and in the header files. If set to NO, the "
+      "shortest path which makes the file name unique will be used. "
+      "<br><br>"
+      "The default value is: YES");
 
    s_fullHelp.insert("BRIEF_MEMBER_DESC",
       "If this tag is set, a brief member description will be included after the "
@@ -599,71 +614,14 @@ void MainWindow::configFullHelp()
       "If this tag is set DoxyPress will prepend the brief description of a member or "
       "function before the detailed description. "
       "<br><br>"
-      "Note: If 'BRIEF DESCRIPTION' and 'HIDE UNDOCUMENTED MEMBERS' are set to NO, the "
+      "If 'BRIEF DESCRIPTION' and 'HIDE UNDOCUMENTED MEMBERS' are set to NO, the "
       "brief descriptions will be completely suppressed. "
       "<br><br>"
       "The default value is: YES");
 
-  s_fullHelp.insert("ALWAYS_DETAILED_SEC",
+   s_fullHelp.insert("ALWAYS_DETAILED_SEC",
       "If this tag and 'REPEAT BRIEF DESCRIPTION' is set, a detailed section will be "
       "generated even if there is only a brief description. "
-      "<br><br>"
-      "The default value is: NO");
-
-   s_fullHelp.insert("ABBREVIATE_BRIEF",
-      "This tag is a list of phrases which are removed from the beginning of a brief description. "
-      "<br><br>"
-      "The default values are: The $name class, The $name widget, The $name file, is, provides, "
-      "specifies, contains, represents, a, an, the");
-
-   s_fullHelp.insert("FULL_PATH_NAMES",
-      "If this tag is set DoxyPress will prepend the full path "
-      "before files names in the file list and in the header files. If set to NO, the "
-      "shortest path which makes the file name unique will be used. "
-      "<br><br>"
-      "The default value is: YES");
-
-   s_fullHelp.insert("STRIP_FROM_PATH",
-      "This tag is used to specify what portion of the path to remove from the source files. "
-      "The path is only stripped if one of the specified strings matches the beginning  "
-      "part of the path. The tag can be used to show relative paths in the file list. "
-      "If left blank the directory where DoxyPress is run is used as the path to strip. "
-      "<br><br>"
-      "This tag requires the tag 'FULL PATH NAME' is set to YES");
-
-   s_fullHelp.insert("STRIP_FROM_INC_PATH",
-      "This tag is used specify what portion of the path to remove for include files. "
-      "The include file shown in the documentation will indicate which header file to include, "
-      "in order to use a particular class. If this tag is left blank the full path will be removed. ");
-   
-   s_fullHelp.insert("ALIASES",
-      "This tag is used to specify a number of aliases which act as commands in "
-      "the documentation. An alias has the format: name=value"
-      "<br><br>"          
-      "\"sideeffect=@par Side Effects:\\n\" "
-      "<br><br>"
-      "This example defines the command \\sideeffect (or @sideeffect). "
-      "The result is a user-defined paragraph with a heading of \"Side Effects:\" ");
-
-   s_fullHelp.insert("TAB_SIZE",
-      "This tag is used to set the number of spaces in a tab. This value is used to "
-      "replace tabs with spaces in code fragments. "
-      "<br><br>"
-      "Minimum: 1, Maximum: 16, Default: 4");
-
-  s_fullHelp.insert("LOOKUP_CACHE_SIZE",
-      "The size of the symbol lookup cache can be set using this tag. If the cache is too small "
-      "DoxyPress may run slower. At the end of a run DoxyPress will report the cache usage and "
-      " suggest the optimal cache size. "
-      "<br><br>"
-      "Minimum: 0, Maximum: 9, Default: 0");
-
-
-   // build config   
-   s_fullHelp.insert("INLINE_INHERITED_MEMBER",
-      "If this tag is set DoxyPress will show all inherited members of a class in the "
-      "documentation of that class as if those members were ordinary class members. "
-      "Constructors, destructors and assignment operators of the base classes will not be shown. "
       "<br><br>"
       "The default value is: NO");
 
@@ -687,15 +645,43 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO");
 
-   s_fullHelp.insert("INHERIT_DOCS",
-      "If this tag is set then an undocumented member inherits the "
-      "documentation from any documented member which it re-implements. "
+  s_fullHelp.insert("TAB_SIZE",
+      "This tag is used to set the number of spaces in a tab. This value is used to "
+      "replace tabs with spaces in code fragments. "
       "<br><br>"
-      "The default value is: YES");
+      "Minimum: 1, Maximum: 16, Default: 4");
 
-   s_fullHelp.insert("SEPARATE_MEMBER_PAGES",
-      "If this tag is set DoxyPress will produce a new page for each member. If set to NO "
-      "the documentation of a member will be part of the file/class/namespace which contains it. "
+  s_fullHelp.insert("LOOKUP_CACHE_SIZE",
+      "The size of the symbol lookup cache can be set using this tag. If the cache is too small "
+      "DoxyPress may run slower. At the end of a run DoxyPress will report the cache usage and "
+      " suggest the optimal cache size. "
+      "<br><br>"
+      "Minimum: 0, Maximum: 9, Default: 0");
+
+   // build config 
+   s_fullHelp.insert("SHORT_NAMES",
+      "If this tag is set shorter file names will be generated which may be less readable. "
+      "<br><br>"
+      "The default value is: NO");
+   
+   s_fullHelp.insert("ALLOW_UNICODE_NAMES",
+      "If this tag is set DoxyPress will allow non-ASCII characters to appear "
+      "in the names of generated files. If set to NO, non-ASCII characters will be "
+      "escaped. For example: _xE3_x81_x84 will be used for Unicode U+3044. "
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("CREATE_SUBDIRS",
+      "If this tag is set, 4096 sub-directories (in 2 levels) will be created "
+      "under the output directory for each output format type. "
+      "The output files will be distributed in these directories. "
+      "<br><br>"
+      "The default value is: NO");
+   
+   s_fullHelp.insert("INLINE_INHERITED_MEMBER",
+      "If this tag is set DoxyPress will show all inherited members of a class in the "
+      "documentation of that class as if those members were ordinary class members. "
+      "Constructors, destructors and assignment operators of the base classes will not be shown. "
       "<br><br>"
       "The default value is: NO");
 
@@ -709,10 +695,10 @@ void MainWindow::configFullHelp()
       "When this tag is set DoxyPress tries to link words which correspond to documented "
       "classes, functions, or namespaces to their corresponding documentation. An auto link can "
       "be prevented for individual cases by adding a % charactor in front of the word or "
-      "globally by setting 'AUTOLINK SUPPORT' to NO. "
+      "globally by setting this tag to NO. "
       "<br><br>"
       "The default value is: YES");
-
+    
    s_fullHelp.insert("STRICT_SIG_MATCHING",
       "If this tag is set then an exact match of the function signature is required to document "
       "a function. An exact match means the function name and parameters must all match. "
@@ -720,10 +706,30 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO");
 
-   // internal doc
-   // force
-   // inherit
-   // seperate mem
+   s_fullHelp.insert("INTERNAL_DOCS",
+      "This tag determines if documentation which is typed after an \\internal command "
+      "is included in the documentation. Set to YES to include the internal documentation, "
+      "set to NO, to exclude the documentation. "
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("FORCE_LOCAL_INCLUDES",
+      "If this tag is set DoxyPress will list include files with double quotes "
+      "instead of less than and greater than symbols. "
+      "<br><br>"
+      "The default value is: NO");
+
+    s_fullHelp.insert("INHERIT_DOCS",
+      "If this tag is set then an undocumented member inherits the "
+      "documentation from any documented member which it re-implements. "
+      "<br><br>"
+      "The default value is: YES");
+
+   s_fullHelp.insert("SEPARATE_MEMBER_PAGES",
+      "If this tag is set DoxyPress will produce a new page for each member. If set to NO "
+      "the documentation of a member will be part of the file/class/namespace which contains the member. "
+      "<br><br>"
+      "The default value is: NO");
 
    s_fullHelp.insert("ALLOW_SUB_GROUPING",
       "Set this tag to allow class member groups of the same type. "
@@ -747,7 +753,6 @@ void MainWindow::configFullHelp()
        "can be added explicitly using the \\ingroup command. "
        "<br><br>"
        "The default value is: NO");
-
 
    s_fullHelp.insert("INLINE_GROUPED_CLASSES",
       "When this tag is set classes, structs, and unions are shown inside the group "
@@ -816,7 +821,7 @@ void MainWindow::configFullHelp()
       "If this tag is set the members of anonymous namespaces will be extracted and appear "
       "as a namespace called 'anonymous_namespace{file}'. The value for 'file' will be "
       "replaced with the base name of the file which contains the anonymous namespace. "
-      "By default anonymous namespace are hidden. "
+      "By default anonymous namespaces are hidden. "
       "<br><br>"
       "The default value is: NO");
 
@@ -839,7 +844,7 @@ void MainWindow::configFullHelp()
       "The default value is: NO");
 
    s_fullHelp.insert("HIDE_FRIEND_COMPOUNDS",
-      "If this tag is set DoxyPress will hide all friend (class|struct|union) declarations. "
+      "If this tag is set DoxyPress will hide all friend class, struct, or union declarations. "
       "If set to NO these declarations will be included in the documentation. "
       "<br><br>"
       "The default value is: NO");
@@ -900,12 +905,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES");
 
-   s_fullHelp.insert("FORCE_LOCAL_INCLUDES",
-      "If this tag is set DoxyPress will list include files with double quotes "
-      "instead of less than and greater than symbols. "
-      "<br><br>"
-      "The default value is: NO");
-
    s_fullHelp.insert("INLINE_INFO",
       "If this tag is set then '[inline]' is displayed for inline members. "
       "<br><br>"
@@ -938,7 +937,7 @@ void MainWindow::configFullHelp()
       "The default value is: NO");
 
    s_fullHelp.insert("SORT_GROUP_NAMES",
-      "If this tag is set DoxyPress will sort the groups alphabetical, as defined by the \\defgroup command. "
+      "If this tag is set DoxyPress will sort the groups alphabetically, as defined by the \\defgroup command. "
       "If set to NO, groups will appear in the order they are defined in the source code. Groups will appear "
       "on a page called modules. "
       "<br><br>"
@@ -956,16 +955,9 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO");
 
-   s_fullHelp.insert("INTERNAL_DOCS",
-      "This tag determines if documentation which is typed after an \\internal command "
-      "is included in the documentation. Set to YES to include the internal documentation, "
-      "set to NO, to exclude the documentation. "
-      "<br><br>"
-      "The default value is: NO");
-
    s_fullHelp.insert("CASE_SENSITIVE_FNAME",
       "If this tag is set to NO all file names will be generated in lower case. "
-      "If set to YES, case is preserved "
+      "If set to YES, case is preserved. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1024,8 +1016,9 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To create a new layout file run 'DoxyPress --l [layout file name]' "
       "<br><br>"
-      "Note: If run from a directory containing a file called DoxyPress_Layout.xml, "
+      "Note: If DoxyPress is run from a directory containing a file called DoxyPress_Layout.xml, "
       "DoxyPress will parse it automatically even if this tag is left empty.");
+
 
    // bb
    s_fullHelp.insert("BB_STYLE",
@@ -1091,7 +1084,7 @@ void MainWindow::configFullHelp()
       "getter and setter methods for a property. If this option is set "
       "DoxyPress will replace the get and set methods by a property in the documentation. "
       "This only works if the methods are getting or setting a simple type. "
-      "If you want to show the methods anyway, you should set this option to NO. "
+      "If you want to show the methods anyway, set this option to NO. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1154,7 +1147,7 @@ void MainWindow::configFullHelp()
       "The default value is: UTF-8");
 
    s_fullHelp.insert("INPUT_PATTERNS",
-      "If the 'INPUT SOURCE' tag contains directories then this tag is be used to "
+      "If the 'INPUT SOURCE' tag contains directories then this tag is used to "
       "specify wildcard patterns. Files matching these patterns will be processed by DoxyPress as source. "
       "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag.  "
       "<br><br>"
@@ -1195,7 +1188,7 @@ void MainWindow::configFullHelp()
       "Refer to the DoxyPress manual regarding the \\include command.");
 
    s_fullHelp.insert("EXAMPLE_PATTERNS",
-      "If the value of the 'EXAMPLE FILES OR DIRECTORIES' tag contains directories, this tag is used "
+      "If the value of the 'EXAMPLE FILES OR DIRECTORIES' tag contains directories then this tag is used "
       "to specify one or more wildcard patterns like *.cpp or *.h to filter out the "
       "source files in the example directories. "
       "<br><br>"
@@ -1376,7 +1369,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "If this tag is empty the default will be: " + m_suffixExclude);
 
-
    s_fullHelp.insert("CLANG_PARSING",
       "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
       "Objective-C source code. Using clang is currently much slower. This feature is under development. "
@@ -1398,7 +1390,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("SEARCH_INCLUDES",
       "If this tag is set then files specified in the 'INCLUDE PATH' tag will be "
-      "searched if an #include directive is found in the source code. "
+      "searched if the #include directive is found in the source code. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
@@ -1434,7 +1426,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
 
    s_fullHelp.insert("SKIP_FUNCTION_MACROS",
-      "If this tag is set DoxyPress will preprocessor and "
+      "If this tag is set DoxyPress will preprocess and "
       "remove all references to function-like macros which are alone on a line, are in "
       "uppercase, and do not end with a semicolon. Such function macros "
       "are typically used for boiler-plate code and will confuse the parser if not removed. "
@@ -1637,27 +1629,21 @@ void MainWindow::configFullHelp()
       "The default value is: YES "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
-
-
-   // when ready in DoxyPress, add the following (01/2016 )
-   // If this tag is enabled use the \\hidecallgraph command to prevent a call graph from being generated.
-
+  
    s_fullHelp.insert("DOT_CALL",
       "If this tag is set a call dependency graph for every global function or class method "
       "will be generated. "
-      "Caller graphs can be enabled for selected functions by using the \\callergraph command. "
+      "Call graphs can be enabled for selected functions by using the \\callgraph command. "
+      "If this tag is enabled use the \\hidecallgraph command to prevent a call graph from being generated. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
-
-   // when ready in DoxyPress, add the following (01/2016 )
-   // If this tag is enabled use the \\hidecallergraph command to prevent a call graph from being generated.
-
    s_fullHelp.insert("DOT_CALLED_BY",
       "If this tag is set a caller dependency graph will be generated for every global function or class method. "
       "Caller graphs can be enabled for selected functions by using the \\callergraph command. "
+      "If this tag is enabled use the \\hidecallergraph command to prevent a caller graph from being generated. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
@@ -1707,7 +1693,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("DOT_FILE_DIRS",
       "This tag is used to specify one or more directories containing "
       "dot files which are included in the documentation. "
-      "Refer to the DoxyPress manual regarding the \\dotfile  command."
+      "Refer to the DoxyPress manual regarding the \\dotfile command."
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
@@ -2099,7 +2085,7 @@ void MainWindow::configFullHelp()
       "script for searching and an index file used by the script. When 'EXTERNAL SEARCH' is enabled the indexing "
       "and searching needs to be provided by external tools. "
       "<br><br>"
-      "Refer to the DoxyPress manual regarding 'External Indexing and Searching'. "
+      "Refer to the DoxyPress manual regarding 'External Searching'. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
@@ -2115,11 +2101,11 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "This tag requires the tag 'HTML SEARCH' is set to YES");
 
-   s_fullHelp.insert("SEARCH_EXTERNAL_URL",
+   s_fullHelp.insert("SEARCH_ENGINE_URL",
       "This tag references a search engine hosted by a web server "
       "which will return the search results when 'EXTERNAL SEARCH' is enabled. "     
       "<br><br>"
-      "Refer to the DoxyPress manual regarding 'External Indexing and Searching'. "
+      "Refer to the DoxyPress manual regarding 'External Searching'. "
       "<br><br>"
       "This tag requires the tag 'HTML SEARCH' is set to YES");
 
@@ -2151,7 +2137,7 @@ void MainWindow::configFullHelp()
       "Use this tag to change the font size of LaTeX formulas included as images in "
       "the HTML documentation. If the font size is changed, ensure there are no "
       "existing form_*.png images in the HTML output directory. This will force DoxyPress "
-      "to regenerated the images the next time it is run."
+      "to regenerate the images the next time it is run."
       "<br><br>"
       "Minimum: 8, Maximum: 50, Default: 10 "
       "<br><br>"
@@ -2391,7 +2377,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("MAN_OUTPUT",
       "This tag is used to specify the location for the man page output. If a relative "
       "path is entered the value of 'OUTPUT DIRECTORY' will  be prepended. "
-      "A directory man3 will be created inside the directory specified by this tag. "
+      "A directory named man3 will be created inside the directory specified by this tag. "
       "<br><br>"
       "The default directory is: man "
       "<br><br>"
@@ -2408,8 +2394,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("MAN_SUBDIR",
       "This tag determines the name of the directory created under the value for "
-      "the 'MAN PAGE OUTPUT DIRECTORY' tag. "
-      "The default directory will be man/3  "
+      "the 'MAN PAGE OUTPUT DIRECTORY' tag. The default directory will be man3. "
       "<br><br>"
       "This tag requires the tag 'GENERATE MAN' is set to YES");
 
@@ -2468,42 +2453,42 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("QCH_FILE",
       "This tag is used to specify the .qch output file name of the QtHelp Generator. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_NAMESPACE",
       "This tag specifies the namespace to use when generating QtHelp output. "
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_VIRTUAL_FOLDER",
       "This tag specifies the virtual folder to use when generating QtHelp output. "
       "<br><br>"
       "The default value is: doc "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_CUST_FILTER_NAME",
       "This tag specifies the name of a custom filter for the QtHelp output. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_CUST_ATTRIB",
       "This tag specifies the list of attributes for the custom filter used by QtHelp. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_SECT_ATTRIB",
       "This tag specifies the list of filter section attributes used by QtHelp. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QTHELP_GEN_PATH",
       "This tag is used to specify the path for the QtHelp Generator. If this tag is empty "
       "DoxyPress will search for the qhelpgenerator program in your path. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE Qt HELP' is set to YES");
+      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
 
    // rtf
    s_fullHelp.insert("GEN_RTF",
@@ -2513,7 +2498,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("RTF_OUTPUT",
       "This tag is used to specify the location for the RTF output. If a relative "
-      "path is entered the value of 'OUTPUT DIRECTORY' will  be prepended. "
+      "path is entered the value of 'OUTPUT DIRECTORY' will be prepended. "
       "<br><br>"
       "The default directory is: rtf "
       "<br><br>"
@@ -2529,7 +2514,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("RTF_HYPERLINKS",
       "If this tag is set the RTF generated will contain hyperlinks."
       "The output may be more suitable for browsing rather than printing. "
-      "WordPad and other RTF readers many not not support hyperlinks. "
+      "WordPad and other RTF readers may not support hyperlinks. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
