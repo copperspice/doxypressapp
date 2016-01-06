@@ -597,15 +597,14 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->group_nested_compounds_CB->setChecked(    object.value("group-nested-compounds").toBool());
 
       // tab 2 -output
-      m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
       m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
-      m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());
-      m_ui->layout_file->setText(                     object.value("layout-file").toString());  
-
-      // tab 2 -bb
+      m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));     
+      m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());      
+      m_ui->main_page->setText(                       "");
+      m_ui->layout_file->setText(                     object.value("layout-file").toString());       
+      m_ui->ns_omit->setPlainText(                    "");
+      m_ui->ns_alias->setPlainText(                   "");
       m_ui->bb_style_CB->setChecked(                  false);
-      m_ui->bb_main_page->setText(                    "");
-      m_ui->bb_ns_alias->setPlainText(                "");
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl-subst"));
@@ -995,15 +994,14 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->group_nested_compounds_CB->setChecked(    configObj.value("group-nested-compounds").toBool());
 
       // tab 2 -output
-      m_ui->enabled_sections->setPlainText(           getDataList(configObj, "enabled-sections"));
       m_ui->max_init_lines_SB->setValue(              configObj.value("max-init-lines").toInt());
+      m_ui->enabled_sections->setPlainText(           getDataList(configObj, "enabled-sections"));
       m_ui->file_version_filter->setText(             configObj.value("file-version-filter").toString());
+      m_ui->main_page->setText(                       configObj.value("main-page").toString());
       m_ui->layout_file->setText(                     configObj.value("layout-file").toString());
-
-      // tab 2 - bb
+      m_ui->ns_omit->setPlainText(                    getDataList(configObj, "ns-omit"));
+      m_ui->ns_alias->setPlainText(                   getDataList(configObj, "ns-alias"));
       m_ui->bb_style_CB->setChecked(                  bbObj.value("bb-style").toBool());
-      m_ui->bb_main_page->setText(                    bbObj.value("bb-main-page").toString());
-      m_ui->bb_ns_alias->setPlainText(                getDataList(bbObj, "bb-ns-alias"));
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(configObj, "tcl-subst"));
@@ -1398,15 +1396,14 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("group-nested-compounds",   m_ui->group_nested_compounds_CB->isChecked());
 
    // tab 2 -output
-   configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));
    configObj.insert("max-init-lines",           m_ui->max_init_lines_SB->value());
+   configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));   
    configObj.insert("file-version-filter",      m_ui->file_version_filter->text());
-   configObj.insert("layout-file",              m_ui->layout_file->text());
-
-   // tab 2 - bb
+   configObj.insert("main-page",                m_ui->main_page->text());
+   configObj.insert("layout-file",              m_ui->layout_file->text());         
+   configObj.insert("ns-omit",                  putDataList(m_ui->ns_omit->toPlainText()));
+   configObj.insert("ns-alias",                 putDataList(m_ui->ns_alias->toPlainText()));
    bbObj.insert("bb-style",                     m_ui->bb_style_CB->isChecked());
-   bbObj.insert("bb-main-page",                 m_ui->bb_main_page->text());
-   bbObj.insert("bb-ns-alias",                  putDataList(m_ui->bb_ns_alias->toPlainText()));
 
    // tab 2 -programming
    configObj.insert("tcl-subst",                putDataList(m_ui->tcl_subst->toPlainText()));

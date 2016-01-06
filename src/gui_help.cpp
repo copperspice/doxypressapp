@@ -985,18 +985,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES"); 
 
+   // BROOM - review this page in doxy docs
 
    // build output
-   s_fullHelp.insert("ENABLED_SECTIONS",
-      "This tag is used to enable conditional documentation by marking a section with one of the following: "
-      "<br><br>"
-      "\\if <section_label> ... \\endif "
-      "<br><br>"
-      "\\cond <section_label> ... \\endcond");
-
    s_fullHelp.insert("MAX_INIT_LINES",
       "This tag specifies the maximum number of lines which are displayed in the documentation for the "
-      "definition of variable or a macro. If the variable or macro consists of more lines than specified in "
+      "definition of a variable or a macro. If the variable or macro consists of more lines than specified in "
       "this tag, the entire initializer will be hidden. "
       "This tag can be overridden on a per variable or macro basis by using the \\showinitializer or "
       "\\hideinitializer command. "
@@ -1005,38 +999,44 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 10000, Default: 30");
 
-  s_fullHelp.insert("FILE_VERSION_FILTER",
+   s_fullHelp.insert("ENABLED_SECTIONS",
+      "This tag is used to enable conditional documentation by marking a section with one of the following: "
+      "<br><br>"
+      "\\if <section_label> ... \\endif "
+      "<br><br>"
+      "\\cond <section_label> ... \\endcond");
+
+   s_fullHelp.insert("FILE_VERSION_FILTER",
       "This tag is used to specify a program which DoxyPress should invoke to obtain the current version "
       "for each file. DoxyPress will invoke this program and pass a file name as the first command line parameter. "
       "The value written to standard output is used as the file version.");  
 
+   s_fullHelp.insert("MAIN_PAGE",
+      "Used to specify an input file for the index page. This file will not be included in the navigation treeview "
+      "file listing if FILES is enabled.");
+
    s_fullHelp.insert("LAYOUT_FILE",
-      "This tag is used to specify a layout file. The layout file controls the global structure of "
-      "the generated output files. "
+      "This tag is used to specify a layout file which controls the global structure of the "
+      "generated output. "
       "<br><br>"
-      "To create a new layout file run 'DoxyPress --l [layout file name]' "
+      "If DoxyPress is run from a directory containing a file called DoxyPress_Layout.xml, "
+      "DoxyPress will parse it automatically even if this tag is left empty."
       "<br><br>"
-      "Note: If DoxyPress is run from a directory containing a file called DoxyPress_Layout.xml, "
-      "DoxyPress will parse it automatically even if this tag is left empty.");
+      "To create a new layout file run 'DoxyPress --l [layout file name]' ");
 
+   s_fullHelp.insert("NS_OMIT",
+      "This tag is used to specify a list of namespaces which should be omitted from the the documentation. ");
 
-   // bb
-   s_fullHelp.insert("BB_STYLE",
-      "This tag is used to enable the special comment style of documenting source code. Commennts in source must be "
-      "below the source code. (Experimental)");
-
-   s_fullHelp.insert("BB_MAIN_PAGE",
-      "This tag is used to specify an input file name which should be used for the index page.");
-    
-   s_fullHelp.insert("BB_SKIP_NS",
-      "This tag is used to specify a list of namespaces which should be treated as if they do not exist");
-
-   s_fullHelp.insert("BB_NS_ALIAS",
+   s_fullHelp.insert("NS_ALIAS",
       "This tag is used to specify a list of namespaces which should be renamed in the documentation. "
       "The format for this tag is: namespace=alias"
       "<br><br>"
       "As an example boost::thread=bt will replace the boost::thread everywhere it occurs in your documentation "
       "with the value of 'bt'");
+
+   s_fullHelp.insert("BB_STYLE",
+      "This tag is used to enable the special comment style of documenting source code. Commennts in source must be "
+      "below the source code. (Experimental)");
 
 
    // language

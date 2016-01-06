@@ -123,7 +123,9 @@ void MainWindow::runDoxyPress()
 }
 
 void MainWindow::readStdout()      
-{
+{   
+   static int count = 0;
+
    if (m_running) {
       QByteArray tmp = m_runProcess->readAllStandardOutput();
 
@@ -131,6 +133,13 @@ void MainWindow::readStdout()
 
       if (! text.isEmpty()) {
          runText_Append(text);
+
+         count += text.count('\n');
+
+         if (count > 8) {
+            m_ui->runText->ensureCursorVisible();
+            count = 0;
+         }
       }
    }
 }

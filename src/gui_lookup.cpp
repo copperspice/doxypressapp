@@ -267,6 +267,13 @@ void MainWindow::file_version_filter_PB()
    m_ui->file_version_filter->setText(file);
 }
 
+void MainWindow::main_page_PB()
+{
+   QString file = m_ui->main_page->text();
+   file = getSingleFile(tr("Select file"), file);
+   m_ui->main_page->setText(file);
+}
+
 void MainWindow::layout_file_PB()
 {
    QString file = m_ui->layout_file->text();
@@ -274,44 +281,12 @@ void MainWindow::layout_file_PB()
    m_ui->layout_file->setText(file);
 }
 
-void MainWindow::cite_bib_files_PB()
+void MainWindow::ns_omit_PB()
 {
    QRegExp regExp("\\s*,\\s*");
    struct LookUpInfo data;
 
-   QString temp = m_ui->cite_bib_files->toPlainText();
-
-   data.title      = "Cite Bib Files";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
-
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
-   int result = dw->exec();
-
-   if (result == QDialog::Accepted) {
-      QStringList dataList = dw->getData();
-
-      QString temp = dataList.join(", ");
-      m_ui->cite_bib_files->setPlainText(temp);
-   }
-}
-
-// tab 2- bb
-void MainWindow::bb_main_page_PB()
-{
-   QString file = m_ui->bb_main_page->text();
-   file = getSingleFile(tr("Select file"), file);
-   m_ui->bb_main_page->setText(file);
-}
-
-void MainWindow::bb_skip_ns_PB()
-{
-   QRegExp regExp("\\s*,\\s*");
-   struct LookUpInfo data;
-
-   QString temp = m_ui->bb_ns_alias->toPlainText();
+   QString temp = m_ui->ns_omit->toPlainText();
 
    data.title      = "Omit Namespaces";
    data.dataList   = temp.split(regExp);
@@ -326,7 +301,31 @@ void MainWindow::bb_skip_ns_PB()
       QStringList dataList = dw->getData();
 
       QString temp = dataList.join(", ");
-      m_ui->bb_ns_alias->setPlainText(temp);
+      m_ui->ns_omit->setPlainText(temp);
+   }
+}
+
+void MainWindow::ns_alias_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->ns_alias->toPlainText();
+
+   data.title      = "Namespace Alias";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->ns_alias->setPlainText(temp);
    }
 }
 
@@ -1305,6 +1304,30 @@ void MainWindow::latex_extra_files_PB()
 
       QString temp = dataList.join(", ");
       m_ui->latex_extra_files->setPlainText(temp);
+   }
+}
+
+void MainWindow::cite_bib_files_PB()
+{
+   QRegExp regExp("\\s*,\\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->cite_bib_files->toPlainText();
+
+   data.title      = "Cite Bib Files";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = true;
+   data.isFolderPB = false;
+   data.relativeTo = PROJECT_DIR;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->cite_bib_files->setPlainText(temp);
    }
 }
 

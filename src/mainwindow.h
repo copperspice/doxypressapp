@@ -290,7 +290,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
       CS_SLOT_2(outputPage)
 
-      // tab 1 - valid
+      // ** valids
+      // tab 1
       CS_SLOT_1(Private, void valid_output_dir())
       CS_SLOT_2(valid_output_dir)
 
@@ -329,7 +330,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void valid_gen_xml_1(bool checked))
       CS_SLOT_2(valid_gen_xml_1)
 
-      // tab 2 valids
+      // tab 2
       CS_SLOT_1(Private, void valid_full_path_names())
       CS_SLOT_2(valid_full_path_names)
 
@@ -382,6 +383,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void valid_html_search())
       CS_SLOT_2(valid_html_search)
 
+
       // ** lookup
       // tab 1
       CS_SLOT_1(Private, void getLogo(const QString route))
@@ -393,7 +395,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void tune_colors_PB())
       CS_SLOT_2(tune_colors_PB)
 
-      // tab 2 - general
+      // tab 2 - project config
       CS_SLOT_1(Private, void abbreviate_brief_PB())
       CS_SLOT_2(abbreviate_brief_PB)
 
@@ -406,20 +408,7 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void aliases_PB())
       CS_SLOT_2(aliases_PB)
 
-      CS_SLOT_1(Private, void tcl_subst_PB())
-      CS_SLOT_2(tcl_subst_PB)
-
-      CS_SLOT_1(Private, void language_mapping_PB())
-      CS_SLOT_2(language_mapping_PB)
-
-      // tab 2- bb
-      CS_SLOT_1(Private, void bb_main_page_PB())
-      CS_SLOT_2(bb_main_page_PB)
-
-      CS_SLOT_1(Private, void bb_skip_ns_PB())
-      CS_SLOT_2(bb_skip_ns_PB)
-
-      // tab 2- build
+      // tab 2- build options
       CS_SLOT_1(Private, void enabled_sections_PB())
       CS_SLOT_2(enabled_sections_PB)
 
@@ -429,9 +418,21 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void layout_file_PB())
       CS_SLOT_2(layout_file_PB)
 
-      CS_SLOT_1(Private, void cite_bib_files_PB())
-      CS_SLOT_2(cite_bib_files_PB)
+      CS_SLOT_1(Private, void main_page_PB())
+      CS_SLOT_2(main_page_PB)
 
+      CS_SLOT_1(Private, void ns_omit_PB())
+      CS_SLOT_2(ns_omit_PB)      
+
+      CS_SLOT_1(Private, void ns_alias_PB())
+      CS_SLOT_2(ns_alias_PB)
+
+      // tab 2 - programming language
+      CS_SLOT_1(Private, void tcl_subst_PB())
+      CS_SLOT_2(tcl_subst_PB)
+
+      CS_SLOT_1(Private, void language_mapping_PB())
+      CS_SLOT_2(language_mapping_PB)
 
       // tab 2- input
       CS_SLOT_1(Private, void input_source_PB())
@@ -467,11 +468,9 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void filter_source_patterns_PB())
       CS_SLOT_2(filter_source_patterns_PB)
 
-
       // tab 2- index
       CS_SLOT_1(Private, void ignore_prefix_PB())
       CS_SLOT_2(ignore_prefix_PB)
-
 
       // tab 2- messages
       CS_SLOT_1(Private, void warn_logfile_PB())
@@ -504,7 +503,6 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void expand_as_defined_PB())
       CS_SLOT_2(expand_as_defined_PB)
-
 
       // tab 2- external
       CS_SLOT_1(Private, void tag_files_PB())
@@ -618,6 +616,9 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void latex_extra_files_PB())
       CS_SLOT_2(latex_extra_files_PB)
+
+      CS_SLOT_1(Private, void cite_bib_files_PB())
+      CS_SLOT_2(cite_bib_files_PB)
 
       // tab 3 look up (rtf)
       CS_SLOT_1(Private, void rtf_output_PB())

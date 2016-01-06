@@ -242,13 +242,11 @@ void MainWindow::createConnections()
 
    // tab 2- build
    connect(m_ui->enabled_sections_PB,       &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
-   connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
+   connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);   
+   connect(m_ui->main_page_PB,              &QPushButton::clicked, this, &MainWindow::main_page_PB);
    connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);
-   connect(m_ui->cite_bib_files_PB,         &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);   
-
-   // tab 2- bb
-   connect(m_ui->bb_main_page_PB,           &QPushButton::clicked, this, &MainWindow::bb_main_page_PB);
-   connect(m_ui->bb_skip_ns_PB,             &QPushButton::clicked, this, &MainWindow::bb_skip_ns_PB);
+   connect(m_ui->ns_omit_PB,                &QPushButton::clicked, this, &MainWindow::ns_omit_PB);
+   connect(m_ui->ns_alias_PB,               &QPushButton::clicked, this, &MainWindow::ns_alias_PB);
 
    // tab 2- input
    connect(m_ui->input_source_PB,           &QPushButton::clicked, this, &MainWindow::input_source_PB);
@@ -257,12 +255,12 @@ void MainWindow::createConnections()
    connect(m_ui->exclude_patterns_PB,       &QPushButton::clicked, this, &MainWindow::exclude_patterns_PB);
    connect(m_ui->exclude_symbols_PB,        &QPushButton::clicked, this, &MainWindow::exclude_symbols_PB);
 
-   connect(m_ui->example_source_PB,         SIGNAL(clicked()), this, SLOT(example_source_PB()));
-   connect(m_ui->example_patterns_PB,       SIGNAL(clicked()), this, SLOT(example_patterns_PB()));
-   connect(m_ui->image_path_PB,             SIGNAL(clicked()), this, SLOT(image_path_PB()));
-   connect(m_ui->filter_program_PB,         SIGNAL(clicked()), this, SLOT(filter_program_PB()));
-   connect(m_ui->filter_patterns_PB,        SIGNAL(clicked()), this, SLOT(filter_patterns_PB()));
-   connect(m_ui->filter_source_patterns_PB, SIGNAL(clicked()), this, SLOT(filter_source_patterns_PB()));
+   connect(m_ui->example_source_PB,         &QPushButton::clicked, this, &MainWindow::example_source_PB);
+   connect(m_ui->example_patterns_PB,       &QPushButton::clicked, this, &MainWindow::example_patterns_PB);
+   connect(m_ui->image_path_PB,             &QPushButton::clicked, this, &MainWindow::image_path_PB);
+   connect(m_ui->filter_program_PB,         &QPushButton::clicked, this, &MainWindow::filter_program_PB);
+   connect(m_ui->filter_patterns_PB,        &QPushButton::clicked, this, &MainWindow::filter_patterns_PB);
+   connect(m_ui->filter_source_patterns_PB, &QPushButton::clicked, this, &MainWindow::filter_source_patterns_PB);
 
    // tab 2- index
    connect(m_ui->ignore_prefix_PB,          &QPushButton::clicked, this, &MainWindow::ignore_prefix_PB);
@@ -318,18 +316,19 @@ void MainWindow::createConnections()
    connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
 
    // tab 3 look up (docbook)
-   connect(m_ui->docbook_output_PB,         SIGNAL(clicked()),   this, SLOT(docbook_output_PB()));
+   connect(m_ui->docbook_output_PB,         &QPushButton::clicked, this, &MainWindow::docbook_output_PB);
 
    // tab 3 look up (latex)
-   connect(m_ui->latex_output_PB,           SIGNAL(clicked()), this, SLOT(latex_output_PB()));
-   connect(m_ui->latex_cmd_name_PB,         SIGNAL(clicked()), this, SLOT(latex_cmd_name_PB()));
-   connect(m_ui->make_index_cmd_name_PB,    SIGNAL(clicked()), this, SLOT(make_index_cmd_name_PB()));
+   connect(m_ui->latex_output_PB,           &QPushButton::clicked, this, &MainWindow::latex_output_PB);
+   connect(m_ui->latex_cmd_name_PB,         &QPushButton::clicked, this, &MainWindow::latex_cmd_name_PB);
+   connect(m_ui->make_index_cmd_name_PB,    &QPushButton::clicked, this, &MainWindow::make_index_cmd_name_PB);
 
    connect(m_ui->latex_extra_packages_PB,   SIGNAL(clicked()), this, SLOT(latex_extra_packages_PB()));
    connect(m_ui->latex_header_PB,           SIGNAL(clicked()), this, SLOT(latex_header_PB()));
    connect(m_ui->latex_footer_PB,           SIGNAL(clicked()), this, SLOT(latex_footer_PB()));
    connect(m_ui->latex_stylesheets_PB,      SIGNAL(clicked()), this, SLOT(latex_stylesheets_PB()));
    connect(m_ui->latex_extra_files_PB,      SIGNAL(clicked()), this, SLOT(latex_extra_files_PB()));
+   connect(m_ui->cite_bib_files_PB,         &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
 
     // tab 3 man
    connect(m_ui->man_output_PB,             SIGNAL(clicked()),   this, SLOT(man_output_PB()));
@@ -349,13 +348,13 @@ void MainWindow::createConnections()
    connect(m_ui->xml_output_PB,             SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
 
    // tab 4
-   connect(m_runProcess,       SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
-   connect(m_runProcess,       SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+   connect(m_runProcess,         SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
+   connect(m_runProcess,         SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
 
-   connect(m_ui->run_PB,       SIGNAL(clicked()), this,  SLOT(runDoxyPress()));
-   connect(m_ui->display_PB,   SIGNAL(clicked()), this,  SLOT(showHtmlOutput()));
-   connect(m_ui->clear_PB,     SIGNAL(clicked()), this,  SLOT(clearOutput()));
-   connect(m_ui->save_log_PB,  SIGNAL(clicked()), this,  SLOT(saveLog()));
+   connect(m_ui->run_PB,         &QPushButton::clicked, this, &MainWindow::runDoxyPress);
+   connect(m_ui->display_PB,     &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
+   connect(m_ui->clear_PB,       &QPushButton::clicked, this, &MainWindow::clearOutput);
+   connect(m_ui->save_log_PB,    &QPushButton::clicked, this, &MainWindow::saveLog);
 
 // connect(m_timer, SIGNAL(timeout()), this,  SLOT(readStdout()));
 }
@@ -426,11 +425,8 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else  if (label == tr("Build Configuration")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config);
 
-      } else if (label == tr("Build Output")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
-
-      } else if (label == tr("Special Styles")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_BB_Style);
+      } else if (label == tr("Build Options")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);    
 
       } else if (label == tr("Programming Language")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);
