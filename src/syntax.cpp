@@ -27,19 +27,15 @@ Syntax::~Syntax()
 }
 
 void Syntax::processSyntax()
-{
-   //
+{   
    QStringList keyWords;
    keyWords.append("\\bProcessing\\b");
    keyWords.append("\\bReading\\b");
 
-   //
    QStringList errorWords;
    errorWords.append("Error:");
    errorWords.append("Warning:");
-   errorWords.append("\\bBroomCS\\b");
 
-   //
    HighlightingRule rule;
 
    for (auto pattern : keyWords) {

@@ -600,7 +600,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
       m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));     
       m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());      
-      m_ui->main_page->setText(                       "");
+      m_ui->main_page_name->setText(                  "");
+      m_ui->main_page_omit->setChecked(               false);
       m_ui->layout_file->setText(                     object.value("layout-file").toString());       
       m_ui->ns_omit->setPlainText(                    "");
       m_ui->ns_alias->setPlainText(                   "");
@@ -993,11 +994,12 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->duplicate_docs_CB->setChecked(            configObj.value("duplicate-docs").toBool());
       m_ui->group_nested_compounds_CB->setChecked(    configObj.value("group-nested-compounds").toBool());
 
-      // tab 2 -output
+      // tab 2 -build options
       m_ui->max_init_lines_SB->setValue(              configObj.value("max-init-lines").toInt());
       m_ui->enabled_sections->setPlainText(           getDataList(configObj, "enabled-sections"));
       m_ui->file_version_filter->setText(             configObj.value("file-version-filter").toString());
-      m_ui->main_page->setText(                       configObj.value("main-page").toString());
+      m_ui->main_page_name->setText(                  configObj.value("main-page-name").toString());
+      m_ui->main_page_omit->setChecked(               configObj.value("main-page-omit").toBool());
       m_ui->layout_file->setText(                     configObj.value("layout-file").toString());
       m_ui->ns_omit->setPlainText(                    getDataList(configObj, "ns-omit"));
       m_ui->ns_alias->setPlainText(                   getDataList(configObj, "ns-alias"));
@@ -1395,11 +1397,12 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("duplicate-docs",           m_ui->duplicate_docs_CB->isChecked());
    configObj.insert("group-nested-compounds",   m_ui->group_nested_compounds_CB->isChecked());
 
-   // tab 2 -output
+   // tab 2 -build options
    configObj.insert("max-init-lines",           m_ui->max_init_lines_SB->value());
    configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));   
    configObj.insert("file-version-filter",      m_ui->file_version_filter->text());
-   configObj.insert("main-page",                m_ui->main_page->text());
+   configObj.insert("main-page-name",           m_ui->main_page_name->text());
+   configObj.insert("main-page-omit",           m_ui->main_page_omit->isChecked());
    configObj.insert("layout-file",              m_ui->layout_file->text());         
    configObj.insert("ns-omit",                  putDataList(m_ui->ns_omit->toPlainText()));
    configObj.insert("ns-alias",                 putDataList(m_ui->ns_alias->toPlainText()));

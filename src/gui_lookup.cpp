@@ -267,11 +267,11 @@ void MainWindow::file_version_filter_PB()
    m_ui->file_version_filter->setText(file);
 }
 
-void MainWindow::main_page_PB()
+void MainWindow::main_page_name_PB()
 {
-   QString file = m_ui->main_page->text();
+   QString file = m_ui->main_page_name->text();
    file = getSingleFile(tr("Select file"), file);
-   m_ui->main_page->setText(file);
+   m_ui->main_page_name->setText(file);
 }
 
 void MainWindow::layout_file_PB()

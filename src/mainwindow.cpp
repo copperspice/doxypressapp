@@ -151,7 +151,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 01.01.2016</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 01.10.2016</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -243,7 +243,7 @@ void MainWindow::createConnections()
    // tab 2- build
    connect(m_ui->enabled_sections_PB,       &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
    connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);   
-   connect(m_ui->main_page_PB,              &QPushButton::clicked, this, &MainWindow::main_page_PB);
+   connect(m_ui->main_page_name_PB,         &QPushButton::clicked, this, &MainWindow::main_page_name_PB);
    connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);
    connect(m_ui->ns_omit_PB,                &QPushButton::clicked, this, &MainWindow::ns_omit_PB);
    connect(m_ui->ns_alias_PB,               &QPushButton::clicked, this, &MainWindow::ns_alias_PB);
@@ -276,10 +276,12 @@ void MainWindow::createConnections()
    connect(m_ui->clang_options_PB,          &QPushButton::clicked, this, &MainWindow::clang_options_PB);
 
    // tab 2- preprocessor
-   connect(m_ui->include_path_PB,           SIGNAL(clicked()), this, SLOT(include_path_PB()));
-   connect(m_ui->include_patterns_PB,       SIGNAL(clicked()), this, SLOT(include_file_patterns_PB()));
-   connect(m_ui->predefined_macros_PB,      SIGNAL(clicked()), this, SLOT(predefined_macros_PB()));
-   connect(m_ui->expand_as_defined_PB,      SIGNAL(clicked()), this, SLOT(expand_as_defined_PB()));
+   connect(m_ui->include_path_PB,           &QPushButton::clicked, this, &MainWindow::include_path_PB);
+   connect(m_ui->include_patterns_PB,       &QPushButton::clicked, this, &MainWindow::include_file_patterns_PB);
+   connect(m_ui->predefined_macros_PB,      &QPushButton::clicked, this, &MainWindow::predefined_macros_PB);
+   connect(m_ui->expand_as_defined_PB,      &QPushButton::clicked, this, &MainWindow::expand_as_defined_PB);
+
+// todo: finish clean up
 
    // tab 2- external
    connect(m_ui->tag_files_PB,              SIGNAL(clicked()), this, SLOT(tag_files_PB()));
@@ -312,8 +314,8 @@ void MainWindow::createConnections()
    connect(m_ui->search_mappings_PB,        SIGNAL(clicked()), this, SLOT(search_mappings_PB()));
 
    // tab 3 chm
-   connect(m_ui->chm_file_PB,               SIGNAL(clicked()), this, SLOT(chm_file_PB()));
-   connect(m_ui->hhc_location_PB,           SIGNAL(clicked()), this, SLOT(hhc_location_PB()));
+   connect(m_ui->chm_file_PB,               &QPushButton::clicked, this, &MainWindow::chm_file_PB);
+   connect(m_ui->hhc_location_PB,           &QPushButton::clicked, this, &MainWindow::hhc_location_PB);
 
    // tab 3 look up (docbook)
    connect(m_ui->docbook_output_PB,         &QPushButton::clicked, this, &MainWindow::docbook_output_PB);
@@ -323,29 +325,29 @@ void MainWindow::createConnections()
    connect(m_ui->latex_cmd_name_PB,         &QPushButton::clicked, this, &MainWindow::latex_cmd_name_PB);
    connect(m_ui->make_index_cmd_name_PB,    &QPushButton::clicked, this, &MainWindow::make_index_cmd_name_PB);
 
-   connect(m_ui->latex_extra_packages_PB,   SIGNAL(clicked()), this, SLOT(latex_extra_packages_PB()));
-   connect(m_ui->latex_header_PB,           SIGNAL(clicked()), this, SLOT(latex_header_PB()));
-   connect(m_ui->latex_footer_PB,           SIGNAL(clicked()), this, SLOT(latex_footer_PB()));
-   connect(m_ui->latex_stylesheets_PB,      SIGNAL(clicked()), this, SLOT(latex_stylesheets_PB()));
-   connect(m_ui->latex_extra_files_PB,      SIGNAL(clicked()), this, SLOT(latex_extra_files_PB()));
+   connect(m_ui->latex_extra_packages_PB,   &QPushButton::clicked, this, &MainWindow::latex_extra_packages_PB);
+   connect(m_ui->latex_header_PB,           &QPushButton::clicked, this, &MainWindow::latex_header_PB);
+   connect(m_ui->latex_footer_PB,           &QPushButton::clicked, this, &MainWindow::latex_footer_PB);
+   connect(m_ui->latex_stylesheets_PB,      &QPushButton::clicked, this, &MainWindow::latex_stylesheets_PB);
+   connect(m_ui->latex_extra_files_PB,      &QPushButton::clicked, this, &MainWindow::latex_extra_files_PB);
    connect(m_ui->cite_bib_files_PB,         &QPushButton::clicked, this, &MainWindow::cite_bib_files_PB);
 
-    // tab 3 man
-   connect(m_ui->man_output_PB,             SIGNAL(clicked()),   this, SLOT(man_output_PB()));
+   // tab 3 man
+   connect(m_ui->man_output_PB,             &QPushButton::clicked, this, &MainWindow::man_output_PB);
 
    // tab 3 qthelp
-   connect(m_ui->qch_file_PB,               SIGNAL(clicked()), this, SLOT(qch_file_PB()));
-   connect(m_ui->qhp_cust_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_cust_attrib_PB()));
-   connect(m_ui->qhp_sect_attrib_PB,        SIGNAL(clicked()), this, SLOT(qhp_sect_attrib_PB()));
-   connect(m_ui->qthelp_gen_path_PB,        SIGNAL(clicked()), this, SLOT(qthelp_gen_path_PB()));
+   connect(m_ui->qch_file_PB,               &QPushButton::clicked, this, &MainWindow::qch_file_PB);
+   connect(m_ui->qhp_cust_attrib_PB,        &QPushButton::clicked, this, &MainWindow::qhp_cust_attrib_PB);
+   connect(m_ui->qhp_sect_attrib_PB,        &QPushButton::clicked, this, &MainWindow::qhp_sect_attrib_PB);
+   connect(m_ui->qthelp_gen_path_PB,        &QPushButton::clicked, this, &MainWindow::qthelp_gen_path_PB);
 
    // tab 3 rtf
-   connect(m_ui->rtf_output_PB,             SIGNAL(clicked()),   this, SLOT(rtf_output_PB()));
-   connect(m_ui->rtf_stylesheet_PB,         SIGNAL(clicked()),   this, SLOT(rtf_stylesheet_PB()));
-   connect(m_ui->rtf_extension_PB,          SIGNAL(clicked()),   this, SLOT(rtf_extension_PB()));
+   connect(m_ui->rtf_output_PB,             &QPushButton::clicked, this, &MainWindow::rtf_output_PB);
+   connect(m_ui->rtf_stylesheet_PB,         &QPushButton::clicked, this, &MainWindow::rtf_stylesheet_PB);
+   connect(m_ui->rtf_extension_PB,          &QPushButton::clicked, this, &MainWindow::rtf_extension_PB);
 
    // tab 3 xml
-   connect(m_ui->xml_output_PB,             SIGNAL(clicked()),   this, SLOT(xml_output_PB()));
+   connect(m_ui->xml_output_PB,             &QPushButton::clicked, this, &MainWindow::xml_output_PB);
 
    // tab 4
    connect(m_runProcess,         SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
@@ -355,8 +357,8 @@ void MainWindow::createConnections()
    connect(m_ui->display_PB,     &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
    connect(m_ui->clear_PB,       &QPushButton::clicked, this, &MainWindow::clearOutput);
    connect(m_ui->save_log_PB,    &QPushButton::clicked, this, &MainWindow::saveLog);
-
 // connect(m_timer, SIGNAL(timeout()), this,  SLOT(readStdout()));
+
 }
 
 void MainWindow::createShortCuts()

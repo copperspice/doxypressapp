@@ -418,8 +418,8 @@ class MainWindow : public QMainWindow
       CS_SLOT_1(Private, void layout_file_PB())
       CS_SLOT_2(layout_file_PB)
 
-      CS_SLOT_1(Private, void main_page_PB())
-      CS_SLOT_2(main_page_PB)
+      CS_SLOT_1(Private, void main_page_name_PB())
+      CS_SLOT_2(main_page_name_PB)
 
       CS_SLOT_1(Private, void ns_omit_PB())
       CS_SLOT_2(ns_omit_PB)      

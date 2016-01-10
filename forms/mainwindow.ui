@@ -94,7 +94,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,1,0">
@@ -1215,22 +1215,6 @@
                </property>
               </widget>
              </item>
-             <item row="18" column="1">
-              <spacer name="verticalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>4</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
              <item row="7" column="0">
               <widget class="QLabel" name="label_t2_12">
                <property name="font">
@@ -1476,7 +1460,7 @@
                </property>
               </widget>
              </item>
-             <item row="17" column="2">
+             <item row="18" column="2">
               <widget class="QSpinBox" name="lookup_cache_size_SB"/>
              </item>
              <item row="13" column="0">
@@ -1538,7 +1522,7 @@
                </property>
               </widget>
              </item>
-             <item row="17" column="0">
+             <item row="18" column="0">
               <widget class="QLabel" name="label_t2_36">
                <property name="font">
                 <font>
@@ -1609,6 +1593,22 @@
              </item>
              <item row="0" column="2" colspan="2">
               <widget class="QComboBox" name="output_language_CM"/>
+             </item>
+             <item row="19" column="2">
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -2811,7 +2811,10 @@
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="6" column="1" rowspan="2" colspan="3">
+             <property name="horizontalSpacing">
+              <number>8</number>
+             </property>
+             <item row="7" column="1" rowspan="2" colspan="3">
               <widget class="QPlainTextEdit" name="ns_omit">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -2827,7 +2830,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1" colspan="3">
+             <item row="6" column="1" colspan="3">
               <widget class="QLineEdit" name="layout_file">
                <property name="font">
                 <font>
@@ -2920,7 +2923,7 @@
                 <string>Main Page Name:</string>
                </property>
                <property name="buddy">
-                <cstring>main_page</cstring>
+                <cstring>main_page_name</cstring>
                </property>
               </widget>
              </item>
@@ -2932,14 +2935,14 @@
                 </font>
                </property>
                <property name="text">
-                <string>Max initializer lines:</string>
+                <string>Max Initializer Lines:</string>
                </property>
                <property name="buddy">
                 <cstring>max_init_lines_SB</cstring>
                </property>
               </widget>
              </item>
-             <item row="8" column="1" rowspan="2" colspan="3">
+             <item row="9" column="1" rowspan="2" colspan="3">
               <widget class="QPlainTextEdit" name="ns_alias">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -2955,7 +2958,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="1">
+             <item row="11" column="1">
               <widget class="QCheckBox" name="bb_style_CB">
                <property name="font">
                 <font>
@@ -2967,7 +2970,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="11" column="0">
               <widget class="QLabel" name="label_147">
                <property name="font">
                 <font>
@@ -2975,14 +2978,14 @@
                 </font>
                </property>
                <property name="text">
-                 <string>Special Style Comments:&lt;br/&gt;(Experimental)</string>
+                <string>Special Style Comments:&lt;br/&gt;(Experimental)</string>
                </property>
                <property name="buddy">
                 <cstring>bb_style_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="5" column="4">
+             <item row="6" column="4">
               <widget class="QPushButton" name="layout_file_PB">
                <property name="maximumSize">
                 <size>
@@ -3003,7 +3006,7 @@
              <item row="0" column="1">
               <widget class="QSpinBox" name="max_init_lines_SB"/>
              </item>
-             <item row="8" column="0">
+             <item row="9" column="0">
               <widget class="QLabel" name="label_198">
                <property name="font">
                 <font>
@@ -3018,7 +3021,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="6" column="0">
               <widget class="QLabel" name="label_191">
                <property name="font">
                 <font>
@@ -3033,7 +3036,7 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="3">
+             <item row="12" column="3">
               <spacer name="verticalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -3046,7 +3049,7 @@
                </property>
               </spacer>
              </item>
-             <item row="6" column="0">
+             <item row="7" column="0">
               <widget class="QLabel" name="label_197">
                <property name="font">
                 <font>
@@ -3054,7 +3057,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Omit Namespaces:</string>
+                <string>Omit Namespaces:&lt;br/&gt;(Expeimental)</string>
                </property>
                <property name="buddy">
                 <cstring>ns_omit</cstring>
@@ -3062,7 +3065,7 @@
               </widget>
              </item>
              <item row="4" column="1" colspan="3">
-              <widget class="QLineEdit" name="main_page">
+              <widget class="QLineEdit" name="main_page_name">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -3071,7 +3074,7 @@
               </widget>
              </item>
              <item row="4" column="4">
-              <widget class="QPushButton" name="main_page_PB">
+              <widget class="QPushButton" name="main_page_name_PB">
                <property name="maximumSize">
                 <size>
                  <width>28</width>
@@ -3088,7 +3091,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="4">
+             <item row="7" column="4">
               <widget class="QPushButton" name="ns_omit_PB">
                <property name="maximumSize">
                 <size>
@@ -3121,7 +3124,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="4">
+             <item row="9" column="4">
               <widget class="QPushButton" name="ns_alias_PB">
                <property name="maximumSize">
                 <size>
@@ -3145,6 +3148,28 @@
                 <font>
                  <pointsize>10</pointsize>
                 </font>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="main_page_omit">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_28">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Omit Main Page:</string>
+               </property>
+               <property name="buddy">
+                <cstring>main_page_omit</cstring>
                </property>
               </widget>
              </item>
@@ -4749,7 +4774,7 @@
                 <string>Extensions for source:</string>
                </property>
                <property name="buddy">
-                <cstring>clang_flags</cstring>
+                <cstring>suffix_source_navtree</cstring>
                </property>
               </widget>
              </item>
@@ -4780,7 +4805,7 @@
                 <string>Extensions for headers:</string>
                </property>
                <property name="buddy">
-                <cstring>clang_flags</cstring>
+                <cstring>suffix_header_navtree</cstring>
                </property>
               </widget>
              </item>
@@ -4812,7 +4837,7 @@
 (Files in navigation treeview)</string>
                </property>
                <property name="buddy">
-                <cstring>clang_flags</cstring>
+                <cstring>suffix_exclude_navtree</cstring>
                </property>
               </widget>
              </item>
@@ -10605,8 +10630,9 @@
   <tabstop>enabled_sections_PB</tabstop>
   <tabstop>file_version_filter</tabstop>
   <tabstop>file_version_filter_PB</tabstop>
-  <tabstop>main_page</tabstop>
-  <tabstop>main_page_PB</tabstop>
+  <tabstop>main_page_name</tabstop>
+  <tabstop>main_page_name_PB</tabstop>
+  <tabstop>main_page_omit</tabstop>
   <tabstop>layout_file</tabstop>
   <tabstop>layout_file_PB</tabstop>
   <tabstop>ns_omit</tabstop>
@@ -10622,6 +10648,18 @@
   <tabstop>cpp_cli_support_CB</tabstop>
   <tabstop>sip_support_CB</tabstop>
   <tabstop>idl_support_CB</tabstop>
+  <tabstop>quiet_CB</tabstop>
+  <tabstop>warnings_CB</tabstop>
+  <tabstop>warn_undoc_CB</tabstop>
+  <tabstop>warn_doc_error_CB</tabstop>
+  <tabstop>warn_undoc_param_CB</tabstop>
+  <tabstop>warn_format</tabstop>
+  <tabstop>warn_logfile</tabstop>
+  <tabstop>warn_logfile_PB</tabstop>
+  <tabstop>input_source</tabstop>
+  <tabstop>input_source_PB</tabstop>
+  <tabstop>input_patterns</tabstop>
+  <tabstop>input_patterns_PB</tabstop>
   <tabstop>input_encoding</tabstop>
   <tabstop>input_recursive_CB</tabstop>
   <tabstop>exclude_files</tabstop>
@@ -10653,13 +10691,21 @@
   <tabstop>source_code_CB</tabstop>
   <tabstop>inline_source_CB</tabstop>
   <tabstop>strip_code_comments_CB</tabstop>
+  <tabstop>verbatim_headers_CB</tabstop>
   <tabstop>ref_by_relation_CB</tabstop>
   <tabstop>ref_relation_CB</tabstop>
   <tabstop>ref_link_source_CB</tabstop>
   <tabstop>source_tooltips_CB</tabstop>
-  <tabstop>verbatim_headers_CB</tabstop>
+  <tabstop>use_htags_CB</tabstop>
+  <tabstop>suffix_source_navtree</tabstop>
+  <tabstop>suffix_source_navtree_PB</tabstop>
+  <tabstop>suffix_header_navtree</tabstop>
+  <tabstop>suffix_header_navtree_PB</tabstop>
+  <tabstop>suffix_exclude_navtree</tabstop>
+  <tabstop>suffix_exclude_navtree_PB</tabstop>
   <tabstop>clang_parsing_CB</tabstop>
   <tabstop>clang_flags</tabstop>
+  <tabstop>clang_options_PB</tabstop>
   <tabstop>enable_preprocessing_CB</tabstop>
   <tabstop>search_includes_CB</tabstop>
   <tabstop>include_path</tabstop>
@@ -10709,6 +10755,26 @@
   <tabstop>directory_graph_CB</tabstop>
   <tabstop>dot_image_format_CM</tabstop>
   <tabstop>interactive_svg_CB</tabstop>
+  <tabstop>dot_path</tabstop>
+  <tabstop>dot_path_PB</tabstop>
+  <tabstop>dot_file_dirs</tabstop>
+  <tabstop>dot_file_dirs_PB</tabstop>
+  <tabstop>msc_file_dirs</tabstop>
+  <tabstop>msc_file_dirs_PB</tabstop>
+  <tabstop>dia_file_dirs</tabstop>
+  <tabstop>dia_file_dirs_PB</tabstop>
+  <tabstop>plantuml_jar_path</tabstop>
+  <tabstop>plantuml_jar_path_PB</tabstop>
+  <tabstop>plantuml_inc_path</tabstop>
+  <tabstop>plantuml_inc_path_PB</tabstop>
+  <tabstop>dot_graph_max_nodes_SB</tabstop>
+  <tabstop>dot_graph_max_depth_SB</tabstop>
+  <tabstop>dot_transparent_CB</tabstop>
+  <tabstop>dot_multiple_targets_CB</tabstop>
+  <tabstop>gen_legend_CB</tabstop>
+  <tabstop>dot_cleanup_CB</tabstop>
+  <tabstop>output_TreeWidget</tabstop>
+  <tabstop>help_t3</tabstop>
   <tabstop>gen_html_CB2</tabstop>
   <tabstop>html_output</tabstop>
   <tabstop>html_output_PB</tabstop>
@@ -10835,57 +10901,17 @@
   <tabstop>xml_output</tabstop>
   <tabstop>xml_output_PB</tabstop>
   <tabstop>xml_program_listing_CB</tabstop>
-  <tabstop>runText</tabstop>
-  <tabstop>run_PB</tabstop>
-  <tabstop>display_PB</tabstop>
   <tabstop>clear_PB</tabstop>
+  <tabstop>run_PB</tabstop>
   <tabstop>save_log_PB</tabstop>
-  <tabstop>dot_file_dirs_PB</tabstop>
-  <tabstop>help_t3</tabstop>
-  <tabstop>plantuml_jar_path_PB</tabstop>
-  <tabstop>plantuml_jar_path</tabstop>
-  <tabstop>dot_file_dirs</tabstop>
-  <tabstop>plantuml_inc_path_PB</tabstop>
-  <tabstop>msc_file_dirs</tabstop>
-  <tabstop>dot_graph_max_nodes_SB</tabstop>
-  <tabstop>dot_graph_max_depth_SB</tabstop>
-  <tabstop>dot_transparent_CB</tabstop>
-  <tabstop>dot_multiple_targets_CB</tabstop>
-  <tabstop>msc_file_dirs_PB</tabstop>
-  <tabstop>dia_file_dirs</tabstop>
-  <tabstop>dot_path</tabstop>
-  <tabstop>dot_path_PB</tabstop>
-  <tabstop>gen_legend_CB</tabstop>
-  <tabstop>dot_cleanup_CB</tabstop>
-  <tabstop>output_TreeWidget</tabstop>
-  <tabstop>plantuml_inc_path</tabstop>
-  <tabstop>dia_file_dirs_PB</tabstop>
-  <tabstop>warn_format</tabstop>
-  <tabstop>input_source_PB</tabstop>
-  <tabstop>warn_logfile</tabstop>
-  <tabstop>warn_undoc_param_CB</tabstop>
-  <tabstop>input_patterns</tabstop>
-  <tabstop>use_htags_CB</tabstop>
-  <tabstop>suffix_source_navtree</tabstop>
-  <tabstop>suffix_header_navtree</tabstop>
-  <tabstop>suffix_exclude_navtree</tabstop>
-  <tabstop>suffix_source_navtree_PB</tabstop>
-  <tabstop>suffix_header_navtree_PB</tabstop>
-  <tabstop>suffix_exclude_navtree_PB</tabstop>
-  <tabstop>clang_options_PB</tabstop>
-  <tabstop>warn_doc_error_CB</tabstop>
-  <tabstop>input_source</tabstop>
-  <tabstop>input_patterns_PB</tabstop>
-  <tabstop>quiet_CB</tabstop>
-  <tabstop>warn_logfile_PB</tabstop>
-  <tabstop>warnings_CB</tabstop>
-  <tabstop>warn_undoc_CB</tabstop>
+  <tabstop>runText</tabstop>
+  <tabstop>display_PB</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_latex"/>
+  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_html"/>
  </buttongroups>
 </ui>

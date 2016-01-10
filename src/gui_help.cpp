@@ -985,8 +985,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES"); 
 
-   // BROOM - review this page in doxy docs
-
    // build output
    s_fullHelp.insert("MAX_INIT_LINES",
       "This tag specifies the maximum number of lines which are displayed in the documentation for the "
@@ -1011,9 +1009,15 @@ void MainWindow::configFullHelp()
       "for each file. DoxyPress will invoke this program and pass a file name as the first command line parameter. "
       "The value written to standard output is used as the file version.");  
 
-   s_fullHelp.insert("MAIN_PAGE",
-      "Used to specify an input file for the index page. This file will not be included in the navigation treeview "
-      "file listing if FILES is enabled.");
+   s_fullHelp.insert("MAIN_PAGE_NAME",
+      "This tag is used to specify an input file name which should be used for the index page. "
+      "<br><br>"
+      "The file name will not be included in the navigation treeview file listing if FILES is enabled.");
+
+   s_fullHelp.insert("MAIN_PAGE_OMIT",
+      "If this tag is set the index page will not be included in the navigation treeview. "
+      "<br><br>"
+      "The default value is: NO");
 
    s_fullHelp.insert("LAYOUT_FILE",
       "This tag is used to specify a layout file which controls the global structure of the "
@@ -1025,19 +1029,19 @@ void MainWindow::configFullHelp()
       "To create a new layout file run 'DoxyPress --l [layout file name]' ");
 
    s_fullHelp.insert("NS_OMIT",
-      "This tag is used to specify a list of namespaces which should be omitted from the the documentation. ");
+      "This tag is used to specify a list of namespaces which should be omitted from the "
+      "documentation. (Experimental)");
 
    s_fullHelp.insert("NS_ALIAS",
       "This tag is used to specify a list of namespaces which should be renamed in the documentation. "
       "The format for this tag is: namespace=alias"
       "<br><br>"
       "As an example boost::thread=bt will replace the boost::thread everywhere it occurs in your documentation "
-      "with the value of 'bt'");
+      "with the value of 'bt'.");
 
    s_fullHelp.insert("BB_STYLE",
-      "This tag is used to enable the special comment style of documenting source code. Commennts in source must be "
+      "This tag is used to enable the special comment style of documenting source code. Comments in source must be "
       "below the source code. (Experimental)");
-
 
    // language
    s_fullHelp.insert("TCL_SUBST",
