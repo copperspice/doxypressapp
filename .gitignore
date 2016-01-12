@@ -1,5 +1,5 @@
 .dirstamp
-DoxyPressApp.creator.user.*
+DoxyPressApp.creator.user*
 do-config
 autom4te.cache/*
 autotools/build-aux/*
@@ -14,7 +14,7 @@ aclocal.m4
 configure
 config.log
 error.log
-/appTest
+
 /bin/src
 /bin/*.cpp
 /bin/.deps
@@ -23,5 +23,4 @@ error.log
 /bin/*.h
 /bin/Makefile
 /bin/*.exe
-/deploy/
-/source_dist/
+/deploy
