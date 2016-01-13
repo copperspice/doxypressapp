@@ -1,5 +1,7 @@
 doxypressapp.qrc
 
+src/dialog_args.cpp
+src/dialog_args.h
 src/dialog_config.cpp
 src/dialog_config.h
 src/dialog_editcfg.h
@@ -11,6 +13,7 @@ src/dialog_selectcfg.h
 src/dialog_xp_getdir.cpp
 src/dialog_xp_getdir.h
 
+forms/dialog_args.ui
 forms/dialog_config.ui
 forms/dialog_editcfg.ui
 forms/dialog_lookup.ui

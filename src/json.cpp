@@ -91,10 +91,8 @@ bool MainWindow::json_Read(Config trail)
       QSize size = QSize(width, height);
       resize(size);
 
-      m_struct.doxyPressExe = object.value("doxyPress-location").toString();
-
-      //
-      m_struct.pathPrior = object.value("pathPrior").toString();
+      m_settings.doxyPressExe = object.value("doxyPress-location").toString();
+      m_settings.pathPrior = object.value("pathPrior").toString();
 
       // recent files
       list = object.value("recent-files").toArray();
@@ -155,7 +153,7 @@ bool MainWindow::json_Write(Option route, Config trail)
             object.insert("size-width",  size().width()  );
             object.insert("size-height", size().height() );
 
-            object.insert("doxyPress-location", m_struct.doxyPressExe);
+            object.insert("doxyPress-location", m_settings.doxyPressExe);
 
             {
               // opened files
@@ -165,13 +163,13 @@ bool MainWindow::json_Write(Option route, Config trail)
 
             break;
 
-         // missing option for the user to set this by hand (BroomCS)
+         // missing option for the user to set this by hand
          case DOXY_PRESS_EXE:
-            object.insert("doxyPress-location", m_struct.doxyPressExe);
+            object.insert("doxyPress-location", m_settings.doxyPressExe);
             break;
 
          case PATH_PRIOR:
-            object.insert("pathPrior", m_struct.pathPrior);
+            object.insert("pathPrior", m_settings.pathPrior);
             break;
 
          case RECENTFILE:
@@ -316,7 +314,7 @@ bool MainWindow::json_CreateNew()
 // **
 void MainWindow::edit_Cfg()
 {
-   Dialog_EditCfg *dw = new Dialog_EditCfg(this, m_struct.doxyPressExe);
+   Dialog_EditCfg *dw = new Dialog_EditCfg(this, m_settings.doxyPressExe);
    int result = dw->exec();
 
    switch (result) {
@@ -325,7 +323,7 @@ void MainWindow::edit_Cfg()
          break;
 
       case QDialog::Accepted:
-         m_struct.doxyPressExe = dw->get_doxyPressFn();
+         m_settings.doxyPressExe = dw->get_doxyPressFn();
          json_Write(DOXY_PRESS_EXE);
 
          break;

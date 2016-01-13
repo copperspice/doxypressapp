@@ -15,13 +15,13 @@
  *
 *************************************************************************/
 
-#include "dialog_xp_getdir.h"
-#include "mainwindow.h"
-#include "util.h"
-
 #include <QAbstractItemView>
 #include <QDir>
 #include <QFileInfoList>
+
+#include "dialog_xp_getdir.h"
+#include "mainwindow.h"
+#include "util.h"
 
 #ifdef Q_OS_WIN
 #ifndef UNICODE

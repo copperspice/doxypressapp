@@ -18,12 +18,12 @@
 #ifndef DIALOG_XP_GETDIR_H
 #define DIALOG_XP_GETDIR_H
 
-#include "ui_dialog_xp_getdir.h"
-#include "mainwindow.h"
-
 #include <QFileDialog>
 #include <QFileSystemModel>
 #include <QTreeWidgetItem>
+
+#include "ui_dialog_xp_getdir.h"
+#include "mainwindow.h"
 
 struct netServers {
    QString serverName;   

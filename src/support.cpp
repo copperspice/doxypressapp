@@ -222,7 +222,7 @@ void MainWindow::newDoxy()
 void MainWindow::openDoxy()
 {
    if (querySave()) {
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open DoxyPress Project"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open DoxyPress Project"), m_settings.pathPrior);
 
       if (! fname.isEmpty()) {
          openDoxy_Internal(fname);
@@ -246,7 +246,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
 
    //
    m_curFile = fname;
-   m_struct.pathPrior = this->pathName(fname);
+   m_settings.pathPrior = this->pathName(fname);
 
    json_Write(PATH_PRIOR);
 
@@ -339,7 +339,7 @@ bool MainWindow::saveDoxyAs()
 {
    bool retval;
 
-   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_struct.pathPrior,
+   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_settings.pathPrior,
                                             tr("Json Files (*.json)"));
 
    if (m_curFile.isEmpty()) {

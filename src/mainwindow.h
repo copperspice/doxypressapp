@@ -69,11 +69,16 @@ enum RelativeX {
    ABSOLUTE_ONLY
 };
 
-struct Settings {
-   QFont   fontNormal;
-   QColor  colorText;
-   QString pathPrior;
-   QString doxyPressExe;
+struct Args {
+   bool blank_layout;  
+   bool setDateTime;
+
+   QString layout; 
+   QString dateTime;
+
+   QString style_html_header;
+   QString style_html_footer;
+   QString style_html_css;
 };
 
 struct LookUpInfo {
@@ -111,6 +116,13 @@ struct HelpData {
    QString body;
 };
 
+struct Settings {
+   QFont   fontNormal;
+   QColor  colorText;
+   QString pathPrior;
+   QString doxyPressExe;
+};
+
 class MainWindow : public QMainWindow
 {
    CS_OBJECT(MainWindow)
@@ -121,7 +133,8 @@ class MainWindow : public QMainWindow
       QString m_appPath;
       QString m_jsonFname;
 
-      struct Settings m_struct;
+      struct Settings m_settings;
+      struct Args m_args;
 
       QString pathName(QString fileName) const;
       bool openDoxy_Internal(const QString fname);
@@ -651,6 +664,9 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void runComplete())
       CS_SLOT_2(runComplete)
+
+      CS_SLOT_1(Private, void setArgs())
+      CS_SLOT_2(setArgs)
 
       CS_SLOT_1(Private, void showHtmlOutput())
       CS_SLOT_2(showHtmlOutput)

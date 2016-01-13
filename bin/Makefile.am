@@ -116,8 +116,8 @@ endif
 
 DoxyPressApp_SOURCES = \
    src/colors.cpp  \
+   src/dialog_args.cpp \
    src/dialog_config.cpp  \
-   src/dialog_config.h   \
    src/dialog_editcfg.cpp  \
    src/dialog_editcfg.h   \
    src/dialog_lookup.cpp \
@@ -138,6 +138,7 @@ DoxyPressApp_SOURCES = \
 
 noinst_HEADERS = \
    src/colors.h \
+   src/dialog_args.h \
    src/dialog_config.h \
    src/dialog_editcfg.h \
    src/dialog_lookup.h \
@@ -149,6 +150,7 @@ noinst_HEADERS = \
    src/util.h
 
 FORMS = \
+   forms/dialog_args.ui \
    forms/dialog_config.ui \
    forms/dialog_editcfg.ui \
    forms/dialog_lookup.ui \

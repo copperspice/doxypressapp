@@ -15,10 +15,11 @@
  *
 *************************************************************************/
 
-#include "mainwindow.h"
-
 #include <QFileInfo>
 #include <QTextCursor>
+
+#include "mainwindow.h"
+#include "dialog_args.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -43,9 +44,9 @@ void MainWindow::runDoxyPress()
 
       QString doxyPressPath;
 
-      if (! m_struct.doxyPressExe.trimmed().isEmpty() ) {
+      if (! m_settings.doxyPressExe.trimmed().isEmpty() ) {
          // user specified
-         doxyPressPath = m_struct.doxyPressExe;
+         doxyPressPath = m_settings.doxyPressExe;
 
       } else {
          // test if DoxyPress is in the same directory as the current app
@@ -75,8 +76,39 @@ void MainWindow::runDoxyPress()
       QString projectDir = pathName(m_curFile);
       m_runProcess->setWorkingDirectory(projectDir);
 
-      QStringList args;     
-      args.append("--b");           // make stdout unbuffered
+      QStringList args;
+
+      // make stdout unbuffered
+      args.append("--b");
+
+      if (m_args.blank_layout) {
+         args.append("--l");
+         args.append(m_args.layout);
+      }
+
+      if (! m_args.style_html_header.isEmpty()) {
+         args.append("--w");
+         args.append("html-head");
+         args.append(m_args.style_html_header);
+      }
+
+      if (! m_args.style_html_footer.isEmpty()) {
+         args.append("--w");
+         args.append("html-foot");
+         args.append(m_args.style_html_footer);
+      }
+
+      if (! m_args.style_html_css.isEmpty()) {
+         args.append("--w");
+         args.append("html-style");
+         args.append(m_args.style_html_css);
+      }
+
+      if (m_args.setDateTime) {
+         args.append("--dt");
+         args.append(m_args.dateTime);
+      }
+
       args.append(m_curFile);
 
       clearOutput();
@@ -212,6 +244,22 @@ QString MainWindow::getHtmlOutputIndex() const
    return retval;
 }
 
+void MainWindow::setArgs()
+{
+   Dialog_Args *dw = new Dialog_Args(this, m_args);
+   int result = dw->exec();
+
+   switch (result) {
+
+      case QDialog::Rejected:
+         break;
+
+      case QDialog::Accepted:
+         m_args = dw->get_Args();
+         break;
+   }
+}
+
 bool MainWindow::htmlOutputPresent() const
 {
    bool generateHtml = m_ui->gen_html_CB1->isChecked();
@@ -272,10 +320,12 @@ void MainWindow::saveLog()
 void MainWindow::updateRunButtons()
 {
    if (m_ui->runText->toPlainText().isEmpty())  {
+      m_ui->parameters_PB->setEnabled(true);
       m_ui->save_log_PB->setEnabled(false);
       m_ui->clear_PB->setEnabled(false);
 
    } else {
+      m_ui->parameters_PB->setEnabled(false);
       m_ui->save_log_PB->setEnabled(true);
       m_ui->clear_PB->setEnabled(true);
 

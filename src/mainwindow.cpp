@@ -100,6 +100,9 @@ MainWindow::MainWindow()
    m_running = false;
    updateRunButtons();
 
+   m_args.blank_layout = false;
+   m_args.setDateTime  = false;
+
    m_ui->setup_StackedWidget->setCurrentWidget(m_ui->page_Project);
    m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Project_Config);
    m_ui->output_StackedWidget->setCurrentWidget(m_ui->page_Html_A);
@@ -350,13 +353,14 @@ void MainWindow::createConnections()
    connect(m_ui->xml_output_PB,             &QPushButton::clicked, this, &MainWindow::xml_output_PB);
 
    // tab 4
-   connect(m_runProcess,         SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
-   connect(m_runProcess,         SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+   connect(m_runProcess,               SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
+   connect(m_runProcess,               SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
 
-   connect(m_ui->run_PB,         &QPushButton::clicked, this, &MainWindow::runDoxyPress);
-   connect(m_ui->display_PB,     &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
-   connect(m_ui->clear_PB,       &QPushButton::clicked, this, &MainWindow::clearOutput);
-   connect(m_ui->save_log_PB,    &QPushButton::clicked, this, &MainWindow::saveLog);
+   connect(m_ui->run_PB,               &QPushButton::clicked, this, &MainWindow::runDoxyPress);
+   connect(m_ui->parameters_PB,        &QPushButton::clicked, this, &MainWindow::setArgs);
+   connect(m_ui->display_PB,           &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
+   connect(m_ui->clear_PB,             &QPushButton::clicked, this, &MainWindow::clearOutput);
+   connect(m_ui->save_log_PB,          &QPushButton::clicked, this, &MainWindow::saveLog);
 // connect(m_timer, SIGNAL(timeout()), this,  SLOT(readStdout()));
 
 }

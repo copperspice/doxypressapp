@@ -15,35 +15,33 @@
  *
 *************************************************************************/
 
-#ifndef DIALOG_CONFIG_H
-#define DIALOG_CONFIG_H
+#ifndef DIALOG_ARGS_H
+#define DIALOG_ARGS_H
 
 #include <QDialog>
 #include <QString>
 
-#include "ui_dialog_config.h"
+#include "mainwindow.h"
+#include "ui_dialog_args.h"
 
-class Dialog_Config : public QDialog
+class Dialog_Args: public QDialog
 {     
-   CS_OBJECT(Dialog_Config)
+   CS_OBJECT(Dialog_Args)
 
    public:
-      Dialog_Config(QString fileName);
-      ~Dialog_Config();
+      Dialog_Args(MainWindow *parent, struct Args argsX);
+      ~Dialog_Args();
 
-      QString get_newName();
+      struct Args get_Args();
 
    private:
-      Ui::Dialog_Config *m_ui;
+      MainWindow *m_owner;
+      Ui::Dialog_Args *m_ui;
 
-      CS_SLOT_1(Private, void createNew())
-      CS_SLOT_2(createNew) 
+      struct Args m_args;
 
-      CS_SLOT_1(Private, void select())
-      CS_SLOT_2(select) 
-
-      CS_SLOT_1(Private, void rename())
-      CS_SLOT_2(rename) 
+      CS_SLOT_1(Private, void ok())
+      CS_SLOT_2(ok)
 
       CS_SLOT_1(Private, void cancel())
       CS_SLOT_2(cancel) 

@@ -18,7 +18,7 @@
 #ifndef DOXY_BUILD_INFO_H_IN
 #define DOXY_BUILD_INFO_H_IN
 
-// DoxyPressApp Version  "1.0.0"
+// DoxyPressApp Version  "x.y.z"
 constexpr const char *versionString = "1.2.0";
 
 #endif

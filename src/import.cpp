@@ -1037,7 +1037,7 @@ void MainWindow::importDoxy()
 {   
    while (true) {
 
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open (old) Doxygen project file"), m_struct.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open (old) Doxygen project file"), m_settings.pathPrior);
 
       if (fname.isEmpty()) {
          csError(tr("File Open"), tr("No file name was provided"));
@@ -1077,7 +1077,7 @@ void MainWindow::importDoxy()
       }
 
       // ** get new file project file
-      fname = QFileDialog::getSaveFileName(this, tr("Save DoxyPress project file"), m_struct.pathPrior,
+      fname = QFileDialog::getSaveFileName(this, tr("Save DoxyPress project file"), m_settings.pathPrior,
                                            tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
@@ -1099,7 +1099,7 @@ void MainWindow::importDoxy()
 
          if (retval == QMessageBox::Yes) {            
             m_curFile = fname;
-            m_struct.pathPrior = this->pathName(fname);
+            m_settings.pathPrior = this->pathName(fname);
 
             clearAllFields();
             convertDoxy(data);
