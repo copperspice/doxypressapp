@@ -56,6 +56,7 @@
 #include <QTextStream>
 #include <QWidget>
 
+static const int DOXYPRESS_FORMAT = 1;
 static const int RECENT_FILES_MAX = 10;
 
 enum Validate {
@@ -132,6 +133,7 @@ class MainWindow : public QMainWindow
 
       QString m_appPath;
       QString m_jsonFname;
+      int m_doxypressFormat;
 
       struct Settings m_settings;
       struct Args m_args;
@@ -161,7 +163,7 @@ class MainWindow : public QMainWindow
       QStringList m_openedFiles;
 
       enum Config { CFG_STARTUP, CFG_DEFAULT };
-      enum Option { ABOUTURL, CLOSE, DOXY_PRESS_EXE, PATH_PRIOR, RECENTFILE };
+      enum Option { ABOUTURL, CLOSE, DOXYPRESS_EXE, PATH_PRIOR, RECENTFILE };
 
       void clearAllFields();
       void convertDoxy(QByteArray data);
@@ -433,9 +435,6 @@ class MainWindow : public QMainWindow
 
       CS_SLOT_1(Private, void main_page_name_PB())
       CS_SLOT_2(main_page_name_PB)
-
-      CS_SLOT_1(Private, void ns_omit_PB())
-      CS_SLOT_2(ns_omit_PB)      
 
       CS_SLOT_1(Private, void ns_alias_PB())
       CS_SLOT_2(ns_alias_PB)

@@ -175,8 +175,7 @@ void MainWindow::clearAllFields()
 
    // tab 2 - build options
    m_ui->main_page_name->setText("");
-   m_ui->main_page_omit->setChecked(false);
-   m_ui->ns_omit->setPlainText("");   
+   m_ui->main_page_omit->setChecked(false);   
    m_ui->ns_alias->setPlainText("");
    m_ui->bb_style_CB->setChecked(false);
 

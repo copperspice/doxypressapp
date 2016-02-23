@@ -119,9 +119,9 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    connect(m_ui->drives_TV, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
            this, SLOT(showDirectories(QTreeWidgetItem *, QTreeWidgetItem *))); 
 
-   connect(m_ui->network_PB, SIGNAL(clicked()),this, SLOT(network()));
-   connect(m_ui->ok_PB,      SIGNAL(clicked()),this, SLOT(ok()));
-   connect(m_ui->cancel_PB,  SIGNAL(clicked()),this, SLOT(cancel()));
+   connect(m_ui->network_PB, &QPushButton::clicked, this, &Dialog_XP_GetDir::network);
+   connect(m_ui->ok_PB,      &QPushButton::clicked, this, &Dialog_XP_GetDir::ok);
+   connect(m_ui->cancel_PB,  &QPushButton::clicked, this, &Dialog_XP_GetDir::cancel);
 
    // update right treeview
    connect(m_model_R, &QFileSystemModel::directoryLoaded, this, &Dialog_XP_GetDir::showMe);

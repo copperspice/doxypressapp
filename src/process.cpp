@@ -29,13 +29,15 @@
 void MainWindow::runDoxyPress()
 {
    if (! m_running) {
-      // save the project file
 
       if (! saveDoxy()) {
+         // save the current project file
          QString msg = m_curFile;
 
          if (msg.isEmpty()) {
-            msg = "No project file was selected";
+            msg = "No project file name was selected, save aborted";
+         } else  {
+            msg += ", save project file aborted or failed";
          }
 
          runText_Append( QString("*** Unable to save DoxyPress project: %1\n").arg(msg));
@@ -130,6 +132,7 @@ void MainWindow::runDoxyPress()
          runText_Append( QString("*** Failed to run %1\n").arg(doxyPressPath));
 
       } else {
+         m_ui->parameters_PB->setEnabled(false);
          m_ui->save_log_PB->setEnabled(false);
          m_ui->clear_PB->setEnabled(false);
 
@@ -147,8 +150,8 @@ void MainWindow::runDoxyPress()
 
       m_runProcess->kill();
 
-      m_ui->run_PB->setText(tr("Run DoxyPress"));
-      m_ui->runStatus->setText(tr("DoxyPress is Idle"));
+      // m_ui->run_PB->setText(tr("Run DoxyPress"));
+      // m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
 //B   m_timer->stop();
    }
@@ -167,8 +170,11 @@ void MainWindow::readStdout()
          runText_Append(text);
 
          count += text.count('\n');
-
          if (count > 8) {
+            QTextCursor cursor = m_ui->runText->textCursor();
+            cursor.movePosition(QTextCursor::End);
+            m_ui->runText->setTextCursor(cursor);
+
             m_ui->runText->ensureCursorVisible();
             count = 0;
          }
@@ -192,6 +198,10 @@ void MainWindow::runComplete()
 
    }
 
+   QTextCursor cursor = m_ui->runText->textCursor();
+   cursor.movePosition(QTextCursor::End);
+   m_ui->runText->setTextCursor(cursor);
+
    m_ui->runText->ensureCursorVisible();
 
    m_ui->run_PB->setText(tr("Run DoxyPress"));
@@ -201,9 +211,6 @@ void MainWindow::runComplete()
 
    updateRunButtons();
    m_syntaxParser->processSyntax();
-
-   m_ui->save_log_PB->setEnabled(true);
-   m_ui->clear_PB->setEnabled(true);
 }
 
 //  **
@@ -319,17 +326,17 @@ void MainWindow::saveLog()
 
 void MainWindow::updateRunButtons()
 {
-   if (m_ui->runText->toPlainText().isEmpty())  {
-      m_ui->parameters_PB->setEnabled(true);
+   if (m_ui->runText->toPlainText().isEmpty())  {      
       m_ui->save_log_PB->setEnabled(false);
       m_ui->clear_PB->setEnabled(false);
 
-   } else {
-      m_ui->parameters_PB->setEnabled(false);
+   } else {  
       m_ui->save_log_PB->setEnabled(true);
       m_ui->clear_PB->setEnabled(true);
 
    }
+
+   m_ui->parameters_PB->setEnabled(! m_running);
 
    bool isHtml = htmlOutputPresent();
    m_ui->display_PB->setEnabled(isHtml);

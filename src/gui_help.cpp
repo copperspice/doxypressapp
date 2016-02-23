@@ -551,7 +551,7 @@ void MainWindow::configFullHelp()
       "The default value is: YES");
 
    s_fullHelp.insert("DIAGRAM_DOT_RB",
-      "If this tag is set the Dot program will be used to generate diagrams. "
+      "If this tag is set the dot program will be used to generate diagrams. "
       "<br><br>"
       "The default value is: NO");
 
@@ -626,7 +626,7 @@ void MainWindow::configFullHelp()
       "The default value is: NO");
 
    s_fullHelp.insert("JAVADOC_AUTO_BRIEF",
-      "If this tag is set DoxyPress will interpret the first sentence of a Javadoc style comment "
+      "If this tag is set DoxyPress will interpret the first sentence of a JavaDoc style comment "
       "as the brief description. If set to NO, an explicit @brief command is required. "
       "<br><br>"
       "The default value is: NO");
@@ -694,7 +694,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("AUTO_LINK",
       "When this tag is set DoxyPress tries to link words which correspond to documented "
       "classes, functions, or namespaces to their corresponding documentation. An auto link can "
-      "be prevented for individual cases by adding a % charactor in front of the word or "
+      "be prevented for individual cases by adding a % character in front of the word or "
       "globally by setting this tag to NO. "
       "<br><br>"
       "The default value is: YES");
@@ -1027,10 +1027,6 @@ void MainWindow::configFullHelp()
       "DoxyPress will parse it automatically even if this tag is left empty."
       "<br><br>"
       "To create a new layout file run 'DoxyPress --l [layout file name]' ");
-
-   s_fullHelp.insert("NS_OMIT",
-      "This tag is used to specify a list of namespaces which should be omitted from the "
-      "documentation. (Experimental)");
 
    s_fullHelp.insert("NS_ALIAS",
       "This tag is used to specify a list of namespaces which should be renamed in the documentation. "
@@ -1459,7 +1455,7 @@ void MainWindow::configFullHelp()
 
    // external
    s_fullHelp.insert("TAG_FILES",
-      "This tag is used to specify one or more tag files. For each tag file the location ot the "
+      "This tag is used to specify one or more tag files. For each tag file the location to the "
       "external documentation should be provided. The format of a tag file without this location is: "
       "<br><br>"
       "TAGFILES = tagFile1 tagFile2 ... "
@@ -1467,7 +1463,7 @@ void MainWindow::configFullHelp()
       "Syntax to add a url or path for the tag files. Loc1 and loc2 can be relative or absolute. "
       "TAGFILES = tagFile1=loc1 tagFile2=loc2 ... "
       "<br><br>"      
-      "Refer to the DoxyPress documention regarding 'Linking to external documentation' "
+      "Refer to the DoxyPress documentation regarding 'Linking to external documentation' "
       "<br><br>"
       "Each tag file must have a unique name (where the name does NOT include the path). If a tag file is not "
       "located in the directory in which DoxyPress is run, include the path with the file name.");
@@ -1476,7 +1472,7 @@ void MainWindow::configFullHelp()
       "When a file name is specified DoxyPress will create a "
       "tag file which is based on the input files it reads. "
       "<br><br>"
-      "Refer to the DoxyPress documention regarding 'Linking to external documentation'.");
+      "Refer to the DoxyPress documentation regarding 'Linking to external documentation'.");
 
    s_fullHelp.insert("ALL_EXTERNALS",
       "If this tag is set all external classes will be listed in the class index. "
@@ -1505,7 +1501,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("CLASS_DIAGRAMS",
       "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "
       "for classes with base or super classes. Setting the tag to NO turns the diagrams off. "     
-      "It is recommended you install and use Dot since it yields more powerful graphs. "
+      "It is recommended you install and use the dot program since it yields more powerful graphs. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1528,7 +1524,7 @@ void MainWindow::configFullHelp()
       "The default value is: YES");
 
    s_fullHelp.insert("HAVE_DOT",
-      "If this tag is set DoxyPress will assume the DOT program is available from the path. "
+      "If this tag is set DoxyPress will expect the dot program is available from your path. "
       "This program is part of Graphviz which is a graph visualization toolkit from AT&T "
       "and Lucent Bell Labs.   "     
       "<br><br>"
@@ -1536,14 +1532,15 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("DOT_NUM_THREADS",
       "This tag specifies the number of dot invocations DoxyPress is allowed to run in parallel. "
-      "If the value is zero DoxyPress will select a value based on the number of processors available in the system. "
+      "If the value is zero DoxyPress will select a value based on the number of processors available "
+      "in the system. "
       "<br><br>"
       "Minimum: 0, Maximum: 32, Default: 0 "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_NAME",
-      "This tag specifies a different font for DOT. The path can be set using the 'DOT FONT PATH' tag. "
+      "This tag specifies a different font for the dot program. The path can be set using the 'DOT FONT PATH' tag. "
       "<br><br>"
       "The default value is: Helvetica "
       "<br><br>"
@@ -1557,8 +1554,8 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_PATH",
-      "By default DOT will use the default font as specified by 'DOT FONT NAME'. "
-      "If a different font is specified then this tag is used to specify the path to locate the font file. "
+      "The dot program will use the default font as specified by 'DOT FONT NAME'. "
+      "If a font name is specified then this tag will be used as the path to locate the font file. "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
@@ -1670,7 +1667,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_IMAGE_FORMAT",
-      "This tag is used to specify the image format generated by dot. "
+      "This tag is used to specify the image format generated by the dot program. "
       "If svg is selected 'HTML FILE EXTENSION' should be set to 'xhtml' in order "
       "to ensure the images files are visible in all browsers. "
       "<br><br>"
@@ -1689,7 +1686,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_PATH",
-      "This tag is used to specify the path where the Dot program is located. "
+      "This tag is used to specify the path where the dot program is located. "
       "If left blank DoxyPress will search the users path. "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
@@ -1732,8 +1729,8 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
-      "This tag is used to set the maximum depth of the graphs generated by dot. A depth value of 3 means "
-      "only nodes reachable from the root in no more than 3 steps will be shown. "
+      "This tag is used to set the maximum depth of the graphs generated by the dot program. A depth value "
+      "of 3 means only nodes reachable from the root in no more than 3 steps will be shown. "
       "Nodes which are further from the root node will be omitted. Setting this option to 1 "
       "or 2 may reduce the computation time needed for large code bases. "
       "The size of a graph can be further restricted by 'DOT GRAPH MAX NODES'. "
@@ -1753,8 +1750,8 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_MULTIPLE_TARGETS",
-      "Set this tag to allow dot to generate multiple output files in one run. Setting this tag to YES "
-      "makes dot run faster. Only versions of dot greter than 1.8.10 support this feature. "
+      "Set this tag to allow the dot program to generate multiple output files in one run. Setting this tag to YES "
+      "makes dot run faster. Only versions of dot greater than 1.8.10 support this feature. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
@@ -1875,7 +1872,7 @@ void MainWindow::configFullHelp()
       "This tag defines the preferred number of entries shown in the various tree "
       "structured indices. DoxyPress will expand the tree until the specified "
       "number of entries are visible. Setting this value to 1 will "
-      "produce a fullly collapsed tree. A value of 0 will result in a fully expanded tree. "
+      "produce a fully collapsed tree. A value of 0 will result in a fully expanded tree. "
       "<br><br>"
       "Minimum: 0, Maximum: 9999, Default: 100 "
       "<br><br>"

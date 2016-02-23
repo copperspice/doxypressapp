@@ -362,7 +362,28 @@ bool MainWindow::saveDoxyAs()
 
 bool MainWindow::saveDoxy()
 {
-   bool retval;
+   bool retval;     
+
+   // test json format
+   if (m_doxypressFormat != DOXYPRESS_FORMAT)  {
+
+      QString msg = "The current project file is using an older format. Saving will automatically "
+            "update to the new format.";
+
+      QMessageBox msgB;
+      msgB.setWindowTitle("Save Project File");
+      msgB.setWindowIcon(QIcon("://resources/doxypress.png"));
+
+      msgB.setText(msg);
+      msgB.setInformativeText("Continue?");
+
+      msgB.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+      int retval = msgB.exec();
+
+      if (retval != QMessageBox::Save) {
+         return false;
+      }
+   }
 
    if (m_curFile.isEmpty()) {
       retval = saveDoxyAs();

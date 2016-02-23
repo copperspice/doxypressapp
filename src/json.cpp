@@ -164,7 +164,7 @@ bool MainWindow::json_Write(Option route, Config trail)
             break;
 
          // missing option for the user to set this by hand
-         case DOXY_PRESS_EXE:
+         case DOXYPRESS_EXE:
             object.insert("doxyPress-location", m_settings.doxyPressExe);
             break;
 
@@ -324,7 +324,7 @@ void MainWindow::edit_Cfg()
 
       case QDialog::Accepted:
          m_settings.doxyPressExe = dw->get_doxyPressFn();
-         json_Write(DOXY_PRESS_EXE);
+         json_Write(DOXYPRESS_EXE);
 
          break;
    }
@@ -469,18 +469,15 @@ void MainWindow::json_OpenDoxy(QByteArray data)
    int index;
 
    // test json format
-   int format;
    QJsonValue temp = object.value("doxypress-format");
 
    if (temp.isNull())  {
-      format = 0;
-
+      m_doxypressFormat = 0;
    } else {
-      format = temp.toInt();
-
+      m_doxypressFormat = temp.toInt();
    }
 
-   if (format == 0)  {
+   if (m_doxypressFormat == 0)  {
 
       // tab 1
       m_ui->project_name->setText(              object.value("project-name").toString());
@@ -600,8 +597,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());      
       m_ui->main_page_name->setText(                  "");
       m_ui->main_page_omit->setChecked(               false);
-      m_ui->layout_file->setText(                     object.value("layout-file").toString());       
-      m_ui->ns_omit->setPlainText(                    "");
+      m_ui->layout_file->setText(                     object.value("layout-file").toString());             
       m_ui->ns_alias->setPlainText(                   "");
       m_ui->bb_style_CB->setChecked(                  false);
 
@@ -853,7 +849,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->docbook_program_listing_CB->setChecked(   object.value("docbook-program-listing").toBool());
 
    } else {
-      // format == 1
+      // m_doxypressFormat == DOXYPRESS_FORMAT  (current value is one)
 
       // read objects
       QJsonObject projectObj     = object.value("project").toObject();
@@ -998,8 +994,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->file_version_filter->setText(             configObj.value("file-version-filter").toString());
       m_ui->main_page_name->setText(                  configObj.value("main-page-name").toString());
       m_ui->main_page_omit->setChecked(               configObj.value("main-page-omit").toBool());
-      m_ui->layout_file->setText(                     configObj.value("layout-file").toString());
-      m_ui->ns_omit->setPlainText(                    getDataList(configObj, "ns-omit"));
+      m_ui->layout_file->setText(                     configObj.value("layout-file").toString());      
       m_ui->ns_alias->setPlainText(                   getDataList(configObj, "ns-alias"));
       m_ui->bb_style_CB->setChecked(                  bbObj.value("bb-style").toBool());
 
@@ -1283,8 +1278,9 @@ QByteArray MainWindow::json_SaveDoxy()
    QJsonObject rtfObj;
    QJsonObject xmlObj;
 
-   object.insert("doxypress-format",      1);
-   object.insert("doxypress-updated",     QString{"2015-Oct-15"} );
+   m_doxypressFormat = DOXYPRESS_FORMAT;
+   object.insert("doxypress-format",      m_doxypressFormat);
+   object.insert("doxypress-updated",     QString{"2015-Oct-15"} );   
 
    // tab 1
    projectObj.insert("project-name",      m_ui->project_name->text());
@@ -1401,8 +1397,7 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("file-version-filter",      m_ui->file_version_filter->text());
    configObj.insert("main-page-name",           m_ui->main_page_name->text());
    configObj.insert("main-page-omit",           m_ui->main_page_omit->isChecked());
-   configObj.insert("layout-file",              m_ui->layout_file->text());         
-   configObj.insert("ns-omit",                  putDataList(m_ui->ns_omit->toPlainText()));
+   configObj.insert("layout-file",              m_ui->layout_file->text());           
    configObj.insert("ns-alias",                 putDataList(m_ui->ns_alias->toPlainText()));
    bbObj.insert("bb-style",                     m_ui->bb_style_CB->isChecked());
 

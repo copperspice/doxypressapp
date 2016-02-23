@@ -281,30 +281,6 @@ void MainWindow::layout_file_PB()
    m_ui->layout_file->setText(file);
 }
 
-void MainWindow::ns_omit_PB()
-{
-   QRegExp regExp("\\s*,\\s*");
-   struct LookUpInfo data;
-
-   QString temp = m_ui->ns_omit->toPlainText();
-
-   data.title      = "Omit Namespaces";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
-
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
-   int result = dw->exec();
-
-   if (result == QDialog::Accepted) {
-      QStringList dataList = dw->getData();
-
-      QString temp = dataList.join(", ");
-      m_ui->ns_omit->setPlainText(temp);
-   }
-}
-
 void MainWindow::ns_alias_PB()
 {
    QRegExp regExp("\\s*,\\s*");

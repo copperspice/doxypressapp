@@ -18,7 +18,7 @@
 #include "doxy_build_info.h"
 #include "mainwindow.h"
 
-
+#include <QButtonGroup>
 #include <QKeySequence>
 #include <QPushButton>
 #include <QTreeWidget>
@@ -154,7 +154,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 01.10.2016</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 02.24.2016</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -199,14 +199,12 @@ void MainWindow::createConnections()
    connect(m_ui->gen_rtf_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_rtf_1);
    connect(m_ui->gen_xml_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_xml_1);
 
-   connect(m_ui->buttonGroup_html,    SIGNAL(buttonClicked(QAbstractButton *)), this,
-                                      SLOT(validSet_html(QAbstractButton *)));
-
-   connect(m_ui->buttonGroup_latex,   SIGNAL(buttonClicked(QAbstractButton *)), this,
-                                      SLOT(validSet_latex(QAbstractButton *)));
-
-   connect(m_ui->buttonGroup_diagram, SIGNAL(buttonClicked(QAbstractButton *)), this,
-                                      SLOT(validSet_dot(QAbstractButton *)));
+   connect(m_ui->buttonGroup_html,          static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+           this, &MainWindow::validSet_html);
+   connect(m_ui->buttonGroup_latex,         static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+           this, &MainWindow::validSet_latex);
+   connect(m_ui->buttonGroup_diagram,       static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+           this, &MainWindow::validSet_dot);
 
    // tab 2   
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
@@ -247,8 +245,7 @@ void MainWindow::createConnections()
    connect(m_ui->enabled_sections_PB,       &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
    connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);   
    connect(m_ui->main_page_name_PB,         &QPushButton::clicked, this, &MainWindow::main_page_name_PB);
-   connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);
-   connect(m_ui->ns_omit_PB,                &QPushButton::clicked, this, &MainWindow::ns_omit_PB);
+   connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);  
    connect(m_ui->ns_alias_PB,               &QPushButton::clicked, this, &MainWindow::ns_alias_PB);
 
    // tab 2- input
@@ -284,37 +281,35 @@ void MainWindow::createConnections()
    connect(m_ui->predefined_macros_PB,      &QPushButton::clicked, this, &MainWindow::predefined_macros_PB);
    connect(m_ui->expand_as_defined_PB,      &QPushButton::clicked, this, &MainWindow::expand_as_defined_PB);
 
-// todo: finish clean up
-
    // tab 2- external
-   connect(m_ui->tag_files_PB,              SIGNAL(clicked()), this, SLOT(tag_files_PB()));
-   connect(m_ui->gen_tagfile_PB,            SIGNAL(clicked()), this, SLOT(gen_tagfile_PB()));
-   connect(m_ui->perl_path_PB,              SIGNAL(clicked()), this, SLOT(perl_path_PB()));
+   connect(m_ui->tag_files_PB,              &QPushButton::clicked, this, &MainWindow::tag_files_PB);
+   connect(m_ui->gen_tagfile_PB,            &QPushButton::clicked, this, &MainWindow::gen_tagfile_PB);
+   connect(m_ui->perl_path_PB,              &QPushButton::clicked, this, &MainWindow::perl_path_PB);
 
    // tab 2- dot
-   connect(m_ui->mscgen_path_PB,            SIGNAL(clicked()), this, SLOT(mscgen_path_PB()));
-   connect(m_ui->dia_path_PB,               SIGNAL(clicked()), this, SLOT(dia_path_PB()));
-   connect(m_ui->dot_font_name_PB,          SIGNAL(clicked()), this, SLOT(dot_font_name_PB()));
-   connect(m_ui->dot_font_path_PB,          SIGNAL(clicked()), this, SLOT(dot_font_path_PB()));
+   connect(m_ui->mscgen_path_PB,            &QPushButton::clicked, this, &MainWindow::mscgen_path_PB);
+   connect(m_ui->dia_path_PB,               &QPushButton::clicked, this, &MainWindow::dia_path_PB);
+   connect(m_ui->dot_font_name_PB,          &QPushButton::clicked, this, &MainWindow::dot_font_name_PB);
+   connect(m_ui->dot_font_path_PB,          &QPushButton::clicked, this, &MainWindow::dot_font_path_PB);
 
-   connect(m_ui->dot_path_PB,               SIGNAL(clicked()), this, SLOT(dot_path_PB()));
-   connect(m_ui->dot_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dot_file_dirs_PB()));
-   connect(m_ui->msc_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(msc_file_dirs_PB()));
-   connect(m_ui->dia_file_dirs_PB,          SIGNAL(clicked()), this, SLOT(dia_file_dirs_PB()));
-   connect(m_ui->plantuml_jar_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_jar_path_PB()));
-   connect(m_ui->plantuml_inc_path_PB,      SIGNAL(clicked()), this, SLOT(plantuml_inc_path_PB()));
+   connect(m_ui->dot_path_PB,               &QPushButton::clicked, this, &MainWindow::dot_path_PB);
+   connect(m_ui->dot_file_dirs_PB,          &QPushButton::clicked, this, &MainWindow::dot_file_dirs_PB);
+   connect(m_ui->msc_file_dirs_PB,          &QPushButton::clicked, this, &MainWindow::msc_file_dirs_PB);
+   connect(m_ui->dia_file_dirs_PB,          &QPushButton::clicked, this, &MainWindow::dia_file_dirs_PB);
+   connect(m_ui->plantuml_jar_path_PB,      &QPushButton::clicked, this, &MainWindow::plantuml_jar_path_PB);
+   connect(m_ui->plantuml_inc_path_PB,      &QPushButton::clicked, this, &MainWindow::plantuml_inc_path_PB);
 
    // tab 3 html
-   connect(m_ui->html_output_PB,            SIGNAL(clicked()), this, SLOT(html_output_PB()));
-   connect(m_ui->html_header_PB,            SIGNAL(clicked()), this, SLOT(html_header_PB()));
-   connect(m_ui->html_footer_PB,            SIGNAL(clicked()), this, SLOT(html_footer_PB()));   
-   connect(m_ui->html_stylesheets_PB,       SIGNAL(clicked()), this, SLOT(html_stylesheets_PB()));
-   connect(m_ui->html_extra_files_PB,       SIGNAL(clicked()), this, SLOT(html_extra_files_PB()));
+   connect(m_ui->html_output_PB,            &QPushButton::clicked, this, &MainWindow::html_output_PB);
+   connect(m_ui->html_header_PB,            &QPushButton::clicked, this, &MainWindow::html_header_PB);
+   connect(m_ui->html_footer_PB,            &QPushButton::clicked, this, &MainWindow::html_footer_PB);
+   connect(m_ui->html_stylesheets_PB,       &QPushButton::clicked, this, &MainWindow::html_stylesheets_PB);
+   connect(m_ui->html_extra_files_PB,       &QPushButton::clicked, this, &MainWindow::html_extra_files_PB);
 
-   connect(m_ui->ghostscript_PB,            SIGNAL(clicked()), this, SLOT(ghostscript_PB()));
-   connect(m_ui->mathjax_extensions_PB,     SIGNAL(clicked()), this, SLOT(mathjax_extensions_PB()));
-   connect(m_ui->search_data_file_PB,       SIGNAL(clicked()), this, SLOT(search_data_file_PB()));
-   connect(m_ui->search_mappings_PB,        SIGNAL(clicked()), this, SLOT(search_mappings_PB()));
+   connect(m_ui->ghostscript_PB,            &QPushButton::clicked, this, &MainWindow::ghostscript_PB);
+   connect(m_ui->mathjax_extensions_PB,     &QPushButton::clicked, this, &MainWindow::mathjax_extensions_PB);
+   connect(m_ui->search_data_file_PB,       &QPushButton::clicked, this, &MainWindow::search_data_file_PB);
+   connect(m_ui->search_mappings_PB,        &QPushButton::clicked, this, &MainWindow::search_mappings_PB);
 
    // tab 3 chm
    connect(m_ui->chm_file_PB,               &QPushButton::clicked, this, &MainWindow::chm_file_PB);

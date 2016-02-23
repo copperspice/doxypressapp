@@ -15,7 +15,7 @@
  *
 *************************************************************************/
 
-#include <dialog_lookup.h>
+#include "dialog_lookup.h"
 
 Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    :  QDialog(parent), m_ui(new Ui::Dialog_LookUp)
@@ -53,16 +53,16 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
       m_ui->folders_PB->setEnabled(false);
    }
 
-   connect(m_ui->up_PB,           &QPushButton::clicked, this, [this](){ moveItemUp(); } );
-   connect(m_ui->down_PB,         &QPushButton::clicked, this, [this](){ moveItemDown(); } );
+   connect(m_ui->up_PB,           &QPushButton::clicked, this, &Dialog_LookUp::moveItemUp);
+   connect(m_ui->down_PB,         &QPushButton::clicked, this, &Dialog_LookUp::moveItemDown);
 
-   connect(m_ui->files_PB,        &QPushButton::clicked, this, [this](){ getFile(); } );
-   connect(m_ui->folders_PB,      &QPushButton::clicked, this, [this](){ getFolder(); } );
+   connect(m_ui->files_PB,        &QPushButton::clicked, this, &Dialog_LookUp::getFile);
+   connect(m_ui->folders_PB,      &QPushButton::clicked, this, &Dialog_LookUp::getFolder);
 
-   connect(m_ui->add_PB,          &QPushButton::clicked, this, [this](){ addItem(); } );
-   connect(m_ui->delete_PB,       &QPushButton::clicked, this, [this](){ deleteItem(); } );
-   connect(m_ui->save_PB,         &QPushButton::clicked, this, [this](){ save(); } );
-   connect(m_ui->cancel_PB,       &QPushButton::clicked, this, [this](){ cancel(); } );
+   connect(m_ui->add_PB,          &QPushButton::clicked, this, &Dialog_LookUp::addItem);
+   connect(m_ui->delete_PB,       &QPushButton::clicked, this, &Dialog_LookUp::deleteItem);
+   connect(m_ui->save_PB,         &QPushButton::clicked, this, &Dialog_LookUp::save);
+   connect(m_ui->cancel_PB,       &QPushButton::clicked, this, &Dialog_LookUp::cancel);
 
    // force call to sizeHint()
    adjustSize();

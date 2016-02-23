@@ -15,7 +15,7 @@
  *
 *************************************************************************/
 
-#include <dialog_editcfg.h>
+#include "dialog_editcfg.h"
 
 Dialog_EditCfg::Dialog_EditCfg(MainWindow *parent, QString fileName)
    : QDialog(parent), m_ui(new Ui::Dialog_EditCfg)
@@ -28,9 +28,9 @@ Dialog_EditCfg::Dialog_EditCfg(MainWindow *parent, QString fileName)
    m_ui->doxyPressFile->setText(fileName);
    m_ui->doxyPressFile->setFocus();
 
-   connect(m_ui->doxyPressFile_PB, SIGNAL(clicked()), this, SLOT(fileLookUp()));
-   connect(m_ui->save_PB,          SIGNAL(clicked()), this, SLOT(save()));
-   connect(m_ui->cancel_PB,        SIGNAL(clicked()), this, SLOT(cancel()));
+   connect(m_ui->doxyPressFile_PB, &QPushButton::clicked, this, &Dialog_EditCfg::fileLookUp);
+   connect(m_ui->save_PB,          &QPushButton::clicked, this, &Dialog_EditCfg::save);
+   connect(m_ui->cancel_PB,        &QPushButton::clicked, this, &Dialog_EditCfg::cancel);
 }
 
 Dialog_EditCfg::~Dialog_EditCfg()

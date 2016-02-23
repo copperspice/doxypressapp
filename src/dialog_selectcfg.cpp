@@ -15,17 +15,17 @@
  *
 *************************************************************************/
 
-#include <dialog_selectcfg.h>
+#include "dialog_selectcfg.h"
 
 Dialog_SelectCfg::Dialog_SelectCfg(MainWindow *parent)
    : QDialog(parent), m_ui(new Ui::Dialog_SelectCfg)
 {
    m_ui->setupUi(this);
 
-   connect(m_ui->sysDefault_PB, SIGNAL(clicked()),this,  SLOT(sysDefault()));
-   connect(m_ui->pick_PB, SIGNAL(clicked()),this,        SLOT(pick()));
-   connect(m_ui->existing_PB, SIGNAL(clicked()),this,    SLOT(existing()));
-   connect(m_ui->cancel_PB, SIGNAL(clicked()),this,      SLOT(cancel()));
+   connect(m_ui->sysDefault_PB, &QPushButton::clicked, this, &Dialog_SelectCfg::sysDefault);
+   connect(m_ui->pick_PB,       &QPushButton::clicked, this, &Dialog_SelectCfg::pick);
+   connect(m_ui->existing_PB,   &QPushButton::clicked, this, &Dialog_SelectCfg::existing);
+   connect(m_ui->cancel_PB,     &QPushButton::clicked, this, &Dialog_SelectCfg::cancel);
 }
 
 Dialog_SelectCfg::~Dialog_SelectCfg()
