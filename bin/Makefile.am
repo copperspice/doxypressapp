@@ -68,23 +68,12 @@ deploy : all
 
 	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%1.0.dylib,$(cslibs)) $(deployapp)/Frameworks
 
-	for libname in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
+	for binary in $(deployapp)/MacOS/* $(deployapp)/Frameworks/* ; do \
 	\
-	install_name_tool -change $(CS_HOME)/lib/$$libname \
-	@executable_path/../Frameworks/$$libname  $(deployapp)/MacOS/$(bin_PROGRAMS); \
+		for lib in `otool -l $$binary | awk '/^ *name.*libCs/{print $$2}'`; do \
+			install_name_tool -change $$lib @executable_path/../Frameworks/$${lib##*/} $$binary \
+		; done \
 	\
-	for templib in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
-	install_name_tool -change $(CS_HOME)/lib/$$templib \
-	@executable_path/../Frameworks/$$templib  $(deployapp)/Frameworks/$$libname \
-	; done \
-	\
-	; done
-
-   # clean up the path for doxypress app
-	for libname in $(patsubst %,libCs%1.0.dylib,$(cslibs)) ; do \
-	\
-	install_name_tool -change $(CS_HOME)/lib/$$libname \
-	@executable_path/../Frameworks/$$libname  $(deployapp)/MacOS/doxypress \
 	; done
 
    # generate dmg	
