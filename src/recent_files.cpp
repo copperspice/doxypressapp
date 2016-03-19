@@ -44,7 +44,7 @@ void MainWindow::rf_CreateMenus()
          rf_Actions[i]->setVisible(false);
       }
 
-      connect(rf_Actions[i], SIGNAL(triggered()), this, SLOT(rf_Open()));
+      connect(rf_Actions[i], &QAction::triggered, this, &MainWindow::rf_Open);
    }
 }
 

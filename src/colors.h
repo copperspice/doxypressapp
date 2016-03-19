@@ -39,21 +39,20 @@ class TuneColorDialog : public QDialog
 {
    CS_OBJECT(TuneColorDialog)
 
- public:
-   TuneColorDialog(int hue, int sat, int gamma, QWidget *parent = 0);
-   int getHue() const;
-   int getSaturation() const;
-   int getGamma() const;
+   public:
+      TuneColorDialog(int hue, int sat, int gamma, QWidget *parent = 0);
+      int getHue() const;
+      int getSaturation() const;
+      int getGamma() const;
 
- private :
-   CS_SLOT_1(Private, void updateImage(int hue, int sat, int val))
-   CS_SLOT_2(updateImage)
+   private :
+      void updateImage(int hue, int sat, int val);
 
-   QImage *m_image;
-   QLabel *m_imageLab;
-   int m_hue;
-   int m_sat;
-   int m_gam;
+      QImage *m_image;
+      QLabel *m_imageLab;
+      int m_hue;
+      int m_sat;
+      int m_gam;
 };
 
 class ColorPicker : public QWidget
@@ -66,8 +65,7 @@ class ColorPicker : public QWidget
    ColorPicker(Mode m);
    ~ColorPicker();
  
-   CS_SLOT_1(Public, void setCol(int h, int s, int g))
-   CS_SLOT_2(setCol)
+   void setCol(int h, int s, int g);
 
    CS_SIGNAL_1(Public, void newHsv(int h, int s, int g))
    CS_SIGNAL_2(newHsv, h, s, g)

@@ -89,14 +89,12 @@ MainWindow::MainWindow()
 
    // recent files, context menu
    m_ui->menuFile->setContextMenuPolicy(Qt::CustomContextMenu);
-   connect(m_ui->menuFile, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(showContext_Files(const QPoint &)));
+   connect(m_ui->menuFile, &QMenu::customContextMenuRequested, this, &MainWindow::showContext_Files);
 
    // syntax highlighting
    m_syntaxParser = new Syntax(m_ui->runText->document());
 
-// m_timer = new QTimer;
    m_runProcess = new QProcess;
-
    m_running = false;
    updateRunButtons();
 
@@ -166,28 +164,28 @@ void MainWindow::about()
 void MainWindow::createConnections()
 {
    // menu options
-   connect(m_ui->actionNew,           &QAction::triggered, this, [this](){ newDoxy();    } );
-   connect(m_ui->actionOpen,          &QAction::triggered, this, [this](){ openDoxy();   } );
-   connect(m_ui->actionReload,        &QAction::triggered, this, [this](){ reloadDoxy(); } );
+   connect(m_ui->actionNew,           &QAction::triggered, this, &MainWindow::newDoxy);
+   connect(m_ui->actionOpen,          &QAction::triggered, this, &MainWindow::openDoxy);
+   connect(m_ui->actionReload,        &QAction::triggered, this, &MainWindow::reloadDoxy);
 
-   connect(m_ui->actionSave,          &QAction::triggered, this, [this](){ saveDoxy();   } );
-   connect(m_ui->actionSave_As,       &QAction::triggered, this, [this](){ saveDoxyAs(); } );
-   connect(m_ui->actionExit,          &QAction::triggered, this, [this](){ close();      } );
+   connect(m_ui->actionSave,          &QAction::triggered, this, [this](){ saveDoxy();   });
+   connect(m_ui->actionSave_As,       &QAction::triggered, this, [this](){ saveDoxyAs(); });
+   connect(m_ui->actionExit,          &QAction::triggered, this, [this](){ close();      });
 
-   connect(m_ui->actionImport,        &QAction::triggered, this, [this](){ importDoxy(); } );
-   connect(m_ui->actionEdit_Cfg,      &QAction::triggered, this, [this](){ edit_Cfg(); } );
-   connect(m_ui->actionMove_Cfg,      &QAction::triggered, this, [this](){ move_Cfg(); } );
-   connect(m_ui->actionSave_Cfg,      &QAction::triggered, this, [this](){ save_Cfg(); } );
+   connect(m_ui->actionImport,        &QAction::triggered, this, &MainWindow::importDoxy);
+   connect(m_ui->actionEdit_Cfg,      &QAction::triggered, this, &MainWindow::edit_Cfg);
+   connect(m_ui->actionMove_Cfg,      &QAction::triggered, this, &MainWindow::move_Cfg);
+   connect(m_ui->actionSave_Cfg,      &QAction::triggered, this, &MainWindow::save_Cfg);
 
-   connect(m_ui->actionDoxyHelp,      &QAction::triggered, this, [this](){ manual();     } );
-   connect(m_ui->actionAbout,         &QAction::triggered, this, [this](){ about();      } );
+   connect(m_ui->actionDoxyHelp,      &QAction::triggered, this, &MainWindow::manual);
+   connect(m_ui->actionAbout,         &QAction::triggered, this, &MainWindow::about);
 
    // tabs
    connect(m_ui->setup_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::setupPage);
    connect(m_ui->build_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::buildPage);
    connect(m_ui->output_TreeWidget,   &QTreeWidget::currentItemChanged, this, &MainWindow::outputPage);
 
-   // ** validataion
+
    // tab 1
    connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);
    connect(m_ui->project_logo,        &QLineEdit::textChanged, this, [this](){ getLogo("load"); } );
@@ -226,6 +224,7 @@ void MainWindow::createConnections()
    connect(m_ui->gen_xml_CB2,               &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
 
    connect(m_ui->html_search_CB2,           &QPushButton::toggled, this, &MainWindow::valid_html_search);
+
 
    // ** lookups
    // tab 1
@@ -315,10 +314,10 @@ void MainWindow::createConnections()
    connect(m_ui->chm_file_PB,               &QPushButton::clicked, this, &MainWindow::chm_file_PB);
    connect(m_ui->hhc_location_PB,           &QPushButton::clicked, this, &MainWindow::hhc_location_PB);
 
-   // tab 3 look up (docbook)
+   // tab 3 docbook
    connect(m_ui->docbook_output_PB,         &QPushButton::clicked, this, &MainWindow::docbook_output_PB);
 
-   // tab 3 look up (latex)
+   // tab 3 latex
    connect(m_ui->latex_output_PB,           &QPushButton::clicked, this, &MainWindow::latex_output_PB);
    connect(m_ui->latex_cmd_name_PB,         &QPushButton::clicked, this, &MainWindow::latex_cmd_name_PB);
    connect(m_ui->make_index_cmd_name_PB,    &QPushButton::clicked, this, &MainWindow::make_index_cmd_name_PB);
@@ -348,16 +347,15 @@ void MainWindow::createConnections()
    connect(m_ui->xml_output_PB,             &QPushButton::clicked, this, &MainWindow::xml_output_PB);
 
    // tab 4
-   connect(m_runProcess,               SIGNAL(readyReadStandardOutput()),           this, SLOT(readStdout()));
-   connect(m_runProcess,               SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(runComplete()));
+   connect(m_runProcess,               &QProcess::readyReadStandardOutput, this, &MainWindow::readStdout);
+   connect(m_runProcess,               static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+                                       this, &MainWindow::runComplete);
 
    connect(m_ui->run_PB,               &QPushButton::clicked, this, &MainWindow::runDoxyPress);
    connect(m_ui->parameters_PB,        &QPushButton::clicked, this, &MainWindow::setArgs);
    connect(m_ui->display_PB,           &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
    connect(m_ui->clear_PB,             &QPushButton::clicked, this, &MainWindow::clearOutput);
    connect(m_ui->save_log_PB,          &QPushButton::clicked, this, &MainWindow::saveLog);
-// connect(m_timer, SIGNAL(timeout()), this,  SLOT(readStdout()));
-
 }
 
 void MainWindow::createShortCuts()

@@ -116,8 +116,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    m_ui->folders_TV->setCurrentIndex(m_index_R);
 
    // tree view triggers
-   connect(m_ui->drives_TV, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-           this, SLOT(showDirectories(QTreeWidgetItem *, QTreeWidgetItem *))); 
+   connect(m_ui->drives_TV,  &QTreeWidget::currentItemChanged, this, &Dialog_XP_GetDir::showDirectories);
 
    connect(m_ui->network_PB, &QPushButton::clicked, this, &Dialog_XP_GetDir::network);
    connect(m_ui->ok_PB,      &QPushButton::clicked, this, &Dialog_XP_GetDir::ok);

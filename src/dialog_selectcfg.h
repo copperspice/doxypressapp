@@ -41,17 +41,10 @@ class Dialog_SelectCfg : public QDialog
    private:
       Ui::Dialog_SelectCfg *m_ui;
 
-      CS_SLOT_1(Private, void sysDefault())
-      CS_SLOT_2(sysDefault)
-
-      CS_SLOT_1(Private, void pick())
-      CS_SLOT_2(pick)
-
-      CS_SLOT_1(Private, void existing())
-      CS_SLOT_2(existing)
-
-      CS_SLOT_1(Private, void cancel())
-      CS_SLOT_2(cancel)
+      void sysDefault();
+      void pick();
+      void existing();
+      void cancel();
 };
 
 #endif

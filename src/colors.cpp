@@ -33,12 +33,13 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    //
    QHBoxLayout *buttonsLayout = new QHBoxLayout;
 
-   QPushButton *okButton = new QPushButton(tr("Ok"));
-   connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+   QPushButton *okButton = new QPushButton(tr("Ok"));   
    okButton->setDefault(true);
 
    QPushButton *cancelButton = new QPushButton(tr("Cancel"));
-   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
+
+   connect(okButton,     &QPushButton::clicked, this, &TuneColorDialog::accept);
+   connect(cancelButton, &QPushButton::clicked, this, &TuneColorDialog::reject);
 
    //
    ColorPicker *huePicker = new ColorPicker(ColorPicker::Hue);
@@ -67,15 +68,16 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    layout->addLayout(buttonsLayout, 2, 0, 1, 4);
 
    //
-   connect(huePicker, SIGNAL(newHsv(int, int, int)), satPicker, SLOT(setCol(int, int, int)));
-   connect(satPicker, SIGNAL(newHsv(int, int, int)), huePicker, SLOT(setCol(int, int, int)));
-   connect(huePicker, SIGNAL(newHsv(int, int, int)), gamPicker, SLOT(setCol(int, int, int)));
-   connect(satPicker, SIGNAL(newHsv(int, int, int)), gamPicker, SLOT(setCol(int, int, int)));
-   connect(gamPicker, SIGNAL(newHsv(int, int, int)), satPicker, SLOT(setCol(int, int, int)));
-   connect(gamPicker, SIGNAL(newHsv(int, int, int)), huePicker, SLOT(setCol(int, int, int)));
-   connect(huePicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
-   connect(satPicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
-   connect(gamPicker, SIGNAL(newHsv(int, int, int)), this, SLOT(updateImage(int, int, int)));
+   connect(huePicker, &ColorPicker::newHsv, satPicker, &ColorPicker::setCol);
+   connect(satPicker, &ColorPicker::newHsv, huePicker, &ColorPicker::setCol);
+   connect(huePicker, &ColorPicker::newHsv, gamPicker, &ColorPicker::setCol);
+   connect(satPicker, &ColorPicker::newHsv, gamPicker, &ColorPicker::setCol);
+   connect(gamPicker, &ColorPicker::newHsv, satPicker, &ColorPicker::setCol);
+   connect(gamPicker, &ColorPicker::newHsv, huePicker, &ColorPicker::setCol);
+
+   connect(huePicker, &ColorPicker::newHsv, this, &TuneColorDialog::updateImage);
+   connect(satPicker, &ColorPicker::newHsv, this, &TuneColorDialog::updateImage);
+   connect(gamPicker, &ColorPicker::newHsv, this, &TuneColorDialog::updateImage);
 }
 
 void hsl2rgb(double h, double s, double l, double *pRed, double *pGreen, double *pBlue)

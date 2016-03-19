@@ -61,19 +61,11 @@ class Dialog_XP_GetDir  : public QDialog
       QString driveType(QString drive);
 
       QList<netServers> getWin_NetServers();
-//    QList<netShares> getWin_NetShares();
 
-      CS_SLOT_1(Private, void showDirectories(QTreeWidgetItem * current,QTreeWidgetItem * previous))
-      CS_SLOT_2(showDirectories) 
-
-      CS_SLOT_1(Private, void network())
-      CS_SLOT_2(network)
-
-      CS_SLOT_1(Private, void ok())
-      CS_SLOT_2(ok)
-
-      CS_SLOT_1(Private, void cancel())
-      CS_SLOT_2(cancel)
+      void showDirectories(QTreeWidgetItem * current,QTreeWidgetItem * previous);
+      void network();
+      void ok();
+      void cancel();
 };
 
 #endif

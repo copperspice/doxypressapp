@@ -40,11 +40,8 @@ class Dialog_Args: public QDialog
 
       struct Args m_args;
 
-      CS_SLOT_1(Private, void ok())
-      CS_SLOT_2(ok)
-
-      CS_SLOT_1(Private, void cancel())
-      CS_SLOT_2(cancel) 
+      void ok();
+      void cancel();
 };
 
 #endif

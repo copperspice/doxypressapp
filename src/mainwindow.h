@@ -246,435 +246,205 @@ class MainWindow : public QMainWindow
       void hoverChanged(QWidget *old_Widget, QWidget *new_Widget);
 
       // menu options
-      CS_SLOT_1(Private, void newDoxy())
-      CS_SLOT_2(newDoxy)
+      void newDoxy();
+      void openDoxy();
+      void reloadDoxy();
 
-      CS_SLOT_1(Private, void openDoxy())
-      CS_SLOT_2(openDoxy)
+      bool saveDoxy();
+      bool saveDoxyAs();
 
-      CS_SLOT_1(Private, void reloadDoxy())
-      CS_SLOT_2(reloadDoxy)
+      void importDoxy();
+      void edit_Cfg();
+      void move_Cfg();
+      void save_Cfg();
 
-      CS_SLOT_1(Private, bool saveDoxy())
-      CS_SLOT_2(saveDoxy)
+      void manual();
+      void about();
 
-      CS_SLOT_1(Private, bool saveDoxyAs())
-      CS_SLOT_2(saveDoxyAs)
+      // tabs
+      void setupPage(QTreeWidgetItem *item, QTreeWidgetItem *);
+      void buildPage(QTreeWidgetItem *item, QTreeWidgetItem *);
+      void outputPage(QTreeWidgetItem *item, QTreeWidgetItem *);
 
-      CS_SLOT_1(Private, void importDoxy())
-      CS_SLOT_2(importDoxy)
+      // menu recent files
+      void showContext_Files(const QPoint &pt);
 
-      CS_SLOT_1(Private, void edit_Cfg())
-      CS_SLOT_2(edit_Cfg)
-
-      CS_SLOT_1(Private, void move_Cfg())
-      CS_SLOT_2(move_Cfg)
-
-      CS_SLOT_1(Private, void save_Cfg())
-      CS_SLOT_2(save_Cfg)
-
-      // recent files
-      CS_SLOT_1(Private, void showContext_Files(const QPoint &pt))
-      CS_SLOT_2(showContext_Files)
-
-      CS_SLOT_1(Private, void rf_Open())
-      CS_SLOT_2(rf_Open)
+      void rf_Open();    
+      void rf_DeleteName();
 
       CS_SLOT_1(Private, void rf_ClearList())
       CS_SLOT_2(rf_ClearList)
 
-      CS_SLOT_1(Private, void rf_DeleteName())
-      CS_SLOT_2(rf_DeleteName)
-
       CS_SLOT_1(Private, void rf_RemoveFName())
       CS_SLOT_2(rf_RemoveFName)
-
-      CS_SLOT_1(Private, void manual())
-      CS_SLOT_2(manual)
-
-      CS_SLOT_1(Private, void about())
-      CS_SLOT_2(about)
-
-      // tabs
-      CS_SLOT_1(Private, void setupPage(QTreeWidgetItem *, QTreeWidgetItem *))
-      CS_SLOT_2(setupPage)
-
-      CS_SLOT_1(Private, void buildPage(QTreeWidgetItem *, QTreeWidgetItem *))
-      CS_SLOT_2(buildPage)
-
-      CS_SLOT_1(Private, void outputPage(QTreeWidgetItem *, QTreeWidgetItem *))
-      CS_SLOT_2(outputPage)
-
-      // ** valids
-      // tab 1
-      CS_SLOT_1(Private, void valid_output_dir())
-      CS_SLOT_2(valid_output_dir)
 
       void adjustDefaults();
       void finalLoad();
       void validGet_html();
       void validGet_latex();
-      void validGet_dot();          
+      void validGet_dot();
 
       // tab 1
-      CS_SLOT_1(Private, void validSet_html(QAbstractButton *))
-      CS_SLOT_2(validSet_html)
+      void valid_output_dir();
+      void getLogo(const QString route);
 
-      CS_SLOT_1(Private, void validSet_latex(QAbstractButton *))
-      CS_SLOT_2(validSet_latex)
+      void valid_gen_html_1(bool checked);
+      void valid_gen_docbook_1(bool checked);
+      void valid_gen_latex_1(bool checked);
+      void valid_gen_man_1(bool checked);
+      void valid_gen_rtf_1(bool checked);
+      void valid_gen_xml_1(bool checked);
 
-      CS_SLOT_1(Private, void validSet_dot(QAbstractButton *))
-      CS_SLOT_2(validSet_dot)      
-
-      // tab 1
-      CS_SLOT_1(Private, void valid_gen_html_1(bool checked))
-      CS_SLOT_2(valid_gen_html_1)
-
-      CS_SLOT_1(Private, void valid_gen_docbook_1(bool checked))
-      CS_SLOT_2(valid_gen_docbook_1)
-
-      CS_SLOT_1(Private, void valid_gen_latex_1(bool checked))
-      CS_SLOT_2(valid_gen_latex_1)
-
-      CS_SLOT_1(Private, void valid_gen_man_1(bool checked))
-      CS_SLOT_2(valid_gen_man_1)
-
-      CS_SLOT_1(Private, void valid_gen_rtf_1(bool checked))
-      CS_SLOT_2(valid_gen_rtf_1)
-
-      CS_SLOT_1(Private, void valid_gen_xml_1(bool checked))
-      CS_SLOT_2(valid_gen_xml_1)
+      void validSet_html(QAbstractButton *);
+      void validSet_latex(QAbstractButton *);
+      void validSet_dot(QAbstractButton *);
 
       // tab 2
-      CS_SLOT_1(Private, void valid_full_path_names())
-      CS_SLOT_2(valid_full_path_names)
+      void valid_full_path_names();
+      void valid_filter_source_files();
+      void valid_alpha_index();
+      void valid_enable_preprocessing();
+      void valid_have_dot();
 
-      CS_SLOT_1(Private, void valid_filter_source_files())
-      CS_SLOT_2(valid_filter_source_files)
+      // tab 3
+      void valid_gen_html();
+      void valid_gen_chm();
+      void valid_gen_docbook();
+      void valid_gen_docset();
+      void valid_gen_eclipse();
+      void valid_gen_latex();
+      void valid_gen_man();
+      void valid_gen_qthelp();
+      void valid_gen_rtf();
+      void valid_gen_xml();
+      void valid_html_search();
 
-      CS_SLOT_1(Private, void valid_alpha_index())
-      CS_SLOT_2(valid_alpha_index)
-
-      CS_SLOT_1(Private, void valid_source_code())
-      CS_SLOT_2(valid_source_code)
-
-      CS_SLOT_1(Private, void valid_enable_preprocessing())
-      CS_SLOT_2(valid_enable_preprocessing)
-
-      CS_SLOT_1(Private, void valid_have_dot())
-      CS_SLOT_2(valid_have_dot)
-
-      // tab 3 valids
-      CS_SLOT_1(Private, void valid_gen_html())
-      CS_SLOT_2(valid_gen_html)
-
-      CS_SLOT_1(Private, void valid_gen_chm())
-      CS_SLOT_2(valid_gen_chm)
-
-      CS_SLOT_1(Private, void valid_gen_docbook())
-      CS_SLOT_2(valid_gen_docbook)
-
-      CS_SLOT_1(Private, void valid_gen_docset())
-      CS_SLOT_2(valid_gen_docset)
-
-      CS_SLOT_1(Private, void valid_gen_eclipse())
-      CS_SLOT_2(valid_gen_eclipse)
-
-      CS_SLOT_1(Private, void valid_gen_latex())
-      CS_SLOT_2(valid_gen_latex)
-
-      CS_SLOT_1(Private, void valid_gen_man())
-      CS_SLOT_2(valid_gen_man)
-
-      CS_SLOT_1(Private, void valid_gen_qthelp())
-      CS_SLOT_2(valid_gen_qthelp)
-
-      CS_SLOT_1(Private, void valid_gen_rtf())
-      CS_SLOT_2(valid_gen_rtf)
-
-      CS_SLOT_1(Private, void valid_gen_xml())
-      CS_SLOT_2(valid_gen_xml)
-
-      CS_SLOT_1(Private, void valid_html_search())
-      CS_SLOT_2(valid_html_search)
-
-
-      // ** lookup
+      // ** lookups
       // tab 1
-      CS_SLOT_1(Private, void getLogo(const QString route))
-      CS_SLOT_2(getLogo)
-
-      CS_SLOT_1(Private, void output_dir_PB())
-      CS_SLOT_2(output_dir_PB)
-
-      CS_SLOT_1(Private, void tune_colors_PB())
-      CS_SLOT_2(tune_colors_PB)
+      void output_dir_PB();
+      void tune_colors_PB();
 
       // tab 2 - project config
-      CS_SLOT_1(Private, void abbreviate_brief_PB())
-      CS_SLOT_2(abbreviate_brief_PB)
+      void abbreviate_brief_PB();
+      void strip_from_path_PB();
+      void strip_from_inc_path_PB();
+      void aliases_PB();
+      void tcl_subst_PB();
+      void language_mapping_PB();
 
-      CS_SLOT_1(Private, void strip_from_path_PB())
-      CS_SLOT_2(strip_from_path_PB)
-
-      CS_SLOT_1(Private, void strip_from_inc_path_PB())
-      CS_SLOT_2(strip_from_inc_path_PB)
-
-      CS_SLOT_1(Private, void aliases_PB())
-      CS_SLOT_2(aliases_PB)
-
-      // tab 2- build options
-      CS_SLOT_1(Private, void enabled_sections_PB())
-      CS_SLOT_2(enabled_sections_PB)
-
-      CS_SLOT_1(Private, void file_version_filter_PB())
-      CS_SLOT_2(file_version_filter_PB)
-
-      CS_SLOT_1(Private, void layout_file_PB())
-      CS_SLOT_2(layout_file_PB)
-
-      CS_SLOT_1(Private, void main_page_name_PB())
-      CS_SLOT_2(main_page_name_PB)
-
-      CS_SLOT_1(Private, void ns_alias_PB())
-      CS_SLOT_2(ns_alias_PB)
-
-      // tab 2 - programming language
-      CS_SLOT_1(Private, void tcl_subst_PB())
-      CS_SLOT_2(tcl_subst_PB)
-
-      CS_SLOT_1(Private, void language_mapping_PB())
-      CS_SLOT_2(language_mapping_PB)
+      // tab 2- build
+      void enabled_sections_PB();
+      void file_version_filter_PB();
+      void main_page_name_PB();
+      void layout_file_PB();
+      void ns_alias_PB();
 
       // tab 2- input
-      CS_SLOT_1(Private, void input_source_PB())
-      CS_SLOT_2(input_source_PB)
-
-      CS_SLOT_1(Private, void input_patterns_PB())
-      CS_SLOT_2(input_patterns_PB)
-
-      CS_SLOT_1(Private, void exclude_files_PB())
-      CS_SLOT_2(exclude_files_PB)
-
-      CS_SLOT_1(Private, void exclude_patterns_PB())
-      CS_SLOT_2(exclude_patterns_PB)
-
-      CS_SLOT_1(Private, void exclude_symbols_PB())
-      CS_SLOT_2(exclude_symbols_PB)
-
-      CS_SLOT_1(Private, void example_source_PB())
-      CS_SLOT_2(example_source_PB)
-
-      CS_SLOT_1(Private, void example_patterns_PB())
-      CS_SLOT_2(example_patterns_PB)
-
-      CS_SLOT_1(Private, void image_path_PB())
-      CS_SLOT_2(image_path_PB)
-
-      CS_SLOT_1(Private, void filter_program_PB())
-      CS_SLOT_2(filter_program_PB)
-
-      CS_SLOT_1(Private, void filter_patterns_PB())
-      CS_SLOT_2(filter_patterns_PB)
-
-      CS_SLOT_1(Private, void filter_source_patterns_PB())
-      CS_SLOT_2(filter_source_patterns_PB)
+      void input_source_PB();
+      void input_patterns_PB();
+      void exclude_files_PB();
+      void exclude_patterns_PB();
+      void exclude_symbols_PB();
+      void example_source_PB();
+      void example_patterns_PB();
+      void image_path_PB();
+      void filter_program_PB();
+      void filter_patterns_PB();
+      void filter_source_patterns_PB();
 
       // tab 2- index
-      CS_SLOT_1(Private, void ignore_prefix_PB())
-      CS_SLOT_2(ignore_prefix_PB)
+      void ignore_prefix_PB();
 
       // tab 2- messages
-      CS_SLOT_1(Private, void warn_logfile_PB())
-      CS_SLOT_2(warn_logfile_PB)
-
+      void warn_logfile_PB();
 
       // tab 2- source code
-      CS_SLOT_1(Private, void suffix_source_navtree_PB())
-      CS_SLOT_2(suffix_source_navtree_PB)
-
-      CS_SLOT_1(Private, void suffix_header_navtree_PB())
-      CS_SLOT_2(suffix_header_navtree_PB)
-
-      CS_SLOT_1(Private, void suffix_exclude_navtree_PB())
-      CS_SLOT_2(suffix_exclude_navtree_PB)
-
-      CS_SLOT_1(Private, void clang_options_PB())
-      CS_SLOT_2(clang_options_PB)
-
+      void valid_source_code();
+      void suffix_source_navtree_PB();
+      void suffix_header_navtree_PB();
+      void suffix_exclude_navtree_PB();
+      void clang_options_PB();
 
       // tab 2- preprocess
-      CS_SLOT_1(Private, void include_path_PB())
-      CS_SLOT_2(include_path_PB)
-
-      CS_SLOT_1(Private, void include_file_patterns_PB())
-      CS_SLOT_2(include_file_patterns_PB)
-
-      CS_SLOT_1(Private, void predefined_macros_PB())
-      CS_SLOT_2(predefined_macros_PB)
-
-      CS_SLOT_1(Private, void expand_as_defined_PB())
-      CS_SLOT_2(expand_as_defined_PB)
+      void include_path_PB();
+      void include_file_patterns_PB();
+      void predefined_macros_PB();
+      void expand_as_defined_PB();
 
       // tab 2- external
-      CS_SLOT_1(Private, void tag_files_PB())
-      CS_SLOT_2(tag_files_PB)
+      void tag_files_PB();
+      void gen_tagfile_PB();
+      void perl_path_PB();
 
-      CS_SLOT_1(Private, void gen_tagfile_PB())
-      CS_SLOT_2(gen_tagfile_PB)
-
-      CS_SLOT_1(Private, void perl_path_PB())
-      CS_SLOT_2(perl_path_PB)
-
-      // tab 2- look up (dot)
-      CS_SLOT_1(Private, void mscgen_path_PB())
-      CS_SLOT_2(mscgen_path_PB)
-
-      CS_SLOT_1(Private, void dia_path_PB())
-      CS_SLOT_2(dia_path_PB)
-
-      CS_SLOT_1(Private, void dot_font_name_PB())
-      CS_SLOT_2(dot_font_name_PB)
-
-      CS_SLOT_1(Private, void dot_font_path_PB())
-      CS_SLOT_2(dot_font_path_PB)
-
-      CS_SLOT_1(Private, void dot_path_PB())
-      CS_SLOT_2(dot_path_PB)
-
-      CS_SLOT_1(Private, void dot_file_dirs_PB())
-      CS_SLOT_2(dot_file_dirs_PB)
-
-      CS_SLOT_1(Private, void msc_file_dirs_PB())
-      CS_SLOT_2(msc_file_dirs_PB)
-
-      CS_SLOT_1(Private, void dia_file_dirs_PB())
-      CS_SLOT_2(dia_file_dirs_PB)
-
-      CS_SLOT_1(Private, void plantuml_jar_path_PB())
-      CS_SLOT_2(plantuml_jar_path_PB)
-
-      CS_SLOT_1(Private, void plantuml_inc_path_PB())
-      CS_SLOT_2(plantuml_inc_path_PB)
-
+      // tab 2- dot
+      void mscgen_path_PB();
+      void dia_path_PB();
+      void dot_font_name_PB();
+      void dot_font_path_PB();
+      void dot_path_PB();
+      void dot_file_dirs_PB();
+      void msc_file_dirs_PB();
+      void dia_file_dirs_PB();
+      void plantuml_jar_path_PB();
+      void plantuml_inc_path_PB();
 
       // tab 3 html
-      CS_SLOT_1(Private, void html_output_PB())
-      CS_SLOT_2(html_output_PB)
+      void html_output_PB();
+      void html_header_PB();
+      void html_footer_PB();
+      void html_stylesheets_PB();
+      void html_extra_files_PB();
 
-      CS_SLOT_1(Private, void html_header_PB())
-      CS_SLOT_2(html_header_PB)
+      void ghostscript_PB();
+      void mathjax_extensions_PB();
+      void search_data_file_PB();
+      void search_mappings_PB();
 
-      CS_SLOT_1(Private, void html_footer_PB())
-      CS_SLOT_2(html_footer_PB)
+      // tab 3 chm
+      void chm_file_PB();
+      void hhc_location_PB();
 
-      CS_SLOT_1(Private, void html_stylesheets_PB())
-      CS_SLOT_2(html_stylesheets_PB)
+      // tab 3 docbook
+      void docbook_output_PB();
 
-      CS_SLOT_1(Private, void html_extra_files_PB())
-      CS_SLOT_2(html_extra_files_PB)
+      // tab 3 latex
+      void latex_output_PB();
+      void latex_cmd_name_PB();
+      void make_index_cmd_name_PB();
 
-      CS_SLOT_1(Private, void ghostscript_PB())
-      CS_SLOT_2(ghostscript_PB)
+      void latex_extra_packages_PB();
+      void latex_header_PB();
+      void latex_footer_PB();
+      void latex_stylesheets_PB();
+      void latex_extra_files_PB();
+      void cite_bib_files_PB();
 
-      CS_SLOT_1(Private, void chm_file_PB())
-      CS_SLOT_2(chm_file_PB)
+      // tab 3 man
+      void man_output_PB();
 
-      CS_SLOT_1(Private, void hhc_location_PB())
-      CS_SLOT_2(hhc_location_PB)
+      // tab 3 qthelp
+      void qch_file_PB();
+      void qhp_cust_attrib_PB();
+      void qhp_sect_attrib_PB();
+      void qthelp_gen_path_PB();
 
-      CS_SLOT_1(Private, void qch_file_PB())
-      CS_SLOT_2(qch_file_PB)
+      // tab 3 rtf
+      void rtf_output_PB();
+      void rtf_stylesheet_PB();
+      void rtf_extension_PB();
 
-      CS_SLOT_1(Private, void qhp_cust_attrib_PB())
-      CS_SLOT_2(qhp_cust_attrib_PB)
-
-      CS_SLOT_1(Private, void qhp_sect_attrib_PB())
-      CS_SLOT_2(qhp_sect_attrib_PB)
-
-      CS_SLOT_1(Private, void qthelp_gen_path_PB())
-      CS_SLOT_2(qthelp_gen_path_PB)
-
-      CS_SLOT_1(Private, void mathjax_extensions_PB())
-      CS_SLOT_2(mathjax_extensions_PB)
-
-      CS_SLOT_1(Private, void search_data_file_PB())
-      CS_SLOT_2(search_data_file_PB)
-
-      CS_SLOT_1(Private, void search_mappings_PB())
-      CS_SLOT_2(search_mappings_PB)
-
-      // tab 3 look up (latex)
-      CS_SLOT_1(Private, void latex_output_PB())
-      CS_SLOT_2(latex_output_PB)
-
-      CS_SLOT_1(Private, void latex_cmd_name_PB())
-      CS_SLOT_2(latex_cmd_name_PB)
-
-      CS_SLOT_1(Private, void make_index_cmd_name_PB())
-      CS_SLOT_2(make_index_cmd_name_PB)
-
-      CS_SLOT_1(Private, void latex_extra_packages_PB())
-      CS_SLOT_2(latex_extra_packages_PB)
-
-      CS_SLOT_1(Private, void latex_header_PB())
-      CS_SLOT_2(latex_header_PB)
-
-      CS_SLOT_1(Private, void latex_footer_PB())
-      CS_SLOT_2(latex_footer_PB)
-
-      CS_SLOT_1(Private, void latex_stylesheets_PB())
-      CS_SLOT_2(latex_stylesheets_PB)
-
-      CS_SLOT_1(Private, void latex_extra_files_PB())
-      CS_SLOT_2(latex_extra_files_PB)
-
-      CS_SLOT_1(Private, void cite_bib_files_PB())
-      CS_SLOT_2(cite_bib_files_PB)
-
-      // tab 3 look up (rtf)
-      CS_SLOT_1(Private, void rtf_output_PB())
-      CS_SLOT_2(rtf_output_PB)
-
-      CS_SLOT_1(Private, void rtf_stylesheet_PB())
-      CS_SLOT_2(rtf_stylesheet_PB)
-
-      CS_SLOT_1(Private, void rtf_extension_PB())
-      CS_SLOT_2(rtf_extension_PB)
-
-      // tab 3 look up (man)
-      CS_SLOT_1(Private, void man_output_PB())
-      CS_SLOT_2(man_output_PB)
-
-      // tab 3 look up (xml)
-      CS_SLOT_1(Private, void xml_output_PB())
-      CS_SLOT_2(xml_output_PB)
-
-      // tab 3 look up (docbook)
-      CS_SLOT_1(Private, void docbook_output_PB())
-      CS_SLOT_2(docbook_output_PB)
+      // tab 3 xml
+      void xml_output_PB();
 
       // tab 4
-      CS_SLOT_1(Private, void runDoxyPress())
-      CS_SLOT_2(runDoxyPress)
+      void runDoxyPress();
+      void setArgs();
+      void showHtmlOutput();
+      void clearOutput();
+      void saveLog();
 
-      CS_SLOT_1(Private, void readStdout())
-      CS_SLOT_2(readStdout)
-
-      CS_SLOT_1(Private, void runComplete())
-      CS_SLOT_2(runComplete)
-
-      CS_SLOT_1(Private, void setArgs())
-      CS_SLOT_2(setArgs)
-
-      CS_SLOT_1(Private, void showHtmlOutput())
-      CS_SLOT_2(showHtmlOutput)
-
-      CS_SLOT_1(Private, void clearOutput())
-      CS_SLOT_2(clearOutput)
-
-      CS_SLOT_1(Private, void saveLog())
-      CS_SLOT_2(saveLog)
+      void readStdout();
+      void runComplete();
 };
 
 #endif

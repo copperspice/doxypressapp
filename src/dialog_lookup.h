@@ -42,29 +42,15 @@ class Dialog_LookUp : public QDialog
       QStandardItemModel *m_model;
       struct LookUpInfo m_data;
 
-      CS_SLOT_1(Private, void moveItemUp())
-      CS_SLOT_2(moveItemUp)
+      void moveItemUp();
+      void moveItemDown();
+      void getFile();
+      void getFolder();
+      void addItem();
+      void deleteItem();
+      void save();
+      void cancel();
 
-      CS_SLOT_1(Private, void moveItemDown())
-      CS_SLOT_2(moveItemDown)
-
-      CS_SLOT_1(Private, void getFile())
-      CS_SLOT_2(getFile)
-
-      CS_SLOT_1(Private, void getFolder())
-      CS_SLOT_2(getFolder)
-
-      CS_SLOT_1(Private, void addItem())
-      CS_SLOT_2(addItem)
-
-      CS_SLOT_1(Private, void deleteItem())
-      CS_SLOT_2(deleteItem)
-
-      CS_SLOT_1(Private, void save())
-      CS_SLOT_2(save)
-
-      CS_SLOT_1(Private, void cancel())
-      CS_SLOT_2(cancel)
 };
 
 #endif
