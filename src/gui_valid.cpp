@@ -295,6 +295,7 @@ void MainWindow::clearAllFields()
    m_ui->docbook_output->setText("docbook");
 
    // ** final step
+   m_doxypressFormat = DOXYPRESS_FORMAT;
    finalLoad();
 
    // adjust defaults in m_bigMap (do this after the finalLoad)

@@ -211,7 +211,6 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
    return retval;
 }
 
-// **
 void MainWindow::newDoxy()
 {
    if (querySave()) {
@@ -339,13 +338,13 @@ bool MainWindow::saveDoxyAs()
 {
    bool retval;
 
-   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"), m_settings.pathPrior,
-                                            tr("Json Files (*.json)"));
+   m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"),
+                  m_settings.pathPrior, tr("Json Files (*.json)"));
 
    if (m_curFile.isEmpty()) {
       retval = false;
 
-   } else {
+   } else {      
       retval = saveDoxy_Internal();
 
       if (retval) {
@@ -368,7 +367,7 @@ bool MainWindow::saveDoxy()
    if (m_doxypressFormat != DOXYPRESS_FORMAT)  {
 
       QString msg = "The current project file is using an older format. Saving will automatically "
-            "update to the new format.";
+                    "update to the new format.";
 
       QMessageBox msgB;
       msgB.setWindowTitle("Save Project File");
@@ -387,7 +386,6 @@ bool MainWindow::saveDoxy()
 
    if (m_curFile.isEmpty()) {
       retval = saveDoxyAs();
-
    } else {
       retval = saveDoxy_Internal();
    }

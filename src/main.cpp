@@ -19,41 +19,59 @@
 #include <QMessageBox>
 #include <QString>
 
+#include "doxy_build_info.h"
 #include "mainwindow.h"
 
+static void convert(QString fromFile, QString toFile);
+static void useage();
+
 int main(int argc, char *argv[])
-{
+{   
+   QApplication app(argc, argv);
+   app.setOrganizationName("CS");
+   app.setApplicationName("DoxyPressApp");
+
    // passed parameters
-   QStringList flagList;
+   QStringList argList;
 
    for (int k = 0; k < argc; ++k)   {
       QString value = argv[k];
+      argList.append(value);
+   } 
 
-      if (value.left(2) == "--") {
-         flagList.append(value);
+   if (argList.contains("--convert", Qt::CaseInsensitive)) {
+
+      int index = argList.indexOf("--convert", Qt::CaseInsensitive);
+
+      QString fromFile;
+      QString toFile;
+
+      if (index + 1 < argList.size()) {
+         fromFile = argList[index+1];
       }
-   }
 
-   QApplication app(argc, argv);
+      if (index + 2 < argList.size()) {
+         toFile   = argList[index+2];
+      }
 
-   if (flagList.contains("--help", Qt::CaseInsensitive)) {
-      QMessageBox msgBox;
-      msgBox.setWindowIcon(QIcon("://resources/doxypress.png"));
+      convert(fromFile, toFile);
+      exit(0);
 
-      msgBox.setText(QString().sprintf("Usage: %s [config file]", argv[0]));
-      msgBox.exec();
+   } else if (argList.contains("--help", Qt::CaseInsensitive) ||
+              argList.contains("--version", Qt::CaseInsensitive)) {
 
+      useage();
       exit(0);
    }
 
    try {
       MainWindow main;
 
-      int index = flagList.indexOf("--config", Qt::CaseInsensitive);
+      int index = argList.indexOf("--project", Qt::CaseInsensitive);
 
-      if (index > 0 && index + 1 < flagList.size()) {
-         // name of config file as an argument
-         main.openDoxy_Internal(flagList[index+1]);
+      if (index > 0 && index + 1 < argList.size()) {
+         // name of project file as an argument
+         main.openDoxy_Internal(argList[index+1]);
       }
 
       main.show();
@@ -78,5 +96,46 @@ int main(int argc, char *argv[])
          msgB.exec();
       }
    }
+
+   return 0;
 }
 
+
+static void useage()
+{
+   // console issues on windows, tell user to redirect
+
+   printf("\n");
+   printf("DoxyPressApp: Version %s\n", versionString);
+   printf("email: info@copperspice.com\n");
+
+   printf("\n");
+   printf("Usage: DoxyPessApp [OPTIONS] [project file name]\n");
+
+   printf("\n\n");
+   printf("Convert Doxygen project file to DoxyPress format: \n");
+   printf("   --convert  existing-doxygen-fileName  new-doxypress-fileName \n");
+}
+
+static void convert(QString fromFile, QString toFile)
+{
+   // console issues on windows, tell user to redirect
+   bool ok = true;
+
+   if (fromFile.isEmpty())  {
+      printf("Existing doxygen project file was not supplied\n");
+      ok = false;
+   }
+
+   if (toFile.isEmpty())   {
+      printf("New DoxyPress project file was not not supplied\n");
+      ok = false;
+   }
+
+   if (ok) {
+      MainWindow main;
+      main.autoConvert(fromFile, toFile);
+   } else {
+      printf("Convert aborted");
+   }
+}

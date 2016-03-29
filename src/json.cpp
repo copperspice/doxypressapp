@@ -464,7 +464,22 @@ void MainWindow::save_Cfg()
 // **
 void MainWindow::json_OpenDoxy(QByteArray data)
 {
-   QJsonDocument doc  = QJsonDocument::fromJson(data);
+   QJsonDocument doc = QJsonDocument::fromJson(data);
+
+   if (! doc.isObject()) {
+
+      if (data.contains("PROJECT_NUMBER"))  {
+         csError(tr("Open Project file"), tr("The selected file appears to be a Doxygen project file. To convert to "
+                    "a DoxyPress project file select Tools, then 'Convert to DoxyPress format'"));
+
+      } else {
+         csError(tr("Open Project file"), tr("The selected file is not a valid JSON file format, open "
+                    "project file aborted"));
+      }
+
+      return;
+   }
+
    QJsonObject object = doc.object();   
    int index;
 

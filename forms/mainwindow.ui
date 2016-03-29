@@ -10458,7 +10458,7 @@
   </action>
   <action name="actionImport">
    <property name="text">
-    <string>Convert Doxygen project to DoxyPress format</string>
+    <string>Convert Doxygen project file to DoxyPress format</string>
    </property>
    <property name="toolTip">
     <string>Import Doxygen File</string>
@@ -10892,8 +10892,8 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_latex"/>
   <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_html"/>
-  <buttongroup name="buttonGroup_latex"/>
  </buttongroups>
 </ui>

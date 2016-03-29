@@ -151,6 +151,8 @@ class MainWindow : public QMainWindow
       QString get_DirPath(QString message, QString path, enum RelativeX relativeTo);
       QString getSingleFile(QString title, QString fname, QString filter = "");
 
+      void autoConvert(QString fromFile, QString toFile);
+
    protected:
       void closeEvent(QCloseEvent *event);
 

@@ -1037,7 +1037,7 @@ void MainWindow::importDoxy()
 {   
    while (true) {
 
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open (old) Doxygen project file"), m_settings.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open Doxygen project file"), m_settings.pathPrior);
 
       if (fname.isEmpty()) {
          csError(tr("File Open"), tr("No file name was provided"));
@@ -1050,6 +1050,10 @@ void MainWindow::importDoxy()
          break;
       }
 
+      QFileInfo fi(file);
+      QString importPath = fi.absolutePath() + QDir::separator() + fi.baseName() + ".json";
+
+      // read file
       QByteArray data;
 
       data = file.readAll();
@@ -1072,16 +1076,16 @@ void MainWindow::importDoxy()
 
       // verify a few fields to ensure this is an old project file
       if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
-         csError(tr("DoxyPressApp Import"), tr("Doxygen (old) project file is missing required information, Import canceled"));
+         csError(tr("Convert Project File"), tr("Doxygen project file is missing required information, Convert aborted"));
          break;
       }
 
-      // ** get new file project file
-      fname = QFileDialog::getSaveFileName(this, tr("Save DoxyPress project file"), m_settings.pathPrior,
+      // ** save as new project file
+      fname = QFileDialog::getSaveFileName(this, tr("Save as DoxyPress project file"), importPath,
                                            tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
-         csError(tr("DoxyPressApp Import"), tr("No DoxyPress file name was provided, Import canceled"));
+         csError(tr("Convert Project File"), tr("No DoxyPress file name was provided, Convert aborted"));
          break;
 
       } else {
@@ -1120,3 +1124,43 @@ void MainWindow::importDoxy()
    }
 }
 
+void MainWindow::autoConvert(QString fromFile, QString toFile)
+{
+   QFile file(fromFile);
+   if (! file.open(QIODevice::ReadOnly)) {
+      printf("Error: Unable to open %s, error %s", csPrintable(fromFile), csPrintable(file.error()) );
+      return;
+   }
+
+   // read file
+   QByteArray data;
+
+   data = file.readAll();
+   file.close();
+
+   // strip comments
+   int posBeg;
+   int posEnd;
+
+   while (true) {
+      posBeg = data.indexOf("#");
+
+      if (posBeg == -1) {
+         break;
+      }
+
+      posEnd = data.indexOf("\n",posBeg);
+      data.remove(posBeg, posEnd-posBeg);
+   }
+
+   // verify a few fields to ensure this is an old project file
+   if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
+      printf("Doxygen project file is missing required information, Convert aborted");
+      return;
+   }
+
+   m_curFile = toFile;
+
+   convertDoxy(data);
+   saveDoxy_Internal();
+}
