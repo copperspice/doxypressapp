@@ -1399,7 +1399,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("INCLUDE_PATH",
       "This tag is used to specify one or more directories which contain include files."
       "<br><br>"
-      "This tag requires the tag 'SEARCH INCLUDES' is set to YES");
+      "This tag requires the tag 'ENABLE PREPROCESSING' and 'SEARCH INCLUDES' are set to YES");
 
    s_fullHelp.insert("INCLUDE_PATTERNS",
       "This tag is used to specify wildcard patterns (like *.h) "
