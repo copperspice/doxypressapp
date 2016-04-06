@@ -244,6 +244,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
    file.close();
 
    //
+   QString old_fName = m_curFile;
    m_curFile = fname;
    m_settings.pathPrior = this->pathName(fname);
 
@@ -253,13 +254,16 @@ bool MainWindow::openDoxy_Internal(const QString fname)
       rf_Update();
    }
 
-   //
-   json_OpenDoxy(data);   
+   if (json_OpenDoxy(data)) {
+      updateRunButtons();
+      clearOutput();
 
-   updateRunButtons();
-   clearOutput();
+      setDoxyTitle(false);
 
-   setDoxyTitle(false);
+   } else {
+      m_curFile = old_fName;
+
+   }
 
    return true;
 }

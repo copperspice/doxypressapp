@@ -193,7 +193,7 @@ class MainWindow : public QMainWindow
       QByteArray json_ReadFile();
       void save_ConfigFile();
 
-      void json_OpenDoxy(QByteArray data);
+      bool json_OpenDoxy(QByteArray data);
       QByteArray json_SaveDoxy();
       QString getDataList(QJsonObject &object, QString fieldData);
       QJsonArray putDataList(QString fieldData);

@@ -462,7 +462,7 @@ void MainWindow::save_Cfg()
 
 
 // **
-void MainWindow::json_OpenDoxy(QByteArray data)
+bool MainWindow::json_OpenDoxy(QByteArray data)
 {
    QJsonDocument doc = QJsonDocument::fromJson(data);
 
@@ -477,7 +477,7 @@ void MainWindow::json_OpenDoxy(QByteArray data)
                     "project file aborted"));
       }
 
-      return;
+      return false;
    }
 
    QJsonObject object = doc.object();   
@@ -1263,6 +1263,8 @@ void MainWindow::json_OpenDoxy(QByteArray data)
 
    // final step
    finalLoad();
+
+   return true;
 }
 
 QByteArray MainWindow::json_SaveDoxy()
