@@ -233,17 +233,14 @@ bool MainWindow::openDoxy_Internal(const QString fname)
 {  
    QFile file(fname);
 
-   if (! file.open(QIODevice::ReadOnly)) {
+   if (! file.open(QFile::ReadOnly | QFile::Text)) {
       QMessageBox::warning(this, tr("Error Opening: ") + fname, tr("Unable to open: ") + file.error());
       return false;
    }
 
-   QByteArray data;
-
-   data = file.readAll();
+   QByteArray data = file.readAll();
    file.close();
 
-   //
    QString old_fName = m_curFile;
    m_curFile = fname;
    m_settings.pathPrior = this->pathName(fname);
@@ -325,7 +322,7 @@ bool MainWindow::saveDoxy_Internal()
    QByteArray data = json_SaveDoxy();
    QFile file(m_curFile);
 
-   if (! file.open(QIODevice::WriteOnly)) {
+   if (! file.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
       QMessageBox::warning(this, tr("Error Saving: ") + m_curFile, tr("Unable to save: ") + file.error());
       return false;
    }

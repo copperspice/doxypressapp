@@ -133,8 +133,9 @@ void MainWindow::runDoxyPress()
 
       } else {
          m_ui->parameters_PB->setEnabled(false);
-         m_ui->save_log_PB->setEnabled(false);
+         m_ui->display_PB->setEnabled(false);
          m_ui->clear_PB->setEnabled(false);
+         m_ui->save_log_PB->setEnabled(false);
 
          m_running = true;
 
