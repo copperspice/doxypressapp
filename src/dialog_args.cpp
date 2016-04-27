@@ -40,6 +40,8 @@ Dialog_Args::Dialog_Args(MainWindow *m_owner, struct Args argsX)
       m_ui->dateTime->setDateTime(QDateTime::fromString(m_args.dateTime, dateTimeFormat) );
    } 
 
+   m_ui->deleteHtml->setChecked(m_args.deleteHtml);
+
    m_ui->generate_layout->setChecked(m_args.blank_layout);
 
    if (! m_args.layout.isEmpty()) {
@@ -63,9 +65,10 @@ void Dialog_Args::ok()
 {
    // update m_args
    m_args.setDateTime = m_ui->set_dateTime->isChecked();
+   QDateTime dt       = m_ui->dateTime->dateTime();
+   m_args.dateTime    = dt.toString(dateTimeFormat);
 
-   QDateTime dt    = m_ui->dateTime->dateTime();
-   m_args.dateTime = dt.toString(dateTimeFormat);
+   m_args.deleteHtml  = m_ui->deleteHtml->isChecked();
 
    m_args.blank_layout = m_ui->generate_layout->isChecked();
    m_args.layout       = m_ui->layout_fName->text();

@@ -73,6 +73,7 @@ enum RelativeX {
 struct Args {
    bool blank_layout;  
    bool setDateTime;
+   bool deleteHtml;
 
    QString layout; 
    QString dateTime;
@@ -212,9 +213,10 @@ class MainWindow : public QMainWindow
       bool m_modified;
 
       void runText_Append(const QString &text);
-      QString getHtmlOutputIndex() const;
       bool htmlOutputPresent() const;
       void updateRunButtons();
+      QString get_OutputDir() const;
+      void deleteOutputFiles(const QString &path);
 
       // help and label text color
       static QMap<QWidget *, HelpData> m_bigMap;
@@ -443,10 +445,10 @@ class MainWindow : public QMainWindow
       void setArgs();
       void showHtmlOutput();
       void clearOutput();
-      void saveLog();
+      void saveLog();      
 
       void readStdout();
-      void runComplete();
+      void runComplete();      
 };
 
 #endif

@@ -80,6 +80,11 @@ void MainWindow::runDoxyPress()
 
       QStringList args;
 
+      if (m_args.deleteHtml) {
+         QString path = get_OutputDir() + "/" + m_ui->html_output->text();
+         deleteOutputFiles(path);
+      }
+
       // make stdout unbuffered
       args.append("--b");
 
@@ -222,36 +227,6 @@ void MainWindow::runText_Append(const QString &text)
    cursor.insertText(text);
 }
 
-QString MainWindow::getHtmlOutputIndex() const
-{
-   QString retval = this->pathName(m_curFile);
-
-   QString outputDir = m_ui->output_dir->text();
-   QString htmlDir   = m_ui->html_output->text();
-
-   if (QFileInfo(outputDir).isAbsolute())  {
-      // override
-      retval = outputDir;
-
-   } else if (! outputDir.isEmpty())   {
-      // append
-      retval += "/" + outputDir;
-   }
-
-   if (QFileInfo(htmlDir).isAbsolute())  {
-      // override
-      retval = htmlDir;
-
-   } else if (! htmlDir.isEmpty())  {
-      // append
-      retval += "/" + htmlDir;
-   }
-
-   retval += "/index.html";
-
-   return retval;
-}
-
 void MainWindow::setArgs()
 {
    Dialog_Args *dw = new Dialog_Args(this, m_args);
@@ -271,28 +246,34 @@ void MainWindow::setArgs()
 bool MainWindow::htmlOutputPresent() const
 {
    bool generateHtml = m_ui->gen_html_CB1->isChecked();
-   QString dir = m_ui->output_dir->text();
 
-   if (! generateHtml || dir.isEmpty()) {
-      return false;
+   if (generateHtml) {
+
+      QString dir = get_OutputDir() + "/" + m_ui->html_output->text();
+
+      QString indexHtml = dir + "/index.html";
+      QFileInfo fi(indexHtml);
+
+      return (fi.exists() && fi.isFile());
    }
 
-   QString pathHtml = getHtmlOutputIndex();
-   QFileInfo fi(pathHtml);
-
-   return (fi.exists() && fi.isFile());
+   return false;
 }
 
 void MainWindow::showHtmlOutput()
-{
-   QString pathHtml = getHtmlOutputIndex();
-   QFileInfo fileInfo(pathHtml);
+{   
+   QString dir = get_OutputDir() + "/" + m_ui->html_output->text();
 
-   QString indexUrl = "file:///" + fileInfo.absoluteFilePath();
-   bool ok = QDesktopServices::openUrl(QUrl(indexUrl));
+   QString indexHtml = dir + "/index.html";
+   QFileInfo fileInfo(indexHtml);
 
-   if (! ok)  {
-      csError("Display HTML", "Unable to display generated documentation, " + indexUrl );
+   if (fileInfo.exists() && fileInfo.isFile()) {
+      QString indexUrl = "file:///" + fileInfo.absoluteFilePath();
+      bool ok = QDesktopServices::openUrl(QUrl(indexUrl));
+
+      if (! ok)  {
+         csError("Display HTML", "Unable to display generated documentation, " + indexUrl );
+      }
    }
 }
 
@@ -341,5 +322,49 @@ void MainWindow::updateRunButtons()
 
    bool isHtml = htmlOutputPresent();
    m_ui->display_PB->setEnabled(isHtml);
+}
+
+QString MainWindow::get_OutputDir() const
+{
+   QString outputDir  = m_ui->output_dir->text();
+   QString projectDir = pathName(m_curFile);
+
+   // test if outputdir is relative
+   if (QDir::isAbsolutePath(outputDir)) {
+      // do nothing
+
+   } else if (outputDir.isEmpty()) {
+      // outputdir was blank
+      outputDir = projectDir;
+
+   } else {
+      // outputdir was relative
+      outputDir = projectDir + "/" + outputDir;
+
+   }
+
+   return outputDir;
+}
+
+void MainWindow::deleteOutputFiles(const QString &path)
+{
+   QDir dir(path);
+
+   if (dir.exists() && htmlOutputPresent()) {
+
+      QFileInfoList fileInfoList = dir.entryInfoList(QDir::AllEntries | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot);
+
+      for (auto &fi : fileInfoList)  {
+
+         if (fi.isDir() && ! fi.isSymLink()) {
+            QDir temp(fi.filePath());
+            temp.removeRecursively();
+
+         } else {
+            QFile::remove(fi.filePath());
+
+         }
+      }
+   }
 }
 

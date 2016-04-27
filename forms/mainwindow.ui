@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -10258,7 +10258,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Passed Parameters</string>
+             <string>Options for DoxyPress</string>
             </property>
            </widget>
           </item>
@@ -10922,7 +10922,7 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_latex"/>
-  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_html"/>
+  <buttongroup name="buttonGroup_diagram"/>
  </buttongroups>
 </ui>

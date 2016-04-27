@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>352</height>
+    <width>587</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="font">
@@ -24,53 +24,129 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
-    <number>14</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="topMargin">
     <number>14</number>
    </property>
-   <property name="rightMargin">
-    <number>14</number>
+   <property name="bottomMargin">
+    <number>9</number>
    </property>
-   <item row="11" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
      </property>
-     <property name="text">
-      <string>Html Header:</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="minimumSize">
+         <size>
+          <width>140</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Set Date / Time:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="set_dateTime">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Generated on:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QDateTimeEdit" name="dateTime">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="date">
+         <date>
+          <year>2016</year>
+          <month>1</month>
+          <day>10</day>
+         </date>
+        </property>
+        <property name="time">
+         <time>
+          <hour>9</hour>
+          <minute>0</minute>
+          <second>0</second>
+         </time>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>1950</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy/MM/dd HH:mm:ss</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <spacer name="horizontalSpacer_1">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>160</width>
+          <height>17</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QLabel" name="dateFormat">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>yyyy/MM/dd HH:mm:ss </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="9" column="2" colspan="2">
-    <widget class="QLineEdit" name="layout_fName">
-     <property name="minimumSize">
-      <size>
-       <width>400</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="2" colspan="2">
-    <widget class="QLineEdit" name="html_header">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2">
+   <item>
     <spacer name="verticalSpacer_1">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -86,59 +162,38 @@
      </property>
     </spacer>
    </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Layout File Name:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Set Date / Time:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QCheckBox" name="set_dateTime">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
       <string/>
      </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete output files for HTML before running DoxyPress:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="deleteHtml">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="15" column="0">
-    <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Expanding</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>30</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="10" column="2">
+   <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -154,98 +209,163 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Date:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QDateTimeEdit" name="dateTime">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="date">
-      <date>
-       <year>2016</year>
-       <month>1</month>
-       <day>10</day>
-      </date>
-     </property>
-     <property name="time">
-      <time>
-       <hour>9</hour>
-       <minute>0</minute>
-       <second>0</second>
-      </time>
-     </property>
-     <property name="minimumDate">
-      <date>
-       <year>1950</year>
-       <month>1</month>
-       <day>1</day>
-      </date>
-     </property>
-     <property name="displayFormat">
-      <string>yyyy/MM/dd HH:mm:ss</string>
-     </property>
-     <property name="calendarPopup">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2">
-    <widget class="QLabel" name="dateFormat">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>yyyy/MM/dd HH:mm:ss </string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="2">
-    <widget class="QCheckBox" name="generate_layout">
-     <property name="text">
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
       <string/>
      </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="rightMargin">
+       <number>14</number>
+      </property>
+      <property name="bottomMargin">
+       <number>14</number>
+      </property>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Html Footer:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>15</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Html CSS StyleSheet:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="html_header">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="layout_fName">
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Layout File Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="generate_layout">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="minimumSize">
+         <size>
+          <width>140</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Generate new Layout:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="html_css"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Html Header:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="html_footer">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="13" column="0">
-    <widget class="QLabel" name="label_7">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="text">
-      <string>Html Footer:</string>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
      </property>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
    </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Generate new Layout:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="21" column="0" colspan="4">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <property name="spacing">
       <number>8</number>
@@ -311,51 +431,9 @@
      </item>
     </layout>
    </item>
-   <item row="14" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Html CSS StyleSheet:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3">
-    <spacer name="horizontalSpacer_1">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>200</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="13" column="2" colspan="2">
-    <widget class="QLineEdit" name="html_footer">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="2" colspan="2">
-    <widget class="QLineEdit" name="html_css"/>
-   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>set_dateTime</tabstop>
-  <tabstop>dateTime</tabstop>
   <tabstop>generate_layout</tabstop>
   <tabstop>layout_fName</tabstop>
   <tabstop>html_header</tabstop>

@@ -60,7 +60,6 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
    if (relativeTo != ABSOLUTE_ONLY) {
       // part 1 - find the real outputDir
 
-      // a
       projectDir = pathName(m_curFile);
 
       // test if outputdir is relative
@@ -79,7 +78,7 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
 
       }
 
-      // b
+      //
       if (relativeTo == PROJECT_DIR) {
 
          if (QDir::isAbsolutePath(initialPath) )  {
