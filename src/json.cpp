@@ -503,6 +503,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->optimize_java_RB->setChecked(       object.value("optimize-java").toBool());
       m_ui->optimize_c_RB->setChecked(          object.value("optimize-c").toBool());
       m_ui->optimize_fortran_RB->setChecked(    object.value("optimize-fortran").toBool());
+      m_ui->optimize_python_RB->setChecked(     object.value("optimize-python").toBool());
 
       m_ui->gen_html_CB1->setChecked(           object.value("generate-html").toBool());
 
@@ -900,6 +901,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->optimize_java_RB->setChecked(       genObj.value("optimize-java").toBool());
       m_ui->optimize_c_RB->setChecked(          genObj.value("optimize-c").toBool());
       m_ui->optimize_fortran_RB->setChecked(    genObj.value("optimize-fortran").toBool());
+      m_ui->optimize_python_RB->setChecked(     genObj.value("optimize-python").toBool());
 
       m_ui->gen_html_CB1->setChecked(           htmlObj.value("generate-html").toBool());
 
@@ -1307,6 +1309,7 @@ QByteArray MainWindow::json_SaveDoxy()
    genObj.insert("optimize-java",         m_ui->optimize_java_RB->isChecked());
    genObj.insert("optimize-c",            m_ui->optimize_c_RB->isChecked());
    genObj.insert("optimize-fortran",      m_ui->optimize_fortran_RB->isChecked());
+   genObj.insert("optimize-python",       m_ui->optimize_python_RB->isChecked());
 
    htmlObj.insert("generate-html",        m_ui->gen_html_CB1->isChecked());
 

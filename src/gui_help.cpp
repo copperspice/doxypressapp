@@ -488,14 +488,20 @@ void MainWindow::configFullHelp()
       "The default value is: NO");
 
    s_fullHelp.insert("OPTIMIZE_C_RB",
-      "Set this tag if your project consists of C source code. "
-      "DoxyPress will generate documentation tailored for C. "
+      "Set this tag if your project consists of PHP or C source code. "
+      "DoxyPress will generate documentation tailored for these languages. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("OPTIMIZE_FORTRAN_RB",
       "Set this tag if your project consists of Fortran source code. "
       "DoxyPress will generate documentation tailored for Fortran. "
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("OPTIMIZE_PYTHON_RB",
+      "Set this tag if your project consists of Python source code. "
+      "DoxyPress will generate documentation tailored for Python. "
       "<br><br>"
       "The default value is: NO");
 

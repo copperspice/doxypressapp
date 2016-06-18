@@ -64,6 +64,13 @@ void MainWindow::convertDoxy(QByteArray data)
       isCpp = false;
    }
 
+   tempBool = convert_Bool(data,"OPTIMIZE_FOR_PYTHON");
+   m_ui->optimize_python_RB->setChecked(tempBool);
+
+   if (tempBool)  {
+      isCpp = false;
+   }
+
    if (isCpp)  {
       m_ui->optimize_cplus_RB->setChecked(true);
    }
