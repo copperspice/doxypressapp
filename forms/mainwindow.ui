@@ -33,11 +33,11 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
-        <string>Setup</string>
+        <string>&amp;Setup</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_22">
         <property name="leftMargin">
@@ -1032,7 +1032,7 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Build Settings</string>
+        <string>&amp;Build Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -1134,7 +1134,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>12</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0,1,1,0">
@@ -6682,7 +6682,7 @@
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Output Formats</string>
+        <string>&amp;Output Formats</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_39">
         <item row="2" column="0">
@@ -6797,7 +6797,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>7</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_31" columnstretch="0,0,1,0">
@@ -8462,28 +8462,7 @@
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QComboBox" name="latex_paper_type_CM">
-               <item>
-                <property name="text">
-                 <string>a4</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>letter</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>legal</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>executive</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="latex_paper_type_CM"/>
              </item>
              <item row="6" column="1" rowspan="2" colspan="2">
               <widget class="QPlainTextEdit" name="latex_extra_packages">
@@ -10100,7 +10079,7 @@
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Run</string>
+        <string>&amp;Run</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -10237,7 +10216,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Run DoxyPress</string>
+             <string>Ru&amp;n DoxyPress</string>
             </property>
            </widget>
           </item>
@@ -10265,7 +10244,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Options for DoxyPress</string>
+             <string>O&amp;ptions for DoxyPress</string>
             </property>
            </widget>
           </item>
@@ -10299,7 +10278,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Display HTML</string>
+             <string>&amp;Display HTML</string>
             </property>
            </widget>
           </item>
@@ -10327,7 +10306,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Clear Screen</string>
+             <string>&amp;Clear Screen</string>
             </property>
            </widget>
           </item>
@@ -10361,7 +10340,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Save Log</string>
+             <string>Save &amp;Log</string>
             </property>
            </widget>
           </item>
@@ -10929,8 +10908,8 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_latex"/>
-  <buttongroup name="buttonGroup_diagram"/>
  </buttongroups>
 </ui>

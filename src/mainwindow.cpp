@@ -57,7 +57,6 @@ MainWindow::MainWindow()
       }
    }
 
-
    for (int k = 0; k < m_ui->output_TreeWidget->topLevelItemCount(); ++k) {
 
       QTreeWidgetItem *item = m_ui->output_TreeWidget->topLevelItem(k);
@@ -153,7 +152,7 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 04.27.2016</h5></center></p>").arg(versionString));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # 08.25.2016</h5></center></p>").arg(versionString));
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);
@@ -362,15 +361,19 @@ void MainWindow::createConnections()
 void MainWindow::createShortCuts()
 {
    struct {
+      QKeySequence key_new;
       QKeySequence key_open;
-      QKeySequence key_close;
+      QKeySequence key_reload;
       QKeySequence key_save;
       QKeySequence key_saveAs;
       QKeySequence key_exit;
       QKeySequence key_DoxyHelp;
    }  struct_key;
 
+
+   struct_key.key_new       = QKeySequence(QKeySequence::New);
    struct_key.key_open      = QKeySequence(QKeySequence::Open);
+   struct_key.key_reload    = QKeySequence(QKeySequence::Refresh);
    struct_key.key_save      = QKeySequence(QKeySequence::Save);
    struct_key.key_saveAs    = QKeySequence(QKeySequence::SaveAs);
    struct_key.key_exit      = QKeySequence(QKeySequence::Quit);
@@ -384,7 +387,9 @@ void MainWindow::createShortCuts()
 #ifdef Q_OS_MAC
 #endif
 
+   m_ui->actionNew->setShortcut(QKeySequence(struct_key.key_new));
    m_ui->actionOpen->setShortcut(QKeySequence(struct_key.key_open));
+   m_ui->actionReload->setShortcut(QKeySequence(struct_key.key_reload));
    m_ui->actionSave->setShortcut(QKeySequence(struct_key.key_save));
    m_ui->actionSave_As->setShortcut(QKeySequence(struct_key.key_saveAs));
    m_ui->actionExit->setShortcut(QKeySequence(struct_key.key_exit));

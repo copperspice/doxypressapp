@@ -210,7 +210,7 @@ void MainWindow::runComplete()
 
    m_ui->runText->ensureCursorVisible();
 
-   m_ui->run_PB->setText(tr("Run DoxyPress"));
+   m_ui->run_PB->setText(tr("Ru&n DoxyPress"));
    m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
    m_running = false;
