@@ -14,6 +14,7 @@ aclocal.m4
 configure
 config.log
 error.log
+do-build
 
 /bin/src
 /bin/*.cpp

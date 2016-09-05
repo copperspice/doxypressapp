@@ -11,6 +11,7 @@ gcclibs=libgcc_s_*-1  libstdc++-6  libwinpthread-1
 
 # list of CopperSpice libraries
 cslibs=Core Gui Network Xml
+csver=1.3
 
 # location of includes
 AM_CXXFLAGS+=-I../src
@@ -66,7 +67,7 @@ deploy : all
 
 	cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
 
-	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%1.0.dylib,$(cslibs)) $(deployapp)/Frameworks
+	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%$(csver).dylib,$(cslibs)) $(deployapp)/Frameworks
 
 	for binary in $(deployapp)/MacOS/* $(deployapp)/Frameworks/* ; do \
 	\
@@ -89,14 +90,14 @@ deploy : all
 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)
 
 	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)%.dll,$(gcclibs))  $(deploydir)
-	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%1-0.dll,$(cslibs))  $(deploydir)
+	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%$(csver)-0.dll,$(cslibs))  $(deploydir)
 endif
 
 # search path for source
 VPATH = ../
 
 # linking
-DoxyPressApp_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
+DoxyPressApp_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%$(csver),$(cslibs))
 
 if OSTYPE_WIN
    # used by xp only
