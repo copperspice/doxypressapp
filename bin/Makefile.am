@@ -63,8 +63,8 @@ deploy : all
 	echo "APPL????" > $(deployapp)/PkgInfo
 
 	touch $(deployapp)/Resources/empty.lproj
-	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
 
+	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
 	cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
 
 	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%$(csver).dylib,$(cslibs)) $(deployapp)/Frameworks
