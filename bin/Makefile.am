@@ -90,7 +90,7 @@ deploy : all
 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)
 
 	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)%.dll,$(gcclibs))  $(deploydir)
-	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%$(csver)-0.dll,$(cslibs))  $(deploydir)
+	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%$(csver).dll,$(cslibs))  $(deploydir)
 endif
 
 # search path for source
