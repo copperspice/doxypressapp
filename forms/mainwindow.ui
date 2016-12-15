@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -1035,7 +1035,7 @@
         <string>&amp;Build Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QSplitter" name="build_Splitter">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1620,12 +1620,15 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Build_Config">
-            <layout class="QGridLayout" name="gridLayout_12">
+            <layout class="QGridLayout" name="gridLayout_12" columnstretch="0,0,1,0,2">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
+             </property>
+             <property name="horizontalSpacing">
+              <number>20</number>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_t2_35">
@@ -2819,7 +2822,7 @@
               <number>14</number>
              </property>
              <property name="horizontalSpacing">
-              <number>8</number>
+              <number>6</number>
              </property>
              <item row="6" column="1" colspan="2">
               <widget class="QLineEdit" name="layout_file">
@@ -2949,33 +2952,6 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="bb_style_CB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_147">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Special Style Comments:&lt;br/&gt;(Experimental)</string>
-               </property>
-               <property name="buddy">
-                <cstring>bb_style_CB</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="3">
               <widget class="QPushButton" name="layout_file_PB">
                <property name="maximumSize">
@@ -3027,7 +3003,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="2">
+             <item row="9" column="2">
               <spacer name="verticalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -4205,9 +4181,6 @@
              <property name="topMargin">
               <number>14</number>
              </property>
-             <property name="rightMargin">
-              <number>9</number>
-             </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_289">
                <property name="font">
@@ -5355,14 +5328,14 @@
                 </font>
                </property>
                <property name="text">
-                <string>Note: When clang processing is enabled, only the Predefined Macro tag will be used.</string>
+                <string>Note: When clang processing is enabled, only the Predefined Macro tag on this screen will be used.</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
            <widget class="QWidget" name="page_External">
-            <layout class="QGridLayout" name="gridLayout_21">
+            <layout class="QGridLayout" name="gridLayout_21" columnstretch="0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
@@ -5602,78 +5575,36 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_Dot_A">
-            <layout class="QGridLayout" name="gridLayout_59" columnstretch="0,0,1,0,0,0,0">
+            <layout class="QGridLayout" name="gridLayout_14" columnstretch="0,0,1,0">
              <property name="leftMargin">
               <number>14</number>
              </property>
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="23" column="0">
-              <widget class="QLabel" name="label_694">
+             <item row="22" column="0">
+              <widget class="QLabel" name="label_2">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Directory graph:</string>
+                <string>Called by graph:</string>
                </property>
                <property name="buddy">
-                <cstring>directory_graph_CB</cstring>
+                <cstring>dot_called_by_CB2</cstring>
                </property>
               </widget>
              </item>
-             <item row="19" column="0">
-              <widget class="QLabel" name="label_692">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Call graph:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_call_CB2</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="26" column="0" colspan="7">
-              <spacer name="verticalSpacer_36">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="19" column="1">
-              <widget class="QCheckBox" name="dot_call_CB2">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="class_diagrams_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="22" column="1">
-              <widget class="QCheckBox" name="dot_hierarchy_CB2">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="hide_undoc_relations_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
+             <item row="7" column="0">
               <widget class="QLabel" name="label_681">
                <property name="font">
                 <font>
@@ -5688,124 +5619,144 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="have_dot_CB">
+             <item row="17" column="1">
+              <widget class="QSpinBox" name="uml_limit_num_fields_SB"/>
+             </item>
+             <item row="15" column="0">
+              <widget class="QLabel" name="label_686">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Group graphs:</string>
+               </property>
+               <property name="buddy">
+                <cstring>group_graphs_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_698">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_234">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot font path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_font_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="20" column="0">
+              <widget class="QLabel" name="label_689">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Included by graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_included_by_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QSpinBox" name="dot_font_size_SB"/>
+             </item>
+             <item row="14" column="1">
+              <widget class="QCheckBox" name="dot_collaboration_CB2">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="24" column="1">
-              <widget class="QComboBox" name="dot_image_format_CM"/>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_682">
+             <item row="17" column="0">
+              <widget class="QLabel" name="label_688">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Dot number of threads</string>
+                <string>Uml limit number of fields:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_num_threads_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_690">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Template relations:</string>
-               </property>
-               <property name="buddy">
-                <cstring>template_relations_CB</cstring>
+                <cstring>uml_limit_num_fields_SB</cstring>
                </property>
               </widget>
              </item>
              <item row="6" column="0">
-              <widget class="QLabel" name="label_51">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
+              <spacer name="verticalSpacer_28">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-               <property name="text">
-                <string>Dot font name:</string>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
-               <property name="buddy">
-                <cstring>dot_font_name</cstring>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>6</height>
+                </size>
                </property>
-              </widget>
+              </spacer>
              </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_684">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Collaboration graph:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_collaboration_CB2</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1">
-              <widget class="QCheckBox" name="dot_class_graph_CB2">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="hide_undoc_relations_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_233">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_680">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Dia path:</string>
+                <string>Hide undocumented relations:</string>
                </property>
                <property name="buddy">
-                <cstring>dia_path</cstring>
+                <cstring>hide_undoc_relations_CB</cstring>
                </property>
               </widget>
              </item>
-             <item row="25" column="1">
-              <widget class="QCheckBox" name="interactive_svg_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="24" column="0">
-              <widget class="QLabel" name="label_696">
+             <item row="21" column="0">
+              <widget class="QLabel" name="label_692">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Dot image format:</string>
+                <string>Call graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_image_format_CM</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="uml_look_CB">
-               <property name="text">
-                <string/>
+                <cstring>dot_call_CB2</cstring>
                </property>
               </widget>
              </item>
@@ -5824,7 +5775,161 @@
                </property>
               </widget>
              </item>
-             <item row="25" column="0">
+             <item row="16" column="1">
+              <widget class="QCheckBox" name="uml_look_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_682">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot number of threads</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_num_threads_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="label_685">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Class graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_class_graph_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="20" column="1">
+              <widget class="QCheckBox" name="dot_included_by_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="0">
+              <widget class="QLabel" name="label_687">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Uml look:</string>
+               </property>
+               <property name="buddy">
+                <cstring>uml_look_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="21" column="1">
+              <widget class="QCheckBox" name="dot_call_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="22" column="1">
+              <widget class="QCheckBox" name="dot_called_by_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1">
+              <widget class="QCheckBox" name="group_graphs_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="0">
+              <widget class="QLabel" name="label_691">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Include graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_include_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_683">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot font size:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_font_size_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="0">
+              <widget class="QLabel" name="label_690">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Template relations:</string>
+               </property>
+               <property name="buddy">
+                <cstring>template_relations_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="26" column="1">
+              <widget class="QCheckBox" name="interactive_svg_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="label_684">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Collaboration graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_collaboration_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="1">
+              <widget class="QCheckBox" name="dot_include_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="26" column="0">
               <widget class="QLabel" name="label_697">
                <property name="font">
                 <font>
@@ -5838,6 +5943,9 @@
                 <cstring>interactive_svg_CB</cstring>
                </property>
               </widget>
+             </item>
+             <item row="25" column="1">
+              <widget class="QComboBox" name="dot_image_format_CM"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_232">
@@ -5854,51 +5962,136 @@
                </property>
               </widget>
              </item>
-             <item row="23" column="1">
+             <item row="9" column="1">
+              <widget class="QSpinBox" name="dot_num_threads_SB"/>
+             </item>
+             <item row="25" column="0">
+              <widget class="QLabel" name="label_696">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot image format:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_image_format_CM</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="24" column="1">
               <widget class="QCheckBox" name="directory_graph_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_683">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot font size:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_font_size_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="1" colspan="6">
-              <widget class="QCheckBox" name="dot_included_by_CB2">
+             <item row="18" column="1">
+              <widget class="QCheckBox" name="template_relations_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="17" column="0">
-              <widget class="QLabel" name="label_689">
+             <item row="4" column="0">
+              <spacer name="verticalSpacer_26">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>6</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_51">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Included by graph:</string>
+                <string>Dot font name:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_included_by_CB2</cstring>
+                <cstring>dot_font_name</cstring>
                </property>
               </widget>
              </item>
-             <item row="1" column="6">
+             <item row="24" column="0">
+              <widget class="QLabel" name="label_694">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Directory graph:</string>
+               </property>
+               <property name="buddy">
+                <cstring>directory_graph_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="23" column="1">
+              <widget class="QCheckBox" name="dot_hierarchy_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="23" column="0">
+              <widget class="QLabel" name="label_693">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Graphical hierarchy</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_hierarchy_CB2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_233">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dia path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dia_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="have_dot_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QCheckBox" name="dot_class_graph_CB2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
               <widget class="QPushButton" name="mscgen_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -5922,88 +6115,7 @@
                </property>
               </widget>
              </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="label_686">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Group graphs:</string>
-               </property>
-               <property name="buddy">
-                <cstring>group_graphs_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="class_diagrams_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_680">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide undocumented relations:</string>
-               </property>
-               <property name="buddy">
-                <cstring>hide_undoc_relations_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_687">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Uml look:</string>
-               </property>
-               <property name="buddy">
-                <cstring>uml_look_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="dot_collaboration_CB2">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1" colspan="6">
-              <widget class="QCheckBox" name="template_relations_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_685">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Class graph:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_class_graph_CB2</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="6">
+             <item row="2" column="3">
               <widget class="QPushButton" name="dia_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -6027,93 +6139,25 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="label_688">
+             <item row="10" column="3">
+              <widget class="QPushButton" name="dot_font_name_PB">
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Uml limit number of fields:</string>
-               </property>
-               <property name="buddy">
-                <cstring>uml_limit_num_fields_SB</cstring>
+                <string>►</string>
                </property>
               </widget>
              </item>
-             <item row="12" column="1">
-              <widget class="QCheckBox" name="group_graphs_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="1">
-              <widget class="QCheckBox" name="dot_include_CB2">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="0">
-              <widget class="QLabel" name="label_691">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Include graph:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_include_CB2</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_234">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot font path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_font_path</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="5">
-              <widget class="QLineEdit" name="dia_path">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="5">
-              <widget class="QLineEdit" name="mscgen_path">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1" colspan="5">
-              <widget class="QLineEdit" name="dot_font_path">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="6">
+             <item row="12" column="3">
               <widget class="QPushButton" name="dot_font_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -6137,44 +6181,25 @@
                </property>
               </widget>
              </item>
-             <item row="22" column="0">
-              <widget class="QLabel" name="label_693">
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="mscgen_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
-               <property name="text">
-                <string>Graphical hierarchy</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_hierarchy_CB2</cstring>
-               </property>
               </widget>
              </item>
-             <item row="20" column="0">
-              <widget class="QLabel" name="label_2">
+             <item row="2" column="1" colspan="2">
+              <widget class="QLineEdit" name="dia_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
-               <property name="text">
-                <string>Called by graph:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_called_by_CB2</cstring>
-               </property>
               </widget>
              </item>
-             <item row="20" column="1">
-              <widget class="QCheckBox" name="dot_called_by_CB2">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1" colspan="5">
+             <item row="10" column="1" colspan="2">
               <widget class="QLineEdit" name="dot_font_name">
                <property name="font">
                 <font>
@@ -6183,464 +6208,16 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="6">
-              <widget class="QPushButton" name="dot_font_name_PB">
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+             <item row="12" column="1" colspan="2">
+              <widget class="QLineEdit" name="dot_font_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QSpinBox" name="dot_num_threads_SB"/>
-             </item>
-             <item row="8" column="1">
-              <widget class="QSpinBox" name="dot_font_size_SB"/>
-             </item>
-             <item row="14" column="1">
-              <widget class="QSpinBox" name="uml_limit_num_fields_SB"/>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="page_Dot_B">
-            <layout class="QGridLayout" name="gridLayout_9" columnstretch="0,0,1,0">
-             <property name="leftMargin">
-              <number>14</number>
-             </property>
-             <property name="topMargin">
-              <number>14</number>
-             </property>
-             <item row="11" column="1">
-              <widget class="QSpinBox" name="dot_graph_max_depth_SB"/>
-             </item>
-             <item row="16" column="0">
-              <spacer name="verticalSpacer_56">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="10" column="1">
-              <widget class="QSpinBox" name="dot_graph_max_nodes_SB"/>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_879">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot graph max nodes:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_graph_max_nodes_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1">
-              <widget class="QCheckBox" name="dot_cleanup_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="label_808">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate legend:</string>
-               </property>
-               <property name="buddy">
-                <cstring>gen_legend_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <widget class="QCheckBox" name="dot_transparent_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_426">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Plantuml include path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>plantuml_inc_path</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="dot_multiple_targets_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="label_809">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot cleanup:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_cleanup_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_695">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_path</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_807">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot multiple targets:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_multiple_targets_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_424">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>MscFile directories:</string>
-               </property>
-               <property name="buddy">
-                <cstring>msc_file_dirs</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_425">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Diafile directories:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dia_file_dirs</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="label_884">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot transparent:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_transparent_CB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_423">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot file directories:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_file_dirs</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_885">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Dot graph max depth:</string>
-               </property>
-               <property name="buddy">
-                <cstring>dot_graph_max_depth_SB</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="1">
-              <widget class="QCheckBox" name="gen_legend_CB">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_810">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Plantuml jar path:</string>
-               </property>
-               <property name="buddy">
-                <cstring>plantuml_jar_path</cstring>
                </property>
               </widget>
              </item>
              <item row="8" column="3">
-              <widget class="QPushButton" name="plantuml_inc_path_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="plantuml_inc_path">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3">
-              <widget class="QPushButton" name="dia_file_dirs_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="dia_file_dirs">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="3">
-              <widget class="QPushButton" name="plantuml_jar_path_PB">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1" colspan="2">
-              <widget class="QLineEdit" name="plantuml_jar_path">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QPushButton" name="msc_file_dirs_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="msc_file_dirs">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QPushButton" name="dot_file_dirs_PB">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>28</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>►</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" rowspan="2" colspan="2">
-              <widget class="QPlainTextEdit" name="dot_file_dirs">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>90</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
               <widget class="QPushButton" name="dot_path_PB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -6664,12 +6241,447 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1" colspan="2">
+             <item row="8" column="1" colspan="2">
               <widget class="QLineEdit" name="dot_path">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
+               </property>
+              </widget>
+             </item>
+             <item row="27" column="0">
+              <spacer name="verticalSpacer_36">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="5" column="0" colspan="4">
+              <widget class="Line" name="line">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_Dot_B">
+            <layout class="QGridLayout" name="gridLayout_9" columnstretch="0,0,1,0">
+             <property name="leftMargin">
+              <number>14</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_879">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot graph max nodes:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_graph_max_nodes_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QPushButton" name="dot_file_dirs_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QPushButton" name="dia_file_dirs_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_424">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>MscFile directories:</string>
+               </property>
+               <property name="buddy">
+                <cstring>msc_file_dirs</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QSpinBox" name="dot_graph_max_depth_SB"/>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="dot_transparent_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="3">
+              <widget class="QPushButton" name="plantuml_jar_path_PB">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_423">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot file directories:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_file_dirs</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <widget class="QCheckBox" name="dot_cleanup_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QCheckBox" name="gen_legend_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QSpinBox" name="dot_graph_max_nodes_SB"/>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="label_809">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot cleanup:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_cleanup_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <spacer name="verticalSpacer_56">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="label_808">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate legend:</string>
+               </property>
+               <property name="buddy">
+                <cstring>gen_legend_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_426">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Plantuml include path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>plantuml_inc_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="dot_multiple_targets_CB">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QPushButton" name="msc_file_dirs_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_807">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot multiple targets:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_multiple_targets_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_885">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot graph max depth:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_graph_max_depth_SB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_810">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Plantuml jar path:</string>
+               </property>
+               <property name="buddy">
+                <cstring>plantuml_jar_path</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_884">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dot transparent:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dot_transparent_CB</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_425">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Diafile directories:</string>
+               </property>
+               <property name="buddy">
+                <cstring>dia_file_dirs</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="3">
+              <widget class="QPushButton" name="plantuml_inc_path_PB">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="msc_file_dirs">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="dot_file_dirs">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="plantuml_inc_path">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1" colspan="2">
+              <widget class="QLineEdit" name="plantuml_jar_path">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" rowspan="2" colspan="2">
+              <widget class="QPlainTextEdit" name="dia_file_dirs">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>90</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -6797,7 +6809,7 @@
           </widget>
           <widget class="QStackedWidget" name="output_StackedWidget">
            <property name="currentIndex">
-            <number>7</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="page_Html_A">
             <layout class="QGridLayout" name="gridLayout_31" columnstretch="0,0,1,0">
@@ -10637,7 +10649,6 @@
   <tabstop>layout_file_PB</tabstop>
   <tabstop>ns_alias</tabstop>
   <tabstop>ns_alias_PB</tabstop>
-  <tabstop>bb_style_CB</tabstop>
   <tabstop>tcl_subst</tabstop>
   <tabstop>tcl_subst_PB</tabstop>
   <tabstop>language_mapping</tabstop>
@@ -10733,6 +10744,8 @@
   <tabstop>dia_path_PB</tabstop>
   <tabstop>hide_undoc_relations_CB</tabstop>
   <tabstop>have_dot_CB</tabstop>
+  <tabstop>dot_path</tabstop>
+  <tabstop>dot_path_PB</tabstop>
   <tabstop>dot_num_threads_SB</tabstop>
   <tabstop>dot_font_name</tabstop>
   <tabstop>dot_font_name_PB</tabstop>
@@ -10753,14 +10766,12 @@
   <tabstop>directory_graph_CB</tabstop>
   <tabstop>dot_image_format_CM</tabstop>
   <tabstop>interactive_svg_CB</tabstop>
-  <tabstop>dot_path</tabstop>
-  <tabstop>dot_path_PB</tabstop>
-  <tabstop>dot_file_dirs</tabstop>
-  <tabstop>dot_file_dirs_PB</tabstop>
   <tabstop>msc_file_dirs</tabstop>
   <tabstop>msc_file_dirs_PB</tabstop>
   <tabstop>dia_file_dirs</tabstop>
   <tabstop>dia_file_dirs_PB</tabstop>
+  <tabstop>dot_file_dirs</tabstop>
+  <tabstop>dot_file_dirs_PB</tabstop>
   <tabstop>plantuml_jar_path</tabstop>
   <tabstop>plantuml_jar_path_PB</tabstop>
   <tabstop>plantuml_inc_path</tabstop>
@@ -10909,7 +10920,7 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_diagram"/>
-  <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_latex"/>
+  <buttongroup name="buttonGroup_html"/>
  </buttongroups>
 </ui>

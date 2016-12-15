@@ -177,7 +177,8 @@ void MainWindow::clearAllFields()
    m_ui->main_page_name->setText("");
    m_ui->main_page_omit->setChecked(false);   
    m_ui->ns_alias->setPlainText("");
-   m_ui->bb_style_CB->setChecked(false);
+
+   // (experimental) m_ui->bb_style_CB->setChecked(false);
 
    // tab 2 - messages
    m_ui->warnings_CB->setChecked(true);
@@ -542,10 +543,18 @@ void MainWindow::setupLimits()
    m_ui->output_language_CM->addItems(data);
 
    data.clear();
-   data.append("jpg");
    data.append("gif");
+   data.append("jpg");
    data.append("png");
-   data.append("svg");
+   data.append("svg");   
+   data.append("png:gd");
+   data.append("png:gd:gd");
+   data.append("png:cairo");
+   data.append("png:cairo:cairo");
+   data.append("png:cairo:gd");   
+   data.append("png:cairo:gdiplus");
+   data.append("png:gdiplus");
+   data.append("png:gdiplus:gdiplus");
    m_ui->dot_image_format_CM->addItems(data);
 
    data.clear();
@@ -886,7 +895,7 @@ void MainWindow::valid_have_dot()
       m_ui->dot_font_name_PB->setEnabled(true);
       m_ui->dot_font_size_SB->setEnabled(true);
       m_ui->dot_font_path->setEnabled(true);
-      m_ui->dot_font_name_PB->setEnabled(true);
+      m_ui->dot_font_path_PB->setEnabled(true);
 
       m_ui->dot_class_graph_CB2->setEnabled(true);
       m_ui->dot_collaboration_CB2->setEnabled(true);
@@ -928,7 +937,7 @@ void MainWindow::valid_have_dot()
       m_ui->dot_font_name_PB->setEnabled(false);
       m_ui->dot_font_size_SB->setEnabled(false);
       m_ui->dot_font_path->setEnabled(false);
-      m_ui->dot_font_name_PB->setEnabled(false);
+      m_ui->dot_font_path_PB->setEnabled(false);
 
       m_ui->dot_class_graph_CB2->setEnabled(false);
       m_ui->dot_collaboration_CB2->setEnabled(false);

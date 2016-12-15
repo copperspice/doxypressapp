@@ -1475,8 +1475,7 @@ void MainWindow::configFullHelp()
       "located in the directory in which DoxyPress is run, include the path with the file name.");
 
    s_fullHelp.insert("GEN_TAGFILE",
-      "When a file name is specified DoxyPress will create a "
-      "tag file which is based on the input files it reads. "
+      "When a file name is specified DoxyPress will create a tag file based on the input files. "
       "<br><br>"
       "Refer to the DoxyPress documentation regarding 'Linking to external documentation'.");
 
@@ -1677,7 +1676,7 @@ void MainWindow::configFullHelp()
       "If svg is selected 'HTML FILE EXTENSION' should be set to 'xhtml' in order "
       "to ensure the images files are visible in all browsers. "
       "<br><br>"
-      "Possible values are: png, jpg, gif or svg. The default value is: png "
+      "The default format value is png."
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
 
@@ -2370,10 +2369,9 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("CITE_BIB_FILES",
       "This tag is used to specify one or more bib files containing the reference definitions. "
-      "The .bib extension is automatically appended if omitted from the file name. "
-      "For LaTeX the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "
-      "Both Perl and the bibtex program must be available in the search path. "
-      "Refer to the DoxyPress manual regarding the \\cite command.");
+      "Both perl and bibtex must be available in the search path. "
+      "For LaTeX, the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "      
+      "Refer to the DoxyPress manual regarding the \\cite command for additional information.");
 
    // man
    s_fullHelp.insert("GEN_MAN",

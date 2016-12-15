@@ -612,7 +612,8 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->main_page_omit->setChecked(               false);
       m_ui->layout_file->setText(                     object.value("layout-file").toString());
       m_ui->ns_alias->setPlainText(                   "");
-      m_ui->bb_style_CB->setChecked(                  false);
+
+      // (experimental) m_ui->bb_style_CB->setChecked(false);
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(object, "tcl-subst"));
@@ -1010,7 +1011,8 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->main_page_omit->setChecked(               configObj.value("main-page-omit").toBool());
       m_ui->layout_file->setText(                     configObj.value("layout-file").toString());
       m_ui->ns_alias->setPlainText(                   getDataList(configObj, "ns-alias"));
-      m_ui->bb_style_CB->setChecked(                  bbObj.value("bb-style").toBool());
+
+      // (experimental) m_ui->bb_style_CB->setChecked(bbObj.value("bb-style").toBool());
 
       // tab 2 -programming
       m_ui->tcl_subst->setPlainText(                  getDataList(configObj, "tcl-subst"));
@@ -1416,7 +1418,8 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("main-page-omit",           m_ui->main_page_omit->isChecked());
    configObj.insert("layout-file",              m_ui->layout_file->text());
    configObj.insert("ns-alias",                 putDataList(m_ui->ns_alias->toPlainText()));
-   bbObj.insert("bb-style",                     m_ui->bb_style_CB->isChecked());
+
+   // (experimental) bbObj.insert("bb-style", m_ui->bb_style_CB->isChecked());
 
    // tab 2 -programming
    configObj.insert("tcl-subst",                putDataList(m_ui->tcl_subst->toPlainText()));

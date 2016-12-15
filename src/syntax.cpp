@@ -36,6 +36,7 @@ void Syntax::processSyntax()
    QStringList errorWords;
    errorWords.append("Error:");
    errorWords.append("Warning:");
+   errorWords.append("^bibtex command failed:.*");
 
    HighlightingRule rule;
 
