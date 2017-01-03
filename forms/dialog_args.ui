@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
+    <width>591</width>
     <height>467</height>
    </rect>
   </property>
@@ -86,11 +86,21 @@
           <pointsize>11</pointsize>
          </font>
         </property>
+        <property name="dateTime">
+         <datetime>
+          <hour>9</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2017</year>
+          <month>1</month>
+          <day>7</day>
+         </datetime>
+        </property>
         <property name="date">
          <date>
-          <year>2016</year>
+          <year>2017</year>
           <month>1</month>
-          <day>10</day>
+          <day>7</day>
          </date>
         </property>
         <property name="time">
