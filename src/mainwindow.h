@@ -165,6 +165,12 @@ class MainWindow : public QMainWindow
       QString m_curFile;
       QStringList m_openedFiles;
 
+      // find
+      QString m_findText;
+      QTextDocument::FindFlags m_flags;
+      bool m_direction;
+      bool m_case;
+
       enum Config { CFG_STARTUP, CFG_DEFAULT };
       enum Option { ABOUTURL, CLOSE, DOXYPRESS_EXE, PATH_PRIOR, RECENTFILE };
 
@@ -445,7 +451,10 @@ class MainWindow : public QMainWindow
       void setArgs();
       void showHtmlOutput();
       void clearOutput();
+      void find();
       void saveLog();      
+
+      void findNext();
 
       void readStdout();
       void runComplete();      

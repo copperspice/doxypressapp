@@ -876,7 +876,8 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       QJsonObject ppObj          = object.value("preprocessor").toObject();
       QJsonObject extObj         = object.value("external").toObject();
       QJsonObject dotObj         = object.value("dot").toObject();
-      QJsonObject bbObj          = object.value("bb").toObject();
+
+      // (experimental) QJsonObject bbObj = object.value("bb").toObject();
 
       QJsonObject htmlObj        = object.value("output-html").toObject();
       QJsonObject chmObj         = object.value("output-chm").toObject();
@@ -1282,7 +1283,8 @@ QByteArray MainWindow::json_SaveDoxy()
    QJsonObject ppObj;
    QJsonObject extObj;
    QJsonObject dotObj;
-   QJsonObject bbObj;
+
+   // (experimental)QJsonObject bbObj;
 
    QJsonObject htmlObj;
    QJsonObject chmObj;
@@ -1672,7 +1674,8 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("preprocessor",    ppObj);
    object.insert("external",        extObj);
    object.insert("dot",             dotObj);
-   object.insert("bb",              bbObj);
+
+   // (experimental) object.insert("bb", bbObj);
 
    object.insert("output-html",     htmlObj);
    object.insert("output-chm",      chmObj);

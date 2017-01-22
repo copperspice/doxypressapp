@@ -20,6 +20,7 @@
 
 #include "mainwindow.h"
 #include "dialog_args.h"
+#include "dialog_find.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -140,6 +141,7 @@ void MainWindow::runDoxyPress()
          m_ui->parameters_PB->setEnabled(false);
          m_ui->display_PB->setEnabled(false);
          m_ui->clear_PB->setEnabled(false);
+         m_ui->find_PB->setEnabled(false);
          m_ui->save_log_PB->setEnabled(false);
 
          m_running = true;
@@ -282,6 +284,78 @@ void MainWindow::clearOutput()
    m_ui->runText->document()->clear();
 }
 
+void MainWindow::find()
+{
+   Dialog_Find *dw = new Dialog_Find(this, m_findText);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+
+      if (dw->get_SearchTop()) {
+         QTextCursor cursor(m_ui->runText->textCursor());
+         cursor.movePosition(QTextCursor::Start);
+         m_ui->runText->setTextCursor(cursor);
+      }
+
+      m_findText = dw->get_findText();
+
+      // get the flags
+      m_flags = 0;
+
+      m_direction  = dw->get_Direction();
+
+      if (! m_direction) {
+         m_flags |= QTextDocument::FindBackward;
+      }
+
+      m_case = dw->get_Case();
+      if (m_case) {
+         m_flags |= QTextDocument::FindCaseSensitively;
+      }
+
+      if (! m_findText.isEmpty())  {
+         bool found = m_ui->runText->find(m_findText, m_flags);
+
+         if (! found)  {
+            // text not found, query if the user wants to search from top of file
+            findNext();
+         }
+      }
+   }
+
+   delete dw;
+}
+
+void MainWindow::findNext()
+{
+   QTextDocument::FindFlags flags = QTextDocument::FindFlags(~QTextDocument::FindBackward & m_flags);
+   bool found = m_ui->runText->find(m_findText, flags);
+
+   if (! found)  {
+      QString msg = "Not found: " + m_findText + "\n\n";
+      msg += "Search from the beginning of this document?\n";
+
+      QMessageBox msgFindNext(this);
+      msgFindNext.setWindowTitle("Find");
+      msgFindNext.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+      msgFindNext.setDefaultButton(QMessageBox::Yes);
+      msgFindNext.setText(msg);
+
+      int result = msgFindNext.exec();
+
+      if (result == QMessageBox::Yes) {
+
+         // reset to the beginning of the document
+         QTextCursor cursor(m_ui->runText->textCursor());
+         cursor.movePosition(QTextCursor::Start);
+         m_ui->runText->setTextCursor(cursor);
+
+         // search again
+         this->findNext();
+      }
+   }
+}
+
 void MainWindow::saveLog()
 {
    QString projectDir = pathName(m_curFile);
@@ -311,10 +385,12 @@ void MainWindow::updateRunButtons()
    if (m_ui->runText->toPlainText().isEmpty())  {      
       m_ui->save_log_PB->setEnabled(false);
       m_ui->clear_PB->setEnabled(false);
+      m_ui->find_PB->setEnabled(false);
 
    } else {  
       m_ui->save_log_PB->setEnabled(true);
       m_ui->clear_PB->setEnabled(true);
+      m_ui->find_PB->setEnabled(true);
 
    }
 

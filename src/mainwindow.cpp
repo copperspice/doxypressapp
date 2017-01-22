@@ -21,6 +21,7 @@
 #include <QButtonGroup>
 #include <QKeySequence>
 #include <QPushButton>
+#include <QShortcut>
 #include <QTreeWidget>
 
 MainWindow::MainWindow()
@@ -72,11 +73,11 @@ MainWindow::MainWindow()
    setDoxyTitle(false);
 
    setIconSize(QSize(32,32));
-   setWindowIcon(QIcon(":/resources/doxypress.png"));
+   setWindowIcon(QIcon(":/resources/doxypress.png"));     
 
    if (! json_Read(CFG_STARTUP) ) {
       // do not start program
-      csError(tr("DoxyPressApp Startup"), tr("Unable to locate tlp DoxyPressApp settings file"));
+      csError(tr("DoxyPressApp Startup"), tr("Unable to locate the DoxyPressApp settings file"));
       throw std::runtime_error("abort_no_message");
    }
 
@@ -118,6 +119,22 @@ MainWindow::MainWindow()
    outputItem->setSelected(true);
 
    m_ui->tabWidget->setCurrentIndex(0);
+
+   // shows the cursor and adjusts colors in the process window for searching
+   m_ui->runText->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
+
+   QPalette colors = m_ui->runText->palette();
+   colors.setColor( QPalette::Highlight, QColor(248,233,96, 255));
+   colors.setColor( QPalette::HighlightedText, Qt::black);
+   m_ui->runText->setPalette(colors);
+
+   //search
+   QShortcut *s;
+   s = new QShortcut(QKeySequence(QKeySequence::Find), this);
+   connect(s, &QShortcut::activated, this, &MainWindow::find);
+
+   s = new QShortcut(QKeySequence(QKeySequence::FindNext), this);
+   connect(s, &QShortcut::activated, this, &MainWindow::findNext);
 
    // screen setup
    createConnections();
@@ -355,6 +372,7 @@ void MainWindow::createConnections()
    connect(m_ui->parameters_PB,        &QPushButton::clicked, this, &MainWindow::setArgs);
    connect(m_ui->display_PB,           &QPushButton::clicked, this, &MainWindow::showHtmlOutput);
    connect(m_ui->clear_PB,             &QPushButton::clicked, this, &MainWindow::clearOutput);
+   connect(m_ui->find_PB,              &QPushButton::clicked, this, &MainWindow::find);
    connect(m_ui->save_log_PB,          &QPushButton::clicked, this, &MainWindow::saveLog);
 }
 

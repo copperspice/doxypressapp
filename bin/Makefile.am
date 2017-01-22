@@ -109,7 +109,7 @@ DoxyPressApp_SOURCES = \
    src/dialog_args.cpp \
    src/dialog_config.cpp  \
    src/dialog_editcfg.cpp  \
-   src/dialog_editcfg.h   \
+   src/dialog_find.cpp  \
    src/dialog_lookup.cpp \
    src/dialog_selectcfg.cpp \
    src/dialog_xp_getdir.cpp \
@@ -131,6 +131,7 @@ noinst_HEADERS = \
    src/dialog_args.h \
    src/dialog_config.h \
    src/dialog_editcfg.h \
+   src/dialog_find.h \
    src/dialog_lookup.h \
    src/dialog_selectcfg.h \
    src/dialog_xp_getdir.h \
@@ -143,6 +144,7 @@ FORMS = \
    forms/dialog_args.ui \
    forms/dialog_config.ui \
    forms/dialog_editcfg.ui \
+   forms/dialog_find.ui \
    forms/dialog_lookup.ui \
    forms/dialog_selectcfg.ui \
    forms/dialog_xp_getdir.ui \

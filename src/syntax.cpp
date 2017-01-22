@@ -29,9 +29,9 @@ Syntax::~Syntax()
 void Syntax::processSyntax()
 {   
    QStringList keyWords;
-   keyWords.append("\\bParsing (?=file )");
-   keyWords.append("\\bProcessing\\b");
-   keyWords.append("\\bReading\\b");
+   keyWords.append("^Parsing (?=file )");
+   keyWords.append("^Processing\\b");
+   keyWords.append("^Reading\\b");
 
    QStringList errorWords;
    errorWords.append("Error:");
