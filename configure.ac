@@ -1,5 +1,6 @@
 # project name, version, email
 AC_INIT([DoxyPressApp], 1.2.6, [info@copperspice.com])
+export BUILD_DATE=`date +%m/%d/%Y` 
 
 # location of temp autotools files
 # note: space can not exist between ] and  )
@@ -60,5 +61,6 @@ echo "Application configured for "$BITSIZE"-bit system"
 echo
 
 # location of .am files that will create Makefiles
+AC_SUBST(BUILD_DATE)
 AC_CONFIG_FILES( [Makefile bin/Makefile   src/doxy_build_info.h])
 AC_OUTPUT
