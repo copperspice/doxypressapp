@@ -5,3 +5,8 @@ SUBDIRS=. bin
 
 deploy:
 	$(MAKE) -C bin deploy
+
+EXTRA_DIST= \
+	CMakeLists.txt \
+	cmake/modules/FindCopperSpice.cmake \
+	src/CMakeLists.txt
