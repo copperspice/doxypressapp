@@ -288,6 +288,9 @@ void MainWindow::clearAllFields()
    // tab 3 - rtf
    m_ui->rtf_output->setText("rtf");
 
+   index = m_ui->rtf_paper_type_CM->findText("a4");
+   m_ui->rtf_paper_type_CM->setCurrentIndex(index);
+
    // tab 3 - xml
    m_ui->xml_output->setText("xml");
    m_ui->xml_program_listing_CB->setChecked(true);
@@ -461,6 +464,7 @@ void MainWindow::adjustDefaults()
 
    // tab 3 - rtf
    setDefault(m_ui->rtf_output);
+   setDefault(m_ui->rtf_paper_type_CM);
 
    // tab 3 - xml
    setDefault(m_ui->xml_output);
@@ -571,14 +575,22 @@ void MainWindow::setupLimits()
    data.append("executive");
    m_ui->latex_paper_type_CM->addItems(data);
 
-   // tab 2 -
+   // tab 3 - rtf
+   data.clear();
+   data.append("a4");
+   data.append("letter");
+   data.append("legal");
+   data.append("executive");
+   m_ui->rtf_paper_type_CM->addItems(data);
+
+   // tab 2 - config
    m_ui->tab_size_SB->setMinimum(1);
    m_ui->tab_size_SB->setMaximum(16);
 
    m_ui->lookup_cache_size_SB->setMinimum(0);
    m_ui->lookup_cache_size_SB->setMaximum(9);
 
-  // tab 2 - build
+   // tab 2 - build
    m_ui->max_init_lines_SB->setMinimum(0);
    m_ui->max_init_lines_SB->setMaximum(10000);
 
@@ -1266,24 +1278,30 @@ void MainWindow::valid_gen_rtf()
    if (m_ui->gen_rtf_CB2->isChecked()) {
       m_ui->rtf_output->setEnabled(true);
       m_ui->rtf_output_PB->setEnabled(true);
-      m_ui->rtf_compact_CB->setEnabled(true);
-      m_ui->rtf_hyperlinks_CB->setEnabled(true);
       m_ui->rtf_stylesheet->setEnabled(true);
       m_ui->rtf_stylesheet_PB->setEnabled(true);
       m_ui->rtf_extension->setEnabled(true);
       m_ui->rtf_extension_PB->setEnabled(true);
+
+      m_ui->rtf_paper_type_CM->setEnabled(true);
+
       m_ui->rtf_source_code_CB->setEnabled(true);
+      m_ui->rtf_compact_CB->setEnabled(true);
+      m_ui->rtf_hyperlinks_CB->setEnabled(true);
 
    } else {
       m_ui->rtf_output->setEnabled(false);
       m_ui->rtf_output_PB->setEnabled(false);
-      m_ui->rtf_compact_CB->setEnabled(false);
-      m_ui->rtf_hyperlinks_CB->setEnabled(false);
       m_ui->rtf_stylesheet->setEnabled(false);
       m_ui->rtf_stylesheet_PB->setEnabled(false);
       m_ui->rtf_extension->setEnabled(false);
       m_ui->rtf_extension_PB->setEnabled(false);
+
+      m_ui->rtf_paper_type_CM->setEnabled(false);
+
       m_ui->rtf_source_code_CB->setEnabled(false);
+      m_ui->rtf_compact_CB->setEnabled(false);
+      m_ui->rtf_hyperlinks_CB->setEnabled(false);
    }
 }
 

@@ -848,11 +848,15 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
 
       // tab 3 - rtf
       m_ui->rtf_output->setText(                      object.value("rtf-output").toString());
-      m_ui->rtf_compact_CB->setChecked(               object.value("rtf-compact").toBool());
-      m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf-hyperlinks").toBool());
       m_ui->rtf_stylesheet->setText(                  object.value("rtf-stylesheet").toString());
       m_ui->rtf_extension->setText(                   object.value("rtf-extension").toString());
+
+      index = m_ui->rtf_paper_type_CM->findText(      object.value("rtf-paper-type").toString());
+      m_ui->rtf_paper_type_CM->setCurrentIndex(index);
+
       m_ui->rtf_source_code_CB->setChecked(           object.value("rtf-source-code").toBool());
+      m_ui->rtf_compact_CB->setChecked(               object.value("rtf-compact").toBool());
+      m_ui->rtf_hyperlinks_CB->setChecked(            object.value("rtf-hyperlinks").toBool());
 
       // tab 3 - xml
       m_ui->xml_output->setText(                      object.value("xml-output").toString());
@@ -1248,11 +1252,15 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
 
       // tab 3 - rtf
       m_ui->rtf_output->setText(                      rtfObj.value("rtf-output").toString());
-      m_ui->rtf_compact_CB->setChecked(               rtfObj.value("rtf-compact").toBool());
-      m_ui->rtf_hyperlinks_CB->setChecked(            rtfObj.value("rtf-hyperlinks").toBool());
       m_ui->rtf_stylesheet->setText(                  rtfObj.value("rtf-stylesheet").toString());
       m_ui->rtf_extension->setText(                   rtfObj.value("rtf-extension").toString());
+
+      index = m_ui->rtf_paper_type_CM->findText(      rtfObj.value("rtf-paper-type").toString());
+      m_ui->rtf_paper_type_CM->setCurrentIndex(index);
+
       m_ui->rtf_source_code_CB->setChecked(           rtfObj.value("rtf-source-code").toBool());
+      m_ui->rtf_compact_CB->setChecked(               rtfObj.value("rtf-compact").toBool());
+      m_ui->rtf_hyperlinks_CB->setChecked(            rtfObj.value("rtf-hyperlinks").toBool());     
 
       // tab 3 - xml
       m_ui->xml_output->setText(                      xmlObj.value("xml-output").toString());
@@ -1649,11 +1657,12 @@ QByteArray MainWindow::json_SaveDoxy()
 
    // tab 3 - rtf
    rtfObj.insert("rtf-output",                m_ui->rtf_output->text());
-   rtfObj.insert("rtf-compact",               m_ui->rtf_compact_CB->isChecked());
-   rtfObj.insert("rtf-hyperlinks",            m_ui->rtf_hyperlinks_CB->isChecked());
    rtfObj.insert("rtf-stylesheet",            m_ui->rtf_stylesheet->text());
    rtfObj.insert("rtf-extension",             m_ui->rtf_extension->text());
+   rtfObj.insert("rtf-paper-type",            m_ui->rtf_paper_type_CM->currentText());
    rtfObj.insert("rtf-source-code",           m_ui->rtf_source_code_CB->isChecked());
+   rtfObj.insert("rtf-compact",               m_ui->rtf_compact_CB->isChecked());   
+   rtfObj.insert("rtf-hyperlinks",            m_ui->rtf_hyperlinks_CB->isChecked());
 
    // tab 3 - xml
    xmlObj.insert("xml-output",                m_ui->xml_output->text());

@@ -2509,22 +2509,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "This tag requires the tag 'GENERATE RTF' is set to YES");
 
-   s_fullHelp.insert("RTF_COMPACT",
-      "If this tag is set DoxyPress generates compact RTF documents. "
-      "<br><br>"
-      "The default value is: NO "
-      "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
-
-   s_fullHelp.insert("RTF_HYPERLINKS",
-      "If this tag is set the RTF generated will contain hyperlinks."
-      "The output may be more suitable for browsing rather than printing. "
-      "WordPad and other RTF readers may not support hyperlinks. "
-      "<br><br>"
-      "The default value is: NO "
-      "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
-
    s_fullHelp.insert("RTF_STYLESHEET",
       "Load stylesheet definitions from file. "
       "<br><br>"
@@ -2539,9 +2523,34 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "This tag requires the tag 'GENERATE RTF' is set to YES");
 
+   s_fullHelp.insert("RTF_PAPER_TYPE",
+      "This tag is used to set the paper type used by the printer. "
+      "Possible values are: a4 (210 x 297 mm), letter (8.5 x 11 inches), legal "
+      "(8.5 x 14 inches) and executive (7.25 x 10.5 inches). "
+      "<br><br>"
+      "The default value is: a4 "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE RTF' is set to YES");
+
    s_fullHelp.insert("RTF_SOURCE_CODE",
       "If this tag is set DoxyPress will include source code with syntax highlighting in the RTF output. "
       "Which sources are shown depend on other settings such as 'SOURCE CODE'"
+      "<br><br>"
+      "The default value is: NO "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE RTF' is set to YES");
+
+   s_fullHelp.insert("RTF_COMPACT",
+      "If this tag is set DoxyPress generates compact RTF documents. "
+      "<br><br>"
+      "The default value is: NO "
+      "<br><br>"
+      "This tag requires the tag 'GENERATE RTF' is set to YES");
+
+   s_fullHelp.insert("RTF_HYPERLINKS",
+      "If this tag is set the RTF generated will contain hyperlinks."
+      "The output may be more suitable for browsing rather than printing. "
+      "WordPad and other RTF readers may not support hyperlinks. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
