@@ -11,17 +11,11 @@
 # Documents produced by DoxyPress are derivative works derived from the
 # input used in their production; they are not affected by this license.
 
-# (todo: enhance) hard coded for testing
-set(CS_INCLUDE_DIR "z:/cs5_x_lib/include" 
-                   "z:/cs5_x_lib/include/QtCore"
-                   "z:/cs5_x_lib/include/QtGui" 
-                   "z:/cs5_x_lib/include/QtNetwork" 
-                   "z:/cs5_x_lib/include/QtXml"
-) 
+# location of include files
+set(CS_INCLUDE_DIR ${CS_PATH}/include  ${CS_PATH}/include/QtCore     ${CS_PATH}/include/QtGui
+                                       ${CS_PATH}/include/QtNetwork  ${CS_PATH}/include/QtXml )
 
-include_directories( ${CMAKE_SOURCE_DIR}/src
-                     ${CS_INCLUDE_DIR}                     
-)
+include_directories( ${CMAKE_SOURCE_DIR}/src   ${CS_INCLUDE_DIR} )
 
 check_include_file(windows.h HAVE_WINDOWS_H)
 
@@ -93,23 +87,21 @@ COPPERSPICE_RESOURCES(
 
 add_executable(doxypressapp ${DOXYPRESSAPP_SOURCES} )
 
-# (todo: enhance)
-# target_link_libraries(doxypressapp CopperSpice::CsCore CopperSpice::CsGui
-#            CopperSpice::CsNetwork CopperSpice::CsXml  )
+# ISSUE: resolve this
+# target_link_libraries(doxypressapp  CopperSpice::CsCore    CopperSpice::CsGui
+#                                     CopperSpice::CsNetwork CopperSpice::CsXml  )
 
 target_link_libraries(doxypressapp
 
-   # FIXME - hard coded
-   "z:/cs5_x_lib/lib/libCsCore1.4.dll.a"
-   "z:/cs5_x_lib/lib/libCsGui1.4.dll.a"
-   "z:/cs5_x_lib/lib/libCsNetwork1.4.dll.a"
-   "z:/cs5_x_lib/lib/libCsXml1.4.dll.a"
-   -lnetapi32
-   -lmpr
+   # ISSUE: may be able to change and remove the path and the suffix, windows only for testing
+   ${CS_PATH}/lib/libCsCore1.4.dll.a
+   ${CS_PATH}/lib/libCsGui1.4.dll.a
+   ${CS_PATH}/lib/libCsNetwork1.4.dll.a
+   ${CS_PATH}/lib/libCsXml1.4.dll.a 
 )
 
 if(WIN32)
-   # additional libs for windows suppport, disable console on windows
+   # windows suppport, disable console on windows
    target_link_libraries(doxypressapp -lnetapi32 -lmpr -mwindows)
 endif()
 
@@ -118,6 +110,6 @@ install(FILES   ${CS_LIBS}   DESTINATION .)
 install(FILES   ${CMAKE_CURRENT_SOURCE_DIR}/../resources/doxypress.ico  DESTINATION .)
 
 if(WIN32)
-   # copy MingW files, windows only
+   # copy gcc files, windows only
    install(FILES ${GCC_LIBS}  DESTINATION .)
 endif()

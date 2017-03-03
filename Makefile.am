@@ -8,5 +8,5 @@ deploy:
 
 EXTRA_DIST= \
 	CMakeLists.txt \
-	cmake/modules/FindCopperSpice.cmake \
+	cmake/FindCopperSpice.cmake \
 	src/CMakeLists.txt
