@@ -1710,11 +1710,14 @@ QString MainWindow::getDataList(QJsonObject &object, QString fieldData)
    QString retval;
    QStringList dataList;
 
-   QJsonArray list = object.value(fieldData).toArray();
-   int cnt = list.count();
+   QJsonArray jsonArray = object.value(fieldData).toArray();
 
-   for (int k = 0; k < cnt; k++)  {
-      dataList.append(list.at(k).toString());
+   for (auto item : jsonArray) {
+      QString temp = item.toString();
+
+      if (! temp.isEmpty()) {
+         dataList.append(temp.trimmed());
+      }
    }
 
    retval = dataList.join(", ");
@@ -1724,8 +1727,7 @@ QString MainWindow::getDataList(QJsonObject &object, QString fieldData)
 
 QJsonArray MainWindow::putDataList(QString fieldData)
 {
-   QJsonArray list = QJsonArray();
-
+   QJsonArray list  = QJsonArray();
    QStringList temp = fieldData.split(", ");
 
    for (auto s : temp) {

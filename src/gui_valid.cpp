@@ -867,35 +867,60 @@ void MainWindow::valid_source_code()
 
 void MainWindow::valid_enable_preprocessing()
 {
-   if (m_ui->enable_preprocessing_CB->isChecked()) {
-
-      m_ui->macro_expansion_CB->setEnabled(true);
-      m_ui->expand_only_predefined_CB->setEnabled(true);
-      m_ui->search_includes_CB->setEnabled(true);
+   if (m_ui->clang_parsing_CB->isChecked()) {
       m_ui->include_path->setEnabled(true);
       m_ui->include_path_PB->setEnabled(true);
-      m_ui->include_patterns->setEnabled(true);
-      m_ui->include_patterns_PB->setEnabled(true);
       m_ui->predefined_macros->setEnabled(true);
       m_ui->predefined_macros_PB->setEnabled(true);
-      m_ui->expand_as_defined->setEnabled(true);
-      m_ui->expand_as_defined_PB->setEnabled(true);
-      m_ui->skip_function_macros_CB->setEnabled(true);
 
-   } else {
+      // turn off
+      m_ui->enable_preprocessing_CB->setChecked(false);
+      m_ui->macro_expansion_CB->setChecked(false);
+      m_ui->expand_only_predefined_CB->setChecked(false);
+      m_ui->search_includes_CB->setChecked(false);
+      m_ui->skip_function_macros_CB->setChecked(false);
+
+      m_ui->enable_preprocessing_CB->setEnabled(false);
       m_ui->macro_expansion_CB->setEnabled(false);
       m_ui->expand_only_predefined_CB->setEnabled(false);
       m_ui->search_includes_CB->setEnabled(false);
-      m_ui->include_path->setEnabled(false);
-      m_ui->include_path_PB->setEnabled(false);
       m_ui->include_patterns->setEnabled(false);
       m_ui->include_patterns_PB->setEnabled(false);
-      m_ui->predefined_macros->setEnabled(false);
-      m_ui->predefined_macros_PB->setEnabled(false);
       m_ui->expand_as_defined->setEnabled(false);
       m_ui->expand_as_defined_PB->setEnabled(false);
       m_ui->skip_function_macros_CB->setEnabled(false);
 
+   } else {       
+
+      if (m_ui->enable_preprocessing_CB->isChecked()) {
+         m_ui->macro_expansion_CB->setEnabled(true);
+         m_ui->expand_only_predefined_CB->setEnabled(true);
+         m_ui->search_includes_CB->setEnabled(true);
+         m_ui->include_path->setEnabled(true);
+         m_ui->include_path_PB->setEnabled(true);
+         m_ui->include_patterns->setEnabled(true);
+         m_ui->include_patterns_PB->setEnabled(true);
+         m_ui->predefined_macros->setEnabled(true);
+         m_ui->predefined_macros_PB->setEnabled(true);
+         m_ui->expand_as_defined->setEnabled(true);
+         m_ui->expand_as_defined_PB->setEnabled(true);
+         m_ui->skip_function_macros_CB->setEnabled(true);
+
+      } else {
+         m_ui->macro_expansion_CB->setEnabled(false);
+         m_ui->expand_only_predefined_CB->setEnabled(false);
+         m_ui->search_includes_CB->setEnabled(false);
+         m_ui->include_path->setEnabled(false);
+         m_ui->include_path_PB->setEnabled(false);
+         m_ui->include_patterns->setEnabled(false);
+         m_ui->include_patterns_PB->setEnabled(false);
+         m_ui->predefined_macros->setEnabled(false);
+         m_ui->predefined_macros_PB->setEnabled(false);
+         m_ui->expand_as_defined->setEnabled(false);
+         m_ui->expand_as_defined_PB->setEnabled(false);
+         m_ui->skip_function_macros_CB->setEnabled(false);
+
+      }
    }
 }
 

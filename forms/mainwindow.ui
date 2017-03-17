@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -1134,7 +1134,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>12</number>
+            <number>10</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0,1,1,0">
@@ -5328,7 +5328,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Note: When clang processing is enabled, only the Predefined Macro tag on this screen will be used.</string>
+                <string>Note: When clang processing is enabled, only Include Path and Predefined Macros tags are available.</string>
                </property>
               </widget>
              </item>
@@ -10944,9 +10944,9 @@
   <tabstop>qthelp_gen_path_PB</tabstop>
   <tabstop>gen_rtf_CB2</tabstop>
   <tabstop>rtf_output</tabstop>
-  <tabstop>rtf_output_PB</tabstop> 
+  <tabstop>rtf_output_PB</tabstop>
   <tabstop>rtf_stylesheet</tabstop>
-  <tabstop>rtf_stylesheet_PB</tabstop> 
+  <tabstop>rtf_stylesheet_PB</tabstop>
   <tabstop>rtf_extension</tabstop>
   <tabstop>rtf_extension_PB</tabstop>
   <tabstop>rtf_paper_type_CM</tabstop>
@@ -10966,8 +10966,8 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_latex"/>
   <buttongroup name="buttonGroup_html"/>
-  <buttongroup name="buttonGroup_diagram"/>
  </buttongroups>
 </ui>

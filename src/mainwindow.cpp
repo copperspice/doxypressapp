@@ -224,7 +224,8 @@ void MainWindow::createConnections()
    // tab 2   
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
    connect(m_ui->filter_source_files_CB,    &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
-   connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
+   connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);      
+   connect(m_ui->clang_parsing_CB,          &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
    connect(m_ui->enable_preprocessing_CB,   &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
    connect(m_ui->have_dot_CB,               &QPushButton::toggled, this, &MainWindow::valid_have_dot);
 
