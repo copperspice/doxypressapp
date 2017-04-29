@@ -172,7 +172,7 @@ void MainWindow::readStdout()
    if (m_running) {
       QByteArray tmp = m_runProcess->readAllStandardOutput();
 
-      QString text = QString::fromLocal8Bit(tmp);
+      QString text = QString::fromUtf8(tmp);
 
       if (! text.isEmpty()) {
          runText_Append(text);
