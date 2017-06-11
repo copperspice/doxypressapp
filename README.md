@@ -35,8 +35,8 @@ Output
 
 ### System Requirements
 
-To use DoxyPress you will need the CopperSpice libraries (CsCore, CsXml), a C++11 compiler,
-and a C++11 standard library.
+To build DoxyPressApp you will need the CopperSpice libraries (CsCore, CsGui, CsNetwork, CsXml),
+a C++11 compiler, and a C++11 standard library.
 
 Uses CMake or Autotools for building binary files.
 
