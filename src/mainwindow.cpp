@@ -417,7 +417,7 @@ void MainWindow::createShortCuts()
 
 void MainWindow::manual()
 {  
-   QDesktopServices::openUrl(QUrl("http://www.copperspice.org/documentation-doxypress.html"));
+   QDesktopServices::openUrl(QUrl("http://www.copperspice.com/documentation-doxypress.html"));
 }
 
 void MainWindow::setupPage(QTreeWidgetItem *item, QTreeWidgetItem *)

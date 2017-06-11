@@ -57,7 +57,7 @@
 #include <QWidget>
 
 static const int DOXYPRESS_FORMAT = 1;
-static const int RECENT_FILES_MAX = 10;
+static const int RECENT_FILES_MAX = 15;
 
 enum Validate {
    MODIFIED,
