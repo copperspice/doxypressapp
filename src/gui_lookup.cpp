@@ -369,10 +369,10 @@ void MainWindow::exclude_files_PB()
 
    QString temp    = m_ui->exclude_files->toPlainText();
 
-   data.title      = "Exclude Files";
+   data.title      = "Exclude Files or Folders";
    data.dataList   = temp.split(regExp);
    data.isFilePB   = true;
-   data.isFolderPB = false;
+   data.isFolderPB = true;
    data.relativeTo = PROJECT_DIR;
 
    Dialog_LookUp *dw = new Dialog_LookUp(this, data);
@@ -441,9 +441,9 @@ void MainWindow::example_source_PB()
 
    QString temp = m_ui->example_source->toPlainText();
 
-   data.title      = "Example Source";
+   data.title      = "Example Files or Directories";
    data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
+   data.isFilePB   = true;
    data.isFolderPB = true;
    data.relativeTo = PROJECT_DIR;
 
