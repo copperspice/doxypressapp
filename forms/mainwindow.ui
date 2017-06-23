@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -10236,7 +10236,7 @@
            <widget class="QPushButton" name="run_PB">
             <property name="minimumSize">
              <size>
-              <width>100</width>
+              <width>110</width>
               <height>0</height>
              </size>
             </property>

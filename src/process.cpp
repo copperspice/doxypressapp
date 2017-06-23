@@ -81,11 +81,6 @@ void MainWindow::runDoxyPress()
 
       QStringList args;
 
-      if (m_args.deleteHtml) {
-         QString path = get_OutputDir() + "/" + m_ui->html_output->text();
-         deleteOutputFiles(path);
-      }
-
       // make stdout unbuffered
       args.append("--b");
 
@@ -120,6 +115,16 @@ void MainWindow::runDoxyPress()
       args.append(m_curFile);
 
       clearOutput();
+
+      runText_Append("Initializing project file\n");
+
+      if (m_args.deleteHtml) {
+         runText_Append("Deleting HTML output files\n");
+
+         QString path = get_OutputDir() + "/" + m_ui->html_output->text();
+         deleteOutputFiles(path);
+      }
+
       m_runProcess->start(doxyPressPath, args);
 
       if (! m_runProcess->waitForStarted()) {
