@@ -7,6 +7,6 @@ deploy:
 	$(MAKE) -C bin deploy
 
 EXTRA_DIST= \
+	README.md \
 	CMakeLists.txt \
-	cmake/FindCopperSpice.cmake \
 	src/CMakeLists.txt

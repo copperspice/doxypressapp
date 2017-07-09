@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2014-2017 Barbara Geller & Ansel Sermersheim
-# All rights reserved.    
+# All rights reserved.
 #
 # Permission to use, copy, modify, and distribute this software and its
 # documentation under the terms of the GNU General Public License version 2
@@ -11,11 +11,12 @@
 # Documents produced by DoxyPress are derivative works derived from the
 # input used in their production; they are not affected by this license.
 
-# location of include files
-set(CS_INCLUDE_DIR ${CS_PATH}/include  ${CS_PATH}/include/QtCore     ${CS_PATH}/include/QtGui
-                                       ${CS_PATH}/include/QtNetwork  ${CS_PATH}/include/QtXml )
+set(CS_VERSION 1.4)
 
-include_directories( ${CMAKE_SOURCE_DIR}/src   ${CS_INCLUDE_DIR} )
+macro(cs_copy_dll APP DLL)
+   get_target_property(CS_${DLL}_LIB  CopperSpice::Cs${DLL}${CS_VERSION} LOCATION)
+   install(FILES  ${CS_${DLL}_LIB}  DESTINATION .)
+endmacro()
 
 check_include_file(windows.h HAVE_WINDOWS_H)
 
@@ -74,7 +75,7 @@ set(DOXYPRESSAPP_SOURCES
 COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/../doxypressapp.qrc)
 
 # run uic to generate source
-COPPERSPICE_RESOURCES( 
+COPPERSPICE_RESOURCES(
     ${CMAKE_CURRENT_SOURCE_DIR}/../forms/dialog_args.ui
     ${CMAKE_CURRENT_SOURCE_DIR}/../forms/dialog_config.ui
     ${CMAKE_CURRENT_SOURCE_DIR}/../forms/dialog_editcfg.ui
@@ -85,31 +86,31 @@ COPPERSPICE_RESOURCES(
     ${CMAKE_CURRENT_SOURCE_DIR}/../forms/mainwindow.ui
 )
 
-add_executable(doxypressapp ${DOXYPRESSAPP_SOURCES} )
+add_executable(DoxyPressApp ${DOXYPRESSAPP_SOURCES} )
 
-# ISSUE: resolve this
-# target_link_libraries(doxypressapp  CopperSpice::CsCore    CopperSpice::CsGui
-#                                     CopperSpice::CsNetwork CopperSpice::CsXml  )
+target_include_directories(DoxyPressApp PRIVATE
+   ${CMAKE_SOURCE_DIR}/src
+)
 
-target_link_libraries(doxypressapp
-
-   # ISSUE: may be able to change and remove the path and the suffix, windows only for testing
-   ${CS_PATH}/lib/libCsCore1.4.dll.a
-   ${CS_PATH}/lib/libCsGui1.4.dll.a
-   ${CS_PATH}/lib/libCsNetwork1.4.dll.a
-   ${CS_PATH}/lib/libCsXml1.4.dll.a 
+target_link_libraries(DoxyPressApp
+   CopperSpice::CsCore${CS_VERSION}
+   CopperSpice::CsGui${CS_VERSION}
+   CopperSpice::CsNetwork${CS_VERSION}
+   CopperSpice::CsXml${CS_VERSION}
 )
 
 if(WIN32)
-   # windows suppport, disable console on windows
-   target_link_libraries(doxypressapp -lnetapi32 -lmpr -mwindows)
+   # disable console on windows
+   target_link_libraries(DoxyPressApp -lnetapi32 -lmpr -mwindows)
 endif()
 
-install(TARGETS doxypressapp DESTINATION .)
-install(FILES   ${CS_LIBS}   DESTINATION .)
+install(TARGETS DoxyPressApp DESTINATION .)
 install(FILES   ${CMAKE_CURRENT_SOURCE_DIR}/../resources/doxypress.ico  DESTINATION .)
 
 if(WIN32)
-   # copy gcc files, windows only
-   install(FILES ${GCC_LIBS}  DESTINATION .)
+   cs_copy_dll(DoxyPressApp Core)
+   cs_copy_dll(DoxyPressApp Gui)
+   cs_copy_dll(DoxyPressApp Network)
+   cs_copy_dll(DoxyPressApp Xml)
 endif()
+
