@@ -27,7 +27,7 @@
 MainWindow::MainWindow()
    : m_ui(new Ui::MainWindow)
 {
-   m_ui->setupUi(this);   
+   m_ui->setupUi(this);
 
    QList<int> temp;
    temp.append(250);
@@ -73,7 +73,7 @@ MainWindow::MainWindow()
    setDoxyTitle(false);
 
    setIconSize(QSize(32,32));
-   setWindowIcon(QIcon(":/resources/doxypress.png"));     
+   setWindowIcon(QIcon(":/resources/doxypress.png"));
 
    if (! json_Read(CFG_STARTUP) ) {
       // do not start program
@@ -163,7 +163,6 @@ void MainWindow::about()
       "<p><small>Copyright 2014-2017 BG Consulting, All rights reserved.<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
-   //
    QMessageBox msgB;
    msgB.setIcon(QMessageBox::NoIcon);
    msgB.setWindowIcon(QIcon(icon));
@@ -221,10 +220,10 @@ void MainWindow::createConnections()
    connect(m_ui->buttonGroup_diagram,       static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
            this, &MainWindow::validSet_dot);
 
-   // tab 2   
+   // tab 2
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
    connect(m_ui->filter_source_files_CB,    &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
-   connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);      
+   connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
    connect(m_ui->clang_parsing_CB,          &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
    connect(m_ui->enable_preprocessing_CB,   &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
    connect(m_ui->have_dot_CB,               &QPushButton::toggled, this, &MainWindow::valid_have_dot);
@@ -260,9 +259,9 @@ void MainWindow::createConnections()
 
    // tab 2- build
    connect(m_ui->enabled_sections_PB,       &QPushButton::clicked, this, &MainWindow::enabled_sections_PB);
-   connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);   
+   connect(m_ui->file_version_filter_PB,    &QPushButton::clicked, this, &MainWindow::file_version_filter_PB);
    connect(m_ui->main_page_name_PB,         &QPushButton::clicked, this, &MainWindow::main_page_name_PB);
-   connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);  
+   connect(m_ui->layout_file_PB,            &QPushButton::clicked, this, &MainWindow::layout_file_PB);
    connect(m_ui->ns_alias_PB,               &QPushButton::clicked, this, &MainWindow::ns_alias_PB);
 
    // tab 2- input
@@ -416,7 +415,7 @@ void MainWindow::createShortCuts()
 }
 
 void MainWindow::manual()
-{  
+{
    QDesktopServices::openUrl(QUrl("http://www.copperspice.com/documentation-doxypress.html"));
 }
 
@@ -441,7 +440,7 @@ void MainWindow::setupPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 {
    if (item) {
-      QString label = item->text(0);      
+      QString label = item->text(0);
 
       if (label == tr("Project Configuration")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Project_Config);
@@ -450,7 +449,7 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config);
 
       } else if (label == tr("Build Options")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);    
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
 
       } else if (label == tr("Programming Language")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);
