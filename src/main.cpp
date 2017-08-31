@@ -22,11 +22,13 @@
 #include "doxy_build_info.h"
 #include "mainwindow.h"
 
+#include <stdlib.h>
+
 static void convert(QString fromFile, QString toFile);
 static void useage();
 
 int main(int argc, char *argv[])
-{   
+{
    QApplication app(argc, argv);
    app.setOrganizationName("CS");
    app.setApplicationName("DoxyPressApp");
@@ -37,7 +39,7 @@ int main(int argc, char *argv[])
    for (int k = 0; k < argc; ++k)   {
       QString value = argv[k];
       argList.append(value);
-   } 
+   }
 
    if (argList.contains("--convert", Qt::CaseInsensitive)) {
 
