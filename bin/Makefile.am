@@ -19,6 +19,9 @@ AM_CXXFLAGS+=-I../src
 if OSTYPE_LINUX
 endif
 
+if OSTYPE_BSD
+endif
+
 if OSTYPE_DARWIN
 endif
 
@@ -37,6 +40,9 @@ bin_PROGRAMS = DoxyPressApp
 .PHONY: deploy
 
 if OSTYPE_LINUX
+endif
+
+if OSTYPE_BSD
 endif
 
 if OSTYPE_DARWIN
