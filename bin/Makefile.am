@@ -46,7 +46,7 @@ if OSTYPE_BSD
 endif
 
 if OSTYPE_DARWIN
-deployapp=$(deploydir)/$(bin_PROGRAMS).app/Contents
+deployapp=$(deploydir)/DoxyPress.app/Contents
 
 deploy : all
 	mkdir -p $(deployapp)/Frameworks
@@ -84,8 +84,8 @@ deploy : all
 	; done
 
    # generate dmg	
-	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname $(bin_PROGRAMS) ../$(bin_PROGRAMS)-$(VERSION).dmg
-	hdiutil internet-enable -yes ../$(bin_PROGRAMS)-$(VERSION).dmg
+	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname DoxyPress-$(VERSION) ../DoxyPress-$(VERSION).dmg
+	hdiutil internet-enable -yes ../DoxyPress-$(VERSION).dmg
 endif
 
 if OSTYPE_WIN

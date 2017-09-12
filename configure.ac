@@ -1,5 +1,5 @@
 # project name, version, email
-AC_INIT([DoxyPressApp], 1.2.10, [info@copperspice.com])
+AC_INIT([DoxyPressApp], 1.2.11, [info@copperspice.com])
 export BUILD_DATE=`date +%m/%d/%Y`
 
 # location of temp autotools files
