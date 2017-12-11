@@ -59,7 +59,9 @@ set(DOXYPRESSAPP_SOURCES
 )
 
 # run rcc to generate qrc output
-COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/../doxypressapp.qrc)
+COPPERSPICE_RESOURCES(
+   ${CMAKE_CURRENT_SOURCE_DIR}/../doxypressapp.qrc
+)
 
 # run uic to generate source
 COPPERSPICE_RESOURCES(
