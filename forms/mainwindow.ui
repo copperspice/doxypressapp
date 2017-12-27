@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -1134,7 +1134,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>6</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0,1,1,0">
@@ -4002,7 +4002,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Use markdown file as main page:</string>
+                <string>Use markdown file as Main Page:</string>
                </property>
                <property name="buddy">
                 <cstring>mdfile_mainpage</cstring>
@@ -4168,6 +4168,24 @@
                  <width>16777215</width>
                  <height>90</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="3">
+              <widget class="QPushButton" name="mdfile_mainpage_PB">
+               <property name="maximumSize">
+                <size>
+                 <width>28</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>►</string>
                </property>
               </widget>
              </item>
@@ -10432,7 +10450,7 @@
      <x>0</x>
      <y>0</y>
      <width>1003</width>
-     <height>29</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -10719,6 +10737,7 @@
   <tabstop>image_path</tabstop>
   <tabstop>image_path_PB</tabstop>
   <tabstop>mdfile_mainpage</tabstop>
+  <tabstop>mdfile_mainpage_PB</tabstop>
   <tabstop>filter_program</tabstop>
   <tabstop>filter_program_PB</tabstop>
   <tabstop>filter_patterns</tabstop>
@@ -10953,8 +10972,8 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_latex"/>
   <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_diagram"/>
-  <buttongroup name="buttonGroup_latex"/>
  </buttongroups>
 </ui>

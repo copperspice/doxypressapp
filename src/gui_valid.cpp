@@ -875,10 +875,11 @@ void MainWindow::valid_enable_preprocessing()
 
       // turn off
       m_ui->enable_preprocessing_CB->setChecked(false);
-      m_ui->macro_expansion_CB->setChecked(false);
-      m_ui->expand_only_predefined_CB->setChecked(false);
-      m_ui->search_includes_CB->setChecked(false);
-      m_ui->skip_function_macros_CB->setChecked(false);
+
+//    m_ui->macro_expansion_CB->setChecked(false);
+//    m_ui->expand_only_predefined_CB->setChecked(false);
+//    m_ui->search_includes_CB->setChecked(false);
+//    m_ui->skip_function_macros_CB->setChecked(false);
 
       m_ui->enable_preprocessing_CB->setEnabled(false);
       m_ui->macro_expansion_CB->setEnabled(false);
@@ -890,7 +891,8 @@ void MainWindow::valid_enable_preprocessing()
       m_ui->expand_as_defined_PB->setEnabled(false);
       m_ui->skip_function_macros_CB->setEnabled(false);
 
-   } else {       
+   } else {
+      m_ui->enable_preprocessing_CB->setEnabled(true);
 
       if (m_ui->enable_preprocessing_CB->isChecked()) {
          m_ui->macro_expansion_CB->setEnabled(true);

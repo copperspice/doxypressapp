@@ -274,6 +274,8 @@ void MainWindow::createConnections()
    connect(m_ui->example_source_PB,         &QPushButton::clicked, this, &MainWindow::example_source_PB);
    connect(m_ui->example_patterns_PB,       &QPushButton::clicked, this, &MainWindow::example_patterns_PB);
    connect(m_ui->image_path_PB,             &QPushButton::clicked, this, &MainWindow::image_path_PB);
+   connect(m_ui->mdfile_mainpage_PB,        &QPushButton::clicked, this, &MainWindow::mdfile_mainpage_PB);
+
    connect(m_ui->filter_program_PB,         &QPushButton::clicked, this, &MainWindow::filter_program_PB);
    connect(m_ui->filter_patterns_PB,        &QPushButton::clicked, this, &MainWindow::filter_patterns_PB);
    connect(m_ui->filter_source_patterns_PB, &QPushButton::clicked, this, &MainWindow::filter_source_patterns_PB);

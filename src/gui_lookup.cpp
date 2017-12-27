@@ -506,6 +506,13 @@ void MainWindow::image_path_PB()
    }
 }
 
+void MainWindow::mdfile_mainpage_PB()
+{
+   QString file = m_ui->mdfile_mainpage->text();
+   file = getSingleFile(tr("Select file"), file, "*.md");
+   m_ui->mdfile_mainpage->setText(file);
+}
+
 void MainWindow::filter_program_PB()
 {
    QString file = m_ui->filter_program->text();

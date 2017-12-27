@@ -355,9 +355,12 @@ class MainWindow : public QMainWindow
       void exclude_files_PB();
       void exclude_patterns_PB();
       void exclude_symbols_PB();
+
       void example_source_PB();
       void example_patterns_PB();
       void image_path_PB();
+      void mdfile_mainpage_PB();
+
       void filter_program_PB();
       void filter_patterns_PB();
       void filter_source_patterns_PB();
