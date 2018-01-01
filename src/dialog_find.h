@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (C) 2014-2017 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 2014-2018 Barbara Geller & Ansel Sermersheim
  * All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software and its

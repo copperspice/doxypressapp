@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (C) 2014-2017 Barbara Geller & Ansel Sermersheim
+ * Copyright (C) 2014-2018 Barbara Geller & Ansel Sermersheim
  * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
  *
@@ -160,7 +160,7 @@ void MainWindow::about()
       "    </td>"
       "</tr></table></font>"
       "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-      "<p><small>Copyright 2014-2017 BG Consulting, All rights reserved.<br>"
+      "<p><small>Copyright 2014-2018 BG Consulting, All rights reserved.<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    QMessageBox msgB;
