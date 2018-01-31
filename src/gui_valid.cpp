@@ -100,7 +100,7 @@ void MainWindow::clearAllFields()
          temp_RB->setChecked(false);
 
          // no label coloring
-      }     
+      }
    }
 
    int index;
@@ -123,7 +123,7 @@ void MainWindow::clearAllFields()
    m_ui->dot_include_CB1->setChecked(true);
    m_ui->dot_included_by_CB1->setChecked(true);
 
-   // tab 2 - project   
+   // tab 2 - project
    index = m_ui->output_language_CM->findText("English");
    m_ui->output_language_CM->setCurrentIndex(index);
 
@@ -165,7 +165,7 @@ void MainWindow::clearAllFields()
    m_ui->case_sensitive_fname_CB->setChecked(true);
 
    m_ui->show_include_files_CB->setChecked(true);
-   m_ui->inline_info_CB->setChecked(true);   
+   m_ui->inline_info_CB->setChecked(true);
    m_ui->sort_member_docs_CB->setChecked(true);
 
    m_ui->max_init_lines_SB->setValue(30);
@@ -175,7 +175,7 @@ void MainWindow::clearAllFields()
 
    // tab 2 - build options
    m_ui->main_page_name->setText("");
-   m_ui->main_page_omit->setChecked(false);   
+   m_ui->main_page_omit->setChecked(false);
    m_ui->ns_alias->setPlainText("");
 
    // (experimental) m_ui->bb_style_CB->setChecked(false);
@@ -201,7 +201,7 @@ void MainWindow::clearAllFields()
    m_ui->strip_code_comments_CB->setChecked(true);
    m_ui->verbatim_headers_CB->setChecked(true);
    m_ui->ref_link_source_CB ->setChecked(true);
-   m_ui->source_tooltips_CB->setChecked(true);   
+   m_ui->source_tooltips_CB->setChecked(true);
    m_ui->suffix_source_navtree->setPlainText(m_suffixSource);
    m_ui->suffix_header_navtree->setPlainText(m_suffixHeader);
    m_ui->suffix_exclude_navtree->setPlainText(m_suffixExclude);
@@ -249,7 +249,7 @@ void MainWindow::clearAllFields()
    index = m_ui->mathjax_format_CM->findText("HTML-CSS");
    m_ui->mathjax_format_CM->setCurrentIndex(index);
 
-   m_ui->mathjax_relpath->setText("http://cdn.mathjax.org/mathjax/latest");
+   m_ui->mathjax_relpath->setText("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/");
 
    // tab 3 - chm
 
@@ -486,7 +486,7 @@ void MainWindow::finalLoad()
    // tab 2
    valid_full_path_names();
    valid_filter_source_files();
-   valid_alpha_index(); 
+   valid_alpha_index();
    valid_source_code();
    valid_enable_preprocessing();
    valid_have_dot();
@@ -533,7 +533,7 @@ void MainWindow::setupLimits()
 {
    QString temp;
    QStringList data;
- 
+
    // tab 2 - general
    temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional,"
          "Croatian, Czech, Danish, Dutch, English, "
@@ -550,12 +550,12 @@ void MainWindow::setupLimits()
    data.append("gif");
    data.append("jpg");
    data.append("png");
-   data.append("svg");   
+   data.append("svg");
    data.append("png:gd");
    data.append("png:gd:gd");
    data.append("png:cairo");
    data.append("png:cairo:cairo");
-   data.append("png:cairo:gd");   
+   data.append("png:cairo:gd");
    data.append("png:cairo:gdiplus");
    data.append("png:gdiplus");
    data.append("png:gdiplus:gdiplus");
@@ -634,7 +634,7 @@ void MainWindow::setupLimits()
    m_ui->enum_values_per_line_SB->setMaximum(20);
 
    m_ui->formula_fontsize_SB->setMinimum(8);
-   m_ui->formula_fontsize_SB->setMaximum(50);  
+   m_ui->formula_fontsize_SB->setMaximum(50);
 }
 
 // tab 1
@@ -960,7 +960,7 @@ void MainWindow::valid_have_dot()
       m_ui->msc_file_dirs->setEnabled(true);
       m_ui->msc_file_dirs_PB ->setEnabled(true);
       m_ui->dia_file_dirs->setEnabled(true);
-      m_ui->dia_file_dirs_PB->setEnabled(true);     
+      m_ui->dia_file_dirs_PB->setEnabled(true);
 */
 
       m_ui->dot_graph_max_nodes_SB->setEnabled(true);
@@ -1019,7 +1019,7 @@ void MainWindow::valid_gen_html()
    // this line can be redundant
    m_ui->gen_html_CB1->setChecked(m_ui->gen_html_CB2->isChecked());
 
-   if (m_ui->gen_html_CB2->isChecked()) {                 
+   if (m_ui->gen_html_CB2->isChecked()) {
       m_ui->html_output->setEnabled(true);
       m_ui->html_output_PB->setEnabled(true);
       m_ui->html_file_extension->setEnabled(true);
@@ -1036,7 +1036,7 @@ void MainWindow::valid_gen_html()
       m_ui->html_colorstyle_gamma->setEnabled(true);
       m_ui->html_timestamp_CB->setEnabled(true);
       m_ui->html_dynamic_sections_CB->setEnabled(true);
-      m_ui->html_index_num_entries_SB->setEnabled(true);           
+      m_ui->html_index_num_entries_SB->setEnabled(true);
 
       m_ui->disable_index_CB->setEnabled(true);
       m_ui->gen_treeview_CB->setEnabled(true);
@@ -1405,7 +1405,7 @@ static QString getFilePattens()
    list.append("*.ipp");
    list.append("*.i++");
    list.append("*.inc");
-   list.append("*.inl");  
+   list.append("*.inl");
    list.append("*.java");
    list.append("*.js");
    list.append("*.m");

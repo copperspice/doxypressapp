@@ -140,7 +140,7 @@ QString MainWindow::getDefault(QWidget *name)
 
    auto index = m_bigMap.find(name);
 
-   if (index != m_bigMap.end()) {  
+   if (index != m_bigMap.end()) {
       retval = index->defValue;
    }
 
@@ -578,7 +578,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("ALIASES",
       "This tag is used to specify a number of aliases which act as commands in "
       "the documentation. An alias has the format: name=value"
-      "<br><br>"          
+      "<br><br>"
       "\"sideeffect=@par Side Effects:\\n\" "
       "<br><br>"
       "This example defines the command \\sideeffect (or @sideeffect). "
@@ -664,12 +664,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 9, Default: 0");
 
-   // build config 
+   // build config
    s_fullHelp.insert("SHORT_NAMES",
       "If this tag is set shorter file names will be generated which may be less readable. "
       "<br><br>"
       "The default value is: NO");
-   
+
    s_fullHelp.insert("ALLOW_UNICODE_NAMES",
       "If this tag is set DoxyPress will allow non-ASCII characters to appear "
       "in the names of generated files. If set to NO, non-ASCII characters will be "
@@ -683,7 +683,7 @@ void MainWindow::configFullHelp()
       "The output files will be distributed in these directories. "
       "<br><br>"
       "The default value is: NO");
-   
+
    s_fullHelp.insert("INLINE_INHERITED_MEMBER",
       "If this tag is set DoxyPress will show all inherited members of a class in the "
       "documentation of that class as if those members were ordinary class members. "
@@ -704,7 +704,7 @@ void MainWindow::configFullHelp()
       "globally by setting this tag to NO. "
       "<br><br>"
       "The default value is: YES");
-    
+
    s_fullHelp.insert("STRICT_SIG_MATCHING",
       "If this tag is set then an exact match of the function signature is required to document "
       "a function. An exact match means the function name and parameters must all match. "
@@ -743,7 +743,7 @@ void MainWindow::configFullHelp()
       "Set this tag to NO to prevent subgrouping. Alternatively, sub-grouping can be done per "
       "class using the \\nosubgrouping command. "
       "<br><br>"
-      "The default value is: YES");   
+      "The default value is: YES");
 
    s_fullHelp.insert("DUPLICATE_DOCS",
        "If member grouping is used in the documentation and this tag "
@@ -784,7 +784,7 @@ void MainWindow::configFullHelp()
       "namespace, or class and the struct will be named Type_S. "
       "<br><br>"
       "The default value is: NO");
- 
+
    s_fullHelp.insert("EXTRACT_ALL",
       "If this tag is set DoxyPress will assume all entities are documented. "
       "Private class members and static file members will be hidden unless the "
@@ -953,8 +953,8 @@ void MainWindow::configFullHelp()
       "If this tag is set the class list will be sorted by fully qualified names "
       "including namespaces. If set to NO, the class list will be sorted only by "
       "class name, not including the namespace part. "
-      "<br><br>"  
-      "The default value is: NO");   
+      "<br><br>"
+      "The default value is: NO");
 
    s_fullHelp.insert("SORT_CLASS_CASE_SENSITIVE",
       "If this tag is set to YES then sorting of classes in the index will be case sensitive. "
@@ -989,7 +989,7 @@ void MainWindow::configFullHelp()
       "This tag is used to enable (YES) or disable (NO) the deprecated list. This list is "
       "created by putting \\deprecated commands in the documentation. "
       "<br><br>"
-      "The default value is: YES"); 
+      "The default value is: YES");
 
    // build output
    s_fullHelp.insert("MAX_INIT_LINES",
@@ -1013,7 +1013,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("FILE_VERSION_FILTER",
       "This tag is used to specify a program which DoxyPress should invoke to obtain the current version "
       "for each file. DoxyPress will invoke this program and pass a file name as the first command line parameter. "
-      "The value written to standard output is used as the file version.");  
+      "The value written to standard output is used as the file version.");
 
    s_fullHelp.insert("MAIN_PAGE_NAME",
       "This tag is used to specify an input file name which should be used for the index page. "
@@ -1157,7 +1157,7 @@ void MainWindow::configFullHelp()
       "specify wildcard patterns. Files matching these patterns will be processed by DoxyPress as source. "
       "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag.  "
       "<br><br>"
-      "If this tag is empty the default will be: " + m_filePatterns);   
+      "If this tag is empty the default will be: " + m_filePatterns);
 
    s_fullHelp.insert("INPUT_RECURSIVE",
       "This tag is used to specify whether or not subdirectories should be searched for input files. "
@@ -1186,7 +1186,7 @@ void MainWindow::configFullHelp()
       "This tag is used to specify symbol names, namespaces, classes, functions, etc. "
       "which should be excluded from the documentation. "
       "<br><br>"
-      "Examples: FooNamespace, BarClass, FooNamespace::BarClass, FooNamespace::*Test ");          
+      "Examples: FooNamespace, BarClass, FooNamespace::BarClass, FooNamespace::*Test ");
 
    // input other
    s_fullHelp.insert("EXAMPLE_SOURCE",
@@ -1278,7 +1278,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("IGNORE_PREFIX",
       "This tag is used to define a prefix or a list of prefixes, which should be ignored "
-      "while generating the index headers. "                     
+      "while generating the index headers. "
       "This is useful when several classes start with a common prefix as too many entries "
       "would appear under the same letter in the alphabetical index. "
       "<br><br>"
@@ -1378,12 +1378,12 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("CLANG_PARSING",
       "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
       "Objective-C source code. Using clang is currently much slower. This feature is under development. "
-      "<br><br>"     
+      "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("CLANG_FLAGS",
       "This tag is used to pass flags to clang when parsing source files. "
-      "<br><br>"                 
+      "<br><br>"
       "This tag requires 'CLANG PARSING' is set to YES");
 
 
@@ -1468,7 +1468,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Syntax to add a url or path for the tag files. Loc1 and loc2 can be relative or absolute. "
       "TAGFILES = tagFile1=loc1 tagFile2=loc2 ... "
-      "<br><br>"      
+      "<br><br>"
       "Refer to the DoxyPress documentation regarding 'Linking to external documentation' "
       "<br><br>"
       "Each tag file must have a unique name (where the name does NOT include the path). If a tag file is not "
@@ -1505,7 +1505,7 @@ void MainWindow::configFullHelp()
    // dot
    s_fullHelp.insert("CLASS_DIAGRAMS",
       "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "
-      "for classes with base or super classes. Setting the tag to NO turns the diagrams off. "     
+      "for classes with base or super classes. Setting the tag to NO turns the diagrams off. "
       "It is recommended you install and use the dot program since it yields more powerful graphs. "
       "<br><br>"
       "The default value is: YES");
@@ -1531,7 +1531,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("HAVE_DOT",
       "If this tag is set DoxyPress will expect the dot program is available from your path. "
       "This program is part of Graphviz which is a graph visualization toolkit from AT&T "
-      "and Lucent Bell Labs.   "     
+      "and Lucent Bell Labs.   "
       "<br><br>"
       "The default value is: NO");
 
@@ -1635,7 +1635,7 @@ void MainWindow::configFullHelp()
       "The default value is: YES "
       "<br><br>"
       "This tag requires the tag 'HAVE DOT' is set to YES");
-  
+
    s_fullHelp.insert("DOT_CALL",
       "If this tag is set a call dependency graph for every global function or class method "
       "will be generated. "
@@ -1772,7 +1772,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("DOT_CLEANUP",
       "If this tag is set DoxyPress will remove the intermediate dot files which are used to generate "
-      "the various graphs."      
+      "the various graphs."
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
@@ -1940,7 +1940,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
 
    // docbook
-   s_fullHelp.insert("GEN_DOCBOOK",                     
+   s_fullHelp.insert("GEN_DOCBOOK",
       "If this tag is set Docbook files will be generated. These files can be used to generate a PDF. "
       "<br><br>"
       "The default value is: NO");
@@ -2109,7 +2109,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("SEARCH_ENGINE_URL",
       "This tag references a search engine hosted by a web server "
-      "which will return the search results when 'EXTERNAL SEARCH' is enabled. "     
+      "which will return the search results when 'EXTERNAL SEARCH' is enabled. "
       "<br><br>"
       "Refer to the DoxyPress manual regarding 'External Searching'. "
       "<br><br>"
@@ -2193,7 +2193,7 @@ void MainWindow::configFullHelp()
       "The default value points to the MathJax Content Delivery Network so you can quickly see "
       "the result without installing MathJax. "
       "<br><br>"
-      "The default value is: http://cdn.mathjax.org/mathjax/latest "                     
+      "The default value is: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/ "
       "<br><br>"
       "This tag requires the tag 'USE MATHJAX' is set to YES");
 
@@ -2217,7 +2217,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES");
 
-   s_fullHelp.insert("LATEX_OUTPUT",                     
+   s_fullHelp.insert("LATEX_OUTPUT",
       "This tag is used to specify the location for the LaTeX output. If a relative "
       "path is entered the value of 'OUTPUT DIRECTORY' will be prepended. "
       "<br><br>"
@@ -2370,7 +2370,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("CITE_BIB_FILES",
       "This tag is used to specify one or more bib files containing the reference definitions. "
       "Both perl and bibtex must be available in the search path. "
-      "For LaTeX, the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "      
+      "For LaTeX, the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "
       "Refer to the DoxyPress manual regarding the \\cite command for additional information.");
 
    // man
@@ -2392,7 +2392,7 @@ void MainWindow::configFullHelp()
       "This tag determines the extension which is added to the generated man pages. "
       "In case the manual section does not start with a number, the number "
       "3 is prepended. The dot (.) at the beginning of this tag is optional. "
-      "<br><br>"                     
+      "<br><br>"
       "The default value is: .3 "
       "<br><br>"
       "This tag requires the tag 'GENERATE MAN' is set to YES");
@@ -2575,5 +2575,5 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE XML' is set to YES");  
+      "This tag requires the tag 'GENERATE XML' is set to YES");
 }
