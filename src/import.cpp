@@ -573,6 +573,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "PLANTUML_JAR_PATH");
    m_ui->plantuml_jar_path->setText(tempStr);
 
+   tempStr = convert_Str(data, "PLANTUML_CFG_FILE");
+   m_ui->plantuml_cfg_file->setText(tempStr);
+
    tempStr = convert_Str(data, "PLANTUML_INCLUDE_PATH");
    m_ui->plantuml_inc_path->setPlainText(tempStr);
 

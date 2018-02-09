@@ -947,6 +947,14 @@ void MainWindow::plantuml_jar_path_PB()
    m_ui->plantuml_jar_path->setText(path);
 }
 
+void MainWindow::plantuml_cfg_file_PB()
+{
+   QString path = m_ui->plantuml_cfg_file->text();
+   path = get_DirPath(tr("Select configuration file"), path, PROJECT_DIR);
+
+   m_ui->plantuml_cfg_file->setText(path);
+}
+
 void MainWindow::plantuml_inc_path_PB()
 {
    QRegExp regExp("\\s*, \\s*");

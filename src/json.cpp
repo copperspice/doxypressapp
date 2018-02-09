@@ -726,6 +726,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file-dirs"));
       m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file-dirs"));
       m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());
+      m_ui->plantuml_cfg_file->setText(               object.value("plantuml-cfg_file").toString());
       m_ui->plantuml_inc_path->setPlainText(          getDataList(object, "plantuml-inc-path"));
 
       m_ui->dot_graph_max_nodes_SB->setValue(         object.value("dot-graph-max-nodes").toInt());
@@ -1130,6 +1131,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->msc_file_dirs->setPlainText(              getDataList(dotObj, "msc-file-dirs"));
       m_ui->dia_file_dirs->setPlainText(              getDataList(dotObj, "dia-file-dirs"));
       m_ui->plantuml_jar_path->setText(               dotObj.value("plantuml-jar-path").toString());
+      m_ui->plantuml_cfg_file->setText(               dotObj.value("plantuml-cfg-file").toString());
       m_ui->plantuml_inc_path->setPlainText(          getDataList(dotObj, "plantuml-inc-path"));
 
       m_ui->dot_graph_max_nodes_SB->setValue(         dotObj.value("dot-graph-max-nodes").toInt());
@@ -1540,6 +1542,7 @@ QByteArray MainWindow::json_SaveDoxy()
    dotObj.insert("msc-file-dirs",             putDataList(m_ui->msc_file_dirs->toPlainText()));
    dotObj.insert("dia-file-dirs",             putDataList(m_ui->dia_file_dirs->toPlainText()));
    dotObj.insert("plantuml-jar-path",         m_ui->plantuml_jar_path->text());
+   dotObj.insert("plantuml-cfg-file",         m_ui->plantuml_cfg_file->text());
    dotObj.insert("plantuml-inc-path",         putDataList(m_ui->plantuml_inc_path->toPlainText()));
 
    dotObj.insert("dot-graph-max-nodes",       m_ui->dot_graph_max_nodes_SB->value());

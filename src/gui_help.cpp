@@ -565,14 +565,6 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("OUTPUT_LANGUAGE",
       "This tag is used to specify the language for the generated documentation. "
       "<br><br>"
-      "Possible values are: Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, "
-      "Chinese-Traditional, Croatian, Czech, Danish, Dutch, English, "
-      "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
-      "Indonesian, Italian, Japanese, Japanese-en (Japanese with English messages), "
-      "Korean, Korean-en (Korean with English messages), Latvian, Lithuanian, Macedonian, "
-      "Norwegian, Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, "
-      "Slovak, Slovenian, Spanish, Swedish, Turkish, Ukrainian, and Vietnamese. "
-      "<br><br>"
       "The default value is: English");
 
    s_fullHelp.insert("ALIASES",
@@ -1719,8 +1711,11 @@ void MainWindow::configFullHelp()
       "generate a warning when it encounters a \\startuml command in this case and "
       "will not generate output for the diagram.");
 
+   s_fullHelp.insert("PLANTUML_CFG_FILE",
+      "When using PlantUML this tag can be used to specify a configuration file.");
+
    s_fullHelp.insert("PLANTUML_INC_PATH",
-      "When using PlantUML, the specified paths are searched for files specified by "
+      "When using PlantUML the specified paths are searched for files specified by "
       "the <code>!include</code> statement in a plantuml block.");
 
    s_fullHelp.insert("DOT_GRAPH_MAX_NODES",
@@ -2429,7 +2424,7 @@ void MainWindow::configFullHelp()
       "This tag requires the tag 'GENERATE PERL MODULE' is set to YES");
 
    s_fullHelp.insert("PERL_PRETTY",
-      "If this tag is set, the Perl module output will be "
+      "If this tag is set the Perl module output will be "
       "formatted so it is readable. If this tag is set to NO, the "
       "size of the Perl module output will be much smaller. Perl can parse either format. "
       "<br><br>"

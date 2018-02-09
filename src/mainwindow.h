@@ -399,6 +399,7 @@ class MainWindow : public QMainWindow
       void msc_file_dirs_PB();
       void dia_file_dirs_PB();
       void plantuml_jar_path_PB();
+      void plantuml_cfg_file_PB();
       void plantuml_inc_path_PB();
 
       // tab 3 html

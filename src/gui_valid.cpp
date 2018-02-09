@@ -535,11 +535,10 @@ void MainWindow::setupLimits()
    QStringList data;
 
    // tab 2 - general
-   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional,"
-         "Croatian, Czech, Danish, Dutch, English, "
-         "Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian, "
+   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional, "
+         "Croatian, Czech, Danish, Dutch, English, Esperanto, Finnish, French, German, Greek, Hungarian, "
          "Indonesian, Italian, Japanese, Japanese-en, Korean, Korean-en, Latvian, Lithuanian, "
-         "Macedonian, Norwegian, Polish, Portuguese, Romanian, Russian, "
+         "Macedonian, Norwegian, Persian, Polish, Portuguese, Romanian, Russian, "
          "Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian, Vietnamese";
 
    data.clear();

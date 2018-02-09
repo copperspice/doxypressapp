@@ -315,6 +315,7 @@ void MainWindow::createConnections()
    connect(m_ui->msc_file_dirs_PB,          &QPushButton::clicked, this, &MainWindow::msc_file_dirs_PB);
    connect(m_ui->dia_file_dirs_PB,          &QPushButton::clicked, this, &MainWindow::dia_file_dirs_PB);
    connect(m_ui->plantuml_jar_path_PB,      &QPushButton::clicked, this, &MainWindow::plantuml_jar_path_PB);
+   connect(m_ui->plantuml_cfg_file_PB,      &QPushButton::clicked, this, &MainWindow::plantuml_cfg_file_PB);
    connect(m_ui->plantuml_inc_path_PB,      &QPushButton::clicked, this, &MainWindow::plantuml_inc_path_PB);
 
    // tab 3 html
