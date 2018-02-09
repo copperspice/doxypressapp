@@ -37,6 +37,7 @@ void Syntax::processSyntax()
    errorWords.append("Error:");
    errorWords.append("Warning:");
    errorWords.append("^bibtex command failed:.*");
+   errorWords.append("^.* is not recognized as an internal or external command");
 
    HighlightingRule rule;
 
