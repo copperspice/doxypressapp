@@ -1453,18 +1453,13 @@ void MainWindow::configFullHelp()
 
    // external
    s_fullHelp.insert("TAG_FILES",
-      "This tag is used to specify one or more tag files. For each tag file the location to the "
-      "external documentation should be provided. The format of a tag file without this location is: "
+      "Use this tag is used to specify one or more tag files which were generated from another project. "
+      "For each entry specify the tag filename and the URL to the external documentation. "
+      "The syntax for the URL can be relative or absolute. "
       "<br><br>"
-      "TAGFILES = tagFile1 tagFile2 ... "
+      "tagFile_1=url_1 tagFile_2=url_2 ... "
       "<br><br>"
-      "Syntax to add a url or path for the tag files. Loc1 and loc2 can be relative or absolute. "
-      "TAGFILES = tagFile1=loc1 tagFile2=loc2 ... "
-      "<br><br>"
-      "Refer to the DoxyPress documentation regarding 'Linking to external documentation' "
-      "<br><br>"
-      "Each tag file must have a unique name (where the name does NOT include the path). If a tag file is not "
-      "located in the directory in which DoxyPress is run, include the path with the file name.");
+      "Refer to the DoxyPress documentation regarding 'Linking to external documentation' ");
 
    s_fullHelp.insert("GEN_TAGFILE",
       "When a file name is specified DoxyPress will create a tag file based on the input files. "
