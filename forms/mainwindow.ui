@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -94,7 +94,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,1,0">
@@ -183,7 +183,7 @@
               <widget class="QRadioButton" name="optimize_java_RB">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -195,7 +195,7 @@
               <widget class="QRadioButton" name="optimize_fortran_RB">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -438,7 +438,7 @@
               <widget class="QRadioButton" name="optimize_c_RB">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -459,7 +459,7 @@
               <widget class="QRadioButton" name="optimize_cplus_RB">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -11016,8 +11016,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_diagram"/>
   <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_latex"/>
+  <buttongroup name="buttonGroup_diagram"/>
  </buttongroups>
 </ui>

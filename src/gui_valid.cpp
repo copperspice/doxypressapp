@@ -1213,8 +1213,10 @@ void MainWindow::valid_gen_latex()
       m_ui->latex_stylesheets_PB->setEnabled(true);
       m_ui->latex_extra_files->setEnabled(true);
       m_ui->latex_extra_files_PB->setEnabled(true);
-      m_ui->latex_hyper_pdf_CB->setEnabled(true);
-      m_ui->latex_pdf_CB->setEnabled(true);
+
+      m_ui->latex_timestamp_CB->setEnabled(true);
+      m_ui->latex_hyper_pdf_CB->setEnabled(true);      
+      m_ui->latex_pdf_CB->setEnabled(true);      
       m_ui->latex_batch_mode_CB->setEnabled(true);
       m_ui->latex_hide_indices_CB->setEnabled(true);
       m_ui->latex_source_code_CB->setEnabled(true);
@@ -1239,6 +1241,8 @@ void MainWindow::valid_gen_latex()
       m_ui->latex_stylesheets_PB->setEnabled(false);
       m_ui->latex_extra_files->setEnabled(false);
       m_ui->latex_extra_files_PB->setEnabled(false);
+
+      m_ui->latex_timestamp_CB->setEnabled(false);
       m_ui->latex_hyper_pdf_CB->setEnabled(false);
       m_ui->latex_pdf_CB->setEnabled(false);
       m_ui->latex_batch_mode_CB->setEnabled(false);

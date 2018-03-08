@@ -603,8 +603,8 @@ void MainWindow::configFullHelp()
       "The default value is: YES");
 
    s_fullHelp.insert("BRIEF_MEMBER_DESC",
-      "If this tag is set, a brief member description will be included after the "
-      "members for file and class documentation. "
+      "If this tag is set a brief description will be included after each method, function, or other member "
+      "in the documentation of a class or file. "
       "<br><br>"
       "The default value is: YES");
 
