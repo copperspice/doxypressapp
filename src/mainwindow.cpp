@@ -114,9 +114,11 @@ MainWindow::MainWindow()
 
    QList<QTreeWidgetItem *> list = m_ui->output_TreeWidget->findItems("HTML", Qt::MatchStartsWith | Qt::MatchRecursive);
 
+/*
    // should be four matches, use element 1
    QTreeWidgetItem *outputItem = list.at(1);
    outputItem->setSelected(true);
+*/
 
    m_ui->tabWidget->setCurrentIndex(0);
 
@@ -168,7 +170,9 @@ void MainWindow::about()
    msgB.setWindowIcon(QIcon(icon));
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
-   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # %2</h5></center></p>").arg(versionString).arg(buildDate));
+   msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # %2</h5></center></p>")
+                  .formatArgs(QString::fromLatin1(versionString), QString::fromLatin1(buildDate)));
+
    msgB.setInformativeText(textBody);
 
    msgB.setStandardButtons(QMessageBox::Ok);

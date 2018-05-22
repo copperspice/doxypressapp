@@ -233,7 +233,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
    QFile file(fname);
 
    if (! file.open(QFile::ReadOnly | QFile::Text)) {
-      QString msg = tr("Unable to open: %1  (%2)").arg(fname).arg(file.error());
+      QString msg = tr("Unable to open: %1  (%2)").formatArgs(fname, file.error());
       QMessageBox::warning(this, tr("Error Opening File") , msg);
       return false;
    }

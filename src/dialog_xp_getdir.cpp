@@ -143,40 +143,39 @@ void Dialog_XP_GetDir::cancel()
 
 QString Dialog_XP_GetDir::driveType(QString drive)
 {
+   QString retval;
+
+   int driveType = 0;
    drive = drive + "\\";
 
 #ifdef Q_OS_WIN
    // windows api call, pass drive value as UNICODE
-   int driveType = GetDriveType(drive.toStdWString().c_str());
-
-#else
-   int driveType = 0;
-
+   driveType = GetDriveType(drive.toStdWString().c_str());
 #endif
 
-   switch (driveType)    {
+   switch (driveType) {
 
       case 0:
       case 1:
-         return "Unknown";
+         retval = "Unknown";
 
       case 2:
-         return "Removable Drive";
+         retval = "Removable Drive";
 
       case 3:
-         return "Local Drive";
+         retval = "Local Drive";
 
       case 4:
-         return "Network Drive";
+         retval = "Network Drive";
 
       case 5:
-         return "CD Drive";
+         retval = "CD Drive";
 
       case 6:
-         return "Ram Disk";
+         retval = "Ram Disk";
    }
 
-   return "";
+   return retval;
 }
 
 QString Dialog_XP_GetDir::getDirectory()

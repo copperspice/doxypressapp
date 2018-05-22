@@ -61,8 +61,7 @@ bool MainWindow::json_Read(Config trail)
    if (ok) {
 
       // get existing json data
-      QByteArray data = json_ReadFile();
-
+      QByteArray data   = json_ReadFile();
       QJsonDocument doc = QJsonDocument::fromJson(data);
 
       QJsonObject object = doc.object();
@@ -182,7 +181,7 @@ bool MainWindow::json_Write(Option route, Config trail)
 
       // save the new data
       doc.setObject(object);
-      data = doc.toJson();
+      data = doc.toJsonByteArray();
 
       json_SaveFile(data);
    }
@@ -301,7 +300,7 @@ bool MainWindow::json_CreateNew()
 
    // save the data
    QJsonDocument doc(object);
-   QByteArray data = doc.toJson();
+   QByteArray data = doc.toJsonByteArray();
 
    bool ok = json_SaveFile(data);
 
@@ -1703,7 +1702,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    // save the data
    QJsonDocument doc(object);
-   QByteArray data = doc.toJson();
+   QByteArray data = doc.toJsonByteArray();
 
    return data;
 }

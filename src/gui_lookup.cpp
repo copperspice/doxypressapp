@@ -19,7 +19,7 @@
 #include "dialog_lookup.h"
 #include "mainwindow.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 // tab 1
 void MainWindow::getLogo(const QString route)
@@ -63,12 +63,12 @@ void MainWindow::getLogo(const QString route)
          } else {
             m_ui->project_logo_image->setText(tr("No preview is available for: ") + tempName);
          }
-      }      
+      }
    }
 }
 
 void MainWindow::output_dir_PB()
-{   
+{
    QString path = m_ui->output_dir->text();
    path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
 
@@ -93,7 +93,7 @@ void MainWindow::tune_colors_PB()
 // tab 2- look up (general)
 void MainWindow::abbreviate_brief_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->abbreviate_brief->toPlainText();
@@ -117,7 +117,7 @@ void MainWindow::abbreviate_brief_PB()
 
 void MainWindow::strip_from_path_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->strip_from_path->toPlainText();
@@ -141,7 +141,7 @@ void MainWindow::strip_from_path_PB()
 
 void MainWindow::strip_from_inc_path_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->strip_from_inc_path->toPlainText();
@@ -165,7 +165,7 @@ void MainWindow::strip_from_inc_path_PB()
 
 void MainWindow::aliases_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->aliases->toPlainText();
@@ -189,7 +189,7 @@ void MainWindow::aliases_PB()
 
 void MainWindow::tcl_subst_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->tcl_subst->toPlainText();
@@ -213,7 +213,7 @@ void MainWindow::tcl_subst_PB()
 
 void MainWindow::language_mapping_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->language_mapping->toPlainText();
@@ -238,7 +238,7 @@ void MainWindow::language_mapping_PB()
 // tab 2- look up (build)
 void MainWindow::enabled_sections_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->enabled_sections->toPlainText();
@@ -283,7 +283,7 @@ void MainWindow::layout_file_PB()
 
 void MainWindow::ns_alias_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->ns_alias->toPlainText();
@@ -316,7 +316,7 @@ void MainWindow::warn_logfile_PB()
 // tab 2- look up (input)
 void MainWindow::input_source_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->input_source->toPlainText();
@@ -340,7 +340,7 @@ void MainWindow::input_source_PB()
 
 void MainWindow::input_patterns_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->input_patterns->toPlainText();
@@ -364,7 +364,7 @@ void MainWindow::input_patterns_PB()
 
 void MainWindow::exclude_files_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp    = m_ui->exclude_files->toPlainText();
@@ -387,8 +387,8 @@ void MainWindow::exclude_files_PB()
 }
 
 void MainWindow::exclude_patterns_PB()
-{   
-   QRegExp regExp("\\s*, \\s*");
+{
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp    = m_ui->exclude_patterns->toPlainText();
@@ -412,7 +412,7 @@ void MainWindow::exclude_patterns_PB()
 
 void MainWindow::exclude_symbols_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp    = m_ui->exclude_symbols->toPlainText();
@@ -436,7 +436,7 @@ void MainWindow::exclude_symbols_PB()
 
 void MainWindow::example_source_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->example_source->toPlainText();
@@ -460,7 +460,7 @@ void MainWindow::example_source_PB()
 
 void MainWindow::example_patterns_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->example_patterns->toPlainText();
@@ -484,7 +484,7 @@ void MainWindow::example_patterns_PB()
 
 void MainWindow::image_path_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->image_path->toPlainText();
@@ -522,7 +522,7 @@ void MainWindow::filter_program_PB()
 
 void MainWindow::filter_patterns_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->filter_patterns->toPlainText();
@@ -546,7 +546,7 @@ void MainWindow::filter_patterns_PB()
 
 void MainWindow::filter_source_patterns_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->filter_source_patterns->toPlainText();
@@ -571,7 +571,7 @@ void MainWindow::filter_source_patterns_PB()
 // tab 2- look up (source code)
 void MainWindow::suffix_source_navtree_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->suffix_source_navtree->toPlainText();
@@ -595,7 +595,7 @@ void MainWindow::suffix_source_navtree_PB()
 
 void MainWindow::suffix_header_navtree_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->suffix_header_navtree->toPlainText();
@@ -619,7 +619,7 @@ void MainWindow::suffix_header_navtree_PB()
 
 void MainWindow::suffix_exclude_navtree_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->suffix_exclude_navtree->toPlainText();
@@ -643,7 +643,7 @@ void MainWindow::suffix_exclude_navtree_PB()
 
 void MainWindow::clang_options_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->clang_flags->toPlainText();
@@ -668,7 +668,7 @@ void MainWindow::clang_options_PB()
 // tab 2- look up (index)
 void MainWindow::ignore_prefix_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->ignore_prefix->toPlainText();
@@ -693,7 +693,7 @@ void MainWindow::ignore_prefix_PB()
 // tab 2- look up (preprocess)
 void MainWindow::include_path_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->include_path->toPlainText();
@@ -717,7 +717,7 @@ void MainWindow::include_path_PB()
 
 void MainWindow::include_file_patterns_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->include_patterns->toPlainText();
@@ -741,7 +741,7 @@ void MainWindow::include_file_patterns_PB()
 
 void MainWindow::predefined_macros_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->predefined_macros->toPlainText();
@@ -765,7 +765,7 @@ void MainWindow::predefined_macros_PB()
 
 void MainWindow::expand_as_defined_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->expand_as_defined->toPlainText();
@@ -790,7 +790,7 @@ void MainWindow::expand_as_defined_PB()
 // tab 2- look up (external)
 void MainWindow::tag_files_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->tag_files->toPlainText();
@@ -869,7 +869,7 @@ void MainWindow::dot_path_PB()
 
 void MainWindow::dot_file_dirs_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->dot_file_dirs->toPlainText();
@@ -893,7 +893,7 @@ void MainWindow::dot_file_dirs_PB()
 
 void MainWindow::msc_file_dirs_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->msc_file_dirs->toPlainText();
@@ -917,7 +917,7 @@ void MainWindow::msc_file_dirs_PB()
 
 void MainWindow::dia_file_dirs_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->dia_file_dirs->toPlainText();
@@ -957,7 +957,7 @@ void MainWindow::plantuml_cfg_file_PB()
 
 void MainWindow::plantuml_inc_path_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->plantuml_inc_path->toPlainText();
@@ -1005,7 +1005,7 @@ void MainWindow::html_footer_PB()
 
 void MainWindow::html_stylesheets_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->html_stylesheets->toPlainText();
@@ -1029,7 +1029,7 @@ void MainWindow::html_stylesheets_PB()
 
 void MainWindow::html_extra_files_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->html_extra_files->toPlainText();
@@ -1081,7 +1081,7 @@ void MainWindow::qch_file_PB()
 
 void MainWindow::qhp_cust_attrib_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->qhp_cust_attrib->toPlainText();
@@ -1105,7 +1105,7 @@ void MainWindow::qhp_cust_attrib_PB()
 
 void MainWindow::qhp_sect_attrib_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->qhp_sect_attrib->toPlainText();
@@ -1136,7 +1136,7 @@ void MainWindow::qthelp_gen_path_PB()
 
 void MainWindow::mathjax_extensions_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->mathjax_extensions->toPlainText();
@@ -1167,7 +1167,7 @@ void MainWindow::search_data_file_PB()
 
 void MainWindow::search_mappings_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->search_mappings->toPlainText();
@@ -1214,7 +1214,7 @@ void MainWindow::make_index_cmd_name_PB()
 
 void MainWindow::latex_extra_packages_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->latex_extra_packages->toPlainText();
@@ -1252,7 +1252,7 @@ void MainWindow::latex_footer_PB()
 
 void MainWindow::latex_stylesheets_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->latex_stylesheets->toPlainText();
@@ -1276,7 +1276,7 @@ void MainWindow::latex_stylesheets_PB()
 
 void MainWindow::latex_extra_files_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->latex_stylesheets->toPlainText();
@@ -1300,7 +1300,7 @@ void MainWindow::latex_extra_files_PB()
 
 void MainWindow::cite_bib_files_PB()
 {
-   QRegExp regExp("\\s*, \\s*");
+   QRegularExpression regExp("\\s*, \\s*");
    struct LookUpInfo data;
 
    QString temp = m_ui->cite_bib_files->toPlainText();
@@ -1365,7 +1365,7 @@ void MainWindow::xml_output_PB()
 
 // tab 3 look up (docbook)
 void MainWindow::docbook_output_PB()
-{   
+{
    QString path = m_ui->docbook_output->text();
    path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
 

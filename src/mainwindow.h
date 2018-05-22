@@ -71,11 +71,11 @@ enum RelativeX {
 };
 
 struct Args {
-   bool blank_layout;  
+   bool blank_layout;
    bool setDateTime;
    bool deleteHtml;
 
-   QString layout; 
+   QString layout;
    QString dateTime;
 
    QString style_html_header;
@@ -84,7 +84,7 @@ struct Args {
 };
 
 struct LookUpInfo {
-   QString title;   
+   QString title;
    QStringList dataList;
    QString path;
    QString relPath;
@@ -93,7 +93,7 @@ struct LookUpInfo {
    enum RelativeX relativeTo;
 };
 
-struct HelpData {     
+struct HelpData {
 
    enum DefType {
       BOOL,
@@ -150,7 +150,7 @@ class MainWindow : public QMainWindow
       QSize sizeHint() const;
 
       QString get_DirPath(QString message, QString path, enum RelativeX relativeTo);
-      QString getSingleFile(QString title, QString fname, QString filter = "");
+      QString getSingleFile(QString title, QString fname, QString filter = QString());
 
       void autoConvert(QString fromFile, QString toFile);
 
@@ -177,10 +177,10 @@ class MainWindow : public QMainWindow
       void clearAllFields();
       void convertDoxy(QByteArray data);
 
-      bool convert_Bool(QByteArray data, QString key);
-      int convert_Int(QByteArray data, QString key);
-      QString convert_Str(QByteArray data, QString key);
-      QString convert_PlainText(QByteArray data, QString key);
+      bool convert_Bool(QByteArray data, QByteArray key);
+      int convert_Int(QByteArray data, QByteArray key);
+      QString convert_Str(QByteArray data, QByteArray key);
+      QString convert_PlainText(QByteArray data, QByteArray key);
 
       void createShortCuts();
       void createConnections();
@@ -211,7 +211,7 @@ class MainWindow : public QMainWindow
 
       void rf_CreateMenus();
       void rf_Update();
-      void rf_UpdateActions();   
+      void rf_UpdateActions();
 
       QProcess *m_runProcess;
       QTimer *m_timer;
@@ -279,7 +279,7 @@ class MainWindow : public QMainWindow
       // menu recent files
       void showContext_Files(const QPoint &pt);
 
-      void rf_Open();    
+      void rf_Open();
       void rf_DeleteName();
 
       CS_SLOT_1(Private, void rf_ClearList())
@@ -456,12 +456,12 @@ class MainWindow : public QMainWindow
       void showHtmlOutput();
       void clearOutput();
       void find();
-      void saveLog();      
+      void saveLog();
 
       void findNext();
 
       void readStdout();
-      void runComplete();      
+      void runComplete();
 };
 
 #endif

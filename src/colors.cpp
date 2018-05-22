@@ -24,7 +24,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    setWindowTitle(tr("Tune the colors for HTML output"));
 
    QGridLayout *layout = new QGridLayout(this);
-   m_image    = new QImage(QString::fromAscii(":/resources/tunecolor.png"));
+   m_image    = new QImage(":/resources/tunecolor.png");
    m_imageLab = new QLabel;
    updateImage(hue, sat, gamma);
 

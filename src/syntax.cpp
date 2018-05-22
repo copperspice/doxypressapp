@@ -27,7 +27,7 @@ Syntax::~Syntax()
 }
 
 void Syntax::processSyntax()
-{   
+{
    QStringList keyWords;
    keyWords.append("^Parsing\\b");
    keyWords.append("^Processing\\b");
@@ -41,25 +41,21 @@ void Syntax::processSyntax()
 
    HighlightingRule rule;
 
-   for (auto pattern : keyWords) {
+   for (auto item : keyWords) {
       rule.format.setFontWeight(QFont::Bold);
       rule.format.setFontItalic(false);
       rule.format.setForeground(Qt::blue);
 
-      rule.pattern = QRegExp(pattern);
-      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
-
+      rule.pattern = QRegularExpression(item, QPatternOption::CaseInsensitiveOption);
       highlightingRules.append(rule);
    }
 
-   for (auto pattern : errorWords) {
+   for (auto item : errorWords) {
       rule.format.setFontWeight(QFont::Bold);
       rule.format.setFontItalic(false);
       rule.format.setForeground(Qt::red);
 
-      rule.pattern = QRegExp(pattern);
-      rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
-
+      rule.pattern = QRegularExpression(item, QPatternOption::CaseInsensitiveOption);
       highlightingRules.append(rule);
    }
 
@@ -70,15 +66,17 @@ void Syntax::processSyntax()
 void Syntax::highlightBlock(const QString &text)
 {
    for (auto &rule : highlightingRules) {
-      QRegExp expression(rule.pattern);
-      int index = expression.indexIn(text);
+      QRegularExpressionMatch match = rule.pattern.match(text);
 
-      while (index >= 0) {
-         int length = expression.matchedLength();
+      while (match.hasMatch()) {
+         int index  = match.capturedStart(0) - text.begin();
+         int length = match.capturedLength();
+
          setFormat(index, length, rule.format);
-         index = expression.indexIn(text, index + length);
+
+         // get new match
+         match = rule.pattern.match(text, match.capturedEnd(0));
       }
    }
-
 }
 

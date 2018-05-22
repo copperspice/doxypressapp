@@ -41,7 +41,7 @@ void MainWindow::runDoxyPress()
             msg += ", save project file aborted or failed";
          }
 
-         runText_Append( QString("*** Unable to save DoxyPress project: %1\n").arg(msg));
+         runText_Append( QString("*** Unable to save DoxyPress project: %1\n").formatArg(msg));
          return;
       }
 
@@ -131,16 +131,16 @@ void MainWindow::runDoxyPress()
          // show possible error messages
          readStdout();
 
-         runText_Append( QString("*** Failed to start %1\n").arg(doxyPressPath));
+         runText_Append( QString("*** Failed to start %1\n").formatArg(doxyPressPath));
          return;
-      }            
+      }
 
       //
       if (m_runProcess->state() == QProcess::NotRunning) {
          // show possible error messages
          readStdout();
 
-         runText_Append( QString("*** Failed to run %1\n").arg(doxyPressPath));
+         runText_Append( QString("*** Failed to run %1\n").formatArg(doxyPressPath));
 
       } else {
          m_ui->parameters_PB->setEnabled(false);
@@ -157,7 +157,7 @@ void MainWindow::runDoxyPress()
 //B      m_timer->start(1000);
       }
 
-   } else {      
+   } else {
       // doxypress is running, stop it
       m_running = false;
 
@@ -170,8 +170,8 @@ void MainWindow::runDoxyPress()
    }
 }
 
-void MainWindow::readStdout()      
-{   
+void MainWindow::readStdout()
+{
    static int count = 0;
 
    if (m_running) {
@@ -268,7 +268,7 @@ bool MainWindow::htmlOutputPresent() const
 }
 
 void MainWindow::showHtmlOutput()
-{   
+{
    QString dir = get_OutputDir() + "/" + m_ui->html_output->text();
 
    QString indexHtml = dir + "/index.html";
@@ -371,7 +371,7 @@ void MainWindow::saveLog()
    if (! logName.isEmpty()) {
       QFile f(logName);
 
-      if (f.open(QIODevice::WriteOnly)) {       
+      if (f.open(QIODevice::WriteOnly)) {
 
          QString data = m_ui->runText->toPlainText();
          f.write(data.toUtf8());
@@ -379,7 +379,7 @@ void MainWindow::saveLog()
          setStatusBar(tr("Output log saved"));
 
       } else {
-         QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());         
+         QMessageBox::warning(this, tr("Error Saving: ") + logName, tr("Unable to save file: ") + f.error());
 
       }
    }
@@ -387,12 +387,12 @@ void MainWindow::saveLog()
 
 void MainWindow::updateRunButtons()
 {
-   if (m_ui->runText->toPlainText().isEmpty())  {      
+   if (m_ui->runText->toPlainText().isEmpty())  {
       m_ui->save_log_PB->setEnabled(false);
       m_ui->clear_PB->setEnabled(false);
       m_ui->find_PB->setEnabled(false);
 
-   } else {  
+   } else {
       m_ui->save_log_PB->setEnabled(true);
       m_ui->clear_PB->setEnabled(true);
       m_ui->find_PB->setEnabled(true);

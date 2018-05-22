@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
    QStringList argList;
 
    for (int k = 0; k < argc; ++k)   {
-      QString value = argv[k];
+      QString value = QString::fromLatin1(argv[k]);
       argList.append(value);
    }
 
@@ -80,14 +80,13 @@ int main(int argc, char *argv[])
       return app.exec();
 
    } catch (std::exception &e) {
+      const QString what = QString::fromUtf8(e.what());
 
-      const char *what = e.what();
-
-      if (strcmp(what, "abort_no_message") == 0)  {
+      if (what == "abort_no_message")  {
          // do nothing
 
       } else {
-         QString errMsg = "Exception: " + QString(what);
+         QString errMsg = "Exception: " + what;
 
          QMessageBox msgB;
          msgB.setWindowTitle("DoxyPressApp / Issue");
@@ -101,7 +100,6 @@ int main(int argc, char *argv[])
 
    return 0;
 }
-
 
 static void useage()
 {

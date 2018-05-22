@@ -17,6 +17,8 @@
 
 #include "mainwindow.h"
 
+#include <QRegularExpression>
+
 void MainWindow::convertDoxy(QByteArray data)
 {
    QString tempStr;
@@ -893,7 +895,7 @@ void MainWindow::convertDoxy(QByteArray data)
    finalLoad();
 }
 
-bool MainWindow::convert_Bool(QByteArray data, QString key)
+bool MainWindow::convert_Bool(QByteArray data, QByteArray key)
 {
    bool retval = false;
    int posBeg  = data.indexOf(key);
@@ -915,7 +917,7 @@ bool MainWindow::convert_Bool(QByteArray data, QString key)
    return retval;
 }
 
-int MainWindow::convert_Int(QByteArray data, QString key)
+int MainWindow::convert_Int(QByteArray data, QByteArray key)
 {
    int retval;
    int posBeg = data.indexOf(key);
@@ -929,13 +931,13 @@ int MainWindow::convert_Int(QByteArray data, QString key)
       posBeg  = x.indexOf("=");
       tempStr = x.mid(posBeg + 1).trimmed();
 
-      retval = tempStr.toInt();
+      retval = tempStr.toInteger<int>();
    }
 
    return retval;
 }
 
-QString MainWindow::convert_Str(QByteArray data, QString key)
+QString MainWindow::convert_Str(QByteArray data, QByteArray key)
 {
    QString tempStr;
    int posBeg = data.indexOf(key);
@@ -956,8 +958,8 @@ QString MainWindow::convert_Str(QByteArray data, QString key)
    return tempStr;
 }
 
-QString MainWindow::convert_PlainText(QByteArray data, QString key)
-{  
+QString MainWindow::convert_PlainText(QByteArray data, QByteArray key)
+{
    QString tempStr;
 
    int posBeg = data.indexOf(key);
@@ -985,8 +987,8 @@ QString MainWindow::convert_PlainText(QByteArray data, QString key)
       tempStr = x.mid(posBeg + 1).trimmed();
 
       // break into parts
-      QRegExp regexp("\\\\[ \\t]*[\\n\\r]+");
-      QStringList list = tempStr.split(regexp, QString::SkipEmptyParts);
+      QRegularExpression regexp("\\\\[ \\t]*[\\n\\r]+");
+      QStringList list = tempStr.split(regexp, QStringParser::SkipEmptyParts);
 
       // walk each item
       int maxList = list.size();
@@ -1006,7 +1008,7 @@ QString MainWindow::convert_PlainText(QByteArray data, QString key)
             // have multiple entries on one line
             bool isFirst = true;
 
-            QStringList insertList = tempStr.split(" ", QString::SkipEmptyParts);
+            QStringList insertList = tempStr.split(" ", QStringParser::SkipEmptyParts);
             int maxInsertList = insertList.size();
 
             for (int j = 0; j < maxInsertList; ++j) {
