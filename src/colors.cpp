@@ -33,7 +33,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    //
    QHBoxLayout *buttonsLayout = new QHBoxLayout;
 
-   QPushButton *okButton = new QPushButton(tr("Ok"));   
+   QPushButton *okButton = new QPushButton(tr("Ok"));
    okButton->setDefault(true);
 
    QPushButton *cancelButton = new QPushButton(tr("Cancel"));
@@ -62,7 +62,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
 
    buttonsLayout->addStretch();
    buttonsLayout->addWidget(okButton);
-   buttonsLayout->addWidget(cancelButton);   
+   buttonsLayout->addWidget(cancelButton);
    buttonsLayout->addStretch();
 
    layout->addLayout(buttonsLayout, 2, 0, 1, 4);
@@ -146,7 +146,7 @@ void TuneColorDialog::updateImage(int hue, int sat, int gam)
    QImage coloredImg(m_image->width(), m_image->height(), QImage::Format_RGB32);
    uint *srcPixel = (uint *)m_image->scanLine(0);
    uint *dstPixel = (uint *)coloredImg.scanLine(0);
-   uint nrPixels = coloredImg.width() * coloredImg.height();
+   uint nrPixels  = coloredImg.width() * coloredImg.height();
 
    for (uint i = 0; i < nrPixels; i++, srcPixel++, dstPixel++) {
       QColor c = QColor::fromRgb(*srcPixel);
@@ -206,11 +206,13 @@ void ColorPicker::paintEvent(QPaintEvent *)
 
       int y;
       uint *pixel = (uint *) img.scanLine(0);
+
       for (y = 0; y < hi; y++) {
          const uint *end = pixel + wi;
          int yh = y2hue(y + coff);
          int ys = y2sat(y + coff);
          int yg = y2gam(y + coff);
+
          while (pixel < end) {
             QColor c;
             c.setHsv(yh, ys, (int)(255 * pow(0.7, yg / 100.0)));
@@ -218,6 +220,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
             ++pixel;
          }
       }
+
       m_pix = new QPixmap(QPixmap::fromImage(img));
    }
 

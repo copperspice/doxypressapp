@@ -66,7 +66,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
 
    drive_L = drive_L.left(3);
 
-   // set up drive tree view - QList<QFileInfo>   
+   // set up drive tree view - QList<QFileInfo>
    m_ui->drives_TV->setHeaderLabels(QStringList() << "Drive"  << "Drive Type");
    m_ui->drives_TV->setColumnCount(2);
    m_ui->drives_TV->setColumnWidth(15, 50);
@@ -74,7 +74,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    QString data;
    QTreeWidgetItem *item;
 
-   for (auto k = driveList.begin(); k != driveList.end(); ++k) {      
+   for (auto k = driveList.begin(); k != driveList.end(); ++k) {
       data = k->path();
 
       if (data.endsWith("/")) {
@@ -91,7 +91,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
       if (drive_L.startsWith(data, Qt::CaseInsensitive)) {
          m_ui->drives_TV->setCurrentItem(item);
       }
-   } 
+   }
 
    // set up tree view right
    m_model_R = new QFileSystemModel;
@@ -180,7 +180,7 @@ QString Dialog_XP_GetDir::driveType(QString drive)
 
 QString Dialog_XP_GetDir::getDirectory()
 {
-   QModelIndex index = m_ui->folders_TV->currentIndex();     
+   QModelIndex index = m_ui->folders_TV->currentIndex();
    QString retval = m_model_R->filePath(index);
 
    return retval;
@@ -289,7 +289,7 @@ void Dialog_XP_GetDir::showMe(const QString &path)
 }
 
 QSize Dialog_XP_GetDir::sizeHint() const
-{ 
+{
    return QSize(625,600);
 }
 

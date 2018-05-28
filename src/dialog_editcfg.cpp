@@ -47,6 +47,7 @@ void Dialog_EditCfg::fileLookUp()
 {
    QString file = m_ui->doxyPressFile->text();
    file = m_owner->getSingleFile(tr("Select file"), file);
+
    m_ui->doxyPressFile->setText(file);
 }
 

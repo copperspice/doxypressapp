@@ -34,7 +34,7 @@ void MainWindow::getLogo(const QString route)
          tempName = projectDir + "/" + tempName;
       }
 
-   } else if (route == "select") {            
+   } else if (route == "select") {
       logoName = getSingleFile(tr("Select Project Logo"), logoName);
       m_ui->project_logo->setText(logoName);
    }

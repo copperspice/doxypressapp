@@ -1,5 +1,5 @@
 /*************************************************************************
- * 
+ *
  * Copyright (C) 2014-2018 Barbara Geller & Ansel Sermersheim
  * Copyright (C) 1997-2014 by Dimitri van Heesch.
  * All rights reserved.
@@ -21,7 +21,7 @@
 #include <QFileInfo>
 
 void MainWindow::closeEvent(QCloseEvent *event)
-{ 
+{
    if (querySave()) {
       saveSettings();
       event->accept();
@@ -109,7 +109,7 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
 
    // part 2 - user can select a new path
    QFileDialog::Options options;
-   options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks; 
+   options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks;
 
 #ifdef Q_OS_WIN
 
@@ -229,7 +229,7 @@ void MainWindow::openDoxy()
 }
 
 bool MainWindow::openDoxy_Internal(const QString fname)
-{  
+{
    QFile file(fname);
 
    if (! file.open(QFile::ReadOnly | QFile::Text)) {
@@ -269,7 +269,7 @@ QString MainWindow::pathName(QString fileName) const
 {
    QString retval = "";
 
-   if (! fileName.isEmpty())  {      
+   if (! fileName.isEmpty())  {
       QFileInfo temp(fileName);
 
       if (temp.isAbsolute()) {
@@ -345,7 +345,7 @@ bool MainWindow::saveDoxyAs()
    if (m_curFile.isEmpty()) {
       retval = false;
 
-   } else {      
+   } else {
       retval = saveDoxy_Internal();
 
       if (retval) {
@@ -362,7 +362,7 @@ bool MainWindow::saveDoxyAs()
 
 bool MainWindow::saveDoxy()
 {
-   bool retval;     
+   bool retval;
 
    // test json format
    if (m_doxypressFormat != DOXYPRESS_FORMAT)  {
@@ -401,7 +401,7 @@ void MainWindow::saveSettings()
 
 void MainWindow::setDoxyTitle(bool isModified)
 {
-   m_modified = isModified;   
+   m_modified = isModified;
    setWindowModified(m_modified);
 
    // displays as: DoxyPressApp -- FileName[*]
@@ -421,6 +421,6 @@ void MainWindow::setDoxyTitle(bool isModified)
 }
 
 void MainWindow::setStatusBar(QString msg)
-{     
+{
    statusBar()->showMessage(msg, 5000);
 }

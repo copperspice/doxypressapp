@@ -465,12 +465,12 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
    if (! doc.isObject()) {
 
       if (data.contains("PROJECT_NUMBER"))  {
-         csError(tr("Open Project file"), tr("The selected file appears to be a Doxygen project file. To convert to "
+         csError(tr("Open Project file"), tr("Selected file appears to be a Doxygen project file. To convert to "
                     "a DoxyPress project file select Tools, then 'Convert to DoxyPress format'"));
 
       } else {
-         csError(tr("Open Project file"), tr("The selected file is not a valid JSON file format, open "
-                    "project file aborted"));
+         csError(tr("Open Project file"), tr("Selected file is not a valid JSON file format.\n"
+                    "Project file aborted"));
       }
 
       return false;
@@ -1261,7 +1261,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
 
       m_ui->rtf_source_code_CB->setChecked(           rtfObj.value("rtf-source-code").toBool());
       m_ui->rtf_compact_CB->setChecked(               rtfObj.value("rtf-compact").toBool());
-      m_ui->rtf_hyperlinks_CB->setChecked(            rtfObj.value("rtf-hyperlinks").toBool());     
+      m_ui->rtf_hyperlinks_CB->setChecked(            rtfObj.value("rtf-hyperlinks").toBool());
 
       // tab 3 - xml
       m_ui->xml_output->setText(                      xmlObj.value("xml-output").toString());
@@ -1663,7 +1663,7 @@ QByteArray MainWindow::json_SaveDoxy()
    rtfObj.insert("rtf-extension",             m_ui->rtf_extension->text());
    rtfObj.insert("rtf-paper-type",            m_ui->rtf_paper_type_CM->currentText());
    rtfObj.insert("rtf-source-code",           m_ui->rtf_source_code_CB->isChecked());
-   rtfObj.insert("rtf-compact",               m_ui->rtf_compact_CB->isChecked());   
+   rtfObj.insert("rtf-compact",               m_ui->rtf_compact_CB->isChecked());
    rtfObj.insert("rtf-hyperlinks",            m_ui->rtf_hyperlinks_CB->isChecked());
 
    // tab 3 - xml

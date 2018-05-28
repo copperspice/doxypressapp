@@ -24,7 +24,7 @@ void MainWindow::convertDoxy(QByteArray data)
    QString tempStr;
    QString tempText;
    bool tempBool;
-   int tempInt;
+   int  tempInt;
 
    // tab 1
    tempStr = convert_Str(data,"PROJECT_NAME");
@@ -173,7 +173,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "SEPARATE_MEMBER_PAGES");
    m_ui->separate_member_pages_CB->setChecked(tempBool);
 
-   tempInt = convert_Int(data, "TAB_SIZE");   
+   tempInt = convert_Int(data, "TAB_SIZE");
    m_ui->tab_size_SB->setValue(tempInt);
 
    tempText = convert_PlainText(data,"ALIASES");
@@ -641,7 +641,7 @@ void MainWindow::convertDoxy(QByteArray data)
    m_ui->html_colorstyle_gamma->setValue(tempInt);
 
    tempBool = convert_Bool(data, "HTML_TIMESTAMP");
-   m_ui->html_timestamp_CB->setChecked(tempBool);    
+   m_ui->html_timestamp_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "HTML_DYNAMIC_SECTIONS");
    m_ui->html_dynamic_sections_CB->setChecked(tempBool);
@@ -903,10 +903,10 @@ bool MainWindow::convert_Bool(QByteArray data, QByteArray key)
    if (posBeg > 0) {
       QString tempStr;
 
-      int posEnd = data.indexOf("\n", posBeg);      
+      int posEnd = data.indexOf("\n", posBeg);
       QString x = data.mid(posBeg, posEnd - posBeg);
 
-      posBeg  = x.indexOf("=");      
+      posBeg  = x.indexOf("=");
       tempStr = x.mid(posBeg + 1).trimmed().toUpper();
 
       if (tempStr == "YES") {
@@ -978,7 +978,7 @@ QString MainWindow::convert_PlainText(QByteArray data, QByteArray key)
          } else {
             break;
 
-         }       
+         }
       }
 
       QString x = data.mid(posBeg, posEnd - posBeg);
@@ -1046,7 +1046,7 @@ QString MainWindow::convert_PlainText(QByteArray data, QByteArray key)
 // **
 
 void MainWindow::importDoxy()
-{   
+{
    while (true) {
 
       QString fname = QFileDialog::getOpenFileName(this, tr("Open Doxygen project file"), m_settings.pathPrior);
@@ -1113,7 +1113,7 @@ void MainWindow::importDoxy()
 
          int retval = quest.exec();
 
-         if (retval == QMessageBox::Yes) {            
+         if (retval == QMessageBox::Yes) {
             m_curFile = fname;
             m_settings.pathPrior = this->pathName(fname);
 
