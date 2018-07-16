@@ -604,13 +604,13 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->group_nested_compounds_CB->setChecked(    object.value("group-nested-compounds").toBool());
 
       // tab 2 -output
-      m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
       m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
       m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());
       m_ui->main_page_name->setText(                  "");
       m_ui->main_page_omit->setChecked(               false);
       m_ui->layout_file->setText(                     object.value("layout-file").toString());
       m_ui->ns_alias->setPlainText(                   "");
+      m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
 
       // (experimental) m_ui->bb_style_CB->setChecked(false);
 
@@ -876,8 +876,9 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       QJsonObject msgObj         = object.value("messages").toObject();
       QJsonObject inputObj       = object.value("input").toObject();
       QJsonObject indexObj       = object.value("index").toObject();
-      QJsonObject sourceObj      = object.value("source").toObject();
       QJsonObject ppObj          = object.value("preprocessor").toObject();
+      QJsonObject clangObj       = object.value("clang").toObject();
+      QJsonObject sourceObj      = object.value("source").toObject();
       QJsonObject extObj         = object.value("external").toObject();
       QJsonObject dotObj         = object.value("dot").toObject();
 
@@ -1009,13 +1010,14 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->group_nested_compounds_CB->setChecked(    configObj.value("group-nested-compounds").toBool());
 
       // tab 2 -build options
-      m_ui->max_init_lines_SB->setValue(              configObj.value("max-init-lines").toInt());
       m_ui->enabled_sections->setPlainText(           getDataList(configObj, "enabled-sections"));
       m_ui->file_version_filter->setText(             configObj.value("file-version-filter").toString());
       m_ui->main_page_name->setText(                  configObj.value("main-page-name").toString());
       m_ui->main_page_omit->setChecked(               configObj.value("main-page-omit").toBool());
       m_ui->layout_file->setText(                     configObj.value("layout-file").toString());
       m_ui->ns_alias->setPlainText(                   getDataList(configObj, "ns-alias"));
+      m_ui->max_init_lines_SB->setValue(              configObj.value("max-init-lines").toInt());
+      m_ui->toc_include_headers_SB->setValue(         configObj.value("toc-include-headers").toInt());
 
       // (experimental) m_ui->bb_style_CB->setChecked(bbObj.value("bb-style").toBool());
 
@@ -1066,22 +1068,6 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->cols_in_index_SB->setValue(               indexObj.value("cols-in-index").toInt());
       m_ui->ignore_prefix->setPlainText(              getDataList(indexObj, "ignore-prefix"));
 
-      // tab 2 -source code
-      m_ui->source_code_CB->setChecked(               sourceObj.value("source-code").toBool());
-      m_ui->inline_source_CB->setChecked(             sourceObj.value("inline-source").toBool());
-      m_ui->strip_code_comments_CB->setChecked(       sourceObj.value("strip-code-comments").toBool());
-      m_ui->verbatim_headers_CB->setChecked(          sourceObj.value("verbatim-headers").toBool());
-      m_ui->ref_by_relation_CB->setChecked(           sourceObj.value("ref-by-relation").toBool());
-      m_ui->ref_relation_CB->setChecked(              sourceObj.value("ref-relation").toBool());
-      m_ui->ref_link_source_CB->setChecked(           sourceObj.value("ref-link-source").toBool());
-      m_ui->source_tooltips_CB->setChecked(           sourceObj.value("source-tooltips").toBool());
-      m_ui->use_htags_CB->setChecked(                 sourceObj.value("use-htags").toBool());
-      m_ui->suffix_source_navtree->setPlainText(      getDataList(sourceObj, "suffix-source-navtree"));
-      m_ui->suffix_header_navtree->setPlainText(      getDataList(sourceObj, "suffix-header-navtree"));
-      m_ui->suffix_exclude_navtree->setPlainText(     getDataList(sourceObj, "suffix-exclude-navtree"));
-      m_ui->clang_parsing_CB->setChecked(             sourceObj.value("clang-parsing").toBool());
-      m_ui->clang_flags->setPlainText(                getDataList(sourceObj, "clang-flags"));
-
       // tab 2 - preprocessor
       m_ui->enable_preprocessing_CB->setChecked(      ppObj.value("enable-preprocessing").toBool());
       m_ui->search_includes_CB->setChecked(           ppObj.value("search-includes").toBool());
@@ -1095,6 +1081,30 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
 
       m_ui->predefined_macros->setPlainText(          getDataList(ppObj,"predefined-macros"));
       m_ui->expand_as_defined->setPlainText(          getDataList(ppObj,"expand-as-defined"));
+
+      // tab 2 - clang
+      m_ui->clang_parsing_CB->setChecked(             clangObj.value("clang-parsing").toBool());
+      m_ui->clang_compilation_path->setText(          clangObj.value("clang-compilation-path").toString());
+
+      index = m_ui->clang_dialect_CM->findText(       clangObj.value("clang-dialect").toString());
+      m_ui->clang_dialect_CM->setCurrentIndex(index);
+
+      m_ui->clang_use_headers_CB->setChecked(         clangObj.value("clang-use-headers").toBool());
+      m_ui->clang_flags->setPlainText(                getDataList(clangObj, "clang-flags"));
+
+      // tab 2 -source listing
+      m_ui->source_code_CB->setChecked(               sourceObj.value("source-code").toBool());
+      m_ui->inline_source_CB->setChecked(             sourceObj.value("inline-source").toBool());
+      m_ui->strip_code_comments_CB->setChecked(       sourceObj.value("strip-code-comments").toBool());
+      m_ui->verbatim_headers_CB->setChecked(          sourceObj.value("verbatim-headers").toBool());
+      m_ui->ref_by_relation_CB->setChecked(           sourceObj.value("ref-by-relation").toBool());
+      m_ui->ref_relation_CB->setChecked(              sourceObj.value("ref-relation").toBool());
+      m_ui->ref_link_source_CB->setChecked(           sourceObj.value("ref-link-source").toBool());
+      m_ui->source_tooltips_CB->setChecked(           sourceObj.value("source-tooltips").toBool());
+      m_ui->use_htags_CB->setChecked(                 sourceObj.value("use-htags").toBool());
+      m_ui->suffix_source_navtree->setPlainText(      getDataList(sourceObj, "suffix-source-navtree"));
+      m_ui->suffix_header_navtree->setPlainText(      getDataList(sourceObj, "suffix-header-navtree"));
+      m_ui->suffix_exclude_navtree->setPlainText(     getDataList(sourceObj, "suffix-exclude-navtree"));
 
       // tab 2 - external
       m_ui->tag_files->setPlainText(                  getDataList(extObj,"tag-files"));
@@ -1288,8 +1298,9 @@ QByteArray MainWindow::json_SaveDoxy()
    QJsonObject msgObj;
    QJsonObject inputObj;
    QJsonObject indexObj;
-   QJsonObject sourceObj;
    QJsonObject ppObj;
+   QJsonObject clangObj;
+   QJsonObject sourceObj;
    QJsonObject extObj;
    QJsonObject dotObj;
 
@@ -1309,7 +1320,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    m_doxypressFormat = DOXYPRESS_FORMAT;
    object.insert("doxypress-format",      m_doxypressFormat);
-   object.insert("doxypress-updated",     QString{"2015-Oct-15"} );
+   object.insert("doxypress-updated",     QString{"2018-Jun-2"} );
 
    // tab 1
    projectObj.insert("project-name",      m_ui->project_name->text());
@@ -1422,15 +1433,16 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("group-nested-compounds",   m_ui->group_nested_compounds_CB->isChecked());
 
    // tab 2 -build options
-   configObj.insert("max-init-lines",           m_ui->max_init_lines_SB->value());
    configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));
    configObj.insert("file-version-filter",      m_ui->file_version_filter->text());
    configObj.insert("main-page-name",           m_ui->main_page_name->text());
    configObj.insert("main-page-omit",           m_ui->main_page_omit->isChecked());
    configObj.insert("layout-file",              m_ui->layout_file->text());
    configObj.insert("ns-alias",                 putDataList(m_ui->ns_alias->toPlainText()));
+   configObj.insert("max-init-lines",           m_ui->max_init_lines_SB->value());
+   configObj.insert("toc-include-headers",      m_ui->toc_include_headers_SB->value());
 
-   // (experimental) bbObj.insert("bb-style", m_ui->bb_style_CB->isChecked());
+   // (experimental) bbObj.insert("bb-style",   m_ui->bb_style_CB->isChecked());
 
    // tab 2 -programming
    configObj.insert("tcl-subst",                putDataList(m_ui->tcl_subst->toPlainText()));
@@ -1479,22 +1491,6 @@ QByteArray MainWindow::json_SaveDoxy()
    indexObj.insert("cols-in-index",             m_ui->cols_in_index_SB->value());
    indexObj.insert("ignore-prefix",             putDataList(m_ui->ignore_prefix->toPlainText()));
 
-   // tab 2 - source code
-   sourceObj.insert("source-code",              m_ui->source_code_CB->isChecked());
-   sourceObj.insert("inline-source",            m_ui->inline_source_CB->isChecked());
-   sourceObj.insert("strip-code-comments",      m_ui->strip_code_comments_CB->isChecked());
-   sourceObj.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
-   sourceObj.insert("ref-by-relation",          m_ui->ref_by_relation_CB->isChecked());
-   sourceObj.insert("ref-relation",             m_ui->ref_relation_CB->isChecked());
-   sourceObj.insert("ref-link-source",          m_ui->ref_link_source_CB->isChecked());
-   sourceObj.insert("source-tooltips",          m_ui->source_tooltips_CB->isChecked());
-   sourceObj.insert("use-htags",                m_ui->use_htags_CB->isChecked());
-   sourceObj.insert("suffix-source-navtree",    putDataList(m_ui->suffix_source_navtree->toPlainText()));
-   sourceObj.insert("suffix-header-navtree",    putDataList(m_ui->suffix_header_navtree->toPlainText()));
-   sourceObj.insert("suffix-exclude-navtree",   putDataList(m_ui->suffix_exclude_navtree->toPlainText()));
-   sourceObj.insert("clang-parsing",            m_ui->clang_parsing_CB->isChecked());
-   sourceObj.insert("clang-flags",              putDataList(m_ui->clang_flags->toPlainText()));
-
    // tab 2 - preprocess
    ppObj.insert("enable-preprocessing",         m_ui->enable_preprocessing_CB->isChecked());
    ppObj.insert("search-includes",              m_ui->search_includes_CB->isChecked());
@@ -1508,6 +1504,27 @@ QByteArray MainWindow::json_SaveDoxy()
 
    ppObj.insert("predefined-macros",            putDataList(m_ui->predefined_macros->toPlainText()));
    ppObj.insert("expand-as-defined",            putDataList(m_ui->expand_as_defined->toPlainText()));
+
+   // tab 2 - clang
+   clangObj.insert("clang-parsing",             m_ui->clang_parsing_CB->isChecked());
+   clangObj.insert("clang-compilation-path",    m_ui->clang_compilation_path->text());
+   clangObj.insert("clang-dialect",             m_ui->clang_dialect_CM->currentText());
+   clangObj.insert("clang-use-headers",         m_ui->clang_use_headers_CB->isChecked());
+   clangObj.insert("clang-flags",               putDataList(m_ui->clang_flags->toPlainText()));
+
+   // tab 2 - source code
+   sourceObj.insert("source-code",              m_ui->source_code_CB->isChecked());
+   sourceObj.insert("inline-source",            m_ui->inline_source_CB->isChecked());
+   sourceObj.insert("strip-code-comments",      m_ui->strip_code_comments_CB->isChecked());
+   sourceObj.insert("verbatim-headers",         m_ui->verbatim_headers_CB->isChecked());
+   sourceObj.insert("ref-by-relation",          m_ui->ref_by_relation_CB->isChecked());
+   sourceObj.insert("ref-relation",             m_ui->ref_relation_CB->isChecked());
+   sourceObj.insert("ref-link-source",          m_ui->ref_link_source_CB->isChecked());
+   sourceObj.insert("source-tooltips",          m_ui->source_tooltips_CB->isChecked());
+   sourceObj.insert("use-htags",                m_ui->use_htags_CB->isChecked());
+   sourceObj.insert("suffix-source-navtree",    putDataList(m_ui->suffix_source_navtree->toPlainText()));
+   sourceObj.insert("suffix-header-navtree",    putDataList(m_ui->suffix_header_navtree->toPlainText()));
+   sourceObj.insert("suffix-exclude-navtree",   putDataList(m_ui->suffix_exclude_navtree->toPlainText()));
 
    // tab 2 - external
    extObj.insert("tag-files",                 putDataList(m_ui->tag_files->toPlainText()));
@@ -1565,7 +1582,7 @@ QByteArray MainWindow::json_SaveDoxy()
    htmlObj.insert("html-colorstyle-gamma",    m_ui->html_colorstyle_gamma->value());
 
    htmlObj.insert("html-timestamp",           m_ui->html_timestamp_CB->isChecked());
-   htmlObj.insert("html-dynamic-sections",    m_ui->html_dynamic_sections_CB->isChecked());;
+   htmlObj.insert("html-dynamic-sections",    m_ui->html_dynamic_sections_CB->isChecked());
    htmlObj.insert("html-index-num-entries",   m_ui->html_index_num_entries_SB->value());
 
    htmlObj.insert("disable-index",            m_ui->disable_index_CB->isChecked());
@@ -1681,8 +1698,9 @@ QByteArray MainWindow::json_SaveDoxy()
    object.insert("messages",        msgObj);
    object.insert("input",           inputObj);
    object.insert("index",           indexObj);
-   object.insert("source",          sourceObj);
    object.insert("preprocessor",    ppObj);
+   object.insert("clang",           clangObj);
+   object.insert("source",          sourceObj);
    object.insert("external",        extObj);
    object.insert("dot",             dotObj);
 
