@@ -319,6 +319,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempInt = convert_Int(data, "MAX_INITIALIZER_LINES");
    m_ui->max_init_lines_SB->setValue(tempInt);
 
+   tempInt = convert_Int(data, "TOC_INCLUDE_HEADINGS");
+   m_ui->toc_include_headers_SB->setValue(tempInt);
+
    tempBool = convert_Bool(data, "SHOW_USED_FILES");
    m_ui->show_used_files_CB->setChecked(tempBool);
 
@@ -459,6 +462,9 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempText = convert_PlainText(data,"CLANG_OPTIONS");
    m_ui->clang_flags->setPlainText(tempText);
+
+   tempText = convert_PlainText(data,"CLANG_COMPILATION_DATABASE_PATH");
+   m_ui->clang_compilation_path->setText(tempText);
 
 
    // tab 2 - preprocess
