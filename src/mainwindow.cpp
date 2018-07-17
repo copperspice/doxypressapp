@@ -226,10 +226,12 @@ void MainWindow::createConnections()
 
    // tab 2
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
+   connect(m_ui->markdown_CB,               &QPushButton::toggled, this, &MainWindow::valid_markdown);
    connect(m_ui->filter_source_files_CB,    &QPushButton::toggled, this, &MainWindow::valid_filter_source_files);
    connect(m_ui->alpha_index_CB,            &QPushButton::toggled, this, &MainWindow::valid_alpha_index);
-   connect(m_ui->clang_parsing_CB,          &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
    connect(m_ui->enable_preprocessing_CB,   &QPushButton::toggled, this, &MainWindow::valid_enable_preprocessing);
+   connect(m_ui->clang_parsing_CB,          &QPushButton::toggled, this, &MainWindow::valid_clang);
+   connect(m_ui->source_code_CB,            &QPushButton::toggled, this, &MainWindow::valid_source_listing);
    connect(m_ui->have_dot_CB,               &QPushButton::toggled, this, &MainWindow::valid_have_dot);
 
    // tab 3
@@ -290,18 +292,22 @@ void MainWindow::createConnections()
    // tab 2- messages
    connect(m_ui->warn_logfile_PB,           &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
 
-   // tab 2- source code
-   connect(m_ui->source_code_CB,            &QPushButton::toggled, this, &MainWindow::valid_source_code);
-   connect(m_ui->suffix_source_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_source_navtree_PB);
-   connect(m_ui->suffix_header_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_header_navtree_PB);
-   connect(m_ui->suffix_exclude_navtree_PB, &QPushButton::clicked, this, &MainWindow::suffix_exclude_navtree_PB);
-   connect(m_ui->clang_options_PB,          &QPushButton::clicked, this, &MainWindow::clang_options_PB);
-
    // tab 2- preprocessor
    connect(m_ui->include_path_PB,           &QPushButton::clicked, this, &MainWindow::include_path_PB);
    connect(m_ui->include_patterns_PB,       &QPushButton::clicked, this, &MainWindow::include_file_patterns_PB);
    connect(m_ui->predefined_macros_PB,      &QPushButton::clicked, this, &MainWindow::predefined_macros_PB);
    connect(m_ui->expand_as_defined_PB,      &QPushButton::clicked, this, &MainWindow::expand_as_defined_PB);
+
+   // tab 2 - clang
+   connect(m_ui->clang_compilation_path,    &QLineEdit::textChanged, this, &MainWindow::valid_clang);
+   connect(m_ui->clang_compilation_path_PB, &QPushButton::clicked,   this, &MainWindow::clang_compilation_path_PB);
+   connect(m_ui->clang_flags_PB,            &QPushButton::clicked,   this, &MainWindow::clang_options_PB);
+
+   // tab 2- source listings
+   connect(m_ui->source_code_CB,            &QPushButton::toggled, this, &MainWindow::valid_source_listing);
+   connect(m_ui->suffix_source_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_source_navtree_PB);
+   connect(m_ui->suffix_header_navtree_PB,  &QPushButton::clicked, this, &MainWindow::suffix_header_navtree_PB);
+   connect(m_ui->suffix_exclude_navtree_PB, &QPushButton::clicked, this, &MainWindow::suffix_exclude_navtree_PB);
 
    // tab 2- external
    connect(m_ui->tag_files_PB,              &QPushButton::clicked, this, &MainWindow::tag_files_PB);
@@ -458,7 +464,7 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("Build Options")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);
 
-      } else if (label == tr("Programming Language")) {
+      } else if (label == tr("Programming Languages")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Language);
 
       } else if (label == tr("Messages")) {
@@ -476,13 +482,16 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       } else if (label == tr("Index Page")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Index);
 
-      } else if (label == tr("Source Code")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Source);
-
       } else if (label == tr("Preprocessor")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Process);
 
-      } else if (label == tr("External")) {
+      } else if (label == tr("Clang Parsing")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Clang);
+
+      } else if (label == tr("Source Listings")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Source);
+
+      } else if (label == tr("External Programs")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_External);
 
       } else if (label == tr("Dot") || label == tr("Dot (Part 1)")) {

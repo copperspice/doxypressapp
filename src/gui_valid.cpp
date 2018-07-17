@@ -197,7 +197,18 @@ void MainWindow::clearAllFields()
    m_ui->alpha_index_CB->setChecked(true);
    m_ui->cols_in_index_SB->setValue(5);
 
-   // tab 2 -source code
+   // tab 2 - preprocessor
+   m_ui->enable_preprocessing_CB->setChecked(true);
+   m_ui->search_includes_CB->setChecked(true);
+   m_ui->skip_function_macros_CB->setChecked(true);
+
+   // tab 2 - clang
+   index = m_ui->clang_dialect_CM->findText("-std=c++14");
+   m_ui->clang_dialect_CM->setCurrentIndex(index);
+
+   m_ui->clang_use_headers_CB->setChecked(true);
+
+   // tab 2 -source listing
    m_ui->strip_code_comments_CB->setChecked(true);
    m_ui->verbatim_headers_CB->setChecked(true);
    m_ui->ref_link_source_CB ->setChecked(true);
@@ -205,11 +216,6 @@ void MainWindow::clearAllFields()
    m_ui->suffix_source_navtree->setPlainText(m_suffixSource);
    m_ui->suffix_header_navtree->setPlainText(m_suffixHeader);
    m_ui->suffix_exclude_navtree->setPlainText(m_suffixExclude);
-
-   // tab 2 - preprocessor
-   m_ui->enable_preprocessing_CB->setChecked(true);
-   m_ui->search_includes_CB->setChecked(true);
-   m_ui->skip_function_macros_CB->setChecked(true);
 
    // tab 2 - external
    m_ui->external_groups_CB->setChecked(true);
@@ -395,6 +401,10 @@ void MainWindow::adjustDefaults()
    setDefault(m_ui->search_includes_CB);
    setDefault(m_ui->skip_function_macros_CB);
 
+   // tab 2 - clang
+   setDefault(m_ui->clang_dialect_CM);
+   setDefault(m_ui->clang_use_headers_CB);
+
    // tab 2 - external
    setDefault(m_ui->external_groups_CB);
    setDefault(m_ui->external_pages_CB);
@@ -485,10 +495,12 @@ void MainWindow::finalLoad()
 
    // tab 2
    valid_full_path_names();
+   valid_markdown();
    valid_filter_source_files();
    valid_alpha_index();
-   valid_source_code();
    valid_enable_preprocessing();
+   valid_clang();
+   valid_source_listing();
    valid_have_dot();
 
    // tab 3
@@ -544,6 +556,18 @@ void MainWindow::setupLimits()
    data.clear();
    data = temp.split(", ");
    m_ui->output_language_CM->addItems(data);
+
+   data.clear();
+   data.append("");
+   data.append("-std=c++11");
+   data.append("-std=c++14");
+   data.append("-std=c++17");
+   data.append("-std=c++2a");
+   data.append("-std=gnu++11");
+   data.append("-std=gnu++14");
+   data.append("-std=gnu++17");
+   data.append("-std=gnu++2a");
+   m_ui->clang_dialect_CM->addItems(data);
 
    data.clear();
    data.append("gif");
@@ -823,6 +847,16 @@ void MainWindow::valid_full_path_names()
    }
 }
 
+void MainWindow::valid_markdown()
+{
+   if (m_ui->markdown_CB->isChecked()) {
+      m_ui->toc_include_headers_SB->setEnabled(true);
+
+   } else {
+      m_ui->toc_include_headers_SB->setEnabled(false);
+   }
+}
+
 void MainWindow::valid_filter_source_files()
 {
    if (m_ui->filter_source_files_CB->isChecked()) {
@@ -847,19 +881,6 @@ void MainWindow::valid_alpha_index()
       m_ui->cols_in_index_SB->setEnabled(false);
       m_ui->ignore_prefix->setEnabled(false);
       m_ui->ignore_prefix_PB->setEnabled(false);
-
-   }
-}
-
-void MainWindow::valid_source_code()
-{
-   if (m_ui->source_code_CB->isChecked()) {
-      m_ui->source_tooltips_CB->setEnabled(true);
-      m_ui->use_htags_CB->setEnabled(true);
-
-   } else {
-      m_ui->source_tooltips_CB->setEnabled(false);
-      m_ui->use_htags_CB->setEnabled(false);
 
    }
 }
@@ -922,6 +943,48 @@ void MainWindow::valid_enable_preprocessing()
          m_ui->skip_function_macros_CB->setEnabled(false);
 
       }
+   }
+}
+
+void MainWindow::valid_clang()
+{
+   if (m_ui->clang_parsing_CB->isChecked()) {
+      m_ui->clang_compilation_path->setEnabled(true);
+      m_ui->clang_compilation_path_PB->setEnabled(true);
+      m_ui->clang_flags->setEnabled(true);
+      m_ui->clang_flags_PB->setEnabled(true);
+      m_ui->clang_use_headers_CB->setEnabled(true);
+
+      if (m_ui->clang_compilation_path->text().isEmpty()) {
+         m_ui->clang_dialect_CM->setEnabled(true);        
+      } else {
+         m_ui->clang_dialect_CM->setEnabled(false);         
+      }
+
+   } else {
+      m_ui->clang_compilation_path->setEnabled(false);
+      m_ui->clang_compilation_path_PB->setEnabled(false);
+      m_ui->clang_dialect_CM->setEnabled(false);
+      m_ui->clang_use_headers_CB->setEnabled(false);
+      m_ui->clang_flags->setEnabled(false);
+      m_ui->clang_flags_PB->setEnabled(false);
+
+   }
+
+   // really
+   valid_enable_preprocessing();
+}
+
+void MainWindow::valid_source_listing()
+{
+   if (m_ui->source_code_CB->isChecked()) {
+      m_ui->source_tooltips_CB->setEnabled(true);
+      m_ui->use_htags_CB->setEnabled(true);
+
+   } else {
+      m_ui->source_tooltips_CB->setEnabled(false);
+      m_ui->use_htags_CB->setEnabled(false);
+
    }
 }
 
@@ -1215,8 +1278,8 @@ void MainWindow::valid_gen_latex()
       m_ui->latex_extra_files_PB->setEnabled(true);
 
       m_ui->latex_timestamp_CB->setEnabled(true);
-      m_ui->latex_hyper_pdf_CB->setEnabled(true);      
-      m_ui->latex_pdf_CB->setEnabled(true);      
+      m_ui->latex_hyper_pdf_CB->setEnabled(true);
+      m_ui->latex_pdf_CB->setEnabled(true);
       m_ui->latex_batch_mode_CB->setEnabled(true);
       m_ui->latex_hide_indices_CB->setEnabled(true);
       m_ui->latex_source_code_CB->setEnabled(true);
@@ -1380,6 +1443,7 @@ void MainWindow::valid_html_search()
 
 
 // **
+
 static QString getFilePattens()
 {
    QStringList list;

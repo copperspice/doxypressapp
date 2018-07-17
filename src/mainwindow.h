@@ -311,9 +311,12 @@ class MainWindow : public QMainWindow
 
       // tab 2
       void valid_full_path_names();
+      void valid_markdown();
       void valid_filter_source_files();
       void valid_alpha_index();
       void valid_enable_preprocessing();
+      void valid_clang();
+      void valid_source_listing();
       void valid_have_dot();
 
       // tab 3
@@ -328,6 +331,7 @@ class MainWindow : public QMainWindow
       void valid_gen_rtf();
       void valid_gen_xml();
       void valid_html_search();
+
 
       // ** lookups
       // tab 1
@@ -371,18 +375,20 @@ class MainWindow : public QMainWindow
       // tab 2- messages
       void warn_logfile_PB();
 
-      // tab 2- source code
-      void valid_source_code();
-      void suffix_source_navtree_PB();
-      void suffix_header_navtree_PB();
-      void suffix_exclude_navtree_PB();
-      void clang_options_PB();
-
       // tab 2- preprocess
       void include_path_PB();
       void include_file_patterns_PB();
       void predefined_macros_PB();
       void expand_as_defined_PB();
+
+      // tab 2- clang
+
+      // tab 2- source listing
+      void suffix_source_navtree_PB();
+      void suffix_header_navtree_PB();
+      void suffix_exclude_navtree_PB();
+      void clang_options_PB();
+      void clang_compilation_path_PB();
 
       // tab 2- external
       void tag_files_PB();

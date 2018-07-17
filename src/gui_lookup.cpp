@@ -71,7 +71,6 @@ void MainWindow::output_dir_PB()
 {
    QString path = m_ui->output_dir->text();
    path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
-
    m_ui->output_dir->setText(path);
 }
 
@@ -665,6 +664,13 @@ void MainWindow::clang_options_PB()
    }
 }
 
+void MainWindow::clang_compilation_path_PB()
+{
+   QString path = m_ui->clang_compilation_path->text();
+   path = get_DirPath(tr("Select compilation path"), path, PROJECT_DIR);
+   m_ui->clang_compilation_path->setText(path);
+}
+
 // tab 2- look up (index)
 void MainWindow::ignore_prefix_PB()
 {
@@ -822,7 +828,7 @@ void MainWindow::gen_tagfile_PB()
 void MainWindow::perl_path_PB()
 {
    QString path = m_ui->perl_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
+   path = get_DirPath(tr("Select perl path"), path, ABSOLUTE_ONLY);
 
    m_ui->perl_path->setText(path);
 }
@@ -831,7 +837,7 @@ void MainWindow::perl_path_PB()
 void MainWindow::mscgen_path_PB()
 {
    QString path = m_ui->mscgen_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
+   path = get_DirPath(tr("Select mscgen path"), path, ABSOLUTE_ONLY);
 
    m_ui->mscgen_path->setText(path);
 }
@@ -839,7 +845,7 @@ void MainWindow::mscgen_path_PB()
 void MainWindow::dia_path_PB()
 {
    QString path = m_ui->dia_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
+   path = get_DirPath(tr("Select dia path"), path, ABSOLUTE_ONLY);
 
    m_ui->dia_path->setText(path);
 }
@@ -854,7 +860,7 @@ void MainWindow::dot_font_name_PB()
 void MainWindow::dot_font_path_PB()
 {
    QString path = m_ui->dot_font_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
+   path = get_DirPath(tr("Select font path"), path, PROJECT_DIR);
 
    m_ui->dot_font_path->setText(path);
 }
@@ -862,7 +868,7 @@ void MainWindow::dot_font_path_PB()
 void MainWindow::dot_path_PB()
 {
    QString path = m_ui->dot_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, ABSOLUTE_ONLY);
+   path = get_DirPath(tr("Select dot path"), path, ABSOLUTE_ONLY);
 
    m_ui->dot_path->setText(path);
 }
@@ -942,7 +948,7 @@ void MainWindow::dia_file_dirs_PB()
 void MainWindow::plantuml_jar_path_PB()
 {
    QString path = m_ui->plantuml_jar_path->text();
-   path = get_DirPath(tr("Select destination directory"), path, PROJECT_DIR);
+   path = get_DirPath(tr("Select jar path"), path, PROJECT_DIR);
 
    m_ui->plantuml_jar_path->setText(path);
 }
@@ -950,7 +956,7 @@ void MainWindow::plantuml_jar_path_PB()
 void MainWindow::plantuml_cfg_file_PB()
 {
    QString path = m_ui->plantuml_cfg_file->text();
-   path = get_DirPath(tr("Select configuration file"), path, PROJECT_DIR);
+   path = get_DirPath(tr("Select plantuml cfg path"), path, PROJECT_DIR);
 
    m_ui->plantuml_cfg_file->setText(path);
 }
@@ -984,7 +990,7 @@ void MainWindow::plantuml_inc_path_PB()
 void MainWindow::html_output_PB()
 {
    QString path = m_ui->html_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select html output directory"), path, OUTPUT_DIR);
 
    m_ui->html_output->setText(path);
 }
@@ -1193,7 +1199,7 @@ void MainWindow::search_mappings_PB()
 void MainWindow::latex_output_PB()
 {
    QString path = m_ui->latex_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select latex output directory"), path, OUTPUT_DIR);
 
    m_ui->latex_output->setText(path);
 }
@@ -1326,7 +1332,7 @@ void MainWindow::cite_bib_files_PB()
 void MainWindow::rtf_output_PB()
 {
    QString path = m_ui->rtf_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select rtf output directory"), path, OUTPUT_DIR);
 
    m_ui->rtf_output->setText(path);
 }
@@ -1349,7 +1355,7 @@ void MainWindow::rtf_extension_PB()
 void MainWindow::man_output_PB()
 {
    QString path = m_ui->man_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select man output directory"), path, OUTPUT_DIR);
 
    m_ui->man_output->setText(path);
 }
@@ -1358,7 +1364,7 @@ void MainWindow::man_output_PB()
 void MainWindow::xml_output_PB()
 {
    QString path = m_ui->xml_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select xml output directory"), path, OUTPUT_DIR);
 
    m_ui->xml_output->setText(path);
 }
@@ -1367,7 +1373,7 @@ void MainWindow::xml_output_PB()
 void MainWindow::docbook_output_PB()
 {
    QString path = m_ui->docbook_output->text();
-   path = get_DirPath(tr("Select destination directory"), path, OUTPUT_DIR);
+   path = get_DirPath(tr("Select docbook output directory"), path, OUTPUT_DIR);
 
    m_ui->docbook_output->setText(path);
 }

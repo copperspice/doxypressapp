@@ -522,7 +522,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO"
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("LATEX_HYPER_PDF_RB",
       "If this tag is set the generated LaTeX is converted to a PDF using ps2pdf or pdflatex. "
@@ -530,7 +530,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES"
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PDF_RB",
       "If this tag is set DoxyPress will use the pdflatex program to generate the PDF. "
@@ -538,12 +538,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES"
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PS_RB",
       "Setting this option will disable latex PDF output. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    //
    s_fullHelp.insert("DIAGRAM_NONE_RB",
@@ -588,7 +588,7 @@ void MainWindow::configFullHelp()
       "part of the path. This tag can be used to show relative paths in the file list. "
       "If left blank the directory where DoxyPress is run is used as the path to strip. "
       "<br><br>"
-      "This tag requires the tag 'FULL PATH NAME' is set to YES");
+      "Requires the tag 'FULL PATH NAME' is set to YES");
 
    s_fullHelp.insert("STRIP_FROM_INC_PATH",
       "This tag is used to specify what portion of the path to remove for include files. "
@@ -1033,9 +1033,22 @@ void MainWindow::configFullHelp()
       "As an example boost::thread=bt will replace the boost::thread everywhere it occurs in your documentation "
       "with the value of 'bt'.");
 
+   s_fullHelp.insert("TOC_INCLUDE_HEADERS",
+      "In markdown syntax a line of documentation which starts with a # sign is called a header. "
+      "In the output this 'markdown header' will look like an html H1 element. Multiple # signs can "
+      "be used up to the standard header limit of 6, which corresponds to H6."
+      "<br><br>"
+      "When this tag is set to a value greater than 0 all markdown headers with the same or "
+      "greater level as this tag will automatically be included in the table of contents."
+      "This will occur even if the header does not have an id attribute."
+      "<br><br>"
+      "Requires the tag 'MARKDOWN SUPPORT' is set to YES");
+
+/*
    s_fullHelp.insert("BB_STYLE",
-      "This tag is used to enable the special comment style of documenting source code. Comments in source must be "
-      "below the source code. (Experimental)");
+      "This tag is used to enable the special comment style of documenting source code. Comments in the "
+      "source must be below the source code. (Experimental)");
+*/
 
    // language
    s_fullHelp.insert("TCL_SUBST",
@@ -1250,7 +1263,7 @@ void MainWindow::configFullHelp()
       "The first entry specifies which filter program to use for every *.c file. The second entry "
       "specifies not to use a filter program for *.h files."
       "<br><br>"
-      "This tag requires the tag 'FILTER SOURCE CODE FILES' is set to YES");
+      "Requires the tag 'FILTER SOURCE CODE FILES' is set to YES");
 
 
    // index page
@@ -1266,7 +1279,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 1, Maximum: 20, Default: 5 "
       "<br><br>"
-      "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES");
+      "Requires the tag 'ALPHABETICAL INDEX' is set to YES");
 
    s_fullHelp.insert("IGNORE_PREFIX",
       "This tag is used to define a prefix or a list of prefixes, which should be ignored "
@@ -1274,10 +1287,118 @@ void MainWindow::configFullHelp()
       "This is useful when several classes start with a common prefix as too many entries "
       "would appear under the same letter in the alphabetical index. "
       "<br><br>"
-      "This tag requires the tag 'ALPHABETICAL INDEX' is set to YES");
+      "Requires the tag 'ALPHABETICAL INDEX' is set to YES");
+
+   // preprocessing
+   s_fullHelp.insert("ENABLE_PREPROCESSING",
+      "If this tag is set DoxyPress will evaluate all "
+      "C preprocessor directives found in the source and include files. "
+      "<br><br>"
+      "The default value is: YES");
+
+   s_fullHelp.insert("SEARCH_INCLUDES",
+      "If this tag is set then files specified in the 'INCLUDE PATH' tag will be "
+      "searched if the #include directive is found in the source code. "
+      "<br><br>"
+      "The default value is: YES "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("INCLUDE_PATH",
+      "This tag is used to specify one or more directories which contain include files."
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' and 'SEARCH INCLUDES' are set to YES");
+
+   s_fullHelp.insert("INCLUDE_PATTERNS",
+      "This tag is used to specify wildcard patterns (like *.h) "
+      "to filter out the header files in the directories. If left blank, the patterns "
+      "specified with the 'INPUT FILE PATTERNS' tag will be used. "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("MACRO_EXPANSION",
+      "If this tag is set DoxyPress will expand all macro names in the source code. "
+      "If set to NO, only conditional compilation will be performed. "
+      "Macro expansion can be done in a controlled way by setting 'EXPAND ONLY PREDEFINED MACROS' to YES. "
+      "<br><br>"
+      "The default value is: NO "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("EXPAND_ONLY_PREDEFINED",
+      "If this tag and 'MACRO EXPANSION' are both set to YES, the macro expansion is "
+      "limited to the macros specified by 'PREDEFINED MACROS' and 'EXPAND AS DEFINED' tags. "
+      "<br><br>"
+      "The default value is: NO "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("SKIP_FUNCTION_MACROS",
+      "If this tag is set DoxyPress will preprocess and "
+      "remove all references to function-like macros which are alone on a line, are in "
+      "uppercase, and do not end with a semicolon. Such function macros "
+      "are typically used for boiler-plate code and will confuse the parser if not removed. "
+      "<br><br>"
+      "The default value is: YES "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("PREDEFINED_MACROS",
+      "This tag is used to specify one or more macro names which are defined during"
+      "DoxyPress preprocessor. To prevent a macro definition from being undefined via #undef or "
+      "recursively expanded, use := instead of the = operator. "
+      "If the definition and the \"=\" are omitted, \"=1\" is assumed. "
+      "<br><br>"
+      "The format for this tag is: name=definition, with no spaces."
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
+
+   s_fullHelp.insert("EXPAND_AS_DEFINED",
+      "If the 'MACRO EXPANSION' and 'EXPAND ONLY PREDEFINED MACROS' tags are set to YES, this "
+      "tag is used to specify a list of macro names which should be expanded. "
+      "DoxyPress will use the macro definitions found in your source code. Use the 'PREDEFINED MACROS' "
+      "tag to specify a different macro definition. "
+      "<br><br>"
+      "Requires the tag 'ENABLE PREPROCESSING' is set to YES");
 
 
-   // source code
+   // clang
+   s_fullHelp.insert("CLANG_PARSING",
+      "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
+      "Objective-C source code. Using clang might be slightly slower, however it will be more accurate."
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("CLANG_COMPILATION_PATH",
+      "This tag is used to set the path to a JSON file previously created by a build tool like "
+      "CMake or Visual Studio. This file is referred to as the 'compilation database'. If this tag is "
+      "used then the compiler options do not need to be specified in the 'CLANG FLAGS' tag."
+      "<br><br>"
+      "Requires the tag 'CLANG PARSING' is set to YES");
+
+   s_fullHelp.insert("CLANG_DIALECT",
+      "This tag specifies which C++ standard should be used when parsing source code with clang and a compilation "
+      "JSON file is not provided."
+      "<br><br>"
+      "The default value is: --std=c++14"
+      "<br><br>"
+      "Requires the tag 'CLANG PARSING' is set to YES");
+
+   s_fullHelp.insert("CLANG_USE_HEADERS",
+      "At run time DoxyPress will need access to the clang header files. Checking this tag will use "
+      "the clang headers located in the 'doxypress/include' folder."
+      "<br><br>"
+      "To use a different clang headers ensure this tag is not set. Then specify the location "
+      "of the clang headers using '-I pathToClang' under the 'CLANG FLAGS'."
+      "<br><br>"
+      "Requires the tag 'CLANG PARSING' is set to YES");
+
+   s_fullHelp.insert("CLANG_FLAGS",
+      "This tag is used to pass flags to clang when parsing source files. "
+      "<br><br>"
+      "Requires the tag 'CLANG PARSING' is set to YES");
+
+   // source listing
    s_fullHelp.insert("SOURCE_CODE",
       "If this tag is set then a list of source files will be generated. "
       "Documented entities will be cross-referenced with these sources. "
@@ -1330,7 +1451,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'SOURCE CODE' is set to YES");
+      "Requires the tag 'SOURCE CODE' is set to YES");
 
    s_fullHelp.insert("USE_HTAGS",
       "If this tag is set then all references to source code will point to the HTML generated by "
@@ -1343,7 +1464,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'SOURCE CODE' is set to YES");
+      "Requires the tag 'SOURCE CODE' is set to YES");
 
    s_fullHelp.insert("SUFFIX_SOURCE_NAVTREE",
       "This tag is used to specify a list of file extensions which are treated as source. All entities "
@@ -1366,90 +1487,6 @@ void MainWindow::configFullHelp()
       "in this tag."
       "<br><br>"
       "If this tag is empty the default will be: " + m_suffixExclude);
-
-   s_fullHelp.insert("CLANG_PARSING",
-      "If this tag is set DoxyPress will use the clang parser for parsing C, C++, and "
-      "Objective-C source code. Using clang is currently much slower. This feature is under development. "
-      "<br><br>"
-      "The default value is: NO");
-
-   s_fullHelp.insert("CLANG_FLAGS",
-      "This tag is used to pass flags to clang when parsing source files. "
-      "<br><br>"
-      "This tag requires 'CLANG PARSING' is set to YES");
-
-
-   // preprocessing
-   s_fullHelp.insert("ENABLE_PREPROCESSING",
-      "If this tag is set DoxyPress will evaluate all "
-      "C preprocessor directives found in the source and include files. "
-      "<br><br>"
-      "The default value is: YES");
-
-   s_fullHelp.insert("SEARCH_INCLUDES",
-      "If this tag is set then files specified in the 'INCLUDE PATH' tag will be "
-      "searched if the #include directive is found in the source code. "
-      "<br><br>"
-      "The default value is: YES "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("INCLUDE_PATH",
-      "This tag is used to specify one or more directories which contain include files."
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' and 'SEARCH INCLUDES' are set to YES");
-
-   s_fullHelp.insert("INCLUDE_PATTERNS",
-      "This tag is used to specify wildcard patterns (like *.h) "
-      "to filter out the header files in the directories. If left blank, the patterns "
-      "specified with the 'INPUT FILE PATTERNS' tag will be used. "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("MACRO_EXPANSION",
-      "If this tag is set DoxyPress will expand all macro names in the source code. "
-      "If set to NO, only conditional compilation will be performed. "
-      "Macro expansion can be done in a controlled way by setting 'EXPAND ONLY PREDEFINED MACROS' to YES. "
-      "<br><br>"
-      "The default value is: NO "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("EXPAND_ONLY_PREDEFINED",
-      "If this tag and 'MACRO EXPANSION' are both set to YES, the macro expansion is "
-      "limited to the macros specified by 'PREDEFINED MACROS' and 'EXPAND AS DEFINED' tags. "
-      "<br><br>"
-      "The default value is: NO "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("SKIP_FUNCTION_MACROS",
-      "If this tag is set DoxyPress will preprocess and "
-      "remove all references to function-like macros which are alone on a line, are in "
-      "uppercase, and do not end with a semicolon. Such function macros "
-      "are typically used for boiler-plate code and will confuse the parser if not removed. "
-      "<br><br>"
-      "The default value is: YES "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("PREDEFINED_MACROS",
-      "This tag is used to specify one or more macro names which are defined during"
-      "DoxyPress preprocessor. To prevent a macro definition from being undefined via #undef or "
-      "recursively expanded, use := instead of the = operator. "
-      "If the definition and the \"=\" are omitted, \"=1\" is assumed. "
-      "<br><br>"
-      "The format for this tag is: name=definition, with no spaces."
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
-
-   s_fullHelp.insert("EXPAND_AS_DEFINED",
-      "If the 'MACRO EXPANSION' and 'EXPAND ONLY PREDEFINED MACROS' tags are set to YES, this "
-      "tag is used to specify a list of macro names which should be expanded. "
-      "DoxyPress will use the macro definitions found in your source code. Use the 'PREDEFINED MACROS' "
-      "tag to specify a different macro definition. "
-      "<br><br>"
-      "This tag requires the tag 'ENABLE PREPROCESSING' is set to YES");
 
    // external
    s_fullHelp.insert("TAG_FILES",
@@ -1529,27 +1566,27 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 32, Default: 0 "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_NAME",
       "This tag specifies a different font for the dot program. The path can be set using the 'DOT FONT PATH' tag. "
       "<br><br>"
       "The default value is: Helvetica "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_SIZE",
       "This tag can be used to set the size (in points) of the font of dot graphs. "
       "<br><br>"
       "Minimum: 4, Maximum: 24, Default: 10 "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FONT_PATH",
       "The dot program will use the default font as specified by 'DOT FONT NAME'. "
       "If a font name is specified then this tag will be used as the path to locate the font file. "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_CLASS_GRAPH",
       "If this tag is set DoxyPress will generate a graph for each documented class showing the "
@@ -1558,7 +1595,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_COLLABORATION",
       "If this tag is set DoxyPress will generate a graph for each documented class showing the "
@@ -1567,14 +1604,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("GROUP_GRAPHS",
       "If this tag is set DoxyPress will generate a graph for groups, showing the direct groups dependencies. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("UML_LOOK",
       "If this tag is set DoxyPress will generate inheritance and "
@@ -1582,7 +1619,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("UML_LIMIT_NUM_FIELDS",
       "If the 'UML LOOK' tag is enabled, the fields and methods are shown inside the class node. "
@@ -1595,7 +1632,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 100, Default: 10 "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("TEMPLATE_RELATIONS",
       "If this tag is set the inheritance and collaboration graphs will show the relations "
@@ -1603,7 +1640,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_INCLUDE",
       "If this tag plus 'ENABLE PREPROCESSING' and 'SEARCH INCLUDES' are set to "
@@ -1612,7 +1649,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_INCLUDED_BY",
       "If this tag plus 'ENABLE PREPROCESSING' and 'SEARCH INCLUDES' are set  to "
@@ -1621,7 +1658,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_CALL",
       "If this tag is set a call dependency graph for every global function or class method "
@@ -1631,7 +1668,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_CALLED_BY",
       "If this tag is set a caller dependency graph will be generated for every global function or class method. "
@@ -1640,14 +1677,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_HIERARCHY",
       "If this tag is set a graphical hierarchy of all classes will be shown instead of a textual one. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DIRECTORY_GRAPH",
       "This tag is set the dependencies a directory has on other directories, will be shown. "
@@ -1656,7 +1693,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_IMAGE_FORMAT",
       "This tag is used to specify the image format generated by the dot program. "
@@ -1665,7 +1702,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default format value is png."
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires he tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("INTERACTIVE_SVG",
       "If 'DOT IMAGE FORMAT' is set to svg, this option can be set to YES to "
@@ -1675,20 +1712,20 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_PATH",
       "This tag is used to specify the path where the dot program is located. "
       "If left blank DoxyPress will search the users path. "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_FILE_DIRS",
       "This tag is used to specify one or more directories containing "
       "dot files which are included in the documentation. "
       "Refer to the DoxyPress manual regarding the \\dotfile command."
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("MSC_FILE_DIRS",
       "This tag is used to specify one or more directories containing "
@@ -1721,7 +1758,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 10000, Default: 50 "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_GRAPH_MAX_DEPTH",
       "This tag is used to set the maximum depth of the graphs generated by the dot program. A depth value "
@@ -1733,7 +1770,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 1000, Default: 0 "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_TRANSPARENT",
       "Set this tag to generate images with a transparent background. "
@@ -1742,7 +1779,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_MULTIPLE_TARGETS",
       "Set this tag to allow the dot program to generate multiple output files in one run. Setting this tag to YES "
@@ -1750,7 +1787,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("GEN_LEGEND",
       "If this tag is set DoxyPress will generate a legend page "
@@ -1758,7 +1795,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    s_fullHelp.insert("DOT_CLEANUP",
       "If this tag is set DoxyPress will remove the intermediate dot files which are used to generate "
@@ -1766,7 +1803,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'HAVE DOT' is set to YES");
+      "Requires the tag 'HAVE DOT' is set to YES");
 
    // html
    s_fullHelp.insert("GEN_HTML",
@@ -1780,7 +1817,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: html "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_FILE_EXTENSION",
       "This tag is used to specify the file extension for each "
@@ -1788,7 +1825,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: .html "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_HEADER",
       "This tag is used to specify a user-defined HTML header file for each generated HTML page. "
@@ -1796,7 +1833,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To create a new header file run 'DoxyPress --w html-head [header file name]' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_FOOTER",
       "This tag is used to specify an user defined HTML footer for each generated HTML page. "
@@ -1804,7 +1841,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To create a new footer file run 'DoxyPress --w html-foot [footer file name]' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_STYLESHEETS",
       "This tag is used to specify additional custom css files which will be included "
@@ -1814,7 +1851,7 @@ void MainWindow::configFullHelp()
       "The order of css files is important. The last stylesheet will override the "
       "settings of any previous stylesheets. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_EXTRA_FILES",
       "This tag is used to specify one or more extra images or other source files which "
@@ -1822,7 +1859,7 @@ void MainWindow::configFullHelp()
       "'HTML HEADER FILE' or 'HTML FOOTER FILE' files to load the extra files. In a stylesheet "
       "use the file name with no prefix. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_COLORSTYLE_HUE",
       "This tag controls the color of the HTML output. DoxyPress will adjust the colors in "
@@ -1830,14 +1867,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 359, Default: 220 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_COLORSTYLE_SAT",
       "This tag controls the purity (or saturation) of the colors in the HTML output. "
       "<br><br>"
       "Minimum: 0, Maximum: 255, Default: 100 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "TRequires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_COLORSTYLE_GAMMA",
       "This controls the gamma correction applied to the luminance component of the colors "
@@ -1845,7 +1882,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 40, Maximum: 240, Default: 80 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_TIMESTAMP",
       "If this tag is set to YES, the footer of each generated HTML "
@@ -1853,7 +1890,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_DYNAMIC_SECTIONS",
       "If this tag is set then the generated HTML documentation will contain sections which "
@@ -1861,7 +1898,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_INDEX_NUM_ENTRIES",
       "This tag defines the preferred number of entries shown in the various tree "
@@ -1871,7 +1908,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 9999, Default: 100 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    // chm
    s_fullHelp.insert("GEN_CHM",
@@ -1884,20 +1921,20 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("CHM_FILE",
       "This tag is used to specify the file name of the resulting .chm file. "
       "If a path is specified the file will be written to this path instead of the html output directory. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("HHC_LOCATION",
       "This tag is used to specify the location (absolute path including file name) of the HTML help "
       "compiler (hhc.exe). If non-empty, DoxyPress will try to run the HTML help compiler on the "
       "generated index.hhp. The file has to be specified with full path. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("GEN_CHI",
       "This tag controls if a separate .chi index file is generated "
@@ -1905,13 +1942,13 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("CHM_INDEX_ENCODING",
       "This tag is used to encode HtmlHelp index (hhk), content (hhc) "
       "and project file content. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("BINARY_TOC",
       "This tag controls whether the chm will contain a binary table of contents "
@@ -1919,7 +1956,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    s_fullHelp.insert("TOC_EXPANDED",
       "If this tag is set then group members will be added to  "
@@ -1927,7 +1964,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML HELP' is set to YES");
+      "Requires the tag 'GENERATE HTML HELP' is set to YES");
 
    // docbook
    s_fullHelp.insert("GEN_DOCBOOK",
@@ -1941,7 +1978,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: docbook "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCBOOK' is set to YES");
+      "Requires the tag 'GENERATE DOCBOOK' is set to YES");
 
    s_fullHelp.insert("DOCBOOK_PROGRAM_LISTING",
       "If this tag is set DoxyPress will include the "
@@ -1952,7 +1989,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCBOOK' is set to YES");
+      "Requires the tag 'GENERATE DOCBOOK' is set to YES");
 
    // docset
    s_fullHelp.insert("GEN_DOCSET",
@@ -1963,7 +2000,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("DOCSET_FEEDNAME",
       "This tag determines the name of the docset feed. A documentation feed provides "
@@ -1972,7 +2009,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: DoxyPress generated docs "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
+      "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_BUNDLE_ID",
       "This tag specifies a string which should uniquely identify the documentation "
@@ -1981,7 +2018,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
+      "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_ID",
       "This tag is used to specify a string which should uniquely identify  "
@@ -1990,14 +2027,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: org.doxypress.Publisher "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
+      "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_NAME",
       "This tag identifies the documentation publisher. "
       "<br><br>"
       "The default value is: Publisher. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE DOCSET' is set to YES");
+      "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    // eclipse
    s_fullHelp.insert("GEN_ECLIPSE",
@@ -2009,7 +2046,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("ECLIPSE_DOC_ID",
       "A unique identifier for the Eclipse help plugin. When installing the plugin "
@@ -2018,7 +2055,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br><br>"
-      "This tag requires the tag 'GENERATE ECLIPSE HELP' is set to YES");
+      "Requires the tag 'GENERATE ECLIPSE HELP' is set to YES");
 
    s_fullHelp.insert("DISABLE_INDEX",
       "To obtain full control over the layout of generated HTML it can be "
@@ -2029,14 +2066,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("GEN_TREEVIEW",
       "This tag is used to specify whether a tree index will be displayed in the HTML output. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("TREEVIEW_WIDTH",
       "If 'GENERATE NAVIGATION TREEVIEW' is enabled this tag can be used "
@@ -2044,7 +2081,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 1500, Default: 250 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("ENUM_VALUES_PER_LINE",
       "This tag is used to set the number of enum values  "
@@ -2055,7 +2092,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 0, Maximum: 20, Default: 4 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("EXTERNAL_LINKS_IN_WINDOW",
       "If this tag is set DoxyPress will open links to "
@@ -2063,7 +2100,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_SEARCH",
       "When this tag is set DoxyPress will generate a search box for the HTML output. "
@@ -2072,7 +2109,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("SEARCH_SERVER_BASED",
       "When this tag is set the search engine will be implemented using a web server instead "
@@ -2085,7 +2122,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HTML SEARCH' is set to YES");
+      "Requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_EXTERNAL",
       "When this tag is enabled DoxyPress will not generate the PHP script for searching. "
@@ -2095,7 +2132,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'HTML SEARCH' is set to YES");
+      "Requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_ENGINE_URL",
       "This tag references a search engine hosted by a web server "
@@ -2103,7 +2140,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Refer to the DoxyPress manual regarding 'External Searching'. "
       "<br><br>"
-      "This tag requires the tag 'HTML SEARCH' is set to YES");
+      "Requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_DATA_FILE",
       "When 'SERVER BASED SEARCH' and 'EXTERNAL SEARCH' are both enabled the unindexed "
@@ -2112,14 +2149,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default file is: searchdata.xml "
       "<br><br>"
-      "This tag requires the tag 'HTML SEARCH' is set to YES");
+      "Requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("SEARCH_EXTERNAL_ID",
       "When the tags 'SERVER BASED SEARCH' and 'EXTERNAL SEARCH' are both enabled, this tag is used as "
       "an identifier. This is useful in combination with 'SEARCH MAPPINGS' to search through "
       "multiple projects and redirect the results to the correct project. "
       "<br><br>"
-      "This tag requires the tag 'SEARCH ENGINE is set to YES");
+      "Requires the tag 'SEARCH ENGINE is set to YES");
 
    s_fullHelp.insert("SEARCH_MAPPINGS",
       "This tag is used to enable searching in multiple DoxyPress projects. "
@@ -2127,7 +2164,7 @@ void MainWindow::configFullHelp()
       "This tag is used to map the id to a relative location where the documentation can be found. "
       "The format is: tagname1=loc1 tagname2=loc2 ... "
       "<br><br>"
-      "This tag requires the tag 'HTML SEARCH' is set to YES");
+      "Requires the tag 'HTML SEARCH' is set to YES");
 
    s_fullHelp.insert("FORMULA_FONTSIZE",
       "Use this tag to change the font size of LaTeX formulas included as images in "
@@ -2137,7 +2174,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Minimum: 8, Maximum: 50, Default: 10 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("FORMULA_TRANSPARENT",
       "If this tag is set transparent PNGs will be used in formulas. Transparent PNGs may not "
@@ -2148,12 +2185,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("GHOSTSCRIPT",
       "This tag specifies the full path and file name for the GhostScript program. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("USE_MATHJAX",
       "Set this tag to render LaTeX formulas using MathJax. Client side JavaScript will be used for rendering "
@@ -2164,7 +2201,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("MATHJAX_FORMAT",
       "This tag is used to set the default output format to be used for the MathJax output. "
@@ -2173,7 +2210,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: HTML-CSS "
       "<br><br>"
-      "This tag requires the tag 'USE MATHJAX' is set to YES");
+      "Requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_RELPATH",
       "When MathJax is enabled specify the location relative to the HTML "
@@ -2185,7 +2222,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/ "
       "<br><br>"
-      "This tag requires the tag 'USE MATHJAX' is set to YES");
+      "Requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_EXTENSIONS",
       "This tag is used to specify one or more MathJax extension names which will be enabled "
@@ -2193,13 +2230,13 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "For example: TeX/AMSmath, TeX/AMSsymbols "
       "<br><br>"
-      "This tag requires the tag 'USE MATHJAX' is set to YES");
+      "Requires the tag 'USE MATHJAX' is set to YES");
 
    s_fullHelp.insert("MATHJAX_CODEFILE",
       "This tag is used to specify a file with JavaScript fragments which will be used during "
       "startup of the MathJax code. "
       "<br><br>"
-      "This tag requires the tag 'USE MATHJAX' is set to YES");
+      "Requires the tag 'USE MATHJAX' is set to YES");
 
    // latex
    s_fullHelp.insert("GEN_LATEX",
@@ -2213,7 +2250,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: latex "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_CMD_NAME",
       "This tag is used to specify the LaTeX command name to be invoked. "
@@ -2223,21 +2260,21 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default file is: latex "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("MAKE_INDEX_CMD_NAME",
       "This tag is used to specify the command name to generate an index for LaTeX. "
       "<br><br>"
       "The default file is: makeindex "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_COMPACT",
       "If this tag is set DoxyPress generates compact LaTeX documents. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PAPER_TYPE",
       "This tag is used to set the paper type used by the printer. "
@@ -2246,7 +2283,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: a4 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
       "This tag is used to specify one or more LaTeX packages to include in the "
@@ -2257,7 +2294,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "If this tag is blank no extra packages will be included. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_HEADER",
       "This tag is used to specify a user-defined LaTeX header file for the generated LaTeX output. "
@@ -2271,7 +2308,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To create a new header file run 'DoxyPress --w latex-head [header file name]' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_FOOTER",
       "This tag is used to specify a user-defined LaTeX footer for the generated LaTeX document."
@@ -2279,7 +2316,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To create a new footer file run 'DoxyPress --w latex-foot [footer file name]' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_STYLESHEETS",
       "This tag is used to specify additional custom style sheets which will be included "
@@ -2289,21 +2326,21 @@ void MainWindow::configFullHelp()
       "The order of stylesheets is important. The last stylesheet will override the "
       "settings of any previous stylesheets. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_FILES",
       "This tag is used to specify one or more extra images or "
       "other source files which should be copied to the 'LATEX OUTPUT DIRECTORY' "
       "directory. The files will be copied verbatim. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_TIMESTAMP",
       "If this tag is set the footer page will contain the date and time when the page was generated. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_HYPER_PDF",
       "If this tag is set the generated LaTeX is "
@@ -2312,7 +2349,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_PDF",
       "If this tag is set DoxyPress will use the pdflatex program to generate the PDF file "
@@ -2320,7 +2357,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_BATCH_MODE",
       "If this tag is set DoxyPress will add the \\batchmode command to the generated LaTeX files. "
@@ -2329,7 +2366,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_HIDE_INDICES",
       "If this tag is set DoxyPress will not include the "
@@ -2337,7 +2374,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_SOURCE_CODE",
       "If this tag is set DoxyPress will include source code with syntax highlighting in the LaTeX output. "
@@ -2345,7 +2382,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
 
    // latex bio
@@ -2355,7 +2392,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: plain "
       "<br><br>"
-      "This tag requires the tag 'GENERATE LATEX' is set to YES");
+      "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("CITE_BIB_FILES",
       "This tag is used to specify one or more bib files containing the reference definitions. "
@@ -2376,7 +2413,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: man "
       "<br><br>"
-      "This tag requires the tag 'GENERATE MAN' is set to YES");
+      "Requires the tag 'GENERATE MAN' is set to YES");
 
    s_fullHelp.insert("MAN_EXTENSION",
       "This tag determines the extension which is added to the generated man pages. "
@@ -2385,13 +2422,13 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: .3 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE MAN' is set to YES");
+      "Requires the tag 'GENERATE MAN' is set to YES");
 
    s_fullHelp.insert("MAN_SUBDIR",
       "This tag determines the name of the directory created under the value for "
       "the 'MAN PAGE OUTPUT DIRECTORY' tag. The default directory will be man3. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE MAN' is set to YES");
+      "Requires the tag 'GENERATE MAN' is set to YES");
 
    s_fullHelp.insert("MAN_LINKS",
       "If this tag is set then for each entity documented in the man pages, one additional file "
@@ -2399,7 +2436,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE MAN' is set to YES");
+      "Requires the tag 'GENERATE MAN' is set to YES");
 
    // tab 3 perl module
    s_fullHelp.insert("GEN_PERL",
@@ -2416,7 +2453,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE PERL MODULE' is set to YES");
+      "Requires the tag 'GENERATE PERL MODULE' is set to YES");
 
    s_fullHelp.insert("PERL_PRETTY",
       "If this tag is set the Perl module output will be "
@@ -2425,14 +2462,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE PERL MODULE' is set to YES");
+      "Requires the tag 'GENERATE PERL MODULE' is set to YES");
 
    s_fullHelp.insert("PERL_PREFIX",
       "The names of the make variables in the generated doxyrules.make file are "
       "prefixed with the string contained in 'PERL MODULE MAKEVAR PREFIX'. This is useful "
       "so different doxyrules.make files included by the same Makefile do not overwrite each other's variables. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE PERL MODULE' is set to YES");
+      "Requires the tag 'GENERATE PERL MODULE' is set to YES");
 
    // QtHelp
    s_fullHelp.insert("GEN_QTHELP",
@@ -2443,47 +2480,47 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE HTML' is set to YES");
+      "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("QCH_FILE",
       "This tag is used to specify the .qch output file name of the QtHelp Generator. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_NAMESPACE",
       "This tag specifies the namespace to use when generating QtHelp output. "
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_VIRTUAL_FOLDER",
       "This tag specifies the virtual folder to use when generating QtHelp output. "
       "<br><br>"
       "The default value is: doc "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_CUST_FILTER_NAME",
       "This tag specifies the name of a custom filter for the QtHelp output. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_CUST_ATTRIB",
       "This tag specifies the list of attributes for the custom filter used by QtHelp. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QHP_SECT_ATTRIB",
       "This tag specifies the list of filter section attributes used by QtHelp. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    s_fullHelp.insert("QTHELP_GEN_PATH",
       "This tag is used to specify the path for the QtHelp Generator. If this tag is empty "
       "DoxyPress will search for the qhelpgenerator program in your path. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE QT HELP' is set to YES");
+      "Requires the tag 'GENERATE QT HELP' is set to YES");
 
    // rtf
    s_fullHelp.insert("GEN_RTF",
@@ -2497,7 +2534,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: rtf "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_STYLESHEET",
       "Load stylesheet definitions from file. "
@@ -2505,13 +2542,13 @@ void MainWindow::configFullHelp()
       "Refer to the DoxyPress manual regarding \"DoxyPress Usage\" for information on how to generate "
       "the default stylesheet. "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_EXTENSION",
       "This tag is used to set optional variables used in the generation of an RTF document. "
       "A template extensions file can be generated by running: 'DoxyPress --w rtf-ext [extensions file name]' "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_PAPER_TYPE",
       "This tag is used to set the paper type used by the printer. "
@@ -2520,7 +2557,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: a4 "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_SOURCE_CODE",
       "If this tag is set DoxyPress will include source code with syntax highlighting in the RTF output. "
@@ -2528,14 +2565,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_COMPACT",
       "If this tag is set DoxyPress generates compact RTF documents. "
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_HYPERLINKS",
       "If this tag is set the RTF generated will contain hyperlinks."
@@ -2544,7 +2581,7 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
-      "This tag requires the tag 'GENERATE RTF' is set to YES");
+      "Requires the tag 'GENERATE RTF' is set to YES");
 
    // xml
    s_fullHelp.insert("GEN_XML",
@@ -2558,12 +2595,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default directory is: xml "
       "<br><br>"
-      "This tag requires the tag 'GENERATE XML' is set to YES");
+      "Requires the tag 'GENERATE XML' is set to YES");
 
    s_fullHelp.insert("XML_PROGRAM_LISTING",
       "If this tag is set program source code, including syntax highlighting and cross-referencing, will be generated. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
-      "This tag requires the tag 'GENERATE XML' is set to YES");
+      "Requires the tag 'GENERATE XML' is set to YES");
 }
