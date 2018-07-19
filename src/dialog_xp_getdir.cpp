@@ -158,21 +158,27 @@ QString Dialog_XP_GetDir::driveType(QString drive)
       case 0:
       case 1:
          retval = "Unknown";
+         break;
 
       case 2:
          retval = "Removable Drive";
+         break;
 
       case 3:
          retval = "Local Drive";
+         break;
 
       case 4:
          retval = "Network Drive";
+         break;
 
       case 5:
          retval = "CD Drive";
+         break;
 
       case 6:
          retval = "Ram Disk";
+         break;
    }
 
    return retval;
