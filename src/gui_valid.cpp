@@ -203,6 +203,7 @@ void MainWindow::clearAllFields()
    m_ui->skip_function_macros_CB->setChecked(true);
 
    // tab 2 - clang
+   m_ui->clang_parsing_CB->setChecked(false);
    index = m_ui->clang_dialect_CM->findText("-std=c++14");
    m_ui->clang_dialect_CM->setCurrentIndex(index);
 

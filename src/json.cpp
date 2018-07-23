@@ -488,6 +488,10 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_doxypressFormat = temp.toInt();
    }
 
+   // ensure both are set before reading the json file, do not change the order
+   m_ui->clang_parsing_CB->setChecked(false);
+   m_ui->enable_preprocessing_CB->setEnabled(true);
+
    if (m_doxypressFormat == 0)  {
 
       // tab 1
@@ -1320,7 +1324,7 @@ QByteArray MainWindow::json_SaveDoxy()
 
    m_doxypressFormat = DOXYPRESS_FORMAT;
    object.insert("doxypress-format",      m_doxypressFormat);
-   object.insert("doxypress-updated",     QString{"2018-Jun-2"} );
+   object.insert("doxypress-updated",     QString{"2018-Jun-30"} );
 
    // tab 1
    projectObj.insert("project-name",      m_ui->project_name->text());
