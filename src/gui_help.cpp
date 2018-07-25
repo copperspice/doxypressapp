@@ -457,7 +457,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("PROJECT_NAME",
       "This tag is a single word or a sequence of words surrounded by double quotes "
-      "which identifies your project. This name is used in the title of varies generated pages.");
+      "which identifies your project. The project name is used in the title of the generated documentation.");
 
    s_fullHelp.insert("PROJECT_BRIEF",
       "This tag is used to specify a single line description which will "
@@ -467,8 +467,8 @@ void MainWindow::configFullHelp()
       "This tag is used to enter a project number or revision number.");
 
    s_fullHelp.insert("PROJECT_LOGO",
-      "This tag specifies a logo or icon which is included "
-      "in the documentation. The height of the logo should not exceed 55 "
+      "This tag specifies a logo or icon which is included in the documentation. "
+      "The height of the logo should not exceed 55 "
       "pixels and the width should not exceed 200 pixels.");
 
    s_fullHelp.insert("OUTPUT_DIR",
@@ -625,7 +625,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("JAVADOC_AUTO_BRIEF",
       "If this tag is set DoxyPress will interpret the first sentence of a JavaDoc style comment "
-      "as the brief description. If set to NO, an explicit @brief command is required. "
+      "as the brief description. If set to NO an explicit @brief command is required. "
       "<br><br>"
       "The default value is: NO");
 
@@ -1102,19 +1102,19 @@ void MainWindow::configFullHelp()
    // messages
    s_fullHelp.insert("QUIET",
       "This tag is used to enable (YES) or disable (NO) messages which are generated to "
-      "standard output. If this tag is set standard messages will be generated. "
+      "standard output. If this tag is set then standard messages will be generated. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("WARNINGS",
-      "This tag can be used to enable (YES) or disable (NO) warning messages which are sent to "
-      "standard error (stderr). If this tag is set standard error messages will be generated. "
+      "This tag is used to enable (YES) or disable (NO) warning messages which are generated to "
+      "standard error (stderr). If this tag is set then standard error messages will be generated. "
       "<br><br>"
       "The default value is: YES");
 
    s_fullHelp.insert("WARN_UNDOC",
       "If this tag is set DoxyPress will generate warnings for undocumented members. "
-      "If 'EXTRACT ALL' is set this tag will automatically be disabled. "
+      "If the tag 'EXTRACT ALL' is set, then this tag will automatically be disabled. "
       "<br><br>"
       "The default value is: YES");
 
@@ -1130,14 +1130,15 @@ void MainWindow::configFullHelp()
       "documentation for their parameters or return value. If set to NO, only warnings "
       "about wrong or incomplete parameter documentation, but not about the absence of documentation, "
       "will be generated. "
+      "If the tag 'EXTRACT ALL' is set, then this tag will automatically be disabled. "
       "<br><br>"
       "The default value is: NO");
 
    s_fullHelp.insert("WARN_FORMAT",
-      "This tag determines the format of the warning messages. Given the default value, '$file'' will be "
+      "This tag determines the format of the warning messages. The macro '$file'' will be "
       "replaced by the file name, '$line' is replaced by the line number where the warning originated, "
-      "and '$text' is replaced by with the warning text. This tag can also include '$version' which will "
-      "be replaced by the version of the file if it can be obtained from the 'FILE VERSION FILTER'. "
+      "and '$text' is replaced with warning text. This tag can also include '$version' which will "
+      "be replaced by the version of the file if the text can be obtained from the 'FILE VERSION FILTER'. "
       "<br><br>"
       "The default value is: $file:$line: $text");
 
@@ -1227,10 +1228,10 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("FILTER_PROGRAM",
       "This tag is used to specify a program which is called to filter each input file. "
       "DoxyPress will invoke the filter program and pass the input file name as the first parameter. "
-      "DoxyPress will use the output of the filter program. "
-      "<br><br>"
       "The filter program must not add or remove lines and is run before the "
       "source code is scanned, not when the documentation output code is generated. "
+      "<br><br>"
+      "The output of the filter program will be used instead of your original source code."
       "<br><br>"
       "Custom file extensions need to be defined in the 'LANGUAGE MAPPING' tag.");
 
@@ -1256,12 +1257,12 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("FILTER_SOURCE_PATTERNS",
       "This tag is used to specify filter programs based on a wildcard match. "
       "DoxyPress will compare each source file name with the list of wildcards and apply the "
-      "filter program which matches. This tag will override the 'SELECT FILTER PROGRAM BY WILDCARD' tag."
+      "filter program which matches. This tag will override the 'SELECT FILTER PROGRAM BY WILDCARD'."
       "<br><br>"
       "Example: *.c=some_c_filter, *.h="
       "<br><br>"
-      "The first entry specifies which filter program to use for every *.c file. The second entry "
-      "specifies not to use a filter program for *.h files."
+      "The first pattern specifies which filter program to use for every *.c file. The second patter specifies "
+      "not to use a filter program for any header file. "
       "<br><br>"
       "Requires the tag 'FILTER SOURCE CODE FILES' is set to YES");
 
@@ -1372,7 +1373,7 @@ void MainWindow::configFullHelp()
    s_fullHelp.insert("CLANG_COMPILATION_PATH",
       "This tag is used to set the path to a JSON file previously created by a build tool like "
       "CMake or Visual Studio. This file is referred to as the 'compilation database'. If this tag is "
-      "used then the compiler options do not need to be specified in the 'CLANG FLAGS' tag."
+      "used then the compiler options do not need to be specified in the 'CLANG FLAGS'."
       "<br><br>"
       "Requires the tag 'CLANG PARSING' is set to YES");
 
@@ -1386,10 +1387,10 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("CLANG_USE_HEADERS",
       "At run time DoxyPress will need access to the clang header files. Checking this tag will use "
-      "the clang headers located in the 'doxypress/include' folder."
+      "the clang headers located in the installed 'doxypress/include' folder."
       "<br><br>"
-      "To use a different clang headers ensure this tag is not set. Then specify the location "
-      "of the clang headers using '-I pathToClang' under the 'CLANG FLAGS'."
+      "To use a different set of clang headers ensure this tag is not set. You will need to specify the location "
+      "of the clang headers using '-I pathToClang' in the 'CLANG FLAGS'."
       "<br><br>"
       "Requires the tag 'CLANG PARSING' is set to YES");
 
@@ -1426,8 +1427,7 @@ void MainWindow::configFullHelp()
       "The default value is: YES");
 
    s_fullHelp.insert("REF_BY_RELATION",
-      "If this tag is set, then for each documented "
-      "function all documented functions referencing it will be listed. "
+      "If this tag is set then for each documented entity all documented functions referencing it will be listed. "
       "<br><br>"
       "The default value is: NO");
 
@@ -1820,8 +1820,7 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_FILE_EXTENSION",
-      "This tag is used to specify the file extension for each "
-      "generated HTML page (for example: .htm, .php, .asp). "
+      "This tag is used to specify the file extension for each generated HTML page. For example: .html, .php, .asp. "
       "<br><br>"
       "The default value is: .html "
       "<br><br>"
@@ -1854,10 +1853,9 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE HTML' is set to YES");
 
    s_fullHelp.insert("HTML_EXTRA_FILES",
-      "This tag is used to specify one or more extra images or other source files which "
-      "should be copied to the base 'HTML OUTPUT DIRECTORY'. Use the $relpath^ variable in your "
-      "'HTML HEADER FILE' or 'HTML FOOTER FILE' files to load the extra files. In a stylesheet "
-      "use the file name with no prefix. "
+      "This tag is used to specify one or more extra images or source files which should be copied to "
+      "the 'HTML OUTPUT DIRECTORY'. To acccess the extra files in the 'HTML HEADER FILE' or "
+      "'HTML FOOTER FILE', prepend $relpath^ to the file name. In a CSS stylesheet specify only the file name. "
       "<br><br>"
       "Requires the tag 'GENERATE HTML' is set to YES");
 
@@ -2012,18 +2010,16 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_BUNDLE_ID",
-      "This tag specifies a string which should uniquely identify the documentation "
-      "set bundle. This should be a reverse domain-name style string, such as "
-      "com.mycompany.MyDocSet. DoxyPress will append .docset to the name. "
+      "This tag specifies a string which should uniquely identify the documentation set bundle. "
+      "The ID is a reversed domain name like com.mycompany.MyDocSet. DoxyPress will append .docset to the ID. "
       "<br><br>"
       "The default value is: org.doxypress.Project "
       "<br><br>"
       "Requires the tag 'GENERATE DOCSET' is set to YES");
 
    s_fullHelp.insert("DOCSET_PUBLISHER_ID",
-      "This tag is used to specify a string which should uniquely identify  "
-      "the documentation publisher. This should be a reverse domain-name style "
-      "string, e.g. com.mycompany.MyDocSet.documentation. "
+      "This tag is used to specify a string which should uniquely identify the documentation publisher. "
+      "The ID is a reversed domain name like com.mycompany.MyDocSet.documentation. "
       "<br><br>"
       "The default value is: org.doxypress.Publisher "
       "<br><br>"
@@ -2180,8 +2176,7 @@ void MainWindow::configFullHelp()
       "If this tag is set transparent PNGs will be used in formulas. Transparent PNGs may not "
       "be supported properly in older browsers. "
       "<br><br>"
-      "When changing this tag delete any files named form_*.png in "
-      "the HTML output directory for this change to be effective. "
+      "If this tag is modified make sure to delete all files named form_*.png in the HTML output directory. "
       "<br><br>"
       "The default value is: YES "
       "<br><br>"
@@ -2286,11 +2281,10 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE LATEX' is set to YES");
 
    s_fullHelp.insert("LATEX_EXTRA_PACKAGES",
-      "This tag is used to specify one or more LaTeX packages to include in the "
-      "LaTeX output. Each entry can be a package name or the literal argument "
-      "passed to the \\usepackage command. "
+      "This tag is used to specify one or more LaTeX packages to include in the LaTeX output. Each entry "
+      "can be a package name or the literal argument passed to the \\usepackage command. "
       "<br><br>"
-      "As an example, to use the times font specify either: 'times' or '{times}' "
+      "As an example, to use the times font in your LaTeX output specify either 'times' or '{times}' for this tag. "
       "<br><br>"
       "If this tag is blank no extra packages will be included. "
       "<br><br>"
@@ -2396,8 +2390,8 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("CITE_BIB_FILES",
       "This tag is used to specify one or more bib files containing the reference definitions. "
-      "Both perl and bibtex must be available in the search path. "
-      "For LaTeX, the style of the bibliography can be controlled using 'LATEX BIB STYLE' tag. "
+      "TO use this feature both perl and bibtex must be available in the search path. "
+      "For LaTeX the style of the bibliography can be controlled using 'LATEX BIB STYLE'"
       "Refer to the DoxyPress manual regarding the \\cite command for additional information.");
 
    // man
@@ -2545,8 +2539,9 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_EXTENSION",
-      "This tag is used to set optional variables used in the generation of an RTF document. "
-      "A template extensions file can be generated by running: 'DoxyPress --w rtf-ext [extensions file name]' "
+      "This tag is used to set the path to an RTF Extension file. This file contains optional variables used "
+      "in the generation of an RTF document."
+      "To create a sample extension file run 'DoxyPress --w rtf-ext [extensions file name]' "
       "<br><br>"
       "Requires the tag 'GENERATE RTF' is set to YES");
 
@@ -2561,7 +2556,7 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("RTF_SOURCE_CODE",
       "If this tag is set DoxyPress will include source code with syntax highlighting in the RTF output. "
-      "Which sources are shown depend on other settings such as 'SOURCE CODE'"
+      "Which source files are shown depend on other settings such as the 'SOURCE CODE' tag."
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
@@ -2575,9 +2570,9 @@ void MainWindow::configFullHelp()
       "Requires the tag 'GENERATE RTF' is set to YES");
 
    s_fullHelp.insert("RTF_HYPERLINKS",
-      "If this tag is set the RTF generated will contain hyperlinks."
+      "If this tag is set the RTF generated will contain hyperlinks. "
       "The output may be more suitable for browsing rather than printing. "
-      "WordPad and other RTF readers may not support hyperlinks. "
+
       "<br><br>"
       "The default value is: NO "
       "<br><br>"
