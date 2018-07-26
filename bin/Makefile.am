@@ -39,14 +39,13 @@ bin_PROGRAMS = DoxyPressApp
 # copy required CopperSpice and gcc files for deployment
 .PHONY: deploy
 
-if OSTYPE_LINUX
-endif
-
 if OSTYPE_BSD
 endif
 
 if OSTYPE_DARWIN
 deployapp=$(deploydir)/DoxyPress.app/Contents
+
+clang_path=`llvm-config --prefix`
 
 deploy : all
 	mkdir -p $(deployapp)/Frameworks
@@ -73,6 +72,13 @@ deploy : all
 	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
 	cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
 
+   # clang
+	rsync -W -a $(clang_path)/lib/libclang.dylib  $(deployapp)/Frameworks
+	rsync -W -a $(clang_path)/include/6.0.1       $(deployapp)/MacOS/include/
+
+	install_name_tool -add_rpath "@executable_path/../Frameworks" $(deployapp)/MacOS/doxypress
+
+   # copperspice
 	rsync -W -a $(patsubst %,$(CS_HOME)/lib/libCs%$(csver).dylib,$(cslibs)) $(deployapp)/Frameworks
 
 	for binary in $(deployapp)/MacOS/* $(deployapp)/Frameworks/* ; do \
@@ -86,6 +92,9 @@ deploy : all
    # generate dmg	
 	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname DoxyPress-$(VERSION) ../DoxyPress-$(VERSION).dmg
 	hdiutil internet-enable -yes ../DoxyPress-$(VERSION).dmg
+endif
+
+if OSTYPE_LINUX
 endif
 
 if OSTYPE_WIN
