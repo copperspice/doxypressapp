@@ -1054,22 +1054,20 @@ QString MainWindow::convert_PlainText(QByteArray data, QByteArray key)
 void MainWindow::importDoxy()
 {
    while (true) {
-
-      QString fname = QFileDialog::getOpenFileName(this, tr("Open Doxygen project file"), m_settings.pathPrior);
+      QString fname = QFileDialog::getOpenFileName(this, tr("Open doxygen project file"), m_settings.pathPrior);
 
       if (fname.isEmpty()) {
-         csError(tr("File Open"), tr("No file name was provided"));
          break;
       }
 
       QFile file(fname);
       if (! file.open(QIODevice::ReadOnly)) {
-         csError(tr("Error Opening: ") + fname, tr("Unable to open: ") + file.error());
+         csError(tr("Error trying to open: ") + fname, tr("Unable to open: ") + file.error());
          break;
       }
 
       QFileInfo fi(file);
-      QString importPath = fi.absolutePath() + QDir::separator() + fi.baseName() + ".json";
+      QString importPath = fi.absolutePath() + QDir::separator() + fi.completeBaseName() + ".json";
 
       // read file
       QByteArray data;
@@ -1094,7 +1092,8 @@ void MainWindow::importDoxy()
 
       // verify a few fields to ensure this is an old project file
       if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
-         csError(tr("Convert Project File"), tr("Doxygen project file is missing required information, Convert aborted"));
+         csError(tr("Convert Project File"), tr("Project file is missing the basic required information, "
+                  "process aborted"));
          break;
       }
 
@@ -1103,7 +1102,7 @@ void MainWindow::importDoxy()
                                            tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
-         csError(tr("Convert Project File"), tr("No DoxyPress file name was provided, Convert aborted"));
+         csError(tr("Convert Project File"), tr("No DoxyPress file name was provided, process aborted"));
          break;
 
       } else {
@@ -1111,15 +1110,16 @@ void MainWindow::importDoxy()
          quest.setWindowTitle(tr("Convert Doxygen Project"));
          quest.setWindowIcon(QIcon("://resources/doxypress.png"));
 
-         quest.setText( tr("If a layout or css file was specified in your project file, please refer to the DoxyPress documentation "
-                           "regarding 'Converting to DoxyPress' for additional information. Continue?"));
+         quest.setText( tr("If a layout or css file was specified in the project file, please refer to the DoxyPress "
+                           "documentation for 'Converting to DoxyPress' for additional information.\n\n"
+                           "Click Save to create a DoxyPress project file."));
 
-         quest.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-         quest.setDefaultButton(QMessageBox::No);
+         quest.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+         quest.setDefaultButton(QMessageBox::Cancel);
 
          int retval = quest.exec();
 
-         if (retval == QMessageBox::Yes) {
+         if (retval == QMessageBox::Save) {
             m_curFile = fname;
             m_settings.pathPrior = this->pathName(fname);
 
@@ -1127,7 +1127,6 @@ void MainWindow::importDoxy()
             convertDoxy(data);
 
             saveDoxy_Internal();
-
             json_Write(PATH_PRIOR);
 
             if (! m_rf_List.contains(m_curFile)) {
