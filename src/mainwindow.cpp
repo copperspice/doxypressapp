@@ -142,6 +142,8 @@ MainWindow::MainWindow()
    createConnections();
    createShortCuts();
 
+   this->setMinimumHeight(500);
+
    setUnifiedTitleAndToolBarOnMac(true);
    setStatusBar(tr("Ready"));
 }
@@ -557,6 +559,7 @@ void MainWindow::outputPage(QTreeWidgetItem *item, QTreeWidgetItem *)
 
 QSize MainWindow::sizeHint() const
 {
+   // sets the recommended size
    return QSize(1000, 600);
 }
 
