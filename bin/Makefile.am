@@ -39,6 +39,9 @@ bin_PROGRAMS = DoxyPressApp
 # copy required CopperSpice and gcc files for deployment
 .PHONY: deploy
 
+if OSTYPE_LINUX
+endif
+
 if OSTYPE_BSD
 endif
 
@@ -89,23 +92,28 @@ deploy : all
 	\
 	; done
 
+	mkdir -p $(deployapp)/MacOS/platforms
+	rsync -W -a  $(CS_HOME)/lib/CsGuiCocoa$(csver).so  $(deployapp)/MacOS/platforms
+
    # generate dmg	
 	hdiutil create -ov -srcfolder $(deploydir) -format UDBZ -volname DoxyPress-$(VERSION) ../DoxyPress-$(VERSION).dmg
 	hdiutil internet-enable -yes ../DoxyPress-$(VERSION).dmg
 endif
 
-if OSTYPE_LINUX
-endif
 
 if OSTYPE_WIN
 deploy : all
 	mkdir -p $(deploydir)
+	mkdir -p $(deploydir)/platforms
+
 	$(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deploydir)
 
 	rsync -W -a --modify-window=2  $(top_srcdir)/resources/doxypress.ico $(deploydir)
 
 	rsync -W -a --modify-window=2  $(patsubst %,$(gccpath)%.dll,$(gcclibs))  $(deploydir)
 	rsync -W -a --modify-window=2  $(patsubst %,$(CS_HOME)/bin/libCs%$(csver).dll,$(cslibs))  $(deploydir)
+
+	rsync -W -a --modify-window=2  $(CS_HOME)/lib/CsGuiWin$(csver).dll $(deploydir)/platforms
 endif
 
 # search path for source
