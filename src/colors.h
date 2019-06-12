@@ -31,6 +31,8 @@
 #include <QSpacerItem>
 #include <QWidget>
 
+#include <qdrawutil.h>
+
 enum OptLang     { Lang_Cpp, Lang_C, Lang_Java, Lang_CS };
 enum HtmlStyle   { HS_Plain, HS_TreeView, HS_CHM };
 enum TexStyle    { TS_PDFHyper, TS_PDF, TS_PS };
@@ -65,7 +67,7 @@ class ColorPicker : public QWidget
 
    ColorPicker(Mode m);
    ~ColorPicker();
- 
+
    void setCol(int h, int s, int g);
 
    CS_SIGNAL_1(Public, void newHsv(int h, int s, int g))

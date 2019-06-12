@@ -51,7 +51,6 @@ class Dialog_LookUp : public QDialog
       void deleteItem();
       void save();
       void cancel();
-
 };
 
 #endif

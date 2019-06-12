@@ -29,14 +29,14 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
 
    m_model = new QStandardItemModel();
 
-   m_ui->tableView->setModel(m_model);  
+   m_ui->tableView->setModel(m_model);
    m_ui->tableView->resizeColumnsToContents();
 
    QHeaderView *temp = m_ui->tableView->horizontalHeader();
    temp->setHidden(true);
    temp->setStretchLastSection(true);
 
-   // existing data   
+   // existing data
    for (auto s : m_data.dataList) {
       QStandardItem *item = new QStandardItem(s);
       m_model->appendRow(item);
@@ -75,7 +75,7 @@ Dialog_LookUp::~Dialog_LookUp()
 }
 
 void Dialog_LookUp::addItem()
-{  
+{
    QStandardItem *item = new QStandardItem("");
    m_model->appendRow(item);
 
@@ -103,22 +103,22 @@ void Dialog_LookUp::deleteItem()
    // hide current row from the view
    m_ui->tableView->setRowHidden(row, true);
 
-   m_model->removeRow(row);    
+   m_model->removeRow(row);
 
    //
    int maxRow = m_model->rowCount();
    ++row;
 
-   if (row < maxRow )  {    
+   if (row < maxRow )  {
       // move to next row
       index = m_model->index(row, 0);
 
    } else  {
-      // move to row 0      
+      // move to row 0
       index = m_model->index(0, 0);
    }
 
-   m_ui->tableView->setCurrentIndex(index);   
+   m_ui->tableView->setCurrentIndex(index);
 }
 
 void Dialog_LookUp::getFile()
@@ -277,7 +277,7 @@ QSize Dialog_LookUp::sizeHint() const
 }
 
 void Dialog_LookUp::cancel()
-{ 
+{
    this->done(QDialog::Rejected);
 }
 

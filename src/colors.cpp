@@ -228,6 +228,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
    QPainter p(this);
    p.drawPixmap(1, coff, *m_pix);
    const QPalette &g = palette();
+
    qDrawShadePanel(&p, r, g, true);
    p.setPen(g.foreground().color());
    p.setBrush(g.foreground());
