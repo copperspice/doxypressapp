@@ -72,7 +72,6 @@ deploy : all
 
 	touch $(deployapp)/Resources/empty.lproj
 
-	cp -r $(CS_HOME)/mac/qt_menu.nib $(deployapp)/Resources
 	cp $(top_srcdir)/resources/doxypress.icns $(deployapp)/Resources
 
    # clang
