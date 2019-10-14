@@ -83,27 +83,27 @@ void MainWindow::runDoxyPress()
       QStringList args;
 
       // make stdout unbuffered
-      args.append("--b");
+      args.append("-b");
 
       if (m_args.blank_layout) {
-         args.append("--l");
+         args.append("-l");
          args.append(m_args.layout);
       }
 
       if (! m_args.style_html_header.isEmpty()) {
-         args.append("--w");
+         args.append("-w");
          args.append("html-head");
          args.append(m_args.style_html_header);
       }
 
       if (! m_args.style_html_footer.isEmpty()) {
-         args.append("--w");
+         args.append("-w");
          args.append("html-foot");
          args.append(m_args.style_html_footer);
       }
 
       if (! m_args.style_html_css.isEmpty()) {
-         args.append("--w");
+         args.append("-w");
          args.append("html-style");
          args.append(m_args.style_html_css);
       }
