@@ -22,7 +22,7 @@ Classes and Containers
 * Refactored to use value based containers instead of pointer based containers
 * For improved memory management variadic templates and shared pointers are used
 * Source code reformatted for improved readability
-* Modified source code to use C++14 functionality, features, and syntax
+* Modified source code to use modern C++ functionality, features, and syntax
 
 Output
 
@@ -32,31 +32,38 @@ Output
 * Improved html output for correctness
 
 
-### System Requirements
+### Building
 
-To build DoxyPressApp you will need the CopperSpice libraries (CsCore, CsGui, CsNetwork, CsXml), a C++14 compiler, and a
-C++14 standard library.
+DoxyPressApp prebuilt binaries are available for Linux, Mac OS X, and Windows.
 
-Uses CMake or Autotools for building binary files.
+https://download.copperspice.com/doxypress/binary/
+
+To build DoxyPressApp from source a current copy of the CopperSpice libraries, a C++17 compiler, and a C++17 standard
+library are required. DoxyPressApp links with CsCore, CsGui, CsNetwork, CsXml which are part of the CopperSpice
+libraries.
+
+CMake build files are provided with the DoxyPressApp source distribution.
 
 
 ### Documentation
 
-Full documentation for DoxyPress is available on the CopperSpice website:
-
-www.copperspice.com/docs/doxypress/index.html
+Full documentation for DoxyPress is available on the website or from our download page.
 
 
-### Building
+|URL      |Description|
+|---------|-----------|
+|https://www.copperspice.com/docs/doxypress/index.html| Online
+|https://download.copperspice.com/doxypress/documentation| Download (tar and zip formats)|
+
 
 For documentation on how to build the DoxyPress application refer to the following page:
-
 www.copperspice.com/docs/doxypress/build-doxypress.html
 
 
 ### Presentations
 
-YouTube channel videos about CopperSpice, DoxyPress, C++, and the other topics related to our work.
+Our YouTube channel videos are about modern C++, build systems, CopperSpice, DoxyPress, and other topics related to
+our open source work.
 
 https://www.youtube.com/copperspice
 
@@ -72,11 +79,12 @@ www.copperspice.com/presentations.html
 * **Barbara Geller**
 * **Andrew Marlow**
 * **Adam Mensel**
+* **Tim van Deurzen**
 
 
 ### License
 
-This library is released under the GPL V2 license. For more information refer to the LICENSE file provided with this
+This program is released under the GPL 2 license. For more information refer to the LICENSE file provided with this
 project.
 
 ### References
