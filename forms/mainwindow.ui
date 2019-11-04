@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>809</height>
+    <height>969</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -74,11 +74,6 @@
               <string>Output</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>Diagrams</string>
-             </property>
-            </item>
            </widget>
            <widget class="QTextEdit" name="help_t1">
             <property name="sizePolicy">
@@ -94,7 +89,7 @@
           </widget>
           <widget class="QStackedWidget" name="setup_StackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page_Project">
             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,1,0">
@@ -788,241 +783,6 @@
              <property name="topMargin">
               <number>14</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_t1_e">
-               <property name="palette">
-                <palette>
-                 <active>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </active>
-                 <inactive>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </inactive>
-                 <disabled>
-                  <colorrole role="WindowText">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>106</red>
-                     <green>104</green>
-                     <blue>100</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </disabled>
-                </palette>
-               </property>
-               <property name="text">
-                <string>Diagrams to generate</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QRadioButton" name="diagram_built_in_RB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Use built in class diagram generator</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_diagram</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QRadioButton" name="diagram_dot_RB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Use dot program from GraphViz</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_diagram</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <spacer name="verticalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QGroupBox" name="groupBox_3">
-               <property name="palette">
-                <palette>
-                 <active>
-                  <colorrole role="Text">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </active>
-                 <inactive>
-                  <colorrole role="Text">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>0</red>
-                     <green>0</green>
-                     <blue>255</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </inactive>
-                 <disabled>
-                  <colorrole role="Text">
-                   <brush brushstyle="SolidPattern">
-                    <color alpha="255">
-                     <red>106</red>
-                     <green>104</green>
-                     <blue>100</blue>
-                    </color>
-                   </brush>
-                  </colorrole>
-                 </disabled>
-                </palette>
-               </property>
-               <property name="title">
-                <string>Dot graphs to generate</string>
-               </property>
-               <property name="checkable">
-                <bool>false</bool>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_6">
-                <item>
-                 <widget class="QCheckBox" name="dot_class_graph_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Class Graphs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_collaboration_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Collaboration diagrams</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_hierarchy_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Overall Class Hierarchy</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_include_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Include Graphs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_included_by_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Included by Graphs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_call_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Call graphs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="dot_called_by_CB1">
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Called by graphs</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QRadioButton" name="diagram_none_RB">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>No Class diagrams</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_diagram</string>
-               </attribute>
-              </widget>
-             </item>
             </layout>
            </widget>
           </widget>
@@ -1139,7 +899,7 @@
           </widget>
           <widget class="QStackedWidget" name="build_StackedWidget">
            <property name="currentIndex">
-            <number>14</number>
+            <number>13</number>
            </property>
            <widget class="QWidget" name="page_Project_Config">
             <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0,1,1,0">
@@ -5729,10 +5489,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Called by graph:</string>
+                <string>Called by Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_called_by_CB2</cstring>
+                <cstring>dot_called_by_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5769,7 +5529,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Group graphs:</string>
+                <string>Group Graphs:</string>
                </property>
                <property name="buddy">
                 <cstring>group_graphs_CB</cstring>
@@ -5814,10 +5574,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Included by graph:</string>
+                <string>Included by Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_included_by_CB2</cstring>
+                <cstring>dot_included_by_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5825,7 +5585,7 @@
               <widget class="QSpinBox" name="dot_font_size_SB"/>
              </item>
              <item row="14" column="1">
-              <widget class="QCheckBox" name="dot_collaboration_CB2">
+              <widget class="QCheckBox" name="dot_collaboration_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5892,10 +5652,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Call graph:</string>
+                <string>Call Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_call_CB2</cstring>
+                <cstring>dot_call_CB</cstring>
                </property>
               </widget>
              </item>
@@ -5944,15 +5704,15 @@
                 </font>
                </property>
                <property name="text">
-                <string>Class graph:</string>
+                <string>Class Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_class_graph_CB2</cstring>
+                <cstring>dot_class_graph_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="20" column="1">
-              <widget class="QCheckBox" name="dot_included_by_CB2">
+              <widget class="QCheckBox" name="dot_included_by_CB">
                <property name="text">
                 <string/>
                </property>
@@ -5966,7 +5726,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Uml look:</string>
+                <string>Uml Look:</string>
                </property>
                <property name="buddy">
                 <cstring>uml_look_CB</cstring>
@@ -5974,14 +5734,14 @@
               </widget>
              </item>
              <item row="21" column="1">
-              <widget class="QCheckBox" name="dot_call_CB2">
+              <widget class="QCheckBox" name="dot_call_CB">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="22" column="1">
-              <widget class="QCheckBox" name="dot_called_by_CB2">
+              <widget class="QCheckBox" name="dot_called_by_CB">
                <property name="text">
                 <string/>
                </property>
@@ -6002,10 +5762,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Include graph:</string>
+                <string>Include Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_include_CB2</cstring>
+                <cstring>dot_include_CB</cstring>
                </property>
               </widget>
              </item>
@@ -6054,15 +5814,15 @@
                 </font>
                </property>
                <property name="text">
-                <string>Collaboration graph:</string>
+                <string>Collaboration Graph:</string>
                </property>
                <property name="buddy">
-                <cstring>dot_collaboration_CB2</cstring>
+                <cstring>dot_collaboration_CB</cstring>
                </property>
               </widget>
              </item>
              <item row="19" column="1">
-              <widget class="QCheckBox" name="dot_include_CB2">
+              <widget class="QCheckBox" name="dot_include_CB">
                <property name="text">
                 <string/>
                </property>
@@ -6112,7 +5872,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Dot image format:</string>
+                <string>Dot Image Format:</string>
                </property>
                <property name="buddy">
                 <cstring>dot_image_format_CM</cstring>
@@ -6172,7 +5932,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Directory graph:</string>
+                <string>Directory Graph:</string>
                </property>
                <property name="buddy">
                 <cstring>directory_graph_CB</cstring>
@@ -6180,7 +5940,7 @@
               </widget>
              </item>
              <item row="23" column="1">
-              <widget class="QCheckBox" name="dot_hierarchy_CB2">
+              <widget class="QCheckBox" name="dot_hierarchy_CB">
                <property name="text">
                 <string/>
                </property>
@@ -6194,10 +5954,10 @@
                 </font>
                </property>
                <property name="text">
-                <string>Graphical hierarchy</string>
+                <string>Graphical Hierarchy</string>
                </property>
                <property name="buddy">
-                <cstring>dot_hierarchy_CB2</cstring>
+                <cstring>dot_hierarchy_CB</cstring>
                </property>
               </widget>
              </item>
@@ -6224,7 +5984,7 @@
               </widget>
              </item>
              <item row="13" column="1">
-              <widget class="QCheckBox" name="dot_class_graph_CB2">
+              <widget class="QCheckBox" name="dot_class_graph_CB">
                <property name="text">
                 <string/>
                </property>
@@ -10613,7 +10373,7 @@
      <x>0</x>
      <y>0</y>
      <width>1003</width>
-     <height>28</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -10773,16 +10533,6 @@
   <tabstop>gen_man_CB1</tabstop>
   <tabstop>gen_rtf_CB1</tabstop>
   <tabstop>gen_xml_CB1</tabstop>
-  <tabstop>diagram_none_RB</tabstop>
-  <tabstop>diagram_built_in_RB</tabstop>
-  <tabstop>diagram_dot_RB</tabstop>
-  <tabstop>dot_class_graph_CB1</tabstop>
-  <tabstop>dot_collaboration_CB1</tabstop>
-  <tabstop>dot_hierarchy_CB1</tabstop>
-  <tabstop>dot_include_CB1</tabstop>
-  <tabstop>dot_included_by_CB1</tabstop>
-  <tabstop>dot_call_CB1</tabstop>
-  <tabstop>dot_called_by_CB1</tabstop>
   <tabstop>build_TreeWidget</tabstop>
   <tabstop>help_t2</tabstop>
   <tabstop>output_language_CM</tabstop>
@@ -10972,17 +10722,17 @@
   <tabstop>dot_font_size_SB</tabstop>
   <tabstop>dot_font_path</tabstop>
   <tabstop>dot_font_path_PB</tabstop>
-  <tabstop>dot_class_graph_CB2</tabstop>
-  <tabstop>dot_collaboration_CB2</tabstop>
+  <tabstop>dot_class_graph_CB</tabstop>
+  <tabstop>dot_collaboration_CB</tabstop>
   <tabstop>group_graphs_CB</tabstop>
   <tabstop>uml_look_CB</tabstop>
   <tabstop>uml_limit_num_fields_SB</tabstop>
   <tabstop>template_relations_CB</tabstop>
-  <tabstop>dot_include_CB2</tabstop>
-  <tabstop>dot_included_by_CB2</tabstop>
-  <tabstop>dot_call_CB2</tabstop>
-  <tabstop>dot_called_by_CB2</tabstop>
-  <tabstop>dot_hierarchy_CB2</tabstop>
+  <tabstop>dot_include_CB</tabstop>
+  <tabstop>dot_included_by_CB</tabstop>
+  <tabstop>dot_call_CB</tabstop>
+  <tabstop>dot_called_by_CB</tabstop>
+  <tabstop>dot_hierarchy_CB</tabstop>
   <tabstop>directory_graph_CB</tabstop>
   <tabstop>dot_image_format_CM</tabstop>
   <tabstop>interactive_svg_CB</tabstop>
@@ -11144,6 +10894,5 @@
  <buttongroups>
   <buttongroup name="buttonGroup_html"/>
   <buttongroup name="buttonGroup_latex"/>
-  <buttongroup name="buttonGroup_diagram"/>
  </buttongroups>
 </ui>
