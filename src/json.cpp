@@ -521,14 +521,6 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->gen_xml_CB1->setChecked(            object.value("generate-xml").toBool());
       m_ui->gen_docbook_CB1->setChecked(        object.value("generate-docbook").toBool());
 
-      m_ui->dot_class_graph_CB1->setChecked(    object.value("dot-class-graph").toBool());
-      m_ui->dot_collaboration_CB1->setChecked(  object.value("dot-collaboration").toBool());
-      m_ui->dot_hierarchy_CB1->setChecked(      object.value("dot-hierarchy").toBool());
-      m_ui->dot_include_CB1->setChecked(        object.value("dot-include").toBool());
-      m_ui->dot_included_by_CB1->setChecked(    object.value("dot-included-by").toBool());
-      m_ui->dot_call_CB1->setChecked(           object.value("dot-call").toBool());
-      m_ui->dot_called_by_CB1->setChecked(      object.value("dot-called-by").toBool());
-
       //  ***
       // tab 2 - general
       index = m_ui->output_language_CM->findText(     object.value("output-language").toString());
@@ -709,26 +701,34 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->mscgen_path->setText(                     object.value("mscgen-path").toString());
       m_ui->dia_path->setText(                        object.value("dia-path").toString());
       m_ui->hide_undoc_relations_CB->setChecked(      object.value("hide-undoc-relations").toBool());
+
       m_ui->have_dot_CB->setChecked(                  object.value("have-dot").toBool());
+      m_ui->dot_path->setText(                        object.value("dot-path").toString());
       m_ui->dot_num_threads_SB->setValue(             object.value("dot-num-threads").toInt());
       m_ui->dot_font_name->setText(                   object.value("dot-font-name").toString());
       m_ui->dot_font_size_SB->setValue(               object.value("dot-font-size").toInt());
       m_ui->dot_font_path->setText(                   object.value("dot-font-path").toString());
-
+      m_ui->dot_class_graph_CB->setChecked(           object.value("dot-class-graph").toBool());
+      m_ui->dot_collaboration_CB->setChecked(         object.value("dot-collaboration").toBool());
       m_ui->group_graphs_CB->setChecked(              object.value("group-graphs").toBool());
       m_ui->uml_look_CB->setChecked(                  object.value("uml-look").toBool());
       m_ui->uml_limit_num_fields_SB->setValue(        object.value("uml-limit-num-fields").toInt());
       m_ui->template_relations_CB->setChecked(        object.value("template-relations").toBool());
+      m_ui->dot_include_CB->setChecked(               object.value("dot-include").toBool());
+      m_ui->dot_included_by_CB->setChecked(           object.value("dot-included-by").toBool());
+      m_ui->dot_call_CB->setChecked(                  object.value("dot-call").toBool());
+      m_ui->dot_called_by_CB->setChecked(             object.value("dot-called-by").toBool());
+      m_ui->dot_hierarchy_CB->setChecked(             object.value("dot-hierarchy").toBool());
       m_ui->directory_graph_CB->setChecked(           object.value("directory-graph").toBool());
 
       index = m_ui->dot_image_format_CM->findText(    object.value("dot-image-format").toString());
       m_ui->dot_image_format_CM->setCurrentIndex(index);
 
       m_ui->interactive_svg_CB->setChecked(           object.value("interactive-svg").toBool());
-      m_ui->dot_path->setText(                        object.value("dot-path").toString());
-      m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file-dirs"));
+
       m_ui->msc_file_dirs->setPlainText(              getDataList(object, "msc-file-dirs"));
       m_ui->dia_file_dirs->setPlainText(              getDataList(object, "dia-file-dirs"));
+      m_ui->dot_file_dirs->setPlainText(              getDataList(object, "dot-file-dirs"));
       m_ui->plantuml_jar_path->setText(               object.value("plantuml-jar-path").toString());
       m_ui->plantuml_cfg_file->setText(               object.value("plantuml-cfg_file").toString());
       m_ui->plantuml_inc_path->setPlainText(          getDataList(object, "plantuml-inc-path"));
@@ -927,14 +927,6 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->gen_xml_CB1->setChecked(            xmlObj.value("generate-xml").toBool());
       m_ui->gen_docbook_CB1->setChecked(        docbookObj.value("generate-docbook").toBool());
 
-      m_ui->dot_class_graph_CB1->setChecked(    dotObj.value("dot-class-graph").toBool());
-      m_ui->dot_collaboration_CB1->setChecked(  dotObj.value("dot-collaboration").toBool());
-      m_ui->dot_hierarchy_CB1->setChecked(      dotObj.value("dot-hierarchy").toBool());
-      m_ui->dot_include_CB1->setChecked(        dotObj.value("dot-include").toBool());
-      m_ui->dot_included_by_CB1->setChecked(    dotObj.value("dot-included-by").toBool());
-      m_ui->dot_call_CB1->setChecked(           dotObj.value("dot-call").toBool());
-      m_ui->dot_called_by_CB1->setChecked(      dotObj.value("dot-called-by").toBool());
-
       //  ***
       // tab 2 - general
       index = m_ui->output_language_CM->findText(     genObj.value("output-language").toString());
@@ -1124,12 +1116,12 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->mscgen_path->setText(                     dotObj.value("mscgen-path").toString());
       m_ui->dia_path->setText(                        dotObj.value("dia-path").toString());
       m_ui->hide_undoc_relations_CB->setChecked(      dotObj.value("hide-undoc-relations").toBool());
+
       m_ui->have_dot_CB->setChecked(                  dotObj.value("have-dot").toBool());
       m_ui->dot_num_threads_SB->setValue(             dotObj.value("dot-num-threads").toInt());
       m_ui->dot_font_name->setText(                   dotObj.value("dot-font-name").toString());
       m_ui->dot_font_size_SB->setValue(               dotObj.value("dot-font-size").toInt());
       m_ui->dot_font_path->setText(                   dotObj.value("dot-font-path").toString());
-
       m_ui->group_graphs_CB->setChecked(              dotObj.value("group-graphs").toBool());
       m_ui->uml_look_CB->setChecked(                  dotObj.value("uml-look").toBool());
       m_ui->uml_limit_num_fields_SB->setValue(        dotObj.value("uml-limit-num-fields").toInt());
@@ -1140,6 +1132,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->dot_image_format_CM->setCurrentIndex(index);
 
       m_ui->interactive_svg_CB->setChecked(           dotObj.value("interactive-svg").toBool());
+
       m_ui->dot_path->setText(                        dotObj.value("dot-path").toString());
       m_ui->dot_file_dirs->setPlainText(              getDataList(dotObj, "dot-file-dirs"));
       m_ui->msc_file_dirs->setPlainText(              getDataList(dotObj, "msc-file-dirs"));
@@ -1352,14 +1345,6 @@ QByteArray MainWindow::json_SaveDoxy()
    xmlObj.insert("generate-xml",          m_ui->gen_xml_CB1->isChecked());
    docbookObj.insert("generate-docbook",  m_ui->gen_docbook_CB1->isChecked());
 
-   dotObj.insert("dot-class-graph",       m_ui->dot_class_graph_CB1->isChecked());
-   dotObj.insert("dot-collaboration",     m_ui->dot_collaboration_CB1->isChecked());
-   dotObj.insert("dot-hierarchy",         m_ui->dot_hierarchy_CB1->isChecked());
-   dotObj.insert("dot-include",           m_ui->dot_include_CB1->isChecked());
-   dotObj.insert("dot-included-by",       m_ui->dot_included_by_CB1->isChecked());
-   dotObj.insert("dot-call",              m_ui->dot_call_CB1->isChecked());
-   dotObj.insert("dot-called-by",         m_ui->dot_called_by_CB1->isChecked());
-
    //  ***
    // tab 2 - general
    genObj.insert("output-language",             m_ui->output_language_CM->currentText());
@@ -1544,24 +1529,31 @@ QByteArray MainWindow::json_SaveDoxy()
    dotObj.insert("mscgen-path",               m_ui->mscgen_path->text());
    dotObj.insert("dia-path",                  m_ui->dia_path->text());
    dotObj.insert("hide-undoc-relations",      m_ui->hide_undoc_relations_CB->isChecked());
+
    dotObj.insert("have-dot",                  m_ui->have_dot_CB->isChecked());
+   dotObj.insert("dot-path",                  m_ui->dot_path->text());
    dotObj.insert("dot-num-threads",           m_ui->dot_num_threads_SB->value());
    dotObj.insert("dot-font-name",             m_ui->dot_font_name->text());
    dotObj.insert("dot-font-size",             m_ui->dot_font_size_SB->value());
    dotObj.insert("dot-font-path",             m_ui->dot_font_path->text());
-
+   dotObj.insert("dot-class-graph",           m_ui->dot_class_graph_CB->isChecked());
+   dotObj.insert("dot-collaboration",         m_ui->dot_collaboration_CB->isChecked());
    dotObj.insert("group-graphs",              m_ui->group_graphs_CB->isChecked());
    dotObj.insert("uml-look",                  m_ui->uml_look_CB->isChecked());
    dotObj.insert("uml-limit-num-fields",      m_ui->uml_limit_num_fields_SB->value());
    dotObj.insert("template-relations",        m_ui->template_relations_CB->isChecked());
+   dotObj.insert("dot-include",               m_ui->dot_include_CB->isChecked());
+   dotObj.insert("dot-included-by",           m_ui->dot_included_by_CB->isChecked());
+   dotObj.insert("dot-call",                  m_ui->dot_call_CB->isChecked());
+   dotObj.insert("dot-called-by",             m_ui->dot_called_by_CB->isChecked());
+   dotObj.insert("dot-hierarchy",             m_ui->dot_hierarchy_CB->isChecked());
    dotObj.insert("directory-graph",           m_ui->directory_graph_CB->isChecked());
    dotObj.insert("dot-image-format",          m_ui->dot_image_format_CM->currentText());
-
    dotObj.insert("interactive-svg",           m_ui->interactive_svg_CB->isChecked());
-   dotObj.insert("dot-path",                  m_ui->dot_path->text());
-   dotObj.insert("dot-file-dirs",             putDataList(m_ui->dot_file_dirs->toPlainText()));
+
    dotObj.insert("msc-file-dirs",             putDataList(m_ui->msc_file_dirs->toPlainText()));
    dotObj.insert("dia-file-dirs",             putDataList(m_ui->dia_file_dirs->toPlainText()));
+   dotObj.insert("dot-file-dirs",             putDataList(m_ui->dot_file_dirs->toPlainText()));
    dotObj.insert("plantuml-jar-path",         m_ui->plantuml_jar_path->text());
    dotObj.insert("plantuml-cfg-file",         m_ui->plantuml_cfg_file->text());
    dotObj.insert("plantuml-inc-path",         putDataList(m_ui->plantuml_inc_path->toPlainText()));

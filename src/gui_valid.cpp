@@ -117,13 +117,6 @@ void MainWindow::clearAllFields()
    m_ui->html_colorstyle_sat->setValue(100);
    m_ui->html_colorstyle_gamma->setValue(80);
 
-   m_ui->diagram_built_in_RB->setChecked(true);
-   m_ui->dot_class_graph_CB1->setChecked(true);
-   m_ui->dot_collaboration_CB1->setChecked(true);
-   m_ui->dot_hierarchy_CB1->setChecked(true);
-   m_ui->dot_include_CB1->setChecked(true);
-   m_ui->dot_included_by_CB1->setChecked(true);
-
    // tab 2 - project
    index = m_ui->output_language_CM->findText("English");
    m_ui->output_language_CM->setCurrentIndex(index);
@@ -227,11 +220,17 @@ void MainWindow::clearAllFields()
    // tab 2 - dot
    m_ui->class_diagrams_CB->setChecked(true);
    m_ui->hide_undoc_relations_CB->setChecked(true);
+
    m_ui->dot_num_threads_SB->setValue(0);
    m_ui->dot_font_name->setText("Helvetica");
    m_ui->dot_font_size_SB->setValue(10);
    m_ui->group_graphs_CB->setChecked(true);
    m_ui->uml_limit_num_fields_SB->setValue(10);
+   m_ui->dot_class_graph_CB->setChecked(true);
+   m_ui->dot_collaboration_CB->setChecked(true);
+   m_ui->dot_hierarchy_CB->setChecked(true);
+   m_ui->dot_include_CB->setChecked(true);
+   m_ui->dot_included_by_CB->setChecked(true);
    m_ui->directory_graph_CB->setChecked(true);
 
    index = m_ui->dot_image_format_CM->findText("png");
@@ -329,17 +328,6 @@ void MainWindow::adjustDefaults()
    setDefault(m_ui->html_colorstyle_sat);
    setDefault(m_ui->html_colorstyle_gamma);
 
-   setDefault(m_ui->dot_class_graph_CB1);
-   setDefault(m_ui->dot_collaboration_CB1);
-   setDefault(m_ui->dot_hierarchy_CB1);
-   setDefault(m_ui->dot_include_CB1);
-   setDefault(m_ui->dot_included_by_CB1);
-
-   setDefault(m_ui->dot_class_graph_CB2);
-   setDefault(m_ui->dot_collaboration_CB2);
-   setDefault(m_ui->dot_hierarchy_CB2);
-   setDefault(m_ui->dot_include_CB2);
-   setDefault(m_ui->dot_included_by_CB2);
 
    // tab 2 - general
    setDefault(m_ui->output_language_CM);
@@ -418,10 +406,14 @@ void MainWindow::adjustDefaults()
    setDefault(m_ui->dot_num_threads_SB);
    setDefault(m_ui->dot_font_name);
    setDefault(m_ui->dot_font_size_SB);
+   setDefault(m_ui->dot_class_graph_CB);
+   setDefault(m_ui->dot_collaboration_CB);
    setDefault(m_ui->group_graphs_CB);
    setDefault(m_ui->uml_limit_num_fields_SB);
+   setDefault(m_ui->dot_hierarchy_CB);
+   setDefault(m_ui->dot_include_CB);
+   setDefault(m_ui->dot_included_by_CB);
    setDefault(m_ui->directory_graph_CB);
-
    setDefault(m_ui->dot_image_format_CM);
 
    setDefault(m_ui->dot_graph_max_nodes_SB);
@@ -493,7 +485,6 @@ void MainWindow::finalLoad()
    setDuplicates();
    validGet_html();
    validGet_latex();
-   validGet_dot();
 
    // tab 2
    valid_full_path_names();
@@ -526,21 +517,12 @@ void MainWindow::setDuplicates()
    m_ui->html_chm_RB->setChecked(m_ui->gen_chm_CB->isChecked());
    m_ui->html_search_CB1->setChecked(m_ui->html_search_CB2->isChecked());
 
-   //
    m_ui->gen_html_CB2->setChecked(m_ui->gen_html_CB1->isChecked());
    m_ui->gen_latex_CB2->setChecked(m_ui->gen_latex_CB1->isChecked());
    m_ui->gen_rtf_CB2->setChecked(m_ui->gen_rtf_CB1->isChecked());
    m_ui->gen_man_CB2->setChecked(m_ui->gen_man_CB1->isChecked());
    m_ui->gen_xml_CB2->setChecked(m_ui->gen_xml_CB1->isChecked());
    m_ui->gen_docbook_CB2->setChecked(m_ui->gen_docbook_CB1->isChecked());
-
-   m_ui->dot_class_graph_CB2->setChecked(m_ui->dot_class_graph_CB1->isChecked());
-   m_ui->dot_collaboration_CB2->setChecked(m_ui->dot_collaboration_CB1->isChecked());
-   m_ui->dot_hierarchy_CB2->setChecked(m_ui->dot_hierarchy_CB1->isChecked());
-   m_ui->dot_include_CB2->setChecked(m_ui->dot_include_CB1->isChecked());
-   m_ui->dot_included_by_CB2->setChecked(m_ui->dot_included_by_CB1->isChecked());
-   m_ui->dot_call_CB2->setChecked(m_ui->dot_call_CB1->isChecked());
-   m_ui->dot_called_by_CB2->setChecked(m_ui->dot_called_by_CB1->isChecked());
 }
 
 void MainWindow::setupLimits()
@@ -799,43 +781,6 @@ void MainWindow::validGet_latex()
    }
 }
 
-void MainWindow::validSet_dot(QAbstractButton *button)
-{
-   if (button == m_ui->diagram_none_RB) {
-      // no diagrams
-      m_ui->have_dot_CB->setChecked(false);
-      m_ui->class_diagrams_CB->setChecked(false);
-
-   } else if (button == m_ui->diagram_built_in_RB) {
-      // builtin diagrams
-      m_ui->have_dot_CB->setChecked(false);
-      m_ui->class_diagrams_CB->setChecked(true);
-
-   } else if (button == m_ui->diagram_dot_RB) {
-      // dot diagrams
-      m_ui->have_dot_CB->setChecked(true);
-      m_ui->class_diagrams_CB->setChecked(false);
-
-   }
-}
-
-void MainWindow::validGet_dot()
-{
-   if (m_ui->have_dot_CB->isChecked()) {
-     // dot
-     m_ui->diagram_dot_RB->setChecked(true);
-
-   } else if (m_ui->class_diagrams_CB->isChecked()) {
-     // builtin diagrams
-      m_ui->diagram_built_in_RB->setChecked(true);
-
-   } else  {
-     // no diagrams
-     m_ui->diagram_none_RB->setChecked(true);
-
-   }
-}
-
 // tab 2
 void MainWindow::valid_full_path_names()
 {
@@ -958,9 +903,9 @@ void MainWindow::valid_clang()
       m_ui->clang_use_headers_CB->setEnabled(true);
 
       if (m_ui->clang_compilation_path->text().isEmpty()) {
-         m_ui->clang_dialect_CM->setEnabled(true);        
+         m_ui->clang_dialect_CM->setEnabled(true);
       } else {
-         m_ui->clang_dialect_CM->setEnabled(false);         
+         m_ui->clang_dialect_CM->setEnabled(false);
       }
 
    } else {
@@ -1000,17 +945,17 @@ void MainWindow::valid_have_dot()
       m_ui->dot_font_path->setEnabled(true);
       m_ui->dot_font_path_PB->setEnabled(true);
 
-      m_ui->dot_class_graph_CB2->setEnabled(true);
-      m_ui->dot_collaboration_CB2->setEnabled(true);
+      m_ui->dot_class_graph_CB->setEnabled(true);
+      m_ui->dot_collaboration_CB->setEnabled(true);
       m_ui->group_graphs_CB->setEnabled(true);
       m_ui->uml_look_CB ->setEnabled(true);
       m_ui->uml_limit_num_fields_SB->setEnabled(true);
       m_ui->template_relations_CB->setEnabled(true);
-      m_ui->dot_include_CB2->setEnabled(true);
-      m_ui->dot_included_by_CB2->setEnabled(true);
-      m_ui->dot_call_CB2->setEnabled(true);
-      m_ui->dot_called_by_CB2->setEnabled(true);
-      m_ui->dot_hierarchy_CB2->setEnabled(true);
+      m_ui->dot_include_CB->setEnabled(true);
+      m_ui->dot_included_by_CB->setEnabled(true);
+      m_ui->dot_call_CB->setEnabled(true);
+      m_ui->dot_called_by_CB->setEnabled(true);
+      m_ui->dot_hierarchy_CB->setEnabled(true);
       m_ui->directory_graph_CB->setEnabled(true);
       m_ui->dot_image_format_CM->setEnabled(true);
       m_ui->interactive_svg_CB->setEnabled(true);
@@ -1042,17 +987,17 @@ void MainWindow::valid_have_dot()
       m_ui->dot_font_path->setEnabled(false);
       m_ui->dot_font_path_PB->setEnabled(false);
 
-      m_ui->dot_class_graph_CB2->setEnabled(false);
-      m_ui->dot_collaboration_CB2->setEnabled(false);
+      m_ui->dot_class_graph_CB->setEnabled(false);
+      m_ui->dot_collaboration_CB->setEnabled(false);
       m_ui->group_graphs_CB->setEnabled(false);
       m_ui->uml_look_CB ->setEnabled(false);
       m_ui->uml_limit_num_fields_SB->setEnabled(false);
       m_ui->template_relations_CB->setEnabled(false);
-      m_ui->dot_include_CB2->setEnabled(false);
-      m_ui->dot_included_by_CB2->setEnabled(false);
-      m_ui->dot_call_CB2->setEnabled(false);
-      m_ui->dot_called_by_CB2->setEnabled(false);
-      m_ui->dot_hierarchy_CB2->setEnabled(false);
+      m_ui->dot_include_CB->setEnabled(false);
+      m_ui->dot_included_by_CB->setEnabled(false);
+      m_ui->dot_call_CB->setEnabled(false);
+      m_ui->dot_called_by_CB->setEnabled(false);
+      m_ui->dot_hierarchy_CB->setEnabled(false);
       m_ui->directory_graph_CB->setEnabled(false);
       m_ui->dot_image_format_CM->setEnabled(false);
       m_ui->interactive_svg_CB->setEnabled(false);

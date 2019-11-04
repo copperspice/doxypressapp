@@ -293,7 +293,6 @@ class MainWindow : public QMainWindow
       void finalLoad();
       void validGet_html();
       void validGet_latex();
-      void validGet_dot();
 
       // tab 1
       void valid_output_dir();
@@ -308,7 +307,6 @@ class MainWindow : public QMainWindow
 
       void validSet_html(QAbstractButton *);
       void validSet_latex(QAbstractButton *);
-      void validSet_dot(QAbstractButton *);
 
       // tab 2
       void valid_full_path_names();

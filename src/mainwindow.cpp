@@ -208,7 +208,6 @@ void MainWindow::createConnections()
    connect(m_ui->build_TreeWidget,    &QTreeWidget::currentItemChanged, this, &MainWindow::buildPage);
    connect(m_ui->output_TreeWidget,   &QTreeWidget::currentItemChanged, this, &MainWindow::outputPage);
 
-
    // tab 1
    connect(m_ui->output_dir,          &QLineEdit::textChanged, this, &MainWindow::valid_output_dir);
    connect(m_ui->project_logo,        &QLineEdit::textChanged, this, [this](){ getLogo("load"); } );
@@ -220,12 +219,10 @@ void MainWindow::createConnections()
    connect(m_ui->gen_rtf_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_rtf_1);
    connect(m_ui->gen_xml_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_xml_1);
 
-   connect(m_ui->buttonGroup_html,          static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+   connect(m_ui->buttonGroup_html,    static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
            this, &MainWindow::validSet_html);
-   connect(m_ui->buttonGroup_latex,         static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+   connect(m_ui->buttonGroup_latex,   static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
            this, &MainWindow::validSet_latex);
-   connect(m_ui->buttonGroup_diagram,       static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
-           this, &MainWindow::validSet_dot);
 
    // tab 2
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
@@ -250,7 +247,6 @@ void MainWindow::createConnections()
    connect(m_ui->gen_xml_CB2,               &QPushButton::toggled, this, &MainWindow::valid_gen_xml);
 
    connect(m_ui->html_search_CB2,           &QPushButton::toggled, this, &MainWindow::valid_html_search);
-
 
    // ** lookups
    // tab 1

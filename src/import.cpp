@@ -97,28 +97,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data,"GENERATE_DOCBOOK");
    m_ui->gen_docbook_CB1->setChecked(tempBool);
 
-   //
-   tempBool = convert_Bool(data, "CLASS_GRAPH");
-   m_ui->dot_class_graph_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");
-   m_ui->dot_collaboration_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data, "GRAPHICAL_HIERARCHY");
-   m_ui->dot_hierarchy_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"INCLUDE_GRAPH");
-   m_ui->dot_include_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");
-   m_ui->dot_included_by_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"CALL_GRAPH");
-   m_ui->dot_call_CB1->setChecked(tempBool);
-
-   tempBool = convert_Bool(data,"CALLER_GRAPH");
-   m_ui->dot_called_by_CB1->setChecked(tempBool);
-
 
    //  ***
    // tab 2 - general
@@ -533,6 +511,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "HAVE_DOT");
    m_ui->have_dot_CB->setChecked(tempBool);
 
+   tempStr = convert_Str(data, "DOT_PATH");
+   m_ui->dot_path->setText(tempStr);
+
    tempInt = convert_Int(data, "DOT_NUM_THREADS");
    m_ui->dot_num_threads_SB->setValue(tempInt);
 
@@ -544,6 +525,12 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempStr = convert_Str(data, "DOT_FONTPATH ");
    m_ui->dot_font_path->setText(tempStr);
+
+   tempBool = convert_Bool(data, "CLASS_GRAPH");
+   m_ui->dot_class_graph_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");
+   m_ui->dot_collaboration_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GROUP_GRAPHS");
    m_ui->group_graphs_CB->setChecked(tempBool);
@@ -557,6 +544,21 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "TEMPLATE_RELATIONS");
    m_ui->template_relations_CB->setChecked(tempBool);
 
+   tempBool = convert_Bool(data,"INCLUDE_GRAPH");
+   m_ui->dot_include_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");
+   m_ui->dot_included_by_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"CALL_GRAPH");
+   m_ui->dot_call_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data,"CALLER_GRAPH");
+   m_ui->dot_called_by_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "GRAPHICAL_HIERARCHY");
+   m_ui->dot_hierarchy_CB->setChecked(tempBool);
+
    tempBool = convert_Bool(data, "DIRECTORY_GRAPH");
    m_ui->directory_graph_CB->setChecked(tempBool);
 
@@ -566,9 +568,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "INTERACTIVE_SVG");
    m_ui->interactive_svg_CB->setChecked(tempBool);
-
-   tempStr = convert_Str(data, "DOT_PATH");
-   m_ui->dot_path->setText(tempStr);
 
    tempText = convert_PlainText(data,"DOTFILE_DIRS");
    m_ui->dot_file_dirs->setPlainText(tempText);
