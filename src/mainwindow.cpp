@@ -165,7 +165,7 @@ void MainWindow::about()
       "    </td>"
       "</tr></table></font>"
       "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-      "<p><small>Copyright 2014-2019 BG Consulting, released under the terms of the GNU GPL version 2<br>"
+      "<p><small>Copyright 2014-2020 BG Consulting, released under the terms of the GNU GPL version 2<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    QMessageBox msgB;
