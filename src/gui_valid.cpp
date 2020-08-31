@@ -546,11 +546,11 @@ void MainWindow::setupLimits()
    data.append("-std=c++11");
    data.append("-std=c++14");
    data.append("-std=c++17");
-   data.append("-std=c++2a");
+   data.append("-std=c++20");
    data.append("-std=gnu++11");
    data.append("-std=gnu++14");
    data.append("-std=gnu++17");
-   data.append("-std=gnu++2a");
+   data.append("-std=gnu++20");
    m_ui->clang_dialect_CM->addItems(data);
 
    data.clear();
