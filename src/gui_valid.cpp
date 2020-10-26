@@ -215,7 +215,6 @@ void MainWindow::clearAllFields()
    // tab 2 - external
    m_ui->external_groups_CB->setChecked(true);
    m_ui->external_pages_CB->setChecked(true);
-   m_ui->perl_path->setText("/usr/bin/perl");
 
    // tab 2 - dot
    m_ui->class_diagrams_CB->setChecked(true);
@@ -398,7 +397,6 @@ void MainWindow::adjustDefaults()
    // tab 2 - external
    setDefault(m_ui->external_groups_CB);
    setDefault(m_ui->external_pages_CB);
-   setDefault(m_ui->perl_path);
 
    // tab 2 - dot
    setDefault(m_ui->class_diagrams_CB);

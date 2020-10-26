@@ -392,7 +392,6 @@ class MainWindow : public QMainWindow
       // tab 2- external
       void tag_files_PB();
       void gen_tagfile_PB();
-      void perl_path_PB();
 
       // tab 2- dot
       void mscgen_path_PB();

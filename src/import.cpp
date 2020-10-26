@@ -491,9 +491,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "EXTERNAL_PAGES");
    m_ui->external_pages_CB->setChecked(tempBool);
 
-   tempStr = convert_Str(data, "PERL_PATH");
-   m_ui->perl_path->setText(tempStr);
-
 
    // tab 2 - dot
    tempBool = convert_Bool(data,"CLASS_DIAGRAMS");

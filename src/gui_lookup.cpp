@@ -826,14 +826,6 @@ void MainWindow::gen_tagfile_PB()
    m_ui->gen_tagfile->setText(file);
 }
 
-void MainWindow::perl_path_PB()
-{
-   QString path = m_ui->perl_path->text();
-   path = get_DirPath(tr("Select perl path"), path, ABSOLUTE_ONLY);
-
-   m_ui->perl_path->setText(path);
-}
-
 // tab 2- look up (dot)
 void MainWindow::mscgen_path_PB()
 {

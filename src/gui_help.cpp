@@ -1522,11 +1522,6 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES");
 
-   s_fullHelp.insert("PERL_PATH",
-      "This tag is the absolute path and name of the Perl script interpreter. "
-      "<br><br>"
-      "The default file is: /usr/bin/perl");
-
    // dot
    s_fullHelp.insert("CLASS_DIAGRAMS",
       "If this tag is set DoxyPress will generate a class diagram in HTML and LaTeX "

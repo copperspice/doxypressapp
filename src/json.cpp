@@ -694,7 +694,6 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->all_externals_CB->setChecked(             object.value("all-externals").toBool());
       m_ui->external_groups_CB->setChecked(           object.value("external-groups").toBool());
       m_ui->external_pages_CB->setChecked(            object.value("external-pages").toBool());
-      m_ui->perl_path->setText(                       object.value("perl-path").toString());
 
       // tab 2 - dot
       m_ui->class_diagrams_CB->setChecked(            object.value("class-diagrams").toBool());
@@ -1109,7 +1108,6 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->all_externals_CB->setChecked(             extObj.value("all-externals").toBool());
       m_ui->external_groups_CB->setChecked(           extObj.value("external-groups").toBool());
       m_ui->external_pages_CB->setChecked(            extObj.value("external-pages").toBool());
-      m_ui->perl_path->setText(                       extObj.value("perl-path").toString());
 
       // tab 2 - dot
       m_ui->class_diagrams_CB->setChecked(            dotObj.value("class-diagrams").toBool());
@@ -1522,7 +1520,6 @@ QByteArray MainWindow::json_SaveDoxy()
    extObj.insert("all-externals",             m_ui->all_externals_CB->isChecked());
    extObj.insert("external-groups",           m_ui->external_groups_CB->isChecked());
    extObj.insert("external-pages",            m_ui->external_pages_CB->isChecked());
-   extObj.insert("perl-path",                 m_ui->perl_path->text());
 
    // tab 2 - dot
    dotObj.insert("class-diagrams",            m_ui->class_diagrams_CB->isChecked());

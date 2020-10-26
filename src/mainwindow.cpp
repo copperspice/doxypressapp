@@ -311,7 +311,6 @@ void MainWindow::createConnections()
    // tab 2- external
    connect(m_ui->tag_files_PB,              &QPushButton::clicked, this, &MainWindow::tag_files_PB);
    connect(m_ui->gen_tagfile_PB,            &QPushButton::clicked, this, &MainWindow::gen_tagfile_PB);
-   connect(m_ui->perl_path_PB,              &QPushButton::clicked, this, &MainWindow::perl_path_PB);
 
    // tab 2- dot
    connect(m_ui->mscgen_path_PB,            &QPushButton::clicked, this, &MainWindow::mscgen_path_PB);
