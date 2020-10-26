@@ -2211,7 +2211,7 @@ void MainWindow::configFullHelp()
       "The default value points to the MathJax Content Delivery Network so you can quickly see "
       "the result without installing MathJax. "
       "<br><br>"
-      "The default value is: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/ "
+      "The default value is: https://https://cdn.jsdelivr.net/npm/mathjax@2"
       "<br><br>"
       "Requires the tag 'USE MATHJAX' is set to YES");
 

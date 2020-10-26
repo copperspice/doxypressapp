@@ -255,7 +255,7 @@ void MainWindow::clearAllFields()
    index = m_ui->mathjax_format_CM->findText("HTML-CSS");
    m_ui->mathjax_format_CM->setCurrentIndex(index);
 
-   m_ui->mathjax_relpath->setText("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/");
+   m_ui->mathjax_relpath->setText("https://cdn.jsdelivr.net/npm/mathjax@2");
 
    // tab 3 - chm
 
