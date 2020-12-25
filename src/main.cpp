@@ -111,7 +111,7 @@ static void useage()
    printf("email: info@copperspice.com\n");
 
    printf("\n");
-   printf("Usage: DoxyPessApp [OPTIONS] [project file name]\n");
+   printf("Usage: DoxyPressApp [OPTIONS] [project file name]\n");
 
    printf("\n\n");
    printf("Convert Doxygen project file to DoxyPress format: \n");
