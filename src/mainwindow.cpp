@@ -1,7 +1,7 @@
 /************************************************************************
 *
-* Copyright (C) 2014-2020 Barbara Geller & Ansel Sermersheim
-* Copyright (C) 1997-2014 by Dimitri van Heesch
+* Copyright (c) 2014-2021 Barbara Geller & Ansel Sermersheim
+* Copyright (c) 1997-2014 by Dimitri van Heesch
 *
 * DoxyPressApp is free software: you can redistribute it and/or
 * modify it under the terms of the GNU General Public License version 2
@@ -165,7 +165,7 @@ void MainWindow::about()
       "    </td>"
       "</tr></table></font>"
       "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-      "<p><small>Copyright 2014-2020 BG Consulting, released under the terms of the GNU GPL version 2<br>"
+      "<p><small>Copyright 2014-2021 BG Consulting, released under the terms of the GNU GPL version 2<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    QMessageBox msgB;
