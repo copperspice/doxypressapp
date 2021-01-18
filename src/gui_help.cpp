@@ -698,6 +698,10 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: YES");
 
+   s_fullHelp.insert("PYTHON_DOCSTRING",
+      "If this tag is set Python docstrings will be parsed for DoxyPress commands. If this tag is not set "
+      "docstrings will be treated as verbatim preformatted text.");
+
    s_fullHelp.insert("STRICT_SIG_MATCHING",
       "If this tag is set then an exact match of the function signature is required to document "
       "a function. An exact match means the function name and parameters must all match. "
@@ -789,6 +793,12 @@ void MainWindow::configFullHelp()
 
    s_fullHelp.insert("EXTRACT_PRIVATE",
       "If this tag is set then all private members of a class will be included in the documentation. "
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("EXTRACT_PRIVATE_VIRTUAL",
+      "If this tag is set private virtual methods of a class will be included in the documentation even "
+      " when extract private is off."
       "<br><br>"
       "The default value is: NO");
 
@@ -1135,6 +1145,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO");
 
+   s_fullHelp.insert("WARN_PARAM_MISMATCH",
+      "Setting this tag will generate a message when the parameter variable name in the declaration does "
+      "not match the name in the documentation."
+      "<br><br>"
+      "The default value is: NO");
+
    s_fullHelp.insert("WARN_FORMAT",
       "This tag determines the format of the warning messages. The macro '$file'' will be "
       "replaced by the file name, '$line' is replaced by the line number where the warning originated, "
@@ -1392,6 +1408,12 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "To use a different set of clang headers ensure this tag is not set. You will need to specify the location "
       "of the clang headers using '-I pathToClang' in the 'CLANG FLAGS'."
+      "<br><br>"
+      "Requires the tag 'CLANG PARSING' is set to YES");
+
+   s_fullHelp.insert("CLANG_INCLUDE_INPUT_SOURCE",
+      "If this tag is set all directories listed in 'INPUT SOURCE' will be added to the "
+      "clang flags using the '-I' option."
       "<br><br>"
       "Requires the tag 'CLANG PARSING' is set to YES");
 
@@ -2158,6 +2180,14 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "Requires the tag 'HTML SEARCH' is set to YES");
 
+   s_fullHelp.insert("FORMULA_FORMAT",
+      "When this tag is set to svg DoxyPress will use the pdf2svg program or inkscape to render formulas "
+      "as svg images."
+      "<br><br>"
+      "Default: png"
+      "<br><br>"
+       "Requires the tag 'GENERATE HTML' is set to YES");
+
    s_fullHelp.insert("FORMULA_FONTSIZE",
       "Use this tag to change the font size of LaTeX formulas included as images in "
       "the HTML documentation. If the font size is changed, ensure there are no "
@@ -2175,6 +2205,11 @@ void MainWindow::configFullHelp()
       "If this tag is modified make sure to delete all files named form_*.png in the HTML output directory. "
       "<br><br>"
       "The default value is: YES "
+      "<br><br>"
+      "Requires the tag 'GENERATE HTML' is set to YES");
+
+   s_fullHelp.insert("FORMULA_MACROFILE",
+      "This tag specifies the name of a file which contains Latex commands used in formulas."
       "<br><br>"
       "Requires the tag 'GENERATE HTML' is set to YES");
 
@@ -2594,4 +2629,7 @@ void MainWindow::configFullHelp()
       "The default value is: YES "
       "<br><br>"
       "Requires the tag 'GENERATE XML' is set to YES");
+
+   s_fullHelp.insert("XML_INCLUDE_NS_MEMBERS",
+      "If this tag is set then the output will include namespace members in the file scope.");
 }
