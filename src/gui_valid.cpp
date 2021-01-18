@@ -202,6 +202,7 @@ void MainWindow::clearAllFields()
    m_ui->clang_dialect_CM->setCurrentIndex(index);
 
    m_ui->clang_use_headers_CB->setChecked(true);
+   m_ui->clang_include_input_source_CB->setChecked(true);
 
    // tab 2 -source listing
    m_ui->strip_code_comments_CB->setChecked(true);
@@ -248,6 +249,9 @@ void MainWindow::clearAllFields()
    m_ui->treeview_width_SB ->setValue(250);
    m_ui->enum_values_per_line_SB->setValue(4);
    m_ui->search_data_file->setText("searchdata.xml");
+
+   index = m_ui->formula_format_CM->findText("png");
+   m_ui->formula_format_CM->setCurrentIndex(index);
 
    m_ui->formula_fontsize_SB->setValue(10);
    m_ui->formula_transparent_CB->setChecked(true);
@@ -393,6 +397,7 @@ void MainWindow::adjustDefaults()
    // tab 2 - clang
    setDefault(m_ui->clang_dialect_CM);
    setDefault(m_ui->clang_use_headers_CB);
+   setDefault(m_ui->clang_include_input_source_CB);
 
    // tab 2 - external
    setDefault(m_ui->external_groups_CB);
@@ -428,8 +433,10 @@ void MainWindow::adjustDefaults()
    setDefault(m_ui->enum_values_per_line_SB);
    setDefault(m_ui->search_data_file);
 
+   setDefault(m_ui->formula_format_CM);
    setDefault(m_ui->formula_fontsize_SB);
    setDefault(m_ui->formula_transparent_CB);
+   setDefault(m_ui->formula_macrofile);
 
    setDefault(m_ui->mathjax_format_CM);
    setDefault(m_ui->mathjax_relpath);
@@ -507,6 +514,14 @@ void MainWindow::finalLoad()
    valid_gen_docbook();
 
    valid_html_search();
+
+   // emerald, remove when fully added
+   m_ui->extract_private_virtual_CB->setEnabled(false);
+   m_ui->python_docstring_CB->setEnabled(false);
+
+   m_ui->formula_format_CM->setEnabled(false);
+   m_ui->formula_macrofile->setEnabled(false);
+   m_ui->formula_macrofile_PB->setEnabled(false);
 }
 
 void MainWindow::setDuplicates()
@@ -565,6 +580,11 @@ void MainWindow::setupLimits()
    data.append("png:gdiplus");
    data.append("png:gdiplus:gdiplus");
    m_ui->dot_image_format_CM->addItems(data);
+
+   data.clear();
+   data.append("png");
+   data.append("svg");
+   m_ui->formula_format_CM->addItems(data);
 
    data.clear();
    data.append("HTML-CSS");
@@ -896,9 +916,6 @@ void MainWindow::valid_clang()
    if (m_ui->clang_parsing_CB->isChecked()) {
       m_ui->clang_compilation_path->setEnabled(true);
       m_ui->clang_compilation_path_PB->setEnabled(true);
-      m_ui->clang_flags->setEnabled(true);
-      m_ui->clang_flags_PB->setEnabled(true);
-      m_ui->clang_use_headers_CB->setEnabled(true);
 
       if (m_ui->clang_compilation_path->text().isEmpty()) {
          m_ui->clang_dialect_CM->setEnabled(true);
@@ -906,11 +923,18 @@ void MainWindow::valid_clang()
          m_ui->clang_dialect_CM->setEnabled(false);
       }
 
+      m_ui->clang_use_headers_CB->setEnabled(true);
+      m_ui->clang_include_input_source_CB->setEnabled(true);
+      m_ui->clang_flags->setEnabled(true);
+      m_ui->clang_flags_PB->setEnabled(true);
+
    } else {
       m_ui->clang_compilation_path->setEnabled(false);
       m_ui->clang_compilation_path_PB->setEnabled(false);
       m_ui->clang_dialect_CM->setEnabled(false);
+
       m_ui->clang_use_headers_CB->setEnabled(false);
+      m_ui->clang_include_input_source_CB->setEnabled(false);
       m_ui->clang_flags->setEnabled(false);
       m_ui->clang_flags_PB->setEnabled(false);
 
@@ -1051,9 +1075,15 @@ void MainWindow::valid_gen_html()
       m_ui->enum_values_per_line_SB->setEnabled(true);
       m_ui->external_links_in_window_CB->setEnabled(true);
 
+      m_ui->formula_format_CM->setEnabled(true);
       m_ui->formula_fontsize_SB->setEnabled(true);
       m_ui->formula_transparent_CB->setEnabled(true);
+      m_ui->formula_macrofile->setEnabled(true);
+      m_ui->formula_macrofile_PB->setEnabled(true);
+
       m_ui->ghostscript->setEnabled(true);
+      m_ui->ghostscript_PB->setEnabled(true);
+
       m_ui->use_mathjax_CB->setEnabled(true);
       m_ui->mathjax_format_CM->setEnabled(true);
       m_ui->mathjax_relpath->setEnabled(true);
@@ -1099,9 +1129,15 @@ void MainWindow::valid_gen_html()
       m_ui->enum_values_per_line_SB->setEnabled(false);
       m_ui->external_links_in_window_CB->setEnabled(false);
 
+      m_ui->formula_format_CM->setEnabled(false);
       m_ui->formula_fontsize_SB->setEnabled(false);
       m_ui->formula_transparent_CB->setEnabled(false);
+      m_ui->formula_macrofile->setEnabled(false);
+      m_ui->formula_macrofile_PB->setEnabled(false);
+
       m_ui->ghostscript->setEnabled(false);
+      m_ui->ghostscript_PB->setEnabled(false);
+
       m_ui->use_mathjax_CB->setEnabled(false);
       m_ui->mathjax_format_CM->setEnabled(false);
       m_ui->mathjax_relpath->setEnabled(false);
@@ -1351,11 +1387,13 @@ void MainWindow::valid_gen_xml()
       m_ui->xml_output->setEnabled(true);
       m_ui->xml_output_PB->setEnabled(true);
       m_ui->xml_program_listing_CB->setEnabled(true);
+      m_ui->xml_include_ns_members_CB->setEnabled(true);
 
    } else {
       m_ui->xml_output->setEnabled(false);
       m_ui->xml_output_PB->setEnabled(false);
       m_ui->xml_program_listing_CB->setEnabled(false);
+      m_ui->xml_include_ns_members_CB->setEnabled(false);
    }
 }
 
