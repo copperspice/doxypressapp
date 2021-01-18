@@ -163,7 +163,10 @@ void MainWindow::about()
       "        <tr><td style=padding-right:25><nobr>Developed by Ansel Sermersheim</nobr></td><td>ansel@copperspice.com</td></tr>"
       "       </table>"
       "    </td>"
-      "</tr></table></font>"
+
+      "</tr>"
+      "</table></font>"
+
       "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
       "<p><small>Copyright 2014-2021 BG Consulting, released under the terms of the GNU GPL version 2<br>"
       "This program is provided AS IS with no warranty of any kind.<br></small></p>";
@@ -333,6 +336,7 @@ void MainWindow::createConnections()
    connect(m_ui->html_stylesheets_PB,       &QPushButton::clicked, this, &MainWindow::html_stylesheets_PB);
    connect(m_ui->html_extra_files_PB,       &QPushButton::clicked, this, &MainWindow::html_extra_files_PB);
 
+   connect(m_ui->formula_macrofile_PB,      &QPushButton::clicked, this, &MainWindow::formula_macrofile_PB);
    connect(m_ui->ghostscript_PB,            &QPushButton::clicked, this, &MainWindow::ghostscript_PB);
    connect(m_ui->mathjax_extensions_PB,     &QPushButton::clicked, this, &MainWindow::mathjax_extensions_PB);
    connect(m_ui->search_data_file_PB,       &QPushButton::clicked, this, &MainWindow::search_data_file_PB);
@@ -456,8 +460,11 @@ void MainWindow::buildPage(QTreeWidgetItem *item, QTreeWidgetItem *)
       if (label == tr("Project Configuration")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Project_Config);
 
-      } else  if (label == tr("Build Configuration")) {
-         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config);
+      } else  if (label == tr("Build Configuration (Part 1)")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config_A);
+
+      } else  if (label == tr("Build Configuration (Part 2)")) {
+         m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Config_B);
 
       } else if (label == tr("Build Options")) {
          m_ui->build_StackedWidget->setCurrentWidget(m_ui->page_Build_Output);

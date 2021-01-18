@@ -1050,6 +1050,13 @@ void MainWindow::html_extra_files_PB()
    }
 }
 
+void MainWindow::formula_macrofile_PB()
+{
+   QString file = m_ui->formula_macrofile->text();
+   file = getSingleFile(tr("Select file"), file);
+   m_ui->formula_macrofile->setText(file);
+}
+
 void MainWindow::ghostscript_PB()
 {
    QString file = m_ui->ghostscript->text();

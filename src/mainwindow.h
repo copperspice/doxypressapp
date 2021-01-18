@@ -413,6 +413,7 @@ class MainWindow : public QMainWindow
       void html_stylesheets_PB();
       void html_extra_files_PB();
 
+      void formula_macrofile_PB();
       void ghostscript_PB();
       void mathjax_extensions_PB();
       void search_data_file_PB();
