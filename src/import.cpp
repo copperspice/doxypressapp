@@ -170,6 +170,9 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "AUTOLINK_SUPPORT");
    m_ui->auto_link_CB->setChecked(tempBool);
 
+   tempBool = convert_Bool(data, "PYTHON_DOCSTRING");
+   m_ui->python_docstring_CB->setChecked(tempBool);
+
    tempBool = convert_Bool(data, "BUILTIN_STL_SUPPORT");
    m_ui->built_in_stl_support_CB->setChecked(tempBool);
 
@@ -210,6 +213,9 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "EXTRACT_PRIVATE");
    m_ui->extract_private_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "EXTRACT_PRIV_VIRTUAL");
+   m_ui->extract_private_virtual_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "EXTRACT_PACKAGE");
    m_ui->extract_package_CB->setChecked(tempBool);
@@ -439,11 +445,14 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "CLANG_ASSISTED_PARSING");
    m_ui->clang_parsing_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"CLANG_OPTIONS");
-   m_ui->clang_flags->setPlainText(tempText);
-
    tempText = convert_PlainText(data,"CLANG_COMPILATION_DATABASE_PATH");
    m_ui->clang_compilation_path->setText(tempText);
+
+   tempBool = convert_Bool(data, "CLANG_ADD_INC_PATHS");
+   m_ui->clang_include_input_source_CB->setChecked(tempBool);
+
+   tempText = convert_PlainText(data,"CLANG_OPTIONS");
+   m_ui->clang_flags->setPlainText(tempText);
 
 
    // tab 2 - preprocess
@@ -733,11 +742,18 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "EXT_LINKS_IN_WINDOW");
    m_ui->external_links_in_window_CB->setChecked(tempBool);
 
+   tempStr = convert_Str(data, "FORMULA_FORMAT");
+   tempInt = m_ui->formula_format_CM->findText(tempStr);
+   m_ui->formula_format_CM->setCurrentIndex(tempInt);
+
    tempInt = convert_Int(data, "FORMULA_FONTSIZE");
    m_ui->formula_fontsize_SB->setValue(tempInt);
 
    tempBool = convert_Bool(data, "FORMULA_TRANSPARENT");
    m_ui->formula_transparent_CB->setChecked(tempBool);
+
+   tempStr = convert_Str(data, "FORMULA_MACROFILE");
+   m_ui->formula_macrofile->setText(tempStr);
 
    tempBool = convert_Bool(data, "USE_MATHJAX");
    m_ui->use_mathjax_CB->setChecked(tempBool);
@@ -885,6 +901,9 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "XML_PROGRAMLISTING");
    m_ui->xml_program_listing_CB->setChecked(tempBool);
+
+   tempBool = convert_Bool(data, "XML_NS_MEMB_FILE_SCOPE");
+   m_ui->xml_include_ns_members_CB->setChecked(tempBool);
 
 
    // tab 3 - docbook
