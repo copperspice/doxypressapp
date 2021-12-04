@@ -33,7 +33,8 @@
 #include <lm.h>
 #endif
 
-Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path, QFileDialog::Options options)
+Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path,
+         QFileDialog::FileDialogOptions options)
    : QDialog(from), m_ui(new Ui::Dialog_XP_GetDir)
 {
    // the value for path is an absolute path

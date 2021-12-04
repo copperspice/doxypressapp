@@ -41,7 +41,7 @@ class Dialog_XP_GetDir  : public QDialog
    CS_OBJECT(Dialog_XP_GetDir)
 
    public:
-      Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path, QFileDialog::Options options);
+      Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path, QFileDialog::FileDialogOptions options);
       ~Dialog_XP_GetDir();
 
        QString getDirectory();

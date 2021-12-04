@@ -209,7 +209,7 @@ void MainWindow::json_getFileName()
 #endif
 
    QString selectedFilter;
-   QFileDialog::Options options;
+   QFileDialog::FileDialogOptions options;
 
    Dialog_SelectCfg *dw = new Dialog_SelectCfg(this);
    int result = dw->exec();
@@ -343,7 +343,7 @@ void MainWindow::move_Cfg()
          // create
          {
             QString selectedFilter;
-            QFileDialog::Options options;
+            QFileDialog::FileDialogOptions options;
 
             // force windows 7 and 8 to honor initial path
             options = QFileDialog::ForceInitialDir_Win7;
@@ -376,7 +376,7 @@ void MainWindow::move_Cfg()
          // select
          {
             QString selectedFilter;
-            QFileDialog::Options options;
+            QFileDialog::FileDialogOptions options;
 
             QString newName = QFileDialog::getOpenFileName(this, tr("Select DoxyPressApp Settings File"),
                   "*.json", tr("Json Files (*.json)"), &selectedFilter, options);

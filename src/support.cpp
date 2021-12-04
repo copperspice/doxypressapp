@@ -109,7 +109,7 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
    }
 
    // part 2 - user can select a new path
-   QFileDialog::Options options;
+   QFileDialog::FileDialogOptions options;
    options |= QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks;
 
 #ifdef Q_OS_WIN
@@ -183,7 +183,7 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
    QString initialPath = pathName(retval);
 
    QString selectedFilter;
-   QFileDialog::Options options;
+   QFileDialog::FileDialogOptions options;
 
    // force windows 7 and 8 to honor initial path
    options = QFileDialog::ForceInitialDir_Win7;
