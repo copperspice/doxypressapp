@@ -1,6 +1,6 @@
 /************************************************************************
 *
-* Copyright (c) 2014-2021 Barbara Geller & Ansel Sermersheim
+* Copyright (c) 2014-2022 Barbara Geller & Ansel Sermersheim
 * Copyright (c) 1997-2014 by Dimitri van Heesch
 *
 * DoxyPressApp is free software: you can redistribute it and/or
