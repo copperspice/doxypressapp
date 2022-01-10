@@ -306,7 +306,7 @@ void MainWindow::find()
       m_findText = dw->get_findText();
 
       // get the flags
-      m_flags = 0;
+      m_flags = Qt::EmptyFlag;
 
       m_direction  = dw->get_Direction();
 
