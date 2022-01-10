@@ -11,7 +11,7 @@ project(doxypressapp)
 
 set(BUILD_MAJOR "1")
 set(BUILD_MINOR "4")
-set(BUILD_MICRO "1")
+set(BUILD_MICRO "2")
 
 set(BUILD_COMPONENTS "doxypressapp")
 
