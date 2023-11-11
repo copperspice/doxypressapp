@@ -47,7 +47,7 @@ class Dialog_XP_GetDir  : public QDialog
        QString getDirectory();
 
        void showMe(const QString &);
-       QSize sizeHint() const;
+       QSize sizeHint() const override;
 
    private:
       Ui::Dialog_XP_GetDir *m_ui;      

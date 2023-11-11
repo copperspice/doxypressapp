@@ -148,7 +148,7 @@ class MainWindow : public QMainWindow
       struct Settings get_StructData();
       void setDoxyTitle(bool isModified);
 
-      QSize sizeHint() const;
+      QSize sizeHint() const override;
 
       QString get_DirPath(QString message, QString path, enum RelativeX relativeTo);
       QString getSingleFile(QString title, QString fname, QString filter = QString());
@@ -156,7 +156,7 @@ class MainWindow : public QMainWindow
       void autoConvert(QString fromFile, QString toFile);
 
    protected:
-      void closeEvent(QCloseEvent *event);
+      void closeEvent(QCloseEvent *event) override;
 
    private:
       Ui::MainWindow *m_ui;
@@ -253,7 +253,7 @@ class MainWindow : public QMainWindow
       void createMap();
       void configFullHelp();
 
-      bool eventFilter(QObject *object, QEvent *event);
+      bool eventFilter(QObject *object, QEvent *event) override;
       void hoverChanged(QWidget *old_Widget, QWidget *new_Widget);
 
       // menu options

@@ -941,7 +941,7 @@ bool MainWindow::convert_Bool(QByteArray data, QByteArray key)
 
 int MainWindow::convert_Int(QByteArray data, QByteArray key)
 {
-   int retval;
+   int retval = 0;
    int posBeg = data.indexOf(key);
 
    if (posBeg != -1) {

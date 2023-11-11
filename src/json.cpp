@@ -146,6 +146,9 @@ bool MainWindow::json_Write(Option route, Config trail)
 
       switch (route)  {
 
+         case ABOUTURL:
+            break;
+
          case CLOSE:
             object.insert("pos-x",       pos().x()  );
             object.insert("pos-y",       pos().y()  );

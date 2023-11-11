@@ -34,7 +34,7 @@ class Syntax : public QSyntaxHighlighter
       void processSyntax();
 
    protected:
-      void highlightBlock(const QString &text);
+      void highlightBlock(const QString &text) override;
 
    private:
       struct HighlightingRule

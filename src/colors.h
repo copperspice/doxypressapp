@@ -74,9 +74,9 @@ class ColorPicker : public QWidget
    CS_SIGNAL_2(newHsv, h, s, g)
 
  protected:
-   void paintEvent(QPaintEvent *);
-   void mouseMoveEvent(QMouseEvent *);
-   void mousePressEvent(QMouseEvent *);
+   void paintEvent(QPaintEvent *) override;
+   void mouseMoveEvent(QMouseEvent *) override;
+   void mousePressEvent(QMouseEvent *) override;
 
  private:
    enum { foff = 3, coff = 4 }; //frame and contents offset
