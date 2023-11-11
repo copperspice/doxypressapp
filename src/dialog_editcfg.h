@@ -19,10 +19,10 @@
 #ifndef DIALOG_EDITCFG_H
 #define DIALOG_EDITCFG_H
 
-#include <QDialog>
-
 #include "mainwindow.h"
 #include "ui_dialog_editcfg.h"
+
+#include <QDialog>
 
 class Dialog_EditCfg : public QDialog
 {

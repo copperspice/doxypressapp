@@ -19,10 +19,10 @@
 #ifndef DIALOG_CONFIG_H
 #define DIALOG_CONFIG_H
 
+#include "ui_dialog_config.h"
+
 #include <QDialog>
 #include <QString>
-
-#include "ui_dialog_config.h"
 
 class Dialog_Config : public QDialog
 {     

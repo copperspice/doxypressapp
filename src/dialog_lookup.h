@@ -19,11 +19,11 @@
 #ifndef DIALOG_LOOKUP_H
 #define DIALOG_LOOKUP_H
 
-#include <QDialog>
-#include <QStandardItemModel>
-
 #include "mainwindow.h"
 #include "ui_dialog_lookup.h"
+
+#include <QDialog>
+#include <QStandardItemModel>
 
 class Dialog_LookUp : public QDialog
 {

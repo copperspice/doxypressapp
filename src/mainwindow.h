@@ -19,7 +19,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <syntax.h>
+#include "syntax.h"
 #include "ui_mainwindow.h"
 #include "util.h"
 

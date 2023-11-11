@@ -19,11 +19,11 @@
 #ifndef DIALOG_ARGS_H
 #define DIALOG_ARGS_H
 
-#include <QDialog>
-#include <QString>
-
 #include "mainwindow.h"
 #include "ui_dialog_args.h"
+
+#include <QDialog>
+#include <QString>
 
 class Dialog_Args: public QDialog
 {     

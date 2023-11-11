@@ -19,10 +19,10 @@
 #ifndef DIALOG_SELECTCFG_H
 #define DIALOG_SELECTCFG_H
 
-#include <QDialog>
-
 #include "mainwindow.h"
 #include "ui_dialog_selectcfg.h"
+
+#include <QDialog>
 
 class Dialog_SelectCfg : public QDialog
 {
