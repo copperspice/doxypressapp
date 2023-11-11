@@ -1161,7 +1161,7 @@ void MainWindow::autoConvert(QString fromFile, QString toFile)
 {
    QFile file(fromFile);
    if (! file.open(QIODevice::ReadOnly)) {
-      printf("Error: Unable to open %s, error %s", csPrintable(fromFile), csPrintable(file.error()) );
+      printf("Error: Unable to open %s, error %d", csPrintable(fromFile), file.error());
       return;
    }
 
