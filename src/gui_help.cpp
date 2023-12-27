@@ -1151,6 +1151,17 @@ void MainWindow::configFullHelp()
       "<br><br>"
       "The default value is: NO");
 
+   s_fullHelp.insert("WARN_SA_MISSING_LINKS",
+      "Setting this tag will generate a message when a word in a See Also section does not link to the "
+      "documentation."
+      "<br><br>"
+      "The default value is: NO");
+
+   s_fullHelp.insert("WARN_SA_MISSING_WORDS",
+      "List of words which should be ignored when checking for missing links in a See Also section."
+      "<br><br>"
+      "The default value is: NO");
+
    s_fullHelp.insert("WARN_FORMAT",
       "This tag determines the format of the warning messages. The macro '$file'' will be "
       "replaced by the file name, '$line' is replaced by the line number where the warning originated, "
@@ -2246,7 +2257,7 @@ void MainWindow::configFullHelp()
       "The default value points to the MathJax Content Delivery Network so you can quickly see "
       "the result without installing MathJax. "
       "<br><br>"
-      "The default value is: https://https://cdn.jsdelivr.net/npm/mathjax@2"
+      "The default value is: https://cdn.jsdelivr.net/npm/mathjax@2"
       "<br><br>"
       "Requires the tag 'USE MATHJAX' is set to YES");
 
