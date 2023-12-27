@@ -306,6 +306,30 @@ void MainWindow::ns_alias_PB()
 }
 
 // tab 2- look up (messages)
+void MainWindow::warn_sa_ignore_words_PB()
+{
+   QRegularExpression regExp("\\s*, \\s*");
+   struct LookUpInfo data;
+
+   QString temp = m_ui->warn_sa_ignore_words->toPlainText();
+
+   data.title      = "List of Words to Ignore in a See Also";
+   data.dataList   = temp.split(regExp);
+   data.isFilePB   = false;
+   data.isFolderPB = false;
+   data.relativeTo = ABSOLUTE_ONLY;
+
+   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   int result = dw->exec();
+
+   if (result == QDialog::Accepted) {
+      QStringList dataList = dw->getData();
+
+      QString temp = dataList.join(", ");
+      m_ui->warn_sa_ignore_words->setPlainText(temp);
+   }
+}
+
 void MainWindow::warn_logfile_PB()
 {
    QString file = m_ui->warn_logfile->text();

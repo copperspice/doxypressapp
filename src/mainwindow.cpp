@@ -292,6 +292,7 @@ void MainWindow::createConnections()
    connect(m_ui->ignore_prefix_PB,          &QPushButton::clicked, this, &MainWindow::ignore_prefix_PB);
 
    // tab 2- messages
+   connect(m_ui->warn_sa_ignore_words_PB,   &QPushButton::clicked, this, &MainWindow::warn_sa_ignore_words_PB);
    connect(m_ui->warn_logfile_PB,           &QPushButton::clicked, this, &MainWindow::warn_logfile_PB);
 
    // tab 2- preprocessor

@@ -1039,6 +1039,8 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->warn_doc_error_CB->setChecked(            msgObj.value("warn-doc-error").toBool());
       m_ui->warn_undoc_param_CB->setChecked(          msgObj.value("warn-undoc-param").toBool());
       m_ui->warn_param_mismatch_CB->setChecked(       msgObj.value("warn-param-mismatch").toBool());
+      m_ui->warn_sa_missing_links_CB->setChecked(     msgObj.value("warn-sa-missing-links").toBool());
+      m_ui->warn_sa_ignore_words->setPlainText(       getDataList(msgObj,"warn-sa-ignore-words"));
       m_ui->warn_format->setText(                     msgObj.value("warn-format").toString());
       m_ui->warn_logfile->setText(                    msgObj.value("warn-logfile").toString());
 
@@ -1473,6 +1475,8 @@ QByteArray MainWindow::json_SaveDoxy()
    msgObj.insert("warn-doc-error",              m_ui->warn_doc_error_CB->isChecked());
    msgObj.insert("warn-undoc-param",            m_ui->warn_undoc_param_CB->isChecked());
    msgObj.insert("warn-param-mismatch",         m_ui->warn_param_mismatch_CB->isChecked());
+   msgObj.insert("warn-sa-missing-links",       m_ui->warn_sa_missing_links_CB->isChecked());
+   msgObj.insert("warn-sa-ignore-words",        putDataList(m_ui->warn_sa_ignore_words->toPlainText()));
    msgObj.insert("warn-format",                 m_ui->warn_format->text());
    msgObj.insert("warn-logfile",                m_ui->warn_logfile->text());
 

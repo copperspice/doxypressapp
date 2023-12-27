@@ -373,6 +373,7 @@ class MainWindow : public QMainWindow
 
       // tab 2- messages
       void warn_logfile_PB();
+      void warn_sa_ignore_words_PB();
 
       // tab 2- preprocess
       void include_path_PB();
