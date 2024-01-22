@@ -13,12 +13,12 @@ Parsing
 
 * User selection for full parsing of C and C++ with clang in lieu of the legacy lex parser
 * Clang parser allows complicated modern C++ to be parsed accurately, especially as C++ is updated
-* Added a new parser for makefiles
+* Added a new parser for makefiles*
 
 Classes and Containers
 
 * DoxyPress links with the CopperSpice libraries
-* Removed all Qt 2 classes and containers
+* Removed all obsolete classes and containers
 * Refactored to use value based containers instead of pointer based containers
 * For improved memory management variadic templates and shared pointers are used
 * Source code reformatted for improved readability
@@ -87,7 +87,16 @@ www.copperspice.com/presentations.html
 This program is released under the GPL 2 license. For more information refer to the LICENSE file provided with this
 project.
 
-### References
 
-* Website: www.copperspice.com
-* Email:   info@copperspice.com
+## References
+
+ * Website:  https://www.copperspice.com
+ * Twitter:  https://twitter.com/copperspice_cpp
+ * Email:    info@copperspice.com
+
+<!-- -->
+ * Github:   https://github.com/copperspice
+
+<!-- -->
+ * Forum:    https://forum.copperspice.com
+ * Journal:  https://journal.copperspice.com
