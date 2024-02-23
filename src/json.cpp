@@ -19,14 +19,14 @@
 #include "dialog_config.h"
 #include "dialog_editcfg.h"
 #include "dialog_selectcfg.h"
-#include "util.h"
 #include "mainwindow.h"
+#include "util.h"
 
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
-#include <QFlags>
 #include <QFileDialog>
+#include <QFlags>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QKeySequence>
@@ -34,10 +34,10 @@
 #include <QSettings>
 #include <QStandardPaths>
 
-#include <qglobal.h>
-
 bool MainWindow::json_Read(Config trail)
 {
+   (void) trail;
+
    bool ok = true;
 
    m_appPath = QCoreApplication::applicationDirPath();
@@ -52,6 +52,7 @@ bool MainWindow::json_Read(Config trail)
       if (m_jsonFname.isEmpty()) {
          return false;
       }
+
       settings.setValue("configName", m_jsonFname);
 
       if (! QFile::exists(m_jsonFname))  {
@@ -119,6 +120,8 @@ bool MainWindow::json_Read(Config trail)
 
 bool MainWindow::json_Write(Option route, Config trail)
 {
+   (void) trail;
+
    QSettings settings("DoxyPressApp", "Settings");
    m_jsonFname = settings.value("configName").toString();
 
@@ -129,6 +132,7 @@ bool MainWindow::json_Write(Option route, Config trail)
       if (m_jsonFname.isEmpty()) {
          return false;
       }
+
       settings.setValue("configName", m_jsonFname);
    }
 
@@ -158,9 +162,9 @@ bool MainWindow::json_Write(Option route, Config trail)
             object.insert("doxyPress-location", m_settings.doxyPressExe);
 
             {
-              // opened files
-              QJsonArray temp = QJsonArray::fromStringList(m_openedFiles);
-              object.insert("opened-files", temp);
+               // opened files
+               QJsonArray temp = QJsonArray::fromStringList(m_openedFiles);
+               object.insert("opened-files", temp);
             }
 
             break;
@@ -174,12 +178,11 @@ bool MainWindow::json_Write(Option route, Config trail)
             object.insert("pathPrior", m_settings.pathPrior);
             break;
 
-         case RECENTFILE:
-            {
-               QJsonArray temp = QJsonArray::fromStringList(m_rf_List);
-               object.insert("recent-files", temp);
-               break;
-            }
+         case RECENTFILE: {
+            QJsonArray temp = QJsonArray::fromStringList(m_rf_List);
+            object.insert("recent-files", temp);
+            break;
+         }
       }
 
       // save the new data
@@ -203,12 +206,14 @@ void MainWindow::json_getFileName()
    return;
 
 #elif defined(Q_OS_MAC)
+
    if (m_appPath.contains(".app/Contents/MacOS")) {
       QString homePath = QDir::homePath();
       m_jsonFname = homePath + "/Library/DoxyPressApp/DoxyPressApp.json";
 
       return;
    }
+
 #endif
 
    QString selectedFilter;
@@ -237,7 +242,7 @@ void MainWindow::json_getFileName()
    } else if (result == Dialog_SelectCfg::Result::Existing) {
 
       m_jsonFname = QFileDialog::getOpenFileName(this, tr("Select Existing DoxyPressApp Settings File"),
-            "", tr("Json Files (*.json)"), &selectedFilter, options);
+            QString(), tr("Json Files (*.json)"), &selectedFilter, options);
 
    } else {
       // user aborted
@@ -253,7 +258,7 @@ QByteArray MainWindow::json_ReadFile()
    if (! file.open(QFile::ReadOnly | QFile::Text)) {
       const QString msg = tr("Unable to open Settings File: ") +  m_jsonFname + " : " + file.errorString();
       csError(tr("Read Settings"), msg);
-      return "";
+      return QByteArray();
    }
 
    QByteArray data = file.readAll();
@@ -298,7 +303,7 @@ bool MainWindow::json_CreateNew()
    value = QJsonValue(m_appPath);
    object.insert("pathPrior", value);
 
-   value = QJsonValue(QString(""));
+   value = QJsonValue(QString());
    object.insert("doxyPress-location", value);
 
    // save the data
@@ -344,61 +349,61 @@ void MainWindow::move_Cfg()
 
       case 1:
          // create
-         {
-            QString selectedFilter;
-            QFileDialog::FileDialogOptions options;
+      {
+         QString selectedFilter;
+         QFileDialog::FileDialogOptions options;
 
-            // force windows 7 and 8 to honor initial path
-            options = QFileDialog::ForceInitialDir_Win7;
+         // force windows 7 and 8 to honor initial path
+         options = QFileDialog::ForceInitialDir_Win7;
 
-            QString newName = QFileDialog::getSaveFileName(this, tr("Create new DoxyPressApp Settings File"),
-                  m_appPath + "/wizard.json", tr("Json Files (*.json)"), &selectedFilter, options);
+         QString newName = QFileDialog::getSaveFileName(this, tr("Create new DoxyPressApp Settings File"),
+               m_appPath + "/wizard.json", tr("Json Files (*.json)"), &selectedFilter, options);
 
-            if (newName.isEmpty()) {
-               // do nothing
+         if (newName.isEmpty()) {
+            // do nothing
 
-            } else if (QFile::exists(newName) ) {
-               // can this happen?
-               csError("DoxyPressApp Settings", "File already exists, unable to create new file");
+         } else if (QFile::exists(newName) ) {
+            // can this happen?
+            csError("DoxyPressApp Settings", "File already exists, unable to create new file");
 
-            } else {
-               m_jsonFname = newName;
-               settings.setValue("configName", m_jsonFname);
+         } else {
+            m_jsonFname = newName;
+            settings.setValue("configName", m_jsonFname);
 
-               json_CreateNew();
-               json_Read();
+            json_CreateNew();
+            json_Read();
 
-               // maybe add reset later
-               csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
-            }
-
-            break;
+            // maybe add reset later
+            csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
          }
+
+         break;
+      }
 
       case 2:
          // select
-         {
-            QString selectedFilter;
-            QFileDialog::FileDialogOptions options;
+      {
+         QString selectedFilter;
+         QFileDialog::FileDialogOptions options;
 
-            QString newName = QFileDialog::getOpenFileName(this, tr("Select DoxyPressApp Settings File"),
-                  "*.json", tr("Json Files (*.json)"), &selectedFilter, options);
+         QString newName = QFileDialog::getOpenFileName(this, tr("Select DoxyPressApp Settings File"),
+               "*.json", tr("Json Files (*.json)"), &selectedFilter, options);
 
-            if (newName.isEmpty()) {
-               // do nothing
+         if (newName.isEmpty()) {
+            // do nothing
 
-            } else if (QFile::exists(newName) ) {
-               m_jsonFname = newName;
-               settings.setValue("configName", m_jsonFname);
+         } else if (QFile::exists(newName) ) {
+            m_jsonFname = newName;
+            settings.setValue("configName", m_jsonFname);
 
-               json_Read();
+            json_Read();
 
-               // maybe add reset later
-               csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
-            }
-
-            break;
+            // maybe add reset later
+            csError("DoxyPressApp Settings", "File selected, restart DoxyPressApp to utilize the new settings");
          }
+
+         break;
+      }
 
       case 3:
          // rename
@@ -406,11 +411,10 @@ void MainWindow::move_Cfg()
 
          if (newName.isEmpty()) {
             csError("DoxyPressApp Settings", "No settings file name specified, unable to rename");
-
-         } if (QFile::exists(newName) ) {
+         } else if (QFile::exists(newName) ) {
             csError("DoxyPressApp Settings", "New settings file already exists, unable to rename");
 
-         } else  {
+         } else {
 
             QString path = pathName(newName);
             QDir directory(path);
@@ -459,7 +463,6 @@ void MainWindow::save_Cfg()
    }
 }
 
-
 // **
 bool MainWindow::json_OpenDoxy(QByteArray data)
 {
@@ -469,11 +472,11 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
 
       if (data.contains("PROJECT_NUMBER"))  {
          csError(tr("Open Project file"), tr("Selected file appears to be a Doxygen project file. To convert to "
-                    "a DoxyPress project file select Tools, then 'Convert to DoxyPress format'"));
+               "a DoxyPress project file select Tools, then 'Convert to DoxyPress format'"));
 
       } else {
          csError(tr("Open Project file"), tr("Selected file is not a valid JSON file format.\n"
-                    "Project file aborted"));
+               "Project file aborted"));
       }
 
       return false;
@@ -605,10 +608,10 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       // tab 2 -output
       m_ui->enabled_sections->setPlainText(           getDataList(object, "enabled-sections"));
       m_ui->file_version_filter->setText(             object.value("file-version-filter").toString());
-      m_ui->main_page_name->setText(                  "");
+      m_ui->main_page_name->setText(                  QString());
       m_ui->main_page_omit->setChecked(               false);
       m_ui->layout_file->setText(                     object.value("layout-file").toString());
-      m_ui->ns_alias->setPlainText(                   "");
+      m_ui->ns_alias->setPlainText(                   QString());
       m_ui->max_init_lines_SB->setValue(              object.value("max-init-lines").toInt());
 
       // (experimental) m_ui->bb_style_CB->setChecked(false);
@@ -680,18 +683,18 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->enable_preprocessing_CB->setChecked(      object.value("enable-preprocessing").toBool());
       m_ui->search_includes_CB->setChecked(           object.value("search-includes").toBool());
 
-      m_ui->include_path->setPlainText(               getDataList(object,"include-path"));
-      m_ui->include_patterns->setPlainText(           getDataList(object,"include-patterns"));
+      m_ui->include_path->setPlainText(               getDataList(object, "include-path"));
+      m_ui->include_patterns->setPlainText(           getDataList(object, "include-patterns"));
 
       m_ui->macro_expansion_CB->setChecked(           object.value("macro-expansion").toBool());
       m_ui->expand_only_predefined_CB->setChecked(    object.value("expand-only-predefined").toBool());
       m_ui->skip_function_macros_CB->setChecked(      object.value("skip-function-macros").toBool());
 
-      m_ui->predefined_macros->setPlainText(          getDataList(object,"predefined-macros"));
-      m_ui->expand_as_defined->setPlainText(          getDataList(object,"expand-as-defined"));
+      m_ui->predefined_macros->setPlainText(          getDataList(object, "predefined-macros"));
+      m_ui->expand_as_defined->setPlainText(          getDataList(object, "expand-as-defined"));
 
       // tab 2 - external
-      m_ui->tag_files->setPlainText(                  getDataList(object,"tag-files"));
+      m_ui->tag_files->setPlainText(                  getDataList(object, "tag-files"));
       m_ui->gen_tagfile->setText(                     object.value("generate-tagfile").toString());
       m_ui->all_externals_CB->setChecked(             object.value("all-externals").toBool());
       m_ui->external_groups_CB->setChecked(           object.value("external-groups").toBool());
@@ -1040,7 +1043,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->warn_undoc_param_CB->setChecked(          msgObj.value("warn-undoc-param").toBool());
       m_ui->warn_param_mismatch_CB->setChecked(       msgObj.value("warn-param-mismatch").toBool());
       m_ui->warn_sa_missing_links_CB->setChecked(     msgObj.value("warn-sa-missing-links").toBool());
-      m_ui->warn_sa_ignore_words->setPlainText(       getDataList(msgObj,"warn-sa-ignore-words"));
+      m_ui->warn_sa_ignore_words->setPlainText(       getDataList(msgObj, "warn-sa-ignore-words"));
       m_ui->warn_format->setText(                     msgObj.value("warn-format").toString());
       m_ui->warn_logfile->setText(                    msgObj.value("warn-logfile").toString());
 
@@ -1078,15 +1081,15 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->enable_preprocessing_CB->setChecked(      ppObj.value("enable-preprocessing").toBool());
       m_ui->search_includes_CB->setChecked(           ppObj.value("search-includes").toBool());
 
-      m_ui->include_path->setPlainText(               getDataList(ppObj,"include-path"));
-      m_ui->include_patterns->setPlainText(           getDataList(ppObj,"include-patterns"));
+      m_ui->include_path->setPlainText(               getDataList(ppObj, "include-path"));
+      m_ui->include_patterns->setPlainText(           getDataList(ppObj, "include-patterns"));
 
       m_ui->macro_expansion_CB->setChecked(           ppObj.value("macro-expansion").toBool());
       m_ui->expand_only_predefined_CB->setChecked(    ppObj.value("expand-only-predefined").toBool());
       m_ui->skip_function_macros_CB->setChecked(      ppObj.value("skip-function-macros").toBool());
 
-      m_ui->predefined_macros->setPlainText(          getDataList(ppObj,"predefined-macros"));
-      m_ui->expand_as_defined->setPlainText(          getDataList(ppObj,"expand-as-defined"));
+      m_ui->predefined_macros->setPlainText(          getDataList(ppObj, "predefined-macros"));
+      m_ui->expand_as_defined->setPlainText(          getDataList(ppObj, "expand-as-defined"));
 
       // tab 2 - clang
       m_ui->clang_parsing_CB->setChecked(                clangObj.value("clang-parsing").toBool());
@@ -1120,7 +1123,7 @@ bool MainWindow::json_OpenDoxy(QByteArray data)
       m_ui->suffix_exclude_navtree->setPlainText(     getDataList(sourceObj, "suffix-exclude-navtree"));
 
       // tab 2 - external
-      m_ui->tag_files->setPlainText(                  getDataList(extObj,"tag-files"));
+      m_ui->tag_files->setPlainText(                  getDataList(extObj, "tag-files"));
       m_ui->gen_tagfile->setText(                     extObj.value("generate-tagfile").toString());
       m_ui->all_externals_CB->setChecked(             extObj.value("all-externals").toBool());
       m_ui->external_groups_CB->setChecked(           extObj.value("external-groups").toBool());
@@ -1419,7 +1422,7 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("sort-constructors-first",  m_ui->sort_constructors_first_CB->isChecked());
    configObj.insert("sort-group-names",         m_ui->sort_group_names_CB->isChecked());
    configObj.insert("sort-by-scope-name",       m_ui->sort_by_scope_name_CB->isChecked());
-   configObj.insert("sort-class-case-sensitive",m_ui->sort_class_case_sensitive_CB->isChecked());
+   configObj.insert("sort-class-case-sensitive", m_ui->sort_class_case_sensitive_CB->isChecked());
 
    configObj.insert("generate-todo-list",       m_ui->gen_todo_list_CB->isChecked());
    configObj.insert("generate-test-list",       m_ui->gen_test_list_CB->isChecked());
@@ -1446,7 +1449,6 @@ QByteArray MainWindow::json_SaveDoxy()
    configObj.insert("allow-sub-grouping",       m_ui->allow_sub_grouping_CB->isChecked());
    configObj.insert("duplicate-docs",           m_ui->duplicate_docs_CB->isChecked());
    configObj.insert("group-nested-compounds",   m_ui->group_nested_compounds_CB->isChecked());
-
 
    // tab 2 -build options
    configObj.insert("enabled-sections",         putDataList(m_ui->enabled_sections->toPlainText()));

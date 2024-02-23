@@ -33,7 +33,7 @@ void MainWindow::rf_CreateMenus()
       if (i < cnt)  {
          tName = m_rf_List[i];
       } else {
-         tName = "file"+QString::number(i);
+         tName = "file" + QString::number(i);
       }
 
       rf_Actions[i] = new QAction(tName, this);
@@ -167,14 +167,13 @@ void MainWindow::rf_UpdateActions()
 
    for (int i = 0; i < RECENT_FILES_MAX; ++i) {
 
-     if (i < cnt)  {
-        rf_Actions[i]->setText(m_rf_List[i]);
-        rf_Actions[i]->setVisible(true);
+      if (i < cnt) {
+         rf_Actions[i]->setText(m_rf_List[i]);
+         rf_Actions[i]->setVisible(true);
 
-     } else {
-        rf_Actions[i]->setVisible(false);
-     }
+      } else {
+         rf_Actions[i]->setVisible(false);
+      }
 
    }
 }
-

@@ -122,7 +122,7 @@ QString MainWindow::get_DirPath(QString message, QString initialPath, enum Relat
       if (result == QDialog::Accepted) {
          retval = dw->getDirectory();
       } else {
-         retval = "";
+         retval = QString();
       }
 
    } else {
@@ -194,7 +194,7 @@ QString MainWindow::getSingleFile(QString title, QString fname, QString filter)
       // fname might have been relative
       retval = fname;
 
-    } else {
+   } else {
       retval = newFile;
 
       // turn absolute path into a relative path if possible
@@ -235,7 +235,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
 
    if (! file.open(QFile::ReadOnly | QFile::Text)) {
       QString msg = tr("Unable to open: %1  (%2)").formatArgs(fname, file.error());
-      QMessageBox::warning(this, tr("Error Opening File") , msg);
+      QMessageBox::warning(this, tr("Error Opening File"), msg);
       return false;
    }
 
@@ -268,7 +268,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
 
 QString MainWindow::pathName(QString fileName) const
 {
-   QString retval = "";
+   QString retval;
 
    if (! fileName.isEmpty())  {
       QFileInfo temp(fileName);
@@ -341,7 +341,7 @@ bool MainWindow::saveDoxyAs()
    bool retval;
 
    m_curFile = QFileDialog::getSaveFileName(this, tr("DoxyPress project file"),
-                  m_settings.pathPrior, tr("Json Files (*.json)"));
+         m_settings.pathPrior, tr("Json Files (*.json)"));
 
    if (m_curFile.isEmpty()) {
       retval = false;
@@ -369,7 +369,7 @@ bool MainWindow::saveDoxy()
    if (m_doxypressFormat != DOXYPRESS_FORMAT)  {
 
       QString msg = "The current project file is using an older format. Saving will automatically "
-                    "update to the new format.";
+            "update to the new format.";
 
       QMessageBox msgB;
       msgB.setWindowTitle("Save Project File");
@@ -397,7 +397,7 @@ bool MainWindow::saveDoxy()
 
 void MainWindow::saveSettings()
 {
-  json_Write(CLOSE);
+   json_Write(CLOSE);
 }
 
 void MainWindow::setDoxyTitle(bool isModified)

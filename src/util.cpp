@@ -81,4 +81,3 @@ void showDialog(QDialog &t_Dialog)
 
    QApplication::processEvents();
 }
-

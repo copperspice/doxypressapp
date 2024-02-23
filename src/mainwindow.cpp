@@ -70,10 +70,10 @@ MainWindow::MainWindow()
       }
    }
 
-   m_curFile = "";
+   m_curFile = QString();
    setDoxyTitle(false);
 
-   setIconSize(QSize(32,32));
+   setIconSize(QSize(32, 32));
    setWindowIcon(QIcon(":/resources/doxypress.png"));
 
    if (! json_Read(CFG_STARTUP) ) {
@@ -127,7 +127,7 @@ MainWindow::MainWindow()
    m_ui->runText->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
 
    QPalette colors = m_ui->runText->palette();
-   colors.setColor( QPalette::Highlight, QColor(248,233,96, 255));
+   colors.setColor( QPalette::Highlight, QColor(248, 233, 96, 255));
    colors.setColor( QPalette::HighlightedText, Qt::black);
    m_ui->runText->setPalette(colors);
 
@@ -154,22 +154,22 @@ void MainWindow::about()
    QString icon = ":/resources/doxypress.png";
 
    QString textBody =
-      "<font color='#000080'><table style='margin-right:25'>"
+         "<font color='#000080'><table style='margin-right:25'>"
 
-      "<tr><td><img width='96' height='96'src='" + icon + "'></td>"
-      "    <td>"
-      "      <table style='margin-left:25; margin-top:15px' >"
-      "        <tr><td><nobr>Developed by Barbara Geller</nobr></td><td>barbara@copperspice.com</td></tr>"
-      "        <tr><td style=padding-right:25><nobr>Developed by Ansel Sermersheim</nobr></td><td>ansel@copperspice.com</td></tr>"
-      "       </table>"
-      "    </td>"
+         "<tr><td><img width='96' height='96'src='" + icon + "'></td>"
+         "    <td>"
+         "      <table style='margin-left:25; margin-top:15px' >"
+         "        <tr><td><nobr>Developed by Barbara Geller</nobr></td><td>barbara@copperspice.com</td></tr>"
+         "        <tr><td style=padding-right:25><nobr>Developed by Ansel Sermersheim</nobr></td><td>ansel@copperspice.com</td></tr>"
+         "       </table>"
+         "    </td>"
 
-      "</tr>"
-      "</table></font>"
+         "</tr>"
+         "</table></font>"
 
-      "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
-      "<p><small>Copyright 2014-2024 BG Consulting, released under the terms of the GNU GPL version 2<br>"
-      "This program is provided AS IS with no warranty of any kind.<br></small></p>";
+         "<p><nobr><small>Original development by Dimitri van Heesch</small></nobr></p>"
+         "<p><small>Copyright 2014-2024 BG Consulting, released under the terms of the GNU GPL version 2<br>"
+         "This program is provided AS IS with no warranty of any kind.<br></small></p>";
 
    QMessageBox msgB;
    msgB.setIcon(QMessageBox::NoIcon);
@@ -177,7 +177,7 @@ void MainWindow::about()
 
    msgB.setWindowTitle(tr("About DoxyPressApp"));
    msgB.setText(tr("<p style=margin-right:25><center><h5>Version: %1<br>Build # %2</h5></center></p>")
-                  .formatArgs(QString::fromLatin1(versionString), QString::fromLatin1(buildDate)));
+         .formatArgs(QString::fromLatin1(versionString), QString::fromLatin1(buildDate)));
 
    msgB.setInformativeText(textBody);
 
@@ -194,9 +194,9 @@ void MainWindow::createConnections()
    connect(m_ui->actionOpen,          &QAction::triggered, this, &MainWindow::openDoxy);
    connect(m_ui->actionReload,        &QAction::triggered, this, &MainWindow::reloadDoxy);
 
-   connect(m_ui->actionSave,          &QAction::triggered, this, [this](){ saveDoxy();   });
-   connect(m_ui->actionSave_As,       &QAction::triggered, this, [this](){ saveDoxyAs(); });
-   connect(m_ui->actionExit,          &QAction::triggered, this, [this](){ close();      });
+   connect(m_ui->actionSave,          &QAction::triggered, this, [this]() { saveDoxy();   });
+   connect(m_ui->actionSave_As,       &QAction::triggered, this, [this]() { saveDoxyAs(); });
+   connect(m_ui->actionExit,          &QAction::triggered, this, [this]() { close();      });
 
    connect(m_ui->actionImport,        &QAction::triggered, this, &MainWindow::importDoxy);
    connect(m_ui->actionEdit_Cfg,      &QAction::triggered, this, &MainWindow::edit_Cfg);
@@ -222,10 +222,10 @@ void MainWindow::createConnections()
    connect(m_ui->gen_rtf_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_rtf_1);
    connect(m_ui->gen_xml_CB1,         &QCheckBox::toggled,   this, &MainWindow::valid_gen_xml_1);
 
-   connect(m_ui->buttonGroup_html,    static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
-           this, &MainWindow::validSet_html);
-   connect(m_ui->buttonGroup_latex,   static_cast<void (QButtonGroup:: *)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
-           this, &MainWindow::validSet_latex);
+   connect(m_ui->buttonGroup_html,    static_cast<void (QButtonGroup::*)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+         this, &MainWindow::validSet_html);
+   connect(m_ui->buttonGroup_latex,   static_cast<void (QButtonGroup::*)(QAbstractButton *)> (&QButtonGroup::buttonClicked),
+         this, &MainWindow::validSet_latex);
 
    // tab 2
    connect(m_ui->full_path_names_CB,        &QPushButton::toggled, this, &MainWindow::valid_full_path_names);
@@ -382,7 +382,7 @@ void MainWindow::createConnections()
    // tab 4
    connect(m_runProcess,               &QProcess::readyReadStandardOutput, this, &MainWindow::readStdout);
    connect(m_runProcess,               static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                                       this, &MainWindow::runComplete);
+         this, &MainWindow::runComplete);
 
    connect(m_ui->run_PB,               &QPushButton::clicked, this, &MainWindow::runDoxyPress);
    connect(m_ui->parameters_PB,        &QPushButton::clicked, this, &MainWindow::setArgs);
@@ -403,7 +403,6 @@ void MainWindow::createShortCuts()
       QKeySequence key_exit;
       QKeySequence key_DoxyHelp;
    }  struct_key;
-
 
    struct_key.key_new       = QKeySequence(QKeySequence::New);
    struct_key.key_open      = QKeySequence(QKeySequence::Open);
@@ -566,4 +565,3 @@ QSize MainWindow::sizeHint() const
    // sets the recommended size
    return QSize(1000, 600);
 }
-

@@ -29,21 +29,21 @@ class Dialog_Find : public QDialog
 {
    CS_OBJECT(Dialog_Find)
 
-   public:
-      Dialog_Find(MainWindow *parent, QString text);
-      ~Dialog_Find();
+ public:
+   Dialog_Find(MainWindow *parent, QString text);
+   ~Dialog_Find();
 
-      QString get_findText();      
-      bool get_Direction();
-      bool get_Case();
-      bool get_SearchTop();
+   QString get_findText();
+   bool get_Direction();
+   bool get_Case();
+   bool get_SearchTop();
 
-   private:
-      Ui::Dialog_Find *m_ui;         
-      bool m_upd_Find;
+ private:
+   Ui::Dialog_Find *m_ui;
+   bool m_upd_Find;
 
-      void find(); 
-      void cancel();    
+   void find();
+   void cancel();
 };
 
 #endif

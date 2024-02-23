@@ -28,24 +28,24 @@ class Dialog_SelectCfg : public QDialog
 {
    CS_OBJECT(Dialog_SelectCfg)
 
-   public:
-      explicit Dialog_SelectCfg(MainWindow *parent);
-      ~Dialog_SelectCfg();
+ public:
+   explicit Dialog_SelectCfg(MainWindow *parent);
+   ~Dialog_SelectCfg();
 
-      enum Result {
-         SysDefault,
-         Pick,
-         Existing,
-         Cancel
-      };
+   enum Result {
+      SysDefault,
+      Pick,
+      Existing,
+      Cancel
+   };
 
-   private:
-      Ui::Dialog_SelectCfg *m_ui;
+ private:
+   Ui::Dialog_SelectCfg *m_ui;
 
-      void sysDefault();
-      void pick();
-      void existing();
-      void cancel();
+   void sysDefault();
+   void pick();
+   void existing();
+   void cancel();
 };
 
 #endif

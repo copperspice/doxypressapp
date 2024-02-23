@@ -16,15 +16,16 @@
 *
 *************************************************************************/
 
-#include <QAbstractItemView>
-#include <QDir>
-#include <QFileInfoList>
-
 #include "dialog_xp_getdir.h"
 #include "mainwindow.h"
 #include "util.h"
 
+#include <QAbstractItemView>
+#include <QDir>
+#include <QFileInfoList>
+
 #ifdef Q_OS_WIN
+
 #ifndef UNICODE
 #define UNICODE
 #endif
@@ -34,9 +35,11 @@
 #endif
 
 Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path,
-         QFileDialog::FileDialogOptions options)
+      QFileDialog::FileDialogOptions options)
    : QDialog(from), m_ui(new Ui::Dialog_XP_GetDir)
 {
+   (void) options;
+
    // the value for path is an absolute path
    m_path = path;
 
@@ -62,6 +65,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    QFileInfoList driveList = QDir::drives();
 
    QString drive_L = m_path;
+
    if (drive_L.isEmpty())  {
       drive_L = QCoreApplication::applicationDirPath();
    }
@@ -109,7 +113,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    QModelIndex index = m_model_R->index(drive_L);
    m_ui->folders_TV->setRootIndex(index);
 
-   for(int nCount = 1; nCount < m_model_R->columnCount(); nCount++) {
+   for (int nCount = 1; nCount < m_model_R->columnCount(); nCount++) {
       m_ui->folders_TV->hideColumn(nCount);
    }
 
@@ -207,20 +211,11 @@ void Dialog_XP_GetDir::network()
    // add network servers to left treeview
    m_netServers = getWin_NetServers();
 
-// QFileSystemModel finds the netShares, this method is not required
-// m_netShares  = getWin_NetShares();
-
    for (auto k = m_netServers.begin(); k != m_netServers.end(); ++k) {
       data = k->serverName;
 
       QString other = "Network Share";
 
-/*    if (k->isAvailable) {
-         other = "Network Share";
-      } else  {
-         other = "UnAvailable";
-      }
-*/
       item = new QTreeWidgetItem(m_ui->drives_TV);
       item->setText(0, data);
       item->setText(1, other);
@@ -231,6 +226,8 @@ void Dialog_XP_GetDir::network()
 
 void Dialog_XP_GetDir::showDirectories(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
+   (void) previous;
+
    if (! current) {
       return;
    }
@@ -287,18 +284,15 @@ void Dialog_XP_GetDir::showDirectories(QTreeWidgetItem *current, QTreeWidgetItem
    m_ui->folders_TV->setRootIndex(index);
 }
 
-void Dialog_XP_GetDir::showMe(const QString &path)
+void Dialog_XP_GetDir::showMe()
 {
-   //  m_index_R = m_model_R->index(m_path);
-   //  m_ui->folders_TV->setCurrentIndex(m_index_R);
-
    // needs additional functionality in CS
    m_ui->folders_TV->scrollTo(m_index_R, QAbstractItemView::PositionAtCenter);
 }
 
 QSize Dialog_XP_GetDir::sizeHint() const
 {
-   return QSize(625,600);
+   return QSize(625, 600);
 }
 
 QList<netServers> Dialog_XP_GetDir::getWin_NetServers()
@@ -337,8 +331,8 @@ QList<netServers> Dialog_XP_GetDir::getWin_NetServers()
 
       if (buffer != NULL) {
 
-         for (uint32_t k = 0; k < entriesRead; k++)  {
-            QString temp = QString::fromStdWString(buffer[k].sv100_name);
+         for (uint32_t i = 0; i < entriesRead; i++)  {
+            QString temp = QString::fromStdWString(buffer[i].sv100_name);
 
             if (temp != nameLocal ) {
                retval.append( netServers{temp, true} );
@@ -346,7 +340,6 @@ QList<netServers> Dialog_XP_GetDir::getWin_NetServers()
          }
       }
    }
-
 #endif
 
    return retval;

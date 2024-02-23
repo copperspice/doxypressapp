@@ -70,4 +70,3 @@ QString Dialog_Config::get_newName()
 {
    return m_ui->newName->text();
 }
-

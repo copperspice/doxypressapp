@@ -28,46 +28,46 @@ void MainWindow::convertDoxy(QByteArray data)
    int  tempInt;
 
    // tab 1
-   tempStr = convert_Str(data,"PROJECT_NAME");
+   tempStr = convert_Str(data, "PROJECT_NAME");
    m_ui->project_name->setText(tempStr);
 
-   tempStr = convert_Str(data,"PROJECT_BRIEF");
+   tempStr = convert_Str(data, "PROJECT_BRIEF");
    m_ui->project_brief->setText(tempStr);
 
-   tempStr = convert_Str(data,"PROJECT_NUMBER");
+   tempStr = convert_Str(data, "PROJECT_NUMBER");
    m_ui->project_version->setText(tempStr);
 
-   tempStr= convert_Str(data, "PROJECT_LOGO");
+   tempStr = convert_Str(data, "PROJECT_LOGO");
    m_ui->project_logo->setText(tempStr);
 
-   tempStr = convert_Str(data,"OUTPUT_DIRECTORY");
+   tempStr = convert_Str(data, "OUTPUT_DIRECTORY");
    m_ui->output_dir->setText(tempStr);
 
    //
    bool isCpp = true;
 
-   tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_JAVA");
+   tempBool = convert_Bool(data, "OPTIMIZE_OUTPUT_JAVA");
    m_ui->optimize_java_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
-   tempBool = convert_Bool(data,"OPTIMIZE_OUTPUT_FOR_C");
+   tempBool = convert_Bool(data, "OPTIMIZE_OUTPUT_FOR_C");
    m_ui->optimize_c_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
-   tempBool = convert_Bool(data,"OPTIMIZE_FOR_FORTRAN");
+   tempBool = convert_Bool(data, "OPTIMIZE_FOR_FORTRAN");
    m_ui->optimize_fortran_RB->setChecked(tempBool);
 
    if (tempBool)  {
       isCpp = false;
    }
 
-   tempBool = convert_Bool(data,"OPTIMIZE_FOR_PYTHON");
+   tempBool = convert_Bool(data, "OPTIMIZE_FOR_PYTHON");
    m_ui->optimize_python_RB->setChecked(tempBool);
 
    if (tempBool)  {
@@ -79,24 +79,23 @@ void MainWindow::convertDoxy(QByteArray data)
    }
 
    //
-   tempBool = convert_Bool(data,"GENERATE_HTML");
+   tempBool = convert_Bool(data, "GENERATE_HTML");
    m_ui->gen_html_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_LATEX");
+   tempBool = convert_Bool(data, "GENERATE_LATEX");
    m_ui->gen_latex_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_RTF");;
+   tempBool = convert_Bool(data, "GENERATE_RTF");;
    m_ui->gen_rtf_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_MAN");
+   tempBool = convert_Bool(data, "GENERATE_MAN");
    m_ui->gen_man_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_XML");
+   tempBool = convert_Bool(data, "GENERATE_XML");
    m_ui->gen_xml_CB1->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"GENERATE_DOCBOOK");
+   tempBool = convert_Bool(data, "GENERATE_DOCBOOK");
    m_ui->gen_docbook_CB1->setChecked(tempBool);
-
 
    //  ***
    // tab 2 - general
@@ -116,7 +115,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "REPEAT_BRIEF");
    m_ui->repeat_brief_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"ABBREVIATE_BRIEF");
+   tempText = convert_PlainText(data, "ABBREVIATE_BRIEF");
    m_ui->abbreviate_brief->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "ALWAYS_DETAILED_SEC");
@@ -128,10 +127,10 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "FULL_PATH_NAMES");
    m_ui->full_path_names_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"STRIP_FROM_PATH");
+   tempText = convert_PlainText(data, "STRIP_FROM_PATH");
    m_ui->strip_from_path->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"STRIP_FROM_INC_PATH");
+   tempText = convert_PlainText(data, "STRIP_FROM_INC_PATH");
    m_ui->strip_from_inc_path->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "SHORT_NAMES");
@@ -155,13 +154,13 @@ void MainWindow::convertDoxy(QByteArray data)
    tempInt = convert_Int(data, "TAB_SIZE");
    m_ui->tab_size_SB->setValue(tempInt);
 
-   tempText = convert_PlainText(data,"ALIASES");
+   tempText = convert_PlainText(data, "ALIASES");
    m_ui->aliases->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"TCL_SUBST");
+   tempText = convert_PlainText(data, "TCL_SUBST");
    m_ui->tcl_subst->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"EXTENSION_MAPPING");
+   tempText = convert_PlainText(data, "EXTENSION_MAPPING");
    m_ui->language_mapping->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "MARKDOWN_SUPPORT");
@@ -205,7 +204,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempInt = convert_Int(data, "LOOKUP_CACHE_SIZE");
    m_ui->lookup_cache_size_SB->setValue(tempInt);
-
 
    // tab 2 - build
    tempBool = convert_Bool(data, "EXTRACT_ALL");
@@ -298,7 +296,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "GENERATE_DEPRECATEDLIST");
    m_ui->gen_deprecate_list_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"ENABLED_SECTIONS");
+   tempText = convert_PlainText(data, "ENABLED_SECTIONS");
    m_ui->enabled_sections->setPlainText(tempText);
 
    tempInt = convert_Int(data, "MAX_INITIALIZER_LINES");
@@ -322,62 +320,60 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "LAYOUT_FILE");
    m_ui->layout_file->setText(tempStr);
 
-   tempText = convert_PlainText(data,"CITE_BIB_FILES");
+   tempText = convert_PlainText(data, "CITE_BIB_FILES");
    m_ui->cite_bib_files->setPlainText(tempText);
 
-
    // tab 2 -input
-   tempStr = convert_PlainText(data,"INPUT");
+   tempStr = convert_PlainText(data, "INPUT");
    m_ui->input_source->setPlainText(tempStr);
 
-   tempStr = convert_Str(data,"INPUT_ENCODING");
+   tempStr = convert_Str(data, "INPUT_ENCODING");
    m_ui->input_encoding->setText(tempStr);
 
-   tempText = convert_PlainText(data,"FILE_PATTERNS");
+   tempText = convert_PlainText(data, "FILE_PATTERNS");
    m_ui->input_patterns->setPlainText(tempText);
 
-   tempBool = convert_Bool(data,"RECURSIVE");
+   tempBool = convert_Bool(data, "RECURSIVE");
    m_ui->input_recursive_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"EXCLUDE");
+   tempText = convert_PlainText(data, "EXCLUDE");
    m_ui->exclude_files->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "EXCLUDE_SYMLINKS");
    m_ui->exclude_symlinks_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"EXCLUDE_PATTERNS");
+   tempText = convert_PlainText(data, "EXCLUDE_PATTERNS");
    m_ui->exclude_patterns->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"EXCLUDE_SYMBOLS");
+   tempText = convert_PlainText(data, "EXCLUDE_SYMBOLS");
    m_ui->exclude_symbols->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"EXAMPLE_PATH");
+   tempText = convert_PlainText(data, "EXAMPLE_PATH");
    m_ui->example_source->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"EXAMPLE_PATTERNS");
+   tempText = convert_PlainText(data, "EXAMPLE_PATTERNS");
    m_ui->example_patterns->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "EXAMPLE_RECURSIVE");
    m_ui->example_recursive_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"IMAGE_PATH");
+   tempText = convert_PlainText(data, "IMAGE_PATH");
    m_ui->image_path->setPlainText(tempText);
 
    tempStr = convert_Str(data, "INPUT_FILTER");
    m_ui->filter_program->setText(tempStr);
 
-   tempText = convert_PlainText(data,"FILTER_PATTERNS");
+   tempText = convert_PlainText(data, "FILTER_PATTERNS");
    m_ui->filter_patterns->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "FILTER_SOURCE_FILES");
    m_ui->filter_source_files_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"FILTER_SOURCE_PATTERNS");
+   tempText = convert_PlainText(data, "FILTER_SOURCE_PATTERNS");
    m_ui->filter_source_patterns->setPlainText(tempText);
 
    tempStr = convert_Str(data, "USE_MDFILE_AS_MAINPAGE");
    m_ui->mdfile_mainpage->setText(tempStr);
-
 
    // tab 2 -index
    tempBool = convert_Bool(data, "ALPHABETICAL_INDEX");
@@ -386,10 +382,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempInt = convert_Int(data, "COLS_IN_ALPHA_INDEX");
    m_ui->cols_in_index_SB->setValue(tempInt);
 
-   tempText = convert_PlainText(data,"IGNORE_PREFIX");
+   tempText = convert_PlainText(data, "IGNORE_PREFIX");
    m_ui->ignore_prefix->setPlainText(tempText);
-
-
 
    // tab 2 - messages
    tempBool = convert_Bool(data, "QUIET");
@@ -407,12 +401,11 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "WARN_NO_PARAMDOC");
    m_ui->warn_undoc_param_CB->setChecked(tempBool);
 
-   tempStr = convert_Str(data,"WARN_FORMAT");
+   tempStr = convert_Str(data, "WARN_FORMAT");
    m_ui->warn_format->setText(tempStr);
 
-   tempStr = convert_Str(data,"WARN_LOGFILE");
+   tempStr = convert_Str(data, "WARN_LOGFILE");
    m_ui->warn_logfile->setText(tempStr);
-
 
    // tab 2 -source code
    tempBool = convert_Bool(data, "SOURCE_BROWSER");
@@ -445,15 +438,14 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "CLANG_ASSISTED_PARSING");
    m_ui->clang_parsing_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"CLANG_COMPILATION_DATABASE_PATH");
+   tempText = convert_PlainText(data, "CLANG_COMPILATION_DATABASE_PATH");
    m_ui->clang_compilation_path->setText(tempText);
 
    tempBool = convert_Bool(data, "CLANG_ADD_INC_PATHS");
    m_ui->clang_include_input_source_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"CLANG_OPTIONS");
+   tempText = convert_PlainText(data, "CLANG_OPTIONS");
    m_ui->clang_flags->setPlainText(tempText);
-
 
    // tab 2 - preprocess
    tempBool = convert_Bool(data, "ENABLE_PREPROCESSING");
@@ -468,27 +460,26 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "SEARCH_INCLUDES");
    m_ui->search_includes_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"INCLUDE_PATH");
+   tempText = convert_PlainText(data, "INCLUDE_PATH");
    m_ui->include_path->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"INCLUDE_FILE_PATTERNS");
+   tempText = convert_PlainText(data, "INCLUDE_FILE_PATTERNS");
    m_ui->include_patterns->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"PREDEFINED");
+   tempText = convert_PlainText(data, "PREDEFINED");
    m_ui->predefined_macros->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"EXPAND_AS_DEFINED");
+   tempText = convert_PlainText(data, "EXPAND_AS_DEFINED");
    m_ui->expand_as_defined->setPlainText(tempText);
 
    tempBool = convert_Bool(data, "SKIP_FUNCTION_MACROS");
    m_ui->skip_function_macros_CB->setChecked(tempBool);
 
-
    // tab 2 - external
-   tempText = convert_PlainText(data,"TAGFILES");
+   tempText = convert_PlainText(data, "TAGFILES");
    m_ui->tag_files->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"GENERATE_TAGFILE");
+   tempText = convert_PlainText(data, "GENERATE_TAGFILE");
    m_ui->gen_tagfile->setText(tempText);
 
    tempBool = convert_Bool(data, "ALLEXTERNALS");
@@ -500,9 +491,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "EXTERNAL_PAGES");
    m_ui->external_pages_CB->setChecked(tempBool);
 
-
    // tab 2 - dot
-   tempBool = convert_Bool(data,"CLASS_DIAGRAMS");
+   tempBool = convert_Bool(data, "CLASS_DIAGRAMS");
    m_ui->class_diagrams_CB->setChecked(tempBool);
 
    tempStr = convert_Str(data, "MSCGEN_PATH");
@@ -535,7 +525,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "CLASS_GRAPH");
    m_ui->dot_class_graph_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"COLLABORATION_GRAPH");
+   tempBool = convert_Bool(data, "COLLABORATION_GRAPH");
    m_ui->dot_collaboration_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GROUP_GRAPHS");
@@ -550,16 +540,16 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "TEMPLATE_RELATIONS");
    m_ui->template_relations_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"INCLUDE_GRAPH");
+   tempBool = convert_Bool(data, "INCLUDE_GRAPH");
    m_ui->dot_include_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"INCLUDED_BY_GRAPH");
+   tempBool = convert_Bool(data, "INCLUDED_BY_GRAPH");
    m_ui->dot_included_by_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"CALL_GRAPH");
+   tempBool = convert_Bool(data, "CALL_GRAPH");
    m_ui->dot_call_CB->setChecked(tempBool);
 
-   tempBool = convert_Bool(data,"CALLER_GRAPH");
+   tempBool = convert_Bool(data, "CALLER_GRAPH");
    m_ui->dot_called_by_CB->setChecked(tempBool);
 
    tempBool = convert_Bool(data, "GRAPHICAL_HIERARCHY");
@@ -575,13 +565,13 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "INTERACTIVE_SVG");
    m_ui->interactive_svg_CB->setChecked(tempBool);
 
-   tempText = convert_PlainText(data,"DOTFILE_DIRS");
+   tempText = convert_PlainText(data, "DOTFILE_DIRS");
    m_ui->dot_file_dirs->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"MSCFILE_DIRS");
+   tempText = convert_PlainText(data, "MSCFILE_DIRS");
    m_ui->msc_file_dirs->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"DIAFILE_DIRS");
+   tempText = convert_PlainText(data, "DIAFILE_DIRS");
    m_ui->dia_file_dirs->setPlainText(tempText);
 
    tempStr = convert_Str(data, "PLANTUML_JAR_PATH");
@@ -611,7 +601,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "DOT_CLEANUP");
    m_ui->dot_cleanup_CB->setChecked(tempBool);
 
-
    //  ***
    // tab 3 - html
    tempStr = convert_Str(data, "HTML_OUTPUT");
@@ -628,7 +617,7 @@ void MainWindow::convertDoxy(QByteArray data)
 
    // removed - add to tempText
    tempStr  = convert_Str(data, "HTML_STYLESHEET");
-   tempText = convert_PlainText(data,"HTML_EXTRA_STYLESHEET");
+   tempText = convert_PlainText(data, "HTML_EXTRA_STYLESHEET");
 
    if (! tempStr.isEmpty()) {
 
@@ -638,9 +627,10 @@ void MainWindow::convertDoxy(QByteArray data)
          tempText = tempStr + ", " + tempText;
       }
    }
+
    m_ui->html_stylesheets->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"HTML_EXTRA_FILES");
+   tempText = convert_PlainText(data, "HTML_EXTRA_FILES");
    m_ui->html_extra_files->setPlainText(tempText);
 
    tempInt = convert_Int(data, "HTML_COLORSTYLE_HUE");
@@ -661,7 +651,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempInt = convert_Int(data, "HTML_INDEX_NUM_ENTRIES");
    m_ui->html_index_num_entries_SB->setValue(tempInt);
 
-   tempBool = convert_Bool(data,"GENERATE_DOCSET");
+   tempBool = convert_Bool(data, "GENERATE_DOCSET");
    m_ui->gen_docbook_CB1->setChecked(tempBool);
 
    tempStr = convert_Str(data, "DOCSET_FEEDNAME");
@@ -765,7 +755,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "MATHJAX_RELPATH");
    m_ui->mathjax_relpath->setText(tempStr);
 
-   tempText = convert_PlainText(data,"MATHJAX_EXTENSIONS");
+   tempText = convert_PlainText(data, "MATHJAX_EXTENSIONS");
    m_ui->mathjax_extensions->setPlainText(tempText);
 
    tempStr = convert_Str(data, "MATHJAX_CODEFILE");
@@ -789,9 +779,8 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "EXTERNAL_SEARCH_ID");
    m_ui->search_external_id->setText(tempStr);
 
-   tempText = convert_PlainText(data,"EXTRA_SEARCH_MAPPING");
+   tempText = convert_PlainText(data, "EXTRA_SEARCH_MAPPING");
    m_ui->search_mappings->setPlainText(tempText);
-
 
    // tab 3 - latex
    tempStr = convert_Str(data, "LATEX_OUTPUT");
@@ -810,7 +799,7 @@ void MainWindow::convertDoxy(QByteArray data)
    tempInt = m_ui->latex_paper_type_CM->findText(tempStr);
    m_ui->latex_paper_type_CM->setCurrentIndex(tempInt);
 
-   tempText = convert_PlainText(data,"EXTRA_PACKAGES");
+   tempText = convert_PlainText(data, "EXTRA_PACKAGES");
    m_ui->latex_extra_packages->setPlainText(tempText);
 
    tempStr = convert_Str(data, "LATEX_HEADER");
@@ -819,10 +808,10 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "LATEX_FOOTER");
    m_ui->latex_footer->setText(tempStr);
 
-   tempText = convert_PlainText(data,"LATEX_EXTRA_STYLESHEET");
+   tempText = convert_PlainText(data, "LATEX_EXTRA_STYLESHEET");
    m_ui->latex_stylesheets->setPlainText(tempText);
 
-   tempText = convert_PlainText(data,"LATEX_EXTRA_FILES");
+   tempText = convert_PlainText(data, "LATEX_EXTRA_FILES");
    m_ui->latex_extra_files->setPlainText(tempText);
 
    // new field
@@ -846,7 +835,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "LATEX_BIB_STYLE");
    m_ui->latex_bib_style->setText(tempStr);
 
-
    // tab 3 - rtf
    tempStr = convert_Str(data, "RTF_OUTPUT");
    m_ui->rtf_output->setText(tempStr);
@@ -866,7 +854,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempBool = convert_Bool(data, "RTF_SOURCE_CODE");
    m_ui->rtf_source_code_CB->setChecked(tempBool);
 
-
    // tab 3 - man
    tempStr = convert_Str(data, "MAN_OUTPUT");
    m_ui->man_output->setText(tempStr);
@@ -879,7 +866,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "MAN_LINKS");
    m_ui->man_links_CB->setChecked(tempBool);
-
 
    // tab 3 - perl module
    tempBool = convert_Bool(data, "GENERATE_PERLMOD");
@@ -894,7 +880,6 @@ void MainWindow::convertDoxy(QByteArray data)
    tempStr = convert_Str(data, "PERLMOD_MAKEVAR_PREFIX");
    m_ui->perl_prefix->setText(tempStr);
 
-
    // tab 3 - xml
    tempStr = convert_Str(data, "XML_OUTPUT");
    m_ui->xml_output->setText(tempStr);
@@ -904,7 +889,6 @@ void MainWindow::convertDoxy(QByteArray data)
 
    tempBool = convert_Bool(data, "XML_NS_MEMB_FILE_SCOPE");
    m_ui->xml_include_ns_members_CB->setChecked(tempBool);
-
 
    // tab 3 - docbook
    tempStr = convert_Str(data, "DOCBOOK_OUTPUT");
@@ -1042,7 +1026,7 @@ QString MainWindow::convert_PlainText(QByteArray data, QByteArray key)
                   isFirst = false;
 
                } else {
-                  list.insert(k+j, newStr);
+                  list.insert(k + j, newStr);
 
                   // watch these two lines of code
                   ++maxList;
@@ -1077,6 +1061,7 @@ void MainWindow::importDoxy()
       }
 
       QFile file(fname);
+
       if (! file.open(QIODevice::ReadOnly)) {
          csError(tr("Error trying to open: ") + fname, tr("Unable to open: ") + file.error());
          break;
@@ -1102,20 +1087,20 @@ void MainWindow::importDoxy()
             break;
          }
 
-         posEnd = data.indexOf("\n",posBeg);
-         data.remove(posBeg, posEnd-posBeg);
+         posEnd = data.indexOf("\n", posBeg);
+         data.remove(posBeg, posEnd - posBeg);
       }
 
       // verify a few fields to ensure this is an old project file
       if (! data.contains("PROJECT_NAME") || ! data.contains("OUTPUT_DIRECTORY"))  {
          csError(tr("Convert Project File"), tr("Project file is missing the basic required information, "
-                  "process aborted"));
+                     "process aborted"));
          break;
       }
 
       // ** save as new project file
       fname = QFileDialog::getSaveFileName(this, tr("Save as DoxyPress project file"), importPath,
-                                           tr("Json Files (*.json)"));
+                  tr("Json Files (*.json)"));
 
       if (fname.isEmpty()) {
          csError(tr("Convert Project File"), tr("No DoxyPress file name was provided, process aborted"));
@@ -1160,6 +1145,7 @@ void MainWindow::importDoxy()
 void MainWindow::autoConvert(QString fromFile, QString toFile)
 {
    QFile file(fromFile);
+
    if (! file.open(QIODevice::ReadOnly)) {
       printf("Error: Unable to open %s, error %d", csPrintable(fromFile), file.error());
       return;
@@ -1182,8 +1168,8 @@ void MainWindow::autoConvert(QString fromFile, QString toFile)
          break;
       }
 
-      posEnd = data.indexOf("\n",posBeg);
-      data.remove(posBeg, posEnd-posBeg);
+      posEnd = data.indexOf("\n", posBeg);
+      data.remove(posBeg, posEnd - posBeg);
    }
 
    // verify a few fields to ensure this is an old project file

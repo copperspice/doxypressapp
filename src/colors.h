@@ -42,20 +42,21 @@ class TuneColorDialog : public QDialog
 {
    CS_OBJECT(TuneColorDialog)
 
-   public:
-      TuneColorDialog(int hue, int sat, int gamma, QWidget *parent = 0);
-      int getHue() const;
-      int getSaturation() const;
-      int getGamma() const;
+ public:
+   TuneColorDialog(int hue, int sat, int gamma, QWidget *parent = nullptr);
 
-   private :
-      void updateImage(int hue, int sat, int val);
+   int getHue() const;
+   int getSaturation() const;
+   int getGamma() const;
 
-      QImage *m_image;
-      QLabel *m_imageLab;
-      int m_hue;
-      int m_sat;
-      int m_gam;
+ private:
+   void updateImage(int hue, int sat, int val);
+
+   QImage *m_image;
+   QLabel *m_imageLab;
+   int m_hue;
+   int m_sat;
+   int m_gam;
 };
 
 class ColorPicker : public QWidget
@@ -63,7 +64,11 @@ class ColorPicker : public QWidget
    CS_OBJECT(ColorPicker)
 
  public:
-   enum Mode { Hue, Saturation, Gamma };
+   enum Mode {
+      Hue,
+      Saturation,
+      Gamma
+   };
 
    ColorPicker(Mode m);
    ~ColorPicker();
@@ -79,23 +84,30 @@ class ColorPicker : public QWidget
    void mousePressEvent(QMouseEvent *) override;
 
  private:
-   enum { foff = 3, coff = 4 }; //frame and contents offset
+   // frame and contents offset
+   enum {
+      foff = 3,
+      coff = 4
+   };
+
    int y2hue(int y);
    int y2sat(int y);
    int y2gam(int y);
+
    int hue2y(int hue);
    int sat2y(int sat);
    int gam2y(int gamma);
+
    void setHue(int v);
    void setSat(int v);
    void setGam(int v);
 
    QPixmap *m_pix;
    Mode m_mode;
-   int m_gam;
+
    int m_hue;
    int m_sat;
-
+   int m_gam;
 };
 
 #endif

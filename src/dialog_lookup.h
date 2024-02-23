@@ -29,28 +29,28 @@ class Dialog_LookUp : public QDialog
 {
    CS_OBJECT(Dialog_LookUp)
 
-   public:
-      explicit Dialog_LookUp(MainWindow *parent, struct LookUpInfo data);
-      ~Dialog_LookUp();
+ public:
+   explicit Dialog_LookUp(MainWindow *parent, struct LookUpInfo data);
+   ~Dialog_LookUp();
 
-      QStringList getData();
-      QSize sizeHint() const override;
+   QStringList getData();
+   QSize sizeHint() const override;
 
-   private:
-      MainWindow *m_owner;
+ private:
+   MainWindow *m_owner;
 
-      Ui::Dialog_LookUp *m_ui;
-      QStandardItemModel *m_model;
-      struct LookUpInfo m_data;
+   Ui::Dialog_LookUp *m_ui;
+   QStandardItemModel *m_model;
+   struct LookUpInfo m_data;
 
-      void moveItemUp();
-      void moveItemDown();
-      void getFile();
-      void getFolder();
-      void addItem();
-      void deleteItem();
-      void save();
-      void cancel();
+   void moveItemUp();
+   void moveItemDown();
+   void getFile();
+   void getFolder();
+   void addItem();
+   void deleteItem();
+   void save();
+   void cancel();
 };
 
 #endif

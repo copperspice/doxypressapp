@@ -54,16 +54,16 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
       m_ui->folders_PB->setEnabled(false);
    }
 
-   connect(m_ui->up_PB,           &QPushButton::clicked, this, &Dialog_LookUp::moveItemUp);
-   connect(m_ui->down_PB,         &QPushButton::clicked, this, &Dialog_LookUp::moveItemDown);
+   connect(m_ui->up_PB,       &QPushButton::clicked, this, &Dialog_LookUp::moveItemUp);
+   connect(m_ui->down_PB,     &QPushButton::clicked, this, &Dialog_LookUp::moveItemDown);
 
-   connect(m_ui->files_PB,        &QPushButton::clicked, this, &Dialog_LookUp::getFile);
-   connect(m_ui->folders_PB,      &QPushButton::clicked, this, &Dialog_LookUp::getFolder);
+   connect(m_ui->files_PB,    &QPushButton::clicked, this, &Dialog_LookUp::getFile);
+   connect(m_ui->folders_PB,  &QPushButton::clicked, this, &Dialog_LookUp::getFolder);
 
-   connect(m_ui->add_PB,          &QPushButton::clicked, this, &Dialog_LookUp::addItem);
-   connect(m_ui->delete_PB,       &QPushButton::clicked, this, &Dialog_LookUp::deleteItem);
-   connect(m_ui->save_PB,         &QPushButton::clicked, this, &Dialog_LookUp::save);
-   connect(m_ui->cancel_PB,       &QPushButton::clicked, this, &Dialog_LookUp::cancel);
+   connect(m_ui->add_PB,      &QPushButton::clicked, this, &Dialog_LookUp::addItem);
+   connect(m_ui->delete_PB,   &QPushButton::clicked, this, &Dialog_LookUp::deleteItem);
+   connect(m_ui->save_PB,     &QPushButton::clicked, this, &Dialog_LookUp::save);
+   connect(m_ui->cancel_PB,   &QPushButton::clicked, this, &Dialog_LookUp::cancel);
 
    // force call to sizeHint()
    adjustSize();
@@ -76,7 +76,7 @@ Dialog_LookUp::~Dialog_LookUp()
 
 void Dialog_LookUp::addItem()
 {
-   QStandardItem *item = new QStandardItem("");
+   QStandardItem *item = new QStandardItem();
    m_model->appendRow(item);
 
    // add new row
@@ -90,6 +90,7 @@ void Dialog_LookUp::addItem()
 void Dialog_LookUp::deleteItem()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
+
    if (! index.isValid() ) {
       return;
    }
@@ -124,6 +125,7 @@ void Dialog_LookUp::deleteItem()
 void Dialog_LookUp::getFile()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
+
    if (! index.isValid() ) {
       return;
    }
@@ -138,6 +140,7 @@ void Dialog_LookUp::getFile()
 void Dialog_LookUp::getFolder()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
+
    if (! index.isValid() ) {
       return;
    }
@@ -152,8 +155,10 @@ void Dialog_LookUp::getFolder()
 void Dialog_LookUp::moveItemUp()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
-   if (! index.isValid() )
+
+   if (! index.isValid()) {
       return;
+   }
 
    // current row
    int rowUp = index.row();
@@ -175,7 +180,7 @@ void Dialog_LookUp::moveItemUp()
          }
 
          // decrement and try again
-         rowAbove--;
+         --rowAbove;
 
       } else {
          // have good value
@@ -209,6 +214,7 @@ void Dialog_LookUp::moveItemUp()
 void Dialog_LookUp::moveItemDown()
 {
    QModelIndex index = m_ui->tableView->currentIndex();
+
    if (! index.isValid() ) {
       return;
    }
@@ -235,7 +241,7 @@ void Dialog_LookUp::moveItemDown()
          }
 
          // decrement and try again
-         rowBelow++;
+         ++rowBelow;
 
       } else {
          // have a good value
@@ -287,7 +293,7 @@ QStringList Dialog_LookUp::getData()
    int max = m_model->rowCount();
 
    for (int row = 0; row < max; ++row) {
-      QStandardItem *item = m_model->item(row,0);
+      QStandardItem *item = m_model->item(row, 0);
 
       if (! item->text().isEmpty()) {
          retval.append(item->text());

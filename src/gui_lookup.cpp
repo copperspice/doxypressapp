@@ -31,7 +31,7 @@ void MainWindow::getLogo(const QString route)
    if (route == "load") {
       QString tempName = logoName;
 
-      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) )  {
+      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) ) {
          tempName = projectDir + "/" + tempName;
       }
 
@@ -46,7 +46,7 @@ void MainWindow::getLogo(const QString route)
    } else {
       QString tempName = logoName;
 
-      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) )  {
+      if (! tempName.isEmpty() && ! QDir::isAbsolutePath(tempName) ) {
          tempName = projectDir + "/" + tempName;
       }
 
@@ -1001,7 +1001,6 @@ void MainWindow::plantuml_inc_path_PB()
       m_ui->plantuml_inc_path->setPlainText(temp);
    }
 }
-
 
 // tab 3 look up (html)
 void MainWindow::html_output_PB()

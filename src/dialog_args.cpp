@@ -16,16 +16,18 @@
 *
 *************************************************************************/
 
-#include <QDateTimeEdit>
-
 #include "dialog_args.h"
 #include "util.h"
 
+#include <QDateTimeEdit>
+
 const QString dateTimeFormat = "yyyy/MM/dd HH:mm:ss";
 
-Dialog_Args::Dialog_Args(MainWindow *m_owner, struct Args argsX)
-   : m_ui(new Ui::Dialog_Args)
+Dialog_Args::Dialog_Args(MainWindow *parent, struct Args argsX)
+   : QDialog(parent), m_ui(new Ui::Dialog_Args)
 {
+   m_owner = parent;
+
    m_ui->setupUi(this);
    this->setWindowIcon(QIcon("://resources/doxypress.png"));
 
@@ -34,12 +36,12 @@ Dialog_Args::Dialog_Args(MainWindow *m_owner, struct Args argsX)
    m_ui->set_dateTime->setChecked(m_args.setDateTime);
 
    if (m_args.dateTime.isEmpty()) {
-      QDateTime dt = QDateTime::currentDateTime();     
+      QDateTime dt = QDateTime::currentDateTime();
       m_ui->dateTime->setDateTime(dt);
 
    } else {
       m_ui->dateTime->setDateTime(QDateTime::fromString(m_args.dateTime, dateTimeFormat) );
-   } 
+   }
 
    m_ui->deleteHtml->setChecked(m_args.deleteHtml);
 
@@ -96,4 +98,3 @@ struct Args Dialog_Args::get_Args()
 {
    return m_args;
 }
-

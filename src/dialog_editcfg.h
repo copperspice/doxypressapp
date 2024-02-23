@@ -28,19 +28,19 @@ class Dialog_EditCfg : public QDialog
 {
    CS_OBJECT(Dialog_EditCfg)
 
-   public:
-      explicit Dialog_EditCfg(MainWindow *parent, QString fileName);
-      ~Dialog_EditCfg();
+ public:
+   explicit Dialog_EditCfg(MainWindow *parent, QString fileName);
+   ~Dialog_EditCfg();
 
-      QString get_doxyPressFn();
+   QString get_doxyPressFn();
 
-   private:
-      MainWindow *m_owner;
-      Ui::Dialog_EditCfg *m_ui;
+ private:
+   MainWindow *m_owner;
+   Ui::Dialog_EditCfg *m_ui;
 
-      void fileLookUp();
-      void save();
-      void cancel();
+   void fileLookUp();
+   void save();
+   void cancel();
 };
 
 #endif

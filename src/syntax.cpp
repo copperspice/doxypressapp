@@ -80,4 +80,3 @@ void Syntax::highlightBlock(const QString &text)
       }
    }
 }
-

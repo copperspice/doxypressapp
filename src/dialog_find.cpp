@@ -30,7 +30,7 @@ Dialog_Find::Dialog_Find(MainWindow *parent, QString findText)
 {
    m_upd_Find = false;
 
-   m_ui->setupUi(this);   
+   m_ui->setupUi(this);
 
    m_ui->down_RB->setChecked(true);
    m_ui->searchTop_CKB->setChecked(true);
@@ -84,4 +84,3 @@ bool Dialog_Find::get_SearchTop()
 {
    return m_ui->searchTop_CKB->isChecked();
 }
-

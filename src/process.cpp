@@ -16,12 +16,12 @@
 *
 *************************************************************************/
 
-#include <QFileInfo>
-#include <QTextCursor>
-
-#include "mainwindow.h"
 #include "dialog_args.h"
 #include "dialog_find.h"
+#include "mainwindow.h"
+
+#include <QFileInfo>
+#include <QTextCursor>
 
 #ifdef WIN32
 #include <windows.h>
@@ -57,6 +57,7 @@ void MainWindow::runDoxyPress()
          QString dir = QCoreApplication::applicationDirPath();
 
          QDir file(dir);
+
          if (file.exists("doxypress.exe")) {
             doxyPressPath = dir + "/doxypress.exe";
 
@@ -155,7 +156,7 @@ void MainWindow::runDoxyPress()
          m_ui->run_PB->setText(tr("Stop DoxyPress"));
          m_ui->runStatus->setText(tr("DoxyPress is Running"));
 
-//B      m_timer->start(1000);
+         // B   m_timer->start(1000);
       }
 
    } else {
@@ -167,7 +168,7 @@ void MainWindow::runDoxyPress()
       // m_ui->run_PB->setText(tr("Run DoxyPress"));
       // m_ui->runStatus->setText(tr("DoxyPress is Idle"));
 
-//B   m_timer->stop();
+      // B   m_timer->stop();
    }
 }
 
@@ -184,6 +185,7 @@ void MainWindow::readStdout()
          runText_Append(text);
 
          count += text.count('\n');
+
          if (count > 8) {
             QTextCursor cursor = m_ui->runText->textCursor();
             cursor.movePosition(QTextCursor::End);
@@ -315,6 +317,7 @@ void MainWindow::find()
       }
 
       m_case = dw->get_Case();
+
       if (m_case) {
          m_flags |= QTextDocument::FindCaseSensitively;
       }
@@ -367,7 +370,7 @@ void MainWindow::saveLog()
    QString projectDir = pathName(m_curFile);
 
    QString logName = QFileDialog::getSaveFileName(this, tr("Save log output"),
-                  projectDir + "/doxypress_log.txt");
+               projectDir + "/doxypress_log.txt");
 
    if (! logName.isEmpty()) {
       QFile f(logName);
@@ -449,4 +452,3 @@ void MainWindow::deleteOutputFiles(const QString &path)
       }
    }
 }
-

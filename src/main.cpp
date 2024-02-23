@@ -16,13 +16,12 @@
 *
 *************************************************************************/
 
-#include <QApplication>
-#include <QMessageBox>
-#include <QString>
-
 #include "doxy_build_info.h"
 #include "mainwindow.h"
 
+#include <QApplication>
+#include <QMessageBox>
+#include <QString>
 #include <stdlib.h>
 
 static void convert(QString fromFile, QString toFile);
@@ -50,18 +49,18 @@ int main(int argc, char *argv[])
       QString toFile;
 
       if (index + 1 < argList.size()) {
-         fromFile = argList[index+1];
+         fromFile = argList[index + 1];
       }
 
       if (index + 2 < argList.size()) {
-         toFile   = argList[index+2];
+         toFile   = argList[index + 2];
       }
 
       convert(fromFile, toFile);
       exit(0);
 
    } else if (argList.contains("--help", Qt::CaseInsensitive) ||
-              argList.contains("--version", Qt::CaseInsensitive)) {
+         argList.contains("--version", Qt::CaseInsensitive)) {
 
       useage();
       exit(0);
@@ -74,7 +73,7 @@ int main(int argc, char *argv[])
 
       if (index > 0 && index + 1 < argList.size()) {
          // name of project file as an argument
-         main.openDoxy_Internal(argList[index+1]);
+         main.openDoxy_Internal(argList[index + 1]);
       }
 
       main.show();

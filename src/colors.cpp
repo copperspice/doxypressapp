@@ -29,7 +29,7 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
    m_imageLab = new QLabel;
    updateImage(hue, sat, gamma);
 
-   layout->addWidget(m_imageLab,0,0);
+   layout->addWidget(m_imageLab, 0, 0);
 
    //
    QHBoxLayout *buttonsLayout = new QHBoxLayout;
@@ -84,17 +84,25 @@ TuneColorDialog::TuneColorDialog(int hue, int sat, int gamma, QWidget *parent) :
 void hsl2rgb(double h, double s, double l, double *pRed, double *pGreen, double *pBlue)
 {
    double v;
-   double r, g, b;
+   double r;
+   double g;
+   double b;
 
    r = l;   // default to gray
    g = l;
    b = l;
    v = (l <= 0.5) ? (l * (1.0 + s)) : (l + s - l * s);
+
    if (v > 0) {
       double m;
       double sv;
+
       int sextant;
-      double fract, vsf, mid1, mid2;
+
+      double fract;
+      double vsf;
+      double mid1;
+      double mid2;
 
       m       = l + l - v;
       sv      = (v - m ) / v;
@@ -104,32 +112,38 @@ void hsl2rgb(double h, double s, double l, double *pRed, double *pGreen, double 
       vsf     = v * sv * fract;
       mid1    = m + vsf;
       mid2    = v - vsf;
+
       switch (sextant) {
          case 0:
             r = v;
             g = mid1;
             b = m;
             break;
+
          case 1:
             r = mid2;
             g = v;
             b = m;
             break;
+
          case 2:
             r = m;
             g = v;
             b = mid1;
             break;
+
          case 3:
             r = m;
             g = mid2;
             b = v;
             break;
+
          case 4:
             r = mid1;
             g = m;
             b = v;
             break;
+
          case 5:
             r = v;
             g = m;
@@ -137,6 +151,7 @@ void hsl2rgb(double h, double s, double l, double *pRed, double *pGreen, double 
             break;
       }
    }
+
    *pRed   = r;
    *pGreen = g;
    *pBlue  = b;
@@ -200,7 +215,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
    int wi = r.width() - 2;
    int hi = r.height() - 2;
 
-   if (!m_pix || m_pix->height() != hi || m_pix->width() != wi) {
+   if (! m_pix || m_pix->height() != hi || m_pix->width() != wi) {
       delete m_pix;
 
       QImage img(wi, hi, QImage::Format_RGB32);
@@ -235,9 +250,18 @@ void ColorPicker::paintEvent(QPaintEvent *)
 
    QPolygon a;
 
-   int y = m_mode == Hue ?        hue2y(m_hue) :
-           m_mode == Saturation ? sat2y(m_sat) :
-           gam2y(m_gam);
+   int y;
+
+   if (m_mode == Hue) {
+      y = hue2y(m_hue);
+
+   } else if (m_mode == Saturation) {
+      y = sat2y(m_sat);
+
+   } else {
+      y = gam2y(m_gam);
+   }
+
 
    a.setPoints(3, w, y, w + 5, y + 5, w + 5, y - 5);
    p.eraseRect(w, 0, 5, height());
@@ -275,8 +299,10 @@ void ColorPicker::setHue(int h)
    if (h == m_hue) {
       return;
    }
+
    m_hue = qMax(0, qMin(h, 359));
    delete m_pix;
+
    m_pix = 0;
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
@@ -287,8 +313,10 @@ void ColorPicker::setSat(int s)
    if (s == m_sat) {
       return;
    }
+
    m_sat = qMax(0, qMin(s, 255));
    delete m_pix;
+
    m_pix = 0;
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
@@ -299,8 +327,10 @@ void ColorPicker::setGam(int g)
    if (g == m_gam) {
       return;
    }
+
    m_gam = qMax(40, qMin(g, 240));
    delete m_pix;
+
    m_pix = 0;
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
@@ -313,6 +343,7 @@ void ColorPicker::setCol(int h, int s, int g)
       m_sat = s;
       m_gam = g;
       delete m_pix;
+
       m_pix = 0;
       repaint();
    }

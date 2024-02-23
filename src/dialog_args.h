@@ -26,23 +26,23 @@
 #include <QString>
 
 class Dialog_Args: public QDialog
-{     
+{
    CS_OBJECT(Dialog_Args)
 
-   public:
-      Dialog_Args(MainWindow *parent, struct Args argsX);
-      ~Dialog_Args();
+ public:
+   Dialog_Args(MainWindow *parent, struct Args argsX);
+   ~Dialog_Args();
 
-      struct Args get_Args();
+   struct Args get_Args();
 
-   private:
-      MainWindow *m_owner;
-      Ui::Dialog_Args *m_ui;
+ private:
+   MainWindow *m_owner;
+   Ui::Dialog_Args *m_ui;
 
-      struct Args m_args;
+   struct Args m_args;
 
-      void ok();
-      void cancel();
+   void ok();
+   void cancel();
 };
 
 #endif

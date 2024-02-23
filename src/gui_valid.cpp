@@ -49,6 +49,7 @@ void MainWindow::clearAllFields()
          temp_CB->setChecked(false);
 
          QLabel *label = getLabel(temp_CB);
+
          if (label) {
             setLabelColor(DEFAULT, label);
          }
@@ -65,12 +66,13 @@ void MainWindow::clearAllFields()
       QComboBox *temp_CM = dynamic_cast<QComboBox *>(item);
 
       if (temp_CM) {
-        temp_CM->setCurrentIndex(-1);
+         temp_CM->setCurrentIndex(-1);
 
-        QLabel *label = getLabel(temp_CM);
-        if (label) {
-           setLabelColor(DEFAULT, label);
-        }
+         QLabel *label = getLabel(temp_CM);
+
+         if (label) {
+            setLabelColor(DEFAULT, label);
+         }
       }
 
       QLineEdit *temp_LE = dynamic_cast<QLineEdit *>(item);
@@ -79,6 +81,7 @@ void MainWindow::clearAllFields()
          temp_LE->setText("");
 
          QLabel *label = getLabel(temp_LE);
+
          if (label) {
             setLabelColor(DEFAULT, label);
          }
@@ -90,6 +93,7 @@ void MainWindow::clearAllFields()
          temp_PT->setPlainText("");
 
          QLabel *label = getLabel(temp_PT);
+
          if (label) {
             setLabelColor(DEFAULT, label);
          }
@@ -180,7 +184,7 @@ void MainWindow::clearAllFields()
    m_ui->warn_doc_error_CB->setChecked(true);
    m_ui->warn_format->setText("$file:$line: $text");
 
-    // tab 2 -input src
+   // tab 2 -input src
    m_ui->input_encoding->setText("UTF-8");
    m_ui->input_patterns->setPlainText(m_filePatterns);
 
@@ -323,14 +327,13 @@ void MainWindow::adjustDefaults()
    // ** normal init values
    setDefault(m_ui->project_name);
 
-// setDefault(m_ui->optimize_cplus_RB);
+   // setDefault(m_ui->optimize_cplus_RB);
    setDefault(m_ui->gen_html_CB2);
    setDefault(m_ui->html_search_CB1);
 
    setDefault(m_ui->html_colorstyle_hue);
    setDefault(m_ui->html_colorstyle_sat);
    setDefault(m_ui->html_colorstyle_gamma);
-
 
    // tab 2 - general
    setDefault(m_ui->output_language_CM);
@@ -721,7 +724,7 @@ void MainWindow::valid_gen_xml_1(bool checked)
 
 void MainWindow::validSet_html(QAbstractButton *button)
 {
-    if (button == m_ui->html_plain_RB) {
+   if (button == m_ui->html_plain_RB) {
       // no navigation tree, compiled html help disabled
 
       m_ui->gen_chm_CB->setChecked(false);
@@ -746,16 +749,16 @@ void MainWindow::validSet_html(QAbstractButton *button)
 void MainWindow::validGet_html()
 {
    if (m_ui->gen_chm_CB->isChecked()) {
-     // compiled help
-     m_ui->html_chm_RB->setChecked(true);
+      // compiled help
+      m_ui->html_chm_RB->setChecked(true);
 
    } else if (m_ui->gen_treeview_CB->isChecked()) {
-     // navigation tree
-     m_ui->html_nav_RB->setChecked(true);
+      // navigation tree
+      m_ui->html_nav_RB->setChecked(true);
 
    } else  {
-     // plain HTML
-     m_ui->html_plain_RB->setChecked(true);
+      // plain HTML
+      m_ui->html_plain_RB->setChecked(true);
 
    }
 }
@@ -785,16 +788,16 @@ void MainWindow::validSet_latex(QAbstractButton *button)
 void MainWindow::validGet_latex()
 {
    if (m_ui->latex_pdf_CB->isChecked()) {
-     // postScript
-     m_ui->latex_ps_RB->setChecked(true);
+      // postScript
+      m_ui->latex_ps_RB->setChecked(true);
 
    } else if (m_ui->latex_hyper_pdf_CB->isChecked()) {
-     // pdf
-     m_ui->latex_pdf_RB->setChecked(true);
+      // pdf
+      m_ui->latex_pdf_RB->setChecked(true);
 
    } else  {
-     // hyperlinked PDF
-     m_ui->latex_hyper_pdf_RB->setChecked(true);
+      // hyperlinked PDF
+      m_ui->latex_hyper_pdf_RB->setChecked(true);
 
    }
 }
@@ -1035,6 +1038,7 @@ void MainWindow::valid_have_dot()
       m_ui->dia_file_dirs->setEnabled(false);
       m_ui->dia_file_dirs_PB->setEnabled(false);
 */
+
       m_ui->dot_graph_max_nodes_SB->setEnabled(false);
       m_ui->dot_graph_max_depth_SB->setEnabled(false);
       m_ui->dot_transparent_CB->setEnabled(false);
@@ -1423,7 +1427,6 @@ void MainWindow::valid_html_search()
       m_ui->search_mappings_PB ->setEnabled(false);
    }
 }
-
 
 // **
 

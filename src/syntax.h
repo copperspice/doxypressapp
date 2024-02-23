@@ -19,31 +19,31 @@
 #ifndef SYNTAX_H
 #define SYNTAX_H
 
+#include <QRegularExpression>
 #include <QSyntaxHighlighter>
 #include <QTextDocument>
-#include <QRegularExpression>
 
 class Syntax : public QSyntaxHighlighter
 {
    CS_OBJECT(Syntax)
 
-   public:
-      Syntax(QTextDocument *document);
-      ~Syntax();
+ public:
+   Syntax(QTextDocument *document);
+   ~Syntax();
 
-      void processSyntax();
+   void processSyntax();
 
-   protected:
-      void highlightBlock(const QString &text) override;
+ protected:
+   void highlightBlock(const QString &text) override;
 
-   private:
-      struct HighlightingRule
-      {
-         QRegularExpression pattern;
-         QTextCharFormat format;
-      };
+ private:
+   struct HighlightingRule
+   {
+      QRegularExpression pattern;
+      QTextCharFormat format;
+   };
 
-      QVector<HighlightingRule> highlightingRules;
+   QVector<HighlightingRule> highlightingRules;
 };
 
 #endif
