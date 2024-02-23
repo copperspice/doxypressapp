@@ -198,7 +198,7 @@ ColorPicker::ColorPicker(Mode m)
    m_gam = 100;
    m_sat = 100;
    m_mode = m;
-   m_pix = 0;
+   m_pix  = nullptr;
 }
 
 ColorPicker::~ColorPicker()
@@ -215,7 +215,7 @@ void ColorPicker::paintEvent(QPaintEvent *)
    int wi = r.width() - 2;
    int hi = r.height() - 2;
 
-   if (! m_pix || m_pix->height() != hi || m_pix->width() != wi) {
+   if (m_pix == nullptr || m_pix->height() != hi || m_pix->width() != wi) {
       delete m_pix;
 
       QImage img(wi, hi, QImage::Format_RGB32);
@@ -301,9 +301,10 @@ void ColorPicker::setHue(int h)
    }
 
    m_hue = qMax(0, qMin(h, 359));
-   delete m_pix;
 
-   m_pix = 0;
+   delete m_pix;
+   m_pix = nullptr;
+
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
 }
@@ -315,9 +316,10 @@ void ColorPicker::setSat(int s)
    }
 
    m_sat = qMax(0, qMin(s, 255));
-   delete m_pix;
 
-   m_pix = 0;
+   delete m_pix;
+   m_pix = nullptr;
+
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
 }
@@ -329,9 +331,10 @@ void ColorPicker::setGam(int g)
    }
 
    m_gam = qMax(40, qMin(g, 240));
-   delete m_pix;
 
-   m_pix = 0;
+   delete m_pix;
+   m_pix = nullptr;
+
    repaint();
    emit newHsv(m_hue, m_sat, m_gam);
 }
@@ -342,9 +345,10 @@ void ColorPicker::setCol(int h, int s, int g)
       m_hue = h;
       m_sat = s;
       m_gam = g;
-      delete m_pix;
 
-      m_pix = 0;
+      delete m_pix;
+      m_pix = nullptr;
+
       repaint();
    }
 }

@@ -52,8 +52,6 @@ class Dialog_XP_GetDir  : public QDialog
  private:
    Ui::Dialog_XP_GetDir *m_ui;
    QFileSystemModel  *m_model_R;
-
-   QString m_path;
    QModelIndex m_index_R;
 
    QList<netServers> m_netServers;

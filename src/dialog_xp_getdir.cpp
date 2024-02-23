@@ -25,23 +25,15 @@
 #include <QFileInfoList>
 
 #ifdef Q_OS_WIN
-
-#ifndef UNICODE
-#define UNICODE
-#endif
-
 #include <windows.h>
 #include <lm.h>
 #endif
 
-Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString path,
+Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const QString absolutePath,
       QFileDialog::FileDialogOptions options)
    : QDialog(from), m_ui(new Ui::Dialog_XP_GetDir)
 {
    (void) options;
-
-   // the value for path is an absolute path
-   m_path = path;
 
    m_ui->setupUi(this);
    setWindowTitle(title);
@@ -64,53 +56,52 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    // get drive list and starting drive
    QFileInfoList driveList = QDir::drives();
 
-   QString drive_L = m_path;
+   QString driveLetter = absolutePath;
 
-   if (drive_L.isEmpty())  {
-      drive_L = QCoreApplication::applicationDirPath();
+   if (driveLetter.isEmpty())  {
+      driveLetter = QCoreApplication::applicationDirPath();
    }
 
-   drive_L = drive_L.left(3);
+   driveLetter = driveLetter.left(3);
 
    // set up drive tree view - QList<QFileInfo>
    m_ui->drives_TV->setHeaderLabels(QStringList() << "Drive"  << "Drive Type");
    m_ui->drives_TV->setColumnCount(2);
    m_ui->drives_TV->setColumnWidth(15, 50);
 
-   QString data;
-   QTreeWidgetItem *item;
+   QString path;
+   QTreeWidgetItem *treeItem;
 
-   for (auto k = driveList.begin(); k != driveList.end(); ++k) {
-      data = k->path();
+   for (auto item : driveList) {
+      path = item.path();
 
-      if (data.endsWith("/")) {
-         data = data.left(2);
+      if (path.endsWith("/")) {
+         path = path.left(2);
       }
 
-      //
-      QString other = driveType(data);
+      QString other = driveType(path);
 
-      item = new QTreeWidgetItem(m_ui->drives_TV);
-      item->setText(0, data);
-      item->setText(1, other);
+      treeItem = new QTreeWidgetItem(m_ui->drives_TV);
+      treeItem->setText(0, path);
+      treeItem->setText(1, other);
 
-      if (drive_L.startsWith(data, Qt::CaseInsensitive)) {
-         m_ui->drives_TV->setCurrentItem(item);
+      if (driveLetter.startsWith(path, Qt::CaseInsensitive)) {
+         m_ui->drives_TV->setCurrentItem(treeItem);
       }
    }
 
    // set up tree view right
    m_model_R = new QFileSystemModel;
    m_model_R->setFilter(QDir::Drives | QDir::Dirs | QDir::NoDotAndDotDot);
-   m_model_R->setRootPath(drive_L);
+   m_model_R->setRootPath(driveLetter);
 
    // reset in case there is a backslash issue
-   drive_L = m_model_R->rootPath();
+   driveLetter = m_model_R->rootPath();
 
    m_ui->folders_TV->setModel(m_model_R);
    m_ui->folders_TV->setHeaderHidden(true);
 
-   QModelIndex index = m_model_R->index(drive_L);
+   QModelIndex index = m_model_R->index(driveLetter);
    m_ui->folders_TV->setRootIndex(index);
 
    for (int nCount = 1; nCount < m_model_R->columnCount(); nCount++) {
@@ -118,7 +109,7 @@ Dialog_XP_GetDir::Dialog_XP_GetDir(MainWindow *from, const QString title, const 
    }
 
    // search for the current path
-   m_index_R = m_model_R->index(m_path);
+   m_index_R = m_model_R->index(absolutePath);
    m_ui->folders_TV->setCurrentIndex(m_index_R);
 
    // tree view triggers
@@ -155,8 +146,7 @@ QString Dialog_XP_GetDir::driveType(QString drive)
    drive = drive + "\\";
 
 #ifdef Q_OS_WIN
-   // windows api call, pass drive value as UNICODE
-   driveType = GetDriveType(drive.toStdWString().c_str());
+   driveType = GetDriveTypeW(drive.toStdWString().c_str());
 #endif
 
    switch (driveType) {
@@ -205,20 +195,20 @@ void Dialog_XP_GetDir::ok()
 
 void Dialog_XP_GetDir::network()
 {
-   QString data;
-   QTreeWidgetItem *item;
+   QString networkName;
+   QTreeWidgetItem *treeItem;
 
    // add network servers to left treeview
    m_netServers = getWin_NetServers();
 
-   for (auto k = m_netServers.begin(); k != m_netServers.end(); ++k) {
-      data = k->serverName;
+   for (auto item : m_netServers) {
+      networkName = item.serverName;
 
       QString other = "Network Share";
 
-      item = new QTreeWidgetItem(m_ui->drives_TV);
-      item->setText(0, data);
-      item->setText(1, other);
+      treeItem = new QTreeWidgetItem(m_ui->drives_TV);
+      treeItem->setText(0, networkName);
+      treeItem->setText(1, other);
    }
 
    m_ui->network_PB->setDisabled(true);
@@ -306,7 +296,7 @@ QList<netServers> Dialog_XP_GetDir::getWin_NetServers()
    wchar_t nameBuffer[4096];
    long unsigned int  nameSize = 4096;
 
-   if (GetComputerName(nameBuffer, &nameSize)) {
+   if (GetComputerNameW(nameBuffer, &nameSize)) {
       nameLocal = QString::fromStdWString(nameBuffer);
    }
 

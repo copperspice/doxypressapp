@@ -18,14 +18,14 @@
 
 #include "dialog_lookup.h"
 
-Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
+Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo lookUpInfo)
    :  QDialog(parent), m_ui(new Ui::Dialog_LookUp)
 {
-   m_data  = data;
    m_owner = parent;
+   m_lookUpInfo = lookUpInfo;
 
    m_ui->setupUi(this);
-   setWindowTitle(m_data.title);
+   setWindowTitle(m_lookUpInfo.title);
 
    m_model = new QStandardItemModel();
 
@@ -37,7 +37,7 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    temp->setStretchLastSection(true);
 
    // existing data
-   for (auto s : m_data.dataList) {
+   for (auto s : m_lookUpInfo.dataList) {
       QStandardItem *item = new QStandardItem(s);
       m_model->appendRow(item);
    }
@@ -46,11 +46,11 @@ Dialog_LookUp::Dialog_LookUp(MainWindow *parent, struct LookUpInfo data)
    QModelIndex index = m_model->index(0, 0);
    m_ui->tableView->setCurrentIndex(index);
 
-   if (! data.isFilePB) {
+   if (! m_lookUpInfo.isFilePB) {
       m_ui->files_PB->setEnabled(false);
    }
 
-   if (! data.isFolderPB) {
+   if (! m_lookUpInfo.isFolderPB) {
       m_ui->folders_PB->setEnabled(false);
    }
 
@@ -146,7 +146,7 @@ void Dialog_LookUp::getFolder()
    }
 
    QString path = m_model->data(index).toString();
-   path = m_owner->get_DirPath(tr("Select destination directory"), path, m_data.relativeTo);
+   path = m_owner->get_DirPath(tr("Select destination directory"), path, m_lookUpInfo.relativeTo);
 
    // save new data
    m_model->setData(index, QVariant(path));

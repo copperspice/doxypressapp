@@ -62,8 +62,8 @@ bool MainWindow::json_Read(Config trail)
 
    if (ok) {
       // get existing json data
-      QByteArray data   = json_ReadFile();
-      QJsonDocument doc = QJsonDocument::fromJson(data);
+      QByteArray jsonData = json_ReadFile();
+      QJsonDocument doc   = QJsonDocument::fromJson(jsonData);
 
       QJsonObject object = doc.object();
       QJsonValue value;
@@ -138,14 +138,14 @@ bool MainWindow::json_Write(Option route, Config trail)
 
    if (true) {
       // get existing json data
-      QByteArray data = json_ReadFile();
+      QByteArray jsonData = json_ReadFile();
 
-      if (data.isEmpty()) {
+      if (jsonData.isEmpty()) {
          csError("Save Settings", "Configuration data is empty, aborting update...");
          return false;
       }
 
-      QJsonDocument doc  = QJsonDocument::fromJson(data);
+      QJsonDocument doc  = QJsonDocument::fromJson(jsonData);
       QJsonObject object = doc.object();
 
       switch (route)  {
@@ -187,9 +187,9 @@ bool MainWindow::json_Write(Option route, Config trail)
 
       // save the new data
       doc.setObject(object);
-      data = doc.toJsonByteArray();
+      jsonData = doc.toJsonByteArray();
 
-      json_SaveFile(data);
+      json_SaveFile(jsonData);
    }
 
    return true;
@@ -261,13 +261,13 @@ QByteArray MainWindow::json_ReadFile()
       return QByteArray();
    }
 
-   QByteArray data = file.readAll();
+   QByteArray jsonData = file.readAll();
    file.close();
 
-   return data;
+   return jsonData;
 }
 
-bool MainWindow::json_SaveFile(QByteArray data)
+bool MainWindow::json_SaveFile(QByteArray jsonData)
 {
    QString path = pathName(m_jsonFname);
    QDir directory(path);
@@ -284,7 +284,7 @@ bool MainWindow::json_SaveFile(QByteArray data)
       return false;
    }
 
-   file.write(data);
+   file.write(jsonData);
    file.close();
 
    return true;
@@ -308,9 +308,9 @@ bool MainWindow::json_CreateNew()
 
    // save the data
    QJsonDocument doc(object);
-   QByteArray data = doc.toJsonByteArray();
+   QByteArray jsonData = doc.toJsonByteArray();
 
-   bool ok = json_SaveFile(data);
+   bool ok = json_SaveFile(jsonData);
 
    return ok;
 }
@@ -464,13 +464,13 @@ void MainWindow::save_Cfg()
 }
 
 // **
-bool MainWindow::json_OpenDoxy(QByteArray data)
+bool MainWindow::json_OpenDoxy(QByteArray jsonData)
 {
-   QJsonDocument doc = QJsonDocument::fromJson(data);
+   QJsonDocument doc = QJsonDocument::fromJson(jsonData);
 
    if (! doc.isObject()) {
 
-      if (data.contains("PROJECT_NUMBER"))  {
+      if (jsonData.contains("PROJECT_NUMBER"))  {
          csError(tr("Open Project file"), tr("Selected file appears to be a Doxygen project file. To convert to "
                "a DoxyPress project file select Tools, then 'Convert to DoxyPress format'"));
 
@@ -1751,9 +1751,9 @@ QByteArray MainWindow::json_SaveDoxy()
 
    // save the data
    QJsonDocument doc(object);
-   QByteArray data = doc.toJsonByteArray();
+   QByteArray jsonData = doc.toJsonByteArray();
 
-   return data;
+   return jsonData;
 }
 
 QString MainWindow::getDataList(QJsonObject &object, QString fieldData)
@@ -1778,10 +1778,10 @@ QString MainWindow::getDataList(QJsonObject &object, QString fieldData)
 
 QJsonArray MainWindow::putDataList(QString fieldData)
 {
-   QJsonArray list  = QJsonArray();
-   QStringList temp = fieldData.split(", ");
+   QJsonArray list = QJsonArray();
+   QStringList strList = fieldData.split(", ");
 
-   for (auto s : temp) {
+   for (auto s : strList) {
       list.append(s);
    }
 

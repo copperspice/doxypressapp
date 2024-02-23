@@ -79,9 +79,9 @@ void MainWindow::showContext_Files(const QPoint &pt)
    QAction *action = m_ui->menuFile->actionAt(pt);
 
    if (action)  {
-      QString data = action->data().toString();
+      QString fileType = action->data().toString();
 
-      if (data == "recent-file")  {
+      if (fileType == "recent-file")  {
          QString fName = action->text();
 
          QMenu *menu = new QMenu(this);

@@ -103,7 +103,7 @@ struct HelpData {
    };
 
    HelpData(DefType x_type, QLabel *x_label, QString x_body)
-      : type(x_type), label(x_label), body(x_body)
+      : type(x_type), body(x_body), label(x_label)
    {
       defBool = false;
       defInt  = 0;
@@ -114,9 +114,10 @@ struct HelpData {
    bool defBool;
    int defInt;
 
-   QLabel *label;
    QString title;
    QString body;
+
+   QLabel *label;
 };
 
 struct Settings {
@@ -186,12 +187,12 @@ class MainWindow : public QMainWindow
    };
 
    void clearAllFields();
-   void convertDoxy(QByteArray data);
+   void convertDoxy(QByteArray inputData);
 
-   bool convert_Bool(QByteArray data, QByteArray key);
-   int convert_Int(QByteArray data, QByteArray key);
-   QString convert_Str(QByteArray data, QByteArray key);
-   QString convert_PlainText(QByteArray data, QByteArray key);
+   bool convert_Bool(QByteArray inputData, QByteArray key);
+   int convert_Int(QByteArray inputData, QByteArray key);
+   QString convert_Str(QByteArray inputData, QByteArray key);
+   QString convert_PlainText(QByteArray inputData, QByteArray key);
 
    void createShortCuts();
    void createConnections();
@@ -211,7 +212,7 @@ class MainWindow : public QMainWindow
    QByteArray json_ReadFile();
    void save_ConfigFile();
 
-   bool json_OpenDoxy(QByteArray data);
+   bool json_OpenDoxy(QByteArray jsonData);
    QByteArray json_SaveDoxy();
    QString getDataList(QJsonObject &object, QString fieldData);
    QJsonArray putDataList(QString fieldData);

@@ -94,144 +94,144 @@ void MainWindow::tune_colors_PB()
 void MainWindow::abbreviate_brief_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->abbreviate_brief->toPlainText();
+   QString plainText = m_ui->abbreviate_brief->toPlainText();
 
-   data.title      = "Abbreviate Brief Description";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Abbreviate Brief Description";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->abbreviate_brief->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->abbreviate_brief->setPlainText(tmp);
    }
 }
 
 void MainWindow::strip_from_path_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->strip_from_path->toPlainText();
+   QString plainText = m_ui->strip_from_path->toPlainText();
 
-   data.title      = "Strip From Path";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Strip From Path";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->strip_from_path->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->strip_from_path->setPlainText(tmp);
    }
 }
 
 void MainWindow::strip_from_inc_path_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->strip_from_inc_path->toPlainText();
+   QString plainText = m_ui->strip_from_inc_path->toPlainText();
 
-   data.title      = "Strip From Include Path";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Strip From Include Path";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->strip_from_inc_path->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->strip_from_inc_path->setPlainText(tmp);
    }
 }
 
 void MainWindow::aliases_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->aliases->toPlainText();
+   QString plainText = m_ui->aliases->toPlainText();
 
-   data.title      = "Aliases";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Aliases";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->aliases->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->aliases->setPlainText(tmp);
    }
 }
 
 void MainWindow::tcl_subst_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->tcl_subst->toPlainText();
+   QString plainText = m_ui->tcl_subst->toPlainText();
 
-   data.title      = "Tcl Substitute";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Tcl Substitute";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->tcl_subst->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->tcl_subst->setPlainText(tmp);
    }
 }
 
 void MainWindow::language_mapping_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->language_mapping->toPlainText();
+   QString plainText = m_ui->language_mapping->toPlainText();
 
-   data.title      = "Language Mapping";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Language Mapping";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->language_mapping->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->language_mapping->setPlainText(tmp);
    }
 }
 
@@ -239,24 +239,24 @@ void MainWindow::language_mapping_PB()
 void MainWindow::enabled_sections_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->enabled_sections->toPlainText();
+   QString plainText = m_ui->enabled_sections->toPlainText();
 
-   data.title      = "Enabled Sections";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Enabled Sections";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->enabled_sections->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->enabled_sections->setPlainText(tmp);
    }
 }
 
@@ -284,24 +284,24 @@ void MainWindow::layout_file_PB()
 void MainWindow::ns_alias_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->ns_alias->toPlainText();
+   QString plainText = m_ui->ns_alias->toPlainText();
 
-   data.title      = "Namespace Alias";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Namespace Alias";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->ns_alias->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->ns_alias->setPlainText(tmp);
    }
 }
 
@@ -309,24 +309,24 @@ void MainWindow::ns_alias_PB()
 void MainWindow::warn_sa_ignore_words_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->warn_sa_ignore_words->toPlainText();
+   QString plainText = m_ui->warn_sa_ignore_words->toPlainText();
 
-   data.title      = "List of Words to Ignore in a See Also";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "List of Words to Ignore in a See Also";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->warn_sa_ignore_words->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->warn_sa_ignore_words->setPlainText(tmp);
    }
 }
 
@@ -341,192 +341,192 @@ void MainWindow::warn_logfile_PB()
 void MainWindow::input_source_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->input_source->toPlainText();
+   QString plainText = m_ui->input_source->toPlainText();
 
-   data.title      = "Input Source";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Input Source";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->input_source->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->input_source->setPlainText(tmp);
    }
 }
 
 void MainWindow::input_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->input_patterns->toPlainText();
+   QString plainText = m_ui->input_patterns->toPlainText();
 
-   data.title      = "Input Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Input Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->input_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->input_patterns->setPlainText(tmp);
    }
 }
 
 void MainWindow::exclude_files_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp    = m_ui->exclude_files->toPlainText();
+   QString plainText = m_ui->exclude_files->toPlainText();
 
-   data.title      = "Exclude Files or Folders";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Exclude Files or Folders";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->exclude_files->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->exclude_files->setPlainText(tmp);
    }
 }
 
 void MainWindow::exclude_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp    = m_ui->exclude_patterns->toPlainText();
+   QString plainText = m_ui->exclude_patterns->toPlainText();
 
-   data.title      = "Exclude Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Exclude Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->exclude_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->exclude_patterns->setPlainText(tmp);
    }
 }
 
 void MainWindow::exclude_symbols_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp    = m_ui->exclude_symbols->toPlainText();
+   QString plainText = m_ui->exclude_symbols->toPlainText();
 
-   data.title      = "Exclude Symbols";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Exclude Symbols";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->exclude_symbols->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->exclude_symbols->setPlainText(tmp);
    }
 }
 
 void MainWindow::example_source_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->example_source->toPlainText();
+   QString plainText = m_ui->example_source->toPlainText();
 
-   data.title      = "Example Files or Directories";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Example Files or Directories";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->example_source->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->example_source->setPlainText(tmp);
    }
 }
 
 void MainWindow::example_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->example_patterns->toPlainText();
+   QString plainText = m_ui->example_patterns->toPlainText();
 
-   data.title      = "Example Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Example Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->example_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->example_patterns->setPlainText(tmp);
    }
 }
 
 void MainWindow::image_path_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->image_path->toPlainText();
+   QString plainText = m_ui->image_path->toPlainText();
 
-   data.title      = "Image Path";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Image Path";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->image_path->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->image_path->setPlainText(tmp);
    }
 }
 
@@ -547,48 +547,48 @@ void MainWindow::filter_program_PB()
 void MainWindow::filter_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->filter_patterns->toPlainText();
+   QString plainText = m_ui->filter_patterns->toPlainText();
 
-   data.title      = "Filter Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Filter Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->filter_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->filter_patterns->setPlainText(tmp);
    }
 }
 
 void MainWindow::filter_source_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->filter_source_patterns->toPlainText();
+   QString plainText = m_ui->filter_source_patterns->toPlainText();
 
-   data.title      = "Filter Source Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Filter Source Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->filter_source_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->filter_source_patterns->setPlainText(tmp);
    }
 }
 
@@ -596,96 +596,96 @@ void MainWindow::filter_source_patterns_PB()
 void MainWindow::suffix_source_navtree_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->suffix_source_navtree->toPlainText();
+   QString plainText = m_ui->suffix_source_navtree->toPlainText();
 
-   data.title      = "Extensions Source Navtree";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Extensions Source Navtree";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->suffix_source_navtree->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->suffix_source_navtree->setPlainText(tmp);
    }
 }
 
 void MainWindow::suffix_header_navtree_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->suffix_header_navtree->toPlainText();
+   QString plainText = m_ui->suffix_header_navtree->toPlainText();
 
-   data.title      = "Extensions Header Navtree";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Extensions Header Navtree";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->suffix_header_navtree->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->suffix_header_navtree->setPlainText(tmp);
    }
 }
 
 void MainWindow::suffix_exclude_navtree_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->suffix_exclude_navtree->toPlainText();
+   QString plainText = m_ui->suffix_exclude_navtree->toPlainText();
 
-   data.title      = "Extensions Exclude Navtree";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Extensions Exclude Navtree";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->suffix_exclude_navtree->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->suffix_exclude_navtree->setPlainText(tmp);
    }
 }
 
 void MainWindow::clang_options_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->clang_flags->toPlainText();
+   QString plainText = m_ui->clang_flags->toPlainText();
 
-   data.title      = "Clang Options";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Clang Options";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->clang_flags->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->clang_flags->setPlainText(tmp);
    }
 }
 
@@ -700,24 +700,24 @@ void MainWindow::clang_compilation_path_PB()
 void MainWindow::ignore_prefix_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->ignore_prefix->toPlainText();
+   QString plainText = m_ui->ignore_prefix->toPlainText();
 
-   data.title      = "Ignore Prefix";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Ignore Prefix";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->ignore_prefix->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->ignore_prefix->setPlainText(tmp);
    }
 }
 
@@ -725,96 +725,96 @@ void MainWindow::ignore_prefix_PB()
 void MainWindow::include_path_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->include_path->toPlainText();
+   QString plainText = m_ui->include_path->toPlainText();
 
-   data.title      = "Include Path";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Include Path";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->include_path->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->include_path->setPlainText(tmp);
    }
 }
 
 void MainWindow::include_file_patterns_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->include_patterns->toPlainText();
+   QString plainText = m_ui->include_patterns->toPlainText();
 
-   data.title      = "Inlcude File Patterns";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Inlcude File Patterns";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->include_patterns->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->include_patterns->setPlainText(tmp);
    }
 }
 
 void MainWindow::predefined_macros_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->predefined_macros->toPlainText();
+   QString plainText = m_ui->predefined_macros->toPlainText();
 
-   data.title      = "Predefined Macros";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Predefined Macros";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->predefined_macros->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->predefined_macros->setPlainText(tmp);
    }
 }
 
 void MainWindow::expand_as_defined_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->expand_as_defined->toPlainText();
+   QString plainText = m_ui->expand_as_defined->toPlainText();
 
-   data.title      = "Expand As Defined";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Expand As Defined";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->expand_as_defined->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->expand_as_defined->setPlainText(tmp);
    }
 }
 
@@ -822,24 +822,24 @@ void MainWindow::expand_as_defined_PB()
 void MainWindow::tag_files_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->tag_files->toPlainText();
+   QString plainText = m_ui->tag_files->toPlainText();
 
-   data.title      = "Tag Files";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Tag Files";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->tag_files->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->tag_files->setPlainText(tmp);
    }
 }
 
@@ -893,72 +893,72 @@ void MainWindow::dot_path_PB()
 void MainWindow::dot_file_dirs_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->dot_file_dirs->toPlainText();
+   QString plainText = m_ui->dot_file_dirs->toPlainText();
 
-   data.title      = "Dot File Directory";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Dot File Directory";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->dot_file_dirs->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->dot_file_dirs->setPlainText(tmp);
    }
 }
 
 void MainWindow::msc_file_dirs_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->msc_file_dirs->toPlainText();
+   QString plainText = m_ui->msc_file_dirs->toPlainText();
 
-   data.title      = "MSC File Directory";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "MSC File Directory";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->msc_file_dirs->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->msc_file_dirs->setPlainText(tmp);
    }
 }
 
 void MainWindow::dia_file_dirs_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->dia_file_dirs->toPlainText();
+   QString plainText = m_ui->dia_file_dirs->toPlainText();
 
-   data.title      = "Diafile Directories";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = OUTPUT_DIR;
+   lookUpData.title      = "Diafile Directories";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = OUTPUT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->dia_file_dirs->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->dia_file_dirs->setPlainText(tmp);
    }
 }
 
@@ -981,24 +981,24 @@ void MainWindow::plantuml_cfg_file_PB()
 void MainWindow::plantuml_inc_path_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->plantuml_inc_path->toPlainText();
+   QString plainText = m_ui->plantuml_inc_path->toPlainText();
 
-   data.title      = "PlantUML Include Path";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = true;
-   data.relativeTo = OUTPUT_DIR;
+   lookUpData.title      = "PlantUML Include Path";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = true;
+   lookUpData.relativeTo = OUTPUT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->plantuml_inc_path->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->plantuml_inc_path->setPlainText(tmp);
    }
 }
 
@@ -1028,48 +1028,48 @@ void MainWindow::html_footer_PB()
 void MainWindow::html_stylesheets_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->html_stylesheets->toPlainText();
+   QString plainText = m_ui->html_stylesheets->toPlainText();
 
-   data.title      = "HTML Stylesheets";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "HTML Stylesheets";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->html_stylesheets->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->html_stylesheets->setPlainText(tmp);
    }
 }
 
 void MainWindow::html_extra_files_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->html_extra_files->toPlainText();
+   QString plainText = m_ui->html_extra_files->toPlainText();
 
-   data.title      = "HTML Extra Files";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "HTML Extra Files";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->html_extra_files->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->html_extra_files->setPlainText(tmp);
    }
 }
 
@@ -1111,48 +1111,48 @@ void MainWindow::qch_file_PB()
 void MainWindow::qhp_cust_attrib_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->qhp_cust_attrib->toPlainText();
+   QString plainText = m_ui->qhp_cust_attrib->toPlainText();
 
-   data.title      = "Qt Help Custom Attribute";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Qt Help Custom Attribute";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->qhp_cust_attrib->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->qhp_cust_attrib->setPlainText(tmp);
    }
 }
 
 void MainWindow::qhp_sect_attrib_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->qhp_sect_attrib->toPlainText();
+   QString plainText = m_ui->qhp_sect_attrib->toPlainText();
 
-   data.title      = "Qt Help Section Attribute";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Qt Help Section Attribute";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->qhp_sect_attrib->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->qhp_sect_attrib->setPlainText(tmp);
    }
 }
 
@@ -1166,24 +1166,24 @@ void MainWindow::qthelp_gen_path_PB()
 void MainWindow::mathjax_extensions_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->mathjax_extensions->toPlainText();
+   QString plainText = m_ui->mathjax_extensions->toPlainText();
 
-   data.title      = "Mathjax Extensions";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Mathjax Extensions";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->mathjax_extensions->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->mathjax_extensions->setPlainText(tmp);
    }
 }
 
@@ -1197,24 +1197,24 @@ void MainWindow::search_data_file_PB()
 void MainWindow::search_mappings_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->search_mappings->toPlainText();
+   QString plainText = m_ui->search_mappings->toPlainText();
 
-   data.title      = "Extra Search Mappings";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Extra Search Mappings";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->search_mappings->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->search_mappings->setPlainText(tmp);
    }
 }
 
@@ -1244,24 +1244,24 @@ void MainWindow::make_index_cmd_name_PB()
 void MainWindow::latex_extra_packages_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->latex_extra_packages->toPlainText();
+   QString plainText = m_ui->latex_extra_packages->toPlainText();
 
-   data.title      = "Latex Extra Packages";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = false;
-   data.isFolderPB = false;
-   data.relativeTo = ABSOLUTE_ONLY;
+   lookUpData.title      = "Latex Extra Packages";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = false;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = ABSOLUTE_ONLY;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->latex_extra_packages->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->latex_extra_packages->setPlainText(tmp);
    }
 }
 
@@ -1282,72 +1282,72 @@ void MainWindow::latex_footer_PB()
 void MainWindow::latex_stylesheets_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->latex_stylesheets->toPlainText();
+   QString plainText = m_ui->latex_stylesheets->toPlainText();
 
-   data.title      = "Latex Stylesheets";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Latex Stylesheets";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->latex_stylesheets->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->latex_stylesheets->setPlainText(tmp);
    }
 }
 
 void MainWindow::latex_extra_files_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->latex_stylesheets->toPlainText();
+   QString plainText = m_ui->latex_stylesheets->toPlainText();
 
-   data.title      = "Latex Extra Files";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Latex Extra Files";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->latex_extra_files->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->latex_extra_files->setPlainText(tmp);
    }
 }
 
 void MainWindow::cite_bib_files_PB()
 {
    QRegularExpression regExp("\\s*, \\s*");
-   struct LookUpInfo data;
+   struct LookUpInfo lookUpData;
 
-   QString temp = m_ui->cite_bib_files->toPlainText();
+   QString plainText = m_ui->cite_bib_files->toPlainText();
 
-   data.title      = "Cite Bib Files";
-   data.dataList   = temp.split(regExp);
-   data.isFilePB   = true;
-   data.isFolderPB = false;
-   data.relativeTo = PROJECT_DIR;
+   lookUpData.title      = "Cite Bib Files";
+   lookUpData.dataList   = plainText.split(regExp);
+   lookUpData.isFilePB   = true;
+   lookUpData.isFolderPB = false;
+   lookUpData.relativeTo = PROJECT_DIR;
 
-   Dialog_LookUp *dw = new Dialog_LookUp(this, data);
+   Dialog_LookUp *dw = new Dialog_LookUp(this, lookUpData);
    int result = dw->exec();
 
    if (result == QDialog::Accepted) {
       QStringList dataList = dw->getData();
 
-      QString temp = dataList.join(", ");
-      m_ui->cite_bib_files->setPlainText(temp);
+      QString tmp = dataList.join(", ");
+      m_ui->cite_bib_files->setPlainText(tmp);
    }
 }
 

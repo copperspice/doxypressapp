@@ -543,73 +543,73 @@ void MainWindow::setDuplicates()
 
 void MainWindow::setupLimits()
 {
-   QString temp;
-   QStringList data;
+   QStringList comboList;
 
    // tab 2 - general
-   temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional, "
+   QString temp = "Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese, Chinese-Traditional, "
          "Croatian, Czech, Danish, Dutch, English, Esperanto, Finnish, French, German, Greek, Hungarian, "
          "Indonesian, Italian, Japanese, Japanese-en, Korean, Korean-en, Latvian, Lithuanian, "
          "Macedonian, Norwegian, Persian, Polish, Portuguese, Romanian, Russian, "
          "Serbian, Serbian-Cyrillic, Slovak, Slovene, Spanish, Swedish, Turkish, Ukrainian, Vietnamese";
 
-   data.clear();
-   data = temp.split(", ");
-   m_ui->output_language_CM->addItems(data);
+   comboList = temp.split(", ");
+   m_ui->output_language_CM->addItems(comboList);
 
-   data.clear();
-   data.append("");
-   data.append("-std=c++11");
-   data.append("-std=c++14");
-   data.append("-std=c++17");
-   data.append("-std=c++20");
-   data.append("-std=gnu++11");
-   data.append("-std=gnu++14");
-   data.append("-std=gnu++17");
-   data.append("-std=gnu++20");
-   m_ui->clang_dialect_CM->addItems(data);
+   comboList.clear();
+   comboList.append("");
+   comboList.append("-std=c++11");
+   comboList.append("-std=c++14");
+   comboList.append("-std=c++17");
+   comboList.append("-std=c++20");
+   comboList.append("-std=c++23");
+   comboList.append("-std=gnu++11");
+   comboList.append("-std=gnu++14");
+   comboList.append("-std=gnu++17");
+   comboList.append("-std=gnu++20");
+   comboList.append("-std=gnu++23");
+   m_ui->clang_dialect_CM->addItems(comboList);
 
-   data.clear();
-   data.append("gif");
-   data.append("jpg");
-   data.append("png");
-   data.append("svg");
-   data.append("png:gd");
-   data.append("png:gd:gd");
-   data.append("png:cairo");
-   data.append("png:cairo:cairo");
-   data.append("png:cairo:gd");
-   data.append("png:cairo:gdiplus");
-   data.append("png:gdiplus");
-   data.append("png:gdiplus:gdiplus");
-   m_ui->dot_image_format_CM->addItems(data);
+   comboList.clear();
+   comboList.append("gif");
+   comboList.append("jpg");
+   comboList.append("png");
+   comboList.append("svg");
+   comboList.append("png:gd");
+   comboList.append("png:gd:gd");
+   comboList.append("png:cairo");
+   comboList.append("png:cairo:cairo");
+   comboList.append("png:cairo:gd");
+   comboList.append("png:cairo:gdiplus");
+   comboList.append("png:gdiplus");
+   comboList.append("png:gdiplus:gdiplus");
+   m_ui->dot_image_format_CM->addItems(comboList);
 
-   data.clear();
-   data.append("png");
-   data.append("svg");
-   m_ui->formula_format_CM->addItems(data);
+   comboList.clear();
+   comboList.append("png");
+   comboList.append("svg");
+   m_ui->formula_format_CM->addItems(comboList);
 
-   data.clear();
-   data.append("HTML-CSS");
-   data.append("NativeMML");
-   data.append("SVG");
-   m_ui->mathjax_format_CM->addItems(data);
+   comboList.clear();
+   comboList.append("HTML-CSS");
+   comboList.append("NativeMML");
+   comboList.append("SVG");
+   m_ui->mathjax_format_CM->addItems(comboList);
 
    // tab 3 - latex
-   data.clear();
-   data.append("a4");
-   data.append("letter");
-   data.append("legal");
-   data.append("executive");
-   m_ui->latex_paper_type_CM->addItems(data);
+   comboList.clear();
+   comboList.append("a4");
+   comboList.append("letter");
+   comboList.append("legal");
+   comboList.append("executive");
+   m_ui->latex_paper_type_CM->addItems(comboList);
 
    // tab 3 - rtf
-   data.clear();
-   data.append("a4");
-   data.append("letter");
-   data.append("legal");
-   data.append("executive");
-   m_ui->rtf_paper_type_CM->addItems(data);
+   comboList.clear();
+   comboList.append("a4");
+   comboList.append("letter");
+   comboList.append("legal");
+   comboList.append("executive");
+   m_ui->rtf_paper_type_CM->addItems(comboList);
 
    // tab 2 - config
    m_ui->tab_size_SB->setMinimum(1);

@@ -377,8 +377,8 @@ void MainWindow::saveLog()
 
       if (f.open(QIODevice::WriteOnly)) {
 
-         QString data = m_ui->runText->toPlainText();
-         f.write(data.toUtf8());
+         QString text = m_ui->runText->toPlainText();
+         f.write(text.toUtf8());
 
          setStatusBar(tr("Output log saved"));
 

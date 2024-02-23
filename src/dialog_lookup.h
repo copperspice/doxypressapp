@@ -30,7 +30,7 @@ class Dialog_LookUp : public QDialog
    CS_OBJECT(Dialog_LookUp)
 
  public:
-   explicit Dialog_LookUp(MainWindow *parent, struct LookUpInfo data);
+   explicit Dialog_LookUp(MainWindow *parent, struct LookUpInfo lookUpInfo);
    ~Dialog_LookUp();
 
    QStringList getData();
@@ -41,7 +41,7 @@ class Dialog_LookUp : public QDialog
 
    Ui::Dialog_LookUp *m_ui;
    QStandardItemModel *m_model;
-   struct LookUpInfo m_data;
+   struct LookUpInfo m_lookUpInfo;
 
    void moveItemUp();
    void moveItemDown();

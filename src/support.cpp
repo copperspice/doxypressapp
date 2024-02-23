@@ -239,7 +239,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
       return false;
    }
 
-   QByteArray data = file.readAll();
+   QByteArray fileData = file.readAll();
    file.close();
 
    QString old_fName = m_curFile;
@@ -252,7 +252,7 @@ bool MainWindow::openDoxy_Internal(const QString fname)
       rf_Update();
    }
 
-   if (json_OpenDoxy(data)) {
+   if (json_OpenDoxy(fileData)) {
       updateRunButtons();
       clearOutput();
 
@@ -295,12 +295,12 @@ bool MainWindow::querySave()
       quest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard  | QMessageBox::Cancel );
       quest.setDefaultButton(QMessageBox::Cancel);
 
-      int retval = quest.exec();
+      int result = quest.exec();
 
-      if (retval == QMessageBox::Save) {
+      if (result == QMessageBox::Save) {
          retval = saveDoxy();
 
-      } else if (retval == QMessageBox::Cancel) {
+      } else if (result == QMessageBox::Cancel) {
          retval = false;
 
       }
@@ -320,7 +320,7 @@ void MainWindow::reloadDoxy()
 
 bool MainWindow::saveDoxy_Internal()
 {
-   QByteArray data = json_SaveDoxy();
+   QByteArray jsonData = json_SaveDoxy();
    QFile file(m_curFile);
 
    if (! file.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
@@ -328,7 +328,7 @@ bool MainWindow::saveDoxy_Internal()
       return false;
    }
 
-   file.write(data);
+   file.write(jsonData);
    file.close();
 
    setDoxyTitle(false);
@@ -379,9 +379,9 @@ bool MainWindow::saveDoxy()
       msgB.setInformativeText("Continue?");
 
       msgB.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
-      int retval = msgB.exec();
+      int result = msgB.exec();
 
-      if (retval != QMessageBox::Save) {
+      if (result != QMessageBox::Save) {
          return false;
       }
    }
