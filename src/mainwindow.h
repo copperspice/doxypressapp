@@ -72,25 +72,27 @@ enum RelativeX {
 };
 
 struct Args {
-   bool blank_layout;
-   bool setDateTime;
-   bool deleteHtml;
-
    QString layout;
    QString dateTime;
 
    QString style_html_header;
    QString style_html_footer;
    QString style_html_css;
+
+   bool blank_layout;
+   bool setDateTime;
+   bool deleteHtml;
 };
 
 struct LookUpInfo {
    QString title;
-   QStringList dataList;
    QString path;
    QString relPath;
-   bool isFolderPB;
+   QStringList dataList;
+
    bool isFilePB;
+   bool isFolderPB;
+
    enum RelativeX relativeTo;
 };
 
@@ -110,21 +112,23 @@ struct HelpData {
    }
 
    DefType type;
-   QString defValue;
-   bool defBool;
-   int defInt;
 
+   QString defValue;
    QString title;
    QString body;
 
    QLabel *label;
+
+   bool defBool;
+   int defInt;
 };
 
 struct Settings {
-   QFont   fontNormal;
-   QColor  colorText;
    QString pathPrior;
    QString doxyPressExe;
+
+   QColor  colorText;
+   QFont   fontNormal;
 };
 
 class MainWindow : public QMainWindow

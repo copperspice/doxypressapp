@@ -54,10 +54,10 @@ class Dialog_XP_GetDir  : public QDialog
    QFileSystemModel  *m_model_R;
    QModelIndex m_index_R;
 
+   QString driveType(QString drive);
+
    QList<netServers> m_netServers;
    QList<netShares> m_netShares;
-
-   QString driveType(QString drive);
 
    QList<netServers> getWin_NetServers();
 

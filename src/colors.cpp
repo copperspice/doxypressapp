@@ -193,10 +193,8 @@ int TuneColorDialog::getGamma() const
 }
 
 ColorPicker::ColorPicker(Mode m)
+   : m_hue(220), m_sat(100), m_gam(100)
 {
-   m_hue = 220;
-   m_gam = 100;
-   m_sat = 100;
    m_mode = m;
    m_pix  = nullptr;
 }
