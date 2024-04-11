@@ -87,12 +87,26 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "(Linux|OpenBSD|FreeBSD|NetBSD|DragonFly)")
    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../resources/doxypress.png  DESTINATION .)
 
 elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
-   # disable console on windows
    target_link_libraries(DoxyPressApp
       netapi32
       mpr
-      -mwindows
    )
+
+   if (MSVC)
+      # disables the console window
+      target_link_options(DoxyPressApp
+         PRIVATE
+         /subsystem:windows
+         /entry:mainCRTStartup
+      )
+
+   else()
+      # disables the console window
+      target_link_libraries(DoxyPressApp
+         -mwindows
+      )
+
+   endif()
 
    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../resources/doxypress.ico  DESTINATION .)
 
