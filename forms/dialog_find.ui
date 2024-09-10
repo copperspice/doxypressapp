@@ -2,6 +2,12 @@
 <ui version="4.0">
  <class>Dialog_Find</class>
  <widget class="QDialog" name="Dialog_Find">
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Find</string>
+  </property>
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -13,63 +19,57 @@
     <height>194</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Find</string>
-  </property>
-  <property name="modal">
-   <bool>false</bool>
-  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="topMargin">
-    <number>10</number>
-   </property>
    <property name="horizontalSpacing">
     <number>30</number>
    </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
    <item row="4" column="2" rowspan="3">
     <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Direction</string>
+     </property>
      <property name="font">
       <font>
        <pointsize>10</pointsize>
       </font>
      </property>
-     <property name="title">
-      <string>Direction</string>
-     </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="verticalSpacing">
+       <number>2</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>0</number>
+      </property>
       <property name="topMargin">
        <number>5</number>
       </property>
       <property name="bottomMargin">
        <number>5</number>
       </property>
-      <property name="horizontalSpacing">
-       <number>0</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>2</number>
-      </property>
       <item row="1" column="0">
        <widget class="QRadioButton" name="down_RB">
+        <property name="text">
+         <string>Down</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>Down</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QRadioButton" name="up_RB">
+        <property name="text">
+         <string>Up</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>Up</string>
         </property>
        </widget>
       </item>
@@ -78,21 +78,18 @@
    </item>
    <item row="5" column="1">
     <widget class="QCheckBox" name="searchTop_CKB">
+     <property name="text">
+      <string>Search from top of Log File</string>
+     </property>
      <property name="font">
       <font>
        <pointsize>10</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>Search from top of Log File</string>
-     </property>
     </widget>
    </item>
    <item row="2" column="0" colspan="4">
     <spacer name="verticalSpacer_1">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
@@ -102,13 +99,13 @@
        <height>10</height>
       </size>
      </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
     </spacer>
    </item>
    <item row="10" column="2">
     <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
@@ -118,17 +115,20 @@
        <height>13</height>
       </size>
      </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
     </spacer>
    </item>
    <item row="4" column="1">
     <widget class="QCheckBox" name="case_CKB">
+     <property name="text">
+      <string>Match Case</string>
+     </property>
      <property name="font">
       <font>
        <pointsize>10</pointsize>
       </font>
-     </property>
-     <property name="text">
-      <string>Match Case</string>
      </property>
     </widget>
    </item>
@@ -139,6 +139,9 @@
      </property>
      <item>
       <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Find:</string>
+       </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -149,9 +152,6 @@
         <font>
          <pointsize>10</pointsize>
         </font>
-       </property>
-       <property name="text">
-        <string>Find:</string>
        </property>
       </widget>
      </item>
@@ -170,14 +170,14 @@
     <layout class="QHBoxLayout" name="horizontalLayout_20">
      <item>
       <spacer name="horizontalSpacer_21">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>10</width>
          <height>20</height>
         </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </spacer>
      </item>
@@ -190,9 +190,6 @@
      </item>
      <item>
       <spacer name="horizontalSpacer_23">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeType">
         <enum>QSizePolicy::Fixed</enum>
        </property>
@@ -201,6 +198,9 @@
          <width>8</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </spacer>
      </item>
@@ -213,14 +213,14 @@
      </item>
      <item>
       <spacer name="horizontalSpacer_22">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>10</width>
          <height>20</height>
         </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </spacer>
      </item>

@@ -2,6 +2,12 @@
 <ui version="4.0">
  <class>Dialog_Args</class>
  <widget class="QDialog" name="Dialog_Args">
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Passed Parameters</string>
+  </property>
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -18,12 +24,6 @@
     <pointsize>11</pointsize>
    </font>
   </property>
-  <property name="windowTitle">
-   <string>Passed Parameters</string>
-  </property>
-  <property name="modal">
-   <bool>false</bool>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="topMargin">
     <number>14</number>
@@ -39,6 +39,9 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Set Date / Time:</string>
+        </property>
         <property name="minimumSize">
          <size>
           <width>140</width>
@@ -50,41 +53,50 @@
           <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>Set Date / Time:</string>
-        </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="set_dateTime">
+        <property name="text">
+         <string/>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Generated on:</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>Generated on:</string>
-        </property>
        </widget>
       </item>
       <item row="1" column="1" colspan="2">
        <widget class="QDateTimeEdit" name="dateTime">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
+        <property name="time">
+         <time>
+          <hour>9</hour>
+          <minute>0</minute>
+          <second>0</second>
+         </time>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>1950</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy/MM/dd HH:mm:ss</string>
         </property>
         <property name="dateTime">
          <datetime>
@@ -103,33 +115,18 @@
           <day>7</day>
          </date>
         </property>
-        <property name="time">
-         <time>
-          <hour>9</hour>
-          <minute>0</minute>
-          <second>0</second>
-         </time>
-        </property>
-        <property name="minimumDate">
-         <date>
-          <year>1950</year>
-          <month>1</month>
-          <day>1</day>
-         </date>
-        </property>
-        <property name="displayFormat">
-         <string>yyyy/MM/dd HH:mm:ss</string>
-        </property>
         <property name="calendarPopup">
          <bool>true</bool>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
        <spacer name="horizontalSpacer_1">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
         <property name="sizeType">
          <enum>QSizePolicy::Fixed</enum>
         </property>
@@ -139,17 +136,20 @@
           <height>17</height>
          </size>
         </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
        </spacer>
       </item>
       <item row="2" column="1" colspan="2">
        <widget class="QLabel" name="dateFormat">
+        <property name="text">
+         <string>yyyy/MM/dd HH:mm:ss </string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>yyyy/MM/dd HH:mm:ss </string>
         </property>
        </widget>
       </item>
@@ -158,9 +158,6 @@
    </item>
    <item>
     <spacer name="verticalSpacer_1">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
@@ -169,6 +166,9 @@
        <width>20</width>
        <height>15</height>
       </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
     </spacer>
    </item>
@@ -180,16 +180,16 @@
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QLabel" name="label_8">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete output files for HTML before running DoxyPress:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
-        <property name="textFormat">
-         <enum>Qt::RichText</enum>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
        </widget>
       </item>
@@ -205,9 +205,6 @@
    </item>
    <item>
     <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
@@ -216,6 +213,9 @@
        <width>20</width>
        <height>15</height>
       </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
     </spacer>
    </item>
@@ -233,21 +233,18 @@
       </property>
       <item row="5" column="0">
        <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Html Footer:</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>Html Footer:</string>
-        </property>
        </widget>
       </item>
       <item row="2" column="1">
        <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
         <property name="sizeType">
          <enum>QSizePolicy::Fixed</enum>
         </property>
@@ -257,17 +254,20 @@
           <height>15</height>
          </size>
         </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
        </spacer>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Html CSS StyleSheet:</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>Html CSS StyleSheet:</string>
         </property>
        </widget>
       </item>
@@ -297,13 +297,13 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Layout File Name:</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>Layout File Name:</string>
         </property>
        </widget>
       </item>
@@ -316,6 +316,9 @@
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Generate new Layout:</string>
+        </property>
         <property name="minimumSize">
          <size>
           <width>140</width>
@@ -327,9 +330,6 @@
           <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>Generate new Layout:</string>
-        </property>
        </widget>
       </item>
       <item row="6" column="1">
@@ -337,13 +337,13 @@
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Html Header:</string>
+        </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
-        </property>
-        <property name="text">
-         <string>Html Header:</string>
         </property>
        </widget>
       </item>
@@ -361,9 +361,6 @@
    </item>
    <item>
     <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
      <property name="sizeType">
       <enum>QSizePolicy::Expanding</enum>
      </property>
@@ -372,6 +369,9 @@
        <width>20</width>
        <height>30</height>
       </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
     </spacer>
    </item>
@@ -382,32 +382,29 @@
      </property>
      <item>
       <spacer name="horizontalSpacer_30">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
          <height>20</height>
         </size>
        </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
       </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="ok_PB">
-       <property name="text">
-        <string>Ok</string>
-       </property>
        <property name="autoDefault">
         <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Ok</string>
        </property>
       </widget>
      </item>
      <item>
       <spacer name="horizontalSpacer_33">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeType">
         <enum>QSizePolicy::Fixed</enum>
        </property>
@@ -416,6 +413,9 @@
          <width>8</width>
          <height>20</height>
         </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </spacer>
      </item>
@@ -428,14 +428,14 @@
      </item>
      <item>
       <spacer name="horizontalSpacer_34">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
          <height>20</height>
         </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </spacer>
      </item>
