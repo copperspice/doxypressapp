@@ -7,7 +7,8 @@ DoxyPressApp is a GUI application used to configure the JSON project file and ru
 
 DoxyPress and DoxyPressApp were initially derived from Doxygen and DoxyWizard.
 
-###### Major enhancements
+
+###### Major Enhancements
 
 Parsing
 
@@ -32,17 +33,25 @@ Output
 * Improved html output for correctness
 
 
-### Building
+### Binary Files
 
-DoxyPressApp prebuilt binaries are available for Linux, Mac OS X, and Windows.
+DoxyPressApp prebuilt binaries are available for all supported platforms.
 
+https://github.com/copperspice/doxypress/releases/
 https://download.copperspice.com/doxypress/binary/
 
-To build DoxyPressApp from source a current copy of the CopperSpice libraries, a C++17 compiler, and a C++17 standard
-library are required. DoxyPressApp links with CsCore, CsGui, CsNetwork, CsXml which are part of the CopperSpice
-libraries.
+CopperSpice prebuilt binaries are available for all supported platforms.
 
-CMake build files are provided with the DoxyPressApp source distribution.
+https://github.com/copperspice/copperspice/releases/
+https://download.copperspice.com/copperspice/binary/
+
+
+### System Requirements
+
+Building DoxyPressApp requires a C++20 compiler and a C++20 standard library. You will also need a current copy
+of the CopperSpice libraries. DoxyPressApp links with CsCore, CsGui, CsNetwork, and CsXml.
+
+CMake build files are provided with the source distribution to build this application.
 
 
 ### Documentation
@@ -57,20 +66,20 @@ Full documentation for DoxyPress is available on the website or from our downloa
 
 
 For documentation on how to build the DoxyPress application refer to the following page:
-www.copperspice.com/docs/doxypress/build-doxypress.html
+
+https://www.copperspice.com/docs/doxypress/build-doxypress.html
 
 
 ### Presentations
 
-Our YouTube channel videos are about modern C++, build systems, CopperSpice, DoxyPress, and other topics related to
-our open source work.
+Our YouTube channel contains over 75 videos about C++, programming fundamentals, Unicode/Strings, multithreading,
+graphics, CopperSpice, DoxyPress, and other software development topics.
 
 https://www.youtube.com/copperspice
 
+Links to additional videos can be found on our website.
 
-Links to technical presentations recorded at CppNow and CppCon:
-
-www.copperspice.com/presentations.html
+https://www.copperspice.com/presentations.html
 
 
 ### Authors / Contributors
@@ -88,7 +97,7 @@ This program is released under the GPL 2 license. For more information refer to 
 project.
 
 
-## References
+### References
 
  * Website:  https://www.copperspice.com
  * Twitter:  https://twitter.com/copperspice_cpp
